@@ -1,6 +1,6 @@
 package mvp.view;
 
-public interface IActivity extends BaseVuew{
+public interface IActivity extends BaseVIew {
     int bandLayout();
     void initView();
     void initPresenter();

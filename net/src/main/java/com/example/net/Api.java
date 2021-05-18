@@ -1,6 +1,7 @@
 package com.example.net;
 
 import com.example.net.bean.HomeBean;
+import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 
 import io.reactivex.Observable;
@@ -15,4 +16,6 @@ public interface Api {
 @POST("register")
 @FormUrlEncoded
     Observable<RegisterBean> getRegister(@Field("name")String name,@Field("password")String password);
+@POST("login")
+    Observable<LoginBean> getLogin(@Field("name")String name,@Field("password")String password);
 }

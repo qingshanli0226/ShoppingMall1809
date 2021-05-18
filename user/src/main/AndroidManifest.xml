@@ -2,4 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user">
 
+    <application>
+        <activity android:name=".UserActivity"></activity>
+    </application>
+
 </manifest>
