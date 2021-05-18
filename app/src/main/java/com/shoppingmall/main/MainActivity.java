@@ -62,11 +62,11 @@ public class MainActivity extends BaseActivity {
         mainVp.setAdapter(commonAdapter);
 
         ArrayList<CustomTabEntity> customTabEntities = new ArrayList<>();
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_home),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_sort),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_find),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_shopCar),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_mine),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_home),R.drawable.main_home_press,R.drawable.main_home));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_sort),R.drawable.main_type_press,R.drawable.main_type));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_find),R.drawable.main_community_press,R.drawable.main_community));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_shopCar),R.drawable.main_cart_press,R.drawable.main_cart));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_mine),R.drawable.main_user_press,R.drawable.main_user));
         mainCommon.setTabData(customTabEntities);
 
         mainCommon.setOnTabSelectListener(new OnTabSelectListener() {
