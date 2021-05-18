@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <com.example.framework.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:id="@+id/toolbar"
+        android:visibility="gone"></com.example.framework.view.ToolBar>
 
     <ScrollView
         android:layout_width="match_parent"

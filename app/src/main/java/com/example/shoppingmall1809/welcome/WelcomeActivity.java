@@ -1,48 +1,48 @@
 package com.example.shoppingmall1809.welcome;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.commom.ShopConstants;
 import com.example.framework.service.ShopService;
-import com.example.shoppingmall1809.MainActivity;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.main.MainActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            ARouter.getInstance().build(ShopConstants.MAIN_PATH).navigation();
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        Timer timer = new Timer();
-
-        timer.schedule(new TimerTask() {
-            int i=3;
-            @Override
-            public void run() {
-                if (i<=0){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            timer.cancel();
-
-                            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-
-                i--;
-            }
-        },0,1000);
+        handler.sendEmptyMessageDelayed(0,2000);
 
 
         Intent intent = new Intent(this, ShopService.class);
         startService(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 }
