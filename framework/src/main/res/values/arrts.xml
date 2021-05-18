@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyToorbar">
+        <attr name="titletext" format="string"></attr>
+        <attr name="leftimg" format="reference"></attr>
+        <attr name="rightimg" format="reference"></attr>
+        <attr name="isleft" format="boolean"></attr>
+        <attr name="isright" format="boolean"></attr>
+    </declare-styleable>
+</resources>
