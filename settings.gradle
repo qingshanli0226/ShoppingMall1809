@@ -1,4 +1,8 @@
+
 include ':user'
+
 include ':framework'
+include ':net'
+
 include ':app'
 rootProject.name = "ShoppingMall"
