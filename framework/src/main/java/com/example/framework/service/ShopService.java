@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -25,12 +26,12 @@ public class ShopService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return new FiannceBinder();
+        return new ShopBinder();
     }
 
 
-    public class FiannceBinder extends Binder {
-        public ShopService getFiannceService() {
+    public class ShopBinder extends Binder {
+        public ShopService getShopService() {
             return ShopService.this;
         }
     }
@@ -39,14 +40,13 @@ public class ShopService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-
         String token = SpUtil.getString(this, ShopConstants.TOKEN_KEY);
+
         RetrofitCreator.getShopApiService().getAutoLoginData(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,7 +66,7 @@ public class ShopService extends Service {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Toast.makeText(ShopService.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
