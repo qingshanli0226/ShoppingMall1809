@@ -1,0 +1,7 @@
+include ':user'
+include ':pay'
+include ':net'
+include ':frameWork'
+include ':common'
+include ':app'
+rootProject.name = "ThreeShopping"
