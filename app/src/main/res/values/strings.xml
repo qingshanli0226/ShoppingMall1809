@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ShoppingMall1809</string>
 
     <string name="main">首页</string>
     <string name="type">分类</string>
@@ -23,4 +22,7 @@
     <string name="callCenter">客服中心</string>
     <string name="serviceFeedback">服务反馈</string>
 
+    <string name="app_name">XXX购物车</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
