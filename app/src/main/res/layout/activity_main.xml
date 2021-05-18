@@ -6,12 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    
-    <androidx.viewpager.widget.ViewPager
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:id="@+id/vp"></androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"
+        android:id="@+id/mainScroll">
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="9"
+            android:id="@+id/mainVp"></androidx.viewpager.widget.ViewPager>
 
-    
+        <com.flyco.tablayout.CommonTabLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="1"
+            android:id="@+id/mainCommon"></com.flyco.tablayout.CommonTabLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>
