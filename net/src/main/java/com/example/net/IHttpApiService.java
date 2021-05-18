@@ -3,6 +3,9 @@ package com.example.net;
 import android.app.Application;
 
 
+import com.example.common.Constants;
+import com.example.net.bean.HomeBean;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -15,8 +18,7 @@ import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 public interface IHttpApiService {
-//    @GET(AppNetConfig.INDEX)
-//    Observable<HomeBean> getHomeData();
+
 //    @GET(AppNetConfig.UPDATE)
 //    Observable<UpdateBean> getAppUpdate();
 //
@@ -56,4 +58,8 @@ public interface IHttpApiService {
 //    //清除密码
 //    @POST(AppNetConfig.CLEARESTUREPASSWORD)
 //    Observable<GesturePassword> clearPassword();
+
+
+    @GET(Constants.HOME_URL)
+    Observable<HomeBean> getHomeData();
 }
