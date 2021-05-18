@@ -7,11 +7,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.common.call.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BusinessUserManager.IUserLoginChanged{
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -29,10 +30,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         setContentView(loadingPage);
         initView();
         toolBar = findViewById(R.id.toolbar);
-        //toolBar.setToolbarListener(this);
         initPresenter();
         initData();
 
+        BusinessUserManager.getInstance().Register(this);
 
     }
 
@@ -48,7 +49,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         destroy();
-
+        BusinessUserManager.getInstance().UnRegister(this);
     }
     public void destroy(){
         if (httpPresenter!=null){

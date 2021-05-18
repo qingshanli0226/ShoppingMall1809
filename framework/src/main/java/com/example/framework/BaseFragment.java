@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.common.call.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView{
+public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged {
 
     protected T httpPresenter;
     protected View mView;
@@ -40,6 +41,7 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
         initView();
         initPresenter();
         initData();
+        BusinessUserManager.getInstance().Register(this);
     }
 
     @Override
@@ -51,6 +53,7 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
     public void onDestroy() {
         super.onDestroy();
         destroy();
+        BusinessUserManager.getInstance().UnRegister(this);
     }
 
     public void destroy(){
