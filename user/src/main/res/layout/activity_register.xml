@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register.RegisterActivity"
+    android:orientation="vertical">
+
+    <com.example.framework.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:wp_CenterTitle="@string/userRegistration"
+        app:wp_leftImId="@drawable/left"
+        app:wp_istoolbarLeftImg="true"
+        android:id="@+id/toolbar"></com.example.framework.view.ToolBar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cellPhoneNumber"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:id="@+id/act_reg_phone"
+            android:layout_centerVertical="true"></TextView>
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_100"
+            android:hint="@string/pleaseEnterYourCellPhoneNumber"
+            android:background="@drawable/edit_background_while"></EditText>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/french_grey"></View>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_centerVertical="true"></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_100"
+            android:hint="@string/pleaseEnterAUserName"
+            android:id="@+id/act_reg_username"
+            android:background="@drawable/edit_background_while"></EditText>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/french_grey"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_centerVertical="true"></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_100"
+            android:hint="@string/enterYourPIN"
+            android:id="@+id/act_reg_password"
+            android:background="@drawable/edit_background_while"></EditText>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/french_grey"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirmPassword"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_centerVertical="true"></TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_100"
+            android:hint="@string/confirmPassword"
+            android:id="@+id/act_reg_passwordtwo"
+            android:background="@drawable/edit_background_while"></EditText>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/french_grey"></View>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_20"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/btn_01"
+        android:id="@+id/act_reg_but"
+        android:layout_margin="@dimen/dp_20"></TextView>
+
+
+
+
+</LinearLayout>

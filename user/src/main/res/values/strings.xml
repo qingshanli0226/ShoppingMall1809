@@ -1,0 +1,19 @@
+<resources>
+    <string name="userRegistration">用户注册</string>
+    <string name="cellPhoneNumber">手机号:</string>
+    <string name="pleaseEnterYourCellPhoneNumber">请输入手机号</string>
+    <string name="username">用户名:</string>
+    <string name="pleaseEnterAUserName">请输入用户名</string>
+    <string name="password">密码:</string>
+    <string name="enterYourPIN">请输入密码</string>
+    <string name="confirmPassword">确认密码:</string>
+    <string name="register">注册</string>
+    <string name="theUsernameAndPasswordCannotBeEmpty">用户名密码不能为空</string>
+    <string name="theTwoPasswordsDontMatch">两次密码不一致</string>
+    <string name="userLogin">用户登录</string>
+    <string name="login">登录</string>
+    <string name="usermassage">用户信息</string>
+    <string name="changeThePicture">更改头像</string>
+    <string name="backLogin">退出登录</string>
+    <string name="backLoginyes">退出登录成功</string>
+</resources>

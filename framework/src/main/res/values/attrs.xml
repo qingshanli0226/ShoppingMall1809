@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressView">
+        <attr name="wp_paintCircleWidth" format="integer"></attr>
+        <attr name="wp_paintTextSize" format="integer"></attr>
+        <attr name="wp_paintTextColor" format="color"></attr>
+        <attr name="wp_progressBackRoundColor" format="color"></attr>
+        <attr name="wp_progressColor" format="color"></attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="ToolBar">
+        <attr name="wp_istoolbarLeftImg" format="boolean"></attr>
+        <attr name="wp_istoolbarRightImg" format="boolean"></attr>
+        <attr name="wp_CenterTitle" format="string"></attr>
+        <attr name="wp_leftImId" format="reference"></attr>
+        <attr name="wp_rightImgId" format="reference"></attr>
+    </declare-styleable>
+
+</resources>
