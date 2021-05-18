@@ -11,6 +11,16 @@ public class HomeBean {
 
     private int code;
     private String msg;
+
+    @Override
+    public String toString() {
+        return "HomeBean{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     /**
      * act_info : [{"icon_url":"/operation/img/1478169868/1478761370286.png","name":"尚硅谷福利专区之111.1专区","url":"/oper/1478169868app.html"},{"icon_url":"/operation/img/1478763176/1478762941492.png","name":"尚硅谷福利专区 黄金狗粮限量11.1元抢","url":"/oper/1478763176app.html"}]
      * banner_info : [{"image":"/1478770583834.png","option":3,"type":0,"value":{"url":"/act20161111?cyc_app=1"}},{"image":"/1478770583835.png","option":2,"type":0,"value":{"url":"/act20161111?cyc_app=1"}},{"image":"/1478770583836.png","option":1,"type":0,"value":{"url":"/act20161111?cyc_app=1"}}]
@@ -69,6 +79,19 @@ public class HomeBean {
          */
 
         private List<BannerInfoBean> banner_info;
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "seckill_info=" + seckill_info +
+                    ", act_info=" + act_info +
+                    ", banner_info=" + banner_info +
+                    ", channel_info=" + channel_info +
+                    ", hot_info=" + hot_info +
+                    ", recommend_info=" + recommend_info +
+                    '}';
+        }
+
         /**
          * channel_name : 服饰
          * image : /app/img/menu-cyc.png
@@ -187,6 +210,17 @@ public class HomeBean {
                 private String origin_price;
                 private String product_id;
 
+                @Override
+                public String toString() {
+                    return "ListBean{" +
+                            "cover_price='" + cover_price + '\'' +
+                            ", figure='" + figure + '\'' +
+                            ", name='" + name + '\'' +
+                            ", origin_price='" + origin_price + '\'' +
+                            ", product_id='" + product_id + '\'' +
+                            '}';
+                }
+
                 public String getCover_price() {
                     return cover_price;
                 }
@@ -263,6 +297,17 @@ public class HomeBean {
             private String image;
             private int option;
             private int type;
+
+            @Override
+            public String toString() {
+                return "BannerInfoBean{" +
+                        "image='" + image + '\'' +
+                        ", option=" + option +
+                        ", type=" + type +
+                        ", value=" + value +
+                        '}';
+            }
+
             /**
              * url : /act20161111?cyc_app=1
              */
@@ -319,6 +364,18 @@ public class HomeBean {
             private String image;
             private int option;
             private int type;
+
+            @Override
+            public String toString() {
+                return "ChannelInfoBean{" +
+                        "channel_name='" + channel_name + '\'' +
+                        ", image='" + image + '\'' +
+                        ", option=" + option +
+                        ", type=" + type +
+                        ", value=" + value +
+                        '}';
+            }
+
             /**
              * channel_id : 8
              */
@@ -384,6 +441,16 @@ public class HomeBean {
             private String name;
             private String product_id;
 
+            @Override
+            public String toString() {
+                return "HotInfoBean{" +
+                        "cover_price='" + cover_price + '\'' +
+                        ", figure='" + figure + '\'' +
+                        ", name='" + name + '\'' +
+                        ", product_id='" + product_id + '\'' +
+                        '}';
+            }
+
             public String getCover_price() {
                 return cover_price;
             }
@@ -422,6 +489,16 @@ public class HomeBean {
             private String figure;
             private String name;
             private String product_id;
+
+            @Override
+            public String toString() {
+                return "RecommendInfoBean{" +
+                        "cover_price='" + cover_price + '\'' +
+                        ", figure='" + figure + '\'' +
+                        ", name='" + name + '\'' +
+                        ", product_id='" + product_id + '\'' +
+                        '}';
+            }
 
             public String getCover_price() {
                 return cover_price;

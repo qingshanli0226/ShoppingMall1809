@@ -27,7 +27,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onViewCreated(view, savedInstanceState);
         initView();
         initPresenter();
-        initDataw();
+        initData();
     }
 
     @Override

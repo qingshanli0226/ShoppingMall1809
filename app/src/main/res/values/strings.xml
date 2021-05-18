@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="homeCoundDownTv">秒</string>
+    <string name="homeCoundDownNum">5</string>
 </resources>
