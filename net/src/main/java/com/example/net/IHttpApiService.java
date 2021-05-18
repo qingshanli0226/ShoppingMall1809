@@ -5,14 +5,16 @@ import com.example.common.Constants;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 
+import com.example.common.Constants;
+import com.example.net.bean.HomeBean;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface IHttpApiService {
-//    @GET(AppNetConfig.INDEX)
-//    Observable<HomeBean> getHomeData();
+
 //    @GET(AppNetConfig.UPDATE)
 //    Observable<UpdateBean> getAppUpdate();
 //
@@ -52,4 +54,8 @@ public interface IHttpApiService {
 //    //清除密码
 //    @POST(AppNetConfig.CLEARESTUREPASSWORD)
 //    Observable<GesturePassword> clearPassword();
+
+
+    @GET(Constants.HOME_URL)
+    Observable<HomeBean> getHomeData();
 }
