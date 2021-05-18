@@ -1,0 +1,21 @@
+<resources>
+
+
+<!--  登录  -->
+    <string name="user_login_toolbar">登陆</string>
+    <string name="user_login_nametv">账户</string>
+    <string name="user_login_nameev">请输入用户名</string>
+    <string name="user_login_passtv">密码</string>
+    <string name="user_login_passev">请输入密码</string>
+    <string name="user_login_button">登录</string>
+    <string name="user_other_login"> 其他登录方式</string>
+    <string name="user_login"> 点击登录,表示同意《尚硅谷用户协议》</string>
+    <string name="user_login_forget"> 本功能暂未开放，重新注册一个吧，敬请期待</string>
+    <string name="user_login_weibo"> 本功能暂未开放，合作没谈拢，敬请期待</string>
+
+    <!--  注册  -->
+    <string name="user_register_toolbar">注册新用户</string>
+    <string name="user_register_button">注册</string>
+    <string name="user_register_passtv_again">确认密码</string>
+    <string name="user_register"> 点击注册,表示同意《尚硅谷用户协议》</string>
+</resources>

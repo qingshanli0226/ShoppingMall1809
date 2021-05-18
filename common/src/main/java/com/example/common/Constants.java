@@ -1,7 +1,7 @@
 package com.example.common;
 
 public class Constants {
-    public static final String BASE_URL="http://49.233.0.68:8080";
+    public static final String BASE_URL="http://49.233.0.68:8080/";
     public static final String BASE_URL_JSON ="/atguigu/json/";
     public static final String BASE_URl_IMAGE =BASE_URL+"/atguigu/img";
     //小裙子
@@ -27,9 +27,9 @@ public class Constants {
     //游戏专区
     public static final String GAME_URL = BASE_URL_JSON + "GAME_URL.json";
 
-
-
-
+    public static final String LOGIN = "login";//登录
+    public static final String USERREGISTER = "register";//注册
+    public static final String AUTOLOGIN = "autoLogin";//自动登录
 
 
     //主页Fragment路径
