@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlueshen">
+
+    <ImageView
+        android:id="@+id/leftImg"
+        android:layout_width="@dimen/toolbar_img_size"
+        android:layout_height="@dimen/toolbar_img_size"
+        android:layout_marginLeft="@dimen/toolbar_margin_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        ></ImageView>
+
+    <TextView
+        android:id="@+id/titleTv"
+        style="@style/bigTextStyle"
+        android:layout_centerInParent="true"
+        ></TextView>
+
+    <LinearLayout
+        android:id="@+id/rightArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/toolbar_margin_size"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_width="@dimen/toolbar_img_size"
+                android:layout_height="@dimen/toolbar_img_size"
+                android:id="@+id/rightImg"
+                android:layout_centerVertical="true"
+                ></ImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/rightTv"
+                style="@style/midTextStyle"
+                android:layout_centerVertical="true"
+                ></TextView>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

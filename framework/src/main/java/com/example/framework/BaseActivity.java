@@ -4,69 +4,67 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.example.framework.manager.FiannceConnectManager;
 import com.example.framework.view.LoadingPage;
+import com.example.framework.view.ToolBar;
 
-public abstract class BaseActivity<T extends  BasePresenter> extends AppCompatActivity implements FiannceConnectManager.IConnectListener {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener {
 
     protected T httpPresenter;
     protected boolean isUseLoading = true;
     protected LoadingPage loadingPage;
-    protected Toolbar toolbar ;
+    protected ToolBar toolBar;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLaoutId());
-
-        FiannceConnectManager.getInstance().registerConnectListener(this);
-
-        loadingPage=  new LoadingPage(this){
-
+        loadingPage = new LoadingPage(this) {
             @Override
             protected int getSuccessLayoutId() {
-                return getLaoutId();
+                return getLayoutId();
             }
         };
-
         setContentView(loadingPage);
         initView();
-
-       // toolbar = findViewById(R.id.toolbar);
-
+        toolBar = findViewById(R.id.toolbar);
+        toolBar.setToolbarListener(this);
         initPresenter();
         initData();
-
-
-
     }
-
-    protected abstract void initData();
 
     protected abstract void initPresenter();
 
-    protected abstract int getLaoutId();
+    protected abstract void initData();
 
     protected abstract void initView();
+
+    protected abstract int getLayoutId();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (httpPresenter != null){
+        destroy();
+    }
+
+    public void destroy() {
+        if (httpPresenter != null) {
             httpPresenter.detachView();
         }
-
-        FiannceConnectManager.getInstance().unRegisterConnectListener(this);
     }
 
     @Override
-    public void onConnected() {
+    public void onRightTvClick() {
 
     }
 
     @Override
-    public void onDisconnected() {
+    public void onLeftClick() {
 
     }
+
+    @Override
+    public void onRightImgClick() {
+
+    }
+
 }

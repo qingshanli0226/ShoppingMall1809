@@ -9,41 +9,41 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.fiannce.bawei.framework.manager.FiannceConnectManager;
-import com.fiannce.bawei.framework.view.LoadingPage;
+import com.example.framework.view.LoadingPage;
+import com.example.framework.view.ToolBar;
 
-public abstract   class BaseFragment<T extends BasePresenter> extends Fragment implements Ifragment, FiannceConnectManager.IConnectListener {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements ToolBar.IToolbarListener {
 
     protected T httpPresenter;
+    protected View mBaseView;
+    protected ToolBar toolBar;
     protected LoadingPage loadingPage;
-    private  View inflate;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       inflate =  loadingPage = new LoadingPage(getContext()) {
-           @Override
-           protected int getSuccessLayoutId() {
-               return getLoutId();
-           }
-       };
-
-        return inflate;
-    }
+    protected boolean isUseLoading = true;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FiannceConnectManager.getInstance().registerConnectListener(this);
+
         initView();
-
-
-
-
+        toolBar = mBaseView.findViewById(R.id.toolbar);
+        toolBar.setToolbarListener(this);
         initPresenter();
         initData();
-
-
     }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBaseView = loadingPage = new LoadingPage(getActivity()) {
+            @Override
+            protected int getSuccessLayoutId() {
+                return getLayoutId();
+            }
+        };
+
+        return mBaseView;
+    }
+
 
     protected abstract void initPresenter();
 
@@ -51,29 +51,32 @@ public abstract   class BaseFragment<T extends BasePresenter> extends Fragment i
 
     protected abstract void initView();
 
-    protected abstract int getLoutId();
+    protected abstract int getLayoutId();
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (httpPresenter != null){
+        destroy();
+    }
+
+    public void destroy() {
+        if (httpPresenter != null) {
             httpPresenter.detachView();
         }
-        FiannceConnectManager.getInstance().unRegisterConnectListener(this);
     }
 
     @Override
-    public <T extends View> T findViewById(int id) {
-        return inflate.findViewById(id);
-    }
-
-    @Override
-    public void onConnected() {
+    public void onLeftClick() {
 
     }
 
     @Override
-    public void onDisconnected() {
+    public void onRightImgClick() {
+
+    }
+
+    @Override
+    public void onRightTvClick() {
 
     }
 }

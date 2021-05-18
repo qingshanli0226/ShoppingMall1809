@@ -9,75 +9,74 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.framework.R;
 
 public abstract class LoadingPage extends FrameLayout {
 
-    private  View errorView;
-    private TextView errorTv;
-    private View successView;
     private View loadingView;
+    private View successView;
+    private View errorView;
+    private TextView errorTv;
 
-    public LoadingPage(@NonNull Context context) {
+    public LoadingPage(Context context) {
         super(context);
-        init(context,null,0);
+        init(context, null, 0);
     }
 
-    public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public LoadingPage(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs,0);
+        init(context, attrs, 0);
     }
 
-    public LoadingPage(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LoadingPage(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context,attrs,defStyleAttr);
+        init(context, attrs, 0);
     }
 
-    private void init(Context context,AttributeSet attrs,int defStyleAttr ){
+    private void init(Context context, AttributeSet attrs, int i) {
+
         LayoutInflater inflater = LayoutInflater.from(context);
         errorView = inflater.inflate(R.layout.view_error, null);
         errorTv = errorView.findViewById(R.id.errorTv);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        addView(errorView,layoutParams);
+        addView(errorView, layoutParams);
         successView = inflater.inflate(getSuccessLayoutId(), null);
-        addView(successView,layoutParams);
+        addView(successView, layoutParams);
         loadingView = inflater.inflate(R.layout.view_loading, null);
-        addView(loadingView,layoutParams);
+        addView(loadingView, layoutParams);
         showSuccessView();
     }
 
     protected abstract int getSuccessLayoutId();
 
-    public void showLoadingView(){
+    public void showLoadingView() {
         errorView.setVisibility(GONE);
         successView.setVisibility(GONE);
+        loadingView.setBackgroundColor(Color.WHITE);
         loadingView.setVisibility(VISIBLE);
     }
 
-    public void showErrorView(){
+    public void showErorView() {
         errorView.setVisibility(VISIBLE);
         successView.setVisibility(GONE);
         loadingView.setVisibility(GONE);
     }
 
-    public void showSuccessView(){
+    public void showSuccessView() {
         errorView.setVisibility(GONE);
         successView.setVisibility(VISIBLE);
         loadingView.setVisibility(GONE);
     }
 
-    public void showTransparentLoadingView(){
+    public void showTransparentLoadingView() {
         errorView.setVisibility(GONE);
         successView.setVisibility(VISIBLE);
         loadingView.setBackgroundColor(Color.TRANSPARENT);
         loadingView.setVisibility(VISIBLE);
     }
 
-    public void showError(String errorInfo){
-        showErrorView();
+    public void showError(String errorInfo) {
+        showErorView();
         errorTv.setText(errorInfo);
     }
 
