@@ -1,2 +1,4 @@
+include ':net'
+include ':framework'
 include ':app'
 rootProject.name = "ElectricityProject"
