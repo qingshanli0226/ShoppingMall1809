@@ -59,7 +59,4 @@
         android:layout_height="@dimen/dp_150"
         android:id="@+id/frag_home_banner"></com.youth.banner.Banner>
 
-
-
-
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.os.Message;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.framework.service.ShopService;
+import com.example.shoppingmall1809.main.MainActivity;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.MainActivity;
 
