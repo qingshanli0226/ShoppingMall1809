@@ -1,2 +1,4 @@
+include ':user'
+include ':framework'
 include ':app'
 rootProject.name = "ShoppingMall"
