@@ -1,0 +1,8 @@
+include ':pay'
+include ':shoppingCar'
+include ':framework'
+include ':commom'
+include ':user'
+include ':net'
+include ':app'
+rootProject.name = "ShoppingMall1809"
