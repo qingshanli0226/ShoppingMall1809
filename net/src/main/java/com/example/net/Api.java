@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
-@GET(Constants.BASE_URL)
+    @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomebean();
 @POST("register")
 @FormUrlEncoded
