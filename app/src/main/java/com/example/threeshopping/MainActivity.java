@@ -82,6 +82,8 @@ public class MainActivity extends BaseActivity {
         showFragment(0);
 
 
+
+
         mainGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -132,7 +134,10 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onClickRight() {
+    public void onClickRight() {}
 
-    }
+
+
+
+
 }

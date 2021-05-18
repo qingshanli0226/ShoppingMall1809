@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <com.example.framework.view.ToolBar
         android:visibility="gone"
         android:id="@+id/toolbar"
@@ -80,6 +81,9 @@
                 android:layout_height="match_parent"/>
         </RadioGroup>
     </RelativeLayout>
+
+
+
 
 
 </LinearLayout>
