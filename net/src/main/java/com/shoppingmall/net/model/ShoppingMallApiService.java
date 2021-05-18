@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 public interface ShoppingMallApiService {
     //http://49.233.0.68:8080/atguigu/json/HOME_URL.json
-    @GET("/atguigu/json/HOME_URL.json")
+    @GET("atguigu/json/HOME_URL.json")
     Observable<HomeBean> getHomeData();
 
 }

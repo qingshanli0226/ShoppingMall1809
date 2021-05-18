@@ -17,10 +17,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initData();
     }
 
-    protected abstract int getLayoutId();
-    protected abstract void initView();
-    protected abstract void initPresenter();
-    protected abstract void initData();
+    public abstract int getLayoutId();
+    public abstract void initView();
+    public abstract void initPresenter();
+    public abstract void initData();
 
     @Override
     public void showLoading() {

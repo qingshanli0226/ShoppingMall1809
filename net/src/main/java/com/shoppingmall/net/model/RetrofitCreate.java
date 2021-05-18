@@ -29,7 +29,7 @@ public class RetrofitCreate {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://49.233.0.68:8080")
+                .baseUrl("http://49.233.0.68:8080/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

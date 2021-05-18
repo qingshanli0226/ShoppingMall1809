@@ -1,17 +1,23 @@
-package com.shoppingmall;
+package com.shoppingmall.main;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
 import android.widget.ScrollView;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.shoppingmall.R;
 import com.shoppingmall.bean.CustomBean;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.main.adapter.ComAdapter;
+import com.shoppingmall.main.find.FindFragment;
+import com.shoppingmall.main.home.HomeFragment;
+import com.shoppingmall.main.mine.MineFragment;
+import com.shoppingmall.main.shopcar.ShopCarFragment;
+import com.shoppingmall.main.sort.SortFragment;
 import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.ArrayList;
@@ -19,39 +25,50 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     private android.widget.ScrollView mainScroll;
-    private androidx.viewpager.widget.ViewPager mainVp;
-    private com.flyco.tablayout.CommonTabLayout mainCommon;
+
+    private ComAdapter commonAdapter;
+    private ViewPager mainVp;
+    private CommonTabLayout mainCommon;
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void initView() {
-
-        mainScroll = (ScrollView) findViewById(R.id.mainScroll);
+    public void initView() {
+//        mainScroll = (ScrollView) findViewById(R.id.mainScroll);
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
     }
 
     @Override
-    protected void initPresenter() {
+    public void initPresenter() {
 
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
         //拿到数据
         HomeBean homeBean = CacheManager.getInstance().getHomeBean();
 
+        ArrayList<Fragment> list = new ArrayList<>();
+        list.add(new HomeFragment());
+        list.add(new SortFragment());
+        list.add(new FindFragment());
+        list.add(new ShopCarFragment());
+        list.add(new MineFragment());
+        commonAdapter = new ComAdapter(getSupportFragmentManager(),list);
+        mainVp.setAdapter(commonAdapter);
+
         ArrayList<CustomTabEntity> customTabEntities = new ArrayList<>();
         customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_home),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_sort),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table);
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_find),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table);
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_shopCar),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table);
-        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_mine),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table);
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_sort),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_find),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_shopCar),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
+        customTabEntities.add(new CustomBean(getString(R.string.mainActivity_fragment_title_mine),R.drawable.ic_launcher_home_table,R.drawable.ic_launcher_home02_table));
         mainCommon.setTabData(customTabEntities);
+
         mainCommon.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

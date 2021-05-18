@@ -4,25 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainScroll">
-        <androidx.viewpager.widget.ViewPager
+    tools:context=".main.MainActivity">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/mainScroll">-->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            android:layout_weight="9"
-            android:id="@+id/mainVp"></androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_weight="9"
+                android:id="@+id/mainVp"></androidx.viewpager.widget.ViewPager>
 
-        <com.flyco.tablayout.CommonTabLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            android:layout_weight="1"
-            android:id="@+id/mainCommon"></com.flyco.tablayout.CommonTabLayout>
-
-    </ScrollView>
+            <com.flyco.tablayout.CommonTabLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_weight="1"
+                app:tl_textSelectColor="@color/red"
+                app:tl_textUnselectColor="@color/black"
+                android:id="@+id/mainCommon"></com.flyco.tablayout.CommonTabLayout>
+        </LinearLayout>
+<!--    </ScrollView>-->
 
 
 </LinearLayout>

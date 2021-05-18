@@ -1,5 +1,7 @@
 package com.shoppingmall.framework.manager;
 
+import com.shoppingmall.net.bean.HomeBean;
+
 public class CacheManager {
     private static CacheManager cacheManager;
 
@@ -8,6 +10,16 @@ public class CacheManager {
             cacheManager = new CacheManager();
         }
         return cacheManager;
+    }
+
+    private HomeBean homeBean;
+
+    public HomeBean getHomeBean() {
+        return homeBean;
+    }
+
+    public void setHomeBean(HomeBean homeBean) {
+        this.homeBean = homeBean;
     }
 }
 
