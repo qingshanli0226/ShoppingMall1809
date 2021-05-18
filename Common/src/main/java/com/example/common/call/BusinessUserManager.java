@@ -1,11 +1,8 @@
 package com.example.common.call;
 
-<<<<<<< HEAD:Common/src/main/java/com/example/common/call/BusinessUserManager.java
 
 
 import com.example.common.bean.LogBean;
-=======
->>>>>>> c51b508b90e590efddf687cdfc0692f44bc44dd3:Common/src/main/java/com/example/common/call/FiannceUserManager.java
 
 import java.util.ArrayList;
 import java.util.List;

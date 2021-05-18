@@ -10,17 +10,17 @@ import android.net.NetworkInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuisnessNetManager {
+public class BusinessNetManager {
 
-    private static BuisnessNetManager manager;
+    private static BusinessNetManager manager;
 
     private List<NetConnectListener> list=new ArrayList<>();
 
     private Context context;
 
-    public static BuisnessNetManager getInstance() {
+    public static BusinessNetManager getInstance() {
         if (manager==null){
-            manager=new BuisnessNetManager();
+            manager=new BusinessNetManager();
         }
         return manager;
     }
