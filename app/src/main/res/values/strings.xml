@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ThreeShopping</string>
+    <string name="main_one">首页</string>
+    <string name="main_two">分类</string>
+    <string name="main_three">发现</string>
+    <string name="main_four">购物车</string>
+    <string name="main_five">个人中心</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
