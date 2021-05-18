@@ -1,2 +1,10 @@
+include ':message'
+include ':ToSendTheGoods'
+include ':obligation'
+include ':commodity'
+include ':pay'
+include ':user'
+include ':formwork'
+include ':net'
 include ':app'
 rootProject.name = "My Application"
