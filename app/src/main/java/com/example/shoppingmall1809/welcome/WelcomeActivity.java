@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.framework.service.ShopService;
-import com.example.shoppingmall1809.MainActivity;
+import com.example.shoppingmall1809.main.MainActivity;
 import com.example.shoppingmall1809.R;
 
 import java.util.Timer;
