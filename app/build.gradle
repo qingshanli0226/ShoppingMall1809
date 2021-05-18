@@ -36,7 +36,11 @@ dependencies {
     implementation project(path: ':net')
     implementation project(path: ':framework')
     implementation project(path: ':Common')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.2@aar'
 }
