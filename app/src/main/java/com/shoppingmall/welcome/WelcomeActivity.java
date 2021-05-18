@@ -41,14 +41,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void onHomeData(HomeBean homeBean) {
-        if (homeBean==null){
-            initData();
-        }
         //单例存储数据
         CacheManager.getInstance().setHomeBean(homeBean);
         LogUtils.json(homeBean);
         handler.sendEmptyMessageDelayed(GET_DATA_OK,1000);
-
     }
     private final Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")
@@ -60,6 +56,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
             }else {
+                initData();
                 Toast.makeText(WelcomeActivity.this, "请求超时", Toast.LENGTH_SHORT).show();
             }
         }

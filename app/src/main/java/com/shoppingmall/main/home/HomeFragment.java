@@ -1,66 +1,91 @@
 package com.shoppingmall.main.home;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.widget.EditText;
+import android.widget.ImageView;
 
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
+import com.shoppingmall.framework.manager.CacheManager;
+import com.shoppingmall.framework.mvp.BaseFragment;
+import com.shoppingmall.main.home.adapter.MenuAdapter;
+import com.shoppingmall.net.bean.HomeBean;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.loader.ImageLoader;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class HomeFragment extends BaseFragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private EditText homeFragmentSearch;
+    private Banner banner;
+    private RecyclerView menuRv;
+    private Banner bannerTwo;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void initView() {
+
+        homeFragmentSearch = (EditText) mView.findViewById(R.id.homeFragmentSearch);
+        banner = (Banner) mView.findViewById(R.id.banner);
+        menuRv = (RecyclerView) mView.findViewById(R.id.menuRv);
+        bannerTwo = (Banner) mView.findViewById(R.id.bannerTwo);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public void initPresenter() {
+
     }
+
+    @Override
+    public void initData() {
+        //得到数据
+        HomeBean homeBean = CacheManager.getInstance().getHomeBean();
+        setBanner(homeBean);
+        setMenuRv(homeBean);
+        setTwoBanner(homeBean);
+
+    }
+
+    //第二个轮播图
+    private void setTwoBanner(HomeBean homeBean) {
+        bannerTwo.setImages(homeBean.getResult().getAct_info());
+        bannerTwo.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                HomeBean.ResultBean.ActInfoBean actInfoBean = (HomeBean.ResultBean.ActInfoBean) path;
+                Glide.with(getContext()).load(actInfoBean.getIcon_url()).into(imageView);
+            }
+        });
+        banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
+        banner.start();
+    }
+
+    //小菜单
+    private void setMenuRv(HomeBean homeBean) {
+        MenuAdapter menuAdapter = new MenuAdapter(homeBean.getResult().getChannel_info());
+        menuRv.setLayoutManager(new GridLayoutManager(getContext(), 5));
+        menuRv.setAdapter(menuAdapter);
+    }
+
+    //设置轮播图
+    private void setBanner(HomeBean homeBean) {
+        banner.setImages(homeBean.getResult().getBanner_info());
+        banner.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                HomeBean.ResultBean.BannerInfoBean bannerInfoBean = (HomeBean.ResultBean.BannerInfoBean) path;
+                Glide.with(getContext()).load(bannerInfoBean.getImage()).into(imageView);
+            }
+        });
+        banner.start();
+    }
+
 }
