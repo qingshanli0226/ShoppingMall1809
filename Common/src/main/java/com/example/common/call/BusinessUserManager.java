@@ -1,18 +1,17 @@
 package com.example.common.call;
 
-import com.example.network.model.LogBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiannceUserManager {
+public class BusinessUserManager {
 
     private List<IUserLoginChanged> list=new ArrayList<>();
-    private static FiannceUserManager manager;
+    private static BusinessUserManager manager;
 
-    public synchronized static FiannceUserManager getInstance() {
+    public synchronized static BusinessUserManager getInstance() {
         if (manager==null){
-            manager=new FiannceUserManager();
+            manager=new BusinessUserManager();
         }
         return manager;
     }

@@ -15,9 +15,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     protected T httpPresenter;
     protected ToolBar toolBar;
-    private boolean isUseLoading = true;
     protected LoadingPage loadingPage;
-    private String time;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
