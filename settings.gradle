@@ -1,0 +1,5 @@
+include ':net'
+include ':framework'
+include ':user'
+include ':app'
+rootProject.name = "My Application"
