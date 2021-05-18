@@ -6,5 +6,6 @@
             <attr name="rightIsShow" format="boolean"/>
             <attr name="leftImg" format="reference"/>
             <attr name="leftIsShow" format="boolean" />
+            <attr name="rightText" format="string"/>
         </declare-styleable>
 </resources>

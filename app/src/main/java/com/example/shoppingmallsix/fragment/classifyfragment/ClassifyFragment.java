@@ -9,24 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.framework.BaseFragment;
 import com.example.shoppingmallsix.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClassifyFragment extends Fragment {
-
-
-    public ClassifyFragment() {
-        // Required empty public constructor
-    }
-
+public class ClassifyFragment extends BaseFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classify, container, false);
+    protected void initPresenter() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_classify;
     }
 
 }

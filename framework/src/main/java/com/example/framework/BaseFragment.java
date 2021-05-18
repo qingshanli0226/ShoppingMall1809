@@ -41,6 +41,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
             }
         };
 
+        mBaseView.findViewById(getLayoutId());
+
         return mBaseView;
     }
 

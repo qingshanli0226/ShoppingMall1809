@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ public class ToolBar extends RelativeLayout {
     private String titleText;
     private int rightImgId, leftImgId;
     private IToolbarListener iToolbarListener;
+    private String rightText;
+    private TextView rightTv;
 
     public ToolBar(Context context) {
         super(context);
@@ -43,6 +46,7 @@ public class ToolBar extends RelativeLayout {
         rightImgId = typedArray.getResourceId(R.styleable.ToolBar_rightImage, 0);
         leftIsShow = typedArray.getBoolean(R.styleable.ToolBar_leftIsShow, false);
         rightAreaIsShow = typedArray.getBoolean(R.styleable.ToolBar_rightIsShow, false);
+        rightText = typedArray.getString(R.styleable.ToolBar_rightText);
         typedArray.recycle();
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -51,8 +55,11 @@ public class ToolBar extends RelativeLayout {
         titleTv = findViewById(R.id.titleTv);
         leftImg = findViewById(R.id.leftImg);
         rightImg = findViewById(R.id.rightImg);
+        rightTv = findViewById(R.id.rightTv);
 
         titleTv.setText(titleText);
+        rightTv.setText(rightText);
+
         if (rightAreaIsShow && rightImgId != 0) {
             rightImg.setImageResource(rightImgId);
         }
@@ -73,6 +80,15 @@ public class ToolBar extends RelativeLayout {
             public void onClick(View view) {
                 if (iToolbarListener != null) {
                     iToolbarListener.onRightImgClick();
+                }
+            }
+        });
+
+        rightTv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (iToolbarListener != null) {
+                    iToolbarListener.onRightTvClick();
                 }
             }
         });
