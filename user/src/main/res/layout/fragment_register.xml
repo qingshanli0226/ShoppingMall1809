@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".frag.RegisterFragment">
+<com.example.framework.view.MyToorbar
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
 
+    ></com.example.framework.view.MyToorbar>
 
 </LinearLayout>
