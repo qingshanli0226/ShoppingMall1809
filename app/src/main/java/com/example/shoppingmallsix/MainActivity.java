@@ -1,14 +1,37 @@
 package com.example.shoppingmallsix;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.FrameLayout;
 
-import android.os.Bundle;
+import com.example.framework.BaseActivity;
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends BaseActivity {
+
+    private FrameLayout mainFram;
+    private CommonTabLayout mainCommon;
+    private ArrayList<CustomTabEntity> arrayList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initPresenter() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+        mainFram = findViewById(R.id.mainFram);
+        mainCommon = findViewById(R.id.mainCommon);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 }
