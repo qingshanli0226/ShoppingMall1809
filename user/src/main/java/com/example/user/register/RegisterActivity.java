@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -25,9 +26,9 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements Too
     private com.example.framework.view.ToolBar toolbar;
     private android.widget.EditText registerUsername;
     private android.widget.EditText registerPassword;
-    private android.widget.RadioButton passwordInvisible;
+    private android.widget.CheckBox passwordInvisible;
     private android.widget.EditText registerPasswordAgain;
-    private android.widget.RadioButton passwordInvisibleAgain;
+    private android.widget.CheckBox passwordInvisibleAgain;
     private android.widget.Button register;
 
     @Override
@@ -41,9 +42,9 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements Too
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         registerUsername = (EditText) findViewById(R.id.register_username);
         registerPassword = (EditText) findViewById(R.id.register_password);
-        passwordInvisible = (RadioButton) findViewById(R.id.password_invisible);
+        passwordInvisible = (CheckBox) findViewById(R.id.password_invisible);
         registerPasswordAgain = (EditText) findViewById(R.id.register_password_again);
-        passwordInvisibleAgain = (RadioButton) findViewById(R.id.password_invisible_again);
+        passwordInvisibleAgain = (CheckBox) findViewById(R.id.password_invisible_again);
         register = (Button) findViewById(R.id.register);
         toolbar.setToolbarOnClickLisenter(this);
     }

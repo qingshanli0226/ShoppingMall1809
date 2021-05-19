@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -25,7 +27,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
     private ToolBar toolbar;
     private android.widget.EditText loginUsername;
     private android.widget.EditText loginPassword;
-    private android.widget.RadioButton passwordInvisible;
+    private android.widget.CheckBox passwordInvisible;
     private android.widget.Button login;
     private android.widget.TextView loginRegister;
     private android.widget.TextView forgetPassword;
@@ -43,7 +45,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         loginUsername = (EditText) findViewById(R.id.login_username);
         loginPassword = (EditText) findViewById(R.id.login_password);
-        passwordInvisible = (RadioButton) findViewById(R.id.password_invisible);
+        passwordInvisible = (CheckBox) findViewById(R.id.password_invisible);
         login = (Button) findViewById(R.id.login);
         loginRegister = (TextView) findViewById(R.id.login_register);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
@@ -60,7 +62,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 
     @Override
     public void initData() {
-
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 
     @Override
     public void onClickLeft() {
-        finish();
+        CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
     }
 
     @Override
@@ -137,7 +138,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         LogUtils.json(loginBean);
         if(loginBean.getCode().equals("200")){
             Toast.makeText(this, ""+loginBean.getMessage(), Toast.LENGTH_SHORT).show();
-            finish();
+            CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
 //            SpUtil.putString(this, CommonConstant.SP_TOKEN,loginBean.getResult().getToken());
 //            //跳到主页面返回
 //            CacheUserManager.getInstance().setLoginBean(loginBean);
