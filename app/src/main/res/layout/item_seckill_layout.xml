@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_70">
+
+        <ImageView
+            android:id="@+id/itemSeckillLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dm_dp_40"
+            android:gravity="center"
+            android:text="今日闪购 据 结束"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_dp_20"></TextView>
+
+        <TextView
+            android:id="@+id/itemseckilCountDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_dp_200"
+            android:background="@color/red"
+            android:text="aaa"
+            android:textColor="#ffffff"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dm_dp_40"
+            android:gravity="center"
+            android:text="查看更多"
+            android:textSize="@dimen/dm_dp_20"></TextView>
+        
+
+        <ImageView
+            android:id="@+id/itemSeckilRight"
+            android:layout_width="@dimen/dm_dp_20"
+            android:layout_height="@dimen/dm_dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemSeckil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

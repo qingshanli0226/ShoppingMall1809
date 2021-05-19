@@ -1,14 +1,17 @@
 package com.example.threeshopping.home.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
-import com.blankj.utilcode.util.LogUtils;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 
 import com.bumptech.glide.Glide;
@@ -21,8 +24,6 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.http.HEAD;
 
 public class HomeAdapter extends BaseRvAdapter<Object> {
     @Override
@@ -48,7 +49,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 type = Constants.HOME_HOT;
                 break;
         }
-        Log.i("TAG", "getRootItemViewType: " + type);
         return type;
     }
 
@@ -60,18 +60,16 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 layoutId = R.layout.item_banner_layout;
                 break;
             case 1:
-
                 layoutId = R.layout.item_channel_layout;
-
                 break;
             case 2:
-
+                layoutId = R.layout.item_act_layout;
                 break;
             case 3:
-
+                layoutId = R.layout.item_seckill_layout;
                 break;
             case 4:
-
+                layoutId = R.layout.item_recommend_layout;
                 break;
             case 5:
 
@@ -96,10 +94,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                             }
                         }).start();
                 break;
-
-            case 5:
-                break;
-
             case 1:
                 RecyclerView itemRv = holder.getView(R.id.itemChannelRv);
                 List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans = (List<HomeBean.ResultBean.ChannelInfoBean>) itemView;
@@ -107,7 +101,53 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 ChannelAdapter channelAdapter = new ChannelAdapter();
                 channelAdapter.getData().addAll(channelInfoBeans);
                 itemRv.setAdapter(channelAdapter);
+                break;
+            case 2:
+                ViewPager itemViewpage = holder.getView(R.id.itemViewpage);
+                List<View> views=new ArrayList<>();
+                List<HomeBean.ResultBean.ActInfoBean> actInfoBeans = (List<HomeBean.ResultBean.ActInfoBean>) itemView;
 
+                for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
+                    ImageView imageView = new ImageView(holder.itemView.getContext());
+                    Log.i("TAG", "displayViewHolder: "+Constants.BASE_URl_IMAGE+actInfoBean.getIcon_url());
+                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url()).into(imageView);
+                    views.add(imageView);
+                }
+                itemViewpage.setAdapter(new ItemPageAdapter(views));
+                break;
+            case 3:
+                ImageView sekLeft = holder.getView(R.id.itemSeckillLeft);
+                sekLeft.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_left_flash));
+
+                ImageView sekright = holder.getView(R.id.itemSeckilRight);
+                sekright.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_right));
+                //倒计时
+                TextView countDown = holder.getView(R.id.itemseckilCountDown);
+                HomeBean.ResultBean.SeckillInfoBean seckillInfoBeans = (HomeBean.ResultBean.SeckillInfoBean) itemView;
+
+
+                RecyclerView sekllRv = holder.getView(R.id.itemSeckil);
+
+                sekllRv.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(),RecyclerView.HORIZONTAL,false));
+                SekillAdapter sekillAdapter = new SekillAdapter();
+                sekillAdapter.getData().addAll(seckillInfoBeans.getList());
+                sekllRv.setAdapter(sekillAdapter);
+                break;
+            case 4:
+                ImageView itemLeft = holder.getView(R.id.itemRecommendLeft);
+
+                itemLeft.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_left_new));
+                ImageView itemRight = holder.getView(R.id.itemRecommendRight);
+                itemRight.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_right));
+                RecyclerView itemReRv = holder.getView(R.id.itemRecommend);
+                List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemView;
+                itemReRv.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+                ReCommendAdapter reCommendAdapter = new ReCommendAdapter();
+                reCommendAdapter.getData().addAll(recommendInfoBeans);
+                itemReRv.setAdapter(reCommendAdapter);
+
+                break;
+            case 5:
                 break;
         }
 

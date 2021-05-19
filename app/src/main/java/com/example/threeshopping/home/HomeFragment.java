@@ -56,11 +56,12 @@ public class HomeFragment extends BaseFragment {
         homeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         ArrayList<Object> objects = new ArrayList<>();
         objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getBanner_info());
-
+        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
+        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getAct_info());
+        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getSeckill_info());
+        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getRecommend_info());
 //        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getHot_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
 
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
 
         homeAdapter.getData().addAll(objects);
         homeRv.setAdapter(homeAdapter);

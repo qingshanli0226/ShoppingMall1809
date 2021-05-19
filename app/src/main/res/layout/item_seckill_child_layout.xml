@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_margin="@dimen/dm_dp_20"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/sekillImg"
+        android:scaleType="center"
+        android:layout_width="@dimen/dm_dp_100"
+        android:layout_height="@dimen/dm_dp_100"
+        ></ImageView>
+    <TextView
+        android:id="@+id/sekillNew"
+        android:layout_width="@dimen/dm_dp_100"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="@dimen/dm_dp_20"
+        android:gravity="center"
+        ></TextView>
+    <TextView
+        android:id="@+id/sekillOld"
+        android:layout_width="@dimen/dm_dp_100"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dm_dp_20"
+        android:gravity="center"
+        ></TextView>
+</LinearLayout>
