@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.LoginManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
@@ -139,6 +140,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         if(loginBean.getCode().equals("200")){
             Toast.makeText(this, ""+loginBean.getMessage(), Toast.LENGTH_SHORT).show();
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+            LoginManager.getInstance().setLoginstate(true);
 //            SpUtil.putString(this, CommonConstant.SP_TOKEN,loginBean.getResult().getToken());
 //            //跳到主页面返回
 //            CacheUserManager.getInstance().setLoginBean(loginBean);
@@ -146,6 +148,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 //            bundle.putInt("page",0);
 //            FrameArouter.getInstance().build(CommonConstant.APP_MAIN_PATH).with(bundle).navigation();
         } else{
+            LoginManager.getInstance().setLoginstate(false);
             Toast.makeText(this, ""+loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

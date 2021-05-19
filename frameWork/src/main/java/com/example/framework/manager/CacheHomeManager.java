@@ -19,8 +19,6 @@ public class CacheHomeManager {
     private HomeBean homeBean;
 
 
-
-
     public HomeBean getHomeBean() {
         return homeBean;
     }

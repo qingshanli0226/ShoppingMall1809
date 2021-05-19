@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.framework.BaseRvAdapter;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends BaseRvAdapter<Object> {
-
-
     @Override
     public int getRootItemViewType(int position) {
         int type = -1;
@@ -53,12 +52,19 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 layoutId = R.layout.item_banner_layout;
                 break;
             case 1:
+
                 break;
             case 2:
+
                 break;
             case 3:
+
                 break;
             case 4:
+
+                break;
+            case 5:
+
                 break;
         }
         return layoutId;
@@ -71,8 +77,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
         switch (position) {
             case 0:
                 Log.i("TAG", "displayViewHolder: "+itemView);
-
-
                 List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemView;
                 Banner itemBanner = holder.getView(R.id.itemBanner);
                 itemBanner.setImages(bannerInfoBeans)
@@ -83,6 +87,9 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                                 Glide.with(context).load(Constants.BASE_URl_IMAGE + bean.getImage()).into(imageView);
                             }
                         }).start();
+                break;
+            case 5:
+
                 break;
         }
 

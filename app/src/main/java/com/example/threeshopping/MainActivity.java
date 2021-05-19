@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.LoginManager;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
@@ -88,25 +89,58 @@ public class MainActivity extends BaseActivity {
         mainGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Boolean loginstate = LoginManager.getInstance().getLoginstate();
                 switch (checkedId) {
                     case R.id.mainOne:
                         showFragment(0);
                         break;
                     case R.id.mainTwo:
                         showFragment(1);
-                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        if (loginstate!=null){
+                            if (!loginstate){
+                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                            }else {
+
+                            }
+                        }else {
+                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        }
                         break;
                     case R.id.mainThree:
                         showFragment(2);
-                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        if (loginstate!=null){
+                            if (!loginstate){
+                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                            }else {
+
+                            }
+                        }else {
+                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        }
                         break;
                     case R.id.mainFour:
                         showFragment(3);
-                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        if (loginstate!=null){
+                            if (!loginstate){
+                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                            }else {
+
+                            }
+                        }else {
+                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        }
                         break;
                     case R.id.mainFive:
                         showFragment(4);
-                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        if (loginstate!=null){
+                            if (!loginstate){
+                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                            }else {
+
+                            }
+                        }else {
+                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
+                        }
                         break;
                 }
             }
