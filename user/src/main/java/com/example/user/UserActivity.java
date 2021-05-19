@@ -46,7 +46,9 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
-    public void initDataw() {
+    public void initData() {
 
     }
+
+
 }

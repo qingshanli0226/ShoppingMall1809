@@ -15,6 +15,7 @@ import com.example.user.register.RegisPresenter;
 
 import mvp.view.BaseFragment;
 
+
 public class RegisterFragment extends BaseFragment<RegisPresenter> implements IRegisterView {
 
     @Override
@@ -33,9 +34,10 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
     }
 
     @Override
-    public void initDataw() {
+    public void initData() {
 
     }
+
 
     @Override
     public void OnRegister(RegisterBean registerBean) {
