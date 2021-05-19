@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shoppingmallsix">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.App"
@@ -14,14 +14,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".welcomeactivity.WelcomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
 
+                    />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mainactivity.MainActivity">
-
-        </activity>
+        <activity android:name=".mainactivity.MainActivity" />
     </application>
 
 </manifest>

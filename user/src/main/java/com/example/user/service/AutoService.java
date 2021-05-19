@@ -47,8 +47,6 @@ public class AutoService extends Service {
                 if (loginBean.getResult() != null) {
                     SpUtil.putString(AutoService.this, FiannceContants.TOKEN_KEY, loginBean.getResult().getToken());
                     CacheUserManager.getInstance().setLoginBean(loginBean);
-//                FrameArouter.getInstance().build(CommonConstant.APP_MAIN_PATH).navigation();
-                    ARouter.getInstance().build(getString(R.string.main_mainActivity)).navigation();
                 }
             }
 

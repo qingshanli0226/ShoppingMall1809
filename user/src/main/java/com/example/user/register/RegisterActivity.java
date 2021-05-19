@@ -75,9 +75,9 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements IUs
     @Override
     protected void initView() {
         etRegisterName = findViewById(R.id.et_regist_number);
-        etRegisterPwd = findViewById(R.id.et_login_pwd);
+        etRegisterPwd = findViewById(R.id.et_regist_pwd);
         etRegisterPwdagain = findViewById(R.id.et_regist_again);
-        btnRegister = findViewById(R.id.btn_login);
+        btnRegister = findViewById(R.id.btn_regist);
     }
 
     @Override
