@@ -35,7 +35,7 @@ public class MyToorbar extends RelativeLayout {
         boolean isright = typedArray.getBoolean(R.styleable.MyToorbar_isright, false);
         typedArray.recycle();
 
-        View mytoorbar = LayoutInflater.from(context).inflate(R.layout.toorbarview, null);
+        View mytoorbar = LayoutInflater.from(context).inflate(R.layout.toorbarview, this);
         TextView title = mytoorbar.findViewById(R.id.title);
         ImageView left= mytoorbar.findViewById(R.id.leftimg);
         ImageView right  = mytoorbar.findViewById(R.id.rightimg);
