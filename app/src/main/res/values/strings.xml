@@ -10,4 +10,21 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+<!--fragment_personal-->
+    <string name="payment">待付款</string>
+    <string name="shipments">待发货</string>
+    <string name="takedelivery">待收货</string>
+    <string name="finish">已完成</string>
+    <string name="after">售后/退款</string>
+    <string name="site">收货地址</string>
+
+    <string name="collect">我的收藏</string>
+    <string name="coupon">我的优惠券</string>
+    <string name="melon">我的瓜子</string>
+    <string name="prize">我的奖品</string>
+    <string name="ticket">我的电子票</string>
+    <string name="share">邀请分享</string>
+    <string name="customerserice">客服中心</string>
+    <string name="serice">服务反馈</string>
 </resources>

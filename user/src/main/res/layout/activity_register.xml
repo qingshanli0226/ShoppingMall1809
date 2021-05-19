@@ -78,11 +78,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_dp_50"
                 android:background="#00FFFFFF"
-                android:password="true"
-                android:hint="@string/user_login_passev"></EditText>
+                android:hint="@string/user_login_passev"
+                android:password="true"></EditText>
         </LinearLayout>
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/password_invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
             android:background="@drawable/password_invisible_select"
             android:button="@null"
             android:layout_marginTop="@dimen/dm_dp_5"
-            android:gravity="center"></RadioButton>
+            android:gravity="center"></CheckBox>
     </FrameLayout>
     <View
         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:hint="@string/user_login_passev"></EditText>
         </LinearLayout>
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/password_invisible_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
             android:background="@drawable/password_invisible_select"
             android:button="@null"
             android:layout_marginTop="@dimen/dm_dp_5"
-            android:gravity="center"></RadioButton>
+            android:gravity="center"></CheckBox>
     </FrameLayout>
 
     <Button
