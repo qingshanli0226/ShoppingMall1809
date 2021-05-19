@@ -72,6 +72,7 @@
                 android:id="@+id/register_pwd"
                 android:background="@null"
                 android:layout_width="@dimen/dm_dp_300dp"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 android:hint="请输入密码"></EditText>
 
@@ -99,6 +100,7 @@
                 android:id="@+id/register_cm_pwd"
                 android:background="@null"
                 android:layout_width="@dimen/dp_240"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"
                 android:hint="请再次输入密码"></EditText>
 
