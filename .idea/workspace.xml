@@ -6,7 +6,12 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca4d1c4d-609b-4b68-9579-54c410668d59" name="Default Changelist" comment="" />
+    <list default="true" id="bbd22af2-0bb5-4ed3-9d41-08f1edfdd67a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/minefragment/MineFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/minefragment/MineFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,21 +34,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_car.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-              <folding>
-                <element signature="e#521#535#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="483">
+              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/minefragment/MineFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+            <state relative-caret-position="368">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#981#982#0" expanded="true" />
+                <element signature="e#1005#1006#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/discoverfragment/DiscoverFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
+            <state relative-caret-position="161">
               <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
             </state>
           </provider>
@@ -60,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/homefragment/HomeFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="483">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -69,17 +76,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/classifyfragment/ClassifyFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="184">
               <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="271">
+              <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
+              <folding>
+                <element signature="e#1013#1027#0" expanded="true" />
+                <element signature="e#1333#1347#0" expanded="true" />
+                <element signature="e#1394#1408#0" expanded="true" />
+                <element signature="e#1589#1603#0" expanded="true" />
+                <element signature="e#1650#1664#0" expanded="true" />
+                <element signature="e#1979#1993#0" expanded="true" />
+                <element signature="e#2032#2046#0" expanded="true" />
+                <element signature="e#2906#2920#0" expanded="true" />
+                <element signature="e#3271#3285#0" expanded="true" />
+                <element signature="e#3631#3645#0" expanded="true" />
+                <element signature="e#3797#3810#0" expanded="true" />
+                <element signature="e#4887#4901#0" expanded="true" />
+                <element signature="e#5813#5827#0" expanded="true" />
+                <element signature="e#6697#6711#0" expanded="true" />
+                <element signature="e#7581#7595#0" expanded="true" />
+                <element signature="e#8464#8478#0" expanded="true" />
+                <element signature="e#9721#9734#0" expanded="true" />
+                <element signature="e#10703#10716#0" expanded="true" />
+                <element signature="e#11685#11698#0" expanded="true" />
+                <element signature="e#12665#12678#0" expanded="true" />
+                <element signature="e#13645#13658#0" expanded="true" />
+                <element signature="e#14631#14644#0" expanded="true" />
+                <element signature="e#15829#15842#0" expanded="true" />
+                <element signature="e#16814#16827#0" expanded="true" />
+                <element signature="e#17797#17810#0" expanded="true" />
+              </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -87,8 +121,8 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
-          <provider editor-type-id="text-editor" />
-          <provider selected="true" editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor" />
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -113,8 +147,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
+            <state relative-caret-position="598">
+              <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -133,6 +167,8 @@
         <option value="$PROJECT_DIR$/pay/build.gradle" />
         <option value="$PROJECT_DIR$/shoppingcar/build.gradle" />
         <option value="$PROJECT_DIR$/user/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/minefragment/MineFragment.java" />
       </list>
     </option>
   </component>
@@ -144,8 +180,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="191" />
-    <option name="y" value="5" />
+    <option name="x" value="154" />
+    <option name="y" value="2" />
     <option name="width" value="1758" />
     <option name="height" value="1036" />
   </component>
@@ -168,327 +204,6 @@
               <item name="ShoppingMallSix" type="58d84e3e:PackageViewProjectNode" />
               <item name="commened" type="616d4139:PackageViewModuleNode" />
               <item name="values" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Commerce" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="classifyfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="discoverfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="homefragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="minefragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingcarfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="mainactivity" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="commened" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="bean" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="bean" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="store" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="constants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -580,59 +295,7 @@
               <item name="example" type="462c0819:PsiDirectoryNode" />
               <item name="shoppingmallsix" type="462c0819:PsiDirectoryNode" />
               <item name="fragment" type="462c0819:PsiDirectoryNode" />
-              <item name="classifyfragment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShoppingMall1809" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="shoppingmallsix" type="462c0819:PsiDirectoryNode" />
-              <item name="fragment" type="462c0819:PsiDirectoryNode" />
-              <item name="discoverfragment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShoppingMall1809" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="shoppingmallsix" type="462c0819:PsiDirectoryNode" />
-              <item name="fragment" type="462c0819:PsiDirectoryNode" />
-              <item name="homefragment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShoppingMall1809" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="shoppingmallsix" type="462c0819:PsiDirectoryNode" />
-              <item name="fragment" type="462c0819:PsiDirectoryNode" />
               <item name="minefragment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShoppingMall1809" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="shoppingmallsix" type="462c0819:PsiDirectoryNode" />
-              <item name="fragment" type="462c0819:PsiDirectoryNode" />
-              <item name="shoppingcarfragment" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
@@ -653,6 +316,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShoppingMall1809" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="drawable" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ShoppingMallSix" type="b2602c69:ProjectViewProjectNode" />
@@ -1046,13 +718,334 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Commerce" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="classifyfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="discoverfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="homefragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="minefragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="fragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingcarfragment" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="shoppingmallsix" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="mainactivity" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="commened" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="framework" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="bean" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="bean" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="store" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ShoppingMallSix" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Tool background\demo\git_shixun\ShoppingMall1809" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="example" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="net" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="constants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/net/src/main/java/com/example/net" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -1138,7 +1131,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bf06fc2e-c5a5-498f-91b4-71d6727f6c99" name="Default Changelist" comment="" />
+      <changelist id="bbd22af2-0bb5-4ed3-9d41-08f1edfdd67a" name="Default Changelist" comment="" />
       <created>1621317081253</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -1147,10 +1140,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="191" y="5" width="1758" height="1036" extended-state="1" />
+    <frame x="154" y="2" width="1758" height="1036" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22909304" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20435807" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -1163,27 +1156,19 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.075170845" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
+      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.061503418" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="7" />
       <window_info anchor="bottom" id="Run" order="8" />
-      <window_info anchor="right" id="Preview" weight="0.32979977" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info active="true" anchor="right" id="Preview" order="5" visible="true" weight="0.32979977" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/commerce/MainActivity.java" />
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -1254,42 +1239,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_car.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding>
-            <element signature="e#521#535#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="483">
+          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/discoverfragment/DiscoverFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/homefragment/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/classifyfragment/ClassifyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/mainactivity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="70" column="104" selection-start-line="70" selection-start-column="104" selection-end-line="70" selection-end-column="104" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
+        <state relative-caret-position="598">
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/shoppingmallsix/fragment/minefragment/MineFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        <state relative-caret-position="368">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#981#982#0" expanded="true" />
+            <element signature="e#1005#1006#0" expanded="true" />
+          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
+          <folding>
+            <element signature="e#1013#1027#0" expanded="true" />
+            <element signature="e#1333#1347#0" expanded="true" />
+            <element signature="e#1394#1408#0" expanded="true" />
+            <element signature="e#1589#1603#0" expanded="true" />
+            <element signature="e#1650#1664#0" expanded="true" />
+            <element signature="e#1979#1993#0" expanded="true" />
+            <element signature="e#2032#2046#0" expanded="true" />
+            <element signature="e#2906#2920#0" expanded="true" />
+            <element signature="e#3271#3285#0" expanded="true" />
+            <element signature="e#3631#3645#0" expanded="true" />
+            <element signature="e#3797#3810#0" expanded="true" />
+            <element signature="e#4887#4901#0" expanded="true" />
+            <element signature="e#5813#5827#0" expanded="true" />
+            <element signature="e#6697#6711#0" expanded="true" />
+            <element signature="e#7581#7595#0" expanded="true" />
+            <element signature="e#8464#8478#0" expanded="true" />
+            <element signature="e#9721#9734#0" expanded="true" />
+            <element signature="e#10703#10716#0" expanded="true" />
+            <element signature="e#11685#11698#0" expanded="true" />
+            <element signature="e#12665#12678#0" expanded="true" />
+            <element signature="e#13645#13658#0" expanded="true" />
+            <element signature="e#14631#14644#0" expanded="true" />
+            <element signature="e#15829#15842#0" expanded="true" />
+            <element signature="e#16814#16827#0" expanded="true" />
+            <element signature="e#17797#17810#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
   </component>
 </project>

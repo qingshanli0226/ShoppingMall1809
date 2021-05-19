@@ -8,25 +8,47 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.example.framework.BaseFragment;
+import com.example.framework.view.ToolBar;
 import com.example.shoppingmallsix.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MineFragment extends Fragment {
-
+public class MineFragment extends BaseFragment {
+    private ToolBar toolbar;
+    private LinearLayout obligation;
+    private LinearLayout sendgoods;
 
     public MineFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    protected void initPresenter() {
+
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+
+        toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
+        obligation = (LinearLayout) mBaseView.findViewById(R.id.obligation);
+        sendgoods = (LinearLayout)mBaseView. findViewById(R.id.sendgoods);
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_mine;
     }
 
 }
