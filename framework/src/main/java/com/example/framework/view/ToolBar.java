@@ -15,10 +15,12 @@ public class ToolBar extends RelativeLayout {
     private ImageView toolbarLeftImg;
     private TextView toolbarCenterTitle;
     private ImageView toolbarRightImg;
+    private TextView toolbarRightTitle;
 
     private boolean istoolbarLeftImg = true;
     private boolean istoolbarRightImg = true;
     private String CenterTitle = "";
+    private String RightTitle = "";
     private int leftImgId;
     private int rightImgId;
 
@@ -46,6 +48,7 @@ public class ToolBar extends RelativeLayout {
         istoolbarLeftImg = typedArray.getBoolean(R.styleable.ToolBar_wp_istoolbarLeftImg, false);
         istoolbarRightImg = typedArray.getBoolean(R.styleable.ToolBar_wp_istoolbarRightImg, false);
         CenterTitle = typedArray.getString(R.styleable.ToolBar_wp_CenterTitle);
+        RightTitle=typedArray.getString(R.styleable.ToolBar_wp_RightTitle);
         leftImgId = typedArray.getResourceId(R.styleable.ToolBar_wp_leftImId, 0);
         rightImgId = typedArray.getResourceId(R.styleable.ToolBar_wp_rightImgId, 0);
         typedArray.recycle();
@@ -55,10 +58,11 @@ public class ToolBar extends RelativeLayout {
 
         toolbarLeftImg = (ImageView) findViewById(R.id.toolbar_left_img);
         toolbarCenterTitle = (TextView) findViewById(R.id.toolbar_center_title);
+        toolbarRightTitle=(TextView) findViewById(R.id.toolbar_right_text);
         toolbarRightImg = (ImageView) findViewById(R.id.toolbar_right_img);
 
-
         toolbarCenterTitle.setText(CenterTitle);
+        toolbarRightTitle.setText(RightTitle);
 
         if (istoolbarLeftImg && leftImgId != 0)
             toolbarLeftImg.setImageResource(leftImgId);
@@ -74,6 +78,11 @@ public class ToolBar extends RelativeLayout {
         toolbarCenterTitle.setOnClickListener(view -> {
             if (toolbarListener!=null) {
                 toolbarListener.onCenterTitleClick();
+            }
+        });
+        toolbarRightTitle.setOnClickListener(view ->{
+            if (toolbarListener!=null){
+                toolbarListener.onRightTitle();
             }
         });
         toolbarRightImg.setOnClickListener(view -> {
@@ -94,6 +103,7 @@ public class ToolBar extends RelativeLayout {
         void onLeftImgClick();
         void onCenterTitleClick();
         void onRightImgClick();
+        void onRightTitle();
     }
 
 
@@ -132,5 +142,9 @@ public class ToolBar extends RelativeLayout {
 
     public void setRightImgId(int rightImgId) {
         this.rightImgId = rightImgId;
+    }
+
+    public void setRightTitle(String rightTitle) {
+        RightTitle = rightTitle;
     }
 }

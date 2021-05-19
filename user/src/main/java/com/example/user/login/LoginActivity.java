@@ -1,8 +1,11 @@
 package com.example.user.login;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,13 @@ public class LoginActivity extends BaseActivity<LoginPresneter> implements ILogi
     private EditText actLogPassword;
     private TextView actLogBut;
     private EditText actLogUser;
+    private TextView toRegister;
+    private TextView forgetThePassword;
+    private android.widget.ImageView weibo;
+    private android.widget.ImageView shareQq;
+    private android.widget.ImageView weixin;
+    private boolean isConceal=false;
+    private ImageView loginConceal;
 
     @Override
     protected int getLayoutId() {
@@ -41,7 +51,6 @@ public class LoginActivity extends BaseActivity<LoginPresneter> implements ILogi
             }
         }
 
-
         actLogBut.setOnClickListener(view -> {
             String user = actLogUser.getText().toString().trim();
             String pwd = actLogPassword.getText().toString().trim();
@@ -53,6 +62,55 @@ public class LoginActivity extends BaseActivity<LoginPresneter> implements ILogi
 
         });
 
+        toRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ARouter.getInstance().build(ShopConstants.REGISTER_PATH).navigation();
+            }
+        });
+
+        forgetThePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "本功能暂未开放，重新注册一个吧，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        weibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        shareQq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        weixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        loginConceal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isConceal){
+                    loginConceal.setImageResource(R.drawable.new_password_drawable_visible);
+                    actLogPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    isConceal=true;
+                }else {
+                    loginConceal.setImageResource(R.drawable.new_password_drawable_invisible);
+                    actLogPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    isConceal=false;
+                }
+            }
+        });
     }
 
     @Override
@@ -66,6 +124,12 @@ public class LoginActivity extends BaseActivity<LoginPresneter> implements ILogi
         actLogPassword = (EditText) findViewById(R.id.act_log_password);
         actLogBut = (TextView) findViewById(R.id.act_log_but);
         actLogUser = (EditText) findViewById(R.id.act_log_user);
+        toRegister = (TextView) findViewById(R.id.toRegister);
+        forgetThePassword = (TextView) findViewById(R.id.forgetThePassword);
+        weibo = (ImageView) findViewById(R.id.weibo);
+        shareQq = (ImageView) findViewById(R.id.share_qq);
+        weixin = (ImageView) findViewById(R.id.weixin);
+        loginConceal = (ImageView) findViewById(R.id.loginConceal);
     }
 
 

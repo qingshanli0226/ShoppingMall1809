@@ -8,11 +8,11 @@
         <attr name="wp_progressColor" format="color"></attr>
     </declare-styleable>
 
-
     <declare-styleable name="ToolBar">
         <attr name="wp_istoolbarLeftImg" format="boolean"></attr>
         <attr name="wp_istoolbarRightImg" format="boolean"></attr>
         <attr name="wp_CenterTitle" format="string"></attr>
+        <attr name="wp_RightTitle" format="string"></attr>
         <attr name="wp_leftImId" format="reference"></attr>
         <attr name="wp_rightImgId" format="reference"></attr>
     </declare-styleable>

@@ -4,7 +4,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.RadioGroup;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.ShopConstants;
+import com.example.framework.manager.FiannceUserManager;
+import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.home.HomeFragment;
 import com.example.shoppingmall1809.main.user.UserFragment;
@@ -53,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_type:
+                        login();
+
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.show(homeFragment1);
                         fragmentTransaction.hide(homeFragment2);
@@ -60,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_community:
+                        login();
+
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(homeFragment1);
                         fragmentTransaction.show(homeFragment2);
@@ -67,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_cart:
+                        login();
+
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(homeFragment1);
                         fragmentTransaction.hide(homeFragment2);
@@ -74,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_user:
+                        login();
+
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(homeFragment1);
                         fragmentTransaction.hide(homeFragment2);
@@ -84,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         });
+    }
 
+    public void login(){
+        LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
+        if (loginBean==null){
+            ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
+        }
     }
 }

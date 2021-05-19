@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
 import com.example.framework.manager.FiannceUserManager;
@@ -22,11 +23,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ShopService extends Service {
 
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return new ShopBinder();
+        return null;
     }
 
 

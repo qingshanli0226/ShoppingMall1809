@@ -75,6 +75,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
+    public void onRightTitle() {
+
+    }
+
+    @Override
     public void onConnected() {
         Toast.makeText(this, "有网", Toast.LENGTH_SHORT).show();
     }

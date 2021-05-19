@@ -1,6 +1,9 @@
 package com.example.user.register;
 
+import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +25,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
 
 
     private ToolBar toolbar;
-    private TextView actRegPhone;
     private EditText actRegUsername;
     private EditText actRegPassword;
     private EditText actRegPasswordtwo;
     private TextView actRegBut;
+    private boolean isConceal=false;
+    private ImageView regConceal1;
+    private ImageView regConceal2;
 
     @Override
     protected int getLayoutId() {
@@ -51,6 +56,35 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
             httpPresenter.getRegisterData(user, pwd);
         });
 
+        regConceal1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isConceal){
+                    regConceal1.setImageResource(R.drawable.new_password_drawable_visible);
+                    actRegPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    isConceal=true;
+                }else {
+                    regConceal1.setImageResource(R.drawable.new_password_drawable_invisible);
+                    actRegPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    isConceal=false;
+                }
+            }
+        });
+
+        regConceal2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isConceal){
+                    regConceal2.setImageResource(R.drawable.new_password_drawable_visible);
+                    actRegPasswordtwo.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    isConceal=true;
+                }else {
+                    regConceal2.setImageResource(R.drawable.new_password_drawable_invisible);
+                    actRegPasswordtwo.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    isConceal=false;
+                }
+            }
+        });
     }
 
     @Override
@@ -62,11 +96,12 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
     protected void initView() {
 
         toolbar = (ToolBar) findViewById(R.id.toolbar);
-        actRegPhone = (TextView) findViewById(R.id.act_reg_phone);
         actRegUsername = (EditText) findViewById(R.id.act_reg_username);
         actRegPassword = (EditText) findViewById(R.id.act_reg_password);
         actRegPasswordtwo = (EditText) findViewById(R.id.act_reg_passwordtwo);
         actRegBut = (TextView) findViewById(R.id.act_reg_but);
+        regConceal1 = (ImageView) findViewById(R.id.regConceal1);
+        regConceal2 = (ImageView) findViewById(R.id.regConceal2);
     }
 
     @Override

@@ -7,7 +7,6 @@ import java.util.List;
 
 public class FiannceUserManager {
 
-
     private List<IUserLoginChanged> iUserLoginChangedList = new ArrayList<>();
 
     private LoginBean loginBean;

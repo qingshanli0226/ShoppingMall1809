@@ -21,6 +21,10 @@
     <string name="share">邀请分享</string>
     <string name="callCenter">客服中心</string>
     <string name="serviceFeedback">服务反馈</string>
+    <string name="compile">编辑</string>
+    <string name="checkAll">全选</string>
+    <string name="total">合计：</string>
+    <string name="account">结算</string>
 
     <string name="app_name">XXX购物车</string>
     <!-- TODO: Remove or change this placeholder text -->
