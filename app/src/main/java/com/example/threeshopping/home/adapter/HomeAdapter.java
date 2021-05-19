@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.framework.BaseRvAdapter;
@@ -53,6 +56,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 layoutId = R.layout.item_banner_layout;
                 break;
             case 1:
+                layoutId = R.layout.item_channel_layout;
                 break;
             case 2:
                 break;
@@ -66,15 +70,11 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
     @Override
     protected void displayViewHolder(BaseViewHolder holder, int position, Object itemView) {
-        Log.i("TAG", "aa");
 
         switch (position) {
             case 0:
-                Log.i("TAG", "displayViewHolder: "+itemView);
-
-
-                List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemView;
                 Banner itemBanner = holder.getView(R.id.itemBanner);
+                List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemView;
                 itemBanner.setImages(bannerInfoBeans)
                         .setImageLoader(new ImageLoader() {
                             @Override
@@ -83,6 +83,14 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                                 Glide.with(context).load(Constants.BASE_URl_IMAGE + bean.getImage()).into(imageView);
                             }
                         }).start();
+                break;
+            case 1:
+                RecyclerView itemRv = holder.getView(R.id.itemChannelRv);
+                List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans = (List<HomeBean.ResultBean.ChannelInfoBean>) itemView;
+                itemRv.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
+                ChannelAdapter channelAdapter = new ChannelAdapter();
+                channelAdapter.getData().addAll(channelInfoBeans);
+                itemRv.setAdapter(channelAdapter);
                 break;
         }
 

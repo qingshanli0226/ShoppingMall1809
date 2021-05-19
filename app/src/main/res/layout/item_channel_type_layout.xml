@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/itemChannelTypeImg"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/dm_dp_40"
+        android:layout_height="@dimen/dm_dp_40"></ImageView>
+    <TextView
+        android:id="@+id/itemChannelTypeTitle"
+        android:text="aaa"
+        android:layout_below="@id/itemChannelTypeImg"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dm_dp_20"/>
+</RelativeLayout>
