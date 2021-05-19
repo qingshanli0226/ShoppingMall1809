@@ -1,2 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user" />
+    package="com.example.user">
+
+    <application>
+        <activity android:name=".register.RegisterActivity"></activity>
+        <activity android:name=".login.LoginActivity" />
+
+        <service
+            android:name=".service.AutoService"
+            android:enabled="true"
+            android:exported="true" />
+    </application>
+
+</manifest>

@@ -1,7 +1,10 @@
 package com.example.user.login;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +19,6 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
-
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 

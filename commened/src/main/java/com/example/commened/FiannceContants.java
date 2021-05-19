@@ -2,5 +2,5 @@ package com.example.commened;
 
 public class FiannceContants {
 
-    public static String TOKEN_KEY="token";
+    public static final String TOKEN_KEY="token";
 }
