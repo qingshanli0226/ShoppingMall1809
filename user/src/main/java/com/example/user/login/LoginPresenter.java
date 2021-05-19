@@ -13,7 +13,8 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class LoginPresenter extends BasePresenter<ILoginView> {
-    public LoginPresenter() {
+    public LoginPresenter(ILoginView iLoginView) {
+        attView(iLoginView);
     }
     public void onLogin(String name,String password){
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.user.R;
 import com.example.user.frag.FragmentAdapter;
@@ -14,6 +15,7 @@ import com.example.user.frag.RegisterFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +30,13 @@ public class UserActivity extends BaseActivity {
     private List<Fragment> list=new ArrayList<>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
-
-
-    @Override
     public int bandLayout() {
         return R.layout.activity_main5;
     }
 
     @Override
     public void initView() {
-
+        EventBus.getDefault().register(this);
         vp = findViewById(R.id.vp);
         list.add(new RegisterFragment());
         list.add(new LoginFragment());
@@ -50,8 +45,10 @@ public class UserActivity extends BaseActivity {
 
 
     }
-    @Subscribe
-    public void onEventMain(int a){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMain(String aa){
+        Toast.makeText(this, "123"+aa, Toast.LENGTH_SHORT).show();
+        int a = Integer.parseInt(aa);
         if (a==1){
             vp.setCurrentItem(0);
         }else {

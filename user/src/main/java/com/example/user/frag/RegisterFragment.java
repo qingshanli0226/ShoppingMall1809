@@ -3,6 +3,7 @@ package com.example.user.frag;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
@@ -61,9 +62,13 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
 
     @Override
     public void OnRegister(RegisterBean registerBean) {
+        Toast.makeText(getActivity(), "成功", Toast.LENGTH_SHORT).show();
         String code = registerBean.getCode();
         if (code.equals("200")){
-            EventBus.getDefault().post("1");
+
+            EventBus.getDefault().post("2");
+
+            Toast.makeText(getActivity(), "已经发送", Toast.LENGTH_SHORT).show();
         }
     }
 }

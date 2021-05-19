@@ -2,7 +2,10 @@ package com.example.myapplication;
 
 
 import androidx.fragment.app.Fragment;
+
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.myapplication.classify.ClassifyFragment;
@@ -10,8 +13,10 @@ import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
 import com.example.myapplication.my.MyFragment;
 import com.example.myapplication.shoppingtrolley.ShoppingTrolleyFragment;
+import com.example.user.UserActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +30,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<CustomTabEntity> cusList=new ArrayList<>();
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
+    private android.widget.Button btn;
 
     @Override
     public int bandLayout() {
@@ -35,6 +41,14 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
         mainFra = (FrameLayout) findViewById(R.id.mainFra);
+        btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
