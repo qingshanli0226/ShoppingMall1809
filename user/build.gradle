@@ -37,4 +37,6 @@ dependencies {
     implementation project(path: ':net')
     implementation project(path: ':commened')
     implementation project(path: ':framework')
+    implementation('com.alibaba:arouter-api:1.4.1') //ARouter依赖
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 }

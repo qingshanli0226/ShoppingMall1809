@@ -68,6 +68,10 @@ public class Constants {
 
     public static Boolean isBackHome = false;
 
+    public static final String LOGIN = "login";//登录
+    public static final String USERREGISTER = "register";//注册
+    public static final String AUTOLOGIN = "autoLogin";//自动登录
+
 
 
     //客服数据

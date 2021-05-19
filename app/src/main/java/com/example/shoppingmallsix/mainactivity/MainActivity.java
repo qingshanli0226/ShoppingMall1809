@@ -4,6 +4,7 @@ import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.net.bean.MainBean;
 import com.example.shoppingmallsix.R;
@@ -19,6 +20,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = "/main/MainActivity")
 public class MainActivity extends BaseActivity {
 
     private FrameLayout mainFram;

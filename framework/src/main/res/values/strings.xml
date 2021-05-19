@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">framework</string>
+    <string name="activity_home">首页</string>
+
+    <string name="sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="main_mainActivity">/main/MainActivity</string>
+    <string name="my">我的资产</string>
+    <string name="register">用户注册</string>
+    <string name="phone_number">手机号:</string>
+    <string name="input">请输入手机号</string>
+    <string name="name">用户名:</string>
+    <string name="inputName">请输入用户名</string>
+    <string name="password">密码:</string>
+    <string name="inputPassword">请输入密码</string>
+    <string name="surePassword">确认密码:</string>
+    <string name="registBt">注  册</string>
+    <string name="userlogin">用户登录</string>
+    <string name="loginBt">登  录</string>
+    <string name="exitLogin">退出登录</string>
+    <string name="ti">提示</string>
+    <string name="noLogin">您还没有登录哦！</string>
+    <string name="two">200</string>
+    <string name="defect">登录失败：</string>
+    <string name="small_name">name</string>
+    <string name="small_password">password</string>
+    <string name="nameOrpasswordNull">用户名或密码为空</string>
+    <string name="loginNo">未登录</string>
+    <string name="login">登录</string>
 </resources>
