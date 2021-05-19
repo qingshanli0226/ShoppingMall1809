@@ -25,7 +25,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View rootView= LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType),parent,false);
-        return null;
+        return new BaseViewHolder(rootView);
     }
     //让子类根据viewType返回相应的布局
     public abstract int getLayoutId(int viewType);
@@ -44,7 +44,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             if (iRecyclerItemClickListener!=null){
                 iRecyclerItemClickListener.onItemLongClick(position);
             }
-            return false;
+            return true;
         });
     }
     public abstract void displayViewHolder(BaseViewHolder holder,int position,T itemData);

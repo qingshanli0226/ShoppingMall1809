@@ -1,24 +1,17 @@
 package com.example.user.frag;
 
-<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-=======
->>>>>>> zkhone
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
 import com.example.user.register.IRegisterView;
 import com.example.user.register.RegisPresenter;
 
-<<<<<<< HEAD
 import org.greenrobot.eventbus.EventBus;
 
-import mvp.view.BaseFragment;
-=======
 import com.example.framework.BaseFragment;
->>>>>>> zkhone
 
 
 public class RegisterFragment extends BaseFragment<RegisPresenter> implements IRegisterView {

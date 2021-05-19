@@ -1,10 +1,8 @@
 package com.example.user;
 
-<<<<<<< HEAD
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-=======
->>>>>>> zkhone
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 

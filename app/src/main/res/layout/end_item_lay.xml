@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/homeEndItemNowImage"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"></ImageView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"
+                android:textColor="#f00"></TextView>
+
+            <TextView
+                android:id="@+id/homeEndItemNowMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.00"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"></TextView>
+
+            <TextView
+                android:id="@+id/homeEndItemoOldMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.00"></TextView>
+        </LinearLayout>
+</LinearLayout>
