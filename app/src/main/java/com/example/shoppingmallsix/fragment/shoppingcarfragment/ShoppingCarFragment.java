@@ -37,4 +37,8 @@ public class ShoppingCarFragment extends BaseFragment {
         return R.layout.fragment_shopping_car;
     }
 
+    @Override
+    public void onRightTvClick() {
+        super.onRightTvClick();
+    }
 }
