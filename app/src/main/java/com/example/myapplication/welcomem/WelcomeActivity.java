@@ -48,7 +48,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     public void initData() {
         rootPresenter.getHome();//获取首页数据
         //给倒计时初始值
-        timeTv=getString(R.string.homeCoundDownNum);
+        timeTv=getString(R.string.welcomeCoundDownNum);
         coundDownTv.setText(timeTv);
         handler.sendEmptyMessageDelayed(HANDLER_COUNTDOWN,1000);//倒计时
     }

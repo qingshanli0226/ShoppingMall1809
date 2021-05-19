@@ -19,8 +19,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_50"
-        android:text="@string/homeCoundDownNum"
-        android:textColor="@color/homeCoundDownColor"
+        android:text="@string/welcomeCoundDownNum"
+        android:textColor="@color/welcomeCoundDownColor"
         android:textSize="@dimen/dp_30"
         android:textStyle="bold"></TextView>
 
@@ -30,8 +30,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
-        android:text="@string/homeCoundDownTv"
-        android:textColor="@color/homeCoundDownColor"
+        android:text="@string/welcomeCoundDownTv"
+        android:textColor="@color/welcomeCoundDownColor"
         android:textSize="@dimen/dp_30"
         android:textStyle="bold"></TextView>
 
