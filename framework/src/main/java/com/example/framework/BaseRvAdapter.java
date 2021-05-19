@@ -20,9 +20,9 @@ public  abstract class BaseRvAdapter<T> extends  RecyclerView.Adapter<BaseRvAdap
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType),parent,false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);
 
-        return null;
+        return new BaseViewHolder(inflate);
     }
 
     public abstract int getLayoutId(int viewType);
