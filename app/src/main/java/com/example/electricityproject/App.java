@@ -14,6 +14,7 @@ public class App extends Application {
         NetModel.init(this);
         FrameModel.init(this);
         UserModel.init();
+        AppModel.init();
 
     }
 }

@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+<<<<<<< HEAD
     tools:context=".home.HomeFragment">
+=======
+    tools:context=".mainfragment.HomeFragment">
+>>>>>>> zzz
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
@@ -27,6 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:hint="请输入信息"
+                android:editable="false"
+                android:background="@null"
                 android:id="@+id/edit_message"></EditText>
         </LinearLayout>
         <LinearLayout

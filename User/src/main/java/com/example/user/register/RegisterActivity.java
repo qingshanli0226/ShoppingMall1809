@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,8 +29,41 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     private android.widget.ImageView registerPasswordImage;
     private android.widget.Button register;
 
+    private boolean is_Show = false;
+    private boolean is_shows = false;
+
     @Override
     protected void initData() {
+
+        passwordImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (is_Show){
+                    registerPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    is_Show = false;
+                    passwordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_invisible));
+                }else {
+                    registerPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    is_Show = true;
+                    passwordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_visible));
+                }
+            }
+        });
+
+        registerPasswordImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (is_shows){
+                    registerCmPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    is_shows = false;
+                    registerPasswordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_invisible));
+                }else {
+                    registerCmPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    is_shows = true;
+                    registerPasswordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_visible));
+                }
+            }
+        });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override

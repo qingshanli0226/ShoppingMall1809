@@ -1,6 +1,9 @@
 package com.example.user.login;
 
 import android.content.Intent;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +26,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private android.widget.ImageView passwordImage;
     private android.widget.TextView goRegister;
     private android.widget.Button login;
+    private boolean is_Show = false;
 
     @Override
     protected void initData() {
@@ -44,6 +48,20 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             }
         });
 
+        passwordImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (is_Show){
+                    loginPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    is_Show = false;
+                    passwordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_invisible));
+                }else {
+                    loginPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    is_Show = true;
+                    passwordImage.setImageDrawable(getResources().getDrawable(R.drawable.new_password_drawable_visible));
+                }
+            }
+        });
     }
 
     @Override
@@ -53,7 +71,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     protected void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         loginUsername = (EditText) findViewById(R.id.login_username);
         loginPwd = (EditText) findViewById(R.id.login_pwd);

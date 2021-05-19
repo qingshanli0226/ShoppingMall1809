@@ -1,16 +1,23 @@
 package com.example.framework;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.common.bean.LogBean;
+import com.example.common.call.BusinessARouter;
 import com.example.common.call.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
+<<<<<<< HEAD
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, BusinessUserManager.IUserLoginChanged{
+=======
+public abstract   class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BusinessUserManager.IUserLoginChanged,ToolBar.IToolbarListener{
+>>>>>>> zzz
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -32,7 +39,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initData();
 
         BusinessUserManager.getInstance().Register(this);
-
+        toolBar.setToolbarListener(this);
     }
 
     protected abstract void initData();
@@ -55,5 +62,20 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+    @Override
+    public void onLeftClick() {
+        BusinessARouter.getInstance().getAppManager().OpenMainActivity(FrameModel.context,null);
+        finish();
+        destroy();
+    }
 
+    @Override
+    public void onRightImgClick() {
+
+    }
+
+    @Override
+    public void onRightTvClick() {
+
+    }
 }
