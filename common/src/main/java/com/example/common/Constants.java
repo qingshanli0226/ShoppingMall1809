@@ -83,4 +83,15 @@ public class Constants {
     //注册
     public static final String PATH_REGISTER = "/app/RegisterActivity";
 
+
+
+    //判断home页面的布局
+    public static final int HOME_BANNER = 0;
+    public static final int HOME_CHANNEL = 1;
+    public static final int HOME_ACT = 2;
+    public static final int HOME_SEKILL = 3;
+    public static final int HOME_RECOMMEND = 4;
+    public static final int HOME_HOT = 5;
+
+
 }

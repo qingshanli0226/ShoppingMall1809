@@ -42,7 +42,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
         mainLinear = (LinearLayout) findViewById(R.id.mainLinear);
         mainGroup = (RadioGroup) findViewById(R.id.mainGroup);
         mainOne = (RadioButton) findViewById(R.id.mainOne);
