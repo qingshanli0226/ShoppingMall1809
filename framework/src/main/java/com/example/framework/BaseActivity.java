@@ -1,4 +1,4 @@
-package mvp.view;
+package com.example.framework;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import mvp.presenter.BasePresenter;
+import mvp.view.IActivity;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity {
    protected P rootPresenter;
