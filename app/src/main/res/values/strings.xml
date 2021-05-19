@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="homeCoundDownTv">秒</string>
-    <string name="homeCoundDownNum">5</string>
+    <string name="welcomeCoundDownTv">秒</string>
+    <string name="welcomeCoundDownNum">2</string>
+    <string name="homeSerchEdHint">请输入搜索信息</string>
+    <string name="homeMessageTetview">消息</string>
+
+    <string name="mainFragmentTitle1">首页</string>
+    <string name="mainFragmentTitle2">分类</string>
+    <string name="mainFragmentTitle3">发现</string>
+    <string name="mainFragmentTitle4">购物车</string>
+    <string name="mainFragmentTitle5">个人中心</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
