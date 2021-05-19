@@ -1,7 +1,9 @@
 package com.example.user.register;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,6 @@ import com.example.user.login.LoginActivity;
 
 public class RegisterActivity extends BaseActivity<UserPresenter> implements IUserView {
 
-    private EditText etRegisterNumber;
     private EditText etRegisterName;
     private EditText etRegisterPwd;
     private EditText etRegisterPwdagain;
@@ -63,7 +64,7 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements IUs
                         httpPresenter.getRegister(name, password);
                     } else {
                         //不一致
-                        Toast.makeText(RegisterActivity.this, getString(R.string.surePassword), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -73,11 +74,10 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements IUs
 
     @Override
     protected void initView() {
-        etRegisterNumber = findViewById(R.id.et_register_number);
-        etRegisterName = findViewById(R.id.et_register_name);
-        etRegisterPwd = findViewById(R.id.et_register_pwd);
-        etRegisterPwdagain = findViewById(R.id.et_register_pwdagain);
-        btnRegister = findViewById(R.id.btn_register);
+        etRegisterName = findViewById(R.id.et_regist_number);
+        etRegisterPwd = findViewById(R.id.et_regist_pwd);
+        etRegisterPwdagain = findViewById(R.id.et_regist_again);
+        btnRegister = findViewById(R.id.btn_regist);
     }
 
     @Override
@@ -115,3 +115,4 @@ public class RegisterActivity extends BaseActivity<UserPresenter> implements IUs
 
     }
 }
+

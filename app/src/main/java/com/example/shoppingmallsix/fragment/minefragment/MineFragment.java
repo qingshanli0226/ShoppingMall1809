@@ -1,18 +1,20 @@
 package com.example.shoppingmallsix.fragment.minefragment;
 
 
-import android.os.Bundle;
+import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
+import com.example.user.login.LoginActivity;
+import com.example.user.register.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.

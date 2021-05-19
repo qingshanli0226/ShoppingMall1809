@@ -1,8 +1,12 @@
 package com.example.user.login;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +20,7 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
-
+import com.example.user.register.RegisterActivity;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
@@ -27,6 +31,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private String name1;
     private String password1;
     private SharedPreferences sharedPreferences;
+    private android.widget.TextView registName;
 
     @Override
     protected void initPresenter() {
@@ -63,6 +68,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         etLoginPwd = findViewById(R.id.et_login_pwd);
         btnLogin = findViewById(R.id.btn_login);
 
+        registName = findViewById(R.id.regist_name);
+
+        registName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

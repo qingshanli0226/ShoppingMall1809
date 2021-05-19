@@ -1,12 +1,15 @@
 package com.example.shoppingmallsix.mainactivity;
 
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheUserManager;
+import com.example.net.bean.LoginBean;
 import com.example.net.bean.MainBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.ClassifyFragment;
@@ -22,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/main/MainActivity")
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange{
 
     private FrameLayout mainFram;
     private CommonTabLayout mainCommon;
@@ -36,7 +39,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        CacheUserManager.getInstance().registerLogin(this);
+        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
+        if (loginBean == null) {
+            Toast.makeText(MainActivity.this, getString(R.string.loginNo), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(MainActivity.this, getString(R.string.login), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -86,5 +95,16 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void onLoginChange(LoginBean loginBean) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CacheUserManager.getInstance().unRegisterLogin(this);
     }
 }
