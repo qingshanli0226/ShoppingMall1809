@@ -13,9 +13,11 @@ import retrofit2.http.POST;
 public interface Api {
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomebean();
-@POST("register")
-@FormUrlEncoded
-    Observable<RegisterBean> getRegister(@Field("name")String name,@Field("password")String password);
-@POST("login")
-    Observable<LoginBean> getLogin(@Field("name")String name,@Field("password")String password);
+
+    @POST("register")
+    @FormUrlEncoded
+    Observable<RegisterBean> getRegister(@Field("name") String name, @Field("password") String password);
+
+    @POST("login")
+    Observable<LoginBean> getLogin(@Field("name") String name, @Field("password") String password);
 }

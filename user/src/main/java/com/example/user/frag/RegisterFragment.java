@@ -33,7 +33,7 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
     }
 
     @Override
-    public void initDataw() {
+    public void initData() {
 
     }
 

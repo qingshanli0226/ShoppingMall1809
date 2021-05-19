@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/WelcomeImage"></ImageView>
+        android:src="@mipmap/welcomeimage"></ImageView>
 
     <TextView
         android:id="@+id/coundDownTv"
@@ -23,6 +23,7 @@
         android:textColor="@color/homeCoundDownColor"
         android:textSize="@dimen/dp_30"
         android:textStyle="bold"></TextView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
