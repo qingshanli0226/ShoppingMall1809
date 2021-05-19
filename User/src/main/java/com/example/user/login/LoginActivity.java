@@ -1,5 +1,6 @@
 package com.example.user.login;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import com.example.common.bean.LogBean;
 import com.example.common.call.BusinessUserManager;
 import com.example.framework.BaseActivity;
 import com.example.user.R;
+import com.example.user.register.RegisterActivity;
 import com.example.view.ToolBar;
 
 
@@ -30,8 +32,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             public void onClick(View v) {
                 String name = loginUsername.getText().toString().trim();
                 String pwd = loginPwd.getText().toString().trim();
-
                 httpPresenter.postLogin(name,pwd);
+            }
+        });
+
+        goRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
