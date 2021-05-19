@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/new_login_background"
-    tools:context=".logins.LoginActivity">
+    tools:context=".registers.RegisterActivity">
     <Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
@@ -20,11 +20,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginbtn"
+            android:text="@string/regbar"
             android:textSize="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_150"></TextView>
+            android:layout_marginLeft="@dimen/dp_110"></TextView>
     </Toolbar>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,30 +31,29 @@
         android:layout_marginLeft="@dimen/dp_150"
         android:layout_marginTop="@dimen/dp_50"
         android:src="@drawable/new_user_login_icon"></ImageView>
-
     <FrameLayout
         android:layout_width="@dimen/dp_380"
         android:layout_marginTop="@dimen/dp_50"
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_height="@dimen/dp_50">
 
-    <ImageView
-        android:layout_width="@dimen/dp_380"
-        android:layout_height="@dimen/dp_50"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg1"
-        ></ImageView>
+        <ImageView
+            android:layout_width="@dimen/dp_380"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg1"
+            ></ImageView>
         <LinearLayout
             android:layout_width="@dimen/dp_380"
             android:orientation="horizontal"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dp_20"
-            android:text="@string/username"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_20"
+                android:text="@string/username"></TextView>
             <EditText
                 android:layout_width="@dimen/dp_260"
                 android:layout_height="wrap_content"
@@ -64,7 +62,7 @@
                 android:layout_marginLeft="@dimen/dp_20"
                 android:background="@null"></EditText>
         </LinearLayout>
-</FrameLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="@dimen/dp_380"
@@ -100,17 +98,66 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            <ImageView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/new_password_drawable_invisible"
                     android:id="@+id/invisi"></ImageView>
-            <ImageView
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:src="@drawable/new_password_drawable_visible"
+                    android:id="@+id/visi"></ImageView>
+
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="@dimen/dp_380"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_height="@dimen/dp_50">
+
+        <ImageView
+            android:layout_width="@dimen/dp_380"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg1"
+            ></ImageView>
+        <LinearLayout
+            android:layout_width="@dimen/dp_380"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="wrap_content">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:src="@drawable/new_password_drawable_visible"
-                android:id="@+id/visi"></ImageView>
+                android:textSize="@dimen/dp_20"
+                android:text="@string/pasword1"></TextView>
+            <EditText
+                android:layout_width="@dimen/dp_220"
+                android:layout_height="wrap_content"
+                android:hint="@string/srpassword1"
+                android:id="@+id/password1"
+                android:inputType="textPassword"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:background="@null"></EditText>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/new_password_drawable_invisible"
+                    android:id="@+id/invisi1"></ImageView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:src="@drawable/new_password_drawable_visible"
+                    android:id="@+id/visi1"></ImageView>
 
             </FrameLayout>
         </LinearLayout>
@@ -119,77 +166,16 @@
         android:layout_width="@dimen/dp_380"
         android:layout_height="@dimen/dp_50"
         android:layout_marginLeft="@dimen/dp_15"
-        android:text="@string/loginbtn"
+        android:text="@string/regbtn"
         android:textColor="#ffffff"
         android:id="@+id/btn"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/button_false"></Button>
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:text="@string/djdl"
-         android:gravity="center"
-         android:layout_marginTop="@dimen/dp_15"></TextView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/zcuser"
-         android:textColor="#ff0000"
-         android:layout_marginTop="@dimen/dp_15"
-         android:id="@+id/reguser"></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wjpwd"
-            android:layout_marginTop="@dimen/dp_15"
-            android:layout_marginLeft="@dimen/dp_280"
-            android:id="@+id/wjpwd"></TextView>
-    </LinearLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/qtlogin"
+        android:text="@string/djreg"
         android:gravity="center"
-        android:layout_marginTop="@dimen/dp_30"></TextView>
+        android:layout_marginTop="@dimen/dp_15"></TextView>
 
-    <FrameLayout
-        android:layout_width="@dimen/dp_380"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_height="@dimen/dp_40">
-    <ImageView
-        android:layout_width="@dimen/dp_380"
-        android:layout_height="@dimen/dp_40"
-        android:src="@drawable/bg1"
-        android:scaleType="fitXY"></ImageView>
-
-        <ImageView
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_30"
-            android:src="@drawable/icon_weibo"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_5"
-            android:id="@+id/i1"></ImageView>
-        <ImageView
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_share_qq"
-            android:layout_marginLeft="@dimen/dp_170"
-            android:id="@+id/i2"></ImageView>
-
-        <ImageView
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_30"
-            android:src="@drawable/icon_weixin"
-            android:layout_marginLeft="@dimen/dp_280"
-            android:layout_marginTop="@dimen/dp_5"
-            android:id="@+id/i3"></ImageView>
-
-</FrameLayout>
 </LinearLayout>

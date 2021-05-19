@@ -6,10 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.shoppingmall.framework.custom.LoadingPage;
 import com.shoppingmall.main.MainActivity;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheManager;
@@ -19,6 +22,8 @@ import com.shoppingmall.net.bean.HomeBean;
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements IWelcomeView {
     private final int GET_DATA_OK = 0;
     private final int GET_DATA_NO = 1;
+    private ProgressBar progressBar;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_welcom;
@@ -28,6 +33,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
     public void initView() {
         //全屏显示
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        progressBar = findViewById(R.id.progressBar);
     }
 
     @Override
@@ -44,6 +50,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
     public void onHomeData(HomeBean homeBean) {
         //单例存储数据
         CacheManager.getInstance().setHomeBean(homeBean);
+        loadingPage.showSuccessView();
+        LogUtils.json(homeBean);
         handler.sendEmptyMessageDelayed(GET_DATA_OK,1000);
         if (homeBean==null){
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);
@@ -65,4 +73,15 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             }
         }
     };
+
+    @Override
+    public void showLoading() {
+
+       loadingPage.showTransparentLoadingView();
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 }

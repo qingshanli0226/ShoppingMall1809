@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <dimen name="dp_0">10dp</dimen>
+=======
+    <dimen name="dp_0">0dp</dimen>
+>>>>>>> b4c94d6a9faceb9d775960c8507677e81aa51d5a
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_30">30dp</dimen>
@@ -22,5 +26,5 @@
     <dimen name="dp_160">160dp</dimen>
     <dimen name="dp_170">170dp</dimen>
     <dimen name="dp_180">180dp</dimen>
-
+    <dimen name="dp_380">380dp</dimen>
 </resources>
