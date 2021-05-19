@@ -162,5 +162,11 @@
     <orderEntry type="module" module-name="commened" />
     <orderEntry type="module" module-name="user" />
     <orderEntry type="module" module-name="shoppingcar" />
+    <orderEntry type="module" module-name="net" />
+    <orderEntry type="module" module-name="framework" />
+    <orderEntry type="module" module-name="pay" />
+    <orderEntry type="module" module-name="commened" />
+    <orderEntry type="module" module-name="user" />
+    <orderEntry type="module" module-name="shoppingcar" />
   </component>
 </module>
