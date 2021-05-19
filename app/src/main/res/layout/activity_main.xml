@@ -6,31 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".main.MainActivity">
-<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="@dimen/weight_9"
-        android:id="@+id/main_lin"></LinearLayout>
+        android:id="@+id/main_lin"
+        android:orientation="vertical"
+        ></LinearLayout>
 
 
 
     <RadioGroup
-        android:id="@+id/group"
-        android:orientation="horizontal"
-=======
-
-    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="@dimen/weight_9"
-        android:id="@+id/main_vp"></androidx.viewpager.widget.ViewPager>
-
-    <com.flyco.tablayout.CommonTabLayout
->>>>>>> zx
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/group"
+        android:orientation="horizontal">
 
         <RadioButton
             android:textColor="@drawable/text_color"
@@ -56,7 +47,7 @@
 
         <RadioButton
             android:textColor="@drawable/text_color"
-            android:drawableTop="@drawable/mymoney_radio_color"
+            android:drawableTop="@drawable/find_radio_color"
             android:button="@null"
             android:gravity="center"
             android:layout_width="@dimen/weight"
