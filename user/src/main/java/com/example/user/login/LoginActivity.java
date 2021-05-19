@@ -10,15 +10,15 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
+
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
 
-@Route(path = "/user/LoginActivity")
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolBar.OnClickListener,ILoginView {
 
 
@@ -26,7 +26,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
     private android.widget.EditText loginUsername;
     private android.widget.EditText loginPassword;
     private android.widget.RadioButton passwordInvisible;
-    private android.widget.Button loginLogin;
+    private android.widget.Button login;
     private android.widget.TextView loginRegister;
     private android.widget.TextView forgetPassword;
     private android.widget.ImageView weibo;
@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         loginUsername = (EditText) findViewById(R.id.login_username);
         loginPassword = (EditText) findViewById(R.id.login_password);
         passwordInvisible = (RadioButton) findViewById(R.id.password_invisible);
-        loginLogin = (Button) findViewById(R.id.login_login);
+        login = (Button) findViewById(R.id.login);
         loginRegister = (TextView) findViewById(R.id.login_register);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
         weibo = (ImageView) findViewById(R.id.weibo);
@@ -61,18 +61,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
     @Override
     public void initData() {
 
-      
 
-        loginLogin.setOnClickListener(new View.OnClickListener() {
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = loginUsername.getText().toString().trim();
                 String pass = loginPassword.getText().toString().trim();
-                if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pass)){
-                    Toast.makeText(LoginActivity.this, "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
-                }else {
-//                    Toast.makeText(LoginActivity.this, "2", Toast.LENGTH_SHORT).show();
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)){
                     mPresenter.getLogin(name,pass);
+                }else {
+                   Toast.makeText(LoginActivity.this, "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         loginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ARouter.getInstance().build("/user/RegisterActivity").withInt("",1).navigation();
+                CommonArouter.getInstance().build(Constants.PATH_REGISTER).navigation();
             }
         });
 

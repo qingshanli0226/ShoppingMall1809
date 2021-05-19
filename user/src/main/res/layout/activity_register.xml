@@ -138,7 +138,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/login_login"
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dm_dp_10"

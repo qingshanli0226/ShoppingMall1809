@@ -78,5 +78,9 @@ public class Constants {
     public static final String PATH_WEL = "/app/WelActivity";
     //主页面
     public static final String PATH_MAIN = "/app/MainActivity";
+    //登录
+    public static final String PATH_LOGIN = "/app/LoginActivity";
+    //注册
+    public static final String PATH_REGISTER = "/app/RegisterActivity";
 
 }
