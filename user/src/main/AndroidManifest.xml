@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user">
 
-    <application android:name=".app.App">
+    <application>
         <activity android:name=".login.LoginActivity" />
     </application>
 </manifest>

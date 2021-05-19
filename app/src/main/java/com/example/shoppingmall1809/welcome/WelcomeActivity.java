@@ -33,9 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
         handler.sendEmptyMessageDelayed(0,2000);
-
         Intent intent = new Intent(this, ShopService.class);
         startService(intent);
     }

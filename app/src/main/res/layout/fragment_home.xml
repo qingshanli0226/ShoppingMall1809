@@ -3,47 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.home.HomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".main.home.HomeFragment">
 
     <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:id="@+id/toolbar"
         android:visibility="gone"></com.example.framework.view.ToolBar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:background="@color/red">
+
         <LinearLayout
             android:layout_width="@dimen/dp_350"
             android:layout_height="@dimen/dp_40"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/home_rounded_white">
+
             <ImageView
                 android:layout_width="@dimen/dp_40"
-                android:src="@drawable/home_search_icon"
                 android:layout_height="@dimen/dp_40"
-                android:padding="@dimen/dp_5"></ImageView>
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/home_search_icon"></ImageView>
+
             <EditText
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/home_rounded_white"
-                android:hint="输入搜索信息"
-                android:layout_height="match_parent"></EditText>
+                android:hint="输入搜索信息"></EditText>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_60"
             android:layout_alignParentRight="true"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
-                android:tint="@color/colorB"
-                android:src="@drawable/community_message_icon"></ImageView>
+                android:src="@drawable/community_message_icon"
+                android:tint="@color/colorB"></ImageView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,10 +59,10 @@
         </LinearLayout>
     </RelativeLayout>
 
-
-    <com.youth.banner.Banner
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
-        android:id="@+id/frag_home_banner"></com.youth.banner.Banner>
+        android:layout_height="match_parent"
+        android:id="@+id/frag_home_rv"></androidx.recyclerview.widget.RecyclerView>
+
 
 </LinearLayout>
