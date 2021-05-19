@@ -36,7 +36,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         handler.sendEmptyMessageDelayed(0,2000);
 
-
         Intent intent = new Intent(this, ShopService.class);
         startService(intent);
     }
