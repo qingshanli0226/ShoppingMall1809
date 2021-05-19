@@ -1,28 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".home.HomeFragment">
+
     <com.example.framework.view.ToolBar
-        android:visibility="gone"
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_60">
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
         <LinearLayout
+            android:background="@color/red"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_dp_50">
+            <LinearLayout
+                android:background="@drawable/home_cir"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dm_dp_10"
+                android:layout_weight="8"
+                android:layout_width="@dimen/dm_dp_0"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/home_search_icon" />
+                <EditText
+                    android:id="@+id/edSearch"
+                    android:hint="@string/home_search"
+                    android:background="@drawable/home_cir"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></EditText>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="@dimen/dm_dp_0"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/imgCom"
+                    android:src="@drawable/community_message_icon"
+                    android:layout_weight="4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_0"/>
+                <TextView
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_0"/>
+            </LinearLayout>
+        </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <com.youth.banner.Banner
+                android:id="@+id/homeBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_200"/>
         </LinearLayout>
-    </LinearLayout>
-
+    </ScrollView>
 
 
 </LinearLayout>

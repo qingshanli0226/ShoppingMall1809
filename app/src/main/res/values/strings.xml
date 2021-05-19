@@ -5,6 +5,9 @@
     <string name="main_three">发现</string>
     <string name="main_four">购物车</string>
     <string name="main_five">个人中心</string>
+
+    <string name="home_search">请输入要搜索的内容</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

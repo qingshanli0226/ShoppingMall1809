@@ -5,12 +5,13 @@ import com.example.common.Constants;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 
-import com.example.common.Constants;
+
 import com.example.net.bean.HomeBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface IHttpApiService {
