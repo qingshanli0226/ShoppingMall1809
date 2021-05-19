@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
@@ -93,15 +95,19 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.mainTwo:
                         showFragment(1);
+                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
                         break;
                     case R.id.mainThree:
                         showFragment(2);
+                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
                         break;
                     case R.id.mainFour:
                         showFragment(3);
+                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
                         break;
                     case R.id.mainFive:
                         showFragment(4);
+                        CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
                         break;
                 }
             }
