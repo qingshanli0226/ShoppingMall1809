@@ -35,12 +35,13 @@
               android:layout_width="80dp"
               android:layout_height="wrap_content"
               android:text="账    号"
-              android:textSize="20dp"></TextView>
+              android:textSize="@dimen/dp_20"></TextView>
           <EditText
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="请输入用户名"
-              android:textSize="20dp"></EditText>
+              android:id="@+id/editname"
+              android:textSize="@dimen/dp_20"></EditText>
       </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,12 +50,13 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="密    码"
-                android:textSize="20dp"></TextView>
+                android:textSize="@dimen/dp_20"></TextView>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入密码"
-                android:textSize="20dp"></EditText>
+                android:id="@+id/editpwd"
+                android:textSize="@dimen/dp_20"></EditText>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请再次输入密码"
-                android:textSize="20dp"></EditText>
+                android:id="@+id/editpwdd"
+                android:textSize="@dimen/dp_20"></EditText>
         </LinearLayout>
     </LinearLayout>
     <Button
@@ -76,6 +79,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="注册"
+        android:id="@+id/btn"
         ></Button>
     <LinearLayout
         android:layout_width="match_parent"

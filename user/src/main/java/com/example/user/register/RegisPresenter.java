@@ -14,7 +14,8 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class RegisPresenter extends BasePresenter<IRegisterView> {
-    public RegisPresenter() {
+    public RegisPresenter(IRegisterView iRegisterView) {
+        attView(iRegisterView);
     }
     public void onRegister(String name,String password){
         RetrofitManager.getApi()
