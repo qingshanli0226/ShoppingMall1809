@@ -1,18 +1,22 @@
 package com.example.shoppingmall1809.main.home;
 
-import android.os.Bundle;
+import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
+import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.adapter.HomeAdapter;
+
+import java.util.ArrayList;
 
 
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
+
+    private RecyclerView fragHomeRv;
 
     @Override
     protected int getLayoutId() {
@@ -21,16 +25,51 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void initData() {
-
+        httpPresenter.getHomeData();
     }
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter = new HomePresenter(this);
     }
 
     @Override
     protected void initView() {
+        fragHomeRv = (RecyclerView) findViewById(R.id.frag_home_rv);
+        fragHomeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
 
+    @Override
+    public void getHomeData(HoemBean hoemBean) {
+        LogUtils.json(hoemBean);
+        HoemBean.ResultBean result = hoemBean.getResult();
+
+        ArrayList<Object> objects = new ArrayList<>();
+
+        objects.add(result.getBanner_info());
+        objects.add(result.getChannel_info());
+        objects.add(result.getAct_info());
+        objects.add(result.getSeckill_info());
+        objects.add(result.getRecommend_info());
+        objects.add(result.getHot_info());
+        HomeAdapter homeAdapter = new HomeAdapter(objects);
+        fragHomeRv.setAdapter(homeAdapter);
+    }
+
+
+
+    @Override
+    public void showLoading() {
+        loadingPage.showLoadingView();
+    }
+
+    @Override
+    public void hideLoading() {
+        loadingPage.showSucessView();
+    }
+
+    @Override
+    public void Error(String error) {
+        Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
     }
 }
