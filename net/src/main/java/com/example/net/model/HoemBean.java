@@ -1,5 +1,8 @@
 package com.example.net.model;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import java.net.MulticastSocket;
 import java.util.List;
 
 
@@ -42,7 +45,11 @@ public class HoemBean {
     private ResultBean result;
 
 
-    public static class ResultBean {
+
+
+
+    public static class ResultBean{
+
         public SeckillInfoBean getSeckill_info() {
             return seckill_info;
         }
@@ -108,7 +115,9 @@ public class HoemBean {
         private List<HotInfoBean> hot_info;
         private List<RecommendInfoBean> recommend_info;
 
+
         public static class SeckillInfoBean {
+
             public String getEnd_time() {
                 return end_time;
             }

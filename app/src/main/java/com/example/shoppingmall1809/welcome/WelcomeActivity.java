@@ -34,10 +34,10 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        handler.sendEmptyMessageDelayed(0,2000);
         Intent intent = new Intent(this, ShopService.class);
         startService(intent);
 
-        handler.sendEmptyMessageDelayed(0,2000);
     }
 
     @Override
