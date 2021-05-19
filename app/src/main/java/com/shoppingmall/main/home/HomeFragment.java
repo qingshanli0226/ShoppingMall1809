@@ -1,6 +1,7 @@
 package com.shoppingmall.main.home;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -8,8 +9,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheManager;
+import com.shoppingmall.framework.manager.FiannceArouter;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.home.adapter.MenuAdapter;
 import com.shoppingmall.net.bean.HomeBean;
@@ -73,6 +76,12 @@ public class HomeFragment extends BaseFragment {
         MenuAdapter menuAdapter = new MenuAdapter(homeBean.getResult().getChannel_info());
         menuRv.setLayoutManager(new GridLayoutManager(getContext(), 5));
         menuRv.setAdapter(menuAdapter);
+        menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                FiannceArouter.getInstance().getIUserInterface().openLoginActivity(getContext(),null);
+            }
+        });
     }
 
     //设置轮播图

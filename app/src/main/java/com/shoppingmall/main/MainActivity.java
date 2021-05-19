@@ -12,6 +12,7 @@ import com.shoppingmall.R;
 import com.shoppingmall.bean.CustomBean;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.framework.mvp.IBaseView;
 import com.shoppingmall.main.adapter.ComAdapter;
 import com.shoppingmall.main.find.FindFragment;
 import com.shoppingmall.main.home.HomeFragment;
@@ -22,7 +23,7 @@ import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity  {
 
     private android.widget.ScrollView mainScroll;
 
@@ -96,5 +97,6 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
     }
 }
