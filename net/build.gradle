@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    //Rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //Rxjava   线程调度器在此依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //解析器
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //retrofit使用的rxjava调度器
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    //okhttp
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation project(':common')
+
+    implementation 'com.youth.banner:banner:1.4.10'
+}

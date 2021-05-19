@@ -1,14 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.shoppingmall.bawei.shoppingmall1809"
-        minSdkVersion 15
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -16,13 +22,95 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //cardview卡片布局
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //eventbus
+    implementation 'fm.jiecao:jiecaovideoplayer:5.5'
+
+    //节操视频
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    //recyclerview
+
+    //implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'     //万能适配器
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    //glide
+    implementation 'com.blankj:utilcodex:1.28.3'
+
+    //AndroidUtils工具包
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+
+    //原V7包
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //原design包
+    implementation 'org.jsoup:jsoup:1.13.1'
+
+    //jsoup爬虫
+    implementation 'com.google.code.gson:gson:2.8.4'
+
+    //Gson解析
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+
+    //饺子视频
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.4'
+
+    //GSYVideoPlayer 视频播放器，完整版
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+
+    //Rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    //Rxjava   线程调度器在此依赖
+    implementation 'com.jakewharton:butterknife:10.2.3'
+
+    //butterknife
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //解析器
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
+    //retrofit使用的rxjava调度器
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+
+    //okhttp
+    implementation 'com.youth.banner:banner:2.1.0'
+    implementation project(':framework')
+    implementation project(':net')
+
+    //aRouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    implementation project(':common')
+
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+
+    implementation 'me.jessyan:autosize:1.2.1'
+    implementation 'com.lzy.net:okgo:3.0.4'//okgo依赖
+
 }
