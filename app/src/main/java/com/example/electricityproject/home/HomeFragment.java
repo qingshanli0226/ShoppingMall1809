@@ -1,24 +1,20 @@
 package com.example.electricityproject.home;
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.ImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData{
-    private Banner banner;
-    private List<String> list=new ArrayList<>();
+    private RecyclerView mainRe;
+
     @Override
     protected void initData() {
         httpPresenter=new HomePresenter(this);
@@ -32,8 +28,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     protected void initView() {
-        banner = mView.findViewById(R.id.banner);
-        list.clear();
+        mainRe = mView.findViewById(R.id.main_re);
+        mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -63,19 +59,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     public void onHomeBanner(HomeBean homeBean) {
+        HomeAdapter homeAdapter = new HomeAdapter();
         List<HomeBean.ResultBean.BannerInfoBean> banner_info = homeBean.getResult().getBanner_info();
-        for (HomeBean.ResultBean.BannerInfoBean bannerInfoBean : banner_info) {
-            list.add("http://49.233.0.68:8080/atguigu/img"+bannerInfoBean.getImage());
-            Log.i("zx", "onHomeBanner: http://49.233.0.68:8080/atguigu/img"+bannerInfoBean.getImage()+"");
-        }
-        banner.setImages(list);
-        banner.setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                String s= (String) path;
-                Glide.with(getActivity()).load(s).into(imageView);
-            }
-        });
-        banner.start();
+        List<HomeBean.ResultBean.ChannelInfoBean> channel_info = homeBean.getResult().getChannel_info();
+        List<Object> objectList=new ArrayList<>();
+        objectList.add(banner_info);
+        objectList.add(channel_info);
+        homeAdapter.updateData(objectList);
+        mainRe.setAdapter(homeAdapter);
+
     }
 }

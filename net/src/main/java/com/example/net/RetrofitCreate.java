@@ -1,5 +1,7 @@
 package com.example.net;
 
+import com.example.common.Constants;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -31,7 +33,7 @@ public class RetrofitCreate {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(build)
-                .baseUrl("http://49.233.0.68:8080/").build();
+                .baseUrl(Constants.BASE_URL).build();
 
 
         return retrofit.create(BusinessApiService.class);

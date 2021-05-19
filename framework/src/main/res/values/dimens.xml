@@ -51,6 +51,7 @@
     <dimen name="dm_dp_300dp">300dp</dimen>
     <dimen name="dm_dp_350dp">350dp</dimen>
     <dimen name="dm_dp_400dp">400dp</dimen>
+    <dimen name="dm_dp_500dp">500dp</dimen>
 
 
 </resources>
