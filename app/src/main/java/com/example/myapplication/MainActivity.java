@@ -16,7 +16,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import mvp.view.BaseActivity;
+import com.example.framework.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 

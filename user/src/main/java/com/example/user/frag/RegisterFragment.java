@@ -1,19 +1,11 @@
 package com.example.user.frag;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
 import com.example.user.register.IRegisterView;
 import com.example.user.register.RegisPresenter;
 
-import mvp.view.BaseFragment;
+import com.example.framework.BaseFragment;
 
 
 public class RegisterFragment extends BaseFragment<RegisPresenter> implements IRegisterView {

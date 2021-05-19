@@ -1,12 +1,8 @@
 package com.example.user;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import android.os.Bundle;
-
-import com.example.user.R;
 import com.example.user.frag.FragmentAdapter;
 import com.example.user.frag.LoginFragment;
 import com.example.user.frag.RegisterFragment;
@@ -14,7 +10,7 @@ import com.example.user.frag.RegisterFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import mvp.view.BaseActivity;
+import com.example.framework.BaseActivity;
 
 public class UserActivity extends BaseActivity {
 
