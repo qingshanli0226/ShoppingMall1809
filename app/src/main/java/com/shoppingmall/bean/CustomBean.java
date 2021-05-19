@@ -1,5 +1,6 @@
 package com.shoppingmall.bean;
 
+
 import com.flyco.tablayout.listener.CustomTabEntity;
 
 public class CustomBean implements CustomTabEntity {
