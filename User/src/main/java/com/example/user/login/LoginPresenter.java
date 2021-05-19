@@ -1,5 +1,7 @@
 package com.example.user.login;
 
+import android.util.Log;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.LogBean;
 import com.example.framework.BasePresenter;
@@ -41,7 +43,7 @@ class LoginPresenter extends BasePresenter<ILoginView> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (IView!=null){
-                            IView.showError(e.getMessage());
+                            Log.i("zrf", "onError: "+e.getMessage());
                         }
                     }
 
