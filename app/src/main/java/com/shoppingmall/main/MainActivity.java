@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        mainScroll = (ScrollView) findViewById(R.id.mainScroll);
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
     }

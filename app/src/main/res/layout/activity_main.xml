@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/mainScroll">-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,7 +23,6 @@
                 app:tl_textUnselectColor="@color/black"
                 android:id="@+id/mainCommon"></com.flyco.tablayout.CommonTabLayout>
         </LinearLayout>
-<!--    </ScrollView>-->
 
 
 </LinearLayout>

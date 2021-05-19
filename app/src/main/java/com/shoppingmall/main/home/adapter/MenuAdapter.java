@@ -1,6 +1,5 @@
 package com.shoppingmall.main.home.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shoppingmall.R;
+import com.shoppingmall.framework.Variable;
 import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class MenuAdapter extends BaseQuickAdapter<HomeBean.ResultBean.ChannelInf
     protected void convert(BaseViewHolder helper, HomeBean.ResultBean.ChannelInfoBean item) {
         menuRvImg = helper.getView(R.id.menuRvImg);
         menuRvText = helper.getView(R.id.menuRvText);
-        Glide.with(mContext).load(item.getImage()).transform(new CircleCrop(),new CenterCrop()).into(menuRvImg);
+        Glide.with(mContext).load(Variable.IMG_HTTPS+item.getImage()).transform(new CircleCrop(),new CenterCrop()).into(menuRvImg);
         menuRvText.setText(""+item.getChannel_name());
     }
 

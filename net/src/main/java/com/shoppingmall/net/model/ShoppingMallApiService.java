@@ -26,6 +26,7 @@ import retrofit2.http.POST;
 
 public interface ShoppingMallApiService {
     //http://49.233.0.68:8080/atguigu/json/HOME_URL.json
+    //主页
     @GET("atguigu/json/HOME_URL.json")
     Observable<HomeBean> getHomeData();
     //http://49.233.0.68:8080/atguigu/json/TAG_URL.json
