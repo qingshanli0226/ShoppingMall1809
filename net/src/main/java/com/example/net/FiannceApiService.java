@@ -5,6 +5,8 @@ package com.example.net;
 
 import com.example.net.bean.AccrssoryBean;
 import com.example.net.bean.BagBean;
+import com.example.net.bean.LoginBean;
+import com.example.net.bean.RegisterBean;
 import com.example.net.bean.store.CloseStoreBean;
 import com.example.net.bean.DigitBean;
 import com.example.net.bean.DressBean;
@@ -28,7 +30,10 @@ import com.example.net.bean.store.WenjuStoreBean;
 import com.example.net.constants.Constants;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 
 //认为是IMode
@@ -126,9 +131,17 @@ public interface FiannceApiService {
     Observable<ShoushiStoreBean> getShoushiStoreData();
 
 
+    @POST("register?")
+    @FormUrlEncoded
+    Observable<RegisterBean> getRegisterData(@Field("name") String name, @Field("password") String password);
 
+    @POST("login?")
+    @FormUrlEncoded
+    Observable<LoginBean> getLoginData(@Field("name") String name, @Field("password") String password);
 
-
+    @FormUrlEncoded
+    @POST(Constants.AUTOLOGIN)
+    Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
 
 }
