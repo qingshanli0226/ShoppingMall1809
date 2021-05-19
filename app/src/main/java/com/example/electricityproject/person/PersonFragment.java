@@ -1,4 +1,4 @@
-package com.example.electricityproject.mainfragment;
+package com.example.electricityproject.person;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import com.example.electricityproject.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FindFragment#newInstance} factory method to
+ * Use the {@link PersonFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FindFragment extends Fragment {
+public class PersonFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class FindFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FindFragment() {
+    public PersonFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +35,11 @@ public class FindFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FindFragment.
+     * @return A new instance of fragment PersonFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FindFragment newInstance(String param1, String param2) {
-        FindFragment fragment = new FindFragment();
+    public static PersonFragment newInstance(String param1, String param2) {
+        PersonFragment fragment = new PersonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,6 +60,6 @@ public class FindFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find, container, false);
+        return inflater.inflate(R.layout.fragment_person, container, false);
     }
 }

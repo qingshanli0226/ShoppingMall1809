@@ -1,8 +1,6 @@
 package com.example.framework;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +10,7 @@ import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BusinessUserManager.IUserLoginChanged{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, BusinessUserManager.IUserLoginChanged{
 
     protected T httpPresenter;
     protected ToolBar toolBar;

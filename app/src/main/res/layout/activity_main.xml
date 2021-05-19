@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".main.MainActivity">
+<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
@@ -17,6 +18,16 @@
     <RadioGroup
         android:id="@+id/group"
         android:orientation="horizontal"
+=======
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="@dimen/weight_9"
+        android:id="@+id/main_vp"></androidx.viewpager.widget.ViewPager>
+
+    <com.flyco.tablayout.CommonTabLayout
+>>>>>>> zx
         android:layout_width="match_parent"
         android:layout_height="@dimen/dm_dp_0dp"
         android:layout_weight="1">

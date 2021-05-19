@@ -44,7 +44,7 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
         BusinessUserManager.getInstance().Register(this);
     }
 
-    @Override
+
     public <T extends View> T findViewById(int resId) {
         return mView.findViewById(resId);
     }
