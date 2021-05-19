@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".mainfragment.HomeFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#ed4040">
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_330"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:background="@drawable/lin_style"
+            android:layout_marginLeft="@dimen/dp_20">
+         <ImageView
+             android:layout_width="@dimen/dp_50"
+             android:layout_height="match_parent"
+             android:src="@mipmap/search"
+             android:layout_marginLeft="@dimen/dp_10"
+             android:id="@+id/img_search"
+             ></ImageView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:hint="请输入信息"
+                android:id="@+id/edit_message"></EditText>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_message"
+                android:src="@mipmap/message"></ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.youth.banner.Banner
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:id="@+id/banner"
+        ></com.youth.banner.Banner>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_180"
+        android:id="@+id/main_re"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_50">
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_360"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50">
+            <ImageView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_50"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/product"></ImageView>
+            <ImageView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_50"
+                android:src="@mipmap/more"
+                android:layout_alignParentRight="true"
+                ></ImageView>
+        </RelativeLayout>
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_400dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50">
+            <ImageView
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_50"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/heart"></ImageView>
+            <ImageView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_50"
+                android:src="@mipmap/more"
+                android:layout_alignParentRight="true"
+                ></ImageView>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+</LinearLayout>
