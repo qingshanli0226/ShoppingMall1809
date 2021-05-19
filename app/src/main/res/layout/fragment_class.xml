@@ -13,6 +13,7 @@
         </com.example.framework.view.ToolBar>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="@dimen/dp_80"
+            android:background="#E9E9E9"
             android:layout_height="match_parent"
             android:id="@+id/classify_left_recycler_view"
             />

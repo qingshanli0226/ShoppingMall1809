@@ -76,7 +76,6 @@ public class ClassifyFragment extends BaseFragment {
         buttonRight = mBaseView.findViewById(R.id.buttonRight);
         radioGroup = mBaseView.findViewById(R.id.radioGroup);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
-
         inits();
     }
 

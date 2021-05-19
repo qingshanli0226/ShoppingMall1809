@@ -19,8 +19,8 @@ public class ClassPresenter extends BasePresenter<IClassView> {
     public void getJacketData(){
         RetrofitCreator.getFiannceApiService()
                 .getJacketData()
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JacketBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
