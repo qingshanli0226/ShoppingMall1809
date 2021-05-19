@@ -7,11 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.electricityproject.R;
-import com.example.electricityproject.mainfragment.ClassifyFragment;
-import com.example.electricityproject.mainfragment.FindFragment;
-import com.example.electricityproject.mainfragment.HomeFragment;
-import com.example.electricityproject.mainfragment.PersonFragment;
-import com.example.electricityproject.mainfragment.ShoppingFragment;
+import com.example.electricityproject.classify.ClassifyFragment;
+import com.example.electricityproject.find.FindFragment;
+import com.example.electricityproject.home.HomeFragment;
+import com.example.electricityproject.person.PersonFragment;
+import com.example.electricityproject.shopp.ShoppingFragment;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         mainVp = (ViewPager) findViewById(R.id.main_vp);
         mainTab = (CommonTabLayout) findViewById(R.id.main_tab);
-        mTabEntitys.add(new TabCus("首页",R.mipmap.bottom01,R.mipmap.bottom02));
-        mTabEntitys.add(new TabCus("分类",R.mipmap.bottom07,R.mipmap.bottom08));
-        mTabEntitys.add(new TabCus("发现",R.mipmap.bottom09,R.mipmap.bottom10));
-        mTabEntitys.add(new TabCus("购物车",R.mipmap.bottom03,R.mipmap.bottom04));
-        mTabEntitys.add(new TabCus("个人中心",R.mipmap.bottom05,R.mipmap.bottom06));
+        mTabEntitys.add(new TabCus("首页",R.mipmap.main_home,R.mipmap.main_home_press));
+        mTabEntitys.add(new TabCus("分类",R.mipmap.main_type,R.mipmap.main_type_press));
+        mTabEntitys.add(new TabCus("发现",R.mipmap.main_community,R.mipmap.main_community_press));
+        mTabEntitys.add(new TabCus("购物车",R.mipmap.main_cart,R.mipmap.main_cart_press));
+        mTabEntitys.add(new TabCus("个人中心",R.mipmap.main_user,R.mipmap.main_user_press));
 
         list.add(new HomeFragment());
         list.add(new ClassifyFragment());

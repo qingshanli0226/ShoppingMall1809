@@ -3,6 +3,7 @@ package com.example.electricityproject.welcome;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.electricityproject.R;
@@ -13,8 +14,9 @@ import java.util.TimerTask;
 
 public class WelcomeActivity extends AppCompatActivity {
     private int time;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         time=3;
@@ -35,4 +37,6 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         },0,1000);
     }
+
+
 }

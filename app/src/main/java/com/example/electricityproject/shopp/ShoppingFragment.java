@@ -1,4 +1,4 @@
-package com.example.electricityproject.mainfragment;
+package com.example.electricityproject.shopp;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
