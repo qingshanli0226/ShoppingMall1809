@@ -19,6 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class WelcomeActivity extends AppCompatActivity {
+    private Intent intent;
 
     private Handler handler = new Handler(){
         @Override
@@ -34,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        Intent intent = new Intent(this, ShopService.class);
+        intent = new Intent(this, ShopService.class);
         startService(intent);
 
         handler.sendEmptyMessageDelayed(0,2000);
@@ -44,5 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+
+        stopService(intent);
     }
 }
