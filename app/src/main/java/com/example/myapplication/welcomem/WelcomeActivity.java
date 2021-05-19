@@ -16,7 +16,7 @@ import com.example.myapplication.welcomem.welcomemvp.WelcomeView;
 import com.example.net.bean.HomeBean;
 
 import mvp.CaCheMannager;
-import mvp.view.BaseActivity;
+import com.example.framework.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeView {
 

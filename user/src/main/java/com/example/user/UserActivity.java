@@ -1,14 +1,18 @@
 package com.example.user;
 
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.user.R;
+=======
+>>>>>>> xsp
 import com.example.user.frag.FragmentAdapter;
 import com.example.user.frag.LoginFragment;
 import com.example.user.frag.RegisterFragment;
@@ -20,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import mvp.view.BaseActivity;
+import com.example.framework.BaseActivity;
 
 public class UserActivity extends BaseActivity {
 

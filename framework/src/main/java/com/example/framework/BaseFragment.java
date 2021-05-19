@@ -1,4 +1,4 @@
-package mvp.view;
+package com.example.framework;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import mvp.presenter.BasePresenter;
+import mvp.view.IFragment;
 
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment {
     protected P rootPresenter;

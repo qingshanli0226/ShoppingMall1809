@@ -12,7 +12,7 @@ import com.example.user.register.RegisPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
-import mvp.view.BaseFragment;
+import com.example.framework.BaseFragment;
 
 
 public class RegisterFragment extends BaseFragment<RegisPresenter> implements IRegisterView {
