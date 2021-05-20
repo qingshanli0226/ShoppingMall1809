@@ -9,7 +9,7 @@
         android:layout_height="@dimen/dm_dp_70">
 
         <ImageView
-            android:id="@+id/itemRecommendLeft"
+            android:id="@+id/itemHotLeft"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"></ImageView>
 
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dm_dp_40"
             android:gravity="center"
-            android:text="@string/news"
+            android:text="@string/here"
             android:textColor="@color/black"
             android:textSize="@dimen/dm_dp_20"></TextView>
 
@@ -32,7 +32,7 @@
             android:textSize="@dimen/dm_dp_20"></TextView>
 
         <ImageView
-            android:id="@+id/itemRecommendRight"
+            android:id="@+id/itemHotRight"
             android:layout_width="@dimen/dm_dp_20"
             android:layout_height="@dimen/dm_dp_20"
             android:layout_alignParentRight="true"
@@ -41,7 +41,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemRecommend"
+        android:id="@+id/itemHot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

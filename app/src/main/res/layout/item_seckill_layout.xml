@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dm_dp_40"
             android:gravity="center"
-            android:text="今日闪购 据 结束"
+            android:text="@string/today"
             android:textColor="@color/black"
             android:textSize="@dimen/dm_dp_20"></TextView>
 
@@ -38,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dm_dp_40"
             android:gravity="center"
-            android:text="查看更多"
+            android:text="@string/more"
             android:textSize="@dimen/dm_dp_20"></TextView>
         
 

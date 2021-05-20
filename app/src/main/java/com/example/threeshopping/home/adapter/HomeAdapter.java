@@ -72,7 +72,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 layoutId = R.layout.item_recommend_layout;
                 break;
             case 5:
-
+                layoutId = R.layout.item_hot_layout;
                 break;
         }
         return layoutId;
@@ -148,6 +148,19 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 break;
             case 5:
+
+                ImageView hotimg = holder.getView(R.id.itemHotLeft);
+
+                hotimg.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_left_hot));
+                ImageView hotitemRight = holder.getView(R.id.itemHotRight);
+                hotitemRight.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_right));
+                RecyclerView itemhotRv = holder.getView(R.id.itemHot);
+                List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = (List<HomeBean.ResultBean.HotInfoBean>) itemView;
+                itemhotRv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                HotAdapter hotAdapter = new HotAdapter();
+                hotAdapter.getData().addAll(hotInfoBeans);
+                itemhotRv.setAdapter(hotAdapter);
+
                 break;
         }
 

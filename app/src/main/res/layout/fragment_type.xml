@@ -29,7 +29,7 @@
                 android:gravity="center"
                 android:text="分类"
                 android:button="@null"
-                android:textColor="@drawable/type2_text_color"
+                android:textColor="@drawable/type_text_color"
                 android:textSize="@dimen/dm_dp_20"></RadioButton>
 
             <RadioButton
