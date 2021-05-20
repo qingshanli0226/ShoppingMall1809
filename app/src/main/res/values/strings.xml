@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">某某商城</string>
     <string name="welcomeCoundDownTv">秒</string>
     <string name="welcomeCoundDownNum">2</string>
     <string name="homeSerchEdHint">请输入搜索信息</string>

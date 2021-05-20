@@ -4,12 +4,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.framework.BaseFragment;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
 import com.example.user.login.ILoginView;
 import com.example.user.login.LoginPresenter;
 
-import mvp.view.BaseFragment;
 
 
 public class LoginFragment extends BaseFragment<LoginPresenter> implements ILoginView {

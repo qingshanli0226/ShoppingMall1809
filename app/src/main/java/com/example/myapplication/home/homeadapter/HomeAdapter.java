@@ -2,14 +2,19 @@ package com.example.myapplication.home.homeadapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRecyclerViewAdapter;
@@ -18,6 +23,7 @@ import com.example.net.bean.HomeBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
@@ -92,7 +98,43 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 });
                 break;
             case 2:
-                Log.d("HomeAdapter  ViewPager的图片", "啦啦啦");
+                List<HomeBean.ResultBean.ActInfoBean> listAct= (List<HomeBean.ResultBean.ActInfoBean>) itemData;
+                ViewPager vp = holder.getView(R.id.homeViewPagerImage);
+
+                View view1 = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.home_item_view1, null);
+                ImageView ima1 = view1.findViewById(R.id.ima1);
+                Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+listAct.get(0).getIcon_url()).into(ima1);
+
+                View view2 = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.home_item_view2, null);
+                ImageView ima2= view2.findViewById(R.id.ima2);
+                Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+listAct.get(1).getIcon_url()).into(ima2);
+                ArrayList<View> views = new ArrayList<>();
+                views.add(view1);
+                views.add(view2);
+                PagerAdapter pagerAdapter=new PagerAdapter() {
+                    @Override
+                    public int getCount() {
+                        return views.size();
+                    }
+
+                    @Override
+                    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+                        return view==object;
+                    }
+
+                    @Override
+                    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+                        container.addView(views.get(position));
+                    }
+
+                    @NonNull
+                    @Override
+                    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+                        container.addView(views.get(position));
+                        return views.get(position);
+                    }
+                };
+                vp.setAdapter(pagerAdapter);
                 break;
             case 3:
                 List<HomeBean.ResultBean.SeckillInfoBean.ListBean> list1= (List<HomeBean.ResultBean.SeckillInfoBean.ListBean>) itemData;

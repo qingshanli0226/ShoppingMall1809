@@ -1,5 +1,6 @@
 package com.example.myapplication.home.homeadapter;
 
+import android.graphics.Paint;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class EndRecAdapter extends BaseRecyclerViewAdapter<HomeBean.ResultBean.S
 
         TextView nameTv1 = holder.getView(R.id.homeEndItemoOldMoney);
         nameTv1.setText(itemData.getOrigin_price());
+        nameTv1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     @Override

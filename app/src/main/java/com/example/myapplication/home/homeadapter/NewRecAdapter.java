@@ -23,7 +23,7 @@ public class NewRecAdapter extends BaseRecyclerViewAdapter<HomeBean.ResultBean.R
         nameTv.setText(itemData.getName());
 
         TextView nameTv1 = holder.getView(R.id.homeNewItemMoney);
-        nameTv1.setText(itemData.getProduct_id());
+        nameTv1.setText(itemData.getCover_price());
     }
 
     @Override
