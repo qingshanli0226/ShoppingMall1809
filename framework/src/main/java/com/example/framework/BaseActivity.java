@@ -6,11 +6,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.manager.ShopManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
+import com.example.net.model.LoginBean;
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener , ShopManager.IConnectListener{
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener , ShopManager.IConnectListener {
 
     protected P httpPresenter;
     protected ToolBar toolBar;
@@ -48,7 +50,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         destroy();
-
     }
 
     public void destroy() {
@@ -56,7 +57,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             httpPresenter.detachView();
             httpPresenter = null;
         }
-        ShopManager.getInstance().unregisterConnectListener(this);
     }
 
     @Override

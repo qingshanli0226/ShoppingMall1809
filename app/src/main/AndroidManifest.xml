@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".main.MainActivity" android:launchMode="singleTask">
         </activity>
+        <activity android:name=".particulars.ParticularsActivity"></activity>
 
 
         <meta-data

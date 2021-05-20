@@ -2,6 +2,7 @@ package com.example.net.model;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.io.Serializable;
 import java.net.MulticastSocket;
 import java.util.List;
 
@@ -390,7 +391,7 @@ public class HoemBean {
             }
         }
 
-        public static class HotInfoBean {
+        public static class HotInfoBean implements Serializable {
             public String getCover_price() {
                 return cover_price;
             }
@@ -437,7 +438,7 @@ public class HoemBean {
         }
 
 
-        public static class RecommendInfoBean {
+        public static class RecommendInfoBean implements Serializable {
             public String getCover_price() {
                 return cover_price;
             }

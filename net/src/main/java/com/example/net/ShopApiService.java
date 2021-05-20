@@ -4,6 +4,7 @@ import com.example.commom.Constants;
 import com.example.net.model.HoemBean;
 import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
+import com.example.net.model.ShoppingTrolleyBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -34,5 +35,6 @@ public interface ShopApiService {
     @POST("autoLogin")
     Observable<LoginBean> getAutoLoginData(@Field("token") String token);
 
-
+    @GET("getShortcartProducts")
+    Observable<ShoppingTrolleyBean> getShoppingTrolley();
 }

@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.manager.ShopManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
+import com.example.net.model.LoginBean;
 
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements ToolBar.IToolbarListener, ShopManager.IConnectListener {
 
@@ -98,4 +100,5 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void onDisconnected() {
 
     }
+
 }

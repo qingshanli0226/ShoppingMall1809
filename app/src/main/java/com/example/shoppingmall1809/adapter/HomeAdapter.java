@@ -1,6 +1,7 @@
 package com.example.shoppingmall1809.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.particulars.ParticularsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -123,6 +125,7 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 rv.setAdapter(seckilAdapter);
 
 
+
                 String end = seckill_info.getEnd_time();
                 String start = seckill_info.getStart_time();
                 long time = Integer.parseInt(end) - Integer.parseInt(start);
@@ -136,6 +139,22 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 recomrv.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(),3));
                 RecommendAdapter recommendAdapter = new RecommendAdapter(recommend_info);
                 recomrv.setAdapter(recommendAdapter);
+
+                recommendAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtra("code",1);
+                        intent.putExtra("recommend",recommend_info.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(int position) {
+
+                    }
+                });
+
                 break;
             case HOT_INFO:
                 List<HoemBean.ResultBean.HotInfoBean> hot_info = (List<HoemBean.ResultBean.HotInfoBean>) itemData;
@@ -143,6 +162,22 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 hotrv.setLayoutManager(new GridLayoutManager(holder.itemView.getContext(),2));
                 HotAdapter hotAdapter = new HotAdapter(hot_info);
                 hotrv.setAdapter(hotAdapter);
+
+                hotAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtra("code",2);
+                        intent.putExtra("hotInfo",hot_info.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(int position) {
+
+                    }
+                });
+
                 break;
         }
     }

@@ -29,6 +29,11 @@
     <string name="viewMore">查看更多</string>
     <string name="newProducts">新品推荐</string>
     <string name="excellent">这里都是买的棒棒哒</string>
+    <string name="particulars">商品详情</string>
+    <string name="AddToCart">加入购物车</string>
+    <string name="contact">联系客服</string>
+    <string name="collect">收藏</string>
+    <string name="graphicDetails">图文详情</string>
 
     <string name="app_name">XXX购物车</string>
     <!-- TODO: Remove or change this placeholder text -->
