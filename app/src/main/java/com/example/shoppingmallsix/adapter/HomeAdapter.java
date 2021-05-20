@@ -1,0 +1,108 @@
+package com.example.shoppingmallsix.adapter;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.example.framework.BaseRvAdapter;
+import com.example.net.bean.HomeBean;
+import com.example.net.constants.Constants;
+import com.example.shoppingmallsix.BuildConfig;
+import com.example.shoppingmallsix.R;
+import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
+
+import java.util.List;
+
+public class HomeAdapter extends BaseRvAdapter<Object> {
+
+    private final int BANNER_TYPE = 0;
+    private final int CHANNEL_TYPE = 1;
+    private final int ACT_TYPE = 2;
+
+    public HomeAdapter(List<Object> list){
+        setDataList(list);
+    }
+
+    @Override
+    public int getLayoutId(int viewType) {
+
+        int layoutId = -1;
+        switch (viewType){
+            case BANNER_TYPE:
+                layoutId = R.layout.home_banner;
+                break;
+
+            case CHANNEL_TYPE:
+                layoutId = R.layout.home_recommend;
+                break;
+
+            case ACT_TYPE:
+                layoutId = R.layout.home_act;
+                break;
+        }
+
+
+        return layoutId;
+    }
+
+    @Override
+    public void displayViewHolder(BaseViewHolder holder, int position, Object itemData) {
+        switch (position){
+            case 0:
+                List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemData;
+                if (BuildConfig.DEBUG) Log.d("HomeAdapter", "bannerInfoBeans:" + bannerInfoBeans.toString());
+                Banner banner = holder.getView(R.id.banner);
+                banner.setImages(bannerInfoBeans);
+                banner.setImageLoader(new ImageLoader() {
+                    @Override
+                    public void displayImage(Context context, Object path, ImageView imageView) {
+
+                        HomeBean.ResultBean.BannerInfoBean bean = (HomeBean.ResultBean.BannerInfoBean) path;
+                        String image = bean.getImage();
+
+                        Glide.with(holder.itemView)
+                                .load(Constants.BASE_URl_IMAGE+image)
+                                .into(imageView);
+
+                    }
+                });
+                banner.start();
+                break;
+
+            case 1:
+
+                break;
+
+            case 2:
+
+                break;
+        }
+    }
+
+    @Override
+    public int getRootViewType(int position) {
+
+        int type = -1;
+
+        switch (position){
+            case 0:
+                type = BANNER_TYPE;
+                break;
+
+            case 1:
+                type = CHANNEL_TYPE;
+                break;
+
+            case 2:
+                type = ACT_TYPE;
+                break;
+        }
+
+        return type;
+    }
+}

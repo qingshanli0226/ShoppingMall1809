@@ -15,9 +15,13 @@ public  abstract class BaseRvAdapter<T> extends  RecyclerView.Adapter<BaseRvAdap
 
     public List<T> dataList = new ArrayList<>();
     private IRecyclerItemClickListener iRecyclerItemClickListener;
+
+
+
     protected void setDataList(List<T> list){
         dataList=list;
     }
+
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
