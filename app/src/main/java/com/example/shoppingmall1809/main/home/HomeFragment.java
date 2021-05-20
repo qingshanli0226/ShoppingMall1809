@@ -5,11 +5,10 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
-import com.example.shoppingmall1809.adapter.HomeAdapter;
+import com.example.shoppingmall1809.main.home.adapter.HomeAdapter;
 
 import java.util.ArrayList;
 

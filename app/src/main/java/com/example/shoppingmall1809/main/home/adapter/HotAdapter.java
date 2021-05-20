@@ -1,7 +1,5 @@
-package com.example.shoppingmall1809.adapter;
+package com.example.shoppingmall1809.main.home.adapter;
 
-import android.graphics.Paint;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,25 +11,25 @@ import com.example.shoppingmall1809.R;
 
 import java.util.List;
 
-public class SeckilAdapter extends BaseRVAdapter<HoemBean.ResultBean.SeckillInfoBean.ListBean> {
-    public SeckilAdapter(List<HoemBean.ResultBean.SeckillInfoBean.ListBean> datalist) {
+public class HotAdapter extends BaseRVAdapter<HoemBean.ResultBean.HotInfoBean> {
+    public HotAdapter(List<HoemBean.ResultBean.HotInfoBean> datalist) {
         super(datalist);
     }
 
     @Override
     protected int getLayoutId(int viewType) {
-        return R.layout.home_item_seckil_item;
+        return R.layout.home_item_hot_item;
     }
 
     @Override
-    protected void displayViewHolder(BaseViewHolder holder, int position, HoemBean.ResultBean.SeckillInfoBean.ListBean itemData) {
+    protected void displayViewHolder(BaseViewHolder holder, int position, HoemBean.ResultBean.HotInfoBean itemData) {
         ImageView figure = holder.getView(R.id.figure);
+        TextView name = holder.getView(R.id.name);
         TextView coverPrice = holder.getView(R.id.cover_price);
-        TextView originPrice = holder.getView(R.id.origin_price);
+
         Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getFigure()).placeholder(R.drawable.new_img_loading_1).into(figure);
         coverPrice.setText("￥"+itemData.getCover_price());
-        originPrice.setText("￥"+itemData.getOrigin_price());
-        originPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        name.setText(itemData.getName());
     }
 
     @Override

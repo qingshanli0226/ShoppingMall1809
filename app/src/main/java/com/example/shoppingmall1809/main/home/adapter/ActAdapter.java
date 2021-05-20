@@ -1,4 +1,4 @@
-package com.example.shoppingmall1809.adapter;
+package com.example.shoppingmall1809.main.home.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
