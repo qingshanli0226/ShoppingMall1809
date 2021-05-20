@@ -62,7 +62,7 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
     private SkirtHotAdapter skirtHotAdapter;
     private List<KindSkirtBean.ResultBean.HotProductListBean> arrayList = new ArrayList<>();
     private SkirtChildAdapter skirtChildAdapter;
-
+    private int positions;
 
     @Override
     protected void initData() {
@@ -79,12 +79,17 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         list.add(new KindBean("数据周边"));
         list.add(new KindBean("游戏专区"));
 
+        httpPresenter.getSkirtData();
+
         KindAdapter kindAdapter = new KindAdapter(getContext(), R.layout.item_kind, list);
         kindListview.setAdapter(kindAdapter);
+
 
         kindListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                kindAdapter.setSelectedPosition(position);
+                kindAdapter.notifyDataSetChanged();
                 switch (position){
                     case 0:
                         httpPresenter.getSkirtData();
@@ -120,6 +125,7 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
                         httpPresenter.getGameData();
                         break;
                 }
+
             }
         });
 

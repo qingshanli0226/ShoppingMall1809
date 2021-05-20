@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".shopp.ShoppingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.view.ToolBar
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        app:titleText="购物车"
+        app:titleTextColor="#000000"
+        android:layout_height="@dimen/dm_dp_50dp"></com.example.view.ToolBar>
+
+    <View
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_02dp"
+        android:background="@color/gray"></View>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/atguigu_logo"></ImageView>
+
+        <Button
+            android:background="@drawable/btn_style"
+            android:text="去逛逛"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content"></Button>
+
+    </LinearLayout>
+
+</LinearLayout>
