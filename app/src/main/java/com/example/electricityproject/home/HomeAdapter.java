@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.example.common.NetModel;
 import com.example.common.base.BaseAdapter;
 import com.example.common.bean.HomeBean;
 import com.example.electricityproject.DetailsActivity;
@@ -95,11 +94,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     @Override
                     public void OnItemClick(int position) {
                         Toast.makeText(baseViewHolder.itemView.getContext(), "aaa", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(NetModel.context, DetailsActivity.class);
-                        intent.putExtra("img",channelInfoBeans.get(position).getImage());
-                        intent.putExtra("name",channelInfoBeans.get(position).getChannel_name());
-                        intent.putExtra("price",channelInfoBeans.get(position).getOption()+":00");
-                        NetModel.context.startActivity(intent);
                     }
 
                     @Override
@@ -142,9 +136,25 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 SeckillLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 SeckillAdapter seckillAdapter = new SeckillAdapter();
                 seckill_re.setLayoutManager(SeckillLayoutManager);
-
-                seckillAdapter.updateData(listBeans.getList());
+                List<HomeBean.ResultBean.SeckillInfoBean.ListBean> list = listBeans.getList();
+                seckillAdapter.updateData(list);
                 seckill_re.setAdapter(seckillAdapter);
+                seckillAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
+                        intent.putExtra("img",list.get(position).getFigure());
+                        intent.putExtra("name",list.get(position).getName()+"");
+                        intent.putExtra("price",list.get(position).getCover_price()+":00");
+                        baseViewHolder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
+
                 break;
             case 4:
                 List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans= (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
@@ -153,6 +163,22 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 recommendAdapter.updateData(recommendInfoBeans);
                 recommend_re.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
                 recommend_re.setAdapter(recommendAdapter);
+                recommendAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
+                        intent.putExtra("img",recommendInfoBeans.get(position).getFigure());
+                        intent.putExtra("name",recommendInfoBeans.get(position).getName()+"");
+                        intent.putExtra("price",recommendInfoBeans.get(position).getCover_price()+":00");
+                        baseViewHolder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
+
                 break;
             case 5:
                 List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans= (List<HomeBean.ResultBean.HotInfoBean>) itemData;
@@ -161,6 +187,21 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 hotAdapter.updateData(hotInfoBeans);
                 hot_re.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
                 hot_re.setAdapter(hotAdapter);
+                hotAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
+                        intent.putExtra("img",hotInfoBeans.get(position).getFigure());
+                        intent.putExtra("name",hotInfoBeans.get(position).getName()+"");
+                        intent.putExtra("price",hotInfoBeans.get(position).getCover_price()+":00");
+                        baseViewHolder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
                 break;
         }
     }

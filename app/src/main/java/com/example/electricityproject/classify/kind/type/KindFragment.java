@@ -76,13 +76,10 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         list.add(new KindBean("办公文具"));
         list.add(new KindBean("数据周边"));
         list.add(new KindBean("游戏专区"));
-<<<<<<< HEAD
 
         httpPresenter.getSkirtData();
 
-=======
         httpPresenter.getSkirtData();
->>>>>>> zhangxian
         KindAdapter kindAdapter = new KindAdapter(getContext(), R.layout.item_kind, list);
         kindListview.setAdapter(kindAdapter);
 

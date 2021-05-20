@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.common.Constants;
 import com.example.view.ToolBar;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class DetailsActivity extends AppCompatActivity {
         String img = intent.getStringExtra("img");
         String price = intent.getStringExtra("price");
         if (img!=null){
-            Glide.with(this).load(img).into(detailsImg);
+            Glide.with(this).load(Constants.BASE_URl_IMAGE+img).into(detailsImg);
         }
         if (name!=null){
             detailsName.setText(name+"");
@@ -37,6 +38,22 @@ public class DetailsActivity extends AppCompatActivity {
         if (price!=null){
             detailsPrice.setText("￥"+price);
         }
+        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
+            @Override
+            public void onLeftClick() {
+                finish();
+            }
+
+            @Override
+            public void onRightImgClick() {
+
+            }
+
+            @Override
+            public void onRightTvClick() {
+
+            }
+        });
 
     }
 }

@@ -10,13 +10,9 @@ import com.example.common.call.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
-<<<<<<< HEAD
 
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, BusinessUserManager.IUserLoginChanged,ToolBar.IToolbarListener{
 
-=======
-public abstract   class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BusinessUserManager.IUserLoginChanged,ToolBar.IToolbarListener{
->>>>>>> zhangxian
     protected T httpPresenter;
     protected ToolBar toolBar;
     protected LoadingPage loadingPage;
