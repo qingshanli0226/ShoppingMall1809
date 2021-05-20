@@ -6,6 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
@@ -23,6 +27,8 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
     private final int BANNER_TYPE = 0;
     private final int CHANNEL_TYPE = 1;
     private final int ACT_TYPE = 2;
+    private final int HOT_TYPE = 3;
+    private final int RECOMMEND_TYPE = 4;
 
     public HomeAdapter(List<Object> list){
         setDataList(list);
@@ -76,6 +82,24 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
             case 1:
 
+                List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans = (List<HomeBean.ResultBean.ChannelInfoBean>) itemData;
+                RecyclerView recyclerView = holder.getView(R.id.recommendRv);
+
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
+                ChanneAdapter channeAdapter = new ChanneAdapter();
+                recyclerView.setAdapter(channeAdapter);
+                channeAdapter.dataList.addAll(channelInfoBeans);
+                channeAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Toast.makeText(holder.itemView.getContext(), "短点击", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onItwmLongClick(int position) {
+                        Toast.makeText(holder.itemView.getContext(), "长点击item", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 
             case 2:
