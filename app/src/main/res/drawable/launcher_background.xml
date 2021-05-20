@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 启动页面的背景图片   (图片大小需要注意，我这边图片的宽高比例是1:2) -->
+    <item android:drawable="@drawable/aaaa" />                                  
+</layer-list>

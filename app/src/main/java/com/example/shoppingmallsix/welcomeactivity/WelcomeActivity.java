@@ -60,7 +60,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initView() {
         coundDownTv = findViewById(R.id.countDownTv);
-
+        setTheme(R.style.AppTheme);
         handler.sendEmptyMessageDelayed(DELAY_INDEX, DELAY);
         coundDownTv.setText(countDown + getString(R.string.miao));
 

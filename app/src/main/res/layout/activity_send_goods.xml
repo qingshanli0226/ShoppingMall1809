@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sendgoodsactivity.SendGoodsActivity">
+
+    <com.example.framework.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:id="@+id/toolbar"
+        app:leftImg="@drawable/back"
+        app:leftIsShow="true"
+        app:titleText="待发货订单"></com.example.framework.view.ToolBar>
+
+</LinearLayout>

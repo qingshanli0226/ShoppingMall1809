@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.discoverfragment.DiscoverFragment">
+    tools:context=".messageactivity.MessageActivity">
 
     <com.example.framework.view.ToolBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:id="@+id/toolbar"
-        app:titleText="Title"
+        app:titleText="消息"
+        app:leftImg="@drawable/back"
         app:leftIsShow="true"
-        app:leftImg="@drawable/top_bar_left_back"
-        app:rightText="右侧"
         ></com.example.framework.view.ToolBar>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:background="@color/colorgray"
-        ></View>
+        android:background="@color/colorgray"></View>
+
 </LinearLayout>

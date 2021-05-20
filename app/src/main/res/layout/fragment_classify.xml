@@ -13,6 +13,10 @@
         android:id="@+id/toolbar"
         android:visibility="gone"
         ></com.example.framework.view.ToolBar>
+
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -45,6 +49,7 @@
                 android:textColor="@color/colorRedqian"
                 ></RadioButton>
         </RadioGroup>
+
         <ImageView
             android:layout_centerVertical="true"
             android:layout_width="@dimen/dp_30"
@@ -54,6 +59,13 @@
             android:layout_marginRight="@dimen/dp_20"
             />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/colorgray"
+        ></View>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,24 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context=".fragment.shoppingcarfragment.ShoppingCarFragment">
 
-    <com.example.framework.view.ToolBar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:id="@+id/toolbar"
-        app:titleText="购物车"
-        app:rightText="编辑"
-        ></com.example.framework.view.ToolBar>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.example.framework.view.ToolBar
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_50"
+                android:id="@+id/toolbar"
+                app:titleText="购物车"
+                ></com.example.framework.view.ToolBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="#B8B2B2"
-        ></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编辑"
+                android:id="@+id/shopText"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/dp_20"
+                android:layout_centerVertical="true"
+                ></TextView>
+        </RelativeLayout>
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#B8B2B2"
+            ></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            ></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全选"
+                android:button="@drawable/check_choose"
+                android:textSize="@dimen/dp_20"
+                android:layout_gravity="center"
+                ></CheckBox>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shopTotal"
+                android:text="合计："
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_20"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shopDoaller"
+                android:layout_gravity="center"
+                android:textColor="@color/colorRedqian"
+                android:text="￥"
+                ></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shopMoney"
+                android:layout_gravity="center"
+                android:textColor="@color/colorRedqian"
+                android:text="111"
+                ></TextView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buyBt"
+                android:text="结算"
+                android:background="@color/colorRed"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_40"
+                ></Button>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteBt"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="230dp"
+        android:background="@drawable/words"
+        android:visibility="gone"
+        android:text="删除"
+        ></Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shouCangBt"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/wordsred"
+        android:visibility="gone"
+        android:text="收藏"
+        ></Button>
+
+
+</RelativeLayout>

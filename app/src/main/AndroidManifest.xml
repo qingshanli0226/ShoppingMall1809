@@ -12,11 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".welcomeactivity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"
+        <activity android:name=".sendgoodsactivity.SendGoodsActivity"></activity>
+        <activity android:name=".obligationactivity.ObligationActivity" />
+        <activity android:name=".messageactivity.MessageActivity" />
+        <activity android:name=".welcomeactivity.WelcomeActivity"
+            android:theme="@style/AppTheme.Launcher"
+            android:screenOrientation="portrait"
+            >
 
-                    />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

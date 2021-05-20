@@ -112,5 +112,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     }
 
-
+    @Override
+    public void onLeftClick() {
+        super.onLeftClick();
+        finish();
+    }
 }

@@ -45,6 +45,7 @@
                         android:layout_height="@dimen/dp_80"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/new_message_icon"
+                        android:id="@+id/messageImg"
                         ></ImageView>
 
 

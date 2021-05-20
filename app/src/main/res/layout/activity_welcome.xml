@@ -13,14 +13,6 @@
         android:visibility="gone"
         ></com.example.framework.view.ToolBar>
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/aaaa"
-        android:scaleType="fitXY"
-        ></ImageView>
-
     <TextView
         android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
@@ -28,7 +20,15 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dp_3"
         android:layout_marginRight="@dimen/dp_3"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="#33000000"
         android:id="@+id/countDownTv"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33000000"
+        ></ImageView>
+
+
 
 </RelativeLayout>

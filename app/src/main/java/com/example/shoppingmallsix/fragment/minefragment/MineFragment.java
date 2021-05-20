@@ -2,19 +2,22 @@ package com.example.shoppingmallsix.fragment.minefragment;
 
 
 import android.content.Intent;
-
-import androidx.fragment.app.Fragment;
-
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.messageactivity.MessageActivity;
+import com.example.shoppingmallsix.obligationactivity.ObligationActivity;
+import com.example.shoppingmallsix.sendgoodsactivity.SendGoodsActivity;
 import com.example.user.login.LoginActivity;
-import com.example.user.register.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +26,7 @@ public class MineFragment extends BaseFragment {
     private ToolBar toolbar;
     private LinearLayout obligation;
     private LinearLayout sendgoods;
+    private ImageView messageImg;
 
     public MineFragment() {
         // Required empty public constructor
@@ -35,7 +39,14 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
+        if (loginBean != null){
 
+        }else {
+            Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -44,8 +55,32 @@ public class MineFragment extends BaseFragment {
 
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         obligation = (LinearLayout) mBaseView.findViewById(R.id.obligation);
-        sendgoods = (LinearLayout)mBaseView. findViewById(R.id.sendgoods);
+        sendgoods = (LinearLayout) mBaseView.findViewById(R.id.sendgoods);
+        messageImg = mBaseView.findViewById(R.id.messageImg);
 
+        messageImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        obligation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ObligationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        sendgoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SendGoodsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
