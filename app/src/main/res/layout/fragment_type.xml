@@ -11,28 +11,46 @@
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="aaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_70"
+        >
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dm_dp_50"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:layout_width="@dimen/dm_dp_100"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@drawable/type_broder"
+                android:gravity="center"
+                android:text="分类"
+                android:button="@null"
+                android:textColor="@drawable/type2_text_color"
+                android:textSize="@dimen/dm_dp_20"></RadioButton>
+
+            <RadioButton
+                android:layout_width="@dimen/dm_dp_100"
+                android:layout_height="match_parent"
+                android:text="标签"
+                android:textSize="@dimen/dm_dp_20"
+                android:textColor="@drawable/type_text_color"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_centerInParent="true"
+                android:background="@drawable/type2_broder"
+                ></RadioButton>
+
+        </RadioGroup>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/home_search_icon"
+            android:layout_alignParentRight="true"
+            ></ImageView>
+    </RelativeLayout>
+
 </LinearLayout>
