@@ -58,7 +58,7 @@ public class HomeFragment extends BaseFragment {
         objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getBanner_info());
 
 //        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getHot_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
+//        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
         homeAdapter.getData().addAll(objects);
         homeRv.setAdapter(homeAdapter);
 
