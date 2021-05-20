@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bumptech.glide.Glide;
 import com.example.common.base.BaseAdapter;
 import com.example.common.bean.HomeBean;
@@ -36,7 +40,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 layoutId=R.layout.item_home_act;
                 break;
             case SECKILL_TYPE:
-                layoutId=R.layout.item_home_act;
+                layoutId=R.layout.item_home_seckill;
                 break;
             case RECOMMEND_TYPE:
                 layoutId=R.layout.item_home_recommend;
@@ -50,6 +54,8 @@ public class HomeAdapter extends BaseAdapter<Object> {
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, Object itemData) {
+        LinearLayoutManager ActLayoutManager = new LinearLayoutManager(baseViewHolder.itemView.getContext());
+        ActLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         switch (position){
             case 0:
                 List<HomeBean.ResultBean.BannerInfoBean> banner_info = (List<HomeBean.ResultBean.BannerInfoBean>) itemData;
@@ -69,23 +75,51 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 banner.start();
                 break;
             case 1:
-
+                List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans= (List<HomeBean.ResultBean.ChannelInfoBean>) itemData;
+                RecyclerView channnel_re = baseViewHolder.getView(R.id.home_re);
+                channelAdapter channelAdapter = new channelAdapter();
+                channelAdapter.updateData(channelInfoBeans);
+                channnel_re.setAdapter(channelAdapter);
+                channnel_re.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
                 break;
             case 2:
+                List<HomeBean.ResultBean.ActInfoBean> actInfoBeans= (List<HomeBean.ResultBean.ActInfoBean>) itemData;
+                RecyclerView act_re = baseViewHolder.getView(R.id.act_re);
+                ActAdapter actAdapter = new ActAdapter();
 
+                act_re.setLayoutManager(ActLayoutManager);
+                actAdapter.updateData(actInfoBeans);
+                act_re.setAdapter(actAdapter);
                 break;
             case 3:
+                HomeBean.ResultBean.SeckillInfoBean listBeans= (HomeBean.ResultBean.SeckillInfoBean) itemData;
+                RecyclerView seckill_re = baseViewHolder.getView(R.id.seckill_re);
+                LinearLayoutManager SeckillLayoutManager = new LinearLayoutManager(baseViewHolder.itemView.getContext());
+                SeckillLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                SeckillAdapter seckillAdapter = new SeckillAdapter();
+                seckill_re.setLayoutManager(SeckillLayoutManager);
 
+                seckillAdapter.updateData(listBeans.getList());
+                seckill_re.setAdapter(seckillAdapter);
                 break;
             case 4:
-
+                List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans= (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
+                RecyclerView recommend_re=baseViewHolder.getView(R.id.recommend_re);
+                RecommendAdapter recommendAdapter = new RecommendAdapter();
+                recommendAdapter.updateData(recommendInfoBeans);
+                recommend_re.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+                recommend_re.setAdapter(recommendAdapter);
                 break;
             case 5:
-
+                List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans= (List<HomeBean.ResultBean.HotInfoBean>) itemData;
+                RecyclerView hot_re = baseViewHolder.getView(R.id.hot_re);
+                HotAdapter hotAdapter = new HotAdapter();
+                hotAdapter.updateData(hotInfoBeans);
+                hot_re.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+                hot_re.setAdapter(hotAdapter);
                 break;
         }
     }
-
 
     @Override
     public int getRootViewType(int position) {

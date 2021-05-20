@@ -2,10 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dm_dp_500dp">
+    android:layout_height="@dimen/dm_dp_900dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_400dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,6 +24,8 @@
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:id="@+id/hot_re"
+            android:background="#fafafa"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </LinearLayout>

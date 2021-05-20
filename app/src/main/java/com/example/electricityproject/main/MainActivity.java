@@ -1,10 +1,7 @@
 package com.example.electricityproject.main;
 
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.widget.RadioButton;
-=======
->>>>>>> 0519
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -16,26 +13,11 @@ import com.example.common.bean.LogBean;
 import com.example.common.call.BusinessARouter;
 import com.example.common.call.BusinessUserManager;
 import com.example.electricityproject.R;
-<<<<<<< HEAD
 import com.example.electricityproject.classify.ClassifyFragment;
 import com.example.electricityproject.find.FindFragment;
 import com.example.electricityproject.home.HomeFragment;
 import com.example.electricityproject.person.PersonFragment;
 import com.example.electricityproject.shopp.ShoppingFragment;
-<<<<<<< HEAD
-import com.flyco.tablayout.CommonTabLayout;
-import com.flyco.tablayout.listener.CustomTabEntity;
-
-import java.util.ArrayList;
-=======
-import com.example.electricityproject.mainfragment.ClassifyFragment;
-import com.example.electricityproject.mainfragment.FindFragment;
-import com.example.electricityproject.mainfragment.HomeFragment;
-import com.example.electricityproject.mainfragment.PersonFragment;
-import com.example.electricityproject.mainfragment.ShoppingFragment;
->>>>>>> zzz
-=======
->>>>>>> 0519
 
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
@@ -52,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         initView();
-
-
 
         btnHome.setChecked(true);
 

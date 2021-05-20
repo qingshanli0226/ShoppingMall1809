@@ -3,13 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".classify.ClassifyFragment">
-=======
+    tools:context=".classify.ClassifyFragment"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mainfragment.ClassifyFragment">
->>>>>>> zzz
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <com.google.android.material.tabs.TabLayout
         android:layout_marginLeft="@dimen/dp_100"
