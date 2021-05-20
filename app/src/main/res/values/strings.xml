@@ -12,5 +12,19 @@
     <string name="find_more">查看更多</string>
     <string name="home_new">新品推荐</string>
     <string name="home_hot">这里都是买的棒棒哒</string>
+    <string name="dfk">待付款</string>
+    <string name="dfh">待发货</string>
+    <string name="dsh">待收货</string>
+    <string name="ywc">已完成</string>
+    <string name="shouh">售后/退款</string>
+    <string name="shdz">收货地址</string>
+    <string name="wdsc">我的收藏</string>
+    <string name="wdyhj">我的优惠券</string>
+    <string name="wdgz">我的瓜子</string>
+    <string name="wdjp">我的奖品</string>
+    <string name="wddzp">我的电子票</string>
+    <string name="yqfx">邀请分享</string>
+    <string name="kfzx">客服中心</string>
+    <string name="fwfk">服务反馈</string>
 
 </resources>
