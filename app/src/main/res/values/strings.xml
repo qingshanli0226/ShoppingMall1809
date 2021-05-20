@@ -29,6 +29,20 @@
     <string name="viewMore">查看更多</string>
     <string name="newProducts">新品推荐</string>
     <string name="excellent">这里都是买的棒棒哒</string>
+    <string name="label">标签</string>
+    <string name="smallSkirt">小裙子</string>
+    <string name="jacket">上衣</string>
+    <string name="pants">下装</string>
+    <string name="coat">外套</string>
+    <string name="parts">配件</string>
+    <string name="handbag">包包</string>
+    <string name="dressUp">装扮</string>
+    <string name="theHouseIsTasted">居家宅品</string>
+    <string name="stationery">办公文具</string>
+    <string name="peripheral">数码周边</string>
+    <string name="game">游戏专区</string>
+    <string name="hotSale">热卖推荐</string>
+    <string name="use">常用分类</string>
 
     <string name="app_name">XXX购物车</string>
     <!-- TODO: Remove or change this placeholder text -->
