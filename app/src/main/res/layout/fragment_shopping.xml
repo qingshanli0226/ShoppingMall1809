@@ -33,10 +33,11 @@
             android:src="@drawable/atguigu_logo"></ImageView>
 
         <Button
-            android:background="@drawable/btn_style"
-            android:text="去逛逛"
+            android:id="@+id/go_home"
             android:layout_width="@dimen/dp_100"
-            android:layout_height="wrap_content"></Button>
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_style"
+            android:text="去逛逛"></Button>
 
     </LinearLayout>
 

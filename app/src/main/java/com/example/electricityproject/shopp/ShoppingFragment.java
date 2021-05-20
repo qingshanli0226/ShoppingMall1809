@@ -1,22 +1,31 @@
 package com.example.electricityproject.shopp;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
+import android.widget.Button;
 
 import com.example.common.bean.LogBean;
+import com.example.common.call.BusinessARouter;
+import com.example.electricityproject.App;
+import com.example.electricityproject.AppModel;
 import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
+import com.example.framework.FrameModel;
+import com.example.view.ToolBar;
 
 public class ShoppingFragment extends BaseFragment {
 
 
+    private ToolBar toolbar;
+    private Button goHome;
+
     @Override
     protected void initData() {
-
+        goHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BusinessARouter.getInstance().getAppManager().OpenMainActivity(getContext(),null);
+            }
+        });
     }
 
     @Override
@@ -26,7 +35,8 @@ public class ShoppingFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
+        goHome = (Button) findViewById(R.id.go_home);
     }
 
     @Override
