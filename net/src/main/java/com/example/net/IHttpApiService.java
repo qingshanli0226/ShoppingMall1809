@@ -7,6 +7,7 @@ import com.example.net.bean.RegisterBean;
 
 
 import com.example.net.bean.HomeBean;
+import com.example.net.bean.TypeBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -59,4 +60,50 @@ public interface IHttpApiService {
 
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomeData();
+
+
+
+    @GET(Constants.SKIRT_URL)
+    Observable<TypeBean> getSkirt();
+
+
+    @GET(Constants.JACKET_URL)
+    Observable<TypeBean> getJacket();
+
+
+    @GET(Constants.PANTS_URL)
+    Observable<TypeBean> getPants();
+
+
+    @GET(Constants.OVERCOAT_URL)
+    Observable<TypeBean> getOvercoat();
+
+
+    @GET(Constants.ACCESSORY_URL)
+    Observable<TypeBean> getAccessory();
+
+
+    @GET(Constants.BAG_URL)
+    Observable<TypeBean> getBag();
+
+
+    @GET(Constants.DRESS_UP_URL)
+    Observable<TypeBean> getDress();
+
+
+    @GET(Constants.HOME_PRODUCTS_URL)
+    Observable<TypeBean> getProducts();
+
+
+    @GET(Constants.STATIONERY_URL)
+    Observable<TypeBean> getStationery();
+
+
+    @GET(Constants.DIGIT_URL)
+    Observable<TypeBean> getDigit();
+
+
+    @GET(Constants.GAME_URL)
+    Observable<TypeBean> getGame();
+
 }
