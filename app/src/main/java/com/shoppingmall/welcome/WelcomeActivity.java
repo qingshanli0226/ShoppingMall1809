@@ -51,7 +51,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         //单例存储数据
         CacheManager.getInstance().setHomeBean(homeBean);
         loadingPage.showSuccessView();
-        LogUtils.json(homeBean);
         handler.sendEmptyMessageDelayed(GET_DATA_OK,1000);
         if (homeBean==null){
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);

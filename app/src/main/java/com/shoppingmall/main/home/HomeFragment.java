@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment {
         objects.add(homeBean.getResult().getBanner_info());
         objects.add(homeBean.getResult().getChannel_info());
         objects.add(homeBean.getResult().getAct_info());
-        objects.add(homeBean.getResult().getSeckill_info().getList());
+        objects.add(homeBean.getResult().getSeckill_info());
         objects.add(homeBean.getResult().getRecommend_info());
         objects.add(homeBean.getResult().getHot_info());
         homeAdapter.updateData(objects);

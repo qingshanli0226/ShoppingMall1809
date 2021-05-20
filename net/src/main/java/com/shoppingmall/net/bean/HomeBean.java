@@ -1,5 +1,6 @@
 package com.shoppingmall.net.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HomeBean {
@@ -144,7 +145,7 @@ public class HomeBean {
             this.recommend_info = recommend_info;
         }
 
-        public static class SeckillInfoBean {
+        public static class SeckillInfoBean implements Serializable {
             private String end_time;
             private String start_time;
             /**
@@ -181,7 +182,7 @@ public class HomeBean {
                 this.list = list;
             }
 
-            public static class ListBean {
+            public static class ListBean implements Serializable{
                 private String cover_price;
                 private String figure;
                 private String name;
@@ -379,7 +380,7 @@ public class HomeBean {
             }
         }
 
-        public static class HotInfoBean {
+        public static class HotInfoBean implements Serializable{
             private String cover_price;
             private String figure;
             private String name;
@@ -418,7 +419,7 @@ public class HomeBean {
             }
         }
 
-        public static class RecommendInfoBean {
+        public static class RecommendInfoBean implements Serializable{
             private String cover_price;
             private String figure;
             private String name;
