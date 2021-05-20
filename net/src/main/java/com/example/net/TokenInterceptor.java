@@ -1,7 +1,10 @@
 package com.example.net;
 
 
-import com.example.common.Utility;
+import android.util.Log;
+
+import com.example.common.NetModel;
+import com.example.common.SPUtility;
 
 import java.io.IOException;
 
@@ -11,9 +14,11 @@ import okhttp3.Response;
 public class TokenInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (Utility.getString(NetModel.context)!=null){
-            chain.proceed(chain.request().newBuilder().addHeader("token",Utility.getString(NetModel.context)).build());
+        if (SPUtility.getString(NetModel.context)!=null){
+            Log.i("zx", "intercept: "+SPUtility.getString(NetModel.context));
+            chain.proceed(chain.request().newBuilder().addHeader("token", SPUtility.getString(NetModel.context)).build());
         }
         return chain.proceed(chain.request().newBuilder().addHeader("token","123").build());
     }
+    //4e53b37b-38aa-4885-b386-573f52bdfdafAND1621550495929
 }

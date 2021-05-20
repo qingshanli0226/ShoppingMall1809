@@ -1,22 +1,31 @@
 package com.example.electricityproject.home;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Handler;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.example.common.NetModel;
 import com.example.common.base.BaseAdapter;
 import com.example.common.bean.HomeBean;
+import com.example.electricityproject.DetailsActivity;
 import com.example.electricityproject.R;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeAdapter extends BaseAdapter<Object> {
     private final int BANNER_TYPE=0;
@@ -26,6 +35,8 @@ public class HomeAdapter extends BaseAdapter<Object> {
     private final int RECOMMEND_TYPE=4;
     private final int HOT_TYPE=5;
     private List<String> list=new ArrayList<>();
+    private Handler handler=new Handler();
+    private long l;
     @Override
     public int getLayoutId(int viewType) {
         int layoutId=-1;
@@ -64,7 +75,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     list.add("http://49.233.0.68:8080//atguigu/img"+bannerInfoBean.getImage());
                 }
                 banner.setImages(list);
-                Log.i("zx", "onHomeBanner: "+list.toString());
                 banner.setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
@@ -81,15 +91,49 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 channelAdapter.updateData(channelInfoBeans);
                 channnel_re.setAdapter(channelAdapter);
                 channnel_re.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
+                channelAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Toast.makeText(baseViewHolder.itemView.getContext(), "aaa", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NetModel.context, DetailsActivity.class);
+                        intent.putExtra("img",channelInfoBeans.get(position).getImage());
+                        intent.putExtra("name",channelInfoBeans.get(position).getChannel_name());
+                        intent.putExtra("price",channelInfoBeans.get(position).getOption()+":00");
+                        NetModel.context.startActivity(intent);
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
                 break;
             case 2:
                 List<HomeBean.ResultBean.ActInfoBean> actInfoBeans= (List<HomeBean.ResultBean.ActInfoBean>) itemData;
                 RecyclerView act_re = baseViewHolder.getView(R.id.act_re);
+                TextView time = baseViewHolder.getView(R.id.time);
                 ActAdapter actAdapter = new ActAdapter();
+                l = 24*60*60*1000;
 
                 act_re.setLayoutManager(ActLayoutManager);
                 actAdapter.updateData(actInfoBeans);
                 act_re.setAdapter(actAdapter);
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                time.setText(Current(l)+"");
+                            }
+                        });
+                        l-=1000;
+                        if (l<=0){
+                            l=24*60*60*1000;
+                        }
+                    }
+                },0,1000);
                 break;
             case 3:
                 HomeBean.ResultBean.SeckillInfoBean listBeans= (HomeBean.ResultBean.SeckillInfoBean) itemData;
@@ -145,5 +189,11 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 break;
         }
         return type;
+    }
+    public String Current(Long i){
+        String str="HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);
+        String format = simpleDateFormat.format(new Date(i));
+        return format;
     }
 }

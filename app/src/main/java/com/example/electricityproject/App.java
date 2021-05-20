@@ -1,11 +1,15 @@
 package com.example.electricityproject;
 
 import android.app.Application;
+import android.content.Intent;
+import android.util.Log;
 
-import com.example.common.call.BusinessARouter;
+import com.example.common.SPUtility;
+import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
-import com.example.net.NetModel;
+import com.example.common.NetModel;
 import com.example.user.UserModel;
+import com.example.user.auto.AutoService;
 
 public class App extends Application {
     @Override
@@ -15,6 +19,11 @@ public class App extends Application {
         FrameModel.init(this);
         UserModel.init();
         AppModel.init();
+        MainModel.init();
+        if (SPUtility.getString(this)!=null) {
+            Log.i("zx", "onCreate: "+SPUtility.getString(this));
+            startService(new Intent(this, AutoService.class));
+        }
 
     }
 }

@@ -6,9 +6,16 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".classify.ClassifyFragment">
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+=======
+    tools:context=".classify.ClassifyFragment"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+>>>>>>> zhangxian
     <com.google.android.material.tabs.TabLayout
         android:layout_marginLeft="@dimen/dp_100"
         android:id="@+id/table_layout"
