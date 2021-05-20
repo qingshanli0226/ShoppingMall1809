@@ -45,8 +45,6 @@ import com.example.electricityproject.classify.kind.adapter.skirt.SkirtChildAdap
 import com.example.electricityproject.classify.kind.adapter.skirt.SkirtHotAdapter;
 import com.example.electricityproject.classify.kind.adapter.stationery.StationeryChildAdapter;
 import com.example.electricityproject.classify.kind.adapter.stationery.StationeryHotAdapter;
-import com.example.electricityproject.classify.kind.type.IKindPresenter;
-import com.example.electricityproject.classify.kind.type.IKindView;
 import com.example.framework.BaseFragment;
 
 import java.util.ArrayList;
@@ -78,7 +76,7 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         list.add(new KindBean("办公文具"));
         list.add(new KindBean("数据周边"));
         list.add(new KindBean("游戏专区"));
-
+        httpPresenter.getSkirtData();
         KindAdapter kindAdapter = new KindAdapter(getContext(), R.layout.item_kind, list);
         kindListview.setAdapter(kindAdapter);
 

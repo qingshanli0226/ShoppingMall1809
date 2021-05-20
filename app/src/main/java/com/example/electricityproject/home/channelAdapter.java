@@ -23,6 +23,7 @@ public class channelAdapter extends BaseAdapter<HomeBean.ResultBean.ChannelInfoB
         Glide.with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getImage()).into(img);
         TextView name = baseViewHolder.getView(R.id.channel_name);
         name.setText(itemData.getChannel_name()+"");
+
     }
 
 

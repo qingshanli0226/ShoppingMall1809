@@ -4,12 +4,12 @@ package com.example.common;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Utility {
-    private static Utility utility;
+public class SPUtility {
+    private static SPUtility utility;
 
-    public static Utility getInstance() {
+    public static SPUtility getInstance() {
         if (utility ==null){
-            utility =new Utility();
+            utility =new SPUtility();
         }
         return utility;
     }
