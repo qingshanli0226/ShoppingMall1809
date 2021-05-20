@@ -1,5 +1,6 @@
 package com.example.shoppingmallsix.mainactivity;
 
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     protected void initView() {
         mainFram = findViewById(R.id.mainFram);
         mainCommon = findViewById(R.id.mainCommon);
+
+        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mTabEntities.add(new MainBean("首页", R.drawable.main_home_press, R.drawable.main_home));
         mTabEntities.add(new MainBean("分类", R.drawable.main_type_press, R.drawable.main_type));
