@@ -9,8 +9,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
 import com.example.threeshopping.R;
+
 import com.example.threeshopping.type.typechild.classify.ClassifyFragment;
-import com.example.threeshopping.type.typechild.LabelFragment;
+
+import com.example.threeshopping.type.typechild.label.LabelFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;

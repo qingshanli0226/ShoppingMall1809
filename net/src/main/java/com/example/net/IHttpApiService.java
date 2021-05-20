@@ -2,6 +2,7 @@ package com.example.net;
 
 
 import com.example.common.Constants;
+import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 
@@ -36,6 +37,10 @@ public interface IHttpApiService {
     @FormUrlEncoded
     @POST(Constants.AUTOLOGIN)
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
+
+    @GET(Constants.TAG_URL)
+    Observable<LabelBean> getLabel();
+
 
 //
 //

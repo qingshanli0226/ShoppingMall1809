@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ParticularsActivity">
+
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:app_back_color_toob="@color/white"
+        app:app_text="商品详情"
+        app:app_text_color="@color/black"
+        app:app_left_src="@drawable/top_bar_left_back"
+        app:app_left_isshow="true"
+        app:app_right_src="@drawable/menu"
+        app:app_right_isshow="true"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        >
+        <ImageView
+            android:id="@+id/pariculars_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_dp_300"
+            ></ImageView>
+        <TextView
+            android:id="@+id/pariculars_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预售截至10月15日，预售期为限量礼盒版，包括特质木盒x1、画集x1、邮票x1、书签x1、贴纸x1、信封x1、礼盒特"
+            ></TextView>
+        <TextView
+            android:id="@+id/pariculars_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            ></TextView>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/good_uncollected"
+                ></ImageView>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_callserver_unpressed"
+                ></ImageView>
+            <ImageView
+                android:id="@+id/shopcar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/icon_good_detail_cart"
+                ></ImageView>
+        </LinearLayout>
+        <Button
+            android:id="@+id/particulars_join"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="加入购物车"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            ></Button>
+    </LinearLayout>
+
+
+</LinearLayout>
