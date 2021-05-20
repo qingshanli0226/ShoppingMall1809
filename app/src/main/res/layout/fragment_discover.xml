@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".discover.DiscoverFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/dp_40">
+        <com.example.framework.view.MyToorbar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            app:titletext="Title"
+            app:isleft="true"
+            app:leftimg="@drawable/top_bar_left_back"
+            ></com.example.framework.view.MyToorbar>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右侧"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"></TextView>
 
-</FrameLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
