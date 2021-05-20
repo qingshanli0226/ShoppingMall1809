@@ -56,4 +56,6 @@ dependencies {
     //okhttp
     implementation project(':net')
     implementation project(':common')
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+
 }

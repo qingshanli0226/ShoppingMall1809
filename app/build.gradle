@@ -112,5 +112,6 @@ dependencies {
 
     implementation 'me.jessyan:autosize:1.2.1'
     implementation 'com.lzy.net:okgo:3.0.4'//okgo依赖
+    implementation 'com.jakewharton:disklrucache:2.0.2'
 
 }
