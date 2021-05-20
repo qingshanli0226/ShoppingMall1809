@@ -20,7 +20,7 @@ public class ClassifyFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.fragment_classify;
     }
 
     @Override
