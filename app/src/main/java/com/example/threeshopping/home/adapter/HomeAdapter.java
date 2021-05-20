@@ -22,7 +22,9 @@ import com.example.threeshopping.R;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeAdapter extends BaseRvAdapter<Object> {
@@ -124,6 +126,8 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 //倒计时
                 TextView countDown = holder.getView(R.id.itemseckilCountDown);
                 HomeBean.ResultBean.SeckillInfoBean seckillInfoBeans = (HomeBean.ResultBean.SeckillInfoBean) itemView;
+                String format = new SimpleDateFormat("HH:mm:ss").format(Long.parseLong(seckillInfoBeans.getStart_time()));
+                countDown.setText(format);
 
 
                 RecyclerView sekllRv = holder.getView(R.id.itemSeckil);
