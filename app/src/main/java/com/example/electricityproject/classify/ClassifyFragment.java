@@ -5,9 +5,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
-import com.example.electricityproject.classify.KindFragment;
-import com.example.electricityproject.classify.MyFragmentAdapter;
-import com.example.electricityproject.classify.TagFragment;
+import com.example.electricityproject.classify.kind.tag.TagFragment;
+import com.example.electricityproject.classify.kind.type.KindFragment;
 import com.example.framework.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 

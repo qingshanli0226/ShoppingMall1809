@@ -13,11 +13,7 @@ import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-<<<<<<< HEAD
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, BusinessUserManager.IUserLoginChanged{
-=======
 public abstract   class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BusinessUserManager.IUserLoginChanged,ToolBar.IToolbarListener{
->>>>>>> zzz
 
     protected T httpPresenter;
     protected ToolBar toolBar;

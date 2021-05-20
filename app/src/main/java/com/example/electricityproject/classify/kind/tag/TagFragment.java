@@ -1,4 +1,4 @@
-package com.example.electricityproject.classify;
+package com.example.electricityproject.classify.kind.tag;
 
 import android.os.Bundle;
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="@dimen/dp_200">
+
+    <ImageView
+        android:id="@+id/kind_image"
+        android:src="@drawable/icon_weixin"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"></ImageView>
+
+    <TextView
+        android:id="@+id/kind_money"
+        android:textSize="@dimen/dm_dp_18dp"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="match_parent"
+        android:text="默认值"></TextView>
+
+</LinearLayout>

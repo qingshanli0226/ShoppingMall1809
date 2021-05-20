@@ -1,4 +1,4 @@
-package com.example.electricityproject.classify.kind;
+package com.example.electricityproject.classify.kind.adapter;
 
 public
 class KindBean {

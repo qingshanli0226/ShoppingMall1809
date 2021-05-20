@@ -183,6 +183,7 @@ class KindSkirtBean {
             public void setIs_deleted(String is_deleted) {
                 this.is_deleted = is_deleted;
             }
+
         }
 
         public static class HotProductListBean {
@@ -198,6 +199,24 @@ class KindSkirtBean {
             private String figure;
             private String sell_time_start;
             private String sell_time_end;
+
+            @Override
+            public String toString() {
+                return "HotProductListBean{" +
+                        "product_id='" + product_id + '\'' +
+                        ", channel_id='" + channel_id + '\'' +
+                        ", brand_id='" + brand_id + '\'' +
+                        ", p_catalog_id='" + p_catalog_id + '\'' +
+                        ", supplier_type='" + supplier_type + '\'' +
+                        ", supplier_code='" + supplier_code + '\'' +
+                        ", name='" + name + '\'' +
+                        ", cover_price='" + cover_price + '\'' +
+                        ", brief='" + brief + '\'' +
+                        ", figure='" + figure + '\'' +
+                        ", sell_time_start='" + sell_time_start + '\'' +
+                        ", sell_time_end='" + sell_time_end + '\'' +
+                        '}';
+            }
 
             public String getProduct_id() {
                 return product_id;
@@ -294,6 +313,8 @@ class KindSkirtBean {
             public void setSell_time_end(String sell_time_end) {
                 this.sell_time_end = sell_time_end;
             }
+
+
         }
     }
 }
