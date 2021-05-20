@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_150"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:src="@mipmap/ic_launcher_round"
+        android:id="@+id/recommend_img"></ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="名称"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:id="@+id/recommend_name"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        android:lines="2"
+        android:textSize="@dimen/dp_15"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_14"
+        android:textColor="#F44336"
+        android:text="价钱"
+        android:layout_gravity="center"
+        android:id="@+id/recommend_price"></TextView>
+</LinearLayout>

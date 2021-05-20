@@ -18,9 +18,12 @@ import com.example.electricityproject.find.FindFragment;
 import com.example.electricityproject.home.HomeFragment;
 import com.example.electricityproject.person.PersonFragment;
 import com.example.electricityproject.shopp.ShoppingFragment;
+<<<<<<< HEAD
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 
+=======
+>>>>>>> zhangxian
 
 public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
@@ -37,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         initView();
-
-
 
         btnHome.setChecked(true);
 

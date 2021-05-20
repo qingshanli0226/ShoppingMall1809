@@ -52,6 +52,8 @@
     <dimen name="dm_dp_350dp">350dp</dimen>
     <dimen name="dm_dp_400dp">400dp</dimen>
     <dimen name="dm_dp_500dp">500dp</dimen>
+    <dimen name="dm_dp_800dp">800dp</dimen>
+    <dimen name="dm_dp_900dp">900dp</dimen>
 
 
 </resources>

@@ -32,7 +32,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     private boolean is_Show = false;
     private boolean is_shows = false;
 
-    @Override
+
     protected void initData() {
 
         passwordImage.setOnClickListener(new View.OnClickListener() {

@@ -60,11 +60,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     @Override
     public void onHomeBanner(HomeBean homeBean) {
         HomeAdapter homeAdapter = new HomeAdapter();
-        List<HomeBean.ResultBean.BannerInfoBean> banner_info = homeBean.getResult().getBanner_info();
-        List<HomeBean.ResultBean.ChannelInfoBean> channel_info = homeBean.getResult().getChannel_info();
+
         List<Object> objectList=new ArrayList<>();
-        objectList.add(banner_info);
-        objectList.add(channel_info);
+        objectList.add(homeBean.getResult().getBanner_info());
+        objectList.add(homeBean.getResult().getChannel_info());
+        objectList.add(homeBean.getResult().getAct_info());
+        objectList.add(homeBean.getResult().getSeckill_info());
+        objectList.add(homeBean.getResult().getRecommend_info());
+        objectList.add(homeBean.getResult().getHot_info());
         homeAdapter.updateData(objectList);
         mainRe.setAdapter(homeAdapter);
 
