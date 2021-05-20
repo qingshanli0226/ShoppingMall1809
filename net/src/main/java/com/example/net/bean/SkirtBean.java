@@ -1,5 +1,6 @@
 package com.example.net.bean;
 
+
 import java.util.List;
 
 public class SkirtBean {

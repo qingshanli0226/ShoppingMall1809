@@ -9,9 +9,11 @@ import com.example.net.bean.JacketBean;
 import com.example.net.bean.OvercoatBean;
 import com.example.net.bean.PantsBean;
 import com.example.net.bean.ProductsBean;
+import com.example.net.bean.SkirtBean;
 import com.example.net.bean.StationeryBean;
 
 public interface IClassView {
+    void onSkirtData(SkirtBean skirtBean);
     void onJacketData(JacketBean jacketBean);
     void onPantsBean(PantsBean pantsBean);
     void onOvercoatBean(OvercoatBean overcoatBean);
