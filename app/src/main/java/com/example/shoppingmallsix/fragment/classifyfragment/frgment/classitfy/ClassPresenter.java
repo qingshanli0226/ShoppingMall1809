@@ -18,6 +18,8 @@ import com.example.net.bean.StationeryBean;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ClassPresenter extends BasePresenter<IClassView> {
@@ -30,6 +32,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getSkirtData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<SkirtBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -45,7 +60,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -59,6 +76,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getJacketData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<JacketBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -74,7 +104,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -88,6 +120,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getPantsData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<PantsBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -103,7 +148,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -117,6 +164,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getOvercoatData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<OvercoatBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -132,7 +192,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -146,6 +208,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getAccrssoryData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<AccrssoryBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -161,7 +236,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -175,6 +252,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getBagData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<BagBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -190,7 +280,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -204,6 +296,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getDressData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<DressBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -219,7 +324,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -233,6 +340,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getProductData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<ProductsBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -248,7 +368,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -262,6 +384,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getStationeryData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<StationeryBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -277,7 +412,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -291,6 +428,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getDigitData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<DigitBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -306,7 +456,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
@@ -320,6 +472,19 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .getGameData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        iView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        iView.hideLoading();
+                    }
+                })
                 .subscribe(new Observer<GameBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -335,7 +500,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
+                        if (iView !=null){
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override

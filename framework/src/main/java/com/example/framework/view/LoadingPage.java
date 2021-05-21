@@ -75,9 +75,9 @@ public abstract class LoadingPage extends FrameLayout {
         loadingView.setVisibility(VISIBLE);
     }
 
-    public void showError(String errorInfo) {
+    public void showError(String showInfo) {
         showErorView();
-        errorTv.setText(errorInfo);
+        errorTv.setText(showInfo);
     }
 
 }

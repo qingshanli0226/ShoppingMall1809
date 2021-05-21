@@ -23,6 +23,6 @@
             android:id="@+id/nameTv"
             android:layout_below="@id/channelImage"
             android:text="12365456987"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorBlack"/>
 
 </LinearLayout>

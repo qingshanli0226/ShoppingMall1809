@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         edtname = (EditText) mBaseView.findViewById(R.id.edtname);
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
-        homeAdapter= new HomeAdapter(list);
+        homeAdapter= new HomeAdapter(list,getActivity());
 
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -76,24 +76,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         list.add(result.getBanner_info());
         list.add(result.getChannel_info());
         list.add( result.getAct_info());
+        list.add(result.getSeckill_info().getList());
+        list.add(result.getRecommend_info());
+        list.add(result.getHot_info());
 
-        Toast.makeText(getContext(), ""+homeBean.getResult().getAct_info(), Toast.LENGTH_SHORT).show();
-
+//        Toast.makeText(getContext(), ""+homeBean.getResult().getAct_info(), Toast.LENGTH_SHORT).show();
+        loadingPage.showSuccessView();
         homeAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showLoading() {
-
+        loadingPage.showTransparentLoadingView();
     }
 
     @Override
     public void hideLoading() {
-
     }
 
     @Override
     public void showToast(String msg) {
-
+        loadingPage.showError(msg);
     }
 }

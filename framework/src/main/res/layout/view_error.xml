@@ -3,9 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/save"
+        android:layout_centerInParent="true"
+        android:id="@+id/save"
+        ></ImageView>
+
     <TextView
         android:id="@+id/errorTv"
         style="@style/bigTextStyle"
+        android:layout_below="@+id/save"
+        android:text="连接超时"
         android:textColor="@android:color/holo_red_dark"
         android:layout_centerInParent="true"/>
 

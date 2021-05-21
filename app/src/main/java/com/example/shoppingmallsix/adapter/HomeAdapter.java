@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
@@ -32,9 +34,12 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
     private final int ACT_TYPE = 2;
     private final int HOT_TYPE = 3;
     private final int RECOMMEND_TYPE = 4;
+    private final int HOTT_TYPE = 5;
+    private Context context;
 
-    public HomeAdapter(List<Object> list){
+    public HomeAdapter(List<Object> list,Context context){
         setDataList(list);
+        this.context = context;
     }
 
     @Override
@@ -52,6 +57,15 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
             case ACT_TYPE:
                 layoutId = R.layout.home_viewpage;
+                break;
+            case HOT_TYPE:
+                layoutId = R.layout.home_seckill;
+                break;
+            case RECOMMEND_TYPE:
+                layoutId = R.layout.home_recommend1;
+                break;
+            case HOTT_TYPE:
+                layoutId = R.layout.home_hot;
                 break;
         }
 
@@ -125,6 +139,33 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
 
                 break;
+            case 3:
+                List<HomeBean.ResultBean.SeckillInfoBean.ListBean> seckillInfoBeans = (List<HomeBean.ResultBean.SeckillInfoBean.ListBean>) itemData;
+                RecyclerView seckillRecyclerView = holder.getView(R.id.fourRv);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+                linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+                seckillRecyclerView.setLayoutManager(linearLayoutManager);
+                SeckillAdapter seckillAdapter = new SeckillAdapter();
+                seckillRecyclerView.setAdapter(seckillAdapter);
+                seckillAdapter.dataList.addAll(seckillInfoBeans);
+                break;
+            case 4:
+                List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
+                RecyclerView recommendRecyclerView = holder.getView(R.id.recommendRv);
+                recommendRecyclerView.setLayoutManager(new GridLayoutManager(context,3));
+                RecommendAdapter recommendAdapter = new RecommendAdapter();
+                recommendRecyclerView.setAdapter(recommendAdapter);
+                recommendAdapter.dataList.addAll(recommendInfoBeans);
+                break;
+            case 5:
+                List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = (List<HomeBean.ResultBean.HotInfoBean>) itemData;
+                RecyclerView hotRecyclerView = holder.getView(R.id.hotRv);
+                hotRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+                HotAdapter hotAdapter = new HotAdapter();
+                hotRecyclerView.setAdapter(hotAdapter);
+                hotAdapter.dataList.addAll(hotInfoBeans);
+                break;
         }
     }
 
@@ -137,13 +178,21 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
             case 0:
                 type = BANNER_TYPE;
                 break;
-
             case 1:
                 type = CHANNEL_TYPE;
                 break;
 
             case 2:
                 type = ACT_TYPE;
+                break;
+            case 3:
+                type = HOT_TYPE;
+                break;
+            case 4:
+                type = RECOMMEND_TYPE;
+                break;
+            case 5:
+                type = HOTT_TYPE;
                 break;
         }
 

@@ -99,6 +99,7 @@ public class WelcomeActivity extends BaseActivity {
                         coundDownTv.setText(countDown + getString(R.string.miao));
                         advertistFinsh = true;
                         ARouter.getInstance().build("/main/MainActivity").navigation();
+                        finish();
                     }
                     break;
             }

@@ -1,17 +1,22 @@
 package com.example.shoppingmallsix.fragment.classifyfragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.ClassFragment;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.lab.LabelFragment;
+import com.example.user.login.LoginActivity;
 
 import static com.example.shoppingmallsix.R.drawable.select_left;
 import static com.example.shoppingmallsix.R.drawable.select_left_show;
@@ -66,8 +71,18 @@ public class ClassifyFragment extends BaseFragment {
         });
     }
 
+
+
     @Override
     protected void initData() {
+        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
+        if (loginBean != null) {
+
+        } else {
+            Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -77,11 +92,13 @@ public class ClassifyFragment extends BaseFragment {
         radioGroup = mBaseView.findViewById(R.id.radioGroup);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         inits();
+
     }
+
+
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_classify;
     }
-
 }

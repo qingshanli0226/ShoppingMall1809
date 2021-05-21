@@ -153,9 +153,11 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
 
     @Override
     public void onSkirtData(SkirtBean skirtBean) {
+
         objectList.clear();
         List<SkirtBean.ResultBean> skirtBeanResult = skirtBean.getResult();
         objectList.addAll(skirtBeanResult);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.SKIRT_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -166,6 +168,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<JacketBean.ResultBean> result = jacketBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.JACKET_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -177,6 +180,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<PantsBean.ResultBean> result = pantsBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.PANTS_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -187,6 +191,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<OvercoatBean.ResultBean> result = overcoatBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.OVERCOAT_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -197,6 +202,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<AccrssoryBean.ResultBean> result = accrssoryBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.ACCRSSORY_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -207,6 +213,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<BagBean.ResultBean> result = bagBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.BAG_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -217,6 +224,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<DressBean.ResultBean> result = dressBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.DRESS_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -227,6 +235,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<ProductsBean.ResultBean> result = productsBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.PRODUCTS_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -237,6 +246,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<StationeryBean.ResultBean> result = stationeryBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.STATIONERY_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -247,6 +257,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<DigitBean.ResultBean> result = digitBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.DIGIT_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
@@ -257,10 +268,24 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         objectList.clear();
         List<GameBean.ResultBean> result = gameBean.getResult();
         objectList.addAll(result);
+        loadingPage.showSuccessView();
         //设置传串的内容
         Types = ClassRightAdapter.GAME_TYPE;
         resultBeanClassRightAdapter.setUpdateData(objectList, Types, getActivity());
     }
 
+    @Override
+    public void showLoading() {
+        loadingPage.showTransparentLoadingView();
+    }
 
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        loadingPage.showError(msg);
+    }
 }

@@ -56,8 +56,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (BuildConfig.DEBUG) Log.d("HomePresenter", e.getMessage());
-
+                        if (iView != null) {
+                            iView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override
