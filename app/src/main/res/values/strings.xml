@@ -53,6 +53,8 @@
     <string name="DIGIT_URL">数码周边</string>
     <string name="GAME_URL">游戏专区</string>
     <string name="shopchar">购物车</string>
+    <string name="hotRecommed">热卖推荐</string>
+    <string name="commonSort">常用分类</string>
 
 
 </resources>
