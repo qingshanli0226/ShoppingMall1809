@@ -1,5 +1,8 @@
 package com.shoppingmall.main.sort.fragment;
 
+import android.util.SparseArray;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,7 +60,8 @@ public class ClassificationFragment extends BaseFragment {
         classificationAdapter.setRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                classificationAdapter.setPosition(position);
+                classificationAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -66,4 +70,5 @@ public class ClassificationFragment extends BaseFragment {
             }
         });
     }
+
 }
