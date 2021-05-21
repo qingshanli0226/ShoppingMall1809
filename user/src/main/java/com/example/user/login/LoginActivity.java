@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.Constants;
+import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.LoginManager;
@@ -139,6 +140,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         loadPage.showSuccessLayout();
         LogUtils.json(loginBean);
         if(loginBean.getCode().equals("200")){
+            SpUtil.putString(this,loginBean.getResult().getToken());
+            LogUtils.json(loginBean.getResult().getToken()+"Login");
             Toast.makeText(this, ""+loginBean.getMessage(), Toast.LENGTH_SHORT).show();
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
             LoginManager.getInstance().setLoginstate(true);

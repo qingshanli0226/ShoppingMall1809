@@ -84,7 +84,7 @@ public class Constants {
     public static final String PATH_REGISTER = "/app/RegisterActivity";
 
 
-
+    public static final String SP_TOKEN = "token";
     //判断home页面的布局
     public static final int HOME_BANNER = 0;
     public static final int HOME_CHANNEL = 1;
