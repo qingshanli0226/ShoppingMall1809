@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
 
+import com.fiannce.bawei.framework.R;
 import com.fiannce.bawei.net.RetrofitCreator;
 import com.jakewharton.disklrucache.DiskLruCache;
 
@@ -18,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,6 +34,7 @@ public class ShopmallGlide {
     //使用该数据结构在内存中缓存图片。该数据结构的特点：1，初始化时可以指定它占用内存最大值，当该数据结构存储的数据超过最大值时，该数据结构将会
     // 删除最早存储的图片，然后再存储新的图片。
     private LruCache<String,Bitmap> memCache;
+    /*private HashMap<String,Bitmap> memCache = new HashMap<>();*/
     private DiskLruCache diskLruCache;//在磁盘中存储图片的数据结构，它的逻辑和LruCache类似
     private File cacheFileDir;//磁盘存储图片时，diskLruCache使用的目录
 
@@ -66,7 +69,7 @@ public class ShopmallGlide {
         if (isInited) {
             return;
         }
-        memCache = new LruCache<String,Bitmap>(((int)Runtime.getRuntime().maxMemory())/8) {
+        memCache = new LruCache<String,Bitmap>(((int)Runtime.getRuntime().maxMemory())/30002) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
                 return value.getByteCount();
@@ -78,7 +81,7 @@ public class ShopmallGlide {
             cacheFileDir.mkdir();
         }
         try {
-            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1024*1024*1024);
+            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1*124*1024);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -214,6 +217,7 @@ public class ShopmallGlide {
         });
     }
 
+    //对bitmap二次采样
     public Bitmap sampleBitmap(ImageView imageView, Bitmap originalBitmap) {
         int originalWidth = originalBitmap.getWidth();
         int originalHeight = originalBitmap.getHeight();
@@ -295,6 +299,8 @@ public class ShopmallGlide {
 
         public void into(final ImageView imageView) {
             this.imageView = imageView;
+            imageView.setTag(picUrl);//让imageView去和要下载的地址进行绑定.
+            imageView.setImageResource(R.mipmap.ic_launcher);
             String key = ShopmallGlide.getInstance().generateCacheKey(picUrl);
             //先从内存中获取Bitmap
             Bitmap bitmap = null;
@@ -310,7 +316,11 @@ public class ShopmallGlide {
                 public void onBitmap(String url,Bitmap bitmap) {
                     if (bitmap!=null) {
                         Log.d("LQS", "本地中命中 效率中间。。。。");
-                        imageView.setImageBitmap(bitmap);
+                        if (imageView.getTag().equals(picUrl)) {//只有和imageVIew绑定的图片才能显示出来
+                            imageView.setImageBitmap(bitmap);
+                        } else {
+                            Log.d("LQS", "因为没有绑定，不显示。。。。");
+                        }
                         return;
                     }
                     //如果从本地没有获取到bitmap,只能从网络获取
@@ -319,7 +329,11 @@ public class ShopmallGlide {
                         public void onBitmap(String url, Bitmap bitmap) {
                             if (bitmap!=null) {
                                 Log.d("LQS", "服务端命中 效率最低。。。。");
-                                imageView.setImageBitmap(bitmap);
+                                if (imageView.getTag().equals(picUrl)) {
+                                    imageView.setImageBitmap(bitmap);
+                                } else {
+                                    Log.d("LQS", "因为没有绑定，不显示。。。。");
+                                }
                             }
                         }
                     },imageView);

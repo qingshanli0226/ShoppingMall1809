@@ -2,6 +2,7 @@ package com.fiannce.bawei.net;
 
 
 
+import com.fiannce.bawei.net.mode.FocusBean;
 import com.fiannce.bawei.net.mode.HomeBean;
 import com.fiannce.bawei.net.mode.VersionBean;
 
@@ -34,5 +35,8 @@ public interface FiannceApiService {
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
+
+    @GET("findFocusVideo")
+    Observable<FocusBean> findFocus();
 
 }
