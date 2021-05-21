@@ -9,8 +9,12 @@
         android:targetSdkVersion="30" />
 
     <application>
+<<<<<<< HEAD
         <activity android:name="com.example.user.login.LoginActivity" />
         <activity android:name="com.example.user.register.RegisterActivity" />
+=======
+        <activity android:name="com.example.user.UserActivity" />
+>>>>>>> table
     </application>
 
 </manifest>
