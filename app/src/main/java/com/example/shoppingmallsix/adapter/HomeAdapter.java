@@ -2,6 +2,7 @@ package com.example.shoppingmallsix.adapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
@@ -20,6 +22,7 @@ import com.example.shoppingmallsix.R;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends BaseRvAdapter<Object> {
@@ -48,7 +51,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 break;
 
             case ACT_TYPE:
-                layoutId = R.layout.home_act;
+                layoutId = R.layout.home_viewpage;
                 break;
         }
 
@@ -103,6 +106,23 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 break;
 
             case 2:
+
+                List<HomeBean.ResultBean.ActInfoBean> actInfoBeans = (List<HomeBean.ResultBean.ActInfoBean>) itemData;
+                ViewPager vp = holder.getView(R.id.vp);
+
+                ArrayList<ImageView> imageViews = new ArrayList<>();
+
+                for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
+                    ImageView imageView = new ImageView(holder.itemView.getContext());
+                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+actInfoBean.getUrl())
+                            .error(R.drawable.animation_loading)
+                            .into(imageView);
+                    imageViews.add(imageView);
+                }
+
+                ActAdapter actAdapter = new ActAdapter(imageViews);
+                vp.setAdapter(actAdapter);
+
 
                 break;
         }
