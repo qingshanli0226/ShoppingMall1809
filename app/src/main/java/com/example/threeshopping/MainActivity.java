@@ -4,9 +4,11 @@ package com.example.threeshopping;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -136,7 +138,6 @@ public class MainActivity extends BaseActivity {
                             if (!loginstate){
                                 CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
                             }else {
-
                             }
                         }else {
                             CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
@@ -145,9 +146,10 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
-
-
     }
+
+
+
 
     //显示那个fargment
     private void showFragment(int position) {

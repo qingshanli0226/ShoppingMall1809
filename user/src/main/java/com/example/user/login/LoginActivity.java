@@ -2,6 +2,7 @@ package com.example.user.login;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -155,7 +156,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 
     @Override
     public void showLoading() {
-        loadPage.showTransparentLoadLayout();
+
     }
 
     @Override
@@ -163,6 +164,21 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            Boolean loginstate = LoginManager.getInstance().getLoginstate();
+            if (loginstate!=null){
+                if (!loginstate){
+                    CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+                }else {
+                }
+            }else {
+                CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     @Override
     public void showError(String error) {
         Toast.makeText(this, ""+error, Toast.LENGTH_SHORT).show();

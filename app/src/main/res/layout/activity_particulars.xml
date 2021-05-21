@@ -26,27 +26,85 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         >
-        <ImageView
-            android:id="@+id/pariculars_img"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dm_dp_300"
-            ></ImageView>
-        <TextView
-            android:id="@+id/pariculars_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="预售截至10月15日，预售期为限量礼盒版，包括特质木盒x1、画集x1、邮票x1、书签x1、贴纸x1、信封x1、礼盒特"
-            ></TextView>
-        <TextView
-            android:id="@+id/pariculars_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            ></TextView>
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/pariculars_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_300"
+                ></ImageView>
+            <TextView
+                android:id="@+id/pariculars_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="预售截至10月15日，预售期为限量礼盒版，包括特质木盒x1、画集x1、邮票x1、书签x1、贴纸x1、信封x1、礼盒特"
+                ></TextView>
+            <TextView
+                android:id="@+id/pariculars_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                ></TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_1"
+                android:background="@color/brodergray"
+                ></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dm_dp_30"
+                android:text="由尚硅谷发货"
+                android:gravity="center"
+                ></TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_10"
+                android:background="@color/brodergray"
+                ></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dm_dp_30"
+                android:text="请选择款式"
+                android:gravity="center"
+                ></TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_10"
+                android:background="@color/brodergray"
+                ></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dm_dp_30"
+                android:text="提示:普通商品享有质量问题7天退货,签收后3个工作日内可换货。其他特殊商品(如手办)的售后以页面说明为准"
+                ></TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_10"
+                android:background="@color/brodergray"
+                ></View>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_30"
+                android:text="图文详情"
+                android:gravity="center"
+                ></TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_1"
+                android:background="@color/red"
+                ></View>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_500"
+                ></ImageView>
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -63,13 +121,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/good_uncollected"
+                android:src="@drawable/icon_callserver_unpressed"
                 ></ImageView>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/icon_callserver_unpressed"
+                android:src="@drawable/good_uncollected"
                 ></ImageView>
             <ImageView
                 android:id="@+id/shopcar"

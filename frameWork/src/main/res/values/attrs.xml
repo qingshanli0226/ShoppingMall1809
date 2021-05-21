@@ -9,7 +9,9 @@
 
     <declare-styleable name="ToolBar">
         <attr name="app_text" format="string"/>
+        <attr name="app_right_text" format="string"/>
         <attr name="app_text_color" format="color"/>
+        <attr name="app_right_text_color" format="color"/>
         <attr name="app_back_color_toob" format="color"/>
         <attr name="app_left_src" format="reference"/>
         <attr name="app_right_src" format="reference"/>

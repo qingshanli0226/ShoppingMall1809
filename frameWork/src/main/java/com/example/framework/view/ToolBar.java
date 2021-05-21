@@ -14,7 +14,11 @@ import com.example.framework.R;
 
 public class ToolBar extends RelativeLayout {
     private String text;
+    private String textright;
     private int textColor = Color.RED, backColor = Color.GRAY;
+    private int textRightColor = Color.RED;
+
+
     private int leftSrc, rightSrc;
     private boolean leftIsshow, rightIsShow;
 
@@ -41,6 +45,7 @@ public class ToolBar extends RelativeLayout {
     private ImageView leftRe;
     private ImageView rightSet;
     private TextView centerTitle;
+    private TextView right_text;
     private RelativeLayout toolbarBack;
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -48,12 +53,15 @@ public class ToolBar extends RelativeLayout {
         leftRe = inflate.findViewById(R.id.left_re);
         rightSet = inflate.findViewById(R.id.right_set);
         centerTitle = inflate.findViewById(R.id.center_title);
+        right_text = inflate.findViewById(R.id.right_text);
         toolbarBack = inflate.findViewById(R.id.toolbar_back);
 
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ToolBar);
             text = (String) typedArray.getText(R.styleable.ToolBar_app_text);
+            textright = (String) typedArray.getText(R.styleable.ToolBar_app_right_text);
             textColor = typedArray.getColor(R.styleable.ToolBar_app_text_color, textColor);
+            textRightColor = typedArray.getColor(R.styleable.ToolBar_app_right_text_color, textRightColor);
             backColor = typedArray.getColor(R.styleable.ToolBar_app_back_color_toob, backColor);
             leftSrc = typedArray.getResourceId(R.styleable.ToolBar_app_left_src, 0);
             rightSrc = typedArray.getResourceId(R.styleable.ToolBar_app_right_src, 0);
@@ -65,6 +73,8 @@ public class ToolBar extends RelativeLayout {
         centerTitle.setText(text);
         centerTitle.setTextColor(textColor);
         toolbarBack.setBackgroundColor(backColor);
+        right_text.setText(textright);
+        right_text.setTextColor(textRightColor);
 
         if (leftSrc != 0 && leftIsshow) {
             leftRe.setImageResource(leftSrc);
@@ -93,6 +103,12 @@ public class ToolBar extends RelativeLayout {
     public void setText(String text) {
         if (centerTitle != null) {
             centerTitle.setText(text);
+        }
+    }
+
+    public void setRightText(String text) {
+        if (right_text != null) {
+            right_text.setText(text);
         }
     }
 

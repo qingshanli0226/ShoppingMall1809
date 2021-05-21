@@ -25,4 +25,12 @@
         android:layout_marginRight="@dimen/dm_dp_10"
         android:layout_width="@dimen/dm_dp_40"
         android:layout_height="@dimen/dm_dp_40"/>
+    <TextView
+        android:id="@+id/right_text"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dm_dp_10"
+        android:layout_width="@dimen/dm_dp_40"
+        android:layout_height="@dimen/dm_dp_40"/>
+
 </RelativeLayout>
