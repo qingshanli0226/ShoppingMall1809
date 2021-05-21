@@ -17,7 +17,7 @@ import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
-import com.example.shoppingmall1809.particulars.ParticularsActivity;
+import com.example.shoppingmall1809.main.particulars.ParticularsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -118,7 +118,20 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 SeckilAdapter seckilAdapter = new SeckilAdapter(list);
                 rv.setAdapter(seckilAdapter);
 
+                seckilAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtra("code",3);
+                        intent.putExtra("seckill_info",list.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
 
+                    @Override
+                    public void onItemLongClick(int position) {
+
+                    }
+                });
 
                 String end = seckill_info.getEnd_time();
                 String start = seckill_info.getStart_time();

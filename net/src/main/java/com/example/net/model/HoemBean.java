@@ -117,7 +117,7 @@ public class HoemBean {
         private List<RecommendInfoBean> recommend_info;
 
 
-        public static class SeckillInfoBean {
+        public static class SeckillInfoBean implements Serializable {
 
             public String getEnd_time() {
                 return end_time;
@@ -154,7 +154,7 @@ public class HoemBean {
             private List<ListBean> list;
 
 
-            public static class ListBean {
+            public static class ListBean implements Serializable {
                 public String getCover_price() {
                     return cover_price;
                 }
