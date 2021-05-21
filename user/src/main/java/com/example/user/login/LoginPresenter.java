@@ -17,7 +17,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         attView(iLoginView);
     }
     public void onLogin(String name,String password){
-
         RetrofitManager.getApi()
                 .getLogin(name, password)
                 .subscribeOn(Schedulers.io())

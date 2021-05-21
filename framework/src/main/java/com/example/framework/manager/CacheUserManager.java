@@ -9,31 +9,40 @@ public class CacheUserManager {
     public static CacheUserManager cacheUserManager;
 
     public synchronized static CacheUserManager getInstance() {
-        if (cacheUserManager==null){
-            cacheUserManager=new CacheUserManager();
+        if (cacheUserManager == null) {
+            cacheUserManager = new CacheUserManager();
         }
         return cacheUserManager;
     }
-    private LoginBean loginBean;
-    private List<IloginChange> list=new ArrayList<>();
-    public void registerLogin(IloginChange iloginChange){
-        list.add(iloginChange);
-    }
-    public void unregisterLogin(IloginChange iloginChange){
-        list.remove(iloginChange);
-    }
 
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
+    private boolean isLogin;//登陆状态
+    private List<IloginChange> list = new ArrayList<>();
 
-    public void setLoginBean(LoginBean loginBean){
-        this.loginBean=loginBean;
-        for (IloginChange iloginChange:list) {
-            iloginChange.onLoginChange(loginBean);
+    public void registerLogin(IloginChange iloginChange) {
+        if (!list.contains(iloginChange)){
+            list.add(iloginChange);
         }
     }
-    public interface IloginChange{
-        void onLoginChange(LoginBean loginBean);
+
+    public void unregisterLogin(IloginChange iloginChange) {
+        if (list.contains(iloginChange)){
+            list.remove(iloginChange);
+        }
+    }
+
+    //获取当前登录状态
+    public boolean getLoginBean() {
+        return isLogin;
+    }
+
+    public void setLoginBean(boolean loginBean) {
+        this.isLogin = loginBean;
+        for (IloginChange iloginChange : list) {
+            iloginChange.onLoginChange(isLogin);
+        }
+    }
+
+    public interface IloginChange {
+        void onLoginChange(boolean loginBean);
     }
 }

@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.framework.manager.CacheUserManager;
+
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment,CacheUserManager.IloginChange {
     protected P rootPresenter;
     protected View rootView;
 
@@ -29,6 +31,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         initView();
         initPresenter();
         initData();
+        CacheUserManager.getInstance().registerLogin(this);
     }
 
     @Override
@@ -55,6 +58,12 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void onDestroy() {
         super.onDestroy();
         destroy();
+        CacheUserManager.getInstance().unregisterLogin(this);
+    }
+
+    @Override
+    public void onLoginChange(boolean loginBean) {
+
     }
 
     public void destroy() {

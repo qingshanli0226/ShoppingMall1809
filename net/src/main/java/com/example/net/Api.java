@@ -19,5 +19,6 @@ public interface Api {
     Observable<RegisterBean> getRegister(@Field("name") String name, @Field("password") String password);
 
     @POST("login")
+    @FormUrlEncoded
     Observable<LoginBean> getLogin(@Field("name") String name, @Field("password") String password);
 }

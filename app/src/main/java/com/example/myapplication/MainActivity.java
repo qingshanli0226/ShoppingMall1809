@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.View;
+import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CacheUserManager;
 import com.example.myapplication.classify.ClassifyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
@@ -22,15 +25,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.framework.BaseActivity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 
 public class MainActivity extends BaseActivity {
 
     private com.flyco.tablayout.CommonTabLayout mainComm;
-    private android.widget.FrameLayout mainFra;
     private ArrayList<CustomTabEntity> cusList=new ArrayList<>();
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
-    private android.widget.Button btn;
+    private boolean isLogin;//判断是否登陆
 
     @Override
     public int bandLayout() {
@@ -40,15 +43,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
-        mainFra = (FrameLayout) findViewById(R.id.mainFra);
-        btn = findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -79,5 +73,27 @@ public class MainActivity extends BaseActivity {
         mainComm.setTabData(cusList,this,R.id.mainFra,fragments);
         mainComm.setTextSelectColor(Color.RED);
         mainComm.setTextUnselectColor(Color.BLACK);
+
+        //点击切换fragment的时候  判断是否登陆
+        mainComm.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                if (position!=0){
+                    //获取登陆状态
+                    isLogin= CacheUserManager.getInstance().getLoginBean();
+                    if (!isLogin){
+                        //没有登陆
+                        Bundle bundle = new Bundle();
+                        bundle.putString("falg","2");
+                        CaCheArote.getInstance().getUserInterface().openLoginActivity(MainActivity.this,bundle);
+                    }
+                }
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
     }
 }
