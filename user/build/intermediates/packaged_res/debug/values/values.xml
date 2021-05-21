@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="ashen">#F6F6F6</color>
+    <color name="black">#FF000000</color>
+    <color name="colorA">#27B8EE</color>
+    <color name="colorB">#EBEBEB</color>
+    <color name="darkAshen">#E4E4E4</color>
+    <color name="dark_blue">#5A6E9E</color>
+    <color name="dark_red">#DC143D</color>
+    <color name="darktwo_blue">#142732</color>
+    <color name="french_grey">#A7A7A7</color>
+    <color name="gray">#999999</color>
+    <color name="gray_french">#3C000000</color>
+    <color name="pale_black">#DD000000</color>
+    <color name="pale_blue">#3883D1</color>
+    <color name="pale_red">#E96B84</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="red">#ff0000</color>
+    <color name="sky_blue">#27B8EE</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
+    <dimen name="dp_110">110dp</dimen>
+    <dimen name="dp_120">120dp</dimen>
+    <dimen name="dp_130">130dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_140">140dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_150">150dp</dimen>
+    <dimen name="dp_17">17dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_300">300dp</dimen>
+    <dimen name="dp_33">33dp</dimen>
+    <dimen name="dp_35">35dp</dimen>
+    <dimen name="dp_380">380dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_45">45dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_52">52dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_61">61dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_85">85dp</dimen>
+    <dimen name="dp_90">90dp</dimen>
+    <dimen name="dp_95">95dp</dimen>
+    <dimen name="text_dp_16">16dp</dimen>
+    <item name="BaseQuickAdapter_databinding_support" type="id"/>
+    <item name="BaseQuickAdapter_dragging_support" type="id"/>
+    <item name="BaseQuickAdapter_swiping_support" type="id"/>
+    <item name="BaseQuickAdapter_viewholder_support" type="id"/>
+    <string name="OtherLoginMethods">其它登录方式</string>
+    <string name="accountNumber">账号</string>
+    <string name="backLogin">退出登录</string>
+    <string name="backLoginyes">退出登录成功</string>
+    <string name="cellPhoneNumber">手机号:</string>
+    <string name="changeThePicture">更改头像</string>
+    <string name="confirmPassword">确认密码</string>
+    <string name="consent">点击登录，表示同意《尚硅谷用户协议》</string>
+    <string name="consent2">点击注册，表示同意《尚硅谷用户协议》</string>
+    <string name="enterYourPIN">请输入密码</string>
+    <string name="forgetThePassword">忘记密码?</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">登录</string>
+    <string name="password">密码:</string>
+    <string name="please">请再次输入密码</string>
+    <string name="pleaseEnterAUserName">请输入用户名</string>
+    <string name="pleaseEnterYourCellPhoneNumber">请输入手机号</string>
+    <string name="register">注册</string>
+    <string name="registerAccountNumber">注册账号</string>
+    <string name="theTwoPasswordsDontMatch">两次密码不一致</string>
+    <string name="theUsernameAndPasswordCannotBeEmpty">用户名密码不能为空</string>
+    <string name="userLogin">用户登录</string>
+    <string name="userRegistration">用户注册</string>
+    <string name="usermassage">用户信息</string>
+    <string name="username">用户名:</string>
+    <style name="Theme.1809Fiannce" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+    </style>
+</resources>

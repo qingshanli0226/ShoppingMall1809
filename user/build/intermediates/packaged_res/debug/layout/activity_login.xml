@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginActivity"
+    android:background="@drawable/new_login_background"
+    android:orientation="vertical">
+
+    <com.example.framework.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        app:wp_CenterTitle="@string/login"
+        app:wp_leftImId="@drawable/back"
+        app:wp_istoolbarLeftImg="true"
+        android:id="@+id/toolbar"></com.example.framework.view.ToolBar>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new_user_login_icon"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"></ImageView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/accountNumber"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_centerVertical="true"></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:hint="@string/pleaseEnterAUserName"
+            android:id="@+id/act_log_user"
+            android:background="@drawable/edit_background"></EditText>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/french_grey"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_centerVertical="true"></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:hint="@string/enterYourPIN"
+            android:inputType="textPassword"
+            android:id="@+id/act_log_password"
+            android:background="@drawable/edit_background_while"></EditText>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/new_password_drawable_invisible"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/loginConceal"
+            android:layout_marginRight="@dimen/dp_10"></ImageView>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/french_grey"></View>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_20"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/button_false"
+        android:id="@+id/act_log_but"
+        android:layout_margin="@dimen/dp_10"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consent"
+        android:textColor="@color/black"
+        android:layout_gravity="center"></TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:id="@+id/toRegister"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="@string/registerAccountNumber"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/forgetThePassword"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/forgetThePassword"></TextView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="@string/OtherLoginMethods"
+        android:textColor="@color/black"
+        android:layout_gravity="center"></TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
+        android:background="@drawable/bg1"
+        android:layout_height="@dimen/dp_50">
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:id="@+id/weibo"
+            android:src="@drawable/icon_weibo"></ImageView>
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerInParent="true"
+            android:id="@+id/share_qq"
+            android:src="@drawable/icon_share_qq"></ImageView>
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/weixin"
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@drawable/icon_weixin"></ImageView>
+
+    </RelativeLayout>
+
+</LinearLayout>
