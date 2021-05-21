@@ -9,6 +9,7 @@ import com.example.net.model.ShoppingTrolleyBean;
 import com.example.net.model.SortBean;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -86,4 +87,8 @@ public interface ShopApiService {
     //标签
     @GET(Constants.TAG_URL)
     Observable<SortBean> getSortData();
+
+    @GET
+    @Streaming
+    Call<ResponseBody> downloadFile(@Body String url);
 }
