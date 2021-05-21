@@ -29,7 +29,6 @@ public class AutoService extends Service {
                     Toast.makeText(AutoService.this, ""+logBean.getMessage(), Toast.LENGTH_SHORT).show();
                     BusinessUserManager.getInstance().setIsLog(logBean);
                     SPUtility.putString(AutoService.this,logBean.getResult().getToken());
-                   // BusinessARouter.getInstance().getAppManager().OpenMainActivity(AutoService.this,null);
                 }else {
                     Toast.makeText(AutoService.this, ""+logBean.getMessage(), Toast.LENGTH_SHORT).show();
                 }
