@@ -1,8 +1,10 @@
 package com.example.net.bean;
 
+
+
 import java.util.List;
 
-public class JacketBean {
+public class JacketBean    {
 
     /**
      * code : 200
@@ -29,6 +31,7 @@ public class JacketBean {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
 
     public List<ResultBean> getResult() {
         return result;
@@ -96,7 +99,6 @@ public class JacketBean {
         public void setIs_deleted(String is_deleted) {
             this.is_deleted = is_deleted;
         }
-
         public List<ChildBean> getChild() {
             return child;
         }
@@ -169,7 +171,7 @@ public class JacketBean {
             }
         }
 
-        public static class HotProductListBean {
+        public static class HotProductListBean  {
             /**
              * product_id : 627
              * channel_id : 4

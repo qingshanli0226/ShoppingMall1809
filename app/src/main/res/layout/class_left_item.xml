@@ -4,10 +4,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:id="@+id/classify_item_linear"
     >
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center"
         android:id="@+id/classify_left_item_tv"
         />
     <View

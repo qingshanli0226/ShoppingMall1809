@@ -10,15 +10,15 @@ public class BasePresenter<V> {
     private List<Disposable> disposableList = new ArrayList<>();
     protected V iView;
 
-    public synchronized void add(Disposable disposable) {
+    protected synchronized void add(Disposable disposable) {
         disposableList.add(disposable);
     }
 
-    public void attachView(V iView) {
+    protected void attachView(V iView) {
         this.iView = iView;
     }
 
-    public void detachView() {
+    protected void detachView() {
         this.iView = null;
 
         for (Disposable disposable : disposableList) {

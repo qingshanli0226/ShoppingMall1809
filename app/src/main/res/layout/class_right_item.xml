@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.recycler.mScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                android:text="热卖推荐"
+                android:layout_margin="@dimen/dp_5"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/classify_right_item_rv_top"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/dp_5"
+                android:text="常用分类"
+                />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    android:id="@+id/classify_right_item_rv_button"
+                    />
+        </LinearLayout>
+
+    </com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.recycler.mScrollView>
+
+</LinearLayout>

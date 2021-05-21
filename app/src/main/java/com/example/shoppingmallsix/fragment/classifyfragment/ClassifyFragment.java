@@ -11,7 +11,7 @@ import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.ClassFragment;
-import com.example.shoppingmallsix.fragment.classifyfragment.frgment.LabelFragment;
+import com.example.shoppingmallsix.fragment.classifyfragment.frgment.lab.LabelFragment;
 
 import static com.example.shoppingmallsix.R.drawable.select_left;
 import static com.example.shoppingmallsix.R.drawable.select_left_show;
@@ -76,7 +76,6 @@ public class ClassifyFragment extends BaseFragment {
         buttonRight = mBaseView.findViewById(R.id.buttonRight);
         radioGroup = mBaseView.findViewById(R.id.radioGroup);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
-
         inits();
     }
 
