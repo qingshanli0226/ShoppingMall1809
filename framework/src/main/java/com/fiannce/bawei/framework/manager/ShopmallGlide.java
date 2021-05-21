@@ -34,7 +34,7 @@ public class ShopmallGlide {
     //使用该数据结构在内存中缓存图片。该数据结构的特点：1，初始化时可以指定它占用内存最大值，当该数据结构存储的数据超过最大值时，该数据结构将会
     // 删除最早存储的图片，然后再存储新的图片。
     private LruCache<String,Bitmap> memCache;
-    /*private HashMap<String,Bitmap> memCache = new HashMap<>();*/
+    //private HashMap<String,Bitmap> memCache = new HashMap<>();
     private DiskLruCache diskLruCache;//在磁盘中存储图片的数据结构，它的逻辑和LruCache类似
     private File cacheFileDir;//磁盘存储图片时，diskLruCache使用的目录
 
@@ -69,7 +69,8 @@ public class ShopmallGlide {
         if (isInited) {
             return;
         }
-        memCache = new LruCache<String,Bitmap>(((int)Runtime.getRuntime().maxMemory())/30002) {
+
+        memCache = new LruCache<String,Bitmap>(((int)Runtime.getRuntime().maxMemory())/8) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
                 return value.getByteCount();
@@ -81,7 +82,7 @@ public class ShopmallGlide {
             cacheFileDir.mkdir();
         }
         try {
-            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1*124*1024);
+            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1*1024*1024);
         } catch (IOException e) {
             e.printStackTrace();
         }
