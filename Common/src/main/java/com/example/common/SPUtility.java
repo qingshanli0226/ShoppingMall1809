@@ -15,7 +15,7 @@ public class SPUtility {
     }
     public static String getString(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", null);
+        String token = sharedPreferences.getString("token", "");
         return token;
     }
     public static void putString(Context context,String token){

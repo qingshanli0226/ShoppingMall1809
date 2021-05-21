@@ -6,6 +6,7 @@
 
     <application>
         <service
+
             android:name=".auto.AutoService"
             android:enabled="true"
             android:exported="true"></service>

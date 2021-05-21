@@ -1,5 +1,6 @@
 package com.example.electricityproject.classify.kind.type;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.base.BaseAdapter;
 import com.example.common.bean.KindAccessoryBean;
 import com.example.common.bean.KindBagBean;
 import com.example.common.bean.KindDigitBean;
@@ -20,6 +22,7 @@ import com.example.common.bean.KindPantsBean;
 import com.example.common.bean.KindSkirtBean;
 import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
+import com.example.electricityproject.DetailsActivity;
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.kind.adapter.KindAdapter;
 import com.example.electricityproject.classify.kind.adapter.KindBean;
@@ -182,6 +185,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         skirtChildAdapter.updateData(childBeanList);
         recommendRv.setAdapter(skirtHotAdapter);
         commonRv.setAdapter(skirtChildAdapter);
+
+        skirtHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price+":00");
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -195,6 +217,24 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         JacketHotAdapter jacketHotAdapter = new JacketHotAdapter();
         jacketHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(jacketHotAdapter);
+        jacketHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
 
     }
 
@@ -208,6 +248,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         PantHotAdapter pantHotAdapter = new PantHotAdapter();
         pantHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(pantHotAdapter);
+
+        pantHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -220,6 +279,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         OvercoatHotAdapter overcoatHotAdapter = new OvercoatHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
+
     }
 
     @Override
@@ -232,6 +310,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         AccessoryHotAdapter overcoatHotAdapter = new AccessoryHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -244,6 +341,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         BagHotAdapter overcoatHotAdapter = new BagHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -256,6 +372,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         DressHotAdapter overcoatHotAdapter = new DressHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -268,6 +403,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         HomePduHotAdapter overcoatHotAdapter = new HomePduHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -280,6 +434,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         StationeryHotAdapter overcoatHotAdapter = new StationeryHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -292,6 +465,25 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         DigitHotAdapter overcoatHotAdapter = new DigitHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -304,5 +496,24 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         GameHotAdapter overcoatHotAdapter = new GameHotAdapter();
         overcoatHotAdapter.updateData(hot_product_list);
         recommendRv.setAdapter(overcoatHotAdapter);
+
+        overcoatHotAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                String img = hot_product_list.get(position).getFigure();
+                String price = hot_product_list.get(position).getCover_price();
+                String name = hot_product_list.get(position).getName();
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("img",img);
+                intent.putExtra("name",name);
+                intent.putExtra("price",price);
+                getContext().startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 }

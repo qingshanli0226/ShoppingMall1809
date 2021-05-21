@@ -2,6 +2,7 @@ package com.example.user.auto;
 
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.LogBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
@@ -26,13 +27,14 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
                 .subscribe(new Observer<LogBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        add(d);
                     }
 
                     @Override
                     public void onNext(@NonNull LogBean logBean) {
                         Log.i("zx", "onNext: "+logBean.toString());
                         IView.onAutoData(logBean);
+                        LogUtils.json(logBean);
                     }
 
                     @Override

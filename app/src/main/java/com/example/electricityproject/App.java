@@ -20,10 +20,8 @@ public class App extends Application {
         UserModel.init();
         AppModel.init();
         MainModel.init();
-        if (SPUtility.getString(this)!=null) {
-            Log.i("zx", "onCreate: "+SPUtility.getString(this));
-            startService(new Intent(this, AutoService.class));
-        }
+
+
 
     }
 }

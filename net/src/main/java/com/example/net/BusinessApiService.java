@@ -1,7 +1,11 @@
 package com.example.net;
 
 
+import com.example.common.bean.AddOneProductBean;
+import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.ClassifyBean;
+import com.example.common.bean.ConfirmServerPayResultBean;
+import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.KindAccessoryBean;
 import com.example.common.bean.KindBagBean;
@@ -17,11 +21,15 @@ import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.RecommendBean;
 import com.example.common.bean.RegBean;
+import com.example.common.bean.RemoveOneProductBean;
+import com.example.common.bean.RequestProducts;
+import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateAddress;
 import com.example.common.bean.UpdateEmailBean;
 import com.example.common.bean.UpdateMoneyBean;
 import com.example.common.bean.UpdatePhoneBean;
 import com.example.common.bean.UpdatePointBean;
+import com.example.common.bean.UpdateProductNumBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -90,6 +98,8 @@ public interface BusinessApiService {
 
 
 
+
+
     //注册
     @FormUrlEncoded
     @POST("register")
@@ -124,7 +134,33 @@ public interface BusinessApiService {
     Observable<UpdateAddress> setUpdateAddress(@Body RequestBody requestBody);
 
 
+    //请求添加产品的接口
+    @POST("addOneProduct")
+    Observable<AddOneProductBean> setAddOneProduct(@Body RequestBody requestBody);
 
+    //获取服务端购物车产品信息的接口
+    @GET("getShortcartProducts")
+    Observable<ShortcartProductBean> getShortProductData();
+
+    //更新服务端购物车产品的数量的接口
+    @POST("updateProductNum")
+    Observable<UpdateProductNumBean> setUpdateProductNum(@Body RequestBody requestBody);
+
+    //检查服务端多个产品是否库存充足
+    @POST("checkInventory")
+    Observable<CheckInventoryBean> setCheckInventory(@Body RequestBody requestBody);
+
+    //请求服务端，是否支付成功
+    @POST("confirmServerPayResult")
+    Observable<ConfirmServerPayResultBean> setConfirmServerPayResult(@Body RequestBody requestBody);
+
+    //从服务端购物车删除一个产品的接口
+    @POST("removeOneProduct")
+    Observable<RemoveOneProductBean> setRemoveOneProduct(@Body RequestBody requestBody);
+
+    //查找待支付的订单
+    @GET("findForPay")
+    Observable<FindForPayBean> getFindForPayData();
 
 
 }

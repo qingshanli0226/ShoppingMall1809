@@ -22,6 +22,7 @@ class AccessoryChildAdapter extends BaseAdapter<KindAccessoryBean.ResultBean.Chi
         TextView view = baseViewHolder.getView(R.id.kind_name);
         view.setText(itemData.getName()+"");
         Glide.with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getPic()).into((ImageView) baseViewHolder.getView(R.id.kind_child_image));
+
     }
 
     @Override
