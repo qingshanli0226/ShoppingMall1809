@@ -77,6 +77,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         list.add(result.getChannel_info());
         list.add( result.getAct_info());
 
+        Toast.makeText(getContext(), ""+homeBean.getResult().getAct_info(), Toast.LENGTH_SHORT).show();
 
         homeAdapter.notifyDataSetChanged();
     }
