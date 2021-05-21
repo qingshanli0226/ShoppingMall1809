@@ -1,21 +1,19 @@
-package com.example.user.frag;
+package com.example.myapplication.classify;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
-    private List<Fragment> list;
-
-    public FragmentAdapter(@NonNull FragmentManager fm, List<Fragment> list) {
+public class FrAdapter extends FragmentPagerAdapter {
+    public FrAdapter(@NonNull FragmentManager fm, List<Fragment> list) {
         super(fm);
         this.list = list;
     }
 
+    private List<Fragment> list;
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -26,5 +24,4 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return list.size();
     }
-
 }
