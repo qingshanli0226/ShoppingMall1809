@@ -21,6 +21,10 @@ import com.shoppingmall.main.shopcar.ShopCarFragment;
 import com.shoppingmall.main.sort.SortFragment;
 import com.shoppingmall.net.bean.HomeBean;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity  {
@@ -40,6 +44,7 @@ public class MainActivity extends BaseActivity  {
     public void initView() {
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
+
     }
 
     @Override
@@ -51,7 +56,9 @@ public class MainActivity extends BaseActivity  {
     public void initData() {
         //拿到数据
         HomeBean homeBean = CacheManager.getInstance().getHomeBean();
-
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
         ArrayList<Fragment> list = new ArrayList<>();
         list.add(new HomeFragment());
         list.add(new SortFragment());
@@ -97,5 +104,20 @@ public class MainActivity extends BaseActivity  {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void sdxx(String msg){
+        if (msg.equals("111")){
+            mainVp.setCurrentItem(0);
+        }
     }
 }

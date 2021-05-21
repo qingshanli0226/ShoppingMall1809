@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-=======
 
->>>>>>> 030600a8c1fc1bd48c1f01844af0cae1a2287a4a
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_20">20dp</dimen>
