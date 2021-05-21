@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.common.SPUtility;
 import com.example.common.bean.LogBean;
@@ -87,9 +86,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     public void onLoginData(LogBean logBean) {
         if (logBean.getCode().equals("200")){
-            Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
             BusinessUserManager.getInstance().setIsLog(logBean);
-            Log.i("zx", "onLoginData: "+logBean.getResult().getToken());
+            Log.i("zx", "loginActivity: "+logBean.getResult().getToken());
             SPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             finish();
         }

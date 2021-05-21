@@ -76,14 +76,18 @@ public class ToolBar extends RelativeLayout {
         rightImg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                iToolbarListener.onRightImgClick();
+                if (iToolbarListener!=null) {
+                    iToolbarListener.onRightImgClick();
+                }
             }
         });
 
         leftImg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                iToolbarListener.onLeftClick();
+                if (iToolbarListener!=null) {
+                    iToolbarListener.onLeftClick();
+                }
             }
         });
 

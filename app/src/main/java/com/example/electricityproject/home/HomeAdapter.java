@@ -93,7 +93,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 channelAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
                     @Override
                     public void OnItemClick(int position) {
-                        Toast.makeText(baseViewHolder.itemView.getContext(), "aaa", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(baseViewHolder.itemView.getContext(), ""+channelInfoBeans.get(position).getChannel_name(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -128,6 +128,17 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         }
                     }
                 },0,1000);
+                actAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Toast.makeText(baseViewHolder.itemView.getContext(), ""+actInfoBeans.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
                 break;
             case 3:
                 HomeBean.ResultBean.SeckillInfoBean listBeans= (HomeBean.ResultBean.SeckillInfoBean) itemData;
@@ -145,7 +156,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",list.get(position).getFigure());
                         intent.putExtra("name",list.get(position).getName()+"");
-                        intent.putExtra("price",list.get(position).getCover_price()+":00");
+                        intent.putExtra("price",list.get(position).getCover_price());
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
@@ -169,7 +180,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("name",recommendInfoBeans.get(position).getName()+"");
-                        intent.putExtra("price",recommendInfoBeans.get(position).getCover_price()+":00");
+                        intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
@@ -178,7 +189,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
 
                     }
                 });
-
                 break;
             case 5:
                 List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans= (List<HomeBean.ResultBean.HotInfoBean>) itemData;
@@ -193,7 +203,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("name",hotInfoBeans.get(position).getName()+"");
-                        intent.putExtra("price",hotInfoBeans.get(position).getCover_price()+":00");
+                        intent.putExtra("price",hotInfoBeans.get(position).getCover_price());
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
