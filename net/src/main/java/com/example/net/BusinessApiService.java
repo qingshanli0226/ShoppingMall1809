@@ -21,8 +21,10 @@ import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.RecommendBean;
 import com.example.common.bean.RegBean;
+import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
 import com.example.common.bean.RequestProducts;
+import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateAddress;
 import com.example.common.bean.UpdateEmailBean;
@@ -161,6 +163,14 @@ public interface BusinessApiService {
     //查找待支付的订单
     @GET("findForPay")
     Observable<FindForPayBean> getFindForPayData();
+
+    //从服务端购物车删除一多产品的接口
+    @POST("removeManyProduct")
+    Observable<RemoveManyProductBean> setRemoveManyProduct(@Body RequestBody requestBody);
+
+    //全选服务端购物车产品或者全不选
+    @POST("selectAllProduct")
+    Observable<SelectAllProductBean> SelectAllProduct(@Body RequestBody requestBody);
 
 
 }

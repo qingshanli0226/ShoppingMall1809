@@ -20,6 +20,8 @@ class AppModel implements BusinessARouter.iAppManager{
     @Override
     public void OpenMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MainActivity.class);
+        String notify = bundle.getString("notify", "");
+        intent.putExtra("notifyss",notify);
 
         if (context instanceof Activity){
             context.startActivity(intent);

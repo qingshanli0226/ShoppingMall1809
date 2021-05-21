@@ -132,6 +132,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     @Override
                     public void OnItemClick(int position) {
                         Toast.makeText(baseViewHolder.itemView.getContext(), ""+actInfoBeans.get(position).getName(), Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -157,6 +158,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",list.get(position).getFigure());
                         intent.putExtra("name",list.get(position).getName()+"");
                         intent.putExtra("price",list.get(position).getCover_price());
+                        intent.putExtra("productId",list.get(position).getProduct_id());
+                        intent.putExtra("productPrice",list.get(position).getCover_price());
+                        intent.putExtra("buy","buy");
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
@@ -181,6 +185,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("name",recommendInfoBeans.get(position).getName()+"");
                         intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
+                        intent.putExtra("productId",recommendInfoBeans.get(position).getProduct_id());
+                        intent.putExtra("productPrice",recommendInfoBeans.get(position).getCover_price());
+                        intent.putExtra("new","new");
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
@@ -204,7 +211,12 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("name",hotInfoBeans.get(position).getName()+"");
                         intent.putExtra("price",hotInfoBeans.get(position).getCover_price());
+                        intent.putExtra("productId",hotInfoBeans.get(position).getProduct_id());
+                        intent.putExtra("productPrice",hotInfoBeans.get(position).getCover_price());
+                        intent.putExtra("position", position);
+                        intent.putExtra("more","more");
                         baseViewHolder.itemView.getContext().startActivity(intent);
+
                     }
 
                     @Override

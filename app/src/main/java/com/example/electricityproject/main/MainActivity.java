@@ -1,5 +1,6 @@
 package com.example.electricityproject.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private RadioGroup group;
     private RadioButton btnHome;
+    private RadioButton btnBuycar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+
 
         btnHome.setChecked(true);
 
@@ -124,6 +127,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        btnBuycar.setChecked(true);
+
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        fragmentTransaction = supportFragmentManager.beginTransaction();
+
+        fragmentTransaction.hide(homeFragment);
+        fragmentTransaction.hide(classifyFragment);
+        fragmentTransaction.hide(findFragment);
+        fragmentTransaction.show(shoppingFragment);
+        fragmentTransaction.hide(personFragment);
+
+
+        fragmentTransaction.commit();
+    }
 
     private void BeginTransaction() {
 
@@ -148,5 +169,6 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         group = (RadioGroup) findViewById(R.id.group);
         btnHome = (RadioButton) findViewById(R.id.btn_home);
+        btnBuycar = (RadioButton) findViewById(R.id.btn_buycar);
     }
 }

@@ -144,6 +144,7 @@
             android:id="@+id/add_shop"
             android:layout_weight="1">
             <ImageView
+                android:id="@+id/buy_car"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="8"
