@@ -96,4 +96,50 @@ public class Constants {
     public static final int HOME_HOT = 5;
 
 
+    //购物车说明：检查服务端一个产品库存情况的接口请求头需要添加token
+    public static final String CHECKOUTPRODUCT = "checkOneProductInventory";
+    //向服务端购物车添加一个产品的接口
+    public static final String ADDPRODUCT = "addOneProduct";
+
+
+    //获取服务端购物车产品信息的接口
+    public static final String SHORTACRT = "getShortcartProducts";
+
+    //更新服务端购物车产品的数量的接口
+    public static final String UPDATEPRODUCT = "updateProductNum";
+
+
+
+    //检查服务端多个产品是否库存充足
+    public static final String CHECKINVENTORY = "checkInventory";
+
+
+    //向服务端下订单接口
+    public static final String GETORDER = "getOrderInfo";
+
+    //请求服务端，是否支付成功
+    public static final String CONFIRMSERVER = "confirmServerPayResult";
+
+    //查找待支付的订单
+    public static final String FINDPAY = "findForPay";
+
+    //查找待发货的订单
+    public static final String FINDSEND = "findForSend";
+
+    //从服务端购物车删除一个产品的接口
+    public static final String REMOVEPRODUCT = "removeOneProduct";
+
+    //从更新服务端购物车产品的选择
+    public static final String UPDATEPRODUCTSELECTED = "updateProductSelected";
+
+    //全选服务端购物车产品或者全不选
+    public static final String SELECTALL = "selectAllProduct";
+
+    //从从服务端购物车删除多个产品的接口
+    public static final String REMOVEMANY = "removeManyProduct";
+
+    //从更新服务端购物车产品的选择
+    public static final String UPDATEPRODUCTSELECTED = "updateProductSelected";
+
+
 }
