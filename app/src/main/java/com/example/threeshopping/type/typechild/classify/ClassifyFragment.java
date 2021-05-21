@@ -2,6 +2,7 @@ package com.example.threeshopping.type.typechild.classify;
 
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -9,18 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.view.ToolBar;
-import com.example.net.bean.LoginBean;
+import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.TypeBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.type.typechild.classify.adapter.ClassAdapter;
+import com.example.threeshopping.type.typechild.classify.adapter.LeftAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +31,15 @@ import java.util.List;
 public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements IClassView {
 
 
-    private ListView classList;
     private RecyclerView classRv;
     private ArrayAdapter<String> stringArrayAdapter;
     private List<String> title;
-    private long listId = -1;
     private List<Object> typeList = new ArrayList<>();
     private ClassAdapter classAdapter;
     private SparseArray<View> sparseArray = new SparseArray<>();
+    private LeftAdapter leftAdapter;
+    private RecyclerView leftRv;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_classify;
@@ -46,8 +47,8 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
 
     @Override
     protected void initView() {
-        classList = (ListView) findViewById(R.id.classList);
         classRv = (RecyclerView) findViewById(R.id.classRv);
+        leftRv = (RecyclerView) findViewById(R.id.leftRv);
     }
 
     @Override
@@ -69,41 +70,29 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
         title.add("办公文具");
         title.add("数码周边");
         title.add("游戏专区");
+        leftAdapter = new LeftAdapter();
+        leftAdapter.updata(title);
+        leftAdapter.setPosition(0);
+        leftRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        leftRv.setAdapter(leftAdapter);
+        mPresenter.getSkirt(0);
 
-        stringArrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,title);
-        classList.setAdapter(stringArrayAdapter);
-
-        classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        leftAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                TextView textView = (TextView) view;
-                textView.setTextColor(Color.RED);
-
-                if (sparseArray.get(position) == null) {
-                    sparseArray.put(position,view);
-                }
-                for (int i = 0; i < sparseArray.size(); i++) {
-                    int viewPosition = sparseArray.keyAt(i);
-                    Log.i("TAG", "onItemClick: "+viewPosition);
-                    if(viewPosition != position){
-                        View view1 = sparseArray.get(viewPosition);
-                        TextView textView1 = (TextView) view1;
-                        textView1.setTextColor(Color.BLACK);
-                    }
-                }
-//                for (int i1 = 0; i1 < sparseArray.size(); i1++) {
-//                    int i2 = sparseArray.keyAt(i1);
-//                    if (i2 != position) {
-//                        View item = viewSparseArray.get(i2);
-//                        item.setBackgroundResource(R.color.darkAshen);
-//                    }
-//                }
-
+            public void onItemClick(int position,View view) {
                 mPresenter.getSkirt(position);
+                leftAdapter.setPosition(position);
+                leftAdapter.notifyDataSetChanged();
+
+
+
+            }
+
+            @Override
+            public boolean onLongItemClick(int position,View view) {
+                return false;
             }
         });
-
 
         classAdapter = new ClassAdapter();
         classRv.setAdapter(classAdapter);
@@ -124,6 +113,7 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
     public void onClickRight() {
 
     }
+
     @Override
     public void onType(TypeBean typeBean) {
         typeList.clear();
@@ -145,6 +135,6 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
 
     @Override
     public void showError(String error) {
-
+        loadPage.showErrorText(error);
     }
 }
