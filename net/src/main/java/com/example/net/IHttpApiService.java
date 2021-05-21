@@ -11,10 +11,14 @@ import com.example.net.bean.HomeBean;
 import com.example.net.bean.TypeBean;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 public interface IHttpApiService {
 
@@ -110,5 +114,11 @@ public interface IHttpApiService {
 
     @GET(Constants.GAME_URL)
     Observable<TypeBean> getGame();
+
+    @GET
+    @Streaming
+    Call<ResponseBody> downloadFile(@Url String url);
+
+
 
 }

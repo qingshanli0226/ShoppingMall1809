@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ParticularsActivity"></activity>
+        <activity android:name=".particulars.ParticularsActivity"></activity>
         <activity android:name=".welcome.WelActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

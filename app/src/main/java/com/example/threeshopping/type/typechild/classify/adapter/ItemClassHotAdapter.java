@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.TypeBean;
 import com.example.threeshopping.R;
@@ -28,6 +29,7 @@ public class ItemClassHotAdapter extends BaseRvAdapter<TypeBean.ResultBean.HotPr
         TextView typeHotTitle = holder.getView(R.id.typeHotTitle);
         typeHotTitle.setText(itemView.getCover_price());
         Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getFigure()).into(typeHotImg);
+//        ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getFigure()).into(typeHotImg);
 
     }
 }
