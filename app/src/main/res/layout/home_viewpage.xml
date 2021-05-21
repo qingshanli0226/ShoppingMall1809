@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_100">
+    android:layout_height="@dimen/dp_150">
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="110dp"
+        android:layout_marginLeft="@dimen/dp_10"
         android:id="@+id/vp"
         android:clipChildren="false"
-        android:layout_marginRight="110dp"
+        android:layout_marginRight="@dimen/dp_10"
         ></androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>

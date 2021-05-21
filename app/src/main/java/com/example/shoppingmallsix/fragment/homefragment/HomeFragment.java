@@ -71,7 +71,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void getHomeData(HomeBean homeBean) {
         HomeBean.ResultBean result = homeBean.getResult();
 
-//        Toast.makeText(getContext(), "homeBean:" + homeBean, Toast.LENGTH_SHORT).show();
         if (BuildConfig.DEBUG) Log.d("HomeFragment", "homeBean:" + homeBean);
         list.add(result.getBanner_info());
         list.add(result.getChannel_info());
@@ -80,8 +79,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         list.add(result.getRecommend_info());
         list.add(result.getHot_info());
 
-//        Toast.makeText(getContext(), ""+homeBean.getResult().getAct_info(), Toast.LENGTH_SHORT).show();
+
+
         loadingPage.showSuccessView();
+
+
+
+
         homeAdapter.notifyDataSetChanged();
     }
 

@@ -128,7 +128,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
                     ImageView imageView = new ImageView(holder.itemView.getContext());
-                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+actInfoBean.getUrl())
+                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+actInfoBean.getIcon_url())
                             .error(R.drawable.animation_loading)
                             .into(imageView);
                     imageViews.add(imageView);

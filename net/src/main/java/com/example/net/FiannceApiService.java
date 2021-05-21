@@ -30,14 +30,22 @@ import com.example.net.bean.store.WenjuStoreBean;
 import com.example.net.constants.Constants;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 
 //认为是IMode
 public interface FiannceApiService {
+
+    @GET
+    @Streaming
+    Call<ResponseBody> downloadFile(@Url String url);
 
     //主页面HoemFrgment数据
     @GET(Constants.HOME_URL)
