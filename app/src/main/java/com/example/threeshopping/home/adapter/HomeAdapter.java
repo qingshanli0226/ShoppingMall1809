@@ -3,6 +3,7 @@ package com.example.threeshopping.home.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.HomeBean;
 import com.example.threeshopping.R;
@@ -143,7 +145,11 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 sekillAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
                     public void onItemClick(int position,View view) {
-
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",Constants.BASE_URl_IMAGE +seckillInfoBeans.getList().get(position).getFigure());
+                        bundle.putString("title",seckillInfoBeans.getList().get(position).getName());
+                        bundle.putString("price",seckillInfoBeans.getList().get(position).getCover_price());
+                        CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override
@@ -172,7 +178,11 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 reCommendAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
                     public void onItemClick(int position,View view) {
-                        Toast.makeText(holder.itemView.getContext(), "断", Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",Constants.BASE_URl_IMAGE +recommendInfoBeans.get(position).getFigure());
+                        bundle.putString("title",recommendInfoBeans.get(position).getName());
+                        bundle.putString("price",recommendInfoBeans.get(position).getCover_price());
+                        CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override
@@ -203,7 +213,11 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 hotAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
                     public void onItemClick(int position,View view) {
-                        Toast.makeText(holder.itemView.getContext(), "断", Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",Constants.BASE_URl_IMAGE +hotInfoBeans.get(position).getFigure());
+                        bundle.putString("title",hotInfoBeans.get(position).getName());
+                        bundle.putString("price",hotInfoBeans.get(position).getCover_price());
+                        CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override

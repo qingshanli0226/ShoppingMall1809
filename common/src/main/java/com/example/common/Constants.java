@@ -82,6 +82,8 @@ public class Constants {
     public static final String PATH_LOGIN = "/app/LoginActivity";
     //注册
     public static final String PATH_REGISTER = "/app/RegisterActivity";
+    //详情
+    public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
 
 
     public static final String SP_TOKEN = "token";

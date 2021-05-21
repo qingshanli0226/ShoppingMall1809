@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 
@@ -34,6 +36,7 @@ public class ParticularsActivity extends BaseActivity {
         paricularsPrice = (TextView) findViewById(R.id.pariculars_price);
         shopcar = (ImageView) findViewById(R.id.shopcar);
         particularsJoin = (Button) findViewById(R.id.particulars_join);
+        toolbar.setToolbarOnClickLisenter(this);
     }
 
     @Override
@@ -43,6 +46,13 @@ public class ParticularsActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Bundle bundle = CommonArouter.getInstance().getBundle();
+        String title = bundle.getString("title");
+        String pic = bundle.getString("pic");
+        String price = bundle.getString("price");
+        Glide.with(this).load(pic).into(paricularsImg);
+        paricularsName.setText(""+title);
+        paricularsPrice.setText("￥"+price);
 
     }
 
@@ -53,7 +63,7 @@ public class ParticularsActivity extends BaseActivity {
 
     @Override
     public void onClickLeft() {
-
+        finish();
     }
 
     @Override

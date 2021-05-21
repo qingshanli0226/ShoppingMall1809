@@ -2,6 +2,7 @@ package com.example.threeshopping.type.typechild.classify;
 
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.util.SparseArray;
@@ -15,8 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.BaseRvAdapter;
+import com.example.net.bean.HomeBean;
 import com.example.net.bean.TypeBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.type.typechild.classify.adapter.ClassAdapter;
@@ -84,8 +88,6 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
                 leftAdapter.setPosition(position);
                 leftAdapter.notifyDataSetChanged();
 
-
-
             }
 
             @Override
@@ -94,9 +96,12 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
             }
         });
 
+        List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = new ArrayList<>();
+
         classAdapter = new ClassAdapter();
         classRv.setAdapter(classAdapter);
         classRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
 
     @Override
@@ -121,6 +126,21 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
         typeList.add(typeBean.getResult().get(0).getChild());
         classAdapter.updata(typeList);
 
+//        classAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
+//            @Override
+//            public void onItemClick(int position, View view) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("pic", Constants.BASE_URl_IMAGE +typeBean.getResult().get(0).getHot_product_list().get(position).getFigure());
+//                bundle.putString("title",typeBean.getResult().get(0).getHot_product_list().get(position).getName());
+//                bundle.putString("price",typeBean.getResult().get(0).getHot_product_list().get(position).getCover_price());
+//                CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
+//            }
+//
+//            @Override
+//            public boolean onLongItemClick(int position, View view) {
+//                return false;
+//            }
+//        });
     }
 
     @Override

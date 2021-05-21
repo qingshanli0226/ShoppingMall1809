@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
+        android:scrollbars="none"
         >
         <LinearLayout
             android:orientation="vertical"
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
+                android:textSize="@dimen/dm_dp_25"
                 ></TextView>
             <View
                 android:layout_width="match_parent"
@@ -81,7 +83,7 @@
                 ></View>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_30"
+                android:layout_height="@dimen/dm_dp_40"
                 android:text="提示:普通商品享有质量问题7天退货,签收后3个工作日内可换货。其他特殊商品(如手办)的售后以页面说明为准"
                 ></TextView>
             <View

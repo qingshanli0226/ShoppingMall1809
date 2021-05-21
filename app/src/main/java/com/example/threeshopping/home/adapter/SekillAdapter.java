@@ -1,5 +1,6 @@
 package com.example.threeshopping.home.adapter;
 
+import android.graphics.Paint;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class SekillAdapter extends BaseRvAdapter<HomeBean.ResultBean.SeckillInfo
         Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemView.getFigure()).into(reImg);
         reTitle.setText(itemView.getOrigin_price());
         rePrice.setText(itemView.getCover_price());
+        reTitle.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
     }
 
 
