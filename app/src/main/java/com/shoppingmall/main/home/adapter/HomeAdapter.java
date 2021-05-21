@@ -119,10 +119,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 secKillAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                        intent.putExtra("type","secKill");
-                        intent.putExtra("data",seckillInfoBeans);
-                        holder.itemView.getContext().startActivity(intent);
+//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
+//                        intent.putExtra("type","secKill");
+//                        intent.putExtra("data",seckillInfoBeans);
+//                        holder.itemView.getContext().startActivity(intent);
                     }
 
                     @Override
@@ -142,10 +142,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         HomeBean.ResultBean.RecommendInfoBean recommendInfoBean = new HomeBean.ResultBean.RecommendInfoBean();
-                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                        intent.putExtra("type","recommend");
-                        intent.putExtra("data",recommendInfoBean);
-                        holder.itemView.getContext().startActivity(intent);
+//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
+//                        intent.putExtra("type","recommend");
+//                        intent.putExtra("data",recommendInfoBean);
+//                        holder.itemView.getContext().startActivity(intent);
                     }
 
                     @Override
@@ -165,10 +165,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         HomeBean.ResultBean.HotInfoBean hotInfoBean = new HomeBean.ResultBean.HotInfoBean();
-                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                        intent.putExtra("type","hot");
-                        intent.putExtra("data",hotInfoBean);
-                        holder.itemView.getContext().startActivity(intent);
+//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
+//                        intent.putExtra("type","hot");
+//                        intent.putExtra("data",hotInfoBean);
+//                        holder.itemView.getContext().startActivity(intent);
                     }
 
                     @Override

@@ -5,23 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".main.sort.fragment.ClassificationFragment">
 
-  <!--  <RadioGroup
-        android:layout_width="@dimen/dp_0"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <RadioButton
-            android:id="@+id/SKIRT"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
-            android:background="@drawable/sort_shape"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center"
-            android:text="@string/SKIRT"
-            android:textColor="@drawable/sort_shape_text"></RadioButton>
-    </RadioGroup>-->
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="@dimen/dp_0"
         android:layout_height="match_parent"

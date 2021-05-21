@@ -1,8 +1,10 @@
 package com.shoppingmall.main.shopcar;
 
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.viewpager.widget.ViewPager;
+
 import com.shoppingmall.R;
 import com.shoppingmall.framework.mvp.BaseFragment;
 
@@ -10,15 +12,17 @@ import com.shoppingmall.framework.mvp.BaseFragment;
 public class ShopCarFragment extends BaseFragment {
 
 
-    private ImageView xxx1;
-
+    private TextView goHomeFragment;
+    private ViewPager viewPager;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop_car;
     }
 
+    @Override
     public void initView() {
-        xxx1 = (ImageView) mView.findViewById(R.id.xxx1);
+        goHomeFragment = (TextView) mView.findViewById(R.id.goHomeFragment);
+        viewPager = getActivity().findViewById(R.id.mainVp);
     }
 
     @Override
@@ -28,7 +32,8 @@ public class ShopCarFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        Glide.with(getActivity()).load("https://browser9.qhimg.com/bdm/1000_618_80/t01753453b660de14e9.jpg")
-                .into(xxx1);
+        goHomeFragment.setOnClickListener(v->{
+            viewPager.setCurrentItem(0);
+        });
     }
 }

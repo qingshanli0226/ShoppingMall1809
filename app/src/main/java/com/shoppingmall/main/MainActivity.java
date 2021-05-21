@@ -21,11 +21,11 @@ import com.shoppingmall.main.shopcar.ShopCarFragment;
 import com.shoppingmall.main.sort.SortFragment;
 import com.shoppingmall.net.bean.HomeBean;
 
+
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity  {
 
-    private android.widget.ScrollView mainScroll;
 
     private ComAdapter commonAdapter;
     private ViewPager mainVp;
@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity  {
     public void initView() {
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
+
     }
 
     @Override
@@ -98,4 +99,6 @@ public class MainActivity extends BaseActivity  {
         });
 
     }
+
+
 }

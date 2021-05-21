@@ -18,10 +18,9 @@
     <dimen name="dp_500">500dp</dimen>
     <dimen name="dp_400">400dp</dimen>
     <dimen name="dp_450">450dp</dimen>
-
-    <dimen name="dp_13">13dp</dimen>
+    <dimen name="dp_250">250dp</dimen>
     <dimen name="dp_1">1dp</dimen>
-
+    <dimen name="dp_13">13dp</dimen>
     <dimen name="dp_350">350dp</dimen>
     <dimen name="dp_390">390dp</dimen>
     <dimen name="dp_3">3dp</dimen>
