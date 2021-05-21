@@ -12,7 +12,7 @@
     <string name="find_more">查看更多</string>
     <string name="home_new">新品推荐</string>
     <string name="home_hot">这里都是买的棒棒哒</string>
-<<<<<<< HEAD
+
     <string name="detailToolbar">商品详情</string>
     <string name="detailContext">"预售截止10月15日，预售期为限量礼盒版,包括特制木盒×1、画集x1、邮票x1套、书签x1、贴纸x1、信封x1、礼盒特 "</string>
     <string name="detailText">由</string>
@@ -25,7 +25,7 @@
     <string name="share">分享</string>
     <string name="search">搜索</string>
     <string name="home">首页</string>
-=======
+
     <string name="dfk">待付款</string>
     <string name="dfh">待发货</string>
     <string name="dsh">待收货</string>
@@ -40,6 +40,19 @@
     <string name="yqfx">邀请分享</string>
     <string name="kfzx">客服中心</string>
     <string name="fwfk">服务反馈</string>
+    <string name="classification">分类</string>
+    <string name="label">标签</string>
 
->>>>>>> 030600a8c1fc1bd48c1f01844af0cae1a2287a4a
+    <string name="SKIRT">小裙子</string>
+    <string name="JACKET_URL">上衣</string>
+    <string name="PANTS_URL">下装</string>
+    <string name="OVERCOAT_URL">外套</string>
+    <string name="ACCESSORY_URL">配件</string>
+    <string name="BAG_URL">包包</string>
+    <string name="DRESS_UP_URL">装扮</string>
+    <string name="HOME_PRODUCTS_URL">居家宅品</string>
+    <string name="STATIONERY_URL">办公文具</string>
+    <string name="DIGIT_URL">数码周边</string>
+    <string name="GAME_URL">游戏专区</string>
+
 </resources>

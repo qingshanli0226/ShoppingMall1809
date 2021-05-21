@@ -1,4 +1,4 @@
-package com.shoppingmall;
+package com.shoppingmall.config;
 
 import android.app.Activity;
 import android.content.Context;

@@ -3,7 +3,7 @@ package com.shoppingmall.main.app;
 import android.app.Application;
 
 import com.fiance.user.UserModule;
-import com.shoppingmall.AppModule;
+import com.shoppingmall.config.AppModule;
 import com.shoppingmall.framework.manager.FiannceArouter;
 
 public class App extends Application {
