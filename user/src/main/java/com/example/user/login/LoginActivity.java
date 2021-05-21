@@ -144,6 +144,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
             LogUtils.json(loginBean.getResult().getToken()+"Login");
             Toast.makeText(this, ""+loginBean.getMessage(), Toast.LENGTH_SHORT).show();
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+
             LoginManager.getInstance().setLoginstate(true);
 //            SpUtil.putString(this, CommonConstant.SP_TOKEN,loginBean.getResult().getToken());
 //            //跳到主页面返回
