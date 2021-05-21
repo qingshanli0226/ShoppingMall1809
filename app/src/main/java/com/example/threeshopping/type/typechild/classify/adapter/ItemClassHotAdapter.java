@@ -28,8 +28,7 @@ public class ItemClassHotAdapter extends BaseRvAdapter<TypeBean.ResultBean.HotPr
         ImageView typeHotImg = holder.getView(R.id.typeHotImg);
         TextView typeHotTitle = holder.getView(R.id.typeHotTitle);
         typeHotTitle.setText(itemView.getCover_price());
-        Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getFigure()).into(typeHotImg);
-//        ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getFigure()).into(typeHotImg);
+        ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getFigure()).into(typeHotImg);
 
     }
 }
