@@ -27,9 +27,5 @@ public class ComAdapter extends FragmentPagerAdapter {
         return list.size();
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
-    }
+
 }

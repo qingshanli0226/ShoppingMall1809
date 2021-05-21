@@ -32,7 +32,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
         homeFragmentSearch = (EditText) mView.findViewById(R.id.homeFragmentSearch);
         homeRv = (RecyclerView) mView.findViewById(R.id.homeRv);
     }
