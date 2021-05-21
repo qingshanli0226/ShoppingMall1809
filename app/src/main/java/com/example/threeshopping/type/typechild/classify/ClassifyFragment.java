@@ -40,7 +40,6 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
     private List<String> title;
     private List<Object> typeList = new ArrayList<>();
     private ClassAdapter classAdapter;
-    private SparseArray<View> sparseArray = new SparseArray<>();
     private LeftAdapter leftAdapter;
     private RecyclerView leftRv;
 

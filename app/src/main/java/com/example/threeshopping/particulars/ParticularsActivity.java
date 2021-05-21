@@ -1,4 +1,4 @@
-package com.example.threeshopping;
+package com.example.threeshopping.particulars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.threeshopping.R;
 
 public class ParticularsActivity extends BaseActivity {
 
