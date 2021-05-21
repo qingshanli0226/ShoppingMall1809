@@ -41,14 +41,8 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
         mainFra = (FrameLayout) findViewById(R.id.mainFra);
-        btn = findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
     }
 
     @Override

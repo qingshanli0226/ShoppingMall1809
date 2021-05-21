@@ -3,16 +3,9 @@ package com.example.user;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-<<<<<<< HEAD
 import android.widget.Toast;
 
-=======
 
-import android.widget.Toast;
-
-import com.example.user.R;
-
->>>>>>> zyh
 import com.example.user.frag.FragmentAdapter;
 import com.example.user.frag.LoginFragment;
 import com.example.user.frag.RegisterFragment;
