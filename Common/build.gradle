@@ -50,4 +50,6 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
     //工具类
     api 'com.blankj:utilcodex:1.26.0'
+
+    api 'com.jakewharton:disklrucache:2.0.2'
 }
