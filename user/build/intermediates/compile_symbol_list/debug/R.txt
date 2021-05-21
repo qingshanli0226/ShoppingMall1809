@@ -111,6 +111,11 @@ int attr badgeGravity 0x0
 int attr badgeStyle 0x0
 int attr badgeTextColor 0x0
 int attr barLength 0x0
+<<<<<<< HEAD
+=======
+int attr barrierAllowsGoneWidgets 0x0
+int attr barrierDirection 0x0
+>>>>>>> table
 int attr behavior_autoHide 0x0
 int attr behavior_autoShrink 0x0
 int attr behavior_expandedOffset 0x0
@@ -158,6 +163,10 @@ int attr cardMaxElevation 0x0
 int attr cardPreventCornerOverlap 0x0
 int attr cardUseCompatPadding 0x0
 int attr cardViewStyle 0x0
+<<<<<<< HEAD
+=======
+int attr chainUseRtl 0x0
+>>>>>>> table
 int attr checkboxStyle 0x0
 int attr checkedButton 0x0
 int attr checkedChip 0x0
@@ -221,6 +230,12 @@ int attr colorSecondaryVariant 0x0
 int attr colorSurface 0x0
 int attr colorSwitchThumbNormal 0x0
 int attr commitIcon 0x0
+<<<<<<< HEAD
+=======
+int attr constraintSet 0x0
+int attr constraint_referenced_ids 0x0
+int attr content 0x0
+>>>>>>> table
 int attr contentDescription 0x0
 int attr contentInsetEnd 0x0
 int attr contentInsetEndWithActions 0x0
@@ -285,6 +300,10 @@ int attr editTextStyle 0x0
 int attr elevation 0x0
 int attr elevationOverlayColor 0x0
 int attr elevationOverlayEnabled 0x0
+<<<<<<< HEAD
+=======
+int attr emptyVisibility 0x0
+>>>>>>> table
 int attr endIconCheckable 0x0
 int attr endIconContentDescription 0x0
 int attr endIconDrawable 0x0
@@ -370,6 +389,11 @@ int attr initialActivityCount 0x0
 int attr insetForeground 0x0
 int attr isLightTheme 0x0
 int attr isMaterialTheme 0x0
+<<<<<<< HEAD
+=======
+int attr isleft 0x0
+int attr isright 0x0
+>>>>>>> table
 int attr itemBackground 0x0
 int attr itemFillColor 0x0
 int attr itemHorizontalPadding 0x0
@@ -404,11 +428,72 @@ int attr layout_anchorGravity 0x0
 int attr layout_behavior 0x0
 int attr layout_collapseMode 0x0
 int attr layout_collapseParallaxMultiplier 0x0
+<<<<<<< HEAD
 int attr layout_dodgeInsetEdges 0x0
 int attr layout_insetEdge 0x0
 int attr layout_keyline 0x0
 int attr layout_scrollFlags 0x0
 int attr layout_scrollInterpolator 0x0
+=======
+int attr layout_constrainedHeight 0x0
+int attr layout_constrainedWidth 0x0
+int attr layout_constraintBaseline_creator 0x0
+int attr layout_constraintBaseline_toBaselineOf 0x0
+int attr layout_constraintBottom_creator 0x0
+int attr layout_constraintBottom_toBottomOf 0x0
+int attr layout_constraintBottom_toTopOf 0x0
+int attr layout_constraintCircle 0x0
+int attr layout_constraintCircleAngle 0x0
+int attr layout_constraintCircleRadius 0x0
+int attr layout_constraintDimensionRatio 0x0
+int attr layout_constraintEnd_toEndOf 0x0
+int attr layout_constraintEnd_toStartOf 0x0
+int attr layout_constraintGuide_begin 0x0
+int attr layout_constraintGuide_end 0x0
+int attr layout_constraintGuide_percent 0x0
+int attr layout_constraintHeight_default 0x0
+int attr layout_constraintHeight_max 0x0
+int attr layout_constraintHeight_min 0x0
+int attr layout_constraintHeight_percent 0x0
+int attr layout_constraintHorizontal_bias 0x0
+int attr layout_constraintHorizontal_chainStyle 0x0
+int attr layout_constraintHorizontal_weight 0x0
+int attr layout_constraintLeft_creator 0x0
+int attr layout_constraintLeft_toLeftOf 0x0
+int attr layout_constraintLeft_toRightOf 0x0
+int attr layout_constraintRight_creator 0x0
+int attr layout_constraintRight_toLeftOf 0x0
+int attr layout_constraintRight_toRightOf 0x0
+int attr layout_constraintStart_toEndOf 0x0
+int attr layout_constraintStart_toStartOf 0x0
+int attr layout_constraintTop_creator 0x0
+int attr layout_constraintTop_toBottomOf 0x0
+int attr layout_constraintTop_toTopOf 0x0
+int attr layout_constraintVertical_bias 0x0
+int attr layout_constraintVertical_chainStyle 0x0
+int attr layout_constraintVertical_weight 0x0
+int attr layout_constraintWidth_default 0x0
+int attr layout_constraintWidth_max 0x0
+int attr layout_constraintWidth_min 0x0
+int attr layout_constraintWidth_percent 0x0
+int attr layout_dodgeInsetEdges 0x0
+int attr layout_editor_absoluteX 0x0
+int attr layout_editor_absoluteY 0x0
+int attr layout_goneMarginBottom 0x0
+int attr layout_goneMarginEnd 0x0
+int attr layout_goneMarginLeft 0x0
+int attr layout_goneMarginRight 0x0
+int attr layout_goneMarginStart 0x0
+int attr layout_goneMarginTop 0x0
+int attr layout_insetEdge 0x0
+int attr layout_keyline 0x0
+int attr layout_optimizationLevel 0x0
+int attr layout_scrollFlags 0x0
+int attr layout_scrollInterpolator 0x0
+int attr layout_srlBackgroundColor 0x0
+int attr layout_srlSpinnerStyle 0x0
+int attr leftimg 0x0
+>>>>>>> table
 int attr liftOnScroll 0x0
 int attr liftOnScrollTargetViewId 0x0
 int attr lineHeight 0x0
@@ -494,6 +579,10 @@ int attr ratingBarStyleIndicator 0x0
 int attr ratingBarStyleSmall 0x0
 int attr recyclerViewStyle 0x0
 int attr reverseLayout 0x0
+<<<<<<< HEAD
+=======
+int attr rightimg 0x0
+>>>>>>> table
 int attr rippleColor 0x0
 int attr scrimAnimationDuration 0x0
 int attr scrimBackground 0x0
@@ -526,6 +615,74 @@ int attr spinnerDropDownItemStyle 0x0
 int attr spinnerStyle 0x0
 int attr splitTrack 0x0
 int attr srcCompat 0x0
+<<<<<<< HEAD
+=======
+int attr srlAccentColor 0x0
+int attr srlAnimatingColor 0x0
+int attr srlClassicsSpinnerStyle 0x0
+int attr srlDisableContentWhenLoading 0x0
+int attr srlDisableContentWhenRefresh 0x0
+int attr srlDragRate 0x0
+int attr srlDrawableArrow 0x0
+int attr srlDrawableArrowSize 0x0
+int attr srlDrawableMarginRight 0x0
+int attr srlDrawableProgress 0x0
+int attr srlDrawableProgressSize 0x0
+int attr srlDrawableSize 0x0
+int attr srlEnableAutoLoadMore 0x0
+int attr srlEnableClipFooterWhenFixedBehind 0x0
+int attr srlEnableClipHeaderWhenFixedBehind 0x0
+int attr srlEnableFooterFollowWhenLoadFinished 0x0
+int attr srlEnableFooterFollowWhenNoMoreData 0x0
+int attr srlEnableFooterTranslationContent 0x0
+int attr srlEnableHeaderTranslationContent 0x0
+int attr srlEnableHorizontalDrag 0x0
+int attr srlEnableLastTime 0x0
+int attr srlEnableLoadMore 0x0
+int attr srlEnableLoadMoreWhenContentNotFull 0x0
+int attr srlEnableNestedScrolling 0x0
+int attr srlEnableOverScrollBounce 0x0
+int attr srlEnableOverScrollDrag 0x0
+int attr srlEnablePreviewInEditMode 0x0
+int attr srlEnablePullToCloseTwoLevel 0x0
+int attr srlEnablePureScrollMode 0x0
+int attr srlEnableRefresh 0x0
+int attr srlEnableScrollContentWhenLoaded 0x0
+int attr srlEnableScrollContentWhenRefreshed 0x0
+int attr srlEnableTwoLevel 0x0
+int attr srlFinishDuration 0x0
+int attr srlFixedFooterViewId 0x0
+int attr srlFixedHeaderViewId 0x0
+int attr srlFloorDuration 0x0
+int attr srlFloorRage 0x0
+int attr srlFooterHeight 0x0
+int attr srlFooterInsetStart 0x0
+int attr srlFooterMaxDragRate 0x0
+int attr srlFooterTranslationViewId 0x0
+int attr srlFooterTriggerRate 0x0
+int attr srlHeaderHeight 0x0
+int attr srlHeaderInsetStart 0x0
+int attr srlHeaderMaxDragRate 0x0
+int attr srlHeaderTranslationViewId 0x0
+int attr srlHeaderTriggerRate 0x0
+int attr srlMaxRage 0x0
+int attr srlNormalColor 0x0
+int attr srlPrimaryColor 0x0
+int attr srlReboundDuration 0x0
+int attr srlRefreshRage 0x0
+int attr srlTextFailed 0x0
+int attr srlTextFinish 0x0
+int attr srlTextLoading 0x0
+int attr srlTextNothing 0x0
+int attr srlTextPulling 0x0
+int attr srlTextRefreshing 0x0
+int attr srlTextRelease 0x0
+int attr srlTextSecondary 0x0
+int attr srlTextSizeTime 0x0
+int attr srlTextSizeTitle 0x0
+int attr srlTextTimeMarginTop 0x0
+int attr srlTextUpdate 0x0
+>>>>>>> table
 int attr stackFromEnd 0x0
 int attr startIconCheckable 0x0
 int attr startIconContentDescription 0x0
@@ -631,6 +788,10 @@ int attr titleMargins 0x0
 int attr titleTextAppearance 0x0
 int attr titleTextColor 0x0
 int attr titleTextStyle 0x0
+<<<<<<< HEAD
+=======
+int attr titletext 0x0
+>>>>>>> table
 int attr toolbarId 0x0
 int attr toolbarNavigationButtonStyle 0x0
 int attr toolbarStyle 0x0
@@ -655,6 +816,7 @@ int attr windowFixedWidthMinor 0x0
 int attr windowMinWidthMajor 0x0
 int attr windowMinWidthMinor 0x0
 int attr windowNoTitle 0x0
+<<<<<<< HEAD
 int attr wp_CenterTitle 0x0
 int attr wp_RightTitle 0x0
 int attr wp_istoolbarLeftImg 0x0
@@ -666,6 +828,8 @@ int attr wp_paintTextSize 0x0
 int attr wp_progressBackRoundColor 0x0
 int attr wp_progressColor 0x0
 int attr wp_rightImgId 0x0
+=======
+>>>>>>> table
 int attr yearSelectedStyle 0x0
 int attr yearStyle 0x0
 int attr yearTodayStyle 0x0
@@ -699,12 +863,18 @@ int color abc_tint_spinner 0x0
 int color abc_tint_switch_track 0x0
 int color accent_material_dark 0x0
 int color accent_material_light 0x0
+<<<<<<< HEAD
 int color ashen 0x0
+=======
+>>>>>>> table
 int color background_floating_material_dark 0x0
 int color background_floating_material_light 0x0
 int color background_material_dark 0x0
 int color background_material_light 0x0
+<<<<<<< HEAD
 int color black 0x0
+=======
+>>>>>>> table
 int color bright_foreground_disabled_material_dark 0x0
 int color bright_foreground_disabled_material_light 0x0
 int color bright_foreground_inverse_material_dark 0x0
@@ -718,12 +888,15 @@ int color cardview_light_background 0x0
 int color cardview_shadow_end_color 0x0
 int color cardview_shadow_start_color 0x0
 int color checkbox_themeable_attribute_color 0x0
+<<<<<<< HEAD
 int color colorA 0x0
 int color colorB 0x0
 int color darkAshen 0x0
 int color dark_blue 0x0
 int color dark_red 0x0
 int color darktwo_blue 0x0
+=======
+>>>>>>> table
 int color design_bottom_navigation_shadow_color 0x0
 int color design_box_stroke_color 0x0
 int color design_dark_default_color_background 0x0
@@ -770,9 +943,12 @@ int color error_color_material_dark 0x0
 int color error_color_material_light 0x0
 int color foreground_material_dark 0x0
 int color foreground_material_light 0x0
+<<<<<<< HEAD
 int color french_grey 0x0
 int color gray 0x0
 int color gray_french 0x0
+=======
+>>>>>>> table
 int color highlighted_text_material_dark 0x0
 int color highlighted_text_material_light 0x0
 int color material_blue_grey_800 0x0
@@ -851,9 +1027,12 @@ int color mtrl_textinput_hovered_box_stroke_color 0x0
 int color notification_action_color_filter 0x0
 int color notification_icon_bg_color 0x0
 int color notification_material_background_media_default_color 0x0
+<<<<<<< HEAD
 int color pale_black 0x0
 int color pale_blue 0x0
 int color pale_red 0x0
+=======
+>>>>>>> table
 int color primary_dark_material_dark 0x0
 int color primary_dark_material_light 0x0
 int color primary_material_dark 0x0
@@ -862,30 +1041,42 @@ int color primary_text_default_material_dark 0x0
 int color primary_text_default_material_light 0x0
 int color primary_text_disabled_material_dark 0x0
 int color primary_text_disabled_material_light 0x0
+<<<<<<< HEAD
 int color purple_200 0x0
 int color purple_500 0x0
 int color purple_700 0x0
 int color red 0x0
+=======
+>>>>>>> table
 int color ripple_material_dark 0x0
 int color ripple_material_light 0x0
 int color secondary_text_default_material_dark 0x0
 int color secondary_text_default_material_light 0x0
 int color secondary_text_disabled_material_dark 0x0
 int color secondary_text_disabled_material_light 0x0
+<<<<<<< HEAD
 int color sky_blue 0x0
+=======
+>>>>>>> table
 int color switch_thumb_disabled_material_dark 0x0
 int color switch_thumb_disabled_material_light 0x0
 int color switch_thumb_material_dark 0x0
 int color switch_thumb_material_light 0x0
 int color switch_thumb_normal_material_dark 0x0
 int color switch_thumb_normal_material_light 0x0
+<<<<<<< HEAD
 int color teal_200 0x0
 int color teal_700 0x0
+=======
+>>>>>>> table
 int color test_mtrl_calendar_day 0x0
 int color test_mtrl_calendar_day_selected 0x0
 int color tooltip_background_dark 0x0
 int color tooltip_background_light 0x0
+<<<<<<< HEAD
 int color white 0x0
+=======
+>>>>>>> table
 int dimen abc_action_bar_content_inset_material 0x0
 int dimen abc_action_bar_content_inset_with_nav 0x0
 int dimen abc_action_bar_default_height_material 0x0
@@ -976,7 +1167,10 @@ int dimen compat_button_padding_vertical_material 0x0
 int dimen compat_control_corner_material 0x0
 int dimen compat_notification_large_icon_max_height 0x0
 int dimen compat_notification_large_icon_max_width 0x0
+<<<<<<< HEAD
 int dimen def_height 0x0
+=======
+>>>>>>> table
 int dimen default_dimension 0x0
 int dimen design_appbar_elevation 0x0
 int dimen design_bottom_navigation_active_item_max_width 0x0
@@ -1027,6 +1221,7 @@ int dimen design_textinput_caption_translate_y 0x0
 int dimen disabled_alpha_material_dark 0x0
 int dimen disabled_alpha_material_light 0x0
 int dimen dp_0 0x0
+<<<<<<< HEAD
 int dimen dp_1 0x0
 int dimen dp_10 0x0
 int dimen dp_100 0x0
@@ -1060,6 +1255,14 @@ int dimen dp_80 0x0
 int dimen dp_85 0x0
 int dimen dp_90 0x0
 int dimen dp_95 0x0
+=======
+int dimen dp_10 0x0
+int dimen dp_20 0x0
+int dimen dp_30 0x0
+int dimen dp_40 0x0
+int dimen dp_50 0x0
+int dimen dp_80 0x0
+>>>>>>> table
 int dimen fastscroll_default_thickness 0x0
 int dimen fastscroll_margin 0x0
 int dimen fastscroll_minimum_range 0x0
@@ -1238,13 +1441,19 @@ int dimen notification_small_icon_size_as_large 0x0
 int dimen notification_subtext_size 0x0
 int dimen notification_top_pad 0x0
 int dimen notification_top_pad_large_text 0x0
+<<<<<<< HEAD
 int dimen sp_14 0x0
+=======
+>>>>>>> table
 int dimen subtitle_corner_radius 0x0
 int dimen subtitle_outline_width 0x0
 int dimen subtitle_shadow_offset 0x0
 int dimen subtitle_shadow_radius 0x0
 int dimen test_mtrl_calendar_day_cornerSize 0x0
+<<<<<<< HEAD
 int dimen text_dp_16 0x0
+=======
+>>>>>>> table
 int dimen tooltip_corner_radius 0x0
 int dimen tooltip_horizontal_padding 0x0
 int dimen tooltip_margin 0x0
@@ -1339,6 +1548,7 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x0
 int drawable abc_textfield_search_default_mtrl_alpha 0x0
 int drawable abc_textfield_search_material 0x0
 int drawable abc_vector_test 0x0
+<<<<<<< HEAD
 int drawable animation_loading 0x0
 int drawable avd_hide_password 0x0
 int drawable avd_show_password 0x0
@@ -1347,6 +1557,12 @@ int drawable bg1 0x0
 int drawable brvah_sample_footer_loading 0x0
 int drawable brvah_sample_footer_loading_progress 0x0
 int drawable btn_01 0x0
+=======
+int drawable atguigu_logo 0x0
+int drawable avd_hide_password 0x0
+int drawable avd_show_password 0x0
+int drawable back 0x0
+>>>>>>> table
 int drawable btn_checkbox_checked_mtrl 0x0
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x0
 int drawable btn_checkbox_unchecked_mtrl 0x0
@@ -1355,30 +1571,43 @@ int drawable btn_radio_off_mtrl 0x0
 int drawable btn_radio_off_to_on_mtrl_animation 0x0
 int drawable btn_radio_on_mtrl 0x0
 int drawable btn_radio_on_to_off_mtrl_animation 0x0
+<<<<<<< HEAD
 int drawable button_false 0x0
+=======
+>>>>>>> table
 int drawable design_bottom_navigation_item_background 0x0
 int drawable design_fab_background 0x0
 int drawable design_ic_visibility 0x0
 int drawable design_ic_visibility_off 0x0
 int drawable design_password_eye 0x0
 int drawable design_snackbar_background 0x0
+<<<<<<< HEAD
 int drawable edit_background 0x0
 int drawable edit_background_while 0x0
+=======
+>>>>>>> table
 int drawable ic_calendar_black_24dp 0x0
 int drawable ic_clear_black_24dp 0x0
 int drawable ic_edit_black_24dp 0x0
 int drawable ic_keyboard_arrow_left_black_24dp 0x0
 int drawable ic_keyboard_arrow_right_black_24dp 0x0
+<<<<<<< HEAD
+=======
+int drawable ic_launcher_background 0x0
+>>>>>>> table
 int drawable ic_menu_arrow_down_black_24dp 0x0
 int drawable ic_menu_arrow_up_black_24dp 0x0
 int drawable ic_mtrl_checked_circle 0x0
 int drawable ic_mtrl_chip_checked_black 0x0
 int drawable ic_mtrl_chip_checked_circle 0x0
 int drawable ic_mtrl_chip_close_circle 0x0
+<<<<<<< HEAD
 int drawable icon_share_qq 0x0
 int drawable icon_weibo 0x0
 int drawable icon_weixin 0x0
 int drawable left 0x0
+=======
+>>>>>>> table
 int drawable mtrl_dialog_background 0x0
 int drawable mtrl_dropdown_arrow 0x0
 int drawable mtrl_ic_arrow_drop_down 0x0
@@ -1388,12 +1617,16 @@ int drawable mtrl_ic_error 0x0
 int drawable mtrl_popupmenu_background 0x0
 int drawable mtrl_popupmenu_background_dark 0x0
 int drawable mtrl_tabs_default_indicator 0x0
+<<<<<<< HEAD
 int drawable my_user_default 0x0
 int drawable navigation_empty_icon 0x0
 int drawable new_login_background 0x0
 int drawable new_password_drawable_invisible 0x0
 int drawable new_password_drawable_visible 0x0
 int drawable new_user_login_icon 0x0
+=======
+int drawable navigation_empty_icon 0x0
+>>>>>>> table
 int drawable notification_action_background 0x0
 int drawable notification_bg 0x0
 int drawable notification_bg_low 0x0
@@ -1409,6 +1642,7 @@ int drawable notify_panel_notification_icon_bg 0x0
 int drawable test_custom_background 0x0
 int drawable tooltip_frame_dark 0x0
 int drawable tooltip_frame_light 0x0
+<<<<<<< HEAD
 int drawable wc_ac_01 0x0
 int drawable wc_ac_02 0x0
 int drawable wc_ac_03 0x0
@@ -1433,6 +1667,18 @@ int id BaseQuickAdapter_swiping_support 0x0
 int id BaseQuickAdapter_viewholder_support 0x0
 int id TOP_END 0x0
 int id TOP_START 0x0
+=======
+int drawable welcomeimage 0x0
+int id BOTTOM_END 0x0
+int id BOTTOM_START 0x0
+int id FixedBehind 0x0
+int id FixedFront 0x0
+int id MatchLayout 0x0
+int id Scale 0x0
+int id TOP_END 0x0
+int id TOP_START 0x0
+int id Translate 0x0
+>>>>>>> table
 int id accessibility_action_clickable_span 0x0
 int id accessibility_custom_action_0 0x0
 int id accessibility_custom_action_1 0x0
@@ -1466,6 +1712,7 @@ int id accessibility_custom_action_6 0x0
 int id accessibility_custom_action_7 0x0
 int id accessibility_custom_action_8 0x0
 int id accessibility_custom_action_9 0x0
+<<<<<<< HEAD
 int id act_log_but 0x0
 int id act_log_password 0x0
 int id act_log_user 0x0
@@ -1474,6 +1721,8 @@ int id act_reg_password 0x0
 int id act_reg_passwordtwo 0x0
 int id act_reg_username 0x0
 int id act_user_backlogin 0x0
+=======
+>>>>>>> table
 int id action0 0x0
 int id action_bar 0x0
 int id action_bar_activity_content 0x0
@@ -1500,6 +1749,10 @@ int id async 0x0
 int id auto 0x0
 int id blocking 0x0
 int id bottom 0x0
+<<<<<<< HEAD
+=======
+int id btn 0x0
+>>>>>>> table
 int id buttonPanel 0x0
 int id cancel_action 0x0
 int id cancel_button 0x0
@@ -1518,7 +1771,10 @@ int id coordinator 0x0
 int id custom 0x0
 int id customPanel 0x0
 int id cut 0x0
+<<<<<<< HEAD
 int id dataBinding 0x0
+=======
+>>>>>>> table
 int id date_picker_actions 0x0
 int id decor_content_parent 0x0
 int id default_activity_button 0x0
@@ -1530,9 +1786,17 @@ int id design_navigation_view 0x0
 int id dialog_button 0x0
 int id dropdown_menu 0x0
 int id edit_query 0x0
+<<<<<<< HEAD
 int id end 0x0
 int id end_padder 0x0
 int id errorTv 0x0
+=======
+int id editname 0x0
+int id editpwd 0x0
+int id editpwdd 0x0
+int id end 0x0
+int id end_padder 0x0
+>>>>>>> table
 int id expand_activities_button 0x0
 int id expanded_menu 0x0
 int id fade 0x0
@@ -1541,24 +1805,39 @@ int id filled 0x0
 int id filter_chip 0x0
 int id fixed 0x0
 int id forever 0x0
+<<<<<<< HEAD
 int id forgetThePassword 0x0
 int id ghost_view 0x0
 int id ghost_view_holder 0x0
+=======
+int id ghost_view 0x0
+int id ghost_view_holder 0x0
+int id gone 0x0
+>>>>>>> table
 int id group_divider 0x0
 int id home 0x0
 int id icon 0x0
 int id icon_group 0x0
 int id image 0x0
 int id info 0x0
+<<<<<<< HEAD
+=======
+int id invisible 0x0
+>>>>>>> table
 int id italic 0x0
 int id item_touch_helper_previous_elevation 0x0
 int id labeled 0x0
 int id largeLabel 0x0
 int id left 0x0
+<<<<<<< HEAD
+=======
+int id leftimg 0x0
+>>>>>>> table
 int id line1 0x0
 int id line3 0x0
 int id listMode 0x0
 int id list_item 0x0
+<<<<<<< HEAD
 int id load_more_load_complete_view 0x0
 int id load_more_load_end_view 0x0
 int id load_more_load_fail_view 0x0
@@ -1567,6 +1846,9 @@ int id loadingBar 0x0
 int id loading_progress 0x0
 int id loading_text 0x0
 int id loginConceal 0x0
+=======
+int id loginBtn 0x0
+>>>>>>> table
 int id masked 0x0
 int id media_actions 0x0
 int id message 0x0
@@ -1606,6 +1888,7 @@ int id notification_main_column 0x0
 int id notification_main_column_container 0x0
 int id off 0x0
 int id on 0x0
+<<<<<<< HEAD
 int id onAttachStateChangeListener 0x0
 int id onDateChanged 0x0
 int id outline 0x0
@@ -1613,15 +1896,32 @@ int id parallax 0x0
 int id parentPanel 0x0
 int id parent_matrix 0x0
 int id password_toggle 0x0
+=======
+int id outline 0x0
+int id packed 0x0
+int id parallax 0x0
+int id parent 0x0
+int id parentPanel 0x0
+int id parent_matrix 0x0
+int id password_toggle 0x0
+int id percent 0x0
+>>>>>>> table
 int id pin 0x0
 int id progress_circular 0x0
 int id progress_horizontal 0x0
 int id radio 0x0
+<<<<<<< HEAD
 int id regConceal1 0x0
 int id regConceal2 0x0
 int id right 0x0
 int id right_icon 0x0
 int id right_side 0x0
+=======
+int id right 0x0
+int id right_icon 0x0
+int id right_side 0x0
+int id rightimg 0x0
+>>>>>>> table
 int id rounded 0x0
 int id save_non_transition_alpha 0x0
 int id save_overlay_view 0x0
@@ -1643,11 +1943,14 @@ int id search_src_text 0x0
 int id search_voice_btn 0x0
 int id select_dialog_listview 0x0
 int id selected 0x0
+<<<<<<< HEAD
 int id server_nf_img 0x0
 int id server_nf_pb 0x0
 int id server_nf_text 0x0
 int id server_nf_title 0x0
 int id share_qq 0x0
+=======
+>>>>>>> table
 int id shortcut 0x0
 int id slide 0x0
 int id smallLabel 0x0
@@ -1655,9 +1958,22 @@ int id snackbar_action 0x0
 int id snackbar_text 0x0
 int id spacer 0x0
 int id split_action_bar 0x0
+<<<<<<< HEAD
 int id src_atop 0x0
 int id src_in 0x0
 int id src_over 0x0
+=======
+int id spread 0x0
+int id spread_inside 0x0
+int id src_atop 0x0
+int id src_in 0x0
+int id src_over 0x0
+int id srl_classics_arrow 0x0
+int id srl_classics_center 0x0
+int id srl_classics_progress 0x0
+int id srl_classics_title 0x0
+int id srl_classics_update 0x0
+>>>>>>> table
 int id start 0x0
 int id status_bar_latest_event_content 0x0
 int id stretch 0x0
@@ -1678,7 +1994,10 @@ int id text 0x0
 int id text2 0x0
 int id textSpacerNoButtons 0x0
 int id textSpacerNoTitle 0x0
+<<<<<<< HEAD
 int id textWatcher 0x0
+=======
+>>>>>>> table
 int id text_input_end_icon 0x0
 int id text_input_start_icon 0x0
 int id textinput_counter 0x0
@@ -1689,11 +2008,14 @@ int id title 0x0
 int id titleDividerNoCustom 0x0
 int id title_template 0x0
 int id toRegister 0x0
+<<<<<<< HEAD
 int id toolbar 0x0
 int id toolbar_center_title 0x0
 int id toolbar_left_img 0x0
 int id toolbar_right_img 0x0
 int id toolbar_right_text 0x0
+=======
+>>>>>>> table
 int id top 0x0
 int id topPanel 0x0
 int id touch_outside 0x0
@@ -1702,17 +2024,25 @@ int id transition_layout_save 0x0
 int id transition_position 0x0
 int id transition_scene_layoutid_cache 0x0
 int id transition_transform 0x0
+<<<<<<< HEAD
 int id tv_prompt 0x0
+=======
+>>>>>>> table
 int id unchecked 0x0
 int id uniform 0x0
 int id unlabeled 0x0
 int id up 0x0
 int id view_offset_helper 0x0
 int id visible 0x0
+<<<<<<< HEAD
 int id weibo 0x0
 int id weixin 0x0
 int id window_no 0x0
 int id window_yes 0x0
+=======
+int id vp 0x0
+int id wrap 0x0
+>>>>>>> table
 int id wrap_content 0x0
 int integer abc_config_activityDefaultDur 0x0
 int integer abc_config_activityShortDur 0x0
@@ -1774,12 +2104,18 @@ int layout abc_search_dropdown_item_icons_2line 0x0
 int layout abc_search_view 0x0
 int layout abc_select_dialog_material 0x0
 int layout abc_tooltip 0x0
+<<<<<<< HEAD
 int layout activity_login 0x0
 int layout activity_register 0x0
 int layout activity_user 0x0
 int layout brvah_quick_view_load_more 0x0
 int layout custom_dialog 0x0
 int layout deceive 0x0
+=======
+int layout activity_main 0x0
+int layout activity_main5 0x0
+int layout custom_dialog 0x0
+>>>>>>> table
 int layout design_bottom_navigation_item 0x0
 int layout design_bottom_sheet_dialog 0x0
 int layout design_layout_snackbar 0x0
@@ -1795,6 +2131,11 @@ int layout design_navigation_menu 0x0
 int layout design_navigation_menu_item 0x0
 int layout design_text_input_end_icon 0x0
 int layout design_text_input_start_icon 0x0
+<<<<<<< HEAD
+=======
+int layout fragment_login 0x0
+int layout fragment_register 0x0
+>>>>>>> table
 int layout mtrl_alert_dialog 0x0
 int layout mtrl_alert_dialog_actions 0x0
 int layout mtrl_alert_dialog_title 0x0
@@ -1838,11 +2179,19 @@ int layout notification_template_media 0x0
 int layout notification_template_media_custom 0x0
 int layout notification_template_part_chronometer 0x0
 int layout notification_template_part_time 0x0
+<<<<<<< HEAD
 int layout notification_view 0x0
 int layout pop_dsuccess 0x0
 int layout select_dialog_item_material 0x0
 int layout select_dialog_multichoice_material 0x0
 int layout select_dialog_singlechoice_material 0x0
+=======
+int layout select_dialog_item_material 0x0
+int layout select_dialog_multichoice_material 0x0
+int layout select_dialog_singlechoice_material 0x0
+int layout srl_classics_footer 0x0
+int layout srl_classics_header 0x0
+>>>>>>> table
 int layout support_simple_spinner_dropdown_item 0x0
 int layout test_action_chip 0x0
 int layout test_design_checkbox 0x0
@@ -1856,11 +2205,16 @@ int layout text_view_with_line_height_from_layout 0x0
 int layout text_view_with_line_height_from_style 0x0
 int layout text_view_with_theme_line_height 0x0
 int layout text_view_without_line_height 0x0
+<<<<<<< HEAD
 int layout view_error 0x0
 int layout view_loading 0x0
 int layout view_toolbar 0x0
 int plurals mtrl_badge_content_description 0x0
 int string OtherLoginMethods 0x0
+=======
+int layout toorbarview 0x0
+int plurals mtrl_badge_content_description 0x0
+>>>>>>> table
 int string abc_action_bar_home_description 0x0
 int string abc_action_bar_up_description 0x0
 int string abc_action_menu_overflow_description 0x0
@@ -1869,6 +2223,7 @@ int string abc_activity_chooser_view_see_all 0x0
 int string abc_activitychooserview_choose_application 0x0
 int string abc_capital_off 0x0
 int string abc_capital_on 0x0
+<<<<<<< HEAD
 int string abc_font_family_body_1_material 0x0
 int string abc_font_family_body_2_material 0x0
 int string abc_font_family_button_material 0x0
@@ -1881,6 +2236,8 @@ int string abc_font_family_headline_material 0x0
 int string abc_font_family_menu_material 0x0
 int string abc_font_family_subhead_material 0x0
 int string abc_font_family_title_material 0x0
+=======
+>>>>>>> table
 int string abc_menu_alt_shortcut_label 0x0
 int string abc_menu_ctrl_shortcut_label 0x0
 int string abc_menu_delete_shortcut_label 0x0
@@ -1900,6 +2257,7 @@ int string abc_searchview_description_voice 0x0
 int string abc_shareactionprovider_share_with 0x0
 int string abc_shareactionprovider_share_with_application 0x0
 int string abc_toolbar_collapse_description 0x0
+<<<<<<< HEAD
 int string accountNumber 0x0
 int string appbar_scrolling_view_behavior 0x0
 int string backLogin 0x0
@@ -1911,24 +2269,41 @@ int string brvah_load_failed 0x0
 int string brvah_loading 0x0
 int string cellPhoneNumber 0x0
 int string changeThePicture 0x0
+=======
+int string appbar_scrolling_view_behavior 0x0
+int string bottom_sheet_behavior 0x0
+>>>>>>> table
 int string character_counter_content_description 0x0
 int string character_counter_overflowed_content_description 0x0
 int string character_counter_pattern 0x0
 int string chip_text 0x0
 int string clear_text_end_icon_content_description 0x0
+<<<<<<< HEAD
 int string confirmPassword 0x0
 int string consent 0x0
 int string consent2 0x0
 int string enterYourPIN 0x0
+=======
+int string edPwd 0x0
+int string edPwd2 0x0
+int string edUsername 0x0
+>>>>>>> table
 int string error_icon_content_description 0x0
 int string exposed_dropdown_menu_content_description 0x0
 int string fab_transformation_scrim_behavior 0x0
 int string fab_transformation_sheet_behavior 0x0
+<<<<<<< HEAD
 int string forgetThePassword 0x0
+=======
+>>>>>>> table
 int string hello_blank_fragment 0x0
 int string hide_bottom_view_on_scroll_behavior 0x0
 int string icon_content_description 0x0
 int string login 0x0
+<<<<<<< HEAD
+=======
+int string loginYes 0x0
+>>>>>>> table
 int string mtrl_badge_numberless_content_description 0x0
 int string mtrl_chip_close_icon_content_description 0x0
 int string mtrl_exceed_max_badge_number_suffix 0x0
@@ -1963,12 +2338,17 @@ int string mtrl_picker_toggle_to_calendar_input_mode 0x0
 int string mtrl_picker_toggle_to_day_selection 0x0
 int string mtrl_picker_toggle_to_text_input_mode 0x0
 int string mtrl_picker_toggle_to_year_selection 0x0
+<<<<<<< HEAD
 int string password 0x0
+=======
+int string notNull 0x0
+>>>>>>> table
 int string password_toggle_content_description 0x0
 int string path_password_eye 0x0
 int string path_password_eye_mask_strike_through 0x0
 int string path_password_eye_mask_visible 0x0
 int string path_password_strike_through 0x0
+<<<<<<< HEAD
 int string please 0x0
 int string pleaseEnterAUserName 0x0
 int string pleaseEnterYourCellPhoneNumber 0x0
@@ -1981,6 +2361,34 @@ int string theUsernameAndPasswordCannotBeEmpty 0x0
 int string userLogin 0x0
 int string userRegistration 0x0
 int string usermassage 0x0
+=======
+int string pwd 0x0
+int string register 0x0
+int string registerUser 0x0
+int string registerYes 0x0
+int string search_menu_title 0x0
+int string srl_component_falsify 0x0
+int string srl_content_empty 0x0
+int string srl_footer_failed 0x0
+int string srl_footer_finish 0x0
+int string srl_footer_loading 0x0
+int string srl_footer_nothing 0x0
+int string srl_footer_pulling 0x0
+int string srl_footer_refreshing 0x0
+int string srl_footer_release 0x0
+int string srl_header_failed 0x0
+int string srl_header_finish 0x0
+int string srl_header_loading 0x0
+int string srl_header_pulling 0x0
+int string srl_header_refreshing 0x0
+int string srl_header_release 0x0
+int string srl_header_secondary 0x0
+int string srl_header_update 0x0
+int string status_bar_notification_info_overflow 0x0
+int string toLogin 0x0
+int string toRegister 0x0
+int string usereNewUser 0x0
+>>>>>>> table
 int string username 0x0
 int style ActivityTranslucent 0x0
 int style AlertDialog_AppCompat 0x0
@@ -2404,7 +2812,10 @@ int style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox 0x0
 int style ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense 0x0
 int style ThemeOverlay_MaterialComponents_Toolbar_Primary 0x0
 int style ThemeOverlay_MaterialComponents_Toolbar_Surface 0x0
+<<<<<<< HEAD
 int style Theme_1809Fiannce 0x0
+=======
+>>>>>>> table
 int style Theme_AppCompat 0x0
 int style Theme_AppCompat_CompactMenu 0x0
 int style Theme_AppCompat_DayNight 0x0
@@ -2659,7 +3070,10 @@ int style Widget_MaterialComponents_Toolbar_Primary 0x0
 int style Widget_MaterialComponents_Toolbar_PrimarySurface 0x0
 int style Widget_MaterialComponents_Toolbar_Surface 0x0
 int style Widget_Support_CoordinatorLayout 0x0
+<<<<<<< HEAD
 int style bigTextStyle 0x0
+=======
+>>>>>>> table
 int[] styleable ActionBar { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable ActionBar_background 0
 int styleable ActionBar_backgroundSplit 1
@@ -2918,6 +3332,17 @@ int styleable Badge_badgeGravity 1
 int styleable Badge_badgeTextColor 2
 int styleable Badge_maxCharacterCount 3
 int styleable Badge_number 4
+<<<<<<< HEAD
+=======
+int[] styleable BallPulseFooter { 0x0, 0x0, 0x0 }
+int styleable BallPulseFooter_srlAnimatingColor 0
+int styleable BallPulseFooter_srlClassicsSpinnerStyle 1
+int styleable BallPulseFooter_srlNormalColor 2
+int[] styleable BezierRadarHeader { 0x0, 0x0, 0x0 }
+int styleable BezierRadarHeader_srlAccentColor 0
+int styleable BezierRadarHeader_srlEnableHorizontalDrag 1
+int styleable BezierRadarHeader_srlPrimaryColor 2
+>>>>>>> table
 int[] styleable BottomAppBar { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable BottomAppBar_backgroundTint 0
 int styleable BottomAppBar_elevation 1
@@ -3016,6 +3441,51 @@ int styleable ChipGroup_chipSpacingHorizontal 2
 int styleable ChipGroup_chipSpacingVertical 3
 int styleable ChipGroup_singleLine 4
 int styleable ChipGroup_singleSelection 5
+<<<<<<< HEAD
+=======
+int[] styleable ClassicsFooter { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable ClassicsFooter_srlAccentColor 0
+int styleable ClassicsFooter_srlClassicsSpinnerStyle 1
+int styleable ClassicsFooter_srlDrawableArrow 2
+int styleable ClassicsFooter_srlDrawableArrowSize 3
+int styleable ClassicsFooter_srlDrawableMarginRight 4
+int styleable ClassicsFooter_srlDrawableProgress 5
+int styleable ClassicsFooter_srlDrawableProgressSize 6
+int styleable ClassicsFooter_srlDrawableSize 7
+int styleable ClassicsFooter_srlFinishDuration 8
+int styleable ClassicsFooter_srlPrimaryColor 9
+int styleable ClassicsFooter_srlTextFailed 10
+int styleable ClassicsFooter_srlTextFinish 11
+int styleable ClassicsFooter_srlTextLoading 12
+int styleable ClassicsFooter_srlTextNothing 13
+int styleable ClassicsFooter_srlTextPulling 14
+int styleable ClassicsFooter_srlTextRefreshing 15
+int styleable ClassicsFooter_srlTextRelease 16
+int styleable ClassicsFooter_srlTextSizeTitle 17
+int[] styleable ClassicsHeader { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable ClassicsHeader_srlAccentColor 0
+int styleable ClassicsHeader_srlClassicsSpinnerStyle 1
+int styleable ClassicsHeader_srlDrawableArrow 2
+int styleable ClassicsHeader_srlDrawableArrowSize 3
+int styleable ClassicsHeader_srlDrawableMarginRight 4
+int styleable ClassicsHeader_srlDrawableProgress 5
+int styleable ClassicsHeader_srlDrawableProgressSize 6
+int styleable ClassicsHeader_srlDrawableSize 7
+int styleable ClassicsHeader_srlEnableLastTime 8
+int styleable ClassicsHeader_srlFinishDuration 9
+int styleable ClassicsHeader_srlPrimaryColor 10
+int styleable ClassicsHeader_srlTextFailed 11
+int styleable ClassicsHeader_srlTextFinish 12
+int styleable ClassicsHeader_srlTextLoading 13
+int styleable ClassicsHeader_srlTextPulling 14
+int styleable ClassicsHeader_srlTextRefreshing 15
+int styleable ClassicsHeader_srlTextRelease 16
+int styleable ClassicsHeader_srlTextSecondary 17
+int styleable ClassicsHeader_srlTextSizeTime 18
+int styleable ClassicsHeader_srlTextSizeTitle 19
+int styleable ClassicsHeader_srlTextTimeMarginTop 20
+int styleable ClassicsHeader_srlTextUpdate 21
+>>>>>>> table
 int[] styleable CollapsingToolbarLayout { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable CollapsingToolbarLayout_collapsedTitleGravity 0
 int styleable CollapsingToolbarLayout_collapsedTitleTextAppearance 1
@@ -3045,6 +3515,154 @@ int styleable CompoundButton_android_button 0
 int styleable CompoundButton_buttonCompat 1
 int styleable CompoundButton_buttonTint 2
 int styleable CompoundButton_buttonTintMode 3
+<<<<<<< HEAD
+=======
+int[] styleable ConstraintLayout_Layout { 0x1010120, 0x101011f, 0x1010140, 0x101013f, 0x10100c4, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable ConstraintLayout_Layout_android_maxHeight 0
+int styleable ConstraintLayout_Layout_android_maxWidth 1
+int styleable ConstraintLayout_Layout_android_minHeight 2
+int styleable ConstraintLayout_Layout_android_minWidth 3
+int styleable ConstraintLayout_Layout_android_orientation 4
+int styleable ConstraintLayout_Layout_barrierAllowsGoneWidgets 5
+int styleable ConstraintLayout_Layout_barrierDirection 6
+int styleable ConstraintLayout_Layout_chainUseRtl 7
+int styleable ConstraintLayout_Layout_constraintSet 8
+int styleable ConstraintLayout_Layout_constraint_referenced_ids 9
+int styleable ConstraintLayout_Layout_layout_constrainedHeight 10
+int styleable ConstraintLayout_Layout_layout_constrainedWidth 11
+int styleable ConstraintLayout_Layout_layout_constraintBaseline_creator 12
+int styleable ConstraintLayout_Layout_layout_constraintBaseline_toBaselineOf 13
+int styleable ConstraintLayout_Layout_layout_constraintBottom_creator 14
+int styleable ConstraintLayout_Layout_layout_constraintBottom_toBottomOf 15
+int styleable ConstraintLayout_Layout_layout_constraintBottom_toTopOf 16
+int styleable ConstraintLayout_Layout_layout_constraintCircle 17
+int styleable ConstraintLayout_Layout_layout_constraintCircleAngle 18
+int styleable ConstraintLayout_Layout_layout_constraintCircleRadius 19
+int styleable ConstraintLayout_Layout_layout_constraintDimensionRatio 20
+int styleable ConstraintLayout_Layout_layout_constraintEnd_toEndOf 21
+int styleable ConstraintLayout_Layout_layout_constraintEnd_toStartOf 22
+int styleable ConstraintLayout_Layout_layout_constraintGuide_begin 23
+int styleable ConstraintLayout_Layout_layout_constraintGuide_end 24
+int styleable ConstraintLayout_Layout_layout_constraintGuide_percent 25
+int styleable ConstraintLayout_Layout_layout_constraintHeight_default 26
+int styleable ConstraintLayout_Layout_layout_constraintHeight_max 27
+int styleable ConstraintLayout_Layout_layout_constraintHeight_min 28
+int styleable ConstraintLayout_Layout_layout_constraintHeight_percent 29
+int styleable ConstraintLayout_Layout_layout_constraintHorizontal_bias 30
+int styleable ConstraintLayout_Layout_layout_constraintHorizontal_chainStyle 31
+int styleable ConstraintLayout_Layout_layout_constraintHorizontal_weight 32
+int styleable ConstraintLayout_Layout_layout_constraintLeft_creator 33
+int styleable ConstraintLayout_Layout_layout_constraintLeft_toLeftOf 34
+int styleable ConstraintLayout_Layout_layout_constraintLeft_toRightOf 35
+int styleable ConstraintLayout_Layout_layout_constraintRight_creator 36
+int styleable ConstraintLayout_Layout_layout_constraintRight_toLeftOf 37
+int styleable ConstraintLayout_Layout_layout_constraintRight_toRightOf 38
+int styleable ConstraintLayout_Layout_layout_constraintStart_toEndOf 39
+int styleable ConstraintLayout_Layout_layout_constraintStart_toStartOf 40
+int styleable ConstraintLayout_Layout_layout_constraintTop_creator 41
+int styleable ConstraintLayout_Layout_layout_constraintTop_toBottomOf 42
+int styleable ConstraintLayout_Layout_layout_constraintTop_toTopOf 43
+int styleable ConstraintLayout_Layout_layout_constraintVertical_bias 44
+int styleable ConstraintLayout_Layout_layout_constraintVertical_chainStyle 45
+int styleable ConstraintLayout_Layout_layout_constraintVertical_weight 46
+int styleable ConstraintLayout_Layout_layout_constraintWidth_default 47
+int styleable ConstraintLayout_Layout_layout_constraintWidth_max 48
+int styleable ConstraintLayout_Layout_layout_constraintWidth_min 49
+int styleable ConstraintLayout_Layout_layout_constraintWidth_percent 50
+int styleable ConstraintLayout_Layout_layout_editor_absoluteX 51
+int styleable ConstraintLayout_Layout_layout_editor_absoluteY 52
+int styleable ConstraintLayout_Layout_layout_goneMarginBottom 53
+int styleable ConstraintLayout_Layout_layout_goneMarginEnd 54
+int styleable ConstraintLayout_Layout_layout_goneMarginLeft 55
+int styleable ConstraintLayout_Layout_layout_goneMarginRight 56
+int styleable ConstraintLayout_Layout_layout_goneMarginStart 57
+int styleable ConstraintLayout_Layout_layout_goneMarginTop 58
+int styleable ConstraintLayout_Layout_layout_optimizationLevel 59
+int[] styleable ConstraintLayout_placeholder { 0x0, 0x0 }
+int styleable ConstraintLayout_placeholder_content 0
+int styleable ConstraintLayout_placeholder_emptyVisibility 1
+int[] styleable ConstraintSet { 0x101031f, 0x1010440, 0x10100d0, 0x10100f5, 0x10100fa, 0x10103b6, 0x10100f7, 0x10100f9, 0x10103b5, 0x10100f8, 0x10100f4, 0x1010120, 0x101011f, 0x1010140, 0x101013f, 0x10100c4, 0x1010326, 0x1010327, 0x1010328, 0x1010324, 0x1010325, 0x1010320, 0x1010321, 0x1010322, 0x1010323, 0x10103fa, 0x10100dc, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable ConstraintSet_android_alpha 0
+int styleable ConstraintSet_android_elevation 1
+int styleable ConstraintSet_android_id 2
+int styleable ConstraintSet_android_layout_height 3
+int styleable ConstraintSet_android_layout_marginBottom 4
+int styleable ConstraintSet_android_layout_marginEnd 5
+int styleable ConstraintSet_android_layout_marginLeft 6
+int styleable ConstraintSet_android_layout_marginRight 7
+int styleable ConstraintSet_android_layout_marginStart 8
+int styleable ConstraintSet_android_layout_marginTop 9
+int styleable ConstraintSet_android_layout_width 10
+int styleable ConstraintSet_android_maxHeight 11
+int styleable ConstraintSet_android_maxWidth 12
+int styleable ConstraintSet_android_minHeight 13
+int styleable ConstraintSet_android_minWidth 14
+int styleable ConstraintSet_android_orientation 15
+int styleable ConstraintSet_android_rotation 16
+int styleable ConstraintSet_android_rotationX 17
+int styleable ConstraintSet_android_rotationY 18
+int styleable ConstraintSet_android_scaleX 19
+int styleable ConstraintSet_android_scaleY 20
+int styleable ConstraintSet_android_transformPivotX 21
+int styleable ConstraintSet_android_transformPivotY 22
+int styleable ConstraintSet_android_translationX 23
+int styleable ConstraintSet_android_translationY 24
+int styleable ConstraintSet_android_translationZ 25
+int styleable ConstraintSet_android_visibility 26
+int styleable ConstraintSet_barrierAllowsGoneWidgets 27
+int styleable ConstraintSet_barrierDirection 28
+int styleable ConstraintSet_chainUseRtl 29
+int styleable ConstraintSet_constraint_referenced_ids 30
+int styleable ConstraintSet_layout_constrainedHeight 31
+int styleable ConstraintSet_layout_constrainedWidth 32
+int styleable ConstraintSet_layout_constraintBaseline_creator 33
+int styleable ConstraintSet_layout_constraintBaseline_toBaselineOf 34
+int styleable ConstraintSet_layout_constraintBottom_creator 35
+int styleable ConstraintSet_layout_constraintBottom_toBottomOf 36
+int styleable ConstraintSet_layout_constraintBottom_toTopOf 37
+int styleable ConstraintSet_layout_constraintCircle 38
+int styleable ConstraintSet_layout_constraintCircleAngle 39
+int styleable ConstraintSet_layout_constraintCircleRadius 40
+int styleable ConstraintSet_layout_constraintDimensionRatio 41
+int styleable ConstraintSet_layout_constraintEnd_toEndOf 42
+int styleable ConstraintSet_layout_constraintEnd_toStartOf 43
+int styleable ConstraintSet_layout_constraintGuide_begin 44
+int styleable ConstraintSet_layout_constraintGuide_end 45
+int styleable ConstraintSet_layout_constraintGuide_percent 46
+int styleable ConstraintSet_layout_constraintHeight_default 47
+int styleable ConstraintSet_layout_constraintHeight_max 48
+int styleable ConstraintSet_layout_constraintHeight_min 49
+int styleable ConstraintSet_layout_constraintHeight_percent 50
+int styleable ConstraintSet_layout_constraintHorizontal_bias 51
+int styleable ConstraintSet_layout_constraintHorizontal_chainStyle 52
+int styleable ConstraintSet_layout_constraintHorizontal_weight 53
+int styleable ConstraintSet_layout_constraintLeft_creator 54
+int styleable ConstraintSet_layout_constraintLeft_toLeftOf 55
+int styleable ConstraintSet_layout_constraintLeft_toRightOf 56
+int styleable ConstraintSet_layout_constraintRight_creator 57
+int styleable ConstraintSet_layout_constraintRight_toLeftOf 58
+int styleable ConstraintSet_layout_constraintRight_toRightOf 59
+int styleable ConstraintSet_layout_constraintStart_toEndOf 60
+int styleable ConstraintSet_layout_constraintStart_toStartOf 61
+int styleable ConstraintSet_layout_constraintTop_creator 62
+int styleable ConstraintSet_layout_constraintTop_toBottomOf 63
+int styleable ConstraintSet_layout_constraintTop_toTopOf 64
+int styleable ConstraintSet_layout_constraintVertical_bias 65
+int styleable ConstraintSet_layout_constraintVertical_chainStyle 66
+int styleable ConstraintSet_layout_constraintVertical_weight 67
+int styleable ConstraintSet_layout_constraintWidth_default 68
+int styleable ConstraintSet_layout_constraintWidth_max 69
+int styleable ConstraintSet_layout_constraintWidth_min 70
+int styleable ConstraintSet_layout_constraintWidth_percent 71
+int styleable ConstraintSet_layout_editor_absoluteX 72
+int styleable ConstraintSet_layout_editor_absoluteY 73
+int styleable ConstraintSet_layout_goneMarginBottom 74
+int styleable ConstraintSet_layout_goneMarginEnd 75
+int styleable ConstraintSet_layout_goneMarginLeft 76
+int styleable ConstraintSet_layout_goneMarginRight 77
+int styleable ConstraintSet_layout_goneMarginStart 78
+int styleable ConstraintSet_layout_goneMarginTop 79
+>>>>>>> table
 int[] styleable CoordinatorLayout { 0x0, 0x0 }
 int styleable CoordinatorLayout_keylines 0
 int styleable CoordinatorLayout_statusBarBackground 1
@@ -3134,6 +3752,11 @@ int styleable GradientColor_android_type 11
 int[] styleable GradientColorItem { 0x10101a5, 0x1010514 }
 int styleable GradientColorItem_android_color 0
 int styleable GradientColorItem_android_offset 1
+<<<<<<< HEAD
+=======
+int[] styleable LinearConstraintLayout { 0x10100c4 }
+int styleable LinearConstraintLayout_android_orientation 0
+>>>>>>> table
 int[] styleable LinearLayoutCompat { 0x1010126, 0x1010127, 0x10100af, 0x10100c4, 0x1010128, 0x0, 0x0, 0x0, 0x0 }
 int styleable LinearLayoutCompat_android_baselineAligned 0
 int styleable LinearLayoutCompat_android_baselineAlignedChildIndex 1
@@ -3275,6 +3898,15 @@ int styleable MenuView_android_verticalDivider 5
 int styleable MenuView_android_windowAnimationStyle 6
 int styleable MenuView_preserveIconSpacing 7
 int styleable MenuView_subMenuArrow 8
+<<<<<<< HEAD
+=======
+int[] styleable MyToorbar { 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable MyToorbar_isleft 0
+int styleable MyToorbar_isright 1
+int styleable MyToorbar_leftimg 2
+int styleable MyToorbar_rightimg 3
+int styleable MyToorbar_titletext 4
+>>>>>>> table
 int[] styleable NavigationView { 0x10100d4, 0x10100dd, 0x101011f, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable NavigationView_android_background 0
 int styleable NavigationView_android_fitsSystemWindows 1
@@ -3303,12 +3935,15 @@ int styleable PopupWindow_android_popupBackground 1
 int styleable PopupWindow_overlapAnchor 2
 int[] styleable PopupWindowBackgroundState { 0x0 }
 int styleable PopupWindowBackgroundState_state_above_anchor 0
+<<<<<<< HEAD
 int[] styleable ProgressView { 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable ProgressView_wp_paintCircleWidth 0
 int styleable ProgressView_wp_paintTextColor 1
 int styleable ProgressView_wp_paintTextSize 2
 int styleable ProgressView_wp_progressBackRoundColor 3
 int styleable ProgressView_wp_progressColor 4
+=======
+>>>>>>> table
 int[] styleable RecycleListView { 0x0, 0x0 }
 int styleable RecycleListView_paddingBottomNoButtons 0
 int styleable RecycleListView_paddingTopNoTitle 1
@@ -3358,6 +3993,50 @@ int styleable ShapeAppearance_cornerSizeBottomLeft 6
 int styleable ShapeAppearance_cornerSizeBottomRight 7
 int styleable ShapeAppearance_cornerSizeTopLeft 8
 int styleable ShapeAppearance_cornerSizeTopRight 9
+<<<<<<< HEAD
+=======
+int[] styleable SmartRefreshLayout { 0x10100ea, 0x10100eb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable SmartRefreshLayout_android_clipChildren 0
+int styleable SmartRefreshLayout_android_clipToPadding 1
+int styleable SmartRefreshLayout_srlAccentColor 2
+int styleable SmartRefreshLayout_srlDisableContentWhenLoading 3
+int styleable SmartRefreshLayout_srlDisableContentWhenRefresh 4
+int styleable SmartRefreshLayout_srlDragRate 5
+int styleable SmartRefreshLayout_srlEnableAutoLoadMore 6
+int styleable SmartRefreshLayout_srlEnableClipFooterWhenFixedBehind 7
+int styleable SmartRefreshLayout_srlEnableClipHeaderWhenFixedBehind 8
+int styleable SmartRefreshLayout_srlEnableFooterFollowWhenLoadFinished 9
+int styleable SmartRefreshLayout_srlEnableFooterFollowWhenNoMoreData 10
+int styleable SmartRefreshLayout_srlEnableFooterTranslationContent 11
+int styleable SmartRefreshLayout_srlEnableHeaderTranslationContent 12
+int styleable SmartRefreshLayout_srlEnableLoadMore 13
+int styleable SmartRefreshLayout_srlEnableLoadMoreWhenContentNotFull 14
+int styleable SmartRefreshLayout_srlEnableNestedScrolling 15
+int styleable SmartRefreshLayout_srlEnableOverScrollBounce 16
+int styleable SmartRefreshLayout_srlEnableOverScrollDrag 17
+int styleable SmartRefreshLayout_srlEnablePreviewInEditMode 18
+int styleable SmartRefreshLayout_srlEnablePureScrollMode 19
+int styleable SmartRefreshLayout_srlEnableRefresh 20
+int styleable SmartRefreshLayout_srlEnableScrollContentWhenLoaded 21
+int styleable SmartRefreshLayout_srlEnableScrollContentWhenRefreshed 22
+int styleable SmartRefreshLayout_srlFixedFooterViewId 23
+int styleable SmartRefreshLayout_srlFixedHeaderViewId 24
+int styleable SmartRefreshLayout_srlFooterHeight 25
+int styleable SmartRefreshLayout_srlFooterInsetStart 26
+int styleable SmartRefreshLayout_srlFooterMaxDragRate 27
+int styleable SmartRefreshLayout_srlFooterTranslationViewId 28
+int styleable SmartRefreshLayout_srlFooterTriggerRate 29
+int styleable SmartRefreshLayout_srlHeaderHeight 30
+int styleable SmartRefreshLayout_srlHeaderInsetStart 31
+int styleable SmartRefreshLayout_srlHeaderMaxDragRate 32
+int styleable SmartRefreshLayout_srlHeaderTranslationViewId 33
+int styleable SmartRefreshLayout_srlHeaderTriggerRate 34
+int styleable SmartRefreshLayout_srlPrimaryColor 35
+int styleable SmartRefreshLayout_srlReboundDuration 36
+int[] styleable SmartRefreshLayout_Layout { 0x0, 0x0 }
+int styleable SmartRefreshLayout_Layout_layout_srlBackgroundColor 0
+int styleable SmartRefreshLayout_Layout_layout_srlSpinnerStyle 1
+>>>>>>> table
 int[] styleable Snackbar { 0x0, 0x0 }
 int styleable Snackbar_snackbarButtonStyle 0
 int styleable Snackbar_snackbarStyle 1
@@ -3502,6 +4181,7 @@ int[] styleable ThemeEnforcement { 0x1010034, 0x0, 0x0 }
 int styleable ThemeEnforcement_android_textAppearance 0
 int styleable ThemeEnforcement_enforceMaterialTheme 1
 int styleable ThemeEnforcement_enforceTextAppearance 2
+<<<<<<< HEAD
 int[] styleable ToolBar { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable ToolBar_wp_CenterTitle 0
 int styleable ToolBar_wp_RightTitle 1
@@ -3509,6 +4189,8 @@ int styleable ToolBar_wp_istoolbarLeftImg 2
 int styleable ToolBar_wp_istoolbarRightImg 3
 int styleable ToolBar_wp_leftImId 4
 int styleable ToolBar_wp_rightImgId 5
+=======
+>>>>>>> table
 int[] styleable Toolbar { 0x10100af, 0x1010140, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
 int styleable Toolbar_android_gravity 0
 int styleable Toolbar_android_minHeight 1
@@ -3540,6 +4222,16 @@ int styleable Toolbar_titleMarginTop 26
 int styleable Toolbar_titleMargins 27
 int styleable Toolbar_titleTextAppearance 28
 int styleable Toolbar_titleTextColor 29
+<<<<<<< HEAD
+=======
+int[] styleable TwoLevelHeader { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+int styleable TwoLevelHeader_srlEnablePullToCloseTwoLevel 0
+int styleable TwoLevelHeader_srlEnableTwoLevel 1
+int styleable TwoLevelHeader_srlFloorDuration 2
+int styleable TwoLevelHeader_srlFloorRage 3
+int styleable TwoLevelHeader_srlMaxRage 4
+int styleable TwoLevelHeader_srlRefreshRage 5
+>>>>>>> table
 int[] styleable View { 0x10100da, 0x1010000, 0x0, 0x0, 0x0 }
 int styleable View_android_focusable 0
 int styleable View_android_theme 1

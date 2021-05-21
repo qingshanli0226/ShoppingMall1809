@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <resources xmlns:ns1="http://schemas.android.com/tools">
     <color name="ashen">#F6F6F6</color>
     <color name="black">#FF000000</color>
@@ -99,4 +100,29 @@
         <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
         
     </style>
+=======
+<resources>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <string name="edPwd">请输入密码</string>
+    <string name="edPwd2">请再次输入密码</string>
+    <string name="edUsername">请输入用户名</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">登录</string>
+    <string name="loginYes">登陆成功</string>
+    <string name="notNull">不能为空</string>
+    <string name="pwd">密    码</string>
+    <string name="register">注册</string>
+    <string name="registerUser">注册新用户</string>
+    <string name="registerYes">注册成功</string>
+    <string name="toLogin">请登陆</string>
+    <string name="toRegister">请注册</string>
+    <string name="usereNewUser">注册新用户</string>
+    <string name="username">账    号</string>
+>>>>>>> table
 </resources>

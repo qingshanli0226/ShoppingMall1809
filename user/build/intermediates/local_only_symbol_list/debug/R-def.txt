@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+<<<<<<< HEAD
 color ashen
 color black
 color colorA
@@ -122,3 +123,40 @@ string userRegistration
 string usermassage
 string username
 style Theme.1809Fiannce
+=======
+dimen dp_0
+dimen dp_10
+dimen dp_20
+dimen dp_30
+dimen dp_40
+dimen dp_50
+dimen dp_80
+drawable back
+drawable ic_launcher_background
+drawable welcomeimage
+id btn
+id editname
+id editpwd
+id editpwdd
+id loginBtn
+id toRegister
+id vp
+layout activity_main5
+layout fragment_login
+layout fragment_register
+string edPwd
+string edPwd2
+string edUsername
+string hello_blank_fragment
+string login
+string loginYes
+string notNull
+string pwd
+string register
+string registerUser
+string registerYes
+string toLogin
+string toRegister
+string usereNewUser
+string username
+>>>>>>> table
