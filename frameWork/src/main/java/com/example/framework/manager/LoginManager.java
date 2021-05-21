@@ -1,5 +1,7 @@
 package com.example.framework.manager;
 
+import com.example.net.bean.LoginBean;
+
 public class LoginManager {
 
     private static LoginManager loginManager;
@@ -16,6 +18,15 @@ public class LoginManager {
     }
 
     private Boolean loginstate;
+    private LoginBean loginBean;
+
+    public LoginBean getLoginBean() {
+        return loginBean;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
 
     public Boolean getLoginstate() {
         return loginstate;

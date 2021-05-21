@@ -4,6 +4,7 @@ import android.app.Application;
 
 
 import com.example.common.module.CommonArouter;
+import com.example.net.module.NetModule;
 import com.example.threeshopping.module.AppModule;
 
 public class App extends Application {
@@ -12,6 +13,6 @@ public class App extends Application {
         super.onCreate();
         CommonArouter.getInstance().init(this);
         AppModule.init();
-
+        NetModule.context = this;
     }
 }

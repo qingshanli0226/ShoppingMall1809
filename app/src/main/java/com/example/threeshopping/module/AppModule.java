@@ -14,4 +14,6 @@ public class AppModule {
         CommonArouter.getInstance().registerPath(Constants.PATH_LOGIN, LoginActivity.class);
         CommonArouter.getInstance().registerPath(Constants.PATH_REGISTER, RegisterActivity.class);
     }
+
+
 }

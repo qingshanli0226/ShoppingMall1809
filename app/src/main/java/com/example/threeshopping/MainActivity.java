@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.mainTwo:
                         showFragment(1);
+
                         if (loginstate!=null){
                             if (!loginstate){
                                 CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();

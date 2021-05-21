@@ -2,6 +2,7 @@ package com.example.threeshopping.welcome;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.example.framework.manager.CacheHomeManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.HomeBean;
 import com.example.threeshopping.R;
+import com.example.user.service.UserService;
 
 public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeView {
 
@@ -30,6 +32,8 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
     @Override
     public void initPresenter() {
         mPresenter = new HomePresenter(this);
+        Intent intent = new Intent(this, UserService.class);
+        startService(intent);
     }
 
     @Override
@@ -53,8 +57,8 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
 
     @Override
     public void onHome(HomeBean homeBean) {
-        CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
         CacheHomeManager.getInstance().setHomeBean(homeBean);
+        CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
     }
 
 
