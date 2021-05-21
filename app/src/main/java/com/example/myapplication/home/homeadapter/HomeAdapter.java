@@ -1,6 +1,7 @@
 package com.example.myapplication.home.homeadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +89,7 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 recommentRecAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "点击了Item", Toast.LENGTH_SHORT).show();
+//                        new Intent(holder.itemView.getContext(),)
                     }
 
                     @Override
