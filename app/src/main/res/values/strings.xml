@@ -32,6 +32,8 @@
     <string name="news">新品推荐</string>
     <string name="here">这里都是买的棒棒哒</string>
     <string name="more">查看更多</string>
+    <!--fragment_type-->
 
-
+    <string name="type_one">热卖推荐</string>
+    <string name="type_two">推荐商品</string>
 </resources>

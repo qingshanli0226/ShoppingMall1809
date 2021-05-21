@@ -1,11 +1,13 @@
 package com.example.threeshopping.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -103,6 +105,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 ChannelAdapter channelAdapter = new ChannelAdapter();
                 channelAdapter.getData().addAll(channelInfoBeans);
                 itemRv.setAdapter(channelAdapter);
+
                 break;
             case 2:
                 ViewPager itemViewpage = holder.getView(R.id.itemViewpage);
@@ -136,6 +139,21 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 SekillAdapter sekillAdapter = new SekillAdapter();
                 sekillAdapter.getData().addAll(seckillInfoBeans.getList());
                 sekllRv.setAdapter(sekillAdapter);
+                //点击跳转
+                sekillAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
+                    @Override
+                    public void onItemClick(int position,View view) {
+
+                    }
+
+                    @Override
+                    public boolean onLongItemClick(int position,View view) {
+                        Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                });
+
                 break;
             case 4:
                 ImageView itemLeft = holder.getView(R.id.itemRecommendLeft);
@@ -145,10 +163,26 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 itemRight.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_right));
                 RecyclerView itemReRv = holder.getView(R.id.itemRecommend);
                 List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemView;
+
                 itemReRv.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
                 ReCommendAdapter reCommendAdapter = new ReCommendAdapter();
                 reCommendAdapter.getData().addAll(recommendInfoBeans);
                 itemReRv.setAdapter(reCommendAdapter);
+                //点击跳转
+                reCommendAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
+                    @Override
+                    public void onItemClick(int position,View view) {
+                        Toast.makeText(holder.itemView.getContext(), "断", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public boolean onLongItemClick(int position,View view) {
+                        Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                });
+
 
                 break;
             case 5:
@@ -165,6 +199,20 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 hotAdapter.getData().addAll(hotInfoBeans);
                 itemhotRv.setAdapter(hotAdapter);
 
+                //点击跳转
+                hotAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
+                    @Override
+                    public void onItemClick(int position,View view) {
+                        Toast.makeText(holder.itemView.getContext(), "断", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public boolean onLongItemClick(int position,View view) {
+                        Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                });
                 break;
         }
 

@@ -52,7 +52,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
             @Override
             public void onClick(View v) {
                 if (rvItemOnClickListener != null) {
-                    rvItemOnClickListener.onItemClick(position);
+                    rvItemOnClickListener.onItemClick(position,v);
                 }
             }
         });
@@ -61,7 +61,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
             public boolean onLongClick(View v) {
                 boolean isUse = false;
                 if (rvItemOnClickListener != null) {
-                    isUse  = rvItemOnClickListener.onLongItemClick(position);
+                    isUse  = rvItemOnClickListener.onLongItemClick(position,v);
                 }
                 return isUse;
             }
@@ -92,7 +92,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
     }
 
     public interface IRvItemOnClickListener{
-        void onItemClick(int position);
-        boolean onLongItemClick(int position);
+        void onItemClick(int position,View view);
+        boolean onLongItemClick(int position,View view);
     }
 }
