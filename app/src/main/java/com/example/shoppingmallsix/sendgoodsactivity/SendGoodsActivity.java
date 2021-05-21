@@ -3,12 +3,14 @@ package com.example.shoppingmallsix.sendgoodsactivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.framework.BaseActivity;
+import com.example.framework.view.ToolBar;
 import com.example.shoppingmallsix.R;
 
 public class SendGoodsActivity extends BaseActivity {
-
+    private ToolBar toolbar;
     @Override
     protected void initPresenter() {
 
@@ -22,6 +24,15 @@ public class SendGoodsActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
