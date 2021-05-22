@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".moreactivity.MoreActivity">
+
+    <com.example.framework.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:id="@+id/toolbar"
+        app:leftImg="@drawable/back"
+        app:leftIsShow="true"
+        app:titleText="商品详情"
+        app:rightImage="@drawable/menu"
+        app:rightIsShow="true"></com.example.framework.view.ToolBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/moreRv"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

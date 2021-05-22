@@ -1,6 +1,7 @@
 package com.example.shoppingmallsix.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.moreactivity.MoreActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -137,7 +139,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 ActAdapter actAdapter = new ActAdapter(imageViews);
                 vp.setAdapter(actAdapter);
 
-
                 break;
             case 3:
                 List<HomeBean.ResultBean.SeckillInfoBean.ListBean> seckillInfoBeans = (List<HomeBean.ResultBean.SeckillInfoBean.ListBean>) itemData;
@@ -149,6 +150,21 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 SeckillAdapter seckillAdapter = new SeckillAdapter();
                 seckillRecyclerView.setAdapter(seckillAdapter);
                 seckillAdapter.dataList.addAll(seckillInfoBeans);
+                seckillAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), MoreActivity.class);
+                        intent.putExtra("name",seckillInfoBeans.get(position).getName());
+                        intent.putExtra("figure",seckillInfoBeans.get(position).getFigure());
+                        intent.putExtra("price",seckillInfoBeans.get(position).getCover_price());
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItwmLongClick(int position) {
+
+                    }
+                });
                 break;
             case 4:
                 List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
