@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import java.util.HashMap;
 
-public class FiannceArouter {
+public class ShopMallArouter {
 
     public Class<?> dispalyActivityClass;
     private Context context;
@@ -18,13 +18,13 @@ public class FiannceArouter {
 
     private HashMap<String,Class<?>> pathMap=new HashMap<>();
 
-    private static FiannceArouter fiannceArouter;
+    private static ShopMallArouter shopMallArouter;
 
-    public static synchronized FiannceArouter getInstance() {
-        if (fiannceArouter==null){
-            fiannceArouter=new FiannceArouter();
+    public static synchronized ShopMallArouter getInstance() {
+        if (shopMallArouter ==null){
+            shopMallArouter =new ShopMallArouter();
         }
-        return fiannceArouter;
+        return shopMallArouter;
     }
 
     public void init(Context context){
@@ -72,7 +72,7 @@ public class FiannceArouter {
             pathMap.put(path,clazz);
         }
     }
-    public FiannceArouter build(String path){
+    public ShopMallArouter build(String path){
         dispalyActivityClass=pathMap.get(path);
         return this;
     }

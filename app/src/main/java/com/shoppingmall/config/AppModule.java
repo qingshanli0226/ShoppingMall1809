@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.shoppingmall.framework.manager.FiannceArouter;
+import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.main.MainActivity;
 
-public class AppModule implements FiannceArouter.IAppInterface {
+public class AppModule implements ShopMallArouter.IAppInterface {
     public static void init(){
         AppModule appModule = new AppModule();
-        FiannceArouter.getInstance().registerIAppInterface(appModule);
+        ShopMallArouter.getInstance().registerIAppInterface(appModule);
     }
 
     @Override

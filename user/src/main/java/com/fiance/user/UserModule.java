@@ -7,13 +7,13 @@ import android.os.Bundle;
 
 import com.fiance.user.logins.LoginActivity;
 import com.fiance.user.registers.RegisterActivity;
-import com.shoppingmall.framework.manager.FiannceArouter;
+import com.shoppingmall.framework.manager.ShopMallArouter;
 
-public class UserModule implements FiannceArouter.IUserInterface {
+public class UserModule implements ShopMallArouter.IUserInterface {
 
     public static void init(){
         UserModule userModule = new UserModule();
-        FiannceArouter.getInstance().registerIUserInterface(userModule);
+        ShopMallArouter.getInstance().registerIUserInterface(userModule);
     }
 
     @Override

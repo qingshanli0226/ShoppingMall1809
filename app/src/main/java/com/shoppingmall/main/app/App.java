@@ -4,14 +4,14 @@ import android.app.Application;
 
 import com.fiance.user.UserModule;
 import com.shoppingmall.config.AppModule;
-import com.shoppingmall.framework.manager.FiannceArouter;
+import com.shoppingmall.framework.manager.ShopMallArouter;
 
 public class App extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        FiannceArouter.getInstance().init(this);
+        ShopMallArouter.getInstance().init(this);
         UserModule.init();
         AppModule.init();
     }

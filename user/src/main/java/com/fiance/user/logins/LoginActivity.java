@@ -1,9 +1,6 @@
 package com.fiance.user.logins;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -13,7 +10,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.R;
 import com.fiance.user.registers.RegisterActivity;
-import com.shoppingmall.framework.manager.FiannceArouter;
+import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.LoginBean;
 
@@ -133,7 +130,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")){
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-            FiannceArouter.getInstance().getIAppInterface().openMainActivity(this,null);
+            ShopMallArouter.getInstance().getIAppInterface().openMainActivity(this,null);
         }else{
             Toast.makeText(this, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }

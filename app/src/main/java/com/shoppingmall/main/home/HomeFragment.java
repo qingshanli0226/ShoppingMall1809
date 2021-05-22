@@ -1,16 +1,12 @@
 package com.shoppingmall.main.home;
 
-import android.content.Context;
-import android.view.View;
 import android.widget.EditText;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheManager;
-import com.shoppingmall.framework.manager.FiannceArouter;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.home.adapter.HomeAdapter;
 import com.shoppingmall.net.bean.HomeBean;

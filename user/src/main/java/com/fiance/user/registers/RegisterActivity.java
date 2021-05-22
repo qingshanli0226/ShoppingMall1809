@@ -1,9 +1,6 @@
 package com.fiance.user.registers;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -13,7 +10,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.R;
 import com.fiance.user.logins.LoginActivity;
-import com.shoppingmall.framework.manager.FiannceArouter;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.RegisterBean;
 
