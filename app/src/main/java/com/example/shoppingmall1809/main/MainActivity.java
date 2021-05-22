@@ -14,6 +14,7 @@ import com.example.commom.ShopConstants;
 import com.example.framework.manager.FiannceUserManager;
 import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.main.discover.DiscoverFragment;
 import com.example.shoppingmall1809.main.home.HomeFragment;
 import com.example.shoppingmall1809.main.shoppingtrolley.ShoppingTrolleyFragment;
 import com.example.shoppingmall1809.main.type.TypeFragment;
@@ -29,19 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         HomeFragment homeFragment0 = new HomeFragment();
         TypeFragment typeFragment = new TypeFragment();
-        HomeFragment homeFragment2 = new HomeFragment();
+        DiscoverFragment discoverFragment = new DiscoverFragment();
         ShoppingTrolleyFragment shoppingTrolleyFragment = new ShoppingTrolleyFragment();
         UserFragment userFragment = new UserFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.act_home_ll, homeFragment0);
         fragmentTransaction.add(R.id.act_home_ll, typeFragment);
-        fragmentTransaction.add(R.id.act_home_ll, homeFragment2);
+        fragmentTransaction.add(R.id.act_home_ll, discoverFragment);
         fragmentTransaction.add(R.id.act_home_ll, shoppingTrolleyFragment);
         fragmentTransaction.add(R.id.act_home_ll, userFragment);
 
         fragmentTransaction.hide(typeFragment);
-        fragmentTransaction.hide(homeFragment2);
+        fragmentTransaction.hide(discoverFragment);
         fragmentTransaction.hide(shoppingTrolleyFragment);
         fragmentTransaction.hide(userFragment);
         fragmentTransaction.show(homeFragment0);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.act_radio_home:
                         fragmentTransaction.show(homeFragment0);
                         fragmentTransaction.hide(typeFragment);
-                        fragmentTransaction.hide(homeFragment2);
+                        fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.show(typeFragment);
-                        fragmentTransaction.hide(homeFragment2);
+                        fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(typeFragment);
-                        fragmentTransaction.show(homeFragment2);
+                        fragmentTransaction.show(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(typeFragment);
-                        fragmentTransaction.hide(homeFragment2);
+                        fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.show(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
                         fragmentTransaction.hide(homeFragment0);
                         fragmentTransaction.hide(typeFragment);
-                        fragmentTransaction.hide(homeFragment2);
+                        fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.show(userFragment);
                         break;

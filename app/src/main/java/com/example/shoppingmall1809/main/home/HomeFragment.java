@@ -39,7 +39,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     @Override
-    public void getHomeData(HoemBean hoemBean) {
+    public void onHomeData(HoemBean hoemBean) {
         HoemBean.ResultBean result = hoemBean.getResult();
 
         ArrayList<Object> objects = new ArrayList<>();
