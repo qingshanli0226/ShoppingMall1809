@@ -44,7 +44,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
-public interface BusinessApiService {
+public interface BusinessApi {
     //获取推荐产品信息的接口
     @GET("getRecommend")
     Observable<RecommendBean> getRecommendData();

@@ -1,4 +1,4 @@
-package com.example.electricityproject;
+package com.example.electricityproject.details;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +12,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.call.BusinessARouter;
+import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.view.ToolBar;
 

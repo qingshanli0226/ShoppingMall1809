@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.KindAccessoryBean;
 import com.example.common.bean.KindBagBean;
 import com.example.common.bean.KindDigitBean;
@@ -22,7 +22,7 @@ import com.example.common.bean.KindPantsBean;
 import com.example.common.bean.KindSkirtBean;
 import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
-import com.example.electricityproject.DetailsActivity;
+import com.example.electricityproject.details.DetailsActivity;
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.kind.adapter.KindAdapter;
 import com.example.electricityproject.classify.kind.adapter.KindBean;

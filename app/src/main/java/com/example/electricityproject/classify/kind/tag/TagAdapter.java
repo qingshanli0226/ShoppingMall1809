@@ -1,10 +1,9 @@
 package com.example.electricityproject.classify.kind.tag;
 
 import android.graphics.Color;
-import android.view.View;
 import android.widget.TextView;
 
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.ClassifyBean;
 import com.example.electricityproject.R;
 

@@ -12,15 +12,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitCreate {
 
-    private static BusinessApiService businessApiService;
-    public static BusinessApiService getFiannceApiService() {
+    private static BusinessApi businessApiService;
+    public static BusinessApi getFiannceApiService() {
         if (businessApiService ==null){
             businessApiService = createKSApiService();
         }
         return businessApiService;
     }
 
-    private static BusinessApiService createKSApiService() {
+    private static BusinessApi createKSApiService() {
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         okBuilder.addInterceptor(new TokenInterceptor());
         okBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
@@ -36,6 +36,6 @@ public class RetrofitCreate {
                 .baseUrl(Constants.BASE_URL).build();
 
 
-        return retrofit.create(BusinessApiService.class);
+        return retrofit.create(BusinessApi.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.common.base;
+package com.example.adapter;
 
 import android.util.SparseArray;
 import android.view.LayoutInflater;

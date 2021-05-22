@@ -6,9 +6,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.KindGameBean;
-import com.example.common.bean.KindJacketBean;
 import com.example.electricityproject.R;
 
 public class GameHotAdapter extends BaseAdapter<KindGameBean.ResultBean.HotProductListBean> {
