@@ -4,8 +4,6 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.HoemBean;
 
-import java.util.Observable;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -40,7 +38,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void onNext(@NonNull HoemBean hoemBean) {
                         if (iView != null) {
-                            iView.getHomeData(hoemBean);
+                            iView.onHomeData(hoemBean);
                         }
                     }
 

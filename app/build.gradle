@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+
     //design   tablayout   recyclerview
     implementation 'com.google.android.material:material:1.1.0'
     //万能适配器

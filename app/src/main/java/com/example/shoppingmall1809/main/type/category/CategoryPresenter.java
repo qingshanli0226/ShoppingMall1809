@@ -1,7 +1,5 @@
 package com.example.shoppingmall1809.main.type.category;
 
-import android.widget.Toast;
-
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.ShopApiService;
@@ -89,7 +87,7 @@ public class CategoryPresenter extends BasePresenter<ICategoryView> {
                     @Override
                     public void onNext(@NonNull CategoryBean categoryBean) {
                         if (iView != null) {
-                            iView.getCategoryData(categoryBean);
+                            iView.onCategoryData(categoryBean);
                         }
                     }
 

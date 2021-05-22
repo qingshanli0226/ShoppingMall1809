@@ -36,6 +36,15 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
     private List<Object> resultBeans;
     private CategoryAdapter categoryAdapter;
     private SparseArray<View> viewSparseArray;
+    private View.OnLayoutChangeListener  listener= new View.OnLayoutChangeListener() {
+        @Override
+        public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+            View startView = fragTypeCateLv.getChildAt(fragTypeCateLv.getFirstVisiblePosition());
+            startView.setBackgroundColor(Color.WHITE);
+            viewSparseArray.put(0, startView);
+            fragTypeCateLv.removeOnLayoutChangeListener(listener);
+        }
+    };
 
     @Override
     protected int getLayoutId() {
@@ -62,6 +71,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
 
         viewSparseArray = new SparseArray<>();
 
+        fragTypeCateLv.addOnLayoutChangeListener(listener);
 
         fragTypeCateLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,23 +95,6 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
         httpPresenter.getCategoryData(0);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                View startView = fragTypeCateLv.getChildAt(fragTypeCateLv.getFirstVisiblePosition());
-/*
-                View startView = fragTypeCateLv.getChildAt(0 - fragTypeCateLv.getFirstVisiblePosition());
-*/
-                startView.setBackgroundColor(Color.WHITE);
-                viewSparseArray.put(0, startView);
-            }
-        },1000);
-
-    }
 
     @Override
     protected void initPresenter() {
@@ -132,7 +125,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
     }
 
     @Override
-    public void getCategoryData(CategoryBean categoryBean) {
+    public void onCategoryData(CategoryBean categoryBean) {
         LogUtils.json(categoryBean);
         CategoryBean.ResultBean resultBean = categoryBean.getResult().get(0);
 //        resultBeans = new ArrayList<>();
