@@ -48,9 +48,11 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         list.add(new KindBean("游戏专区"));
 
 
+
         KindAdapter kindAdapter = new KindAdapter(getContext(), R.layout.item_kind, list);
         kindListview.setAdapter(kindAdapter);
 
+        httpPresenter.getTypeData(url[0]);
 
         kindListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
