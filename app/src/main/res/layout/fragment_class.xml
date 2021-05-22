@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:id="@+id/classify_left_recycler_view"
             />
-        <com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.recycler.myRecyclerView
+        <com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.recycler.MyRecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/classify_right_recycler_view"

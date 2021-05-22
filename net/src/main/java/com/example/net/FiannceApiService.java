@@ -5,6 +5,7 @@ package com.example.net;
 
 import com.example.net.bean.AccrssoryBean;
 import com.example.net.bean.BagBean;
+import com.example.net.bean.ClassBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.store.CloseStoreBean;
@@ -55,6 +56,9 @@ public interface FiannceApiService {
     @GET(Constants.TAG_URL)
     Observable<TabBean> getTabData();
 
+    //class页面
+    @GET()
+    Observable<ClassBean> getClassData(@Url String url);
     //小裙子
     @GET(Constants.SKIRT_URL)
     Observable<SkirtBean> getSkirtData();
