@@ -42,6 +42,7 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
     private ClassAdapter classAdapter;
     private LeftAdapter leftAdapter;
     private RecyclerView leftRv;
+    private List<String> urlList ;
 
     @Override
     protected int getLayoutId() {
@@ -73,20 +74,38 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
         title.add("办公文具");
         title.add("数码周边");
         title.add("游戏专区");
+        urlList = new ArrayList<>();
+        urlList.add(Constants.SKIRT_URL);
+        urlList.add(Constants.JACKET_URL);
+        urlList.add(Constants.PANTS_URL);
+        urlList.add(Constants.OVERCOAT_URL);
+        urlList.add(Constants.ACCESSORY_URL);
+        urlList.add(Constants.BAG_URL);
+        urlList.add(Constants.DRESS_UP_URL);
+        urlList.add(Constants.HOME_PRODUCTS_URL);
+        urlList.add(Constants.STATIONERY_URL);
+        urlList.add(Constants.DIGIT_URL);
+        urlList.add(Constants.GAME_URL);
+
         leftAdapter = new LeftAdapter();
         leftAdapter.updata(title);
         leftAdapter.setPosition(0);
         leftRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         leftRv.setAdapter(leftAdapter);
-        mPresenter.getSkirt(0);
+        mPresenter.getType(urlList.get(0));
+
+
+
+
+
+
 
         leftAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
             @Override
             public void onItemClick(int position,View view) {
-                mPresenter.getSkirt(position);
+                mPresenter.getType(urlList.get(position));
                 leftAdapter.setPosition(position);
                 leftAdapter.notifyDataSetChanged();
-
             }
 
             @Override
