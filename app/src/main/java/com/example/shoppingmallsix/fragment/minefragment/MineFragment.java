@@ -39,14 +39,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
-        if (loginBean != null){
 
-        }else {
-            Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        }
     }
 
     @Override

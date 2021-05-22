@@ -1,5 +1,6 @@
 package com.example.shoppingmallsix.mainactivity;
 
+import android.content.Intent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.shoppingmallsix.fragment.discoverfragment.DiscoverFragment;
 import com.example.shoppingmallsix.fragment.homefragment.HomeFragment;
 import com.example.shoppingmallsix.fragment.minefragment.MineFragment;
 import com.example.shoppingmallsix.fragment.shoppingcarfragment.ShoppingCarFragment;
+import com.example.user.login.LoginActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -74,16 +76,48 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
                         break;
                     case 1:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
-                    break;
+                        LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
+                        if (loginBean1 != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
+                        } else {
+                            mainCommon.setCurrentTab(0);
+                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
                     case 2:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new DiscoverFragment()).commitAllowingStateLoss();
+                        LoginBean loginBean2 = CacheUserManager.getInstance().getLoginBean();
+                        if (loginBean2 != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new DiscoverFragment()).commitAllowingStateLoss();
+                        } else {
+                            mainCommon.setCurrentTab(0);
+                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case 3:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ShoppingCarFragment()).commitAllowingStateLoss();
+                        LoginBean loginBean3 = CacheUserManager.getInstance().getLoginBean();
+                        if (loginBean3 != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ShoppingCarFragment()).commitAllowingStateLoss();
+                        } else {
+                            mainCommon.setCurrentTab(0);
+                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case 4:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new MineFragment()).commitAllowingStateLoss();
+                        LoginBean loginBean4 = CacheUserManager.getInstance().getLoginBean();
+                        if (loginBean4 != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new MineFragment()).commitAllowingStateLoss();
+                        } else {
+                            mainCommon.setCurrentTab(0);
+                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                 }
             }
