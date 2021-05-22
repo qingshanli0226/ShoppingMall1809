@@ -60,7 +60,7 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                     @Override
                     public void onNext(ClassBean classBean) {
                         if (iView !=null){
-                            iView.onClassData(classBean,mBoolean);
+                            iView.onClassData(classBean,mBoolean,url);
                         }
                     }
 
