@@ -3,6 +3,7 @@ package com.example.electricityproject.classify;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.common.Constants;
 import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.kind.tag.TagFragment;

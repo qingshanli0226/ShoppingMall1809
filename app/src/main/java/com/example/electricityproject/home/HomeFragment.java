@@ -17,13 +17,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     protected void initData() {
-        httpPresenter=new HomePresenter(this);
         httpPresenter.getHomeBannerData();
     }
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter=new HomePresenter(this);
     }
 
     @Override

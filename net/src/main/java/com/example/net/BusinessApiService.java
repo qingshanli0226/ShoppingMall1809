@@ -6,6 +6,7 @@ import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.ClassifyBean;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.GoodsBean;
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.KindAccessoryBean;
 import com.example.common.bean.KindBagBean;
@@ -40,6 +41,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface BusinessApiService {
     //获取推荐产品信息的接口
@@ -49,6 +51,9 @@ public interface BusinessApiService {
     //主页面的数据
     @GET("/atguigu/json/HOME_URL.json")
     Observable<HomeBean> getHomeData();
+
+    @GET
+    Observable<GoodsBean> getTypeData(@Url String url);
 
     //分类Fragment里面的标签Fragment页面数据
     @GET("/atguigu/json/TAG_URL.json")
