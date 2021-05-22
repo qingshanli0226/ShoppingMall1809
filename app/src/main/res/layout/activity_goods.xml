@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".moreactivity.MoreActivity">
+    tools:context=".Goodsactivity.GoodsActivity">
 
     <com.example.framework.view.ToolBar
         android:layout_width="match_parent"

@@ -1,13 +1,9 @@
-package com.example.shoppingmallsix.moreactivity;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+package com.example.shoppingmallsix.Goodsactivity;
 
 import com.example.framework.BaseActivity;
 import com.example.shoppingmallsix.R;
 
-public class MoreActivity extends BaseActivity {
+public class GoodsActivity extends BaseActivity {
 
 
     @Override
@@ -27,6 +23,6 @@ public class MoreActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_more;
+        return R.layout.activity_goods;
     }
 }

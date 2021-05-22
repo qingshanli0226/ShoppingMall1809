@@ -74,8 +74,10 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
 
     @Override
     public void onItemClick(int position) {
+
         for (int i = 0; i <list.size() ; i++) {
             list.get(i).setaBoolean(false);
+
         }
         list.get(position).setaBoolean(true);
         httpPresenter.getClassData(strings[position],false);
