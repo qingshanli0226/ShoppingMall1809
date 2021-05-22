@@ -1,8 +1,11 @@
 package com.example.myapplication.home.homeadapter;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.Intent;
 import android.util.Log;
+=======
+>>>>>>> 5aa3d117620cb185ac2495139228a62452608433
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -57,6 +59,10 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
             case GOOD_TYPE:
                 layoutId= R.layout.home_item_good;
                 break;
+//            case Skirt_TYPE:
+//                layoutId=R.layout.item_skirt;
+//                break;
+
         }
         return layoutId;
     }
@@ -197,6 +203,15 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                     }
                 });
                 break;
+//            case 6:
+//                List<SkirtBean.ResultBean.ChildBean> list4= (List<SkirtBean.ResultBean.ChildBean>) itemData;
+//                RecyclerView view = holder.getView(R.id.img);
+//                SkirAdapter skirAdapter = new SkirAdapter();
+//                skirAdapter.updataData(list4);
+//                view.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
+//                view.setAdapter(skirAdapter);
+//
+//                break;
         }
     }
 
@@ -222,6 +237,8 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
             case 5:
                 type=GOOD_TYPE;
                 break;
+//            case 6:
+//                type=Skirt_TYPE;
         }
         return type;
     }
