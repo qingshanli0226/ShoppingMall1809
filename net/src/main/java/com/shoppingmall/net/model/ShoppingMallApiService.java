@@ -19,10 +19,14 @@ import com.shoppingmall.net.bean.SkirtBean;
 import com.shoppingmall.net.bean.StationeryBean;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 public interface ShoppingMallApiService {
     //http://49.233.0.68:8080/atguigu/json/HOME_URL.json
@@ -89,7 +93,10 @@ public interface ShoppingMallApiService {
     @GET("/atguigu/json/GAME_URL.json")
     Observable<GameBean> getGameData();
 
-
+    //Glide
+    @GET
+    @Streaming
+    Call<ResponseBody> downloadFile(@Url String url);
 
 
 

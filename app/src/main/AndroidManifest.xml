@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ShoppingMall"
         android:usesCleartextTraffic="true">
         <activity android:name=".main.home.details.DetailsActivity"></activity>
-        <activity android:name=".welcome.WelcomeActivity">
+        <activity android:name=".welcome.WelcomeActivity" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

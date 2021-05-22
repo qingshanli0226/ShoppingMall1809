@@ -37,6 +37,18 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:30.0.0'//recyclerview
     implementation 'com.github.bumptech.glide:glide:4.9.0'//glide依赖
 
+    //Rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //Rxjava   线程调度器在此依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //解析器
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //retrofit使用的rxjava调度器
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation project(path: ':net')
@@ -45,4 +57,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }
