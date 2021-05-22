@@ -1,18 +1,13 @@
 package com.example.electricityproject.classify.kind.adapter;
 
 import android.content.Context;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.example.common.Constants;
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.GoodsBean;
-import com.example.common.bean.KindAccessoryBean;
 import com.example.electricityproject.R;
 
 import java.util.List;

@@ -15,7 +15,10 @@ import com.example.common.call.BusinessARouter;
 import com.example.common.call.BusinessUserManager;
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.ClassifyFragment;
+import com.example.electricityproject.find.FindFragment;
 import com.example.electricityproject.home.HomeFragment;
+import com.example.electricityproject.person.PersonFragment;
+import com.example.electricityproject.shopp.ShoppingFragment;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -42,10 +42,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-<<<<<<< HEAD:net/src/main/java/com/example/net/BusinessApiService.java
-=======
 import retrofit2.http.Streaming;
->>>>>>> refs/remotes/origin/four:net/src/main/java/com/example/net/BusinessApi.java
 import retrofit2.http.Url;
 
 public interface BusinessApi {
