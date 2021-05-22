@@ -3,10 +3,6 @@ package com.example.shoppingmallsix.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,7 +18,7 @@ import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.moreactivity.MoreActivity;
+import com.example.shoppingmallsix.Goodsactivity.GoodsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -153,7 +149,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 seckillAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Intent intent = new Intent(holder.itemView.getContext(), MoreActivity.class);
+                        Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
                         intent.putExtra("name",seckillInfoBeans.get(position).getName());
                         intent.putExtra("figure",seckillInfoBeans.get(position).getFigure());
                         intent.putExtra("price",seckillInfoBeans.get(position).getCover_price());

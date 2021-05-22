@@ -136,8 +136,6 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
                         httpPresenter.getGameBean();
                         break;
                 }
-
-
             } else {
                 list.get(i).setaBoolean(false);
             }
