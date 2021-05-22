@@ -15,7 +15,7 @@ import com.example.net.bean.SkirtBean;
 import com.example.net.bean.StationeryBean;
 
 public interface IClassView extends IBaseView {
-    void onClassData(ClassBean classBean,boolean mBoolean);
+    void onClassData(ClassBean classBean,boolean mBoolean,String url);
 
 
 }

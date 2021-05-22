@@ -28,6 +28,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     private ClassLeftAdapter classifyAdapter;
     private List<ClassLeftBean> list = new ArrayList<>();
     private String[] strings = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};
+
     private List<Object> objectList = new ArrayList<>();
     private ClassRightAdapter<Object> resultBeanClassRightAdapter;
     @Override
@@ -42,6 +43,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     @Override
     protected void initData() {
         for (int i = 0; i < strings.length; i++) {
+            list.add(new ClassLeftBean());
             httpPresenter.getClassData(strings[i],true);
         }
         httpPresenter.getClassData(strings[0],false);
@@ -108,19 +110,22 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     }
 
     @Override
-    public void onClassData(ClassBean classBean,boolean mBoolean) {
+    public void onClassData(ClassBean classBean,boolean mBoolean,String url) {
         objectList.clear();
         loadingPage.showSuccessView();
         if (mBoolean){
-            ClassLeftBean classLeftBean = new ClassLeftBean();
-            if (list.size()==0){
-                classLeftBean.setaBoolean(true);
-            }else {
-                classLeftBean.setaBoolean(false);
+            for (int i = 0; i <strings.length ; i++) {
 
+                if (url.equals(strings[i])){
+                    if (url == strings[0]){
+                        list.get(i).setaBoolean(true);
+                    }else {
+                        list.get(i).setaBoolean(false);
+                    }
+                    list.get(i).setString(classBean.getResult().get(0).getName());
+                }
             }
-            classLeftBean.setString(classBean.getResult().get(0).getName());
-            list.add(classLeftBean);
+
             classifyAdapter.notifyDataSetChanged();
         }else {
             List<ClassBean.ResultBean> result = classBean.getResult();
