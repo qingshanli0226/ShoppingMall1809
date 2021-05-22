@@ -138,8 +138,7 @@ public class Constants {
     //从从服务端购物车删除多个产品的接口
     public static final String REMOVEMANY = "removeManyProduct";
 
-    //从更新服务端购物车产品的选择
-    public static final String UPDATEPRODUCTSELECTED = "updateProductSelected";
+
 
 
 }
