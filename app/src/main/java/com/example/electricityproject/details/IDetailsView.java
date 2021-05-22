@@ -1,7 +1,6 @@
-package com.example.electricityproject;
+package com.example.electricityproject.details;
 
 import com.example.common.bean.AddOneProductBean;
-import com.example.common.bean.ShortcartProductBean;
 import com.example.framework.IBaseView;
 
 public

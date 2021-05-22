@@ -24,7 +24,6 @@ import com.example.common.bean.RecommendBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
-import com.example.common.bean.RequestProducts;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateAddress;
@@ -36,14 +35,20 @@ import com.example.common.bean.UpdateProductNumBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+<<<<<<< HEAD:net/src/main/java/com/example/net/BusinessApiService.java
+=======
+import retrofit2.http.Streaming;
+>>>>>>> refs/remotes/origin/four:net/src/main/java/com/example/net/BusinessApi.java
 import retrofit2.http.Url;
 
-public interface BusinessApiService {
+public interface BusinessApi {
     //获取推荐产品信息的接口
     @GET("getRecommend")
     Observable<RecommendBean> getRecommendData();
@@ -104,6 +109,9 @@ public interface BusinessApiService {
     Observable<KindGameBean> getGameData();
 
 
+    @GET
+    @Streaming
+    Call<ResponseBody> DownFile(@Url String url);
 
 
 

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.HomeBean;
-import com.example.electricityproject.DetailsActivity;
+import com.example.electricityproject.details.DetailsActivity;
 import com.example.electricityproject.R;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;

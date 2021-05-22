@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.HomeBean;
 import com.example.electricityproject.R;
 

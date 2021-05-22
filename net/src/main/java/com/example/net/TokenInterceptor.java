@@ -15,7 +15,4 @@ public class TokenInterceptor implements Interceptor {
         return chain.proceed(chain.request().newBuilder().addHeader("token", SPUtility.getString(NetModel.context)).build());
     }
 
-    //424cd6a0-65f5-4bc2-b519-8ff3d8ff7464AND1621598949535
-
-    //452e2dd3-6381-4760-bff8-1b4768ae044bAND1621599050514
 }

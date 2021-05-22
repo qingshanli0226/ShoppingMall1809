@@ -2,7 +2,6 @@ package com.example.electricityproject.shopp;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.ShortcartProductBean;
-import com.example.electricityproject.IDetailsView;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
 

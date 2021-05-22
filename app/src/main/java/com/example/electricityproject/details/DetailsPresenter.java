@@ -1,8 +1,7 @@
-package com.example.electricityproject;
+package com.example.electricityproject.details;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.AddOneProductBean;
-import com.example.common.bean.ShortcartProductBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
 import com.google.gson.Gson;

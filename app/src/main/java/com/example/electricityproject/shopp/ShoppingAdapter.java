@@ -1,11 +1,10 @@
 package com.example.electricityproject.shopp;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.common.base.BaseAdapter;
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
 
