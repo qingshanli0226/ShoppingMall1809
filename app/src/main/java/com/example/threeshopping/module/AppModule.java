@@ -3,6 +3,7 @@ package com.example.threeshopping.module;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.threeshopping.MainActivity;
+
 import com.example.threeshopping.particulars.ParticularsActivity;
 import com.example.threeshopping.welcome.WelActivity;
 import com.example.user.login.LoginActivity;
