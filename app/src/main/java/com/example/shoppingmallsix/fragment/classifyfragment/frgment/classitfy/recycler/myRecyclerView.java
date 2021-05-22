@@ -10,18 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
 
-public class myRecyclerView extends RecyclerView {
+public class MyRecyclerView extends RecyclerView {
     private int   lofitY;
     private int   lofitX;
-    public myRecyclerView(@NonNull Context context) {
+    public MyRecyclerView(@NonNull Context context) {
         super(context, null, 0);
     }
 
-    public myRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MyRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs, 0);
     }
 
-    public myRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public MyRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context,attrs,defStyle);
     }

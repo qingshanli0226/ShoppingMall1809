@@ -5,18 +5,18 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
-public class mScrollView extends ScrollView {
+public class MyScrollView extends ScrollView {
     private int   lofitY;
     private int   lofitX;
-    public mScrollView(Context context) {
+    public MyScrollView(Context context) {
         super(context, null, 0);
     }
 
-    public mScrollView(Context context, AttributeSet attrs) {
+    public MyScrollView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
     }
 
-    public mScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override

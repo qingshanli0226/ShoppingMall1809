@@ -27,6 +27,7 @@ public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean>{
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, ClassLeftBean itemData) {
         linearLayout = holder.getView(R.id.classify_item_linear);
+
         if (position == 0){
             linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
         }else {
@@ -37,6 +38,7 @@ public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean>{
         }else {
             linearLayout.setBackgroundColor(Color.parseColor("#E9E9E9"));
         }
+
         TextView textView = holder.getView(R.id.classify_left_item_tv);
         textView.setText(itemData.getString());
     }
