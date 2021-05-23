@@ -16,5 +16,6 @@ public class App extends Application {
         AppModule.init();
         UserModule.init();
         NetModule.context = this;
+
     }
 }

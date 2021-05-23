@@ -15,8 +15,8 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class UserPresenter extends BasePresenter<IUserView> {
-    public UserPresenter(IUserView iRegisterView) {
+public class RegisterPresenter extends BasePresenter<IRegisterView> {
+    public RegisterPresenter(IRegisterView iRegisterView) {
         attchView(iRegisterView);
     }
     public void getRegister(String name,String password){

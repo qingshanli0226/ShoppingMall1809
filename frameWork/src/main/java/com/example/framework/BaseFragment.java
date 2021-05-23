@@ -2,6 +2,7 @@ package com.example.framework;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
 
@@ -61,6 +64,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onDestroy();
         destroy();
     }
+
 
     //清除
     public void destroy() {

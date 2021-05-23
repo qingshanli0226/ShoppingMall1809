@@ -1,9 +1,8 @@
 package com.example.user.login;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,45 +11,52 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
-import com.example.framework.BaseActivity;
+import com.example.framework.BaseFragment;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolBar.OnClickListener, ILoginView {
+import org.greenrobot.eventbus.EventBus;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class LoginFragment extends BaseFragment<LoginPresenter> implements ToolBar.OnClickListener, ILoginView {
 
 
     private ToolBar toolbar;
-    private android.widget.EditText loginUsername;
-    private android.widget.EditText loginPassword;
-    private android.widget.CheckBox passwordInvisible;
-    private android.widget.Button login;
-    private android.widget.TextView LoginRegister;
-    private android.widget.TextView forgetPassword;
-    private android.widget.ImageView weibo;
-    private android.widget.ImageView qq;
-    private android.widget.ImageView weixin;
+    private EditText loginUsername;
+    private EditText loginPassword;
+    private CheckBox passwordInvisible;
+    private Button login;
+    private TextView loginRegister;
+    private TextView forgetPassword;
+    private ImageView weibo;
+    private ImageView qq;
+    private ImageView weixin;
     private int page;
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_login;
+    protected int getLayoutId() {
+        return R.layout.fragment_login;
     }
 
     @Override
-    public void initView() {
+    protected void initView() {
+
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         loginUsername = (EditText) findViewById(R.id.login_username);
         loginPassword = (EditText) findViewById(R.id.login_password);
         passwordInvisible = (CheckBox) findViewById(R.id.password_invisible);
         login = (Button) findViewById(R.id.login);
-        LoginRegister = (TextView) findViewById(R.id.login_register);
+        loginRegister = (TextView) findViewById(R.id.login_register);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
         weibo = (ImageView) findViewById(R.id.weibo);
         qq = (ImageView) findViewById(R.id.qq);
@@ -59,12 +65,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
     }
 
     @Override
-    public void initPresenter() {
+    protected void initPrensenter() {
         mPresenter = new LoginPresenter(this);
     }
 
     @Override
-    public void initData() {
+    protected void initData() {
         Bundle bundle = CommonArouter.getInstance().getBundle();
         page = bundle.getInt("page");
 
@@ -76,16 +82,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)) {
                     mPresenter.getLogin(name, pass);
                 } else {
-                    Toast.makeText(LoginActivity.this, "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
 
-        LoginRegister.setOnClickListener(new View.OnClickListener() {
+        loginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonArouter.getInstance().build(Constants.PATH_REGISTER).navigation();
+                EventBus.getDefault().postSticky(1);
             }
         });
 
@@ -93,25 +99,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "" + getString(R.string.user_login_forget), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + getString(R.string.user_login_forget), Toast.LENGTH_SHORT).show();
             }
         });
         weibo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
             }
         });
         qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
             }
         });
         weixin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + getString(R.string.user_login_weibo), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -143,16 +149,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
         loadPage.showSuccessLayout();
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")) {
-            SpUtil.putString(this, loginBean.getResult().getToken());
+            SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
             CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
         } else {
-            Toast.makeText(this, "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
     @Override
     public void showLoading() {
@@ -166,7 +171,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ToolB
 
     @Override
     public void showError(String error) {
-        Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
         LogUtils.json(error);
     }
 }

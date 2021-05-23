@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".login.LoginActivity">
-
+    tools:context=".register.RegisterFragment">
 
     <com.example.framework.view.ToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:app_back_color_toob="@color/white"
-        app:app_left_isshow="true"
+        app:app_text="@string/user_register_toolbar"
+        app:app_text_color="@color/black"
         app:app_left_src="@drawable/top_bar_left_back"
-        app:app_text="@string/user_login_toolbar"
-        app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
-
+        app:app_left_isshow="true"
+        ></com.example.framework.view.ToolBar>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,14 +32,15 @@
         android:background="@color/white">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dm_dp_105"
             android:layout_height="@dimen/dm_dp_50"
             android:padding="@dimen/dm_dp_10"
+            android:gravity="center"
             android:text="@string/user_login_nametv"
             android:textSize="@dimen/dm_dp_20"></TextView>
 
         <EditText
-            android:id="@+id/login_username"
+            android:id="@+id/register_username"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_dp_50"
             android:background="#00FFFFFF"
@@ -66,19 +66,20 @@
             android:background="@color/white">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dm_dp_105"
                 android:layout_height="@dimen/dm_dp_50"
                 android:padding="@dimen/dm_dp_10"
+                android:gravity="center"
                 android:text="@string/user_login_passtv"
                 android:textSize="@dimen/dm_dp_20"></TextView>
 
             <EditText
-                android:id="@+id/login_password"
+                android:id="@+id/register_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_dp_50"
                 android:background="#00FFFFFF"
-                android:password="true"
-                android:hint="@string/user_login_passev"></EditText>
+                android:hint="@string/user_login_passev"
+                android:password="true"></EditText>
         </LinearLayout>
 
         <CheckBox
@@ -91,81 +92,67 @@
             android:layout_marginTop="@dimen/dm_dp_5"
             android:gravity="center"></CheckBox>
     </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_1"
+        android:layout_marginLeft="@dimen/dm_dp_10"
+        android:layout_marginRight="@dimen/dm_dp_10"
+        android:background="@color/gray"></View>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_dp_10"
+            android:layout_marginRight="@dimen/dm_dp_10"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="@dimen/dm_dp_105"
+                android:layout_height="@dimen/dm_dp_50"
+                android:padding="@dimen/dm_dp_10"
+                android:text="@string/user_register_passtv_again"
+                android:textSize="@dimen/dm_dp_20"></TextView>
+
+            <EditText
+                android:id="@+id/register_password_again"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dm_dp_50"
+                android:background="#00FFFFFF"
+                android:password="true"
+                android:hint="@string/user_login_passev"></EditText>
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/password_invisible_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_dp_360"
+            android:background="@drawable/password_invisible_select"
+            android:button="@null"
+            android:layout_marginTop="@dimen/dm_dp_5"
+            android:gravity="center"></CheckBox>
+    </FrameLayout>
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dm_dp_10"
         android:background="@color/red"
-        android:text="@string/user_login_button"
+        android:text="@string/user_register_button"
         android:textColor="@color/white"></Button>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/user_other_login"
+        android:text="@string/user_register"
         android:gravity="center"
         android:layout_marginTop="@dimen/dm_dp_10"
         ></TextView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <TextView
-            android:id="@+id/login_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="注册账号"
-            android:textColor="@color/red"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/dm_dp_10"
-            ></TextView>
-        <TextView
-            android:id="@+id/forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="忘记密码"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="@dimen/dm_dp_10"
-            ></TextView>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/user_login"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/dm_dp_10"
-        ></TextView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_30"
-        android:background="@color/white"
-        android:layout_margin="@dimen/dm_dp_10"
-        >
-        <ImageView
-            android:id="@+id/weibo"
-            android:layout_width="@dimen/dm_dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/icon_weibo"
-            ></ImageView>
-        <ImageView
-            android:id="@+id/qq"
-            android:layout_width="@dimen/dm_dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/icon_share_qq"
-            ></ImageView>
-        <ImageView
-            android:id="@+id/weixin"
-            android:layout_width="@dimen/dm_dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/icon_weixin"
-            ></ImageView>
-    </LinearLayout>
 
 </LinearLayout>

@@ -10,8 +10,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".login.LoginActivity" />
     </application>
 
 </manifest>

@@ -54,7 +54,6 @@ public class MainActivity extends BaseActivity {
         mainFive = (RadioButton) findViewById(R.id.mainFive);
 
         fragments = new ArrayList<>();
-
     }
 
     @Override
@@ -121,8 +120,8 @@ public class MainActivity extends BaseActivity {
         if (loginBean == null) {
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
-            CommonArouter.getInstance().build(Constants.PATH_LOGIN).with(bundle).navigation();
-//            CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
+//            CommonArouter.getInstance().build(Constants.PATH_LOGIN).with(bundle).navigation();
+            CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
         }
     }
 
