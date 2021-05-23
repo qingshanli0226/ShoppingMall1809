@@ -3,10 +3,12 @@
     package="com.example.user">
 
     <application>
+        <activity android:name=".user.UserActivity"></activity>
+
         <service
-            android:name=".service.UserService"
+            android:name=".service.AutoService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".register.RegisterActivity" />
         <activity android:name=".login.LoginActivity" />

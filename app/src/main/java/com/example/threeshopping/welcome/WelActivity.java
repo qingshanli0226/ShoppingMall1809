@@ -1,20 +1,15 @@
 package com.example.threeshopping.welcome;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheHomeManager;
-import com.example.framework.view.ToolBar;
 import com.example.net.bean.HomeBean;
 import com.example.threeshopping.R;
-import com.example.user.service.UserService;
+import com.example.user.service.AutoService;
 
 public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeView {
 
@@ -32,26 +27,12 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
     @Override
     public void initPresenter() {
         mPresenter = new HomePresenter(this);
-        Intent intent = new Intent(this, UserService.class);
+        Intent intent = new Intent(this, AutoService.class);
         startService(intent);
     }
 
     @Override
     public void initData() {
-//        CountDownTimer countDownTimer = new CountDownTimer(1000 * 3, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
-//            }
-//        };
-//
-//        countDownTimer.start();
-
         mPresenter.getHome();
     }
 
@@ -59,6 +40,7 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
     public void onHome(HomeBean homeBean) {
         CacheHomeManager.getInstance().setHomeBean(homeBean);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+        finish();
     }
 
 

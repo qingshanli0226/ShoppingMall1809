@@ -1,20 +1,23 @@
 package com.example.framework;
 
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.KeyEvent;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
+import com.example.framework.manager.UserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.LoginBean;
+
+import java.security.Key;
 
 
-public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter {
+public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, UserManager.IUserChange {
     protected P mPresenter;
     protected ToolBar toolBar;
     protected LoadPage loadPage;
@@ -31,10 +34,14 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
         toolBar = findViewById(R.id.toolbar);
         toolBar.setToolbarOnClickLisenter(this);
 
+        UserManager.getInstance().registerLogin(this);
+
         initView();
         initPresenter();
         initData();
     }
+
+
     
     @LayoutRes
     public abstract int getLayoutId();
@@ -68,5 +75,21 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        UserManager.getInstance().unregisterLogin(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            Bundle bundle = new Bundle();
+            bundle.putInt("page",0);
+            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onUserChange(LoginBean loginBean) {
+
     }
 }

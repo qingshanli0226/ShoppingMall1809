@@ -1,7 +1,7 @@
 <resources>
 
 
-<!--  登录  -->
+    <!--  登录  -->
     <string name="user_login_toolbar">登陆</string>
     <string name="user_login_nametv">账户</string>
     <string name="user_login_nameev">请输入用户名</string>

@@ -79,12 +79,13 @@ public class Constants {
     //主页面
     public static final String PATH_MAIN = "/app/MainActivity";
     //登录
-    public static final String PATH_LOGIN = "/app/LoginActivity";
+    public static final String PATH_LOGIN = "/user/LoginActivity";
     //注册
-    public static final String PATH_REGISTER = "/app/RegisterActivity";
+    public static final String PATH_REGISTER = "/user/RegisterActivity";
     //详情
     public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
-
+    //用户
+    public static final String PATH_USER = "/user/UserActivity";
 
     public static final String SP_TOKEN = "token";
     //判断home页面的布局

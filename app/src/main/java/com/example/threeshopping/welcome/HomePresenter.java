@@ -6,6 +6,8 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.HomeBean;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,6 +22,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     public void getHome(){
         RetrofitManager.getHttpApiService()
                 .getHomeData()
+                .delay(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeBean>() {

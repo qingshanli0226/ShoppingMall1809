@@ -1,23 +1,22 @@
 package com.example.threeshopping;
 
 
-
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
-import com.example.framework.manager.LoginManager;
+import com.example.framework.manager.UserManager;
+import com.example.net.bean.LoginBean;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
@@ -37,6 +36,7 @@ public class MainActivity extends BaseActivity {
     private android.widget.RadioButton mainThree;
     private android.widget.RadioButton mainFour;
     private android.widget.RadioButton mainFive;
+    private LoginBean loginBean;
 
     @Override
     public int getLayoutId() {
@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private List<Fragment> fragments = new ArrayList<>();
+
     @Override
     public void initData() {
         //添加fragment
@@ -74,11 +75,11 @@ public class MainActivity extends BaseActivity {
 
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mainLinear,fragments.get(0));
-        fragmentTransaction.add(R.id.mainLinear,fragments.get(1));
-        fragmentTransaction.add(R.id.mainLinear,fragments.get(2));
-        fragmentTransaction.add(R.id.mainLinear,fragments.get(3));
-        fragmentTransaction.add(R.id.mainLinear,fragments.get(4));
+        fragmentTransaction.add(R.id.mainLinear, fragments.get(0));
+        fragmentTransaction.add(R.id.mainLinear, fragments.get(1));
+        fragmentTransaction.add(R.id.mainLinear, fragments.get(2));
+        fragmentTransaction.add(R.id.mainLinear, fragments.get(3));
+        fragmentTransaction.add(R.id.mainLinear, fragments.get(4));
         fragmentTransaction.commit();
 
         //第一个显示
@@ -86,83 +87,85 @@ public class MainActivity extends BaseActivity {
         showFragment(0);
 
 
-
-
+        loginBean = UserManager.getInstance().getLoginBean();
         mainGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Boolean loginstate = LoginManager.getInstance().getLoginstate();
+
                 switch (checkedId) {
                     case R.id.mainOne:
                         showFragment(0);
                         break;
                     case R.id.mainTwo:
                         showFragment(1);
-
-                        if (loginstate!=null){
-                            if (!loginstate){
-                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                            }else {
-
-                            }
-                        }else {
-                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                        }
+                        skip(1);
                         break;
                     case R.id.mainThree:
                         showFragment(2);
-                        if (loginstate!=null){
-                            if (!loginstate){
-                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                            }else {
-
-                            }
-                        }else {
-                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                        }
+                        skip(2);
                         break;
                     case R.id.mainFour:
                         showFragment(3);
-                        if (loginstate!=null){
-                            if (!loginstate){
-                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                            }else {
-
-                            }
-                        }else {
-                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                        }
+                        skip(3);
                         break;
                     case R.id.mainFive:
                         showFragment(4);
-                        if (loginstate!=null){
-                            if (!loginstate){
-                                CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                            }else {
-                            }
-                        }else {
-                            CommonArouter.getInstance().build(Constants.PATH_LOGIN).navigation();
-                        }
+                        skip(4);
                         break;
                 }
             }
         });
     }
 
-
+    private void skip(int page) {
+        if (loginBean == null) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("page", page);
+            CommonArouter.getInstance().build(Constants.PATH_LOGIN).with(bundle).navigation();
+//            CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
+        }
+    }
 
 
     //显示那个fargment
     private void showFragment(int position) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         for (int i = 0; i < fragments.size(); i++) {
-            if(i == position){
+            if (i == position) {
                 fragmentTransaction.show(fragments.get(i));
-            } else{
+            } else {
                 fragmentTransaction.hide(fragments.get(i));
             }
         }
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Bundle bundle = CommonArouter.getInstance().getBundle();
+        int page = bundle.getInt("page");
+
+        Log.i("zzy", "onNew: " + page);
+        showFragment(page);
+        switch (page) {
+            case 0:
+                mainOne.setChecked(true);
+                break;
+            case 1:
+                mainTwo.setChecked(true);
+                break;
+            case 2:
+                mainThree.setChecked(true);
+                break;
+            case 3:
+                mainFour.setChecked(true);
+                break;
+            case 4:
+                mainFive.setChecked(true);
+                break;
+        }
+
     }
 
     @Override
@@ -176,10 +179,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onClickRight() {}
+    public void onClickRight() {
+    }
 
-
-
-
-
+    @Override
+    public void onUserChange(LoginBean loginBean) {
+        super.onUserChange(loginBean);
+        this.loginBean = loginBean;
+    }
 }

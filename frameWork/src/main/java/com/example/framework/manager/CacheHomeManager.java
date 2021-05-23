@@ -9,7 +9,7 @@ public class CacheHomeManager {
     private CacheHomeManager() {
     }
 
-    public static CacheHomeManager getInstance(){
+    public synchronized static CacheHomeManager getInstance(){
         if (cacheManager == null) {
             cacheManager = new CacheHomeManager();
         }
@@ -17,6 +17,7 @@ public class CacheHomeManager {
     }
 
     private HomeBean homeBean;
+
 
 
     public HomeBean getHomeBean() {
