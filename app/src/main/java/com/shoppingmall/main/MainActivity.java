@@ -3,10 +3,12 @@ package com.shoppingmall.main;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shoppingmall.R;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.main.bean.CustomBean;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
@@ -21,6 +23,7 @@ import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.ArrayList;
 
+@Route(path = Constants.TO_MAIN_ACTIVITY)
 public class MainActivity extends BaseActivity  {
 
 

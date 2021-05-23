@@ -13,6 +13,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,9 +32,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
+    implementation('com.alibaba:arouter-api:1.4.1') //ARouter依赖
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
     //轮播图
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.2@aar'//flycotablayout
@@ -43,6 +52,7 @@ dependencies {
     implementation project(path: ':framework')
     implementation project(path: ':user')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(path: ':detail')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

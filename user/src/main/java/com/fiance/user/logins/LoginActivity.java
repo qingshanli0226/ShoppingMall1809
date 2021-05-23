@@ -7,9 +7,11 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.R;
 import com.fiance.user.registers.RegisterActivity;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.LoginBean;
@@ -130,7 +132,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")){
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-            ShopMallArouter.getInstance().getIAppInterface().openMainActivity(this,null);
+//            ShopMallArouter.getInstance().getIAppInterface().openMainActivity(this,null);
+            ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("",0).navigation();
         }else{
             Toast.makeText(this, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }

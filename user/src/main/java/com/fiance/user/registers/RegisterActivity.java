@@ -7,12 +7,15 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.R;
 import com.fiance.user.logins.LoginActivity;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.RegisterBean;
 
+@Route(path = Constants.TO_USER_ACTIVITY)
 public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterView {
 
 

@@ -28,4 +28,8 @@ public class Constants {
     public static final String DIGIT_URL = BASE_URL_JSON +  "DIGIT_URL.json";
     //游戏专区
     public static final String GAME_URL = BASE_URL_JSON + "GAME_URL.json";
+
+    public static final String TO_DETAIL_ACTIVITY = "/detail/DetailActivity";
+    public static final String TO_MAIN_ACTIVITY = "/app/MainActivity";
+    public static final String TO_USER_ACTIVITY ="/user/RegisterActivity";
 }

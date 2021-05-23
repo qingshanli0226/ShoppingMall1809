@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".main.home.details.DetailsActivity">
+    tools:context=".detail.details.DetailsActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50">

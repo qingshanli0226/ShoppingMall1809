@@ -15,7 +15,7 @@ public class ShopMallArouter {
     private IUserInterface iUserInterface;
     private IPayInterface iPayInterface;
     private IAppInterface iAppInterface;
-
+    private IDetailInterface iDetailInterface;
     private HashMap<String,Class<?>> pathMap=new HashMap<>();
 
     private static ShopMallArouter shopMallArouter;
@@ -41,6 +41,9 @@ public class ShopMallArouter {
     public void registerIAppInterface(IAppInterface iAppInterface){
         this.iAppInterface=iAppInterface;
     }
+    public void registerDetailInterface(IDetailInterface iDetailInterface){
+        this.iDetailInterface=iDetailInterface;
+    }
 
     public IUserInterface getIUserInterface() {
         return iUserInterface;
@@ -54,6 +57,10 @@ public class ShopMallArouter {
         return iAppInterface;
     }
 
+    public IDetailInterface getIDetailInterface() {
+        return iDetailInterface;
+    }
+
     public interface IUserInterface{
         void openLoginActivity(Context context, Bundle bundle);
         void openRegisterActivity(Context context, Bundle bundle);
@@ -65,6 +72,10 @@ public class ShopMallArouter {
 
     public interface IAppInterface{
         void openMainActivity(Context context, Bundle bundle);
+    }
+
+    public interface IDetailInterface{
+        void openDetailActivity(Context context, Bundle bundle);
     }
 
     public void registerActivityPath(String path , Class<?> clazz){
@@ -85,4 +96,5 @@ public class ShopMallArouter {
             context.startActivity(intent);
         }
     }
+
 }

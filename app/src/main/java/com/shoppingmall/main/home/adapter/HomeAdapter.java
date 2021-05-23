@@ -1,6 +1,8 @@
 package com.shoppingmall.main.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -8,10 +10,12 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.net.bean.HomeBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -114,10 +118,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 secKillAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-//                        intent.putExtra("type","secKill");
-//                        intent.putExtra("data",seckillInfoBeans);
-//                        holder.itemView.getContext().startActivity(intent);
+                        ARouter.getInstance().build(Constants.TO_DETAIL_ACTIVITY).withSerializable("goods",seckillInfoBeans.getList().get(position)).withString("type","seckill").navigation();
                     }
 
                     @Override
@@ -137,10 +138,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         HomeBean.ResultBean.RecommendInfoBean recommendInfoBean = new HomeBean.ResultBean.RecommendInfoBean();
-//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-//                        intent.putExtra("type","recommend");
-//                        intent.putExtra("data",recommendInfoBean);
-//                        holder.itemView.getContext().startActivity(intent);
+                        ARouter.getInstance().build(Constants.TO_DETAIL_ACTIVITY).withSerializable("goods",recommendInfoBeans.get(position)).withString("type","recommend").navigation();
                     }
 
                     @Override
@@ -159,11 +157,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 hotAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        HomeBean.ResultBean.HotInfoBean hotInfoBean = new HomeBean.ResultBean.HotInfoBean();
-//                        Intent intent = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-//                        intent.putExtra("type","hot");
-//                        intent.putExtra("data",hotInfoBean);
-//                        holder.itemView.getContext().startActivity(intent);
+                        ARouter.getInstance().build(Constants.TO_DETAIL_ACTIVITY).withSerializable("goods",hotInfoBeans.get(position)).withString("type","hot").navigation();
                     }
 
                     @Override
