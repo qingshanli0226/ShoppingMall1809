@@ -18,7 +18,7 @@
             android:textSize="@dimen/dp_20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="默认值"></TextView>
+            android:text="@string/shop_default"></TextView>
 
     </LinearLayout>
 

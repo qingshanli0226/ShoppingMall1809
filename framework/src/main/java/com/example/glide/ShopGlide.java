@@ -259,7 +259,7 @@ public class ShopGlide {
         public void init(final ImageView imageView){
             this.imageView=imageView;
             imageView.setTag(picUrl);
-            imageView.setImageResource(R.mipmap.ic_launcher_round);
+            imageView.setImageResource(R.mipmap.new_img_loading_2);
             String key = ShopGlide.getInstance().generateCacheKey(picUrl);
             Bitmap bitmap=null;
             bitmap=shopGlide.getFromMen(picUrl);

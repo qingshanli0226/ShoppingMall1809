@@ -1,1 +1,16 @@
-<resources></resources>
+<resources>
+    <string name="log_name">登录</string>
+    <string name="accountNumber">账号</string>
+    <string name="please_user">请输入用户名</string>
+    <string name="password">密码</string>
+    <string name="please_pwd">请输入密码</string>
+    <string name="log_text">点击登录,表示同意《尚硅谷用户协议》</string>
+    <string name="register_num">注册账号</string>
+    <string name="forget_num">忘记密码?</string>
+    <string name="other_log">其他登录方式</string>
+    <string name="register_new_user">注册新用户</string>
+    <string name="confirm_pwd">确认密码</string>
+    <string name="please_more_pwd">请再次输入密码</string>
+    <string name="register">注册</string>
+    <string name="register_text">点击注册,表示同意《尚硅谷用户协议》</string>
+</resources>

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/dp_60"
     android:layout_height="@dimen/dp_60"
     android:orientation="vertical">
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_30"
         android:layout_height="@dimen/dp_30"
         android:src="@mipmap/ic_launcher_round"
         android:id="@+id/channel_img"
+        android:backgroundTintMode="screen"
         android:layout_gravity="center"></ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:text="名称"
+        android:text="@string/shop_name"
         android:layout_gravity="center"
         android:id="@+id/channel_name"></TextView>
 

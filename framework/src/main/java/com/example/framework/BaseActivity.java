@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
@@ -59,7 +58,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 
     public void onLeftClick() {
-        BusinessARouter.getInstance().getAppManager().OpenMainActivity(FrameModel.context,null);
         finish();
         destroy();
     }

@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/shop_name"
             android:layout_gravity="center"
-            android:text="默认值"
+            android:text="@string/shop_default"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:textSize="@dimen/dp_18"></TextView>
@@ -47,7 +47,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@color/red"
-                    android:text="默认值"></TextView>
+                    android:text="@string/shop_default"></TextView>
 
             </LinearLayout>
 
@@ -66,7 +66,7 @@
                 <TextView
                     android:id="@+id/product_num"
                     android:gravity="center"
-                    android:text="默认值"
+                    android:text="@string/shop_default"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="match_parent"
                     android:layout_weight="@dimen/weight_1"></TextView>

@@ -139,7 +139,6 @@ public class MainActivity extends BaseActivity {
 
     private void BeginTransaction(Fragment showFragment,Fragment hideFragmentOne,Fragment hideFragmentTwo,Fragment hideFragmentThree,Fragment hideFragmentFour) {
 
-
         fragmentTransaction.show(showFragment);
         fragmentTransaction.hide(hideFragmentOne);
         fragmentTransaction.hide(hideFragmentTwo);

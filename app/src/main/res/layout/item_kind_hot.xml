@@ -18,6 +18,6 @@
         android:gravity="center"
         android:layout_width="@dimen/dp_100"
         android:layout_height="match_parent"
-        android:text="默认值"></TextView>
+        android:text="@string/shop_default"></TextView>
 
 </LinearLayout>

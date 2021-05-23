@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricityProject">
-        <activity android:name=".details.DetailsActivity"></activity>
-        <activity android:name=".main.MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".details.DetailsActivity" />
+        <activity
+            android:name=".main.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

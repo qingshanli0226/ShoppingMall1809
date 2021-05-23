@@ -22,7 +22,6 @@ public class ActAdapter extends BaseAdapter<HomeBean.ResultBean.ActInfoBean> {
 
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemData.getIcon_url()).init(imageView);
 
-
     }
 
     @Override

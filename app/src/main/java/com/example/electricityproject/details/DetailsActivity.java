@@ -12,14 +12,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
-import com.example.manager.BusinessARouter;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.glide.ShopGlide;
+import com.example.manager.BusinessARouter;
 import com.example.view.ToolBar;
 
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
 
         if (img!=null){
-            Glide.with(this).load(Constants.BASE_URl_IMAGE+img).into(detailsImg);
+            ShopGlide.getInstance().with(this).load(Constants.BASE_URl_IMAGE+img).init(detailsImg);
         }
         if (name!=null){
             detailsName.setText(name+"");

@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="名称"
+        android:text="@string/shop_name"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         android:id="@+id/recommend_name"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/dp_14"
         android:textColor="#F44336"
-        android:text="价钱"
+        android:text="@string/price"
         android:layout_gravity="center"
         android:id="@+id/recommend_price"></TextView>
 </LinearLayout>

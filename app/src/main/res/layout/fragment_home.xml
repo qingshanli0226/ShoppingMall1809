@@ -26,7 +26,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
-                android:hint="请输入信息"
+                android:hint="@string/please_message"
                 android:editable="false"
                 android:background="@null"
                 android:id="@+id/edit_message"></EditText>

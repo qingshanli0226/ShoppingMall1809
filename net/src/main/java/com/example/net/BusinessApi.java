@@ -50,6 +50,8 @@ public interface BusinessApi {
     @GET("getRecommend")
     Observable<RecommendBean> getRecommendData();
 
+
+
     //主页面的数据
     @GET("/atguigu/json/HOME_URL.json")
     Observable<HomeBean> getHomeData();

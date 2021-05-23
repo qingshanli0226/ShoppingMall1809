@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.example.adapter.BaseAdapter;
 import com.example.common.bean.HomeBean;
-import com.example.electricityproject.details.DetailsActivity;
 import com.example.electricityproject.R;
+import com.example.electricityproject.details.DetailsActivity;
 import com.example.electricityproject.home.act.ActAdapter;
 import com.example.electricityproject.home.channel.channelAdapter;
 import com.example.electricityproject.home.hot.HotAdapter;
 import com.example.electricityproject.home.recommend.RecommendAdapter;
 import com.example.electricityproject.home.seckill.SeckillAdapter;
+import com.example.glide.ShopGlide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -83,7 +83,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         String s= (String) path;
-                        Glide.with(context).load(s).into(imageView);
+                        ShopGlide.getInstance().with(context).load(s).init(imageView);
                     }
                 });
                 banner.start();

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="热卖推荐"
+        android:text="@string/hot_recommend"
         android:textColor="#788188" />
 
     <androidx.recyclerview.widget.RecyclerView

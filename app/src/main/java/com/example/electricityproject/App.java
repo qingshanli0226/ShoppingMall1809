@@ -17,7 +17,6 @@ public class App extends Application {
         NetModel.init(this);
         FrameModel.init(this);
         UserModel.init();
-        AppModel.init();
         MainModel.init();
         if (TokenSPUtility.getString(this)!=null) {
             startService(new Intent(this, AutoService.class));
