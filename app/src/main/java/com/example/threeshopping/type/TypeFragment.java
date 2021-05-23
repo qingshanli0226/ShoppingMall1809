@@ -35,7 +35,6 @@ public class TypeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         typeGroup = (RadioGroup) findViewById(R.id.type_group);
         typeClassify = (RadioButton) findViewById(R.id.type_Classify);

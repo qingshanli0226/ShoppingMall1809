@@ -2,8 +2,10 @@ package com.example.net;
 
 
 import com.example.common.Constants;
+import com.example.net.bean.CartBean;
 import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
 
 
@@ -11,8 +13,10 @@ import com.example.net.bean.HomeBean;
 import com.example.net.bean.TypeBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -78,5 +82,10 @@ public interface IHttpApiService {
     Call<ResponseBody> downloadFile(@Url String url);
 
 
+    @POST(Constants.ADDPRODUCT)
+    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
 
+
+    @GET(Constants.SHORTACRT)
+    Observable<CartBean> showCart();
 }
