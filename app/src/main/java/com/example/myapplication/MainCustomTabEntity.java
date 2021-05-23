@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import com.flyco.tablayout.listener.CustomTabEntity;
 
 public class MainCustomTabEntity implements CustomTabEntity {

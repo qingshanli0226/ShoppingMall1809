@@ -90,7 +90,7 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 recommentRecAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "点击了Item", Toast.LENGTH_SHORT).show();
+//                        new Intent(holder.itemView.getContext(),)
                     }
 
                     @Override

@@ -3,20 +3,16 @@ package com.example.myapplication;
 
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
-import com.example.myapplication.classify.ClassifyFragment;
+import com.example.myapplication.type.ClassifyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
-import com.example.myapplication.my.MyFragment;
+import com.example.myapplication.personalCenter.PersonalCenterFragment;
 import com.example.myapplication.shoppingtrolley.ShoppingTrolleyFragment;
-import com.example.user.UserActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 
@@ -37,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public int bandLayout() {
-        return R.layout.activity_main2;
+        return R.layout.activity_main;
     }
 
     @Override
@@ -56,7 +52,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new ClassifyFragment());
         fragments.add(new DiscoverFragment());
         fragments.add(new ShoppingTrolleyFragment());
-        fragments.add(new MyFragment());
+        fragments.add(new PersonalCenterFragment());
 
         strings.add(getString(R.string.mainFragmentTitle1));
         strings.add(getString(R.string.mainFragmentTitle2));
@@ -80,7 +76,7 @@ public class MainActivity extends BaseActivity {
             public void onTabSelect(int position) {
                 if (position!=0){
                     //获取登陆状态
-                    isLogin= CacheUserManager.getInstance().getLoginBean();
+                    isLogin= CacheUserManager.getInstance().getIsLogin();
                     if (!isLogin){
                         //没有登陆
                         Bundle bundle = new Bundle();

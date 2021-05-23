@@ -1,4 +1,4 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
 import com.example.net.bean.AccessoryBean;
 import com.example.net.bean.BagBean;
@@ -12,9 +12,9 @@ import com.example.net.bean.PantsBean;
 import com.example.net.bean.SkirtBean;
 import com.example.net.bean.StationeryBean;
 
-import mvp.view.BaseVIew;
+import mvp.view.IBaseVIew;
 
-public interface ISkirtView extends BaseVIew {
+public interface ISkirtView extends IBaseVIew {
     void onSkirt(SkirtBean skirtBean);
     void onJack(JacketBean jacketBean);
     void onPants(PantsBean pantsBean);

@@ -1,4 +1,4 @@
-package com.example.myapplication.welcomem;
+package com.example.myapplication.welcome;
 
 import androidx.annotation.NonNull;
 
@@ -6,19 +6,18 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.welcomem.welcomemvp.WelcomePresenter;
-import com.example.myapplication.welcomem.welcomemvp.WelcomeView;
 import com.example.net.bean.HomeBean;
 
 import mvp.CaCheMannager;
 import com.example.framework.BaseActivity;
 
-public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeView {
+public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements IWelcomeView {
 
     private final int HANDLER_SIGN = 0;//handler发送消息的标志
     private final int HANDLER_HOMEDATE=1;//获取到首页数据的时候
@@ -31,7 +30,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     public int bandLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_welcome;
     }
 
     @Override
@@ -75,10 +74,16 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
                 case HANDLER_SIGN:
                     if (isHome&&isCountDown){
                         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));//跳转
+                        finish();//关闭欢迎页页面
                     }
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return false;
+    }
 
     @Override
     public void onWelcome(HomeBean homeBean) {

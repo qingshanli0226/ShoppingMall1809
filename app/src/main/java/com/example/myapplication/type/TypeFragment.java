@@ -1,4 +1,4 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +22,6 @@ import com.example.net.bean.StationeryBean;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.schedulers.Schedulers;
 
 public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirtView {
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
 import com.example.net.RetrofitManager;
 import com.example.net.bean.AccessoryBean;
@@ -6,7 +6,6 @@ import com.example.net.bean.BagBean;
 import com.example.net.bean.DigitBean;
 import com.example.net.bean.DressBean;
 import com.example.net.bean.GameBean;
-import com.example.net.bean.HomeBean;
 import com.example.net.bean.HomeProductBean;
 import com.example.net.bean.JacketBean;
 import com.example.net.bean.Overconat;
