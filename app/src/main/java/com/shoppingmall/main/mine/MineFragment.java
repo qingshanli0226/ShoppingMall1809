@@ -1,18 +1,16 @@
 package com.shoppingmall.main.mine;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shoppingmall.R;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
+import com.shoppingmall.net.bean.LoginBean;
 
 
-public class MineFragment extends BaseFragment {
+public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {
+
+    private TextView textname;
 
     @Override
     public int getLayoutId() {
@@ -21,7 +19,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        textname = mView.findViewById(R.id.textname);
     }
 
     @Override
@@ -32,5 +30,14 @@ public class MineFragment extends BaseFragment {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    public void onLoginChanged(LoginBean loginBean) {
+        if (loginBean!=null){
+            textname.setText(loginBean.getResult().getName());
+        }else{
+            textname.setText("未登录");
+        }
     }
 }

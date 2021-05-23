@@ -57,8 +57,11 @@ public interface ShoppingMallApiService {
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
-
     //所有商品
+
+    @FormUrlEncoded
+    @POST("autoLogin")
+    Observable<LoginBean> getAuto(@Field("token")String token);
 
 
 }

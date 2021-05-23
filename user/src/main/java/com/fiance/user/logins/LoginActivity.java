@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.fiance.commom.SpUtil;
 import com.fiance.user.R;
 import com.fiance.user.registers.RegisterActivity;
 import com.shoppingmall.framework.manager.ShopMallArouter;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.LoginBean;
 
@@ -129,6 +131,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void onLoginData(LoginBean loginBean) {
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")){
+            ShopMallUserManager.getInstance().setLoginBean(loginBean);
+            SpUtil.setString(this,loginBean.getResult().getToken());
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
             ShopMallArouter.getInstance().getIAppInterface().openMainActivity(this,null);
         }else{
