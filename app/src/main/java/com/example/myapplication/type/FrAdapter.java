@@ -1,4 +1,4 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

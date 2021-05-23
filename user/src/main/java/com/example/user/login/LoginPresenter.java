@@ -16,7 +16,8 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     public LoginPresenter(ILoginView iLoginView) {
         attView(iLoginView);
     }
-    public void onLogin(String name,String password){
+
+    public void getLogin(String name, String password) {
         RetrofitManager.getApi()
                 .getLogin(name, password)
                 .subscribeOn(Schedulers.io())
@@ -42,16 +43,16 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
                     @Override
                     public void onNext(@NonNull LoginBean loginBean) {
-                           if (mView!=null){
-                               mView.onLogin(loginBean);
-                           }
+                        if (mView != null) {
+                            mView.onLogin(loginBean);
+                        }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                            if (mView!=null){
-                                mView.showToast(e.getMessage());
-                            }
+                        if (mView != null) {
+                            mView.showToast(e.getMessage());
+                        }
                     }
 
                     @Override

@@ -1,4 +1,4 @@
-package com.example.myapplication.welcomem;
+package com.example.myapplication.welcome;
 
 import androidx.annotation.NonNull;
 
@@ -30,7 +30,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public int bandLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_welcome;
     }
 
     @Override

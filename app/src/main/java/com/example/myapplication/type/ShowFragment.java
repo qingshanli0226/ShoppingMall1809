@@ -1,4 +1,4 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
 import android.os.Bundle;
 

@@ -3,17 +3,12 @@ package com.example.user;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.framework.manager.CaCheArote;
-=======
-import android.widget.Toast;
 
-
->>>>>>> zyh
 import com.example.user.frag.FragmentAdapter;
 import com.example.user.login.LoginFragment;
 import com.example.user.register.RegisterFragment;

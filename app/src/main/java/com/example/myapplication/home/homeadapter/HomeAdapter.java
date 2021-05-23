@@ -1,11 +1,6 @@
 package com.example.myapplication.home.homeadapter;
 
 import android.content.Context;
-<<<<<<< HEAD
-import android.content.Intent;
-import android.util.Log;
-=======
->>>>>>> 5aa3d117620cb185ac2495139228a62452608433
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

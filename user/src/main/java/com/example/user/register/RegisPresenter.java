@@ -17,7 +17,7 @@ public class RegisPresenter extends BasePresenter<IRegisterView> {
     public RegisPresenter(IRegisterView iRegisterView) {
         attView(iRegisterView);
     }
-    public void onRegister(String name,String password){
+    public void getRegister(String name, String password){
         RetrofitManager.getApi()
                 .getRegister(name, password)
                 .subscribeOn(Schedulers.io())

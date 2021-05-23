@@ -45,7 +45,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
                 return;
             }
             //登陆
-            rootPresenter.onLogin(ename, epwd);
+            rootPresenter.getLogin(ename, epwd);
         });
         //注册页面
         toRegister.setOnClickListener(new View.OnClickListener() {

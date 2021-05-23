@@ -1,6 +1,5 @@
-package com.example.myapplication.classify;
+package com.example.myapplication.type;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.framework.BaseRecyclerViewAdapter;

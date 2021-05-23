@@ -31,7 +31,7 @@ public class CacheUserManager {
     }
 
     //获取当前登录状态
-    public boolean getLoginBean() {
+    public boolean getIsLogin() {
         return isLogin;
     }
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.welcomem;
+package com.example.myapplication.welcome;
 
 import com.example.net.RetrofitManager;
 import com.example.net.bean.HomeBean;

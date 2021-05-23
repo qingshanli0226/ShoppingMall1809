@@ -1,15 +1,12 @@
 package com.example.user.register;
 
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
-import com.example.user.register.IRegisterView;
-import com.example.user.register.RegisPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -52,7 +49,7 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
                 Toast.makeText(getActivity(), getString(R.string.notNull), Toast.LENGTH_SHORT).show();
             }
             //注册
-            rootPresenter.onRegister(ename, epwd);
+            rootPresenter.getRegister(ename, epwd);
         });
     }
 
