@@ -3,28 +3,15 @@ package com.example.myapplication.classify;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.typeadapter.ClassifyAdapter;
 import com.example.net.Constants;
-import com.example.net.bean.AccessoryBean;
-import com.example.net.bean.BagBean;
-import com.example.net.bean.DigitBean;
-import com.example.net.bean.DressBean;
-import com.example.net.bean.GameBean;
-import com.example.net.bean.HomeProductBean;
-import com.example.net.bean.JacketBean;
-import com.example.net.bean.Overconat;
-import com.example.net.bean.PantsBean;
 import com.example.net.bean.SkirtBean;
-import com.example.net.bean.StationeryBean;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.schedulers.Schedulers;
 
 public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirtView {
 
@@ -81,9 +68,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
         classAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
                 rootPresenter.onSkirt(urls[position]);
-
             }
 
             @Override

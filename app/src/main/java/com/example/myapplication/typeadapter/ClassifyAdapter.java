@@ -1,23 +1,12 @@
 package com.example.myapplication.typeadapter;
 
-import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.framework.BaseRecyclerViewAdapter;
-import com.example.myapplication.BuildConfig;
 import com.example.myapplication.R;
-import com.example.myapplication.home.homeadapter.HotoneAdapter;
-import com.example.net.bean.AccessoryBean;
-import com.example.net.bean.BagBean;
-import com.example.net.bean.DressBean;
-import com.example.net.bean.JacketBean;
-import com.example.net.bean.Overconat;
-import com.example.net.bean.PantsBean;
 import com.example.net.bean.SkirtBean;
 
 import java.util.List;

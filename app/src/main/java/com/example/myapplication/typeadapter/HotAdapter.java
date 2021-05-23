@@ -1,17 +1,13 @@
 package com.example.myapplication.typeadapter;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
-import com.example.net.bean.JacketBean;
 import com.example.net.bean.SkirtBean;
-
-import java.util.List;
 
 public class HotAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.HotProductListBean> {
 
