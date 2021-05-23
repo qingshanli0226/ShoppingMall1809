@@ -1,5 +1,5 @@
 include ':detail'
-include ':detail'
+include ':commom'
 include ':user'
 
 include ':framework'
