@@ -1,18 +1,7 @@
 package com.example.myapplication.type;
 
 import com.example.net.RetrofitManager;
-<<<<<<< HEAD:app/src/main/java/com/example/myapplication/type/SkirtPresenter.java
-import com.example.net.bean.AccessoryBean;
-import com.example.net.bean.BagBean;
-import com.example.net.bean.DigitBean;
-import com.example.net.bean.DressBean;
-import com.example.net.bean.GameBean;
-import com.example.net.bean.HomeProductBean;
-import com.example.net.bean.JacketBean;
-import com.example.net.bean.Overconat;
-import com.example.net.bean.PantsBean;
-=======
->>>>>>> zyh:app/src/main/java/com/example/myapplication/classify/SkirtPresenter.java
+
 import com.example.net.bean.SkirtBean;
 
 import io.reactivex.Observer;
