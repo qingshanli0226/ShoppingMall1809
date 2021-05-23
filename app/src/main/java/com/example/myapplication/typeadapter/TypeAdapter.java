@@ -10,23 +10,21 @@ import com.example.net.bean.SkirtBean;
 
 import java.util.List;
 
-public class TypeAdapter<T> extends BaseRecyclerViewAdapter<T> {
-    public TypeAdapter(List<T>list1){
-        updataData(list1);
-    }
+public class TypeAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.ChildBean> {
+
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.type_item;
     }
 
     @Override
-    public void displayViewHolder(BaseViewHolder holder, int position, T itemData) {
-        SkirtBean.ResultBean.ChildBean listBeans= (SkirtBean.ResultBean.ChildBean) itemData;
+    public void displayViewHolder(BaseViewHolder holder, int position, SkirtBean.ResultBean.ChildBean itemData) {
         TextView view = holder.getView(R.id.text);
-        view.setText(listBeans.getName());
-        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+listBeans.getPic()).into((ImageView) holder.getView(R.id.img));
+        view.setText(itemData.getName());
+        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getPic()).into((ImageView) holder.getView(R.id.img));
 
     }
+
 
 
     @Override

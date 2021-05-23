@@ -20,6 +20,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface Api {
     @GET(Constants.HOME_URL)
@@ -33,27 +34,7 @@ public interface Api {
     @FormUrlEncoded
     Observable<LoginBean> getLogin(@Field("name") String name, @Field("password") String password);
 
-    @GET(Constants.SKIRT_URL)
-    Observable<SkirtBean> getSkirt();
-    @GET(Constants.JACKET_URL)
-    Observable<JacketBean> getJack();
-    @GET(Constants.PANTS_URL)
-    Observable<PantsBean> getPants();
-    @GET(Constants.OVERCOAT_URL)
-    Observable<Overconat> getOver();
-    @GET(Constants.ACCESSORY_URL)
-    Observable<AccessoryBean> getAccess();
-    @GET(Constants.BAG_URL)
-    Observable<BagBean> getBag();
-    @GET(Constants.DRESS_UP_URL)
-    Observable<DressBean> getDress();
-@GET(Constants.HOME_PRODUCTS_URL)
-    Observable<HomeProductBean> getHomee();
-@GET(Constants.STATIONERY_URL)
-    Observable<StationeryBean> getStati();
-@GET(Constants.DIGIT_URL)
-    Observable<DigitBean> getDigit();
-    @GET(Constants.GAME_URL)
-    Observable<GameBean> getGame();
+    @GET
+    Observable<SkirtBean> getSkirt(@Url String url);
 
 }

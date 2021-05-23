@@ -1,5 +1,6 @@
 package com.example.myapplication.typeadapter;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,25 +13,24 @@ import com.example.net.bean.SkirtBean;
 
 import java.util.List;
 
-public class HotAdapter<T> extends BaseRecyclerViewAdapter<T> {
+public class HotAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.HotProductListBean> {
 
-    public HotAdapter(List<T> list){
-       updataData(list);
-    }
+
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_hot_view;
     }
 
     @Override
-    public void displayViewHolder(BaseViewHolder holder, int position, T itemData) {
-       SkirtBean.ResultBean.HotProductListBean listBeans= (SkirtBean.ResultBean.HotProductListBean) itemData;
+    public void displayViewHolder(BaseViewHolder holder, int position, SkirtBean.ResultBean.HotProductListBean itemData) {
+        Log.i("zyhaaa", "displayViewHolder: "+itemData);
         TextView view = holder.getView(R.id.money);
-        view.setText(listBeans.getCover_price()+"");
-        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+listBeans.getFigure()).into((ImageView) holder.getView(R.id.img));
-
+        view.setText(itemData.getCover_price()+"");
+        Log.i("zyh", "displayViewHolder: "+itemData);
+        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getFigure()).into((ImageView) holder.getView(R.id.img));
 
     }
+
 
 
 

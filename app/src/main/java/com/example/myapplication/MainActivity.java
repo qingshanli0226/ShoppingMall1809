@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
     private boolean isLogin;//判断是否登陆
+    private FrameLayout mainFra;
 
     @Override
     public int bandLayout() {
@@ -43,12 +44,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
-<<<<<<< HEAD
-=======
+
         mainFra = (FrameLayout) findViewById(R.id.mainFra);
 
 
->>>>>>> zyh
+        mainFra = findViewById(R.id.mainFra);
     }
 
     @Override

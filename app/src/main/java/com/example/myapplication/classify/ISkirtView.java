@@ -16,14 +16,5 @@ import mvp.view.BaseVIew;
 
 public interface ISkirtView extends BaseVIew {
     void onSkirt(SkirtBean skirtBean);
-    void onJack(JacketBean jacketBean);
-    void onPants(PantsBean pantsBean);
-    void onOver(Overconat overconat);
-    void onAccess(AccessoryBean accessoryBean);
-    void onBagurl(BagBean bagBean);
-    void onDress(DressBean dressBean);
-    void onHomee(HomeProductBean homeProductBean);
-    void onStart(StationeryBean stationeryBean);
-    void onDigit(DigitBean digitBean);
-    void onGame(GameBean gameBean);
+
 }
