@@ -8,6 +8,7 @@ import com.example.framework.BaseFragment;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.typeadapter.ClassifyAdapter;
+import com.example.net.Constants;
 import com.example.net.bean.AccessoryBean;
 import com.example.net.bean.BagBean;
 import com.example.net.bean.DigitBean;
@@ -29,8 +30,9 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
     private RecyclerView rv;
     private ClassifyAdapter classifyAdapter;
     private List<String> list=new ArrayList<>();
+    private List<Object> data=new ArrayList<>();
     private ClassAdapter classAdapter;
-
+    private String[] urls = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};
 
 
     @Override
@@ -51,19 +53,18 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
     @Override
     public void initPresenter() {
          rootPresenter=new SkirtPresenter(this);
-         rootPresenter.onSkirt();
-         rootPresenter.onJack();
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
-         list.add("小裙子");
+
+         list.add(getString(R.string.skirt));
+         list.add(getString(R.string.jacket));
+         list.add(getString(R.string.pants));
+         list.add(getString(R.string.over));
+         list.add(getString(R.string.access));
+         list.add(getString(R.string.bag));
+         list.add(getString(R.string.dress));
+         list.add(getString(R.string.homepro));
+         list.add(getString(R.string.stati));
+         list.add(getString(R.string.digit));
+         list.add(getString(R.string.game));
         classAdapter.updataData(list);
 
 
@@ -71,7 +72,6 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
 
     @Override
     public void initData() {
-
         rv.setAdapter(classifyAdapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         lv.setAdapter(classAdapter);
@@ -79,33 +79,9 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
         classAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if (position==0){
-                    rootPresenter.onSkirt();
-                }
-                if (position==1){
-                    rootPresenter.onJack();
-                }
-                if (position==2){
-                    rootPresenter.onpatns();
-                }
-                if (position==3){
-                    rootPresenter.onOver();
-                }
-                if (position==4){
-                    rootPresenter.onAccess();
-                }if (position==5){
-                    rootPresenter.onBag();
-                }if (position==6){
-                    rootPresenter.onDress();
-                }if (position==7){
-                     rootPresenter.onHomeP();
-                }if (position==8){
-                     rootPresenter.onStari();
-                }if (position==9){
-                     rootPresenter.onDigit();
-                }if (position==10){
-                     rootPresenter.onGame();
-                }
+
+                rootPresenter.onSkirt(urls[position]);
+
             }
 
             @Override
@@ -117,65 +93,15 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
 
     @Override
     public void onSkirt(SkirtBean skirtBean) {
-
-        LogUtils.json(skirtBean);
-        classifyAdapter.setupdata(skirtBean.getResult(),getContext(),ClassifyAdapter.SKIRT_URL);
-
-
-    }
-
-    @Override
-    public void onJack(JacketBean jacketBean) {
-        classifyAdapter.setupdata(jacketBean.getResult(),getContext(),ClassifyAdapter.JACKET_URL);
+        data.clear();
+        List<SkirtBean.ResultBean> result = skirtBean.getResult();
+        List<SkirtBean.ResultBean.ChildBean> child = result.get(0).getChild();
+        List<SkirtBean.ResultBean.HotProductListBean> hot_product_list = result.get(0).getHot_product_list();
+        data.add(hot_product_list);
+        data.add(child);
+        classifyAdapter.updataData(data);
 
 
-
-    }
-
-    @Override
-    public void onPants(PantsBean pantsBean) {
-        classifyAdapter.setupdata(pantsBean.getResult(),getContext(),ClassifyAdapter.PANTS_URL);
-    }
-
-    @Override
-    public void onOver(Overconat overconat) {
-        classifyAdapter.setupdata(overconat.getResult(),getContext(),ClassifyAdapter.OVERCOAT_URL);
-
-    }
-
-    @Override
-    public void onAccess(AccessoryBean accessoryBean) {
-        classifyAdapter.setupdata(accessoryBean.getResult(),getContext(),ClassifyAdapter.ACCESSORY_URL);
-    }
-
-    @Override
-    public void onBagurl(BagBean bagBean) {
-        classifyAdapter.setupdata(bagBean.getResult(),getContext(),ClassifyAdapter.BAG_URL);
-    }
-
-    @Override
-    public void onDress(DressBean dressBean) {
-        classifyAdapter.setupdata(dressBean.getResult(),getContext(),ClassifyAdapter.DRESS_UP_URL);
-    }
-
-    @Override
-    public void onHomee(HomeProductBean homeProductBean) {
-        classifyAdapter.setupdata(homeProductBean.getResult(),getContext(),ClassifyAdapter.HOME_PRODUCTS_URL);
-    }
-
-    @Override
-    public void onStart(StationeryBean stationeryBean) {
-        classifyAdapter.setupdata(stationeryBean.getResult(),getContext(),ClassifyAdapter.STATIONERY_URL);
-    }
-
-    @Override
-    public void onDigit(DigitBean digitBean) {
-        classifyAdapter.setupdata(digitBean.getResult(),getContext(),ClassifyAdapter.DIGIT_URL);
-    }
-
-    @Override
-    public void onGame(GameBean gameBean) {
-        classifyAdapter.setupdata(gameBean.getResult(),getContext(),ClassifyAdapter.GAME_URL);
     }
 
 

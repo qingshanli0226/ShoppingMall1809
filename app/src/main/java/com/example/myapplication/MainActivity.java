@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
     private boolean isLogin;//判断是否登陆
+    private FrameLayout mainFra;
 
     @Override
     public int bandLayout() {

@@ -184,6 +184,24 @@ public class SkirtBean {
         }
 
         public static class HotProductListBean {
+            @Override
+            public String toString() {
+                return "HotProductListBean{" +
+                        "product_id='" + product_id + '\'' +
+                        ", channel_id='" + channel_id + '\'' +
+                        ", brand_id='" + brand_id + '\'' +
+                        ", p_catalog_id='" + p_catalog_id + '\'' +
+                        ", supplier_type='" + supplier_type + '\'' +
+                        ", supplier_code='" + supplier_code + '\'' +
+                        ", name='" + name + '\'' +
+                        ", cover_price='" + cover_price + '\'' +
+                        ", brief='" + brief + '\'' +
+                        ", figure='" + figure + '\'' +
+                        ", sell_time_start='" + sell_time_start + '\'' +
+                        ", sell_time_end='" + sell_time_end + '\'' +
+                        '}';
+            }
+
             private String product_id;
             private String channel_id;
             private String brand_id;

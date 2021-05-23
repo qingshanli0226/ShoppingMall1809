@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="skirt"> 小裙子 </string>
+    <string name="jacket">上衣</string>
+    <string name="pants">下装</string>
+    <string name="over">外套</string>
+    <string name="access">配件</string>
+    <string name="bag">包包</string>
+    <string name="dress">装扮</string>
+    <string name="homepro">居家宅品</string>
+    <string name="stati">办公文具</string>
+    <string name="digit">数码周边</string>
+    <string name="game">游戏专区</string>
+</resources>
