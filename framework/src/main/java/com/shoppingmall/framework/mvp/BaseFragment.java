@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shoppingmall.framework.R;
+import com.shoppingmall.framework.custom.LoadingPage;
 
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements IBaseView{
     protected T httpPresenter;
@@ -24,11 +25,18 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loadingPage = new LoadingPage(getContext()){
+            @Override
+            protected int getSuccessLayoutId() {
+                return getLayoutId();
+            }
+        };
         initView();
         initPresenter();
         initData();
     }
 
+    public LoadingPage loadingPage;
     public abstract int getLayoutId();
     public abstract void initView();
     public abstract void initPresenter();

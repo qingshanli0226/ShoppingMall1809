@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.Variable;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.net.bean.HomeBean;
 
@@ -24,7 +24,7 @@ public class HotAdapter extends BaseRvAdapter<HomeBean.ResultBean.HotInfoBean> {
         hotRvImg = (ImageView) holder.getView(R.id.hotRvImg);
         hotRvName = (TextView) holder.getView(R.id.hotRvName);
         hotRvCoverPrice = (TextView) holder.getView(R.id.hotRvCoverPrice);
-        Glide.with(hotRvImg.getContext()).load(Variable.IMG_HTTPS+itemData.getFigure()).into(hotRvImg);
+        Glide.with(hotRvImg.getContext()).load(Constants.IMG_HTTPS+itemData.getFigure()).into(hotRvImg);
         hotRvName.setText("" + itemData.getName());
         hotRvCoverPrice.setText("￥"+itemData.getCover_price());
     }

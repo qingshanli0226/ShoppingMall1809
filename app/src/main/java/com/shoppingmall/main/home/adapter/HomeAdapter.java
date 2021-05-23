@@ -1,9 +1,6 @@
 package com.shoppingmall.main.home.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,12 +8,10 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.Variable;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
-import com.shoppingmall.main.home.details.DetailsActivity;
 import com.shoppingmall.net.bean.HomeBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -69,7 +64,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         HomeBean.ResultBean.BannerInfoBean bannerInfoBean = (HomeBean.ResultBean.BannerInfoBean) path;
-                        Glide.with(holder.itemView).load(Variable.IMG_HTTPS + bannerInfoBean.getImage()).into(imageView);
+                        Glide.with(holder.itemView).load(Constants.IMG_HTTPS + bannerInfoBean.getImage()).into(imageView);
                     }
                 });
                 banner.start();
@@ -101,7 +96,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         HomeBean.ResultBean.ActInfoBean actInfoBean = (HomeBean.ResultBean.ActInfoBean) path;
-                        Glide.with(holder.itemView).load(Variable.IMG_HTTPS + actInfoBean.getIcon_url()).into(imageView);
+                        Glide.with(holder.itemView).load(Constants.IMG_HTTPS + actInfoBean.getIcon_url()).into(imageView);
                     }
                 });
                 actBanner.start();

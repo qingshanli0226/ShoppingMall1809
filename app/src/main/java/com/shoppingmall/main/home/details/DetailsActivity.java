@@ -1,7 +1,6 @@
 package com.shoppingmall.main.home.details;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,16 +9,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.Variable;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.HomeBean;
-
-import java.io.Serializable;
-import java.util.List;
 
 public class DetailsActivity extends BaseActivity {
 
@@ -60,19 +55,19 @@ public class DetailsActivity extends BaseActivity {
         switch (type){
             case "secKill":
                 HomeBean.ResultBean.SeckillInfoBean.ListBean listBean = (HomeBean.ResultBean.SeckillInfoBean.ListBean) intent.getSerializableExtra("data");
-                Glide.with(this).load(Variable.IMG_HTTPS+listBean.getFigure()).into(detailImg);
+                Glide.with(this).load(Constants.IMG_HTTPS+listBean.getFigure()).into(detailImg);
                 detailTitle.setText(""+listBean.getName());
                 detailTitle.setText(""+listBean.getCover_price());
                 break;
             case "recommend":
                 HomeBean.ResultBean.RecommendInfoBean recommendInfoBean = (HomeBean.ResultBean.RecommendInfoBean) intent.getSerializableExtra("data");
-                Glide.with(this).load(Variable.IMG_HTTPS+recommendInfoBean.getFigure()).into(detailImg);
+                Glide.with(this).load(Constants.IMG_HTTPS+recommendInfoBean.getFigure()).into(detailImg);
                 detailTitle.setText(""+recommendInfoBean.getName());
                 detailTitle.setText(""+recommendInfoBean.getCover_price());
                 break;
             case "hot":
                 HomeBean.ResultBean.HotInfoBean hotInfoBean = (HomeBean.ResultBean.HotInfoBean) intent.getSerializableExtra("data");
-                Glide.with(this).load(Variable.IMG_HTTPS+hotInfoBean.getFigure()).into(detailImg);
+                Glide.with(this).load(Constants.IMG_HTTPS+hotInfoBean.getFigure()).into(detailImg);
                 detailTitle.setText(""+hotInfoBean.getName());
                 detailTitle.setText(""+hotInfoBean.getCover_price());
                 break;

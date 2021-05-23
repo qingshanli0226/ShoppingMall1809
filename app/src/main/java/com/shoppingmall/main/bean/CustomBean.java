@@ -1,4 +1,4 @@
-package com.shoppingmall.bean;
+package com.shoppingmall.main.bean;
 
 
 import com.flyco.tablayout.listener.CustomTabEntity;

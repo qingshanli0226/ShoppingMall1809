@@ -3,16 +3,13 @@ package com.shoppingmall.main;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.widget.ScrollView;
-
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shoppingmall.R;
-import com.shoppingmall.bean.CustomBean;
+import com.shoppingmall.main.bean.CustomBean;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
-import com.shoppingmall.framework.mvp.IBaseView;
 import com.shoppingmall.main.adapter.ComAdapter;
 import com.shoppingmall.main.find.FindFragment;
 import com.shoppingmall.main.home.HomeFragment;

@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
-import com.shoppingmall.main.sort.fragment.ClassificationFragment;
 
 
 public class ClassificationAdapter extends BaseRvAdapter<String> {

@@ -7,6 +7,7 @@ import com.shoppingmall.net.bean.DialogBean;
 import com.shoppingmall.net.bean.DigitBean;
 import com.shoppingmall.net.bean.DressBean;
 import com.shoppingmall.net.bean.GameBean;
+import com.shoppingmall.net.bean.GoodsBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.Home_ProductsBean;
 import com.shoppingmall.net.bean.JacketBean;
@@ -50,54 +51,14 @@ public interface ShoppingMallApiService {
     @GET("/atguigu/json/NEW_POST_URL.json")
     Observable<BuyBean> getBuyData();
     //http://49.233.0.68:8080/atguigu/json/HOT_POST_URL.json
-    //对话图片
-    @GET("/atguigu/json/HOT_POST_URL.json")
-    Observable<DialogBean> getDialogData();
-    //小裙子
-    @GET("/atguigu/json/SKIRT_URL.json")
-    Observable<SkirtBean> getSkirtData();
-    //上衣
-    @GET("/atguigu/json/JACKET_URL.json")
-    Observable<JacketBean> getJacketData();
-    //下衣
-    @GET("/atguigu/json/PANTS_URL.json")
-    Observable<PantsBean> getPantsData();
-    //外套
-    @GET("/atguigu/json/OVERCOAT_URL.json")
-    Observable<OvercoatBean> getOvercoatData();
-    //配件
-    @GET("/atguigu/json/ACCESSORY_URL.json")
-    Observable<AccessoryBean> getAccessoryData();
-    //包包
-    @GET("/atguigu/json/BAG_URL.json")
-    Observable<BagBean> getBagData();
-
-    //装扮
-    @GET("/atguigu/json/DRESS_UP_URL.json")
-    Observable<DressBean> getDressData();
-
-    //居家宅品
-    @GET("/atguigu/json/HOME_PRODUCTS_URL.json")
-    Observable<Home_ProductsBean> getHomeProductsData();
-
-
-    //办公文具
-    @GET("/atguigu/json/STATIONERY_URL.json")
-    Observable<StationeryBean> getStationeryData();
-
-    //数码周边
-    @GET("/atguigu/json/DIGIT_URL.json")
-    Observable<DigitBean> getDigitData();
-
-    //游戏专区
-    @GET("/atguigu/json/GAME_URL.json")
-    Observable<GameBean> getGameData();
-
+    @GET
+    Observable<GoodsBean> Goods(@Url String url);
     //Glide
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
+    //所有商品
 
 
 }

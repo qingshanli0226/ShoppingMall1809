@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.Variable;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.net.bean.HomeBean;
 
@@ -27,7 +27,7 @@ public class SecKillAdapter extends BaseRvAdapter<HomeBean.ResultBean.SeckillInf
         secKillText = (TextView) holder.getView(R.id.secKillText);
         secKill = (TextView) holder.getView(R.id.secKill);
 
-        Glide.with(secKillRvImg.getContext()).load(Variable.IMG_HTTPS+itemData.getFigure()).into(secKillRvImg);
+        Glide.with(secKillRvImg.getContext()).load(Constants.IMG_HTTPS+itemData.getFigure()).into(secKillRvImg);
         secKill.setText("￥"+itemData.getCover_price());
         secKillText.setText("￥"+itemData.getOrigin_price());
         secKillText.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG );

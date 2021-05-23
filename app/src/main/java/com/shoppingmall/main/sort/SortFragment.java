@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.adapter.ComAdapter;
-import com.shoppingmall.main.sort.fragment.ClassificationFragment;
+import com.shoppingmall.main.sort.fragment.classfication.ClassificationFragment;
 import com.shoppingmall.main.sort.fragment.label.LabelFragment;
 
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.Variable;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.net.bean.HomeBean;
 
@@ -22,7 +22,7 @@ public class RecommendAdapter extends BaseRvAdapter<HomeBean.ResultBean.Recommen
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.RecommendInfoBean itemData) {
         recommendRvImg = (ImageView) holder.getView(R.id.recommendRvImg);
-        Glide.with(recommendRvImg.getContext()).load(Variable.IMG_HTTPS+itemData.getFigure()).into(recommendRvImg);
+        Glide.with(recommendRvImg.getContext()).load(Constants.IMG_HTTPS+itemData.getFigure()).into(recommendRvImg);
         recommendRvName = (TextView) holder.getView(R.id.recommendRvName);
         recommendRvCoverPrice = (TextView) holder.getView(R.id.recommendRvCoverPrice);
         recommendRvName.setText("" + itemData.getName());

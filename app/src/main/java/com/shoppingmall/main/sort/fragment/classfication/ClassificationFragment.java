@@ -1,25 +1,30 @@
-package com.shoppingmall.main.sort.fragment;
-
-import android.util.SparseArray;
-import android.widget.Toast;
+package com.shoppingmall.main.sort.fragment.classfication;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shoppingmall.R;
+import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
-import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.sort.fragment.adapter.ClassificationAdapter;
 import com.shoppingmall.main.sort.fragment.adapter.ClassificationContentAdapter;
-import com.shoppingmall.net.bean.HomeBean;
+import com.shoppingmall.net.bean.GoodsBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClassificationFragment extends BaseFragment {
+public class ClassificationFragment extends BaseFragment<ClassificationPresenter> implements IClassification {
 
+    private String[] urls = new String[]{Constants.SKIRT_URL,
+            Constants.JACKET_URL, Constants.PANTS_URL,
+            Constants.OVERCOAT_URL, Constants.ACCESSORY_URL,
+            Constants.BAG_URL, Constants.DRESS_UP_URL,
+            Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL,
+            Constants.DIGIT_URL,
+            Constants.GAME_URL};
+    private List<Object> list=new ArrayList<>();
 
     private RecyclerView classificationTitleRv;
     private RecyclerView classificationContentRv;
@@ -37,12 +42,12 @@ public class ClassificationFragment extends BaseFragment {
 
     @Override
     public void initPresenter() {
-
+        httpPresenter = new ClassificationPresenter(this);
     }
 
     @Override
     public void initData() {
-        HomeBean homeBean = CacheManager.getInstance().getHomeBean();
+        httpPresenter.getGoodsData(urls[0]);
 
         List<String> classificationTitleList = new ArrayList<>();
         classificationTitleList.add(getString(R.string.SKIRT));
@@ -61,31 +66,16 @@ public class ClassificationFragment extends BaseFragment {
         classificationTitleRv.setAdapter(classificationAdapter);
         classificationAdapter.updateData(classificationTitleList);
 
-        //添加数据
-        List<Object> objects = new ArrayList<>();
-        objects.add(homeBean.getResult().getRecommend_info());
-        objects.add(homeBean.getResult().getHot_info());
-
         classificationContentAdapter = new ClassificationContentAdapter();
         classificationContentRv.setLayoutManager(new LinearLayoutManager(getContext()));
         classificationContentRv.setAdapter(classificationContentAdapter);
-        classificationContentAdapter.updateData(objects);
-
 
         classificationAdapter.setRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 classificationAdapter.setPosition(position);
                 classificationAdapter.notifyDataSetChanged();
-
-                switch (position){
-                    case 0:
-
-                        break;
-                    case 1:
-
-                        break;
-                }
+                httpPresenter.getGoodsData(urls[position]);
             }
 
             @Override
@@ -95,4 +85,20 @@ public class ClassificationFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void getGoods(GoodsBean goodsBean) {
+        list.clear();
+        List<GoodsBean.ResultBean> result = goodsBean.getResult();
+        List<GoodsBean.ResultBean.ChildBean> child = result.get(0).getChild();
+        List<GoodsBean.ResultBean.HotProductListBean> hots = result.get(0).getHot_product_list();
+        list.add(hots);
+        list.add(child);
+        classificationContentAdapter.updateData(list);
+    }
+
+    @Override
+    public void showLoading() {
+        super.showLoading();
+        loadingPage.showTransparentLoadingView();
+    }
 }

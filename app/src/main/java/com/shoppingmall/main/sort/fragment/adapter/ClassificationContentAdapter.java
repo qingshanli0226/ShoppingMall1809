@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.net.bean.GoodsBean;
 import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.List;
@@ -34,16 +35,16 @@ public class ClassificationContentAdapter extends BaseRvAdapter<Object> {
     public void displayViewHolder(BaseViewHolder holder, int position, Object itemData) {
         switch (position){
             case 0:
-                List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
+                List<GoodsBean.ResultBean.HotProductListBean> hotProductListBeans = (List<GoodsBean.ResultBean.HotProductListBean>) itemData;
                 RecyclerView classHorizontalTypeRv = holder.getView(R.id.classHorizontalType);
                 HorizontalTypeAdapter horizontalTypeAdapter = new HorizontalTypeAdapter();
                 classHorizontalTypeRv.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
                 classHorizontalTypeRv.setAdapter(horizontalTypeAdapter);
-                horizontalTypeAdapter.updateData(recommendInfoBeans);
+                horizontalTypeAdapter.updateData(hotProductListBeans);
                 break;
 
             case 1:
-                List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = (List<HomeBean.ResultBean.HotInfoBean>) itemData;
+                List<GoodsBean.ResultBean.ChildBean> hotInfoBeans = (List<GoodsBean.ResultBean.ChildBean>) itemData;
                 RecyclerView classVerticalTypeRv = holder.getView(R.id.classVerticalType);
                 VerticalType verticalType = new VerticalType();
                 classVerticalTypeRv.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
