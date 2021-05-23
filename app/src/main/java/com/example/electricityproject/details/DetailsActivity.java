@@ -17,7 +17,7 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
-import com.example.common.call.BusinessARouter;
+import com.example.manager.BusinessARouter;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.view.ToolBar;

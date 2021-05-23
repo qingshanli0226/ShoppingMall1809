@@ -16,6 +16,11 @@ import com.example.adapter.BaseAdapter;
 import com.example.common.bean.HomeBean;
 import com.example.electricityproject.details.DetailsActivity;
 import com.example.electricityproject.R;
+import com.example.electricityproject.home.act.ActAdapter;
+import com.example.electricityproject.home.channel.channelAdapter;
+import com.example.electricityproject.home.hot.HotAdapter;
+import com.example.electricityproject.home.recommend.RecommendAdapter;
+import com.example.electricityproject.home.seckill.SeckillAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 

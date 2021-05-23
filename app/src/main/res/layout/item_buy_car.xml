@@ -29,7 +29,7 @@
             android:text="默认值"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            android:textSize="@dimen/dm_dp_18dp"></TextView>
+            android:textSize="@dimen/dp_18"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,9 +37,9 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_weight="3">
+                android:layout_weight="@dimen/weight_3">
 
                 <TextView
                     android:id="@+id/text_money"
@@ -52,16 +52,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_weight="7">
+                android:layout_weight="@dimen/weight_7">
 
                 <ImageView
                     android:id="@+id/image_add"
                     android:src="@drawable/goods_add_btn"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></ImageView>
+                    android:layout_weight="@dimen/weight_1"></ImageView>
 
                 <TextView
                     android:id="@+id/product_num"
@@ -69,14 +69,14 @@
                     android:text="默认值"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></TextView>
+                    android:layout_weight="@dimen/weight_1"></TextView>
 
                 <ImageView
                     android:id="@+id/image_sub"
                     android:src="@drawable/goods_sub_btn"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></ImageView>
+                    android:layout_weight="@dimen/weight_1"></ImageView>
 
             </LinearLayout>
 

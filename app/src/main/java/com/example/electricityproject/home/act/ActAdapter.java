@@ -1,14 +1,15 @@
-package com.example.electricityproject.home;
+package com.example.electricityproject.home.act;
 
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.example.common.Constants;
 import com.example.adapter.BaseAdapter;
+import com.example.common.Constants;
 import com.example.common.bean.HomeBean;
 import com.example.electricityproject.R;
+import com.example.glide.ShopGlide;
 
 public class ActAdapter extends BaseAdapter<HomeBean.ResultBean.ActInfoBean> {
+
 
     @Override
     public int getLayoutId(int viewType) {
@@ -17,10 +18,9 @@ public class ActAdapter extends BaseAdapter<HomeBean.ResultBean.ActInfoBean> {
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, HomeBean.ResultBean.ActInfoBean itemData) {
-        ImageView img = baseViewHolder.getView(R.id.act_img);
+        ImageView imageView = baseViewHolder.getView(R.id.act_img);
 
-        Glide.with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemData.getIcon_url()).into(img);
-
+        ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemData.getIcon_url()).init(imageView);
 
 
     }

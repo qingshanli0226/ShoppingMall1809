@@ -1,31 +1,21 @@
 package com.example.electricityproject.welcome;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.common.SPUtility;
+import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.main.MainActivity;
-import com.example.user.auto.AutoService;
+import com.example.framework.BaseActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
     private int time;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-
-            Log.i("zx", "onCreate: "+SPUtility.getString(this));
-            startService(new Intent(this, AutoService.class));
-
+    protected void initData() {
         time=3;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -45,5 +35,40 @@ public class WelcomeActivity extends AppCompatActivity {
         },0,1000);
     }
 
+    @Override
+    protected void initPresenter() {
 
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_welcome;
+    }
+
+
+    @Override
+    public void onLoginChange(LogBean isLog) {
+
+    }
+
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
 }

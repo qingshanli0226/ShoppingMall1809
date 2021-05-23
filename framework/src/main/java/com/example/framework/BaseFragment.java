@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.common.call.BusinessUserManager;
+import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 

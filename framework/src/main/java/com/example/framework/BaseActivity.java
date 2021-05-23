@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.common.call.BusinessARouter;
-import com.example.common.call.BusinessUserManager;
+import com.example.manager.BusinessARouter;
+import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 

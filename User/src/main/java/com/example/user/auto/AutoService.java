@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import com.example.common.SPUtility;
+import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
-import com.example.common.call.BusinessUserManager;
+import com.example.manager.BusinessUserManager;
 
 public class AutoService extends Service {
     public AutoService() {
@@ -22,14 +22,14 @@ public class AutoService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        if (!SPUtility.getString(this).equals("")) {
+        if (!TokenSPUtility.getString(this).equals("")) {
                 new AutoPresenter(new IAutoView() {
                     @Override
                     public void onAutoData(LogBean logBean) {
                         if (logBean.getCode().equals("200")) {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                             BusinessUserManager.getInstance().setIsLog(logBean);
-                            SPUtility.putString(AutoService.this, logBean.getResult().getToken());
+                            TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
                         } else {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -50,7 +50,7 @@ public class AutoService extends Service {
                     public void showError(String error) {
 
                     }
-                }).getAutoData(SPUtility.getString(this));
+                }).getAutoData(TokenSPUtility.getString(this));
 
             }
 

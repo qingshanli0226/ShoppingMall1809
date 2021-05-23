@@ -10,8 +10,8 @@ import java.util.List;
 public class FragAdapter extends FragmentPagerAdapter {
     private List<Fragment> list;
 
-    public FragAdapter(@NonNull FragmentManager fm, List<Fragment> list) {
-        super(fm);
+    public FragAdapter(@NonNull FragmentManager fm, int behavior, List<Fragment> list) {
+        super(fm, behavior);
         this.list = list;
     }
 

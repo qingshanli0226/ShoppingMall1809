@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.common.call.BusinessARouter;
+import com.example.manager.BusinessARouter;
 import com.example.user.login.LoginActivity;
 
 public class UserModel implements BusinessARouter.iUserManager{

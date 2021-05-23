@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/kind_money"
-        android:textSize="@dimen/dm_dp_18dp"
+        android:textSize="@dimen/dp_18"
         android:textColor="@color/red"
         android:gravity="center"
         android:layout_width="@dimen/dp_100"

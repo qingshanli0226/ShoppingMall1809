@@ -4,6 +4,6 @@
     <size android:width="@dimen/dp_100" android:height="@dimen/dp_50"></size>
     <solid android:color="@color/white"></solid>
     <corners android:radius="10dp"></corners>
-    <stroke android:width="@dimen/dm_dp_02dp" android:color="@color/red"></stroke>
+    <stroke android:width="@dimen/dp_2" android:color="@color/red"></stroke>
 
 </shape>
