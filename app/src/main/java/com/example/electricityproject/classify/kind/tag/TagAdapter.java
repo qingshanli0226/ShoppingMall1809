@@ -27,6 +27,7 @@ class TagAdapter extends BaseAdapter<ClassifyBean.ResultBean> {
         view.setText(itemData.getName()+"");
         view.setTextColor(Color.parseColor(ranColor[randomcolor]));
 
+
     }
 
     @Override

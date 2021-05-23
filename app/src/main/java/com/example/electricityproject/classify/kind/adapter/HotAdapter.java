@@ -30,6 +30,9 @@ class HotAdapter extends BaseAdapter<GoodsBean.ResultBean.HotProductListBean> {
         TextView tv = baseViewHolder.getView(R.id.kind_money);
         Glide.with(context).load(Constants.BASE_URl_IMAGE+itemData.getFigure()).placeholder(R.drawable.new_img_loading_1).into(iv);
         tv.setText("¥"+itemData.getCover_price());
+
+
+
     }
 
     @Override

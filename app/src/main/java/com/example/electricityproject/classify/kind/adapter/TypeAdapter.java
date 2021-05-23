@@ -1,6 +1,7 @@
 package com.example.electricityproject.classify.kind.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.adapter.BaseAdapter;
 import com.example.common.bean.GoodsBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.details.DetailsActivity;
 
 import java.util.List;
 
@@ -45,6 +47,25 @@ class TypeAdapter extends BaseAdapter<Object> {
                 hotRv.setAdapter(adapter);
                 adapter.updateData(hotProductListBeans);
 
+                adapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+                    @Override
+                    public void OnItemClick(int position) {
+                        Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
+                        intent.putExtra("img",hotProductListBeans.get(position).getFigure());
+                        intent.putExtra("name",hotProductListBeans.get(position).getName()+"");
+                        intent.putExtra("price",hotProductListBeans.get(position).getCover_price());
+                        intent.putExtra("productId",hotProductListBeans.get(position).getProduct_id());
+                        intent.putExtra("productPrice",hotProductListBeans.get(position).getCover_price());
+                        context.startActivity(intent);
+                    }
+
+                    @Override
+                    public void OnItemLongClick(int position) {
+
+                    }
+                });
+
+
                 break;
             case 1:
 
@@ -54,6 +75,7 @@ class TypeAdapter extends BaseAdapter<Object> {
                 ChildAdapter goodAdapter = new ChildAdapter(context);
                 goodsRv.setAdapter(goodAdapter);
                 goodAdapter.updateData(childBeans);
+
                 break;
         }
     }
