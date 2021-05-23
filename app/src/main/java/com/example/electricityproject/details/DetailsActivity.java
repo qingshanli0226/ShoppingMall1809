@@ -16,10 +16,18 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
+<<<<<<< HEAD
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
+=======
+import com.example.glide.ShopGlide;
+import com.example.manager.BusinessARouter;
+import com.example.electricityproject.R;
+import com.example.framework.BaseActivity;
+import com.example.manager.BusinessUserManager;
+>>>>>>> 0523
 import com.example.view.ToolBar;
 
 import java.util.ArrayList;
@@ -45,6 +53,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private Intent intent;
     private List<ShortcartProductBean.ResultBean> resultBeans = new ArrayList<>();
     private ImageView buyCar;
+    private LinearLayout linLin;
+    private LinearLayout detailsLin;
+    private PopupWindow popupWindow;
+    private int prod_num = 1;
 
     @Override
     protected void initData() {
@@ -59,9 +71,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
-        productPrice = intent.getStringExtra("productPrice");
         map.put("productId",productId);
-        map.put("productNum",productNum);
         map.put("productNum",productNum);
         map.put("productName",name);
         map.put("url",url);
@@ -104,7 +114,67 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                httpPresenter.postAddOneProduct(map);
+
+                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+                if (isLog!=null){
+                    linLin.setVisibility(View.GONE);
+                    popupWindow = new PopupWindow();
+                    popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                    popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                    View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.pop_products, null);
+                    ImageView image = inflate.findViewById(R.id.pop_image);
+                    TextView names = inflate.findViewById(R.id.pop_name);
+                    TextView num = inflate.findViewById(R.id.pop_num);
+                    TextView price = inflate.findViewById(R.id.pop_price);
+                    ImageView pop_add = inflate.findViewById(R.id.pop_add);
+                    ImageView pop_sub = inflate.findViewById(R.id.pop_sub);
+                    Button pop_conf = inflate.findViewById(R.id.pop_conf);
+                    ShopGlide.getInstance().with(DetailsActivity.this).load(Constants.BASE_URl_IMAGE+img).init(image);
+                    names.setText(""+name);
+                    num.setText("1");
+                    price.setText("￥"+productPrice);
+
+                    pop_add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            prod_num = prod_num+1;
+                            num.setText(""+prod_num);
+                        }
+                    });
+
+                    pop_sub.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            if (prod_num < 0){
+                                Toast.makeText(DetailsActivity.this, "库存不可为0", Toast.LENGTH_SHORT).show();
+                            }else {
+                                prod_num = prod_num-1;
+                                num.setText(""+prod_num);
+                            }
+                        }
+                    });
+
+                    pop_conf.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                            linLin.setVisibility(View.VISIBLE);
+
+
+
+                        }
+                    });
+
+                    popupWindow.setContentView(inflate);
+                    popupWindow.showAsDropDown(btnAdd,0,0);
+                }else {
+                    Toast.makeText(DetailsActivity.this, "当前用户未登录", Toast.LENGTH_SHORT).show();
+                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(DetailsActivity.this,null);
+                }
+
+
+
             }
         });
 
@@ -114,6 +184,18 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 Bundle bundle = new Bundle();
                 bundle.putString("notify","go_buyCar");
                 BusinessARouter.getInstance().getAppManager().OpenMainActivity(DetailsActivity.this,bundle);
+            }
+        });
+
+        detailsLin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow!=null){
+                    popupWindow.dismiss();
+                    linLin.setVisibility(View.VISIBLE);
+                }
+
+
             }
         });
 
@@ -133,6 +215,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         addShop = (LinearLayout) findViewById(R.id.add_shop);
         btnAdd = (Button) findViewById(R.id.btn_add);
         buyCar = (ImageView) findViewById(R.id.buy_car);
+        linLin = (LinearLayout) findViewById(R.id.lin_lin);
+        detailsLin = (LinearLayout) findViewById(R.id.details_lin);
     }
 
     @Override

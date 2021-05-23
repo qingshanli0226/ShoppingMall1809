@@ -54,6 +54,10 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
 
         httpPresenter.getTypeData(url[0]);
 
+
+
+
+
         kindListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,6 +85,7 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         typeRv.setLayoutManager(manager);
         typeAdapter=new TypeAdapter(getContext());
         typeRv.setAdapter(typeAdapter);
+
     }
 
     @Override
@@ -120,7 +125,6 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         objectList.add(hot_product_list);
         objectList.add(child);
         typeAdapter.updateData(objectList);
-
 
     }
 }
