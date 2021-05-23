@@ -7,27 +7,10 @@ import android.widget.ListView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-<<<<<<< HEAD
 import com.example.common.Constants;
 import com.example.common.bean.GoodsBean;
-=======
-import com.example.adapter.BaseAdapter;
-import com.example.common.bean.KindAccessoryBean;
-import com.example.common.bean.KindBagBean;
-import com.example.common.bean.KindDigitBean;
-import com.example.common.bean.KindDressBean;
-import com.example.common.bean.KindGameBean;
-import com.example.common.bean.KindHomeProductsBean;
-import com.example.common.bean.KindJacketBean;
-import com.example.common.bean.KindOvercoatBean;
-import com.example.common.bean.KindPantsBean;
->>>>>>> refs/remotes/origin/four
 import com.example.common.bean.KindSkirtBean;
 import com.example.common.bean.LogBean;
-<<<<<<< HEAD
-=======
-import com.example.electricityproject.details.DetailsActivity;
->>>>>>> refs/remotes/origin/four
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.kind.adapter.KindAdapter;
 import com.example.electricityproject.classify.kind.adapter.KindBean;

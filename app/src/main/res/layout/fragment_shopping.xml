@@ -13,12 +13,12 @@
         android:id="@+id/toolbar"
         app:titleText="购物车"
         app:titleTextColor="#000000"
-        android:layout_height="@dimen/dm_dp_50dp"></com.example.view.ToolBar>
+        android:layout_height="@dimen/dp_50"></com.example.view.ToolBar>
 
     <View
         android:layout_marginTop="@dimen/dp_5"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_02dp"
+        android:layout_height="@dimen/dp_2"
         android:background="@color/gray"></View>
 
     <androidx.recyclerview.widget.RecyclerView

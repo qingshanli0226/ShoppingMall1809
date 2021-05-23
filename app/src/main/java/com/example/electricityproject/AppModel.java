@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.common.call.BusinessARouter;
+import com.example.manager.BusinessARouter;
 import com.example.electricityproject.main.MainActivity;
-import com.example.user.UserModel;
-import com.example.user.login.LoginActivity;
 
 public
 class AppModel implements BusinessARouter.iAppManager{

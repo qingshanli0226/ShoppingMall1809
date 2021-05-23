@@ -1,4 +1,4 @@
-package com.example.electricityproject.home;
+package com.example.electricityproject.home.channel;
 
 import android.widget.ImageView;
 import android.widget.TextView;

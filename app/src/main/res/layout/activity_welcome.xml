@@ -5,5 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash"
     tools:context=".welcome.WelcomeActivity">
-
+    <com.example.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:id="@+id/toolbar"></com.example.view.ToolBar>
 </LinearLayout>

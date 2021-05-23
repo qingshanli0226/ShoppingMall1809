@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.common.SPUtility;
+import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
-import com.example.common.call.BusinessUserManager;
+import com.example.manager.BusinessUserManager;
 import com.example.framework.BaseActivity;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         if (logBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setIsLog(logBean);
             Log.i("zx", "loginActivity: "+logBean.getResult().getToken());
-            SPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
+            TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             finish();
         }
     }
