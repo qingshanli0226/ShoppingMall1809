@@ -129,8 +129,13 @@ public interface FiannceApiService {
     @POST(Constants.BUSINESS_CONFIRMSERVERPAYRESULT)
     Observable<ConfirmServerPayResultBean> getConfirmServerPayResult(@Body RequestBody body);
 
+<<<<<<< HEAD
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
+=======
+    @POST("addOneProduct")
+    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
+>>>>>>> zyz524
 
 
 }

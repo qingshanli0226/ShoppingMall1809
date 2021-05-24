@@ -17,6 +17,12 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.shoppingmallsix.R;
+<<<<<<< HEAD
+=======
+import com.example.shoppingmallsix.fragment.classifyfragment.ClassifyFragment;
+import com.example.shoppingmallsix.mainactivity.MainActivity;
+import com.example.user.login.LoginActivity;
+>>>>>>> zyz524
 
 import java.util.List;
 
@@ -38,13 +44,19 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter = new ShoppingPresenter(this);
     }
 
     @Override
     protected void initData() {
-
-
+        LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
+        if (loginBean1 != null) {
+            httpPresenter.getShoppingData();
+        } else {
+            Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -94,7 +106,12 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
+<<<<<<< HEAD
     public void onShopping(GetShortcartProductsBean shoppingCarBean) {
+=======
+    public void onShopping(ShoppingCarBean shoppingCarBean) {
+
+>>>>>>> zyz524
         if (shoppingCarBean.getCode().equals("200")) {
             List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
 
@@ -121,6 +138,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     public void onLoginChange(LoginBean loginBean) {
-
+        if (loginBean != null){
+            httpPresenter.getShoppingData();
+        }
     }
 }

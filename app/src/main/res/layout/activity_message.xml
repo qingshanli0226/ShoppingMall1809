@@ -21,4 +21,13 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/colorgray"></View>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorgray"
+        />
+
 </LinearLayout>
