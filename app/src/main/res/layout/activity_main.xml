@@ -17,6 +17,11 @@
         android:layout_height="50dp"
         android:id="@+id/btnGlide"
         android:text="GLIDE"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnBs"
+        android:text="BEISAIER"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

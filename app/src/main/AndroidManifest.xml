@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".glide.GlideActivity"/>
+        <activity android:name=".beisaier.BeisaierActivity"/>
     </application>
 
 </manifest>

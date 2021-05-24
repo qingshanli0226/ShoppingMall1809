@@ -11,6 +11,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.shoppingmall.bawei.shoppingmall1809.beisaier.BeisaierActivity;
 import com.shoppingmall.bawei.shoppingmall1809.glide.GlideActivity;
 import com.shoppingmall.bawei.shoppingmall1809.home.HomeAdapter;
 
@@ -65,6 +66,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,GlideActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.btnBs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,BeisaierActivity.class);
                 startActivity(intent);
             }
         });
