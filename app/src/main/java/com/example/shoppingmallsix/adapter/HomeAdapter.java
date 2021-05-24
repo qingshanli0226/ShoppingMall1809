@@ -169,6 +169,21 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 RecommendAdapter recommendAdapter = new RecommendAdapter();
                 recommendRecyclerView.setAdapter(recommendAdapter);
                 recommendAdapter.dataList.addAll(recommendInfoBeans);
+                recommendAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                        intent.putExtra("name",recommendInfoBeans.get(position).getName());
+                        intent.putExtra("figure",recommendInfoBeans.get(position).getFigure());
+                        intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItwmLongClick(int position) {
+
+                    }
+                });
                 break;
             case 5:
                 List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = (List<HomeBean.ResultBean.HotInfoBean>) itemData;
@@ -177,6 +192,21 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 HotAdapter hotAdapter = new HotAdapter();
                 hotRecyclerView.setAdapter(hotAdapter);
                 hotAdapter.dataList.addAll(hotInfoBeans);
+                hotAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                        intent.putExtra("name",hotInfoBeans.get(position).getName());
+                        intent.putExtra("figure",hotInfoBeans.get(position).getFigure());
+                        intent.putExtra("price",hotInfoBeans.get(position).getCover_price());
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItwmLongClick(int position) {
+
+                    }
+                });
                 break;
         }
     }

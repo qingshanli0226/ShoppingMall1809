@@ -53,18 +53,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     @Override
-    public void onRightTvClick() {
-
-    }
-
-    @Override
     public void onLeftClick() {
-
+        finish();
     }
-
     @Override
     public void onRightImgClick() {
 
     }
 
+    @Override
+    public void onRightTvClick() {
+
+    }
 }

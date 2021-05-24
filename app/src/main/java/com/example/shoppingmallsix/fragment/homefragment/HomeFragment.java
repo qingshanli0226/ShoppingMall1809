@@ -79,12 +79,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         list.add(result.getRecommend_info());
         list.add(result.getHot_info());
 
-
-
         loadingPage.showSuccessView();
-
-
-
 
         homeAdapter.notifyDataSetChanged();
     }

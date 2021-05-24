@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dp_10"
+        tools:ignore="WebViewLayout">
+        <WebView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/dp_350"
+            android:layout_height="@dimen/dp_400"
+            android:src="@drawable/icon_good_detail_cart"
+            android:id="@+id/goods_adapter_item_web_view"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:id="@+id/goods_adapter_item_text_name"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_15_3"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:text="预售截止10月15日,预售期为限量礼盒版,包括特制木盒x1.画集x1. 邮票x1套. 书签x1. 贴纸x1. 信封x1. 礼盒特"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:id="@+id/goods_adapter_item_text_price"
+            />
+    </LinearLayout>
+</LinearLayout>

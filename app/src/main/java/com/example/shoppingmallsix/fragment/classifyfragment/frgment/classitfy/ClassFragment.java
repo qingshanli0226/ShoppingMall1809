@@ -13,7 +13,6 @@ import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.adapter.ClassLeftAdapter;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.adapter.ClassRightAdapter;
-import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.recycler.MyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.List;
 public class ClassFragment extends BaseFragment<ClassPresenter> implements IClassView, BaseRvAdapter.IRecyclerItemClickListener {
 
     private RecyclerView classifyLeftRecyclerView;
-    private MyRecyclerView classifyRightRecyclerView;
+    private RecyclerView classifyRightRecyclerView;
     private ClassLeftAdapter classifyAdapter;
     private List<ClassLeftBean> list = new ArrayList<>();
     private String[] strings = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};
@@ -66,7 +65,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     @Override
     protected void initView() {
         classifyLeftRecyclerView = (RecyclerView) mBaseView.findViewById(R.id.classify_left_recycler_view);
-        classifyRightRecyclerView = (MyRecyclerView) mBaseView.findViewById(R.id.classify_right_recycler_view);
+        classifyRightRecyclerView = (RecyclerView) mBaseView.findViewById(R.id.classify_right_recycler_view);
     }
 
     @Override

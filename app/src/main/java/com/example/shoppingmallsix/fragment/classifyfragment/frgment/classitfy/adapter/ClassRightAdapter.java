@@ -1,6 +1,8 @@
 package com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.adapter;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -60,6 +62,7 @@ public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
         RecyclerView recyclerViewTop = holder.getView(R.id.classify_right_item_rv_top);
         RecyclerView recyclerViewButton = holder.getView(R.id.classify_right_item_rv_button);
 
+        LinearLayout linearLayout = holder.getView(R.id.classify_right_button_item_linear);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
 
@@ -68,8 +71,13 @@ public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
 
         List<ClassBean.ResultBean.HotProductListBean> hot_product_list = resultBean.getHot_product_list();
         List<ClassBean.ResultBean.ChildBean> child = resultBean.getChild();
-
-
+        //判断lngearlayout
+        int indext = child.size() /4;
+        if (indext >1){
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,200+(indext-4*100)));
+        }else {
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
         //top
         ClassRightTopAdapter<ClassBean.ResultBean.HotProductListBean> hotProductListBeanClassRightTopAdapter = new ClassRightTopAdapter<>(hot_product_list);
         recyclerViewTop.setAdapter(hotProductListBeanClassRightTopAdapter);
