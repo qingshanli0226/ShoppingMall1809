@@ -48,6 +48,13 @@ public class DetailActivity extends BaseActivity {
     private TextView toShopMallCarFragment;
     private android.widget.Button addShopMallCar;
     private LoginBean loginBean;
+    private DaoSession daoSession;
+    private TextView popRemoveNum;
+    private TextView popNum;
+    private TextView popAddNum;
+    private Button no;
+    private Button yes;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_detail;
@@ -81,6 +88,10 @@ public class DetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        startAutoService();
+
+        daoSession = TableManager.getInstance().getDaoSession();
+
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
@@ -131,21 +142,50 @@ public class DetailActivity extends BaseActivity {
                 ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withString("addDetail","addDetail").navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
+                PopupWindow popupWindow = new PopupWindow();
+                View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
+                popupWindow.setContentView(inflate);
+                popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAtLocation(inflate,Gravity.BOTTOM,0,0);
 
+                popRemoveNum = (TextView) inflate.findViewById(R.id.popRemoveNum);
+                popNum = (TextView) inflate.findViewById(R.id.popNum);
+                popAddNum = (TextView) inflate.findViewById(R.id.popAddNum);
+                no = (Button) inflate.findViewById(R.id.no);
+                yes = (Button) inflate.findViewById(R.id.yes);
+
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                popRemoveNum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                popAddNum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+//                daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
+//                        productGoodBean.getName(),productGoodBean.getCover_price(),
+//                        productGoodBean.getNumber()));
+//                Toast.makeText(this, "加入了一条数据", Toast.LENGTH_SHORT).show();
             }
-//            PopupWindow popupWindow = new PopupWindow();
-//            View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
-//            popupWindow.setContentView(inflate);
-//            popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
-//            popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
-//            popupWindow.setOutsideTouchable(true);
-//            popupWindow.showAtLocation(inflate,Gravity.TOP,0,190);
-//            DaoSession daoSession = TableManager.getInstance().getDaoSession();
-//
-//            daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
-//                    productGoodBean.getName(),productGoodBean.getCover_price(),
-//                    productGoodBean.getNumber()));
-//            Toast.makeText(this, "加入了一条数据", Toast.LENGTH_SHORT).show();
+
         });
 
     }

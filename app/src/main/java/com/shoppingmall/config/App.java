@@ -3,7 +3,9 @@ package com.shoppingmall.config;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.shoppingmall.detail.greendao.TableManager;
 import com.shoppingmall.framework.manager.CacheManager;
+import com.yoho.greendao.gen.DaoSession;
 
 public class App extends Application {
 
@@ -13,5 +15,6 @@ public class App extends Application {
         ARouter.openLog();
         ARouter.openDebug();
         ARouter.init(this);
+        TableManager.getInstance().init(this);
     }
 }
