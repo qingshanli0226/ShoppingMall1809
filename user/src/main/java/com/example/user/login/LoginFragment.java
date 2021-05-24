@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.common.type.ToLoginType;
 import com.example.framework.BaseFragment;
 import com.example.framework.SpUtil;
 import com.example.framework.manager.CacheUserManager;
@@ -49,7 +48,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
                 return;
             }
             //登陆
-            rootPresenter.getLogin(ename, epwd);
+            mPresenter.getLogin(ename, epwd);
         });
         //注册页面
         toRegister.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +80,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
 
     @Override
     public void initPresenter() {
-        rootPresenter = new LoginPresenter(this);
+        mPresenter = new LoginPresenter(this);
     }
 
 }

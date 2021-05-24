@@ -16,7 +16,7 @@ import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment,CacheUserManager.IloginChange {
-    protected P rootPresenter;
+    protected P mPresenter;
     protected View rootView;
 
     @Nullable
@@ -67,8 +67,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     public void destroy() {
-        if (rootPresenter != null) {
-            rootPresenter.destroy();
+        if (mPresenter != null) {
+            mPresenter.destroy();
         }
     }
 }
