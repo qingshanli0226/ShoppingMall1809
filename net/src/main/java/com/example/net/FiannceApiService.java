@@ -9,6 +9,7 @@ import com.example.net.bean.ClassBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
+import com.example.net.bean.ShoppingCarBean;
 import com.example.net.bean.store.CloseStoreBean;
 import com.example.net.bean.DigitBean;
 import com.example.net.bean.DressBean;
@@ -160,6 +161,9 @@ public interface FiannceApiService {
 
     @POST("addOneProduct")
     Observable<ProductBean> addProduct(@Body ResponseBody responseBody);
+
+    @GET("getShortcartProducts")
+    Observable<ShoppingCarBean> getShoppingTrolley();
 
 //    //待支付
 //    @GET("findForPay")
