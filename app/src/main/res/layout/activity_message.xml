@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:id="@+id/toolbar"
-        app:titleText="消息"
+        app:titleText="@string/information"
         app:leftImg="@drawable/back"
         app:leftIsShow="true"
         ></com.example.framework.view.ToolBar>

@@ -21,8 +21,8 @@ import com.example.user.login.LoginActivity;
 public class ShoppingCarFragment extends BaseFragment {
 
     private TextView shopText;
-    private String bianji = "编辑";
-    private String wancheng = "完成";
+    private String bianji = getString(R.string.compile);
+    private String wancheng =  getString(R.string.accomplish);
     private TextView shopTotal;
     private TextView shopDoaller;
     private TextView shopMoney;
@@ -38,6 +38,14 @@ public class ShoppingCarFragment extends BaseFragment {
     @Override
     protected void initData() {
 
+<<<<<<< HEAD
+=======
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+>>>>>>> t0521
     }
 
     @Override
