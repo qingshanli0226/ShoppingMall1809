@@ -11,6 +11,7 @@ import com.example.net.bean.RegisterBean;
 
 
 import com.example.net.bean.HomeBean;
+import com.example.net.bean.SelectBean;
 import com.example.net.bean.TypeBean;
 
 import io.reactivex.Observable;
@@ -90,9 +91,15 @@ public interface IHttpApiService {
     @GET(Constants.SHORTACRT)
     Observable<CartBean> showCart();
 
+
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<InventoryBean> inventory(@Field("productId")String productId,@Field("productNum")String productNum);
 
+
+
+
+    @POST(Constants.UPDATEPRODUCTSELECTED)
+    Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
 
 }

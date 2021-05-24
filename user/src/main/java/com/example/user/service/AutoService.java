@@ -54,7 +54,7 @@ public class AutoService extends Service {
                                 LogUtils.json(loginBean.getResult().getToken()+"User");
                                 SpUtil.putString(AutoService.this,loginBean.getResult().getToken());
                                 UserManager.getInstance().setLoginBean(loginBean);
-
+                                //请求购物车数据
                                 CacheShopManager.getInstance().showCart();
                             }
                         }

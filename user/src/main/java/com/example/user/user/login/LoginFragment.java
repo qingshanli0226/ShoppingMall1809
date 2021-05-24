@@ -18,6 +18,7 @@ import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
@@ -155,10 +156,13 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             getActivity().finish();
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("page", page);
-//            LogUtils.json(loginBean.getResult().getToken());
-//            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+            Bundle bundle = new Bundle();
+            bundle.putInt("page", page);
+            //购物车数据加载
+            CacheShopManager.getInstance().showCart();
+
+            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }

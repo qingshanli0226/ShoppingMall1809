@@ -9,6 +9,9 @@ import com.example.net.BuildConfig;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.ProductBean;
+import com.example.net.bean.SelectBean;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -20,6 +23,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class CacheShopManager {
     private static CacheShopManager cacheShopManager;
@@ -52,8 +57,44 @@ public class CacheShopManager {
 
                     @Override
                     public void onNext(@NonNull CartBean cartBean) {
+                        Log.i("TAG", "onNext: "+cartBean);
                         if (cartBean.getCode().equals("200")) {
-                            carts = cartBean.getResult();
+                            setCarts(cartBean.getResult());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i("CacheShopManager", e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void updateProductSelect(ProductBean productBean){
+        String s = new Gson().toJson(productBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitManager.getHttpApiService()
+                .updateProductSelect(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        Log.i("TAG", "onNext: "+selectBean);
+                        if (selectBean.getCode().equals("200")) {
+                            showCart();
                         }
                     }
 

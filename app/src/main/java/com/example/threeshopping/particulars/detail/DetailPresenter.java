@@ -25,7 +25,6 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
         String s = new Gson().toJson(productBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, s);
-        Log.i("zyb", "addProduct:");
         RetrofitManager.getHttpApiService()
                 .addProduct(requestBody)
                 .subscribeOn(Schedulers.io())
@@ -38,7 +37,6 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
 
                     @Override
                     public void onNext(@NonNull ProductBean productBean) {
-                        Log.i("zyb", "onNext: " + productBean);
                         if (mView != null) {
                             mView.onAddCart(productBean);
                         }
@@ -46,7 +44,6 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("TAG", "onError: " + e);
                         if (mView != null) {
                             mView.showError(e.getMessage());
                         }

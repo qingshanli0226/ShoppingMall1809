@@ -10,6 +10,16 @@ public class CartBean {
      */
 
     private String code;
+
+    @Override
+    public String toString() {
+        return "CartBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     private String message;
     /**
      * productId : 9356
@@ -53,6 +63,18 @@ public class CartBean {
         private String url;
         private Object productPrice;
         private boolean productSelected;
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "productId='" + productId + '\'' +
+                    ", productName='" + productName + '\'' +
+                    ", productNum='" + productNum + '\'' +
+                    ", url='" + url + '\'' +
+                    ", productPrice=" + productPrice +
+                    ", productSelected=" + productSelected +
+                    '}';
+        }
 
         public String getProductId() {
             return productId;

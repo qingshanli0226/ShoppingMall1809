@@ -41,10 +41,10 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:id="@+id/cartRv"
         ></androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
         android:id="@+id/cartLLfinish"
