@@ -21,8 +21,8 @@ import com.example.user.login.LoginActivity;
 public class ShoppingCarFragment extends BaseFragment {
 
     private TextView shopText;
-    private String bianji = getString(R.string.compile);
-    private String wancheng =  getString(R.string.accomplish);
+    private String bianji = "编辑";
+    private String wancheng = "完成";
     private TextView shopTotal;
     private TextView shopDoaller;
     private TextView shopMoney;
