@@ -1,6 +1,8 @@
 package com.example.myapplication.home.homeadapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,12 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.common.type.ToLoginType;
+import com.example.common.type.TypeString;
 import com.example.framework.BaseRecyclerViewAdapter;
+import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.R;
+import com.example.myapplication.particulars.ParticularsActivity;
 import com.example.net.bean.HomeBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -90,12 +96,12 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 recommentRecAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-//                        new Intent(holder.itemView.getContext(),)
+
                     }
 
                     @Override
                     public void onItemLongClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "长按了Item", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 break;
@@ -149,12 +155,20 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 endRecAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "点击了Item", Toast.LENGTH_SHORT).show();
+                        //从哪里跳转登录页面
+                        ToLoginType.getInstance().setActivityType(TypeString.MAIN_TYPE);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",list1.get(position).getFigure());
+                        bundle.putString("name",list1.get(position).getName());
+                        bundle.putString("price",list1.get(position).getCover_price());
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtras(bundle);
+                        holder.itemView.getContext().startActivity(intent);
                     }
 
                     @Override
                     public void onItemLongClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "长按了Item", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(holder.itemView.getContext(), "长按了Item", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -168,12 +182,19 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 newRecAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "点击1", Toast.LENGTH_SHORT).show();
-                    }
+                        //从哪里跳转登录页面
+                        ToLoginType.getInstance().setActivityType(TypeString.MAIN_TYPE);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",list2.get(position).getFigure());
+                        bundle.putString("name",list2.get(position).getName());
+                        bundle.putString("price",list2.get(position).getCover_price());
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtras(bundle);
+                        holder.itemView.getContext().startActivity(intent);                    }
 
                     @Override
                     public void onItemLongClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -189,12 +210,19 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 goodRecAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "点击1", Toast.LENGTH_SHORT).show();
-                    }
+                        //从哪里跳转登录页面
+                        ToLoginType.getInstance().setActivityType(TypeString.MAIN_TYPE);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pic",list3.get(position).getFigure());
+                        bundle.putString("name",list3.get(position).getName());
+                        bundle.putString("price",list3.get(position).getCover_price());
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtras(bundle);
+                        holder.itemView.getContext().startActivity(intent);                    }
 
                     @Override
                     public void onItemLongClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;

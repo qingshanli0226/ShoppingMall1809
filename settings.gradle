@@ -1,5 +1,5 @@
 include ':common'
-include ':particulars'
+//include ':particulars'
 include ':net'
 include ':framework'
 include ':user'

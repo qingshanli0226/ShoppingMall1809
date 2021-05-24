@@ -20,6 +20,7 @@ public class CaCheArote {
 //    private IGestureInterface iGestureInterface;
 //    private IPayInterface iPayInterface;
     private IAppInterface iAppInterface;
+    private IParticularsInterface iParticularsInterface;
     private Context context;
 
     public void init(Context context) {
@@ -33,6 +34,13 @@ public class CaCheArote {
     //回去User模块的接口
     public IUserInterface getUserInterface() {
         return iUserInterface;
+    }
+
+    public void registerIParticularsInterface(IParticularsInterface iParticularsInterface) {
+        this.iParticularsInterface = iParticularsInterface;
+    }
+    public IParticularsInterface getParticularsInterface() {
+        return iParticularsInterface;
     }
 //
 //    //注册手势模块的回调借口
@@ -80,6 +88,9 @@ public class CaCheArote {
     public interface IAppInterface {
         void openMainActivity(Context context, Bundle bundle);
         void onEvent(String event);
+    }
+    public interface IParticularsInterface {
+        void openParticularsctivity(Context context, Bundle bundle);
     }
 
 

@@ -3,10 +3,14 @@ package com.example.myapplication;
 
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.example.common.type.ToLoginType;
+import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
 import com.example.myapplication.type.ClassifyFragment;
@@ -49,6 +53,15 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Toast.makeText(this, "运行了", Toast.LENGTH_SHORT).show();
+           Bundle extras = intent.getExtras();
+           String page = extras.getString("page");
+           mainComm.setCurrentTab(Integer.parseInt(page));
+    }
+
+    @Override
     public void initData() {
         fragments.add(new HomeFragment());
         fragments.add(new ClassifyFragment());
@@ -80,6 +93,7 @@ public class MainActivity extends BaseActivity {
                     //获取登陆状态
                     isLogin= CacheUserManager.getInstance().getIsLogin();
                     if (!isLogin){
+                        ToLoginType.getInstance().setActivityType(TypeString.MAIN_TYPE);
                         //没有登陆
                         Bundle bundle = new Bundle();
                         bundle.putString("falg","2");

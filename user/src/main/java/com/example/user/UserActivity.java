@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.common.type.ToLoginType;
+import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
 
 import com.example.user.frag.FragmentAdapter;
@@ -17,6 +19,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class UserActivity extends BaseActivity {
     private androidx.viewpager.widget.ViewPager vp;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private List<Fragment> list = new ArrayList<>();
-
+    private String toLoginType;
     @Override
     public int bandLayout() {
         return R.layout.activity_main5;
@@ -39,10 +42,12 @@ public class UserActivity extends BaseActivity {
     public void initView() {
         EventBus.getDefault().register(this);
         vp = findViewById(R.id.vp);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMain(String aa) {
+        toLoginType= ToLoginType.getInstance().getActivityType();
         int a = Integer.parseInt(aa);
         if (a == 0) {
             //注册
@@ -50,11 +55,17 @@ public class UserActivity extends BaseActivity {
         } else if (a== 1){
             //登陆
             vp.setCurrentItem(1);
-        }else {
-            //返回App 主页面
-            Bundle bundle=new Bundle();
-            bundle.putString("page","0");
-            CaCheArote.getInstance().getAppInterface().openMainActivity(this,bundle);
+        }else if (a == 2){
+            if (toLoginType.equals(TypeString.MAIN_TYPE)){
+                //返回App 主页面
+                Bundle bundle=new Bundle();
+                bundle.putString("page","0");
+                CaCheArote.getInstance().getAppInterface().openMainActivity(this,bundle);
+            }else if (toLoginType.equals(TypeString.PARTICALARS_TYPE)){
+                //返回详情页面
+                CaCheArote.getInstance().getParticularsInterface().openParticularsctivity(this,null);
+            }
+            finish();
         }
     }
 

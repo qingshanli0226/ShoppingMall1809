@@ -37,6 +37,7 @@ dependencies {
     implementation project(path: ':user')
     implementation project(path: ':framework')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(path: ':common')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
