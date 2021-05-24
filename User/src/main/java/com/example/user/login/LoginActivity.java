@@ -2,7 +2,6 @@ package com.example.user.login;
 
 import android.content.Intent;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +10,13 @@ import android.widget.TextView;
 
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
-import com.example.manager.BusinessUserManager;
 import com.example.framework.BaseActivity;
+import com.example.manager.BusinessUserManager;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
 import com.example.view.ToolBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
@@ -87,7 +88,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     public void onLoginData(LogBean logBean) {
         if (logBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setIsLog(logBean);
-            Log.i("zx", "loginActivity: "+logBean.getResult().getToken());
+            EventBus.getDefault().postSticky("acc_username");
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             finish();
         }

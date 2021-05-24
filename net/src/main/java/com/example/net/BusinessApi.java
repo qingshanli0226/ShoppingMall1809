@@ -152,6 +152,10 @@ public interface BusinessApi {
     @POST("addOneProduct")
     Observable<AddOneProductBean> setAddOneProduct(@Body RequestBody requestBody);
 
+    //请求添加产品的接口
+    @POST("checkOneProductInventory")
+    Observable<AddOneProductBean> checkOneProductInventory(@Body RequestBody requestBody);
+
     //获取服务端购物车产品信息的接口
     @GET("getShortcartProducts")
     Observable<ShortcartProductBean> getShortProductData();
