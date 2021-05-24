@@ -1,7 +1,7 @@
 package com.example.user.login;
 
 import com.example.framework.IBaseView;
-import com.example.net.bean.LoginBean;
+import com.example.net.bean.user.LoginBean;
 
 public interface ILoginView extends IBaseView {
 

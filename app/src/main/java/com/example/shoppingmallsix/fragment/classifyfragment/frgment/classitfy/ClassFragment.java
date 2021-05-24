@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
 import com.example.framework.BaseRvAdapter;
-import com.example.net.bean.ClassBean;
-import com.example.net.bean.ClassLeftBean;
+import com.example.net.bean.classify.ClassBean;
+import com.example.net.bean.classify.ClassLeftBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.adapter.ClassLeftAdapter;

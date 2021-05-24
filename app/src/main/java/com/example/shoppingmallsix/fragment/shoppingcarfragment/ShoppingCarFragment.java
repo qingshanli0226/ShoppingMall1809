@@ -1,19 +1,14 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.CacheUserManager;
-import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
-import com.example.user.login.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.

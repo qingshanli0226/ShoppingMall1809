@@ -4,7 +4,6 @@ package com.example.shoppingmallsix.fragment.classifyfragment.frgment.lab;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
-import com.example.net.bean.StationeryBean;
 import com.example.net.bean.TabBean;
 
 import io.reactivex.Observer;

@@ -2,7 +2,7 @@ package com.example.user.login;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
-import com.example.net.bean.LoginBean;
+import com.example.net.bean.user.LoginBean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

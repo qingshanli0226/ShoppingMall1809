@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
-import com.example.net.bean.LoginBean;
+import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.MainBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.ClassifyFragment;

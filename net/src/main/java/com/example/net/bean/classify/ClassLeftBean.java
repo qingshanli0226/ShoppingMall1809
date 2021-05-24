@@ -1,4 +1,4 @@
-package com.example.net.bean;
+package com.example.net.bean.classify;
 
 public class ClassLeftBean {
     private String string;

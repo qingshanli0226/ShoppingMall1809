@@ -1,4 +1,4 @@
-package com.example.net.bean;
+package com.example.net.bean.user;
 
 public class LoginBean {
 

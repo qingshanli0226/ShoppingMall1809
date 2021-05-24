@@ -1,15 +1,13 @@
-package com.example.net.bean;
-
-
+package com.example.net.bean.classify;
 
 import java.util.List;
 
-public class JacketBean    {
+public class OvercoatBean {
 
     /**
      * code : 200
      * msg : 请求成功
-     * result : [{"p_catalog_id":"51","parent_id":"0","name":"上衣","pic":"","is_deleted":"0","child":[{"p_catalog_id":"52","parent_id":"51","name":"日常","pic":"/product_catalog/1446017524434.jpg","is_deleted":"0"},{"p_catalog_id":"96","parent_id":"51","name":"泳衣","pic":"/product_catalog/1449216802403.jpg","is_deleted":"0"},{"p_catalog_id":"109","parent_id":"51","name":"汉风","pic":"/product_catalog/1465383063303.jpg","is_deleted":"0"},{"p_catalog_id":"117","parent_id":"51","name":"古风","pic":"","is_deleted":"0"},{"p_catalog_id":"55","parent_id":"51","name":"lolita","pic":"/product_catalog/1446017570261.jpg","is_deleted":"0"},{"p_catalog_id":"56","parent_id":"51","name":"创意T恤","pic":"/product_catalog/1446017583897.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"627","channel_id":"4","brand_id":"3","p_catalog_id":"52","supplier_type":"1","supplier_code":"1101001","name":"剑三T恤批发","cover_price":"32.00","brief":"","figure":"/1439367400560.jpg","sell_time_start":"1439308800","sell_time_end":"1439913600"},{"product_id":"6895","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 半臂","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465295954097.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"6896","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 吊带","cover_price":"59.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296158907.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"4628","channel_id":"8","brand_id":"5","p_catalog_id":"56","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】 原创可爱萌猫咪大人 立体猫尾T恤 蕾丝花边女","cover_price":"79.00","brief":"","figure":"/1461571069605.jpg","sell_time_start":"1455638400","sell_time_end":"1456243200"},{"product_id":"3691","channel_id":"8","brand_id":"90","p_catalog_id":"52","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】宫崎骏 龙猫套装 女冬 帽子衬衫背心打底裤短裤","cover_price":"105.00","brief":"背心上小挂件赠完即止哦 ","figure":"/1451012249243.jpg","sell_time_start":"1450972800","sell_time_end":"1451577600"},{"product_id":"6263","channel_id":"8","brand_id":"234","p_catalog_id":"56","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 恶灵退散纯棉七分袖T恤 秋季日系原宿男女装A21","cover_price":"63.00","brief":"","figure":"/1464245798979.jpg","sell_time_start":"1478772000","sell_time_end":"1462982400"}]}]
+     * result : [{"p_catalog_id":"64","parent_id":"0","name":"外套","pic":"","is_deleted":"0","child":[{"p_catalog_id":"65","parent_id":"64","name":"日常","pic":"/product_catalog/1446017786075.jpg","is_deleted":"0"},{"p_catalog_id":"111","parent_id":"64","name":"汉风","pic":"/product_catalog/1465384012358.jpg","is_deleted":"0"},{"p_catalog_id":"67","parent_id":"64","name":"和风","pic":"/product_catalog/1446017802214.jpg","is_deleted":"0"},{"p_catalog_id":"68","parent_id":"64","name":"lolita","pic":"/product_catalog/1446017835551.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"6633","channel_id":"8","brand_id":"394","p_catalog_id":"67","supplier_type":"2","supplier_code":"1101037","name":"【画影】现货 小狐狸羽织 ","cover_price":"132.00","brief":"红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~ 重要的事情说三次~","figure":"/1466759461799.jpg","sell_time_start":"1464019200","sell_time_end":"1464624000"},{"product_id":"2855","channel_id":"3","brand_id":"258","p_catalog_id":"65","supplier_type":"2","supplier_code":"2105003","name":"【宅漫周边店】柴犬doge周边 可爱萌 牛角扣学院风呢子大衣 动漫外套","cover_price":"168.00","brief":"","figure":"/1476170715116.jpg","sell_time_start":"1447776000","sell_time_end":"1448380800"},{"product_id":"5605","channel_id":"8","brand_id":"234","p_catalog_id":"67","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创 日本和风 招财猫和服浴衣 外套 空调开衫A8","cover_price":"99.00","brief":"","figure":"/1459131888532.jpg","sell_time_start":"1459094400","sell_time_end":"1459699200"},{"product_id":"2406","channel_id":"8","brand_id":"23","p_catalog_id":"65","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】舰队Collection 北方酱 纯棉拉链连帽卫衣外套秋冬","cover_price":"139.92","brief":"已到货，发货中","figure":"/1445568698438.jpg","sell_time_start":"1478772000","sell_time_end":"1446134400"},{"product_id":"4226","channel_id":"8","brand_id":"5","p_catalog_id":"65","supplier_type":"2","supplier_code":"1801007","name":"【 三色瑾】美少女的冬天 长款风衣 LOLITA 日常 哥特风衣","cover_price":"280.60","brief":"","figure":"/1453477900441.jpg","sell_time_start":"1453392000","sell_time_end":"1453996800"},{"product_id":"2653","channel_id":"8","brand_id":"191","p_catalog_id":"65","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】请问您今天要来点兔子吗 香风智乃 纯棉卫衣外套","cover_price":"128.00","brief":"","figure":"/1447036942992.jpg","sell_time_start":"1478772000","sell_time_end":"1447603200"}]}]
      */
 
     private int code;
@@ -32,7 +30,6 @@ public class JacketBean    {
         this.msg = msg;
     }
 
-
     public List<ResultBean> getResult() {
         return result;
     }
@@ -43,13 +40,13 @@ public class JacketBean    {
 
     public static class ResultBean {
         /**
-         * p_catalog_id : 51
+         * p_catalog_id : 64
          * parent_id : 0
-         * name : 上衣
+         * name : 外套
          * pic :
          * is_deleted : 0
-         * child : [{"p_catalog_id":"52","parent_id":"51","name":"日常","pic":"/product_catalog/1446017524434.jpg","is_deleted":"0"},{"p_catalog_id":"96","parent_id":"51","name":"泳衣","pic":"/product_catalog/1449216802403.jpg","is_deleted":"0"},{"p_catalog_id":"109","parent_id":"51","name":"汉风","pic":"/product_catalog/1465383063303.jpg","is_deleted":"0"},{"p_catalog_id":"117","parent_id":"51","name":"古风","pic":"","is_deleted":"0"},{"p_catalog_id":"55","parent_id":"51","name":"lolita","pic":"/product_catalog/1446017570261.jpg","is_deleted":"0"},{"p_catalog_id":"56","parent_id":"51","name":"创意T恤","pic":"/product_catalog/1446017583897.jpg","is_deleted":"0"}]
-         * hot_product_list : [{"product_id":"627","channel_id":"4","brand_id":"3","p_catalog_id":"52","supplier_type":"1","supplier_code":"1101001","name":"剑三T恤批发","cover_price":"32.00","brief":"","figure":"/1439367400560.jpg","sell_time_start":"1439308800","sell_time_end":"1439913600"},{"product_id":"6895","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 半臂","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465295954097.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"6896","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 吊带","cover_price":"59.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296158907.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"4628","channel_id":"8","brand_id":"5","p_catalog_id":"56","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】 原创可爱萌猫咪大人 立体猫尾T恤 蕾丝花边女","cover_price":"79.00","brief":"","figure":"/1461571069605.jpg","sell_time_start":"1455638400","sell_time_end":"1456243200"},{"product_id":"3691","channel_id":"8","brand_id":"90","p_catalog_id":"52","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】宫崎骏 龙猫套装 女冬 帽子衬衫背心打底裤短裤","cover_price":"105.00","brief":"背心上小挂件赠完即止哦 ","figure":"/1451012249243.jpg","sell_time_start":"1450972800","sell_time_end":"1451577600"},{"product_id":"6263","channel_id":"8","brand_id":"234","p_catalog_id":"56","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 恶灵退散纯棉七分袖T恤 秋季日系原宿男女装A21","cover_price":"63.00","brief":"","figure":"/1464245798979.jpg","sell_time_start":"1478772000","sell_time_end":"1462982400"}]
+         * child : [{"p_catalog_id":"65","parent_id":"64","name":"日常","pic":"/product_catalog/1446017786075.jpg","is_deleted":"0"},{"p_catalog_id":"111","parent_id":"64","name":"汉风","pic":"/product_catalog/1465384012358.jpg","is_deleted":"0"},{"p_catalog_id":"67","parent_id":"64","name":"和风","pic":"/product_catalog/1446017802214.jpg","is_deleted":"0"},{"p_catalog_id":"68","parent_id":"64","name":"lolita","pic":"/product_catalog/1446017835551.jpg","is_deleted":"0"}]
+         * hot_product_list : [{"product_id":"6633","channel_id":"8","brand_id":"394","p_catalog_id":"67","supplier_type":"2","supplier_code":"1101037","name":"【画影】现货 小狐狸羽织 ","cover_price":"132.00","brief":"红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~ 重要的事情说三次~","figure":"/1466759461799.jpg","sell_time_start":"1464019200","sell_time_end":"1464624000"},{"product_id":"2855","channel_id":"3","brand_id":"258","p_catalog_id":"65","supplier_type":"2","supplier_code":"2105003","name":"【宅漫周边店】柴犬doge周边 可爱萌 牛角扣学院风呢子大衣 动漫外套","cover_price":"168.00","brief":"","figure":"/1476170715116.jpg","sell_time_start":"1447776000","sell_time_end":"1448380800"},{"product_id":"5605","channel_id":"8","brand_id":"234","p_catalog_id":"67","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创 日本和风 招财猫和服浴衣 外套 空调开衫A8","cover_price":"99.00","brief":"","figure":"/1459131888532.jpg","sell_time_start":"1459094400","sell_time_end":"1459699200"},{"product_id":"2406","channel_id":"8","brand_id":"23","p_catalog_id":"65","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】舰队Collection 北方酱 纯棉拉链连帽卫衣外套秋冬","cover_price":"139.92","brief":"已到货，发货中","figure":"/1445568698438.jpg","sell_time_start":"1478772000","sell_time_end":"1446134400"},{"product_id":"4226","channel_id":"8","brand_id":"5","p_catalog_id":"65","supplier_type":"2","supplier_code":"1801007","name":"【 三色瑾】美少女的冬天 长款风衣 LOLITA 日常 哥特风衣","cover_price":"280.60","brief":"","figure":"/1453477900441.jpg","sell_time_start":"1453392000","sell_time_end":"1453996800"},{"product_id":"2653","channel_id":"8","brand_id":"191","p_catalog_id":"65","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】请问您今天要来点兔子吗 香风智乃 纯棉卫衣外套","cover_price":"128.00","brief":"","figure":"/1447036942992.jpg","sell_time_start":"1478772000","sell_time_end":"1447603200"}]
          */
 
         private String p_catalog_id;
@@ -99,6 +96,7 @@ public class JacketBean    {
         public void setIs_deleted(String is_deleted) {
             this.is_deleted = is_deleted;
         }
+
         public List<ChildBean> getChild() {
             return child;
         }
@@ -117,10 +115,10 @@ public class JacketBean    {
 
         public static class ChildBean {
             /**
-             * p_catalog_id : 52
-             * parent_id : 51
+             * p_catalog_id : 65
+             * parent_id : 64
              * name : 日常
-             * pic : /product_catalog/1446017524434.jpg
+             * pic : /product_catalog/1446017786075.jpg
              * is_deleted : 0
              */
 
@@ -171,20 +169,20 @@ public class JacketBean    {
             }
         }
 
-        public static class HotProductListBean  {
+        public static class HotProductListBean {
             /**
-             * product_id : 627
-             * channel_id : 4
-             * brand_id : 3
-             * p_catalog_id : 52
-             * supplier_type : 1
-             * supplier_code : 1101001
-             * name : 剑三T恤批发
-             * cover_price : 32.00
-             * brief :
-             * figure : /1439367400560.jpg
-             * sell_time_start : 1439308800
-             * sell_time_end : 1439913600
+             * product_id : 6633
+             * channel_id : 8
+             * brand_id : 394
+             * p_catalog_id : 67
+             * supplier_type : 2
+             * supplier_code : 1101037
+             * name : 【画影】现货 小狐狸羽织
+             * cover_price : 132.00
+             * brief : 红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~红黑款是现货哦·~现货不配送发带~~ 重要的事情说三次~
+             * figure : /1466759461799.jpg
+             * sell_time_start : 1464019200
+             * sell_time_end : 1464624000
              */
 
             private String product_id;

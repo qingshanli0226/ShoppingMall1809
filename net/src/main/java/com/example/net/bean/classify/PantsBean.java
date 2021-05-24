@@ -1,13 +1,13 @@
-package com.example.net.bean;
+package com.example.net.bean.classify;
 
 import java.util.List;
 
-public class AccrssoryBean {
+public class PantsBean {
 
     /**
      * code : 200
      * msg : 请求成功
-     * result : [{"p_catalog_id":"69","parent_id":"0","name":"配件","pic":"","is_deleted":"0","child":[{"p_catalog_id":"70","parent_id":"69","name":"帽子","pic":"/product_catalog/1446017867549.jpg","is_deleted":"0"},{"p_catalog_id":"105","parent_id":"69","name":"围巾","pic":"/product_catalog/1461642090192.jpg","is_deleted":"0"},{"p_catalog_id":"71","parent_id":"69","name":"配饰","pic":"/product_catalog/1446017886090.jpg","is_deleted":"0"},{"p_catalog_id":"72","parent_id":"69","name":"手表","pic":"/product_catalog/1446017897843.jpg","is_deleted":"0"},{"p_catalog_id":"73","parent_id":"69","name":"首饰","pic":"/product_catalog/1446017920333.jpg","is_deleted":"0"},{"p_catalog_id":"74","parent_id":"69","name":"鞋子","pic":"/product_catalog/1446017931323.jpg","is_deleted":"0"},{"p_catalog_id":"84","parent_id":"69","name":"袜子","pic":"/product_catalog/1446017947046.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"8312","channel_id":"3","brand_id":"72","p_catalog_id":"71","supplier_type":"1","supplier_code":"300011","name":"【艾漫】全职高手-夏日水手服徽章套","cover_price":"30.00","brief":"到货啦~","figure":"/1469184599346.jpg","sell_time_start":"1469116800","sell_time_end":"1469721600"},{"product_id":"3831","channel_id":"8","brand_id":"429","p_catalog_id":"84","supplier_type":"1","supplier_code":"1101035","name":"【喵鹿酱】超萌 假透肉 拼接 踩脚过膝打底袜 裤袜-加绒保暖","cover_price":"29.00","brief":"","figure":"/1452161899947.jpg","sell_time_start":"1477563362","sell_time_end":"1452182400"},{"product_id":"1969","channel_id":"6","brand_id":"80","p_catalog_id":"71","supplier_type":"1","supplier_code":"1101037","name":"【画影】古风 头饰 Lolita 羊尾巴 装饰毛钱流苏发夹","cover_price":"12.00","brief":"","figure":"/1443527992618.jpg","sell_time_start":"1443456000","sell_time_end":"1444060800"},{"product_id":"3845","channel_id":"8","brand_id":"183","p_catalog_id":"70","supplier_type":"2","supplier_code":"100003","name":"预售 【世界线的彼岸】炸鸡块 颜文字 羊毛呢贝雷帽 圆润烧饼帽 保暖","cover_price":"49.00","brief":"","figure":"/1451967280855.jpg","sell_time_start":"1451923200","sell_time_end":"1452528000"},{"product_id":"1752","channel_id":"12","brand_id":"3","p_catalog_id":"73","supplier_type":"1","supplier_code":"0","name":"剑网3门派衍生同人原创手链 ","cover_price":"68.00","brief":"","figure":"/1450754469244.jpg","sell_time_start":"1443024000","sell_time_end":"1443628800"},{"product_id":"4947","channel_id":"8","brand_id":"5","p_catalog_id":"71","supplier_type":"2","supplier_code":"1101026","name":"【USEE哟喜】 原创纹身贴防水 黑白彩色持久男女森女蝴蝶鹿 特惠套装","cover_price":"22.00","brief":"","figure":"/1467361365770.jpg","sell_time_start":"1456848000","sell_time_end":"1457452800"}]}]
+     * result : [{"p_catalog_id":"57","parent_id":"0","name":"下装","pic":"","is_deleted":"0","child":[{"p_catalog_id":"110","parent_id":"57","name":"汉风","pic":"/product_catalog/1465383117300.jpg","is_deleted":"0"},{"p_catalog_id":"59","parent_id":"57","name":"古风","pic":"/product_catalog/1446017608030.jpg","is_deleted":"0"},{"p_catalog_id":"61","parent_id":"57","name":"lolita","pic":"/product_catalog/1446017628543.jpg","is_deleted":"0"},{"p_catalog_id":"62","parent_id":"57","name":"胖次","pic":"/product_catalog/1446017713072.jpg","is_deleted":"0"},{"p_catalog_id":"63","parent_id":"57","name":"南瓜裤","pic":"/product_catalog/1446017725424.jpg","is_deleted":"0"},{"p_catalog_id":"88","parent_id":"57","name":"日常","pic":"/product_catalog/1446017744373.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"6634","channel_id":"8","brand_id":"5","p_catalog_id":"88","supplier_type":"2","supplier_code":"1101037","name":"【画影】小狐狸短裙","cover_price":"98.00","brief":"红黑短裙是现货哦~","figure":"/1466759853976.jpg","sell_time_start":"1464019200","sell_time_end":"1464624000"},{"product_id":"6897","channel_id":"15","brand_id":"402","p_catalog_id":"88","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 短宋裤","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296453463.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"2215","channel_id":"6","brand_id":"215","p_catalog_id":"59","supplier_type":"1","supplier_code":"1101015","name":"【游鹤工作室】闲梦沄沄下裙刺绣白鹿（短款）- 藏青","cover_price":"110.60","brief":"现货 ","figure":"/1444883979497.jpg","sell_time_start":"1444838400","sell_time_end":"1445443200"},{"product_id":"5914","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 百鬼夜行-冥府魔道和风短裤 日式棉麻阔腿裤A70","cover_price":"89.00","brief":"","figure":"/1462352934101.jpg","sell_time_start":"1460476800","sell_time_end":"1461081600"},{"product_id":"5614","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创 日本和风服饰-和。扇 棉麻印花短裤 女装阔腿裤 A11","cover_price":"78.00","brief":"预售截止到2号发货哦~ 预售截止到2号发货哦~ 预售截止到2号发货哦~","figure":"/1459135580746.jpg","sell_time_start":"1459094400","sell_time_end":"1459699200"},{"product_id":"4011","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】定制款 欧式复古歌特风系带高腰短裙 半身裙子 伞裙 A52","cover_price":"79.00","brief":"","figure":"/1452653909042.jpg","sell_time_start":"1452614400","sell_time_end":"1453219200"}]}]
      */
 
     private int code;
@@ -40,13 +40,13 @@ public class AccrssoryBean {
 
     public static class ResultBean {
         /**
-         * p_catalog_id : 69
+         * p_catalog_id : 57
          * parent_id : 0
-         * name : 配件
+         * name : 下装
          * pic :
          * is_deleted : 0
-         * child : [{"p_catalog_id":"70","parent_id":"69","name":"帽子","pic":"/product_catalog/1446017867549.jpg","is_deleted":"0"},{"p_catalog_id":"105","parent_id":"69","name":"围巾","pic":"/product_catalog/1461642090192.jpg","is_deleted":"0"},{"p_catalog_id":"71","parent_id":"69","name":"配饰","pic":"/product_catalog/1446017886090.jpg","is_deleted":"0"},{"p_catalog_id":"72","parent_id":"69","name":"手表","pic":"/product_catalog/1446017897843.jpg","is_deleted":"0"},{"p_catalog_id":"73","parent_id":"69","name":"首饰","pic":"/product_catalog/1446017920333.jpg","is_deleted":"0"},{"p_catalog_id":"74","parent_id":"69","name":"鞋子","pic":"/product_catalog/1446017931323.jpg","is_deleted":"0"},{"p_catalog_id":"84","parent_id":"69","name":"袜子","pic":"/product_catalog/1446017947046.jpg","is_deleted":"0"}]
-         * hot_product_list : [{"product_id":"8312","channel_id":"3","brand_id":"72","p_catalog_id":"71","supplier_type":"1","supplier_code":"300011","name":"【艾漫】全职高手-夏日水手服徽章套","cover_price":"30.00","brief":"到货啦~","figure":"/1469184599346.jpg","sell_time_start":"1469116800","sell_time_end":"1469721600"},{"product_id":"3831","channel_id":"8","brand_id":"429","p_catalog_id":"84","supplier_type":"1","supplier_code":"1101035","name":"【喵鹿酱】超萌 假透肉 拼接 踩脚过膝打底袜 裤袜-加绒保暖","cover_price":"29.00","brief":"","figure":"/1452161899947.jpg","sell_time_start":"1477563362","sell_time_end":"1452182400"},{"product_id":"1969","channel_id":"6","brand_id":"80","p_catalog_id":"71","supplier_type":"1","supplier_code":"1101037","name":"【画影】古风 头饰 Lolita 羊尾巴 装饰毛钱流苏发夹","cover_price":"12.00","brief":"","figure":"/1443527992618.jpg","sell_time_start":"1443456000","sell_time_end":"1444060800"},{"product_id":"3845","channel_id":"8","brand_id":"183","p_catalog_id":"70","supplier_type":"2","supplier_code":"100003","name":"预售 【世界线的彼岸】炸鸡块 颜文字 羊毛呢贝雷帽 圆润烧饼帽 保暖","cover_price":"49.00","brief":"","figure":"/1451967280855.jpg","sell_time_start":"1451923200","sell_time_end":"1452528000"},{"product_id":"1752","channel_id":"12","brand_id":"3","p_catalog_id":"73","supplier_type":"1","supplier_code":"0","name":"剑网3门派衍生同人原创手链 ","cover_price":"68.00","brief":"","figure":"/1450754469244.jpg","sell_time_start":"1443024000","sell_time_end":"1443628800"},{"product_id":"4947","channel_id":"8","brand_id":"5","p_catalog_id":"71","supplier_type":"2","supplier_code":"1101026","name":"【USEE哟喜】 原创纹身贴防水 黑白彩色持久男女森女蝴蝶鹿 特惠套装","cover_price":"22.00","brief":"","figure":"/1467361365770.jpg","sell_time_start":"1456848000","sell_time_end":"1457452800"}]
+         * child : [{"p_catalog_id":"110","parent_id":"57","name":"汉风","pic":"/product_catalog/1465383117300.jpg","is_deleted":"0"},{"p_catalog_id":"59","parent_id":"57","name":"古风","pic":"/product_catalog/1446017608030.jpg","is_deleted":"0"},{"p_catalog_id":"61","parent_id":"57","name":"lolita","pic":"/product_catalog/1446017628543.jpg","is_deleted":"0"},{"p_catalog_id":"62","parent_id":"57","name":"胖次","pic":"/product_catalog/1446017713072.jpg","is_deleted":"0"},{"p_catalog_id":"63","parent_id":"57","name":"南瓜裤","pic":"/product_catalog/1446017725424.jpg","is_deleted":"0"},{"p_catalog_id":"88","parent_id":"57","name":"日常","pic":"/product_catalog/1446017744373.jpg","is_deleted":"0"}]
+         * hot_product_list : [{"product_id":"6634","channel_id":"8","brand_id":"5","p_catalog_id":"88","supplier_type":"2","supplier_code":"1101037","name":"【画影】小狐狸短裙","cover_price":"98.00","brief":"红黑短裙是现货哦~","figure":"/1466759853976.jpg","sell_time_start":"1464019200","sell_time_end":"1464624000"},{"product_id":"6897","channel_id":"15","brand_id":"402","p_catalog_id":"88","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 短宋裤","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296453463.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"2215","channel_id":"6","brand_id":"215","p_catalog_id":"59","supplier_type":"1","supplier_code":"1101015","name":"【游鹤工作室】闲梦沄沄下裙刺绣白鹿（短款）- 藏青","cover_price":"110.60","brief":"现货 ","figure":"/1444883979497.jpg","sell_time_start":"1444838400","sell_time_end":"1445443200"},{"product_id":"5914","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 百鬼夜行-冥府魔道和风短裤 日式棉麻阔腿裤A70","cover_price":"89.00","brief":"","figure":"/1462352934101.jpg","sell_time_start":"1460476800","sell_time_end":"1461081600"},{"product_id":"5614","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创 日本和风服饰-和。扇 棉麻印花短裤 女装阔腿裤 A11","cover_price":"78.00","brief":"预售截止到2号发货哦~ 预售截止到2号发货哦~ 预售截止到2号发货哦~","figure":"/1459135580746.jpg","sell_time_start":"1459094400","sell_time_end":"1459699200"},{"product_id":"4011","channel_id":"8","brand_id":"234","p_catalog_id":"88","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】定制款 欧式复古歌特风系带高腰短裙 半身裙子 伞裙 A52","cover_price":"79.00","brief":"","figure":"/1452653909042.jpg","sell_time_start":"1452614400","sell_time_end":"1453219200"}]
          */
 
         private String p_catalog_id;
@@ -115,10 +115,10 @@ public class AccrssoryBean {
 
         public static class ChildBean {
             /**
-             * p_catalog_id : 70
-             * parent_id : 69
-             * name : 帽子
-             * pic : /product_catalog/1446017867549.jpg
+             * p_catalog_id : 110
+             * parent_id : 57
+             * name : 汉风
+             * pic : /product_catalog/1465383117300.jpg
              * is_deleted : 0
              */
 
@@ -171,18 +171,18 @@ public class AccrssoryBean {
 
         public static class HotProductListBean {
             /**
-             * product_id : 8312
-             * channel_id : 3
-             * brand_id : 72
-             * p_catalog_id : 71
-             * supplier_type : 1
-             * supplier_code : 300011
-             * name : 【艾漫】全职高手-夏日水手服徽章套
-             * cover_price : 30.00
-             * brief : 到货啦~
-             * figure : /1469184599346.jpg
-             * sell_time_start : 1469116800
-             * sell_time_end : 1469721600
+             * product_id : 6634
+             * channel_id : 8
+             * brand_id : 5
+             * p_catalog_id : 88
+             * supplier_type : 2
+             * supplier_code : 1101037
+             * name : 【画影】小狐狸短裙
+             * cover_price : 98.00
+             * brief : 红黑短裙是现货哦~
+             * figure : /1466759853976.jpg
+             * sell_time_start : 1464019200
+             * sell_time_end : 1464624000
              */
 
             private String product_id;

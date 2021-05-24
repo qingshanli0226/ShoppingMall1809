@@ -1,15 +1,13 @@
 package com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.adapter;
 
 import android.graphics.Color;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.framework.BaseRvAdapter;
-import com.example.net.bean.ClassLeftBean;
+import com.example.net.bean.classify.ClassLeftBean;
 import com.example.shoppingmallsix.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean>{

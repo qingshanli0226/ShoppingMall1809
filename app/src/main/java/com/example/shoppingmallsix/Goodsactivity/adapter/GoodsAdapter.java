@@ -48,7 +48,6 @@ public class GoodsAdapter extends BaseRvAdapter<GoodAdapterBean> {
                 goodsAdapterItemTextPrice.setTextColor(Color.parseColor("#ff0000"));
                 break;
             case 1:
-
                 break;
 
         }

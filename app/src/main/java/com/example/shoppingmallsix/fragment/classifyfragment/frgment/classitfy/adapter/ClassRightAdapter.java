@@ -5,27 +5,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseRvAdapter;
 
-import com.example.net.bean.AccrssoryBean;
-import com.example.net.bean.BagBean;
-import com.example.net.bean.ClassBean;
-import com.example.net.bean.DigitBean;
-import com.example.net.bean.DressBean;
-import com.example.net.bean.GameBean;
-import com.example.net.bean.JacketBean;
-import com.example.net.bean.OvercoatBean;
-import com.example.net.bean.PantsBean;
-import com.example.net.bean.ProductsBean;
-import com.example.net.bean.SkirtBean;
+import com.example.net.bean.classify.ClassBean;
 
-import com.example.net.bean.StationeryBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.manager.FullyGridLayoutManager;
 

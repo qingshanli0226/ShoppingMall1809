@@ -6,13 +6,11 @@ import android.os.Binder;
 import android.os.IBinder;
 
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commened.FiannceContants;
 import com.example.commened.SpUtil;
 import com.example.framework.manager.CacheUserManager;
-import com.example.net.bean.LoginBean;
-import com.example.net.bean.RegisterBean;
-import com.example.user.R;
+import com.example.net.bean.user.LoginBean;
+import com.example.net.bean.user.RegisterBean;
 import com.example.user.register.IUserView;
 import com.example.user.register.UserPresenter;
 
