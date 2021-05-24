@@ -21,6 +21,10 @@ public class GoodsActivity extends BaseActivity {
     private RecyclerView moreRv;
     private List<GoodAdapterBean> list = new ArrayList<>();
     private GoodsAdapter goodsAdapter;
+    private String name;
+    private String figure;
+    private String price;
+
     @Override
     protected void initPresenter() {
 
@@ -29,9 +33,9 @@ public class GoodsActivity extends BaseActivity {
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        String figure = intent.getStringExtra("figure");
-        String price = intent.getStringExtra("price");
+        name = intent.getStringExtra("name");
+        figure = intent.getStringExtra("figure");
+        price = intent.getStringExtra("price");
         GoodAdapterBean goodAdapterBean = new GoodAdapterBean(name, figure, price);
         list.add(goodAdapterBean);
         list.add(goodAdapterBean);
