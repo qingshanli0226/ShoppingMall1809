@@ -1,0 +1,6 @@
+com/example/common/type/ToLoginType.java
+ com.example.common.type.ToLoginType
+com/example/common/type/TypeString.java
+ com.example.common.type.TypeString
+com/example/common/BuildConfig.java
+ com.example.common.BuildConfig

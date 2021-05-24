@@ -68,6 +68,11 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         }
     }
 
+    @Override
+    public void onAutoLogin(LoginBean loginBean) {
+
+    }
+
 
     @Override
     public void initPresenter() {
