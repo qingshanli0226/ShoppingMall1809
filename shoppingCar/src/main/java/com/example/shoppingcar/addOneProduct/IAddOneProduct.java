@@ -5,4 +5,6 @@ import com.example.net.model.RegisterBean;
 
 public interface IAddOneProduct extends IBaseView {
     void onAddOneProduct(RegisterBean registerBean);
+
+    void onCheckOneProductInventory(RegisterBean registerBean);
 }

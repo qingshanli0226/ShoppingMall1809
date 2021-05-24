@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
-import com.example.framework.view.ShopmallGlide;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
 
