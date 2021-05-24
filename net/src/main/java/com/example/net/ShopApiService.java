@@ -35,7 +35,6 @@ public interface ShopApiService {
     @POST("register")
     Observable<RegisterBean> getRegisterData(@Field("name") String username, @Field("password") String password);
 
-
     @FormUrlEncoded
     @POST("login")
     Observable<LoginBean> getLoginData(@Field("name") String username, @Field("password") String password);
@@ -94,5 +93,6 @@ public interface ShopApiService {
     @GET(Constants.TAG_URL)
     Observable<SortBean> getSortData();
 
-
+    @POST("addOneProduct")
+    Observable<RegisterBean> addOneProduct(@Body ResponseBody responseBody);
 }

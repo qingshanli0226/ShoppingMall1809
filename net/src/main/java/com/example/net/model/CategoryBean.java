@@ -1,5 +1,6 @@
 package com.example.net.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -171,7 +172,7 @@ public class CategoryBean {
         }
 
 
-        public static class HotProductListBean {
+        public static class HotProductListBean implements Serializable {
             public String getProduct_id() {
                 return product_id;
             }

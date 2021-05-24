@@ -5,6 +5,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
@@ -13,6 +14,9 @@ import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.adapter.ShoppingCarAdapter;
+
+import java.util.List;
 
 public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShopping, FiannceUserManager.IUserLoginChanged {
     private ToolBar toolbar;
@@ -68,6 +72,11 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
     @Override
     public void onShopping(ShoppingTrolleyBean shoppingTrolleyBean) {
         if (shoppingTrolleyBean.getCode().equals("200")) {
+            List<ShoppingTrolleyBean.ResultBean> result = shoppingTrolleyBean.getResult();
+
+            ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
+            shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
+            shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
         }
     }
 

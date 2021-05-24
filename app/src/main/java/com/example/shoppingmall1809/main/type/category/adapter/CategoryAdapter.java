@@ -1,5 +1,6 @@
 package com.example.shoppingmall1809.main.type.category.adapter;
 
+import android.content.Intent;
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.CategoryBean;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.main.particulars.ParticularsActivity;
 
 import java.util.List;
 
@@ -42,6 +44,20 @@ public class CategoryAdapter extends BaseRVAdapter<Object> {
                 hotrv.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(),RecyclerView.HORIZONTAL,false));
 
                 CHotAdapter cHotAdapter = new CHotAdapter(hotProductListBeans);
+                cHotAdapter.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(holder.itemView.getContext(), ParticularsActivity.class);
+                        intent.putExtra("code",4);
+                        intent.putExtra("hotProductListBeans",hotProductListBeans.get(position));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(int position) {
+
+                    }
+                });
 
                 hotrv.setAdapter(cHotAdapter);
                 break;

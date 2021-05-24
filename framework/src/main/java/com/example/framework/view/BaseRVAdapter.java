@@ -18,6 +18,9 @@ public abstract class BaseRVAdapter<T> extends RecyclerView.Adapter<BaseRVAdapte
         this.datalist = datalist;
     }
 
+    protected BaseRVAdapter() {
+    }
+
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
