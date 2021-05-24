@@ -43,7 +43,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private Map<String,String> map = new HashMap<>();
     private String productId;
     private String productPrice;
-    private String productNum;
+    private int productNum;
     private String url;
     private Intent intent;
     private List<ShortcartProductBean.ResultBean> resultBeans = new ArrayList<>();
@@ -60,17 +60,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         name = intent.getStringExtra("name");
         img = intent.getStringExtra("img");
         price = intent.getStringExtra("price");
-        productNum = "1";
+        productNum = prod_num;
         url = "http://www.baidu.com";
 
 
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
         map.put("productId",productId);
-        map.put("productNum",productNum);
-        map.put("productName",name);
         map.put("url",url);
         map.put("productPrice",productPrice);
+        map.put("productName",name);
 
 
         if (img!=null){
@@ -163,6 +162,11 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         public void onClick(View v) {
                             popupWindow.dismiss();
                             linLin.setVisibility(View.VISIBLE);
+                            map.put("productNum", String.valueOf(prod_num));
+
+
+
+                            httpPresenter.postAddOneProduct(map);
 
                         }
                     });
@@ -247,7 +251,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
-        Toast.makeText(this, ""+addOneProductBean.getCode(), Toast.LENGTH_SHORT).show();
+        String result = addOneProductBean.getResult();
+        Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
     }
 
 }

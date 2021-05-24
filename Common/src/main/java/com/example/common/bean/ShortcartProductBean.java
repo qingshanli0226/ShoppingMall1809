@@ -53,8 +53,8 @@ class ShortcartProductBean {
         private String productName;
         private String productNum;
         private String url;
-        private Object productPrice;
-        private boolean productSelected;
+        private String productPrice;
+        private boolean isAll=false;
 
         public String getProductId() {
             return productId;
@@ -88,20 +88,20 @@ class ShortcartProductBean {
             this.url = url;
         }
 
-        public Object getProductPrice() {
+        public String getProductPrice() {
             return productPrice;
         }
 
-        public void setProductPrice(Object productPrice) {
+        public void setProductPrice(String productPrice) {
             this.productPrice = productPrice;
         }
 
-        public boolean isProductSelected() {
-            return productSelected;
+        public boolean isAll() {
+            return isAll;
         }
 
-        public void setProductSelected(boolean productSelected) {
-            this.productSelected = productSelected;
+        public void setAll(boolean all) {
+            isAll = all;
         }
     }
 }

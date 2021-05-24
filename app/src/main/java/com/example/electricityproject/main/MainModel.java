@@ -14,12 +14,13 @@ public class MainModel implements BusinessARouter.iAppManager {
     }
     @Override
     public void OpenMainActivity(Context context, Bundle bundle) {
-        String notify = bundle.getString("notify", "");
-        if (notify.equals("go_buyCar")){
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("notifyss",notify);
+        if (bundle!=null) {
+            String notify = bundle.getString("notify", "");
+            if (notify.equals("go_buyCar")) {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("notifyss", notify);
+            }
         }
-
         Intent intent = new Intent(context, MainActivity.class);
 
         if (context instanceof Activity){

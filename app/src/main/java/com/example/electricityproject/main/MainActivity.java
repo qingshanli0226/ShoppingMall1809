@@ -1,7 +1,6 @@
 package com.example.electricityproject.main;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -53,7 +52,7 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.add(R.id.main_lin, shoppingFragment);
         fragmentTransaction.add(R.id.main_lin, personFragment);
 
-        BeginTransaction(homeFragment,classifyFragment,findFragment,shoppingFragment,personFragment);
+        BeginTransaction(homeFragment, classifyFragment, findFragment, shoppingFragment, personFragment);
 
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -63,25 +62,25 @@ public class MainActivity extends BaseActivity {
                 switch (checkedId) {
                     case R.id.btn_home:
 
-                        BeginTransaction(homeFragment,classifyFragment,findFragment,shoppingFragment,personFragment);
+                        BeginTransaction(homeFragment, classifyFragment, findFragment, shoppingFragment, personFragment);
 
                         break;
 
                     case R.id.btn_kind:
 
-                        BeginTransaction(classifyFragment,homeFragment,findFragment,shoppingFragment,personFragment);
+                        BeginTransaction(classifyFragment, homeFragment, findFragment, shoppingFragment, personFragment);
 
                         break;
 
                     case R.id.btn_find:
 
-                        BeginTransaction(findFragment,classifyFragment,homeFragment,shoppingFragment,personFragment);
+                        BeginTransaction(findFragment, classifyFragment, homeFragment, shoppingFragment, personFragment);
 
                         break;
 
                     case R.id.btn_buycar:
 
-                        BeginTransaction(shoppingFragment,classifyFragment,findFragment,homeFragment,personFragment);
+                        BeginTransaction(shoppingFragment, classifyFragment, findFragment, homeFragment, personFragment);
 
                         LogBean logBean = BusinessUserManager.getInstance().getIsLog();
 
@@ -93,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
                     case R.id.btn_person:
 
-                        BeginTransaction(personFragment,classifyFragment,findFragment,homeFragment,shoppingFragment);
+                        BeginTransaction(personFragment, classifyFragment, findFragment, homeFragment, shoppingFragment);
 
                         break;
                 }
@@ -123,21 +122,20 @@ public class MainActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-
-            btnBuycar.setChecked(true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            fragmentTransaction = supportFragmentManager.beginTransaction();
-            fragmentTransaction.hide(homeFragment);
-            fragmentTransaction.hide(classifyFragment);
-            fragmentTransaction.hide(findFragment);
-            fragmentTransaction.show(shoppingFragment);
-            fragmentTransaction.hide(personFragment);
-            fragmentTransaction.commit();
+        btnBuycar.setChecked(true);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.hide(homeFragment);
+        fragmentTransaction.hide(classifyFragment);
+        fragmentTransaction.hide(findFragment);
+        fragmentTransaction.show(shoppingFragment);
+        fragmentTransaction.hide(personFragment);
+        fragmentTransaction.commit();
 
 
     }
 
-    private void BeginTransaction(Fragment showFragment,Fragment hideFragmentOne,Fragment hideFragmentTwo,Fragment hideFragmentThree,Fragment hideFragmentFour) {
+    private void BeginTransaction(Fragment showFragment, Fragment hideFragmentOne, Fragment hideFragmentTwo, Fragment hideFragmentThree, Fragment hideFragmentFour) {
 
         fragmentTransaction.show(showFragment);
         fragmentTransaction.hide(hideFragmentOne);
