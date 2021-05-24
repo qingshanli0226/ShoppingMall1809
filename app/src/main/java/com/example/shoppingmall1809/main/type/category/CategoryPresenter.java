@@ -17,53 +17,10 @@ public class CategoryPresenter extends BasePresenter<ICategoryView> {
         attachView(iCategoryView);
     }
 
-    void getCategoryData(int position) {
+    void getCategoryData(String url) {
         ShopApiService shopApiService = RetrofitCreator.getShopApiService();
 
-        Observable<CategoryBean> observable;
-
-        switch (position) {
-            case 1:
-                observable = shopApiService.getJacketData();
-                break;
-            case 2:
-                observable = shopApiService.getPantsData();
-                break;
-            case 3:
-                observable = shopApiService.getOvercoatData();
-                break;
-            case 4:
-                observable = shopApiService.getAccessoryData();
-                break;
-            case 5:
-                observable = shopApiService.getBugData();
-                break;
-            case 6:
-                observable = shopApiService.getDressData();
-                break;
-            case 7:
-                observable = shopApiService.getProductsData();
-                break;
-            case 8:
-                observable = shopApiService.getStationeryData();
-                break;
-            case 9:
-                observable = shopApiService.getDigitData();
-                break;
-            case 10:
-                observable = shopApiService.getGameData();
-                break;
-            default:
-                observable = shopApiService.getSkirtData();
-                break;
-        }
-
-        if (observable == null) {
-            if (iView != null) {
-                iView.Error("对象为空");
-            }
-            return;
-        }
+        Observable<CategoryBean> observable = shopApiService.getTypeData(url);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -1,16 +1,17 @@
 package com.example.shoppingmall1809.main;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.FiannceUserManager;
 import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
@@ -23,19 +24,28 @@ import com.example.shoppingmall1809.main.user.UserFragment;
 @Route(path = "/main/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
+    private RadioButton actRadioCart;
+    private RadioButton actRadioUser;
+    private RadioButton actRadioHome;
+    private RadioButton actRadioType;
+    private RadioButton actRadioCommunity;
+    private RadioButton actRadioRecord;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
 
-        HomeFragment homeFragment0 = new HomeFragment();
+
+        HomeFragment homeFragment = new HomeFragment();
         TypeFragment typeFragment = new TypeFragment();
         DiscoverFragment discoverFragment = new DiscoverFragment();
         ShoppingTrolleyFragment shoppingTrolleyFragment = new ShoppingTrolleyFragment();
         UserFragment userFragment = new UserFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.act_home_ll, homeFragment0);
+        fragmentTransaction.add(R.id.act_home_ll, homeFragment);
         fragmentTransaction.add(R.id.act_home_ll, typeFragment);
         fragmentTransaction.add(R.id.act_home_ll, discoverFragment);
         fragmentTransaction.add(R.id.act_home_ll, shoppingTrolleyFragment);
@@ -45,63 +55,64 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.hide(discoverFragment);
         fragmentTransaction.hide(shoppingTrolleyFragment);
         fragmentTransaction.hide(userFragment);
-        fragmentTransaction.show(homeFragment0);
+        fragmentTransaction.show(homeFragment);
 
         fragmentTransaction.commit();
 
-
+        //添加初始化
+        actRadioRecord = actRadioHome;
         RadioGroup radioGroup = findViewById(R.id.act_radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                switch (i){
+                switch (i) {
                     case R.id.act_radio_home:
-                        fragmentTransaction.show(homeFragment0);
+                        //记录步骤
+                        actRadioRecord = actRadioHome;
+                        fragmentTransaction.show(homeFragment);
                         fragmentTransaction.hide(typeFragment);
                         fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_type:
-                        if (login()) {
-                            return;
-                        }
-
-                        fragmentTransaction.hide(homeFragment0);
+                        //记录步骤
+                        actRadioRecord = actRadioType;
+                        fragmentTransaction.hide(homeFragment);
                         fragmentTransaction.show(typeFragment);
                         fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_community:
-                        if (login()) {
-                            return;
-                        }
-
-                        fragmentTransaction.hide(homeFragment0);
+                        //记录步骤
+                        actRadioRecord = actRadioCommunity;
+                        fragmentTransaction.hide(homeFragment);
                         fragmentTransaction.hide(typeFragment);
                         fragmentTransaction.show(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_cart:
-                        if (login()) {
+                        if (islogin()) {
+                            ARouter.getInstance().build(ShopConstants.LOGIN_PATH).withString(ShopConstants.REGISTER_PATH, "").navigation();
+                            CacheManager.getInstance().decideARoutPage = ShopConstants.AROUT_SHOPCAR;
+                            actRadioRecord.setChecked(true);
                             return;
                         }
-
-                        fragmentTransaction.hide(homeFragment0);
+                        //记录步骤
+                        actRadioRecord = actRadioCart;
+                        fragmentTransaction.hide(homeFragment);
                         fragmentTransaction.hide(typeFragment);
                         fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.show(shoppingTrolleyFragment);
                         fragmentTransaction.hide(userFragment);
                         break;
                     case R.id.act_radio_user:
-                        if (login()) {
-                            return;
-                        }
-
-                        fragmentTransaction.hide(homeFragment0);
+                        //记录步骤
+                        actRadioRecord = actRadioUser;
+                        fragmentTransaction.hide(homeFragment);
                         fragmentTransaction.hide(typeFragment);
                         fragmentTransaction.hide(discoverFragment);
                         fragmentTransaction.hide(shoppingTrolleyFragment);
@@ -113,15 +124,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean login(){
+    public boolean islogin() {
         LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
-        if (loginBean==null){
-            ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
-            RadioButton radioButton = findViewById(R.id.act_radio_home);
-            radioButton.setChecked(true);
+        if (loginBean == null) {
             return true;
         }
         return false;
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        switch (CacheManager.getInstance().decideARoutPage) {
+            case ShopConstants.AROUT_SHOPCAR:
+                actRadioCart.setChecked(true);
+                break;
+            case ShopConstants.AROUT_USER_HAND:
+                actRadioUser.setChecked(true);
+                break;
+            default:
+                actRadioHome.setChecked(true);
+                break;
+        }
+    }
+
+    private void initView() {
+        actRadioCart = (RadioButton) findViewById(R.id.act_radio_cart);
+        actRadioUser = (RadioButton) findViewById(R.id.act_radio_user);
+        actRadioHome = (RadioButton) findViewById(R.id.act_radio_home);
+        actRadioType = (RadioButton) findViewById(R.id.act_radio_type);
+        actRadioCommunity = (RadioButton) findViewById(R.id.act_radio_community);
+    }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.CategoryBean;
 import com.example.shoppingmall1809.R;
 
@@ -25,7 +26,7 @@ public class CHotAdapter extends BaseRVAdapter<CategoryBean.ResultBean.HotProduc
     protected void displayViewHolder(BaseViewHolder holder, int position, CategoryBean.ResultBean.HotProductListBean itemData) {
         ImageView figure = holder.getView(R.id.figure);
         TextView coverPrice = holder.getView(R.id.name);
-        Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getFigure()).placeholder(R.drawable.new_img_loading_1).into(figure);
+        ShopmallGlide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getFigure()).into(figure);
         coverPrice.setText("￥"+itemData.getCover_price());
     }
 

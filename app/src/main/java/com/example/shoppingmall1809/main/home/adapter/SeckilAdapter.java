@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
 
@@ -28,7 +29,7 @@ public class SeckilAdapter extends BaseRVAdapter<HoemBean.ResultBean.SeckillInfo
         ImageView figure = holder.getView(R.id.figure);
         TextView coverPrice = holder.getView(R.id.cover_price);
         TextView originPrice = holder.getView(R.id.origin_price);
-        Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getFigure()).placeholder(R.drawable.new_img_loading_1).into(figure);
+        ShopmallGlide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getFigure()).into(figure);
         coverPrice.setText("￥"+itemData.getCover_price());
         originPrice.setText("￥"+itemData.getOrigin_price());
         originPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);

@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.example.framework.R;
 import com.example.net.RetrofitCreator;
 import com.jakewharton.disklrucache.DiskLruCache;
 
@@ -268,7 +269,7 @@ public class ShopmallGlide {
         public void into(final ImageView imageView){
             this.imageView =imageView;
             imageView.setTag(picUrl);
-            imageView.setImageResource(android.R.mipmap.sym_def_app_icon);
+            imageView.setImageResource(R.drawable.new_img_loading_1);
             String key = ShopmallGlide.getInstance().generateCacheKey(picUrl);
             Bitmap bitmap = shopmallGlide.getFromMem(key);
             if (bitmap != null) {

@@ -46,7 +46,5 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
-
-        stopService(intent);
     }
 }

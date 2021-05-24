@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.particulars.ParticularsActivity;
@@ -78,9 +79,8 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         HoemBean.ResultBean.BannerInfoBean bannerInfoBean = (HoemBean.ResultBean.BannerInfoBean) path;
-                        Glide.with(context)
+                        ShopmallGlide.with(context)
                                 .load(Constants.BASE_URl_IMAGE + bannerInfoBean.getImage())
-                                .placeholder(R.drawable.new_img_loading_1)
                                 .into(imageView);
                     }
                 });
@@ -103,7 +103,7 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 ArrayList<ImageView> imageViews = new ArrayList<>();
                 for (HoemBean.ResultBean.ActInfoBean actInfoBean : act_info) {
                     ImageView imageView = new ImageView(holder.itemView.getContext());
-                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url()).placeholder(R.drawable.new_img_loading_1).into(imageView);
+                    ShopmallGlide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url()).into(imageView);
                     imageViews.add(imageView);
                 }
                 ActAdapter actAdapter = new ActAdapter(imageViews);

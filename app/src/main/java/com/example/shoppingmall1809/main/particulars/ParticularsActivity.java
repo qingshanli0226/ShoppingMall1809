@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.HoemBean;
@@ -67,7 +68,8 @@ public class ParticularsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
-                if (loginBean==null){
+                if (loginBean == null) {
+                    CacheManager.getInstance().decideARoutPage = ShopConstants.AROUT_PARTICULARS;
                     ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
                     return;
                 }
