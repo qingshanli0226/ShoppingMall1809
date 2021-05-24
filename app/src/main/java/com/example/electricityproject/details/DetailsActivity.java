@@ -1,22 +1,29 @@
 package com.example.electricityproject.details;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
+import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
@@ -41,7 +48,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private String img;
     private String price;
     private Map<String,String> map = new HashMap<>();
-    private Map<String,Integer> map2 = new HashMap<>();
+    private Map<String,String> map2 = new HashMap<>();
     private String productId;
     private String productPrice;
     private int productNum;
@@ -53,6 +60,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private LinearLayout detailsLin;
     private PopupWindow popupWindow;
     private int prod_num = 1;
+    private RelativeLayout liner;
 
     @Override
     protected void initData() {
@@ -68,8 +76,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
         map.put("productId",productId);
+        map2.put("productId",productId);
         map.put("url",url);
-        map.put("productPrice",productPrice);
+        map.put("productPrice",price);
         map.put("productName",name);
 
 
@@ -163,8 +172,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             popupWindow.dismiss();
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
+                            map2.put("productNum", String.valueOf(prod_num));
 
                             httpPresenter.postAddOneProduct(map);
+//                            httpPresenter.checkOneProductInventory(map2);
                         }
                     });
 
@@ -194,12 +205,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     popupWindow.dismiss();
                     linLin.setVisibility(View.VISIBLE);
                 }
-
-
             }
         });
 
     }
+
+
 
     @Override
     protected void initPresenter() {
@@ -217,6 +228,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         buyCar = (ImageView) findViewById(R.id.buy_car);
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
         detailsLin = (LinearLayout) findViewById(R.id.details_lin);
+        liner = (RelativeLayout) findViewById(R.id.relative);
     }
 
     @Override
@@ -246,15 +258,81 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
-        String result = addOneProductBean.getResult();
-        Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+        if (addOneProductBean.getCode().equals("200")){
+            showBezierAnim(Constants.BASE_URl_IMAGE+img);
+            String result = addOneProductBean.getResult();
+            Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
-    public void checkOneProductInventory(AddOneProductBean addOneProductBean) {
-        if (addOneProductBean.getCode().equals("200")){
+    public void checkOneProductInventory(RegBean checkInventoryBean) {
+        if (checkInventoryBean.getCode().equals("200")){
             Toast.makeText(this, "1231232", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //贝塞尔曲线
+    private void showBezierAnim(String url){
+        ImageView imageView = new ImageView(this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+        imageView.setLayoutParams(params);
+//        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
+        Glide.with(DetailsActivity.this).load(url).into(imageView);
+        liner.addView(imageView);
+
+        //起始点坐标
+        int[] startLoa = new int[2];
+//        startLoa[0] = 600;
+//        startLoa[1] = -1100;
+
+        detailsWeb.getLocationInWindow(startLoa);
+
+        //终点坐标
+        int[] endLoa = new int[2];
+        endLoa[0] = 600;
+        endLoa[1] = 600;
+        buyCar.getLocationInWindow(endLoa);
+
+        //控制点坐标
+        int[] controlLoa = new int[2];
+        controlLoa[0] = 200;
+        controlLoa[1] = 500;
+
+        Path path = new Path();
+        path.moveTo(startLoa[0],startLoa[1]);
+        path.quadTo(controlLoa[0],controlLoa[1],endLoa[0],endLoa[1]);
+        PathMeasure pathMeasure = new PathMeasure(path,false);
+
+        //使用属性动画
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,pathMeasure.getLength());
+        valueAnimator.setDuration(3 * 1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+
+        //动画更新监听,监听动画的绘制过程
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                float[] nextLocation = new float[2];
+                pathMeasure.getPosTan(value,nextLocation,null);
+                imageView.setTranslationX(nextLocation[0]);
+                imageView.setTranslationY(nextLocation[1]);
+
+                float v = value / pathMeasure.getLength();
+                imageView.setAlpha(1-v);
+
+                imageView.setScaleX(2*v);
+                imageView.setScaleY(2*v);
+
+            }
+        });
+
+        valueAnimator.start();
+
+
+    }
+
 
 }

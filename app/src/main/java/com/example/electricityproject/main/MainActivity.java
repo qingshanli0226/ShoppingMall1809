@@ -20,6 +20,8 @@ import com.example.framework.BaseActivity;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class MainActivity extends BaseActivity {
     private HomeFragment homeFragment;
@@ -87,6 +89,9 @@ public class MainActivity extends BaseActivity {
                         if (logBean == null) {
                             Toast.makeText(MainActivity.this, "用户未登录，请先登录", Toast.LENGTH_SHORT).show();
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
+                        }else {
+                            Toast.makeText(MainActivity.this, "用户已经登录", Toast.LENGTH_SHORT).show();
+                            EventBus.getDefault().post("request_buyCar");
                         }
                         break;
 

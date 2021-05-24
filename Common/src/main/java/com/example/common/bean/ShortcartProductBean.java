@@ -56,6 +56,18 @@ class ShortcartProductBean {
         private String productPrice;
         private boolean isAll=false;
 
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "productId='" + productId + '\'' +
+                    ", productName='" + productName + '\'' +
+                    ", productNum='" + productNum + '\'' +
+                    ", url='" + url + '\'' +
+                    ", productPrice='" + productPrice + '\'' +
+                    ", isAll=" + isAll +
+                    '}';
+        }
+
         public String getProductId() {
             return productId;
         }

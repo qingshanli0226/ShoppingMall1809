@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,9 @@ import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.view.ToolBar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +46,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     @Override
     protected void initData() {
-        httpPresenter.getShortProductsData();
+
+
+
+        EventBus.getDefault().register(this);
+
 
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,15 +80,36 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 }
             }
         });
-        ShortcartProductBean shortProductBean = BusinessBuyCarManger.getBusinessBuyCarManger().getShortProductBean();
 
-        if (shortProductBean!=null){
-            shoppingAdapter = new ShoppingAdapter();
-            buyCarRv.setAdapter(shoppingAdapter);
-            shoppingAdapter.notifyDataSetChanged();
+
+
+    }
+
+    @Subscribe
+    public void getEvent(String eve){
+        if (eve.equals("login_success")){
+            httpPresenter.getShortProductsData();
         }
+    }
+
+    @Subscribe
+    public void getBuyCarData(String eve){
+        if (eve.equals("request_buyCar")){
+            Toast.makeText(getContext(), "接收到广播", Toast.LENGTH_SHORT).show();
+            ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
 
 
+            if (shortProductBean!=null){
+                result = shortProductBean.getResult();
+
+                shoppingAdapter = new ShoppingAdapter();
+                shoppingAdapter.updateData(shortProductBean.getResult());
+                buyCarRv.setAdapter(shoppingAdapter);
+                shoppingAdapter.notifyDataSetChanged();
+            }else {
+                Toast.makeText(getContext(), "欢迎页面没有加载数据", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -129,10 +158,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
         result = shortcartProductBean.getResult();
         if (shortcartProductBean.getCode().equals("200")) {
+            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+
             shoppingAdapter = new ShoppingAdapter();
             shoppingAdapter.updateData(shortcartProductBean.getResult());
-
-            BusinessBuyCarManger.getBusinessBuyCarManger().setShortProductBean(shortcartProductBean);
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
@@ -170,11 +199,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         allPrice=0;
         for (ShortcartProductBean.ResultBean resultBean : result) {
             if (resultBean.isAll()){
-                Log.i("zx", "num: "+resultBean.getProductNum()+"price:"+resultBean.getProductPrice());
-                int num = Integer.parseInt(resultBean.getProductNum());
-                double price = Double.parseDouble(resultBean.getProductPrice());
+                if (resultBean!=null){
+                    Log.i("zx", "num: "+resultBean.getProductNum()+"price:"+resultBean.getProductPrice());
+                    int num = Integer.parseInt(resultBean.getProductNum());
+                    double price = Double.parseDouble(resultBean.getProductPrice());
 
-                allPrice+= (double) (num*price);
+                    allPrice+= (double) (num * price);
+                }
+
             }
         }
         shoppingMoney.setText("￥"+allPrice+"");

@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         if (logBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setIsLog(logBean);
             EventBus.getDefault().postSticky("acc_username");
+            EventBus.getDefault().postSticky("login_success");
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
         }

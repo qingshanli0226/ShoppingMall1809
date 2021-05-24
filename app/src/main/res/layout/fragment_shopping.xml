@@ -7,24 +7,36 @@
     android:orientation="vertical"
     tools:context=".shopp.ShoppingFragment">
 
-    <com.example.view.ToolBar
-        android:gravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/toolbar"
-        app:titleText="@string/shop_car"
-        app:titleTextColor="#000000"
-        android:layout_height="@dimen/dp_50"></com.example.view.ToolBar>
+        android:layout_height="@dimen/dp_0"
+        android:orientation="vertical"
+        android:layout_weight="0.9">
 
-    <View
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
-        android:background="@color/gray"></View>
+        <com.example.view.ToolBar
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+            app:titleText="@string/shop_car"
+            app:titleTextColor="#000000"
+            android:layout_weight="9"
+            android:layout_height="0dp"></com.example.view.ToolBar>
+
+        <View
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/gray"></View>
+
+    </LinearLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="9"
+        android:layout_weight="8.1"
         android:id="@+id/buy_car_rv"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout

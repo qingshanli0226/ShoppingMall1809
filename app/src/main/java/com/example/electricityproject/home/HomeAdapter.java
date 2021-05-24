@@ -166,7 +166,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("price",list.get(position).getCover_price());
                         intent.putExtra("productId",list.get(position).getProduct_id());
                         intent.putExtra("productPrice",list.get(position).getCover_price());
-                        intent.putExtra("buy","buy");
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 
@@ -193,7 +192,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
                         intent.putExtra("productId",recommendInfoBeans.get(position).getProduct_id());
                         intent.putExtra("productPrice",recommendInfoBeans.get(position).getCover_price());
-                        intent.putExtra("new","new");
                         baseViewHolder.itemView.getContext().startActivity(intent);
                     }
 

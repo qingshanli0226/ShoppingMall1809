@@ -2,6 +2,7 @@ package com.example.electricityproject.details;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.AddOneProductBean;
+import com.example.common.bean.RegBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
 import com.google.gson.Gson;
@@ -15,6 +16,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public
 class DetailsPresenter extends BasePresenter<IDetailsView> {
@@ -61,27 +63,27 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
 
     }
 
-    public void checkOneProductInventory(Map<String,Integer> map){
+    public void checkOneProductInventory(Map<String,String> map){
 
         String s = new Gson().toJson(map);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        RequestBody requestBody = RequestBody.create(parse, s);
+        ResponseBody responseBody = ResponseBody.create(parse, s);
 
         RetrofitCreate.getFiannceApiService()
-                .checkOneProductInventory(requestBody)
+                .checkOneProductInventory(responseBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<AddOneProductBean>() {
+                .subscribe(new Observer<RegBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         add(d);
                     }
 
                     @Override
-                    public void onNext(@NonNull AddOneProductBean addOneProductBean) {
+                    public void onNext(@NonNull RegBean checkInventoryBean) {
                         if (IView!=null){
-                            IView.checkOneProductInventory(addOneProductBean);
-                            LogUtils.json(addOneProductBean);
+                            IView.checkOneProductInventory(checkInventoryBean);
+                            LogUtils.json(checkInventoryBean);
                         }
                     }
 

@@ -6,7 +6,7 @@ import com.example.framework.IBaseView;
 
 public
 interface IShoppingView extends IBaseView {
-    void getShortProductData(ShortcartProductBean shortcartProductBean);
     void postSelectAllProductData(SelectAllProductBean selectAllProductBean);
+    void getShortProductData(ShortcartProductBean shortcartProductBean);
 
 }
