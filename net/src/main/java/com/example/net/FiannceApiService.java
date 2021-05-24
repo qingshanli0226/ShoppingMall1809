@@ -7,6 +7,7 @@ import com.example.net.bean.AccrssoryBean;
 import com.example.net.bean.BagBean;
 import com.example.net.bean.ClassBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.store.CloseStoreBean;
 import com.example.net.bean.DigitBean;
@@ -31,6 +32,7 @@ import com.example.net.bean.store.WenjuStoreBean;
 import com.example.net.constants.Constants;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -156,8 +158,8 @@ public interface FiannceApiService {
     @POST(Constants.AUTOLOGIN)
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
-    @POST("addOneProduct")
-    Observable<RegisterBean> addOneProduct(@Body ResponseBody responseBody);
+    @POST(Constants.ADDPRODUCT)
+    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
 
 //    //待支付
 //    @GET("findForPay")
