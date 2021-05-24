@@ -55,6 +55,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private String title;
     private String pic;
     private String price;
+    private String id;
 
     @Override
     public void initData() {
@@ -62,6 +63,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         title = bundle.getString("title");
         pic = bundle.getString("pic");
         price = bundle.getString("price");
+        id = bundle.getString("id");
         Glide.with(this).load(pic).into(paricularsImg);
         paricularsName.setText(""+title);
         paricularsPrice.setText("￥"+price);
@@ -74,6 +76,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             public void onClick(View v) {
                 if(loginBean != null){
                     ProductBean productBean = new ProductBean();
+                    productBean.setProductId(id);
                     productBean.setProductName(title);
                     productBean.setProductNum(1);
                     productBean.setUrl(pic);
