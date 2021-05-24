@@ -33,4 +33,9 @@
     <string name="particularsActivity">详情页面</string>
     <string name="priceFlag">￥</string>
 
+
+
+
+    <string name="popType">样式</string>
+
 </resources>

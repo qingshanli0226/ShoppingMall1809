@@ -3,9 +3,11 @@ package com.example.myapplication.particulars;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,7 +100,9 @@ public class ParticularsActivity extends BaseActivity {
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
                 CaCheArote.getInstance().getUserInterface().openLoginActivity(this,bundle);
             }else {
-
+                PopupWindow popupWindow = new PopupWindow();
+                LayoutInflater.from(this).inflate(R.layout.)
+                popupWindow.setContentView();
             }
         });
     }
