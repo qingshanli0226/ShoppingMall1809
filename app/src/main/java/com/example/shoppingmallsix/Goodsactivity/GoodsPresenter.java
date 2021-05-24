@@ -25,7 +25,7 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
         attachView(iDetailView);
     }
 
-    public void AddOneProduct(String productId,String productNum,String productName,
+    public void ddOneProduct(String productId,String productNum,String productName,
                               String url,String productPrice){
 
         JSONObject jsonObject = new JSONObject();

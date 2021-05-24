@@ -126,13 +126,8 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ProductBean productBean = new ProductBean();
-                        productBean.setProductId(id);
-                        productBean.setProductName(name);
-                        productBean.setProductNum(1);
-                        productBean.setUrl(figure);
-                        productBean.setProductPrice(price);
-                        httpPresenter.addProduct(productBean);
+                        GoodsPresenter goodsPresenter = new GoodsPresenter(GoodsActivity.this);
+                        goodsPresenter.ddOneProduct(id,num+"",name,figure,price);
                         popupWindow.dismiss();
                     }
                 });
