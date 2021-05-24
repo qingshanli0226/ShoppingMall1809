@@ -1,14 +1,15 @@
-package com.example.net.bean;
+package com.example.net.bean.classify;
+
 
 
 import java.util.List;
 
-public class SkirtBean {
+public class JacketBean    {
 
     /**
      * code : 200
      * msg : 请求成功
-     * result : [{"p_catalog_id":"3","parent_id":"0","name":"小裙子","pic":"","is_deleted":"0","child":[{"p_catalog_id":"10","parent_id":"3","name":"古风","pic":"/product_catalog/1446016297307.jpg","is_deleted":"0"},{"p_catalog_id":"11","parent_id":"3","name":"和风","pic":"/product_catalog/1446016509141.jpg","is_deleted":"0"},{"p_catalog_id":"12","parent_id":"3","name":"lolita","pic":"/product_catalog/1446016728621.jpg","is_deleted":"0"},{"p_catalog_id":"91","parent_id":"3","name":"日常","pic":"/product_catalog/1446444753067.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"2704","channel_id":"6","brand_id":"230","p_catalog_id":"3","supplier_type":"1","supplier_code":"0","name":"中华风lolita -山海经 凤凰图 JSK","cover_price":"300.00","brief":"","figure":"/1447239453626.jpg","sell_time_start":"1447171200","sell_time_end":"1447776000"},{"product_id":"3571","channel_id":"8","brand_id":"259","p_catalog_id":"12","supplier_type":"2","supplier_code":"1801005","name":"【INFANTA.婴梵塔】学院风尖领外套/大衣","cover_price":"287.00","brief":"","figure":"/1450433177397.jpg","sell_time_start":"1450368000","sell_time_end":"1450972800"},{"product_id":"589","channel_id":"8","brand_id":"266","p_catalog_id":"12","supplier_type":"2","supplier_code":"1801001","name":"定制【Neverland 原创】直发 烫金lolita 人鱼之歌 高腰JSK连衣裙","cover_price":"403.04","brief":"45天工期","figure":"/1438772068067.jpg","sell_time_start":"1478772000","sell_time_end":"1439308800"},{"product_id":"5970","channel_id":"8","brand_id":"356","p_catalog_id":"91","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】 黑白猫咪 黑喵咪 短袖连衣裙","cover_price":"121.44","brief":"猫咪是神秘的小动物。传说它们能通灵和驱魔，给主人带来好运。可猫咪也被认为是女巫役使的邪恶精灵，是恶魔的化身。萌域为爱美又略微中二的宅MM们，设计了黑猫、白猫主题裙装，不同的风格、一样的可爱。白猫套装穿上性感俏皮，黑色连衣裙让你像猫咪一样优雅又有气质。","figure":"/1463385771450.jpg","sell_time_start":"1478772000","sell_time_end":"1461254400"},{"product_id":"5181","channel_id":"6","brand_id":"394","p_catalog_id":"10","supplier_type":"2","supplier_code":"1101037","name":"【画影】汉元素 古风日常\u2014\u2014 仲夏 ","cover_price":"250.00","brief":"","figure":"/1457504361484.jpg","sell_time_start":"1457452800","sell_time_end":"1458057600"},{"product_id":"7729","channel_id":"8","brand_id":"432","p_catalog_id":"91","supplier_type":"2","supplier_code":"1601008","name":"现货【TUMO】 雨库洛牌元素 软妹森女系短袖连衣裙","cover_price":"179.00","brief":"","figure":"/supplier/1467687105197.jpg","sell_time_start":"0","sell_time_end":"0"}]}]
+     * result : [{"p_catalog_id":"51","parent_id":"0","name":"上衣","pic":"","is_deleted":"0","child":[{"p_catalog_id":"52","parent_id":"51","name":"日常","pic":"/product_catalog/1446017524434.jpg","is_deleted":"0"},{"p_catalog_id":"96","parent_id":"51","name":"泳衣","pic":"/product_catalog/1449216802403.jpg","is_deleted":"0"},{"p_catalog_id":"109","parent_id":"51","name":"汉风","pic":"/product_catalog/1465383063303.jpg","is_deleted":"0"},{"p_catalog_id":"117","parent_id":"51","name":"古风","pic":"","is_deleted":"0"},{"p_catalog_id":"55","parent_id":"51","name":"lolita","pic":"/product_catalog/1446017570261.jpg","is_deleted":"0"},{"p_catalog_id":"56","parent_id":"51","name":"创意T恤","pic":"/product_catalog/1446017583897.jpg","is_deleted":"0"}],"hot_product_list":[{"product_id":"627","channel_id":"4","brand_id":"3","p_catalog_id":"52","supplier_type":"1","supplier_code":"1101001","name":"剑三T恤批发","cover_price":"32.00","brief":"","figure":"/1439367400560.jpg","sell_time_start":"1439308800","sell_time_end":"1439913600"},{"product_id":"6895","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 半臂","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465295954097.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"6896","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 吊带","cover_price":"59.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296158907.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"4628","channel_id":"8","brand_id":"5","p_catalog_id":"56","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】 原创可爱萌猫咪大人 立体猫尾T恤 蕾丝花边女","cover_price":"79.00","brief":"","figure":"/1461571069605.jpg","sell_time_start":"1455638400","sell_time_end":"1456243200"},{"product_id":"3691","channel_id":"8","brand_id":"90","p_catalog_id":"52","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】宫崎骏 龙猫套装 女冬 帽子衬衫背心打底裤短裤","cover_price":"105.00","brief":"背心上小挂件赠完即止哦 ","figure":"/1451012249243.jpg","sell_time_start":"1450972800","sell_time_end":"1451577600"},{"product_id":"6263","channel_id":"8","brand_id":"234","p_catalog_id":"56","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 恶灵退散纯棉七分袖T恤 秋季日系原宿男女装A21","cover_price":"63.00","brief":"","figure":"/1464245798979.jpg","sell_time_start":"1478772000","sell_time_end":"1462982400"}]}]
      */
 
     private int code;
@@ -31,6 +32,7 @@ public class SkirtBean {
         this.msg = msg;
     }
 
+
     public List<ResultBean> getResult() {
         return result;
     }
@@ -41,13 +43,13 @@ public class SkirtBean {
 
     public static class ResultBean {
         /**
-         * p_catalog_id : 3
+         * p_catalog_id : 51
          * parent_id : 0
-         * name : 小裙子
+         * name : 上衣
          * pic :
          * is_deleted : 0
-         * child : [{"p_catalog_id":"10","parent_id":"3","name":"古风","pic":"/product_catalog/1446016297307.jpg","is_deleted":"0"},{"p_catalog_id":"11","parent_id":"3","name":"和风","pic":"/product_catalog/1446016509141.jpg","is_deleted":"0"},{"p_catalog_id":"12","parent_id":"3","name":"lolita","pic":"/product_catalog/1446016728621.jpg","is_deleted":"0"},{"p_catalog_id":"91","parent_id":"3","name":"日常","pic":"/product_catalog/1446444753067.jpg","is_deleted":"0"}]
-         * hot_product_list : [{"product_id":"2704","channel_id":"6","brand_id":"230","p_catalog_id":"3","supplier_type":"1","supplier_code":"0","name":"中华风lolita -山海经 凤凰图 JSK","cover_price":"300.00","brief":"","figure":"/1447239453626.jpg","sell_time_start":"1447171200","sell_time_end":"1447776000"},{"product_id":"3571","channel_id":"8","brand_id":"259","p_catalog_id":"12","supplier_type":"2","supplier_code":"1801005","name":"【INFANTA.婴梵塔】学院风尖领外套/大衣","cover_price":"287.00","brief":"","figure":"/1450433177397.jpg","sell_time_start":"1450368000","sell_time_end":"1450972800"},{"product_id":"589","channel_id":"8","brand_id":"266","p_catalog_id":"12","supplier_type":"2","supplier_code":"1801001","name":"定制【Neverland 原创】直发 烫金lolita 人鱼之歌 高腰JSK连衣裙","cover_price":"403.04","brief":"45天工期","figure":"/1438772068067.jpg","sell_time_start":"1478772000","sell_time_end":"1439308800"},{"product_id":"5970","channel_id":"8","brand_id":"356","p_catalog_id":"91","supplier_type":"2","supplier_code":"1101004","name":"【绝对萌域】 黑白猫咪 黑喵咪 短袖连衣裙","cover_price":"121.44","brief":"猫咪是神秘的小动物。传说它们能通灵和驱魔，给主人带来好运。可猫咪也被认为是女巫役使的邪恶精灵，是恶魔的化身。萌域为爱美又略微中二的宅MM们，设计了黑猫、白猫主题裙装，不同的风格、一样的可爱。白猫套装穿上性感俏皮，黑色连衣裙让你像猫咪一样优雅又有气质。","figure":"/1463385771450.jpg","sell_time_start":"1478772000","sell_time_end":"1461254400"},{"product_id":"5181","channel_id":"6","brand_id":"394","p_catalog_id":"10","supplier_type":"2","supplier_code":"1101037","name":"【画影】汉元素 古风日常\u2014\u2014 仲夏 ","cover_price":"250.00","brief":"","figure":"/1457504361484.jpg","sell_time_start":"1457452800","sell_time_end":"1458057600"},{"product_id":"7729","channel_id":"8","brand_id":"432","p_catalog_id":"91","supplier_type":"2","supplier_code":"1601008","name":"现货【TUMO】 雨库洛牌元素 软妹森女系短袖连衣裙","cover_price":"179.00","brief":"","figure":"/supplier/1467687105197.jpg","sell_time_start":"0","sell_time_end":"0"}]
+         * child : [{"p_catalog_id":"52","parent_id":"51","name":"日常","pic":"/product_catalog/1446017524434.jpg","is_deleted":"0"},{"p_catalog_id":"96","parent_id":"51","name":"泳衣","pic":"/product_catalog/1449216802403.jpg","is_deleted":"0"},{"p_catalog_id":"109","parent_id":"51","name":"汉风","pic":"/product_catalog/1465383063303.jpg","is_deleted":"0"},{"p_catalog_id":"117","parent_id":"51","name":"古风","pic":"","is_deleted":"0"},{"p_catalog_id":"55","parent_id":"51","name":"lolita","pic":"/product_catalog/1446017570261.jpg","is_deleted":"0"},{"p_catalog_id":"56","parent_id":"51","name":"创意T恤","pic":"/product_catalog/1446017583897.jpg","is_deleted":"0"}]
+         * hot_product_list : [{"product_id":"627","channel_id":"4","brand_id":"3","p_catalog_id":"52","supplier_type":"1","supplier_code":"1101001","name":"剑三T恤批发","cover_price":"32.00","brief":"","figure":"/1439367400560.jpg","sell_time_start":"1439308800","sell_time_end":"1439913600"},{"product_id":"6895","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 半臂","cover_price":"99.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465295954097.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"6896","channel_id":"15","brand_id":"402","p_catalog_id":"52","supplier_type":"2","supplier_code":"802004","name":"【流烟昔泠】汉元素 半臂 短宋裤 吊带 刺绣 豆蔻年华少女系列-清秋兔 吊带","cover_price":"59.00","brief":"7月15日起进入第四批预定，第四批约7月31日左右发货","figure":"/1465296158907.jpg","sell_time_start":"1465228800","sell_time_end":"1465833600"},{"product_id":"4628","channel_id":"8","brand_id":"5","p_catalog_id":"56","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】 原创可爱萌猫咪大人 立体猫尾T恤 蕾丝花边女","cover_price":"79.00","brief":"","figure":"/1461571069605.jpg","sell_time_start":"1455638400","sell_time_end":"1456243200"},{"product_id":"3691","channel_id":"8","brand_id":"90","p_catalog_id":"52","supplier_type":"2","supplier_code":"1201001","name":"【漫踪】宫崎骏 龙猫套装 女冬 帽子衬衫背心打底裤短裤","cover_price":"105.00","brief":"背心上小挂件赠完即止哦 ","figure":"/1451012249243.jpg","sell_time_start":"1450972800","sell_time_end":"1451577600"},{"product_id":"6263","channel_id":"8","brand_id":"234","p_catalog_id":"56","supplier_type":"2","supplier_code":"2101001","name":"【古怪舍】原创设计 恶灵退散纯棉七分袖T恤 秋季日系原宿男女装A21","cover_price":"63.00","brief":"","figure":"/1464245798979.jpg","sell_time_start":"1478772000","sell_time_end":"1462982400"}]
          */
 
         private String p_catalog_id;
@@ -97,7 +99,6 @@ public class SkirtBean {
         public void setIs_deleted(String is_deleted) {
             this.is_deleted = is_deleted;
         }
-
         public List<ChildBean> getChild() {
             return child;
         }
@@ -116,10 +117,10 @@ public class SkirtBean {
 
         public static class ChildBean {
             /**
-             * p_catalog_id : 10
-             * parent_id : 3
-             * name : 古风
-             * pic : /product_catalog/1446016297307.jpg
+             * p_catalog_id : 52
+             * parent_id : 51
+             * name : 日常
+             * pic : /product_catalog/1446017524434.jpg
              * is_deleted : 0
              */
 
@@ -170,20 +171,20 @@ public class SkirtBean {
             }
         }
 
-        public static class HotProductListBean {
+        public static class HotProductListBean  {
             /**
-             * product_id : 2704
-             * channel_id : 6
-             * brand_id : 230
-             * p_catalog_id : 3
+             * product_id : 627
+             * channel_id : 4
+             * brand_id : 3
+             * p_catalog_id : 52
              * supplier_type : 1
-             * supplier_code : 0
-             * name : 中华风lolita -山海经 凤凰图 JSK
-             * cover_price : 300.00
+             * supplier_code : 1101001
+             * name : 剑三T恤批发
+             * cover_price : 32.00
              * brief :
-             * figure : /1447239453626.jpg
-             * sell_time_start : 1447171200
-             * sell_time_end : 1447776000
+             * figure : /1439367400560.jpg
+             * sell_time_start : 1439308800
+             * sell_time_end : 1439913600
              */
 
             private String product_id;

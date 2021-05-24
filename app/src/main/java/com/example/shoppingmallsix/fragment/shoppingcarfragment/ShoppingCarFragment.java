@@ -1,22 +1,22 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
+
 import com.example.framework.manager.CacheUserManager;
-import com.example.net.bean.LoginBean;
-import com.example.net.bean.ShoppingCarBean;
+
+
+import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.user.LoginBean;
 import com.example.shoppingmallsix.R;
-import com.example.user.login.LoginActivity;
 
 import java.util.List;
 
@@ -94,9 +94,9 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onShopping(ShoppingCarBean shoppingCarBean) {
+    public void onShopping(GetShortcartProductsBean shoppingCarBean) {
         if (shoppingCarBean.getCode().equals("200")) {
-            List<ShoppingCarBean.ResultBean> result = shoppingCarBean.getResult();
+            List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
 
             ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

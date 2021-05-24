@@ -1,9 +1,8 @@
-package com.example.net.bean;
+package com.example.net.bean.business;
 
 import java.util.List;
 
-public class ShoppingCarBean {
-
+public class GetShortcartProductsBean {
 
     /**
      * code : 200

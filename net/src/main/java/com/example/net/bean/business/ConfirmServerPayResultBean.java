@@ -1,17 +1,15 @@
-package com.example.net.bean;
+package com.example.net.bean.business;
 
-public class RegisterBean {
-
-
+public class ConfirmServerPayResultBean {
     /**
      * code : 200
      * message : 请求成功
-     * result : 注册成功
+     * result : true
      */
 
     private String code;
     private String message;
-    private String result;
+    private boolean result;
 
     public String getCode() {
         return code;
@@ -29,20 +27,11 @@ public class RegisterBean {
         this.message = message;
     }
 
-    public String getResult() {
+    public boolean isResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(boolean result) {
         this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "RegisterBean{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                ", result='" + result + '\'' +
-                '}';
     }
 }

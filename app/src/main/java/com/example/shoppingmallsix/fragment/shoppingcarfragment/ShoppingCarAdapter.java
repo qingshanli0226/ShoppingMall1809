@@ -1,26 +1,21 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
-import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
 
-import com.example.net.bean.ShoppingCarBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
 
 
 import java.util.List;
 
-public class ShoppingCarAdapter extends BaseRvAdapter<ShoppingCarBean.ResultBean> {
-    public ShoppingCarAdapter(List<ShoppingCarBean.ResultBean> datalist) {
+public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.ResultBean> {
+    public ShoppingCarAdapter(List<GetShortcartProductsBean.ResultBean> datalist) {
         setDataList(datalist);
     }
 
@@ -31,7 +26,7 @@ public class ShoppingCarAdapter extends BaseRvAdapter<ShoppingCarBean.ResultBean
 
 
     @Override
-    public void displayViewHolder(BaseRvAdapter.BaseViewHolder holder, int position, ShoppingCarBean.ResultBean itemData) {
+    public void displayViewHolder(BaseRvAdapter.BaseViewHolder holder, int position, GetShortcartProductsBean.ResultBean itemData) {
         ImageView imageView = holder.getView(R.id.shoppingTrolley_img);
         TextView textView = holder.getView(R.id.shoppingTrolley_text);
         TextView price = holder.getView(R.id.shoppingTrolley_price);

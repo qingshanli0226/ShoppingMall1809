@@ -1,12 +1,11 @@
 package com.example.shoppingmallsix.Goodsactivity;
 
-import android.util.Log;
+
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
-import com.example.net.bean.ProductBean;
-import com.example.net.bean.RegisterBean;
-import com.google.gson.Gson;
+import com.example.net.bean.business.AddOneProductBean;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +16,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 public class GoodsPresenter extends BasePresenter<IGoodsView> {
@@ -42,17 +40,17 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getFiannceApiService()
-                .addProduct(responseBody)
+                .getAddOneProduct(responseBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProductBean>() {
+                .subscribe(new Observer<AddOneProductBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ProductBean productBean) {
+                    public void onNext(@NonNull AddOneProductBean productBean) {
                         if (iView!=null){
                             iView.onAddCart(productBean);
                         }

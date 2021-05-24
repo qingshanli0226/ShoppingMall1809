@@ -1,8 +1,8 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
 import com.example.framework.IBaseView;
-import com.example.net.bean.ShoppingCarBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 
 public interface IShopping extends IBaseView {
-    void onShopping(ShoppingCarBean shoppingCarBean);
+    void onShopping(GetShortcartProductsBean shoppingCarBean);
 }

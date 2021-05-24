@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.messageactivity.MessageActivity;
 import com.example.shoppingmallsix.obligationactivity.ObligationActivity;
 import com.example.shoppingmallsix.sendgoodsactivity.SendGoodsActivity;
-import com.example.user.login.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.

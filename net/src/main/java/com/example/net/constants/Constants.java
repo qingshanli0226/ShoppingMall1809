@@ -67,10 +67,44 @@ public class Constants {
 
 
     public static Boolean isBackHome = false;
+    //User
+    public static final String USER_LOGIN = "login";//登录
+    public static final String USER_REGISTER = "register";//注册
+    public static final String USER_AUTOLOGIN = "autoLogin";//自动登录
+    public static final String USER_UPDATEPHONE = "updatePhone";//更新用户绑定的电话
+    public static final String USER_UPDATEMONEY = "updateMoney";//更新现金的接口
+    public static final String USER_UPLOAD = "upload";//上传头像文件的接口
+    public static final String USER_DOWMLOADFILE = "downloadFile";//下载文件的接口
+    public static final String USER_UPDATEPOINT = "updatePoint";//更新积分的接口
+    public static final String USER_UPDATEEMAIL = "updateEmail";//更新邮箱的接口
+    public static final String USER_UPDATEADDRESS= "updateAddress";//更新地址的接口
+    public static final String USER_LOGOUT= "logout";//退出登录接口
 
-    public static final String LOGIN = "login";//登录
-    public static final String USERREGISTER = "register";//注册
-    public static final String AUTOLOGIN = "autoLogin";//自动登录
+    //business
+    public static final String BUSINESS_GETRECOMMEND = "getRecommend";//获取推荐产品信息的接口
+    public static final String BUSINESS_SEARCH = "search";//搜索数据的接口
+    public static final String BUSINESS_CHECKONEPRODUCTINVENTORY = "checkOneProductInventory";//检查服务端一个产品库存情况的接口
+    public static final String BUSINESS_ADDONEPRODUCT = "addOneProduct";//向服务端购物车添加一个产品的接口
+    public static final String BUSINESS_GETSHORCARTPRODUCTS = "getShortcartProducts";//获取服务端购物车产品信息的接口
+    public static final String BUSINESS_UPDATEPRODUCTNUM = "updateProductNum";//更新服务端购物车产品的数量的接口
+    public static final String BUSINESS_CHECKINVENTORY = "checkInventory";//检查服务端多个产品是否库存充足
+    public static final String BUSINESS_GETORDERINFO = "getOrderInfo";//向服务端下订单接口
+    public static final String BUSINESS_CONFIRMSERVERPAYRESULT = "confirmServerPayResult";//请求服务端，是否支付成功
+    public static final String BUSINESS_FINDFORPAY = "findForPay";//查找待支付的订单
+    public static final String BUSINESS_FINDFORSEND = "findForSend";//查找待发货的订单
+    public static final String BUSINESS_REMOVEONEPRODUCT = "removeOneProduct";//从服务端购物车删除一个产品的接口
+    public static final String BUSINESS_UPDATEPRODUCTSELECTED = "updateProductSelected";//更新服务端购物车产品的选择
+    public static final String BUSINESS_SELECTALLPRODUCT = "selectAllProduct";//全选服务端购物车产品或者全不选
+    public static final String BUSINESS_REMOVEMANYPRODUCT = "removeManyProduct";//从服务端购物车删除多个产品的接口
+
+
+
+
+
+
+
+
+
 
 
 

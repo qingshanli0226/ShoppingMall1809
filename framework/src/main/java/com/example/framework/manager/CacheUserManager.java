@@ -1,6 +1,6 @@
 package com.example.framework.manager;
 
-import com.example.net.bean.LoginBean;
+import com.example.net.bean.user.LoginBean;
 
 import java.util.ArrayList;
 import java.util.List;

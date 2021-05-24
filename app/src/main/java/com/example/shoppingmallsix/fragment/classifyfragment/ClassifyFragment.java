@@ -1,22 +1,17 @@
 package com.example.shoppingmallsix.fragment.classifyfragment;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.LoginBean;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.classitfy.ClassFragment;
 import com.example.shoppingmallsix.fragment.classifyfragment.frgment.lab.LabelFragment;
-import com.example.user.login.LoginActivity;
 
 import static com.example.shoppingmallsix.R.drawable.select_left;
 import static com.example.shoppingmallsix.R.drawable.select_left_show;

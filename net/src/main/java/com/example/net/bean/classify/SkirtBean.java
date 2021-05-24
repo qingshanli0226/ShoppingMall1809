@@ -1,8 +1,10 @@
-package com.example.net.bean;
+package com.example.net.bean.classify;
+
 
 import java.util.List;
 
-public class ClassBean {
+public class SkirtBean {
+
     /**
      * code : 200
      * msg : 请求成功
@@ -11,7 +13,7 @@ public class ClassBean {
 
     private int code;
     private String msg;
-    private List<ClassBean.ResultBean> result;
+    private List<ResultBean> result;
 
     public int getCode() {
         return code;
@@ -29,11 +31,11 @@ public class ClassBean {
         this.msg = msg;
     }
 
-    public List<ClassBean.ResultBean> getResult() {
+    public List<ResultBean> getResult() {
         return result;
     }
 
-    public void setResult(List<ClassBean.ResultBean> result) {
+    public void setResult(List<ResultBean> result) {
         this.result = result;
     }
 
@@ -53,8 +55,8 @@ public class ClassBean {
         private String name;
         private String pic;
         private String is_deleted;
-        private List<ClassBean.ResultBean.ChildBean> child;
-        private List<ClassBean.ResultBean.HotProductListBean> hot_product_list;
+        private List<ChildBean> child;
+        private List<HotProductListBean> hot_product_list;
 
         public String getP_catalog_id() {
             return p_catalog_id;
@@ -96,19 +98,19 @@ public class ClassBean {
             this.is_deleted = is_deleted;
         }
 
-        public List<ClassBean.ResultBean.ChildBean> getChild() {
+        public List<ChildBean> getChild() {
             return child;
         }
 
-        public void setChild(List<ClassBean.ResultBean.ChildBean> child) {
+        public void setChild(List<ChildBean> child) {
             this.child = child;
         }
 
-        public List<ClassBean.ResultBean.HotProductListBean> getHot_product_list() {
+        public List<HotProductListBean> getHot_product_list() {
             return hot_product_list;
         }
 
-        public void setHot_product_list(List<ClassBean.ResultBean.HotProductListBean> hot_product_list) {
+        public void setHot_product_list(List<HotProductListBean> hot_product_list) {
             this.hot_product_list = hot_product_list;
         }
 

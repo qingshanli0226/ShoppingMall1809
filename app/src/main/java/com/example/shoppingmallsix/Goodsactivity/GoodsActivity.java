@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.ProductBean;
-import com.example.net.bean.RegisterBean;
+
+import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.store.GoodAdapterBean;
-import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.Goodsactivity.adapter.GoodsAdapter;
 import com.example.shoppingmallsix.R;
 
@@ -187,7 +186,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     }
 
     @Override
-    public void onAddCart(ProductBean productBean) {
+    public void onAddCart(AddOneProductBean productBean) {
         if (productBean.getCode().equals("200")){
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
         }else {

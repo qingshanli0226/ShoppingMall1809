@@ -2,8 +2,8 @@ package com.example.user.register;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
-import com.example.net.bean.LoginBean;
-import com.example.net.bean.RegisterBean;
+import com.example.net.bean.user.LoginBean;
+import com.example.net.bean.user.RegisterBean;
 
 import java.util.concurrent.TimeUnit;
 

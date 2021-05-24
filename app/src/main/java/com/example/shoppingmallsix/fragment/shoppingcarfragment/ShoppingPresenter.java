@@ -3,7 +3,7 @@ package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
-import com.example.net.bean.ShoppingCarBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,7 +20,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
 
     public void getShoppingData(){
        RetrofitCreator.getFiannceApiService()
-               .getShoppingTrolley()
+               .getShortcartProductsBean()
                .subscribeOn(Schedulers.io())
                .observeOn(AndroidSchedulers.mainThread())
                .doOnSubscribe(new Consumer<Disposable>() {
@@ -39,14 +39,14 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                        }
                    }
                })
-               .subscribe(new Observer<ShoppingCarBean>() {
+               .subscribe(new Observer<GetShortcartProductsBean>() {
                    @Override
                    public void onSubscribe(@NonNull Disposable d) {
 
                    }
 
                    @Override
-                   public void onNext(@NonNull ShoppingCarBean shoppingCarBean) {
+                   public void onNext(@NonNull GetShortcartProductsBean shoppingCarBean) {
                        LogUtils.json(shoppingCarBean);
                        if (iView!=null){
                            iView.onShopping(shoppingCarBean);

@@ -1,11 +1,11 @@
-package com.example.net.bean;
+package com.example.net.bean.user;
 
-public class ProductBean {
+public class logoutBean {
 
     /**
      * code : 200
      * message : 请求成功
-     * result : 请求成功
+     * result : tuichu success
      */
 
     private String code;
@@ -34,14 +34,5 @@ public class ProductBean {
 
     public void setResult(String result) {
         this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductBean{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                ", result='" + result + '\'' +
-                '}';
     }
 }
