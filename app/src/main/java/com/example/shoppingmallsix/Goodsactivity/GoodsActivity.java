@@ -183,12 +183,16 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
 
     @Override
     public void showToast(String msg) {
-
+        Toast.makeText(this,"" + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAddCart(ProductBean productBean) {
-        Toast.makeText(this, productBean.toString(), Toast.LENGTH_SHORT).show();
+        if (productBean.getCode().equals("200")){
+            Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
