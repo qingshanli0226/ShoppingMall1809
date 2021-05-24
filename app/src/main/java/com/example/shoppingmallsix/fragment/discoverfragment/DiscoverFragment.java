@@ -30,18 +30,8 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-<<<<<<< HEAD
 
-=======
-        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
-        if (loginBean != null){
 
-        }else {
-            Toast.makeText(getActivity(), getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        }
->>>>>>> t0521
     }
 
     @Override

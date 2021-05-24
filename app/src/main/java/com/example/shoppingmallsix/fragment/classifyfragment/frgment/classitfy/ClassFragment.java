@@ -23,16 +23,8 @@ import java.util.List;
 public class ClassFragment extends BaseFragment<ClassPresenter> implements IClassView, BaseRvAdapter.IRecyclerItemClickListener {
 
     private RecyclerView classifyLeftRecyclerView;
-<<<<<<< HEAD
+
     private RecyclerView classifyRightRecyclerView;
-=======
-    private myRecyclerView classifyRightRecyclerView;
-    // "", "", "", "", "", "", "", "", ""
-    private String[] strings = new String[]{getString(R.string.skirt), getString(R.string.jacket),getString(R.string.jacket)
-            ,getString(R.string.Downloading),getString(R.string.coat),getString(R.string.accessories),getString(R.string.handbag),
-            getString(R.string.dress),getString(R.string.Thehouseistasted),getString(R.string.Surroundingthedata),getString(R.string.Theamezone)};
-    private List<ClassLeftBean> list = new ArrayList<>();
->>>>>>> t0521
     private ClassLeftAdapter classifyAdapter;
     private List<ClassLeftBean> list = new ArrayList<>();
     private String[] strings = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};

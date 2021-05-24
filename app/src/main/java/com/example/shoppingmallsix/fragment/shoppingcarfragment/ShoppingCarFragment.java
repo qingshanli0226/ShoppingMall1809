@@ -38,14 +38,7 @@ public class ShoppingCarFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-<<<<<<< HEAD
-=======
-        } else {
-            Toast.makeText(getActivity(), getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-        }
->>>>>>> t0521
+
     }
 
     @Override
