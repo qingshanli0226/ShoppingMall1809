@@ -145,12 +145,12 @@ public class RegisterFragment extends BaseFragment<RegisterPresneter> implements
     @Override
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
+            FiannceUserManager.getInstance().setLoginBean(loginBean);
+            SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
             if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
                 getActivity().finish();
                 return;
             }
-            FiannceUserManager.getInstance().setLoginBean(loginBean);
-            SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
             ARouter.getInstance().build(ShopConstants.MAIN_PATH).navigation();
         }
     }

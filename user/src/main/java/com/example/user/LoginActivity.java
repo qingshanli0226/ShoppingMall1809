@@ -34,13 +34,19 @@ public class LoginActivity extends BaseActivity implements LoginFragment.IShowRe
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.user_ll, registerFragment);
         fragmentTransaction.add(R.id.user_ll, loginFragment);
-        if (stringExtra.equals(ShopConstants.REGISTER_PATH)) {
-            fragmentTransaction.hide(loginFragment);
-            fragmentTransaction.show(registerFragment);
-        } else {
+        if (stringExtra==null){
             fragmentTransaction.hide(registerFragment);
             fragmentTransaction.show(loginFragment);
+        }else {
+            if (stringExtra.equals(ShopConstants.REGISTER_PATH)) {
+                fragmentTransaction.hide(loginFragment);
+                fragmentTransaction.show(registerFragment);
+            } else {
+                fragmentTransaction.hide(registerFragment);
+                fragmentTransaction.show(loginFragment);
+            }
         }
+
         fragmentTransaction.commit();
 
 
