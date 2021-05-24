@@ -27,14 +27,14 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GildeManager {
+public class ShopmallGlide  {
 
     private LruCache<String,Bitmap> memCache;
     //private HashMap<String,Bitmap> memCache = new HashMap<>();
     private DiskLruCache diskLruCache;//在磁盘中存储图片的数据结构，它的逻辑和LruCache类似
     private File cacheFileDir;//磁盘存储图片时，diskLruCache使用的目录
 
-    private static GildeManager instance;//使用单例
+    private static ShopmallGlide  instance;//使用单例
 
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -42,15 +42,15 @@ public class GildeManager {
     private Handler mainHandler = new Handler();//通过handler实现在主线程里返回数据
 
     private boolean isInited;
-    private GildeManager(){
+    private ShopmallGlide (){
     }
 
     //单例使用双判断，主要是防止使用锁带来的性能损耗
-    public static GildeManager getInstance() {
+    public static ShopmallGlide  getInstance() {
         if (instance==null) {
-            synchronized (GildeManager.class) {
+            synchronized (ShopmallGlide .class) {
                 if (instance == null) {
-                    instance = new GildeManager();
+                    instance = new ShopmallGlide();
                 }
             }
         }
@@ -91,6 +91,7 @@ public class GildeManager {
         synchronized (memCache) {
             String key = generateCacheKey(url);//通过MD5 Hash算法生成一个key
             return memCache.get(key);
+
         }
     }
     //向内存中写入Bitmap
@@ -98,11 +99,13 @@ public class GildeManager {
         synchronized (memCache) {
             String key = generateCacheKey(url);
             memCache.put(key,bitmap);
+
         }
     }
     //向磁盘中存储Bitmap
     public void setBitmapToDisk(String url, Bitmap bitmap) {
         executorService.execute(new Runnable() {
+
             @Override
             public void run() {
                 synchronized (diskLruCache) {
@@ -160,7 +163,7 @@ public class GildeManager {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Call call = RetrofitManager.getFiannceApiService().downloadFile(url);
+                Call call = RetrofitManager.getApi().downloadFile(url);
                 try {
                     Response<ResponseBody> response = call.execute();
                     if (response.body() == null) {
@@ -265,8 +268,8 @@ public class GildeManager {
         return hex.toString();
     }
 
-    public static ShopmallGlide.GlideRequest with(Context context) {
-        return new ShopmallGlide.GlideRequest(context);
+    public static GlideRequest with(Context context) {
+        return new GlideRequest(context);
     }
 
     public static class GlideRequest {
