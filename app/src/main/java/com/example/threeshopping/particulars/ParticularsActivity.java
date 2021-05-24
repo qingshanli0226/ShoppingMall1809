@@ -54,7 +54,6 @@ public class ParticularsActivity extends BaseActivity {
         Glide.with(this).load(pic).into(paricularsImg);
         paricularsName.setText(""+title);
         paricularsPrice.setText("￥"+price);
-
     }
 
     @Override
