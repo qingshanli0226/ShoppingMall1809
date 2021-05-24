@@ -15,7 +15,7 @@ public class TokenInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-            String token = SpUtil.getString(NetModule.context, FiannceContants.TOKEN_KEY);
+        String token = SpUtil.getString(NetModule.context, FiannceContants.TOKEN_KEY);
         Request newRequest = request.newBuilder().addHeader(FiannceContants.TOKEN_KEY, token).build();
         return chain.proceed(newRequest);
     }
