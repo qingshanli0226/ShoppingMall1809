@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.common.type.ToLoginType;
-import com.example.common.type.TypeString;
+
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
@@ -100,9 +99,9 @@ public class ParticularsActivity extends BaseActivity {
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
                 CaCheArote.getInstance().getUserInterface().openLoginActivity(this,bundle);
             }else {
-                PopupWindow popupWindow = new PopupWindow();
-                LayoutInflater.from(this).inflate(R.layout.)
-                popupWindow.setContentView();
+//                PopupWindow popupWindow = new PopupWindow();
+//                LayoutInflater.from(this).inflate(R.layout.)
+//                popupWindow.setContentView();
             }
         });
     }

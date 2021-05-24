@@ -6,11 +6,8 @@ import android.content.Intent;
 import com.example.UserModule;
 import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.AppModule;
-<<<<<<< HEAD
 import com.example.myapplication.particulars.ParticularsModule;
-=======
 import com.example.user.AutoService;
->>>>>>> zyh
 
 
 public class App extends Application {
