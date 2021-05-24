@@ -14,7 +14,8 @@
             android:layout_width="@dimen/dp_70"
             android:layout_height="@dimen/dp_70"
             android:layout_gravity="center"
-            android:src="@drawable/new_user_login_icon"></ImageView>
+            android:src="@drawable/new_user_login_icon"
+            android:id="@+id/isLogin"></ImageView>
          <ImageView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"

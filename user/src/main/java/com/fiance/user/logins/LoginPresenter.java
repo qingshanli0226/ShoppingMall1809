@@ -4,14 +4,18 @@ import com.shoppingmall.framework.mvp.BasePresenter;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.model.RetrofitCreate;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginPresenter extends BasePresenter<LoginView> {
-      public LoginPresenter(LoginView loginView){
+public class LoginPresenter extends BasePresenter<ILoginView> {
+      public LoginPresenter(ILoginView loginView){
           attachView(loginView);
       }
       public void getLoginData(String name,String password){
@@ -40,4 +44,5 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                       }
                   });
       }
+
 }

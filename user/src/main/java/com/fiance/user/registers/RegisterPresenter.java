@@ -1,8 +1,11 @@
 package com.fiance.user.registers;
 
+import android.util.Log;
+
 import com.shoppingmall.framework.mvp.BasePresenter;
 import com.shoppingmall.net.bean.RegisterBean;
 import com.shoppingmall.net.model.RetrofitCreate;
+
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -10,8 +13,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class RegisterPresenter extends BasePresenter<RegisterView> {
-      public RegisterPresenter(RegisterView registerView){
+public class RegisterPresenter extends BasePresenter<IRegisterView> {
+      public RegisterPresenter(IRegisterView registerView){
           attachView(registerView);
       }
       public void getLoginData(String name,String password){
@@ -40,4 +43,5 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                       }
                   });
       }
+
 }

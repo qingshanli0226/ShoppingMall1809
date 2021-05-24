@@ -6,13 +6,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.shoppingmall.framework.custom.LoadingPage;
+import com.fiance.user.AutoService;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
+import com.shoppingmall.net.sp.SpUtil;
 import com.shoppingmall.main.MainActivity;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheManager;
@@ -55,6 +55,12 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         if (homeBean==null){
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);
         }
+
+
+            Intent intent = new Intent(this, AutoService.class);
+            startService(intent);
+
+
     }
     private final Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")

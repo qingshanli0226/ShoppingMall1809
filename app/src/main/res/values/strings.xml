@@ -55,6 +55,12 @@
     <string name="shopchar">购物车</string>
     <string name="hotRecommed">热卖推荐</string>
     <string name="commonSort">常用分类</string>
+    <string name="Tips">提示</string>
+    <string name="TipsMessage">你还没有登录哦！么么~</string>
+    <string name="welcomeActivity_alert_button_yes">确定</string>
+    <string name="mianActivity_exit_the_program_toast">再点击一次,退出当前应用</string>
+    <string name="login_success">登陆成功</string>
+    <string name="exitUser">退出登录</string>
 
 
 </resources>

@@ -39,6 +39,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initData() {
+
         homeAdapter = new HomeAdapter();
         homeRv.setLayoutManager(new LinearLayoutManager(getContext()));
         homeRv.setAdapter(homeAdapter);

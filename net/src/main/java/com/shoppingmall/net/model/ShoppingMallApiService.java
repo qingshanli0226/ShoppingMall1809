@@ -63,5 +63,7 @@ public interface ShoppingMallApiService {
     @POST("autoLogin")
     Observable<LoginBean> getAuto(@Field("token")String token);
 
-
+    @FormUrlEncoded
+    @POST("autoLogin")
+    Observable<LoginBean> getAutoLogin(@Field("token")String token);
 }

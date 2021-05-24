@@ -4,21 +4,23 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
-import com.fiance.commom.SpUtil;
 import com.fiance.user.R;
 import com.fiance.user.registers.RegisterActivity;
 import com.shoppingmall.framework.Constants;
-import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.net.sp.SpUtil;
 import com.shoppingmall.net.bean.LoginBean;
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginView {
+@Route(path = Constants.TO_USER_ACTIVITY)
+public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
     private android.widget.Toolbar bar;
     private android.widget.ImageView back;
@@ -131,15 +133,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
     @Override
     public void onLoginData(LoginBean loginBean) {
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position",0);
+        Log.i("hqy", "onLoginData: "+position);
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")){
+            SpUtil.putString(LoginActivity.this,"token",loginBean.getResult().getToken());
             ShopMallUserManager.getInstance().setLoginBean(loginBean);
-            SpUtil.setString(this,loginBean.getResult().getToken());
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-//            ShopMallArouter.getInstance().getIAppInterface().openMainActivity(this,null);
-            ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("",0).navigation();
+            ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("position",position).navigation();
+            finish();
         }else{
             Toast.makeText(this, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onAutoLogin(LoginBean loginBean) {
+
     }
 }

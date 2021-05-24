@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -93,13 +94,13 @@ public class DetailActivity extends BaseActivity {
         detailMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow = new PopupWindow();
+                PopupWindow popupWindow = new PopupWindow();
                 View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_pop_wiondow_layout, null);
                 popupWindow.setContentView(inflate);
-                popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-                popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+                popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setOutsideTouchable(true);
-                popupWindow.showAtLocation(inflate, Gravity.TOP,0,0);
+                popupWindow.showAtLocation(inflate,Gravity.TOP,0,190);
             }
         });
     }

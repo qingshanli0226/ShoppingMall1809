@@ -7,16 +7,14 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.R;
 import com.fiance.user.logins.LoginActivity;
-import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.RegisterBean;
 
-@Route(path = Constants.TO_USER_ACTIVITY)
-public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterView {
+public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegisterView {
 
 
     private android.widget.Toolbar bar;
@@ -95,14 +93,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     public void onRegisterData(RegisterBean registerBean) {
         LogUtils.json(registerBean);
         if (registerBean.getCode().equals("200")){
-            Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }else{
             Toast.makeText(this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     @Override

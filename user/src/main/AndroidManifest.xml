@@ -3,7 +3,13 @@
     package="com.fiance.user">
 
     <application>
-        <activity android:name=".registers.RegisterActivity"></activity>
+        <service
+            android:name=".AutoService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".UserActivity" />
+        <activity android:name=".registers.RegisterActivity" />
         <activity android:name=".logins.LoginActivity" />
     </application>
 
