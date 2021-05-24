@@ -17,18 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.store.GoodAdapterBean;
 import com.example.net.constants.Constants;
-import com.example.shoppingcar.AddOnrProductPresenter;
-import com.example.shoppingcar.IAddOneProduct;
 import com.example.shoppingmallsix.Goodsactivity.adapter.GoodsAdapter;
 import com.example.shoppingmallsix.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsActivity extends BaseActivity implements IAddOneProduct {
+public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView {
 
 
     private com.example.framework.view.ToolBar toolbar;
@@ -41,20 +40,22 @@ public class GoodsActivity extends BaseActivity implements IAddOneProduct {
     private LinearLayout shopcar;
     private android.widget.Button insertShopcar;
     private int num = 1;
-    private String productId;
+    private String id;
+    private GoodAdapterBean goodAdapterBean;
 
     @Override
     protected void initPresenter() {
-
+       httpPresenter = new GoodsPresenter(this);
     }
 
     @Override
     protected void initData() {
         Intent intent = getIntent();
+        id = intent.getStringExtra("id");
         name = intent.getStringExtra("name");
         figure = intent.getStringExtra("figure");
         price = intent.getStringExtra("price");
-        GoodAdapterBean goodAdapterBean = new GoodAdapterBean(name, figure, price);
+        goodAdapterBean = new GoodAdapterBean(id,name, figure, price);
         list.add(goodAdapterBean);
         list.add(goodAdapterBean);
         goodsAdapter.notifyDataSetChanged();
@@ -125,13 +126,16 @@ public class GoodsActivity extends BaseActivity implements IAddOneProduct {
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AddOnrProductPresenter addOnrProductPresenter = new AddOnrProductPresenter(GoodsActivity.this);
-                        addOnrProductPresenter
-                                .AddOneProduct(productId,num+"",name,figure,price);
+                        ProductBean productBean = new ProductBean();
+                        productBean.setProductId(id);
+                        productBean.setProductName(name);
+                        productBean.setProductNum(1);
+                        productBean.setUrl(figure);
+                        productBean.setProductPrice(price);
+                        httpPresenter.addProduct(productBean);
                         popupWindow.dismiss();
                     }
                 });
-
                 popupWindow.showAsDropDown(toolbar,0,900,Gravity.BOTTOM);
             }
         });
@@ -172,24 +176,6 @@ public class GoodsActivity extends BaseActivity implements IAddOneProduct {
 
             popupWindow.showAsDropDown(toolbar);
         }
-
-    @Override
-    public void onAddOneProduct(RegisterBean registerBean) {
-        if (registerBean.getCode().equals("200")){
-            Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void setString(String productId,String productName,String productPrice,
-                          String url){
-        this.productId=productId;
-        this.name=productName;
-        this.price=productPrice;
-        this.figure= Constants.BASE_URl_IMAGE +url;
-    }
-
     @Override
     public void showLoading() {
 
@@ -204,4 +190,11 @@ public class GoodsActivity extends BaseActivity implements IAddOneProduct {
     public void showToast(String msg) {
 
     }
+
+    @Override
+    public void onAddCart(ProductBean productBean) {
+        Toast.makeText(this, productBean.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
 }

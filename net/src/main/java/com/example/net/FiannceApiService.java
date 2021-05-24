@@ -158,8 +158,8 @@ public interface FiannceApiService {
     @POST(Constants.AUTOLOGIN)
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
-    @POST(Constants.ADDPRODUCT)
-    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
+    @POST("addOneProduct")
+    Observable<ProductBean> addProduct(@Body ResponseBody responseBody);
 
 //    //待支付
 //    @GET("findForPay")

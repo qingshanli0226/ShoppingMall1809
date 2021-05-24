@@ -1,69 +1,38 @@
 package com.example.net.bean;
 
 public class ProductBean {
-    @Override
-    public String toString() {
-        return "ProductBean{" +
-                "productId='" + productId + '\'' +
-                ", productNum=" + productNum +
-                ", productName='" + productName + '\'' +
-                ", url='" + url + '\'' +
-                ", productPrice='" + productPrice + '\'' +
-                '}';
-    }
 
     /**
-     * productId : 1512
-     * productNum : 1
-     * productName : 衬衫
-     * url : http://www.baidu.com
-     * productPrice : 20
+     * code : 200
+     * message : 请求成功
+     * result : 请求成功
      */
 
+    private String code;
+    private String message;
+    private String result;
 
-    private String productId;
-    private int productNum;
-    private String productName;
-    private String url;
-    private String productPrice;
-
-    public String getProductId() {
-        return productId;
+    public String getCode() {
+        return code;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public int getProductNum() {
-        return productNum;
+    public String getMessage() {
+        return message;
     }
 
-    public void setProductNum(int productNum) {
-        this.productNum = productNum;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getResult() {
+        return result;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
+    public void setResult(String result) {
+        this.result = result;
     }
 }

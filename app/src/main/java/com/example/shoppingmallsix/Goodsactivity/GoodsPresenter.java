@@ -1,8 +1,12 @@
-package com.example.shoppingcar;
+package com.example.shoppingmallsix.Goodsactivity;
+
+import android.util.Log;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
+import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,11 +17,12 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
-public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
-    public AddOnrProductPresenter(IAddOneProduct iAddOneProduct) {
-        attachView(iAddOneProduct);
+public class GoodsPresenter extends BasePresenter<IGoodsView> {
+    public GoodsPresenter(IGoodsView iDetailView) {
+        attachView(iDetailView);
     }
 
     public void AddOneProduct(String productId,String productNum,String productName,
@@ -37,19 +42,19 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
 
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getFiannceApiService()
-                .addOneProduct(responseBody)
+                .addProduct(responseBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RegisterBean>() {
+                .subscribe(new Observer<ProductBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull RegisterBean registerBean) {
+                    public void onNext(@NonNull ProductBean productBean) {
                         if (iView!=null){
-                            iView.onAddOneProduct(registerBean);
+                            iView.onAddCart(productBean);
                         }
                     }
 

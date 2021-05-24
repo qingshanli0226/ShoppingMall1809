@@ -160,6 +160,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                        intent.putExtra("id",seckillInfoBeans.get(position).getProduct_id());
                         intent.putExtra("name",seckillInfoBeans.get(position).getName());
                         intent.putExtra("figure",seckillInfoBeans.get(position).getFigure());
                         intent.putExtra("price",seckillInfoBeans.get(position).getCover_price());
@@ -183,6 +184,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                        intent.putExtra("id",recommendInfoBeans.get(position).getProduct_id());
                         intent.putExtra("name",recommendInfoBeans.get(position).getName());
                         intent.putExtra("figure",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
@@ -206,6 +208,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                        intent.putExtra("id",hotInfoBeans.get(position).getProduct_id());
                         intent.putExtra("name",hotInfoBeans.get(position).getName());
                         intent.putExtra("figure",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("price",hotInfoBeans.get(position).getCover_price());

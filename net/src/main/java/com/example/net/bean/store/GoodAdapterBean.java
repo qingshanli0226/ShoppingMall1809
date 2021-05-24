@@ -1,16 +1,25 @@
 package com.example.net.bean.store;
 
 public class GoodAdapterBean {
+    private String id;
     private String name;
     private String figure;
     private String price;
 
-    public GoodAdapterBean(String name, String figure, String price) {
+    public GoodAdapterBean(String id,String name, String figure, String price) {
+        this.id = id;
         this.name = name;
         this.figure = figure;
         this.price = price;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
