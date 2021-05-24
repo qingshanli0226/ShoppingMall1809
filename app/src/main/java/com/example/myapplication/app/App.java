@@ -15,12 +15,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+
+
         UserModule.init();
         AppModule.init();
         ParticularsModule.init();
+
+
         CaCheArote.getInstance().init(this);
 
-        Intent intent = new Intent(this, AutoService.class);
-        startService(intent);
     }
 }

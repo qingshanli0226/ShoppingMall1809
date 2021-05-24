@@ -4,3 +4,9 @@ com/example/common/type/TypeString.java
  com.example.common.type.TypeString
 com/example/common/BuildConfig.java
  com.example.common.BuildConfig
+com/example/common/autoservice/FiannceContants.java
+ com.example.common.autoservice.FiannceContants
+com/example/common/autoservice/TokenInterceptor.java
+ com.example.common.autoservice.TokenInterceptor
+com/example/common/autoservice/AppMoudel.java
+ com.example.common.autoservice.AppMoudel

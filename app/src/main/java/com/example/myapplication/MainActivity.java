@@ -46,7 +46,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
-
+        //自动登录
+        Intent intent1 = new Intent(this, AutoService.class);
+        startService(intent1);
     }
 
     @Override
@@ -61,6 +63,8 @@ public class MainActivity extends BaseActivity {
            Bundle extras = intent.getExtras();
            String page = extras.getString("page");
            mainComm.setCurrentTab(Integer.parseInt(page));
+
+
     }
 
     @Override

@@ -3,9 +3,14 @@
     package="com.example.user">
 
     <application>
-        <activity android:name=".UserActivity"></activity>
+        <service
+            android:name=".AutoService"
+            android:enabled="true"
+            android:exported="true"></service>
 
-        <service android:name=".AutoService"></service>
+        <activity android:name=".UserActivity" />
+
+
     </application>
 
 </manifest>

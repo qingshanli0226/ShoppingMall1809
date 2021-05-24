@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import com.example.common.type.ToLoginType;
+import com.example.common.type.TypeString;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
