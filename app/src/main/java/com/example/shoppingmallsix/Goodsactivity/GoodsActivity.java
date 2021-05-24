@@ -19,6 +19,7 @@ import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
+import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
 import com.example.shoppingmallsix.Goodsactivity.adapter.GoodsAdapter;
 import com.example.shoppingmallsix.R;
@@ -192,6 +193,16 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
         }else {
             Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onUpdateNum(UpdateProductNumBean bean) {
+
+    }
+
+    @Override
+    public void onUpDataError(String msg) {
+
     }
 
 

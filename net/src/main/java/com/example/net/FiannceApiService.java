@@ -99,7 +99,7 @@ public interface FiannceApiService {
      */
     //向服务端购物车添加一个产品的接口
     @POST(Constants.BUSINESS_ADDONEPRODUCT)
-    Observable<AddOneProductBean> getAddOneProduct(@Body ResponseBody body);
+    Observable<AddOneProductBean> getAddOneProduct(@Body RequestBody body);
 
     //从服务端购物车删除多个产品的接口
     @POST(Constants.BUSINESS_REMOVEMANYPRODUCT)
@@ -129,13 +129,9 @@ public interface FiannceApiService {
     @POST(Constants.BUSINESS_CONFIRMSERVERPAYRESULT)
     Observable<ConfirmServerPayResultBean> getConfirmServerPayResult(@Body RequestBody body);
 
-<<<<<<< HEAD
+    //获取服务端购物车产品信息的接口
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
-=======
-    @POST("addOneProduct")
-    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
->>>>>>> zyz524
 
 
 }
