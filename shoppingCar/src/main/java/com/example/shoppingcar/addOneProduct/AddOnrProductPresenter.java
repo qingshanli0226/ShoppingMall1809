@@ -1,5 +1,6 @@
 package com.example.shoppingcar.addOneProduct;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.RegisterBean;
@@ -13,6 +14,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
@@ -35,7 +37,7 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
             e.printStackTrace();
         }
 
-        ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RequestBody responseBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getShopApiService()
                 .addOneProduct(responseBody)
                 .subscribeOn(Schedulers.io())

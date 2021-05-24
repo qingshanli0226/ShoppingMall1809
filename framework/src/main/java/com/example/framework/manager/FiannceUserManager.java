@@ -19,7 +19,7 @@ public class FiannceUserManager {
         return loginBean;
     }
 
-    public synchronized void  setLoginBean(LoginBean loginBean) {
+    public synchronized void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
         for (IUserLoginChanged iUserLoginChanged : iUserLoginChangedList) {
             iUserLoginChanged.onLoginChange(loginBean);
