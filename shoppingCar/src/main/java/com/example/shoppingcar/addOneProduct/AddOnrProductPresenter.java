@@ -22,24 +22,24 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
         attachView(iAddOneProduct);
     }
 
-    public void AddOneProduct(String productId,String productNum,String productName,
-                              String url,String productPrice){
+    public void AddOneProduct(String productId, String productNum, String productName,
+                              String url, String productPrice) {
 
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("productId",productId);
-            jsonObject.put("productNum",productNum);
-            jsonObject.put("productName",productName);
-            jsonObject.put("url",url);
-            jsonObject.put("productPrice",productPrice);
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        RequestBody responseBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getShopApiService()
-                .addOneProduct(responseBody)
+                .addOneProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterBean>() {
@@ -50,14 +50,56 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
 
                     @Override
                     public void onNext(@NonNull RegisterBean registerBean) {
-                        if (iView!=null){
+                        if (iView != null) {
                             iView.onAddOneProduct(registerBean);
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (iView!=null){
+                        if (iView != null) {
+                            iView.Error(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void CheckOneProductInventory(String productId, String productNum) {
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        ResponseBody requestBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getShopApiService()
+                .getCheckOneProductInventory(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RegisterBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegisterBean registerBean) {
+                        if (iView != null) {
+                            iView.onCheckOneProductInventory(registerBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
                             iView.Error(e.getMessage());
                         }
                     }

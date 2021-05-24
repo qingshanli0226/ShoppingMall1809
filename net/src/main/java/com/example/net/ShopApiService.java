@@ -56,7 +56,10 @@ public interface ShopApiService {
     Observable<SortBean> getSortData();
 
     @POST("addOneProduct")
-    Observable<RegisterBean> addOneProduct(@Body RequestBody responseBody);
+    Observable<RegisterBean> addOneProduct(@Body RequestBody requestBody);
+
+    @POST("checkOneProductInventory")
+    Observable<RegisterBean> getCheckOneProductInventory(@Body ResponseBody responseBody);
 
     //待支付
     @GET("findForPay")
