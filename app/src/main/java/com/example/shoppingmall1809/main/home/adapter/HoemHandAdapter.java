@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
 
@@ -53,9 +54,8 @@ public class HoemHandAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        Glide.with(context)
-                .load(Constants.BASE_URl_IMAGE +list.get(i).getImage())
-                .placeholder(R.drawable.new_img_loading_1).into(viewHolder.img);
+        ShopmallGlide.with(context)
+                .load(Constants.BASE_URl_IMAGE +list.get(i).getImage()).into(viewHolder.img);
         viewHolder.name.setText(list.get(i).getChannel_name());
         return view;
     }

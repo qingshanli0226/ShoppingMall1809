@@ -12,6 +12,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
 import com.example.framework.BaseActivity;
+import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
@@ -20,8 +22,7 @@ import com.example.user.R;
 import com.example.user.login.ILoginView;
 import com.example.user.login.LoginPresneter;
 
-@Route(path = "/user/RegisterActivity")
-public class RegisterActivity extends BaseActivity<RegisterPresneter> implements IRegisterView, ILoginView {
+public class RegisterFragment extends BaseFragment<RegisterPresneter> implements IRegisterView, ILoginView {
 
 
     private ToolBar toolbar;
@@ -35,7 +36,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.fragment_register;
     }
 
     @Override
@@ -46,11 +47,11 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
             String pwdtwo = actRegPasswordtwo.getText().toString().trim();
 
             if (user.equals("") || pwd.equals("")) {
-                Toast.makeText(this, R.string.theUsernameAndPasswordCannotBeEmpty, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.theUsernameAndPasswordCannotBeEmpty, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (!pwd.equals(pwdtwo)) {
-                Toast.makeText(this, R.string.theTwoPasswordsDontMatch, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.theTwoPasswordsDontMatch, Toast.LENGTH_SHORT).show();
                 return;
             }
             httpPresenter.getRegisterData(user, pwd);
@@ -109,12 +110,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
         if (registerBean.getCode().equals("200")) {
             String user = actRegUsername.getText().toString().trim();
             String pwd = actRegPassword.getText().toString().trim();
-//            Toast.makeText(this, registerBean.getResult(), Toast.LENGTH_SHORT).show();
-//            Bundle bundle = new Bundle();
-//            bundle.putString("user",user);
-//            bundle.putString("pwd",pwd);
-//            FiannceArouter.getInstance().build(FianceConstants.LOGIN_PATH).navigation(bundle);
-
             loginPresneter = new LoginPresneter(this);
             loginPresneter.getRegisterData(user, pwd);
 
@@ -151,8 +146,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresneter> implements
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
             FiannceUserManager.getInstance().setLoginBean(loginBean);
-            SpUtil.setString(this, ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
+            SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
+            if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
+                getActivity().finish();
+                return;
+            }
             ARouter.getInstance().build(ShopConstants.MAIN_PATH).navigation();
         }
+    }
+    @Override
+    public void onLeftImgClick() {
+        getActivity().finish();
     }
 }

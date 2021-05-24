@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.TransitionOptions;
+import com.example.commom.Constants;
 import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.CategoryBean;
@@ -45,6 +46,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
             fragTypeCateLv.removeOnLayoutChangeListener(listener);
         }
     };
+    private List<String> urls = new ArrayList();
 
     @Override
     protected int getLayoutId() {
@@ -53,6 +55,18 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
 
     @Override
     protected void initData() {
+        urls.add(Constants.SKIRT_URL);
+        urls.add(Constants.JACKET_URL);
+        urls.add(Constants.PANTS_URL);
+        urls.add(Constants.OVERCOAT_URL);
+        urls.add(Constants.ACCESSORY_URL);
+        urls.add(Constants.BAG_URL);
+        urls.add(Constants.DRESS_UP_URL);
+        urls.add(Constants.HOME_PRODUCTS_URL);
+        urls.add(Constants.STATIONERY_URL);
+        urls.add(Constants.DIGIT_URL);
+        urls.add(Constants.GAME_URL);
+        urls.add(Constants.TAG_URL);
 
         ArrayList<String> data = new ArrayList<>();
         data.add(getResources().getString(R.string.smallSkirt));
@@ -87,12 +101,12 @@ public class CategoryFragment extends BaseFragment<CategoryPresenter> implements
                         item.setBackgroundResource(R.color.darkAshen);
                     }
                 }
-                httpPresenter.getCategoryData(i);
+                httpPresenter.getCategoryData(urls.get(i));
             }
         });
         categoryAdapter = new CategoryAdapter(resultBeans);
         fragTypeCateRv.setAdapter(categoryAdapter);
-        httpPresenter.getCategoryData(0);
+        httpPresenter.getCategoryData(urls.get(0));
     }
 
 

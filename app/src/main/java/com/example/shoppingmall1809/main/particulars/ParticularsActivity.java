@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.view.ShopmallGlide;
 import com.example.framework.view.ToolBar;
@@ -77,7 +78,8 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
             @Override
             public void onClick(View view) {
                 LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
-                if (loginBean==null){
+                if (loginBean == null) {
+                    CacheManager.getInstance().decideARoutPage = ShopConstants.AROUT_PARTICULARS;
                     ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
                     return;
                 }
@@ -137,6 +139,7 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
                         AddOnrProductPresenter addOnrProductPresenter = new AddOnrProductPresenter(ParticularsActivity.this);
                         addOnrProductPresenter
                                 .AddOneProduct(productId,num+"",productName,url,productPrice);
+                        popupWindow.dismiss();
                     }
                 });
 
@@ -225,6 +228,6 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
 
     @Override
     public void Error(String error) {
-
+        Toast.makeText(this, ""+error, Toast.LENGTH_SHORT).show();
     }
 }
