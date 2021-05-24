@@ -2,8 +2,12 @@ package com.example.shoppingmallsix.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,6 +28,8 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeAdapter extends BaseRvAdapter<Object> {
 
@@ -146,6 +152,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 SeckillAdapter seckillAdapter = new SeckillAdapter();
                 seckillRecyclerView.setAdapter(seckillAdapter);
                 seckillAdapter.dataList.addAll(seckillInfoBeans);
+                hours = holder.getView(R.id.hours_tv);
+                minutes = holder.getView(R.id.minutes_tv);
+                seconds = holder.getView(R.id.seconds_tv);
+                startRun();
                 seckillAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -178,6 +188,69 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 hotRecyclerView.setAdapter(hotAdapter);
                 hotAdapter.dataList.addAll(hotInfoBeans);
                 break;
+        }
+    }
+
+    private long mHour = 23;//小时,
+    private long mMin = 59;//分钟,
+    private long mSecond = 59;//秒
+    private TextView hours;
+    private TextView minutes;
+    private TextView seconds;
+    private Timer timer = new Timer();
+
+    Handler timeHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1) {
+                computeTime();
+                hours.setText(getTv(mHour));
+                minutes.setText(getTv(mMin));
+                seconds.setText(getTv(mSecond));
+                if (mSecond == 0 && mHour == 0 && mMin == 0 ) {
+                    timer.cancel();
+                }
+            }
+        }
+    };
+
+
+    private void computeTime() {
+        mSecond--;
+        if (mSecond < 0) {
+            mMin--;
+            mSecond = 59;
+            if (mMin < 0) {
+                mMin = 59;
+                mHour--;
+                if (mHour < 0) {
+                    // 倒计时结束
+                    mHour = 0;
+                    mMin = 0;
+                    mSecond = 0;
+                }
+            }
+        }
+    }
+
+    private void startRun() {
+        TimerTask mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Message message = Message.obtain();
+                message.what = 1;
+                timeHandler.sendMessage(message);
+            }
+        };
+        timer.schedule(mTimerTask,0,1000);
+    }
+
+    private String getTv(long l){
+        if(l>=10){
+            return l+"";
+        }else{
+            return "0"+l;//小于10,,前面补位一个"0"
         }
     }
 
