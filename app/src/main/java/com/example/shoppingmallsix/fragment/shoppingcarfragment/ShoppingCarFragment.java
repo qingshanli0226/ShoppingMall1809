@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
@@ -33,6 +34,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private Button buyBt;
     private Button deleteBt;
     private Button shouCangBt;
+    private RecyclerView recyclerView;
 
     @Override
     protected void initPresenter() {
@@ -54,6 +56,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         buyBt = mBaseView.findViewById(R.id.buyBt);
         deleteBt = mBaseView.findViewById(R.id.deleteBt);
         shouCangBt = mBaseView.findViewById(R.id.shouCangBt);
+        recyclerView = mBaseView.findViewById(R.id.shopcarRv);
 
         shopText.setText(bianji);
         shopText.setTag(false);
@@ -96,8 +99,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             List<ShoppingCarBean.ResultBean> result = shoppingCarBean.getResult();
 
             ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
-            shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
-            shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(shoppingCarAdapter);
         }
     }
 

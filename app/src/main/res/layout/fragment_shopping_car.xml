@@ -39,11 +39,11 @@
             android:background="#B8B2B2"
             ></View>
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="9"
-            ></LinearLayout>
+            android:id="@+id/shopcarRv"></androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
             android:layout_width="match_parent"
