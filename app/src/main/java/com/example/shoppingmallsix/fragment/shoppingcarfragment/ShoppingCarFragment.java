@@ -1,9 +1,11 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +19,9 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.shoppingmallsix.R;
-<<<<<<< HEAD
-=======
-import com.example.shoppingmallsix.fragment.classifyfragment.ClassifyFragment;
-import com.example.shoppingmallsix.mainactivity.MainActivity;
+
 import com.example.user.login.LoginActivity;
->>>>>>> zyz524
+
 
 import java.util.List;
 
@@ -106,12 +105,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-<<<<<<< HEAD
     public void onShopping(GetShortcartProductsBean shoppingCarBean) {
-=======
-    public void onShopping(ShoppingCarBean shoppingCarBean) {
 
->>>>>>> zyz524
         if (shoppingCarBean.getCode().equals("200")) {
             List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
 

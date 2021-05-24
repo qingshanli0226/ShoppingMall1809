@@ -16,6 +16,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 public class GoodsPresenter extends BasePresenter<IGoodsView> {
@@ -40,11 +41,8 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getFiannceApiService()
-<<<<<<< HEAD
-                .getAddOneProduct(responseBody)
-=======
-                .addProduct(requestBody)
->>>>>>> zyz524
+                .getAddOneProduct(requestBody)
+
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<AddOneProductBean>() {
