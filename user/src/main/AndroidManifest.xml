@@ -5,6 +5,7 @@
     <application>
         <activity android:name=".UserActivity"></activity>
 
+        <service android:name=".AutoService"></service>
     </application>
 
 </manifest>

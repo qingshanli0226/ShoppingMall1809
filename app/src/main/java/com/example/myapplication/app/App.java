@@ -1,11 +1,16 @@
 package com.example.myapplication.app;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.example.UserModule;
 import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.AppModule;
+<<<<<<< HEAD
 import com.example.myapplication.particulars.ParticularsModule;
+=======
+import com.example.user.AutoService;
+>>>>>>> zyh
 
 
 public class App extends Application {
@@ -17,5 +22,8 @@ public class App extends Application {
         AppModule.init();
         ParticularsModule.init();
         CaCheArote.getInstance().init(this);
+
+        Intent intent = new Intent(this, AutoService.class);
+        startService(intent);
     }
 }

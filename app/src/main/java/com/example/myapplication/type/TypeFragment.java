@@ -55,7 +55,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
          list.add(getString(R.string.digit));
          list.add(getString(R.string.game));
         classAdapter.updataData(list);
-
+        rootPresenter.onSkirt(urls[0]);
 
     }
 
@@ -65,6 +65,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         lv.setAdapter(classAdapter);
         lv.setLayoutManager(new LinearLayoutManager(getContext()));
+
         classAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {

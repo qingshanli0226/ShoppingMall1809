@@ -46,8 +46,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
-        Intent intent = new Intent(this, AutoService.class);
-        startService(intent);
+
     }
 
     @Override
