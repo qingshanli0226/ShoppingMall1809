@@ -34,7 +34,7 @@
                 android:layout_width="@dimen/dp_70"
                 android:layout_height="@dimen/dp_30"
                 android:background="@drawable/select_left_show"
-                android:text="分类"
+                android:text="@string/classify"
                 android:button="@null"
                 android:gravity="center"
                 android:textColor="@color/colorWhite"></RadioButton>
@@ -42,7 +42,7 @@
                 android:layout_width="@dimen/dp_70"
                 android:layout_height="@dimen/dp_30"
                 android:background="@drawable/select_right"
-                android:text="标签"
+                android:text="@string/label"
                 android:id="@+id/buttonRight"
                 android:button="@null"
                 android:gravity="center"

@@ -56,11 +56,11 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
 
         getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        mTabEntities.add(new MainBean("首页", R.drawable.main_home_press, R.drawable.main_home));
-        mTabEntities.add(new MainBean("分类", R.drawable.main_type_press, R.drawable.main_type));
-        mTabEntities.add(new MainBean("发现", R.drawable.main_community_press, R.drawable.main_community));
-        mTabEntities.add(new MainBean("购物车", R.drawable.main_cart_press, R.drawable.main_cart));
-        mTabEntities.add(new MainBean("个人中心", R.drawable.main_user_press, R.drawable.main_user));
+        mTabEntities.add(new MainBean(getString(R.string.homepage), R.drawable.main_home_press, R.drawable.main_home));
+        mTabEntities.add(new MainBean(getString(R.string.classify), R.drawable.main_type_press, R.drawable.main_type));
+        mTabEntities.add(new MainBean(getString(R.string.discover), R.drawable.main_community_press, R.drawable.main_community));
+        mTabEntities.add(new MainBean(getString(R.string.shopping), R.drawable.main_cart_press, R.drawable.main_cart));
+        mTabEntities.add(new MainBean(getString(R.string.personal), R.drawable.main_user_press, R.drawable.main_user));
         mainCommon.setTabData(mTabEntities);
 
 

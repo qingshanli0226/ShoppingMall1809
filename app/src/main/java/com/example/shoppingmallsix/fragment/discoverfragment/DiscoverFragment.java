@@ -34,7 +34,7 @@ public class DiscoverFragment extends BaseFragment {
         if (loginBean != null){
 
         }else {
-            Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }

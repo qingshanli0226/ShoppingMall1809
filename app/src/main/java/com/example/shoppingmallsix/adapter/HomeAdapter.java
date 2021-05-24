@@ -109,12 +109,12 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 channeAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "短点击", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onItwmLongClick(int position) {
-                        Toast.makeText(holder.itemView.getContext(), "长点击item", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 break;

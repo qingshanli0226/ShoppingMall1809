@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:gravity="center_vertical"
-                android:text="热卖推荐"
+                android:text="@string/hotsalerecommendation"
                 android:layout_margin="@dimen/dp_5"
                 />
             <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +28,7 @@
                 android:layout_height="@dimen/dp_30"
                 android:gravity="center_vertical"
                 android:layout_margin="@dimen/dp_5"
-                android:text="常用分类"
+                android:text="@string/Commonlyusedclassification"
                 />
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"

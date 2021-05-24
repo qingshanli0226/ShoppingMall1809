@@ -14,7 +14,7 @@
         android:id="@+id/toolbar"
         app:leftImg="@drawable/back"
         app:leftIsShow="true"
-        app:titleText="待付款订单"></com.example.framework.view.ToolBar>
+        app:titleText="@string/Orderpendingpayment"></com.example.framework.view.ToolBar>
 
     <View
         android:layout_width="match_parent"

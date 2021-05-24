@@ -88,7 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="6"
                 android:layout_height="wrap_content"
-                android:text="我的订单"
+                android:text="@string/order"
                 android:layout_gravity="center"
                 android:textSize="@dimen/dp_18"
                 ></TextView>
@@ -97,7 +97,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="查看全部订单"
+                android:text="@string/Viewallorders"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="@dimen/dp_18"
@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="待付款"
+                    android:text="@string/obligation"
                     android:textSize="@dimen/dp_20"
                     android:gravity="center"
                     ></TextView>
@@ -173,7 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="待发货"
+                    android:text="@string/Tosendtheoods"
                     android:textSize="@dimen/dp_20"
                     android:gravity="center"
                     ></TextView>
@@ -198,7 +198,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="待收货"
+                    android:text="@string/waitforreceiving"
                     android:textSize="@dimen/dp_20"
                     android:gravity="center"
                     ></TextView>
@@ -223,7 +223,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="已完成"
+                    android:text="@string/offthestocks"
                     android:textSize="@dimen/dp_20"
                     android:gravity="center"
                     ></TextView>
@@ -248,7 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="售后/退款"
+                    android:text="@string/shou"
                     android:textSize="@dimen/dp_20"
                     android:gravity="center"
                     ></TextView>
@@ -286,7 +286,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="收货地址"
+                android:text="@string/address"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -317,7 +317,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="我的收藏"
+                android:text="@string/myfavorite"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -348,7 +348,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="我的优惠卷"
+                android:text="@string/Heresmycoupon"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -379,7 +379,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="我的瓜子"
+                android:text="@string/Myseeds"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -410,7 +410,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="我的奖品"
+                android:text="@string/Myprize"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -441,7 +441,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="我的电子票"
+                android:text="@string/Myelectronicticket"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -484,7 +484,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="邀请分享"
+                android:text="@string/Invitedtoshare"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -515,7 +515,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="客服中心"
+                android:text="@string/callcenter"
                 android:layout_gravity="center"
                 ></TextView>
 
@@ -546,7 +546,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:text="服务反馈"
+                android:text="@string/Servicefeedback"
                 android:layout_gravity="center"
                 ></TextView>
 

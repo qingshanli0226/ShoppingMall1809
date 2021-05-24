@@ -39,7 +39,10 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
 
     private RecyclerView classifyLeftRecyclerView;
     private myRecyclerView classifyRightRecyclerView;
-    private String[] strings = new String[]{"小裙子", "上衣", "下装", "外套", "配件", "包包", "装扮", "居家宅品", "办公文具", "数据周边", "游戏专区"};
+    // "", "", "", "", "", "", "", "", ""
+    private String[] strings = new String[]{getString(R.string.skirt), getString(R.string.jacket),getString(R.string.jacket)
+            ,getString(R.string.Downloading),getString(R.string.coat),getString(R.string.accessories),getString(R.string.handbag),
+            getString(R.string.dress),getString(R.string.Thehouseistasted),getString(R.string.Surroundingthedata),getString(R.string.Theamezone)};
     private List<ClassLeftBean> list = new ArrayList<>();
     private ClassLeftAdapter classifyAdapter;
     private List<Object> objectList = new ArrayList<>();
