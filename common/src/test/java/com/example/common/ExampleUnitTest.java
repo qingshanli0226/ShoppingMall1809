@@ -1,4 +1,4 @@
-package com.example.particulars;
+package com.example.common;
 
 import org.junit.Test;
 

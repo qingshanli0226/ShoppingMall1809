@@ -67,7 +67,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     public void destroy() {
-        if (rootPresenter == null) {
+        if (rootPresenter != null) {
             rootPresenter.destroy();
         }
     }

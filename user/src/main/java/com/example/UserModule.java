@@ -19,11 +19,11 @@ public class UserModule implements CaCheArote.IUserInterface {
         Intent intent = new Intent(context, UserActivity.class);
         if (context instanceof Activity){
             intent.putExtras(bundle);
-            context.startActivity(intent);
+            ((Activity) context).startActivityForResult(intent,100);
         }else {
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            ((Activity) context).startActivityForResult(intent,100);
         }
     }
 
@@ -32,11 +32,11 @@ public class UserModule implements CaCheArote.IUserInterface {
         Intent intent = new Intent(context, UserActivity.class);
         if (context instanceof Activity){
             intent.putExtra("param",bundle);
-            context.startActivity(intent);
+            ((Activity) context).startActivityForResult(intent,100);
         }else {
             intent.putExtra("param",bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            ((Activity) context).startActivityForResult(intent,100);
         }
     }
 //
