@@ -4,35 +4,43 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.adapter.BaseAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static com.example.common.Constants.BASE_URl_IMAGE;
 
 public
-class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean> {
-    @Override
-    public int getLayoutId(int viewType) {
-        return R.layout.item_buy_car;
+class ShoppingAdapter extends BaseQuickAdapter<ShortcartProductBean.ResultBean, BaseViewHolder> {
+
+
+    public ShoppingAdapter(@Nullable List<ShortcartProductBean.ResultBean> data) {
+        super(R.layout.item_buy_car, data);
     }
 
     @Override
-    public void displayViewHolder(BaseViewHolder baseViewHolder, int position, ShortcartProductBean.ResultBean itemData) {
-
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, ShortcartProductBean.ResultBean resultBean) {
         TextView shop_name = baseViewHolder.getView(R.id.shop_name);
-        shop_name.setText(itemData.getProductName()+"");
+        shop_name.setText(resultBean.getProductName()+"");
         TextView shop_money = baseViewHolder.getView(R.id.text_money);
-        shop_money.setText("￥"+itemData.getProductPrice());
+        shop_money.setText("￥"+resultBean.getProductPrice());
         TextView shop_product_num = baseViewHolder.getView(R.id.product_num);
-        shop_product_num.setText(itemData.getProductNum()+"");
+        shop_product_num.setText(resultBean.getProductNum()+"");
+        ImageView shop_img = baseViewHolder.getView(R.id.is_select);
+        shop_img.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
 
-        Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE+itemData.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
+        Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE+resultBean.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
 
-    }
-
-    @Override
-    public int getRootViewType(int position) {
-        return 1;
+        if (resultBean.isProductSelected()){
+            shop_img.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_selected));
+        }else {
+            shop_img.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
+        }
     }
 }

@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/is_select"
-        android:layout_width="wrap_content"
+        android:layout_width="26dp"
         android:layout_height="@dimen/dp_150"
         android:src="@drawable/checkbox_unselected"></ImageView>
 
