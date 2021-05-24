@@ -33,6 +33,7 @@ import com.example.net.constants.Constants;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -155,5 +156,14 @@ public interface FiannceApiService {
     @POST(Constants.AUTOLOGIN)
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
+    @POST("addOneProduct")
+    Observable<RegisterBean> addOneProduct(@Body ResponseBody responseBody);
 
+//    //待支付
+//    @GET("findForPay")
+//    Observable<SortBean> getFindForPayData();
+//
+//    //待发货
+//    @GET("findForSend")
+//    Observable<SortBean> getFindForSendData();
 }
