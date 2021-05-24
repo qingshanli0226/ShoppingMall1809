@@ -1,7 +1,10 @@
 package com.example.threeshopping.personal;
 
+import android.view.View;
 import android.widget.ImageView;
 
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
 import com.example.threeshopping.R;
@@ -30,6 +33,24 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initPrensenter() {
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
+            }
+        });
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_PAYMENT).navigation();
+            }
+        });
+        shipments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_SHIPMENTS).navigation();
+            }
+        });
 
     }
 

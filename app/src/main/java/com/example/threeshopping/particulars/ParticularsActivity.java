@@ -112,7 +112,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                     popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
                     int height = ScreenUtils.getScreenHeight() * 1 / 3;
                     popupWindow.setHeight(height);
-
                     popPrice.setText("" + price);
                     popTitle.setText("" + title);
                     Glide.with(ParticularsActivity.this).load(pic).into(popPic);
@@ -144,9 +143,12 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setUrl(pic);
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
-                            LogUtils.json(productBean);
-                            mPresenter.checkInventory(id,""+num);
 
+
+                            ProductBean inventoryBean = new ProductBean();
+
+                            mPresenter.checkInventory(productBean);
+                            LogUtils.json(productBean);
                         }
                     });
 
@@ -188,8 +190,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     }
 
     @Override
-    public void onInventory(InventoryBean inventoryBean) {
-
+    public void onInventory(ProductBean inventoryBean) {
         LogUtils.json(inventoryBean);
     }
 

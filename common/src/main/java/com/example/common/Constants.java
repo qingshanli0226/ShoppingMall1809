@@ -78,12 +78,15 @@ public class Constants {
     public static final String PATH_WEL = "/app/WelActivity";
     //主页面
     public static final String PATH_MAIN = "/app/MainActivity";
-    //登录
-    public static final String PATH_LOGIN = "/user/LoginActivity";
-    //注册
-    public static final String PATH_REGISTER = "/user/RegisterActivity";
     //详情
     public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
+    //信息
+    public static final String PATH_MESSAGE = "/app/MessageActivity";
+    //待付款
+    public static final String PATH_PAYMENT = "/app/PaymentActivity";
+    //待发货
+    public static final String PATH_SHIPMENTS= "/app/ShipmentsActivity";
+
     //用户
     public static final String PATH_USER = "/user/UserActivity";
 
@@ -134,6 +137,11 @@ public class Constants {
 
     //从更新服务端购物车产品的选择
     public static final String UPDATEPRODUCTSELECTED = "updateProductSelected";
+
+    //更新服务端购物车产品的数量的接口
+    public static final String UPDATEPRODUCTNUM = "updateProductNum";
+
+
 
     //全选服务端购物车产品或者全不选
     public static final String SELECTALL = "selectAllProduct";

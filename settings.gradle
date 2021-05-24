@@ -1,4 +1,4 @@
-include ':user'
+include ':user', ':sql'
 include ':pay'
 include ':net'
 include ':frameWork'

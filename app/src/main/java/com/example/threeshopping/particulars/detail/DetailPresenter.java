@@ -6,6 +6,7 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.ProductBean;
+import com.example.net.bean.UpdateProductNumBean;
 import com.google.gson.Gson;
 
 import io.reactivex.Observer;
@@ -15,6 +16,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class DetailPresenter extends BasePresenter<IDetailView> {
     public DetailPresenter(IDetailView iDetailView) {
@@ -58,21 +60,24 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
     }
 
 
-    public void checkInventory(String productId,String productNum){
+    public void checkInventory(ProductBean productBean){
+        String s = new Gson().toJson(productBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        ResponseBody responseBody = ResponseBody.create(parse, s);
         RetrofitManager.getHttpApiService()
-                .inventory(productId,productNum)
+                .inventory(responseBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<InventoryBean>() {
+                .subscribe(new Observer<ProductBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(InventoryBean inventoryBean) {
+                    public void onNext(ProductBean productBean) {
                         if (mView != null){
-                            mView.onInventory(inventoryBean);
+                            mView.onInventory(productBean);
                         }
                     }
 
@@ -89,4 +94,36 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                     }
                 });
     }
+
+//    public void UpdateProductNum(){
+//        RetrofitManager.getHttpApiService()
+//                .UpdateProductNum()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<UpdateProductNumBean>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(UpdateProductNumBean updateProductNumBean) {
+//                        if (mView != null){
+//                            mView.onUpdateProductNum(updateProductNumBean);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        if (mView != null){
+//                            mView.showError(e.getMessage());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//    }
 }

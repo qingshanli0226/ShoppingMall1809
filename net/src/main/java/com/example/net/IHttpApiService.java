@@ -13,6 +13,7 @@ import com.example.net.bean.RegisterBean;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.SelectBean;
 import com.example.net.bean.TypeBean;
+import com.example.net.bean.UpdateProductNumBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -92,14 +93,16 @@ public interface IHttpApiService {
     Observable<CartBean> showCart();
 
 
-    @FormUrlEncoded
+
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
-    Observable<InventoryBean> inventory(@Field("productId")String productId,@Field("productNum")String productNum);
-
-
+    Observable<ProductBean> inventory(@Body ResponseBody responseBody);
 
 
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
+
+    @POST(Constants.UPDATEPRODUCTNUM)
+    Observable<UpdateProductNumBean> UpdateProductNum();
+
 
 }

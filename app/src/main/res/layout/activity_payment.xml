@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".payment.PaymentActivity">
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:app_back_color_toob="@color/white"
+        app:app_left_isshow="true"
+        app:app_left_src="@drawable/top_bar_left_back"
+        app:app_text="代付款订单"
+        app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
+
+</LinearLayout>

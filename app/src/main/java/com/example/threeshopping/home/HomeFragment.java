@@ -1,6 +1,7 @@
 package com.example.threeshopping.home;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheHomeManager;
 import com.example.net.bean.HomeBean;
@@ -66,6 +68,13 @@ public class HomeFragment extends BaseFragment {
         homeAdapter.getData().addAll(objects);
         homeRv.setAdapter(homeAdapter);
 
+
+        imgCom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
+            }
+        });
     }
 
     @Override

@@ -66,7 +66,7 @@
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dm_dp_80"
+            android:layout_height="@dimen/dm_dp_60"
             >
             <ImageView
                 android:id="@+id/payment"
