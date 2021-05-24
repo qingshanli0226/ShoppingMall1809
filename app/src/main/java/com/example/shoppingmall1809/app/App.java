@@ -12,6 +12,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ARouter.openDebug();
         ARouter.init(this);
 
         NetModule.init(this);

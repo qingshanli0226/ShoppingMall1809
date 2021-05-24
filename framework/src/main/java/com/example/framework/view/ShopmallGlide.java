@@ -159,7 +159,11 @@ public class ShopmallGlide {
                         });
                     } else {
                         Bitmap originalbitmap = BitmapFactory.decodeStream(inputStream);
+                        if (originalbitmap==null){
+                            return;
+                        }
                         //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OM异常，所以二次采样
+                        Log.d("LQS----", "url = " + url);
                         Bitmap bitmap = sampleBitmap(imageView, originalbitmap);
                         originalbitmap.recycle();//已经有采样后的图片，前面的可以销毁了
                         originalbitmap=null;

@@ -1,9 +1,29 @@
 package com.example.framework.manager;
 
+import com.example.net.model.FindForBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCarManager {
+    private FindForBean findForPayBean;
+    private FindForBean findForSendBean;
+
+    public FindForBean getFindForPayBean() {
+        return findForPayBean;
+    }
+
+    public void setFindForPayBean(FindForBean findForPayBean) {
+        this.findForPayBean = findForPayBean;
+    }
+
+    public FindForBean getFindForSendBean() {
+        return findForSendBean;
+    }
+
+    public void setFindForSendBean(FindForBean findForSendBean) {
+        this.findForSendBean = findForSendBean;
+    }
 
     private List<IShoppingCar> list=new ArrayList<>();
 

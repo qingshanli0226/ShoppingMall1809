@@ -33,10 +33,13 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
 
     @Override
     protected void initData() {
+        ShopeUserManager.getInstance().register(this::onLoginChange);
+
         LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
         if (loginBean!=null){
             httpPresenter.getShoppingData();
         }
+
 
         checkAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +68,6 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
         price = (TextView) findViewById(R.id.price);
         accout = (TextView) findViewById(R.id.accout);
 
-        ShopeUserManager.getInstance().register(this);
     }
 
     @Override
@@ -79,11 +81,6 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ShopeUserManager.getInstance().unregister(this);
-    }
 
     @Override
     public void showLoading() {
@@ -105,5 +102,11 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
         if (loginBean != null) {
             httpPresenter.getShoppingData();
         }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ShopeUserManager.getInstance().unregister(this::onLoginChange);
     }
 }

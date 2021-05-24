@@ -1,5 +1,6 @@
 package com.example.shoppingmall1809.main.user;
 
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -8,8 +9,10 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShopeUserManager;
+import com.example.framework.manager.ShoppingCarManager;
 import com.example.net.model.FindForBean;
 import com.example.net.model.LoginBean;
+import com.example.shoppingcar.user.findforpay.FindForPayActivity;
 import com.example.shoppingmall1809.R;
 
 public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUserManager.IUserLoginChanged ,IUserView{
@@ -25,6 +28,7 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
 
     @Override
     protected void initData() {
+        ShopeUserManager.getInstance().register(this::onLoginChange);
         if (ShopeUserManager.getInstance().getLoginBean()!=null) {
             httpPresenter.getFindForPayData();
             httpPresenter.getFindForSendData();
@@ -67,12 +71,16 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
 
     @Override
     public void onFindForPayData(FindForBean findForBean) {
-        LogUtils.json(findForBean);
+        if (findForBean.getCode().equals("200")) {
+            ShoppingCarManager.getInstance().setFindForPayBean(findForBean);
+        }
     }
 
     @Override
     public void onFindForSendData(FindForBean findForBean) {
-        LogUtils.json(findForBean);
+        if (findForBean.getCode().equals("200")) {
+            ShoppingCarManager.getInstance().setFindForSendBean(findForBean);
+        }
     }
 
 
@@ -90,5 +98,11 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
     @Override
     public void Error(String error) {
         Toast.makeText(getActivity(), ""+error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ShopeUserManager.getInstance().unregister(this::onLoginChange);
     }
 }

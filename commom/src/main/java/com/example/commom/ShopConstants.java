@@ -7,7 +7,7 @@ public class ShopConstants {
     public final static String USER_PATH = "/user/UserActivity";
     public final static String MAIN_PATH = "/main/MainActivity";
     public final static String SP_FIANNCE = "shopSp";
-    public final static String SHOP_PAY = "shoppingCar/FindForPayActivity";
+    public final static String SHOP_PAY = "/shoppingCar/FindForPayActivity";
 
     //跳转逻辑
     public final static String AROUT_SHOPCAR = "shopcar";
