@@ -97,6 +97,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 channnel_re.setAdapter(channelAdapter);
                 channnel_re.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
                 channelAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
+
                     @Override
                     public void OnItemClick(int position) {
                         Toast.makeText(baseViewHolder.itemView.getContext(), ""+channelInfoBeans.get(position).getChannel_name(), Toast.LENGTH_SHORT).show();
@@ -106,6 +107,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
                 break;
             case 2:
@@ -145,6 +147,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
                 break;
             case 3:
@@ -174,6 +177,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
 
                 break;
@@ -201,6 +205,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
                 break;
             case 5:
@@ -222,13 +227,13 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("position", position);
                         intent.putExtra("more","more");
                         baseViewHolder.itemView.getContext().startActivity(intent);
-
                     }
 
                     @Override
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
                 break;
         }

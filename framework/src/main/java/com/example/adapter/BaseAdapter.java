@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.BaseViewHolder> {
+
     private List<T> list=new ArrayList<>();
     private iRecyclerItemClickListener recyclerItemClickListener;
     //添加数据
@@ -28,9 +29,11 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
     public List<T> getUpdateData(){
         return list;
     }
+
     public void setRecyclerItemClickListener(iRecyclerItemClickListener recyclerItemClickListener) {
         this.recyclerItemClickListener = recyclerItemClickListener;
     }
+
 
     @NonNull
     @Override
@@ -42,6 +45,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         displayViewHolder(holder,position,list.get(position));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +54,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
                 }
             }
         });
+
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -59,6 +64,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
                 return true;
             }
         });
+
+
     }
 
     public abstract int getLayoutId(int viewType);
@@ -81,6 +88,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
     }
 
     public static class BaseViewHolder extends RecyclerView.ViewHolder{
+
         SparseArray<View> sparseArray=new SparseArray<>();
         public BaseViewHolder(View itemView) {
             super(itemView);
@@ -95,14 +103,13 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
             }
 
         }
+
     }
 
     //点击事件
     public interface iRecyclerItemClickListener{
         void OnItemClick(int position);
         void OnItemLongClick(int position);
-    }
-    public void Notify(){
-        notifyDataSetChanged();
+
     }
 }

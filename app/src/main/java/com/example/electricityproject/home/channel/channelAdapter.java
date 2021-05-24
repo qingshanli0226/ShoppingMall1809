@@ -23,7 +23,6 @@ public class channelAdapter extends BaseAdapter<HomeBean.ResultBean.ChannelInfoB
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getImage()).init(img);
         TextView name = baseViewHolder.getView(R.id.channel_name);
         name.setText(itemData.getChannel_name()+"");
-
     }
 
 
