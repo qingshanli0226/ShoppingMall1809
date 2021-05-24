@@ -57,8 +57,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         }
 
 
-            Intent intent = new Intent(this, AutoService.class);
-            startService(intent);
+        Intent intent = new Intent(this, AutoService.class);
+        startService(intent);
 
 
     }

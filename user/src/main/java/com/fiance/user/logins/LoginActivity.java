@@ -19,6 +19,8 @@ import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.sp.SpUtil;
 import com.shoppingmall.net.bean.LoginBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 @Route(path = Constants.TO_USER_ACTIVITY)
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
@@ -135,14 +137,26 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     public void onLoginData(LoginBean loginBean) {
         Intent intent = getIntent();
         int position = intent.getIntExtra("position",0);
-        Log.i("hqy", "onLoginData: "+position);
+        int toDetail = intent.getIntExtra("toDetail",-1);
+        String addDetail = intent.getStringExtra("addDetail");
+
+        Log.i("hqy", "onLoginData: "+position+toDetail+addDetail);
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")){
             SpUtil.putString(LoginActivity.this,"token",loginBean.getResult().getToken());
             ShopMallUserManager.getInstance().setLoginBean(loginBean);
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-            ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("position",position).navigation();
-            finish();
+            if (toDetail==1){
+                EventBus.getDefault().post("startAutoService");
+                finish();
+            }else if (addDetail.equals("addDetail")){
+                EventBus.getDefault().post("startAutoService");
+                finish();
+            }else {
+                ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("position",position).navigation();
+                finish();
+            }
+
         }else{
             Toast.makeText(this, loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }

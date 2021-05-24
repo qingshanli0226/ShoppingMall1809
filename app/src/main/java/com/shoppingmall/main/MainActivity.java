@@ -62,10 +62,8 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     @Override
     public void initData() {
         Intent intent = getIntent();
-        VpPosition = intent.getIntExtra("position",0);
-        Log.i("hqy", "onLoginData: "+VpPosition);
-        //拿到数据
-        HomeBean homeBean = CacheManager.getInstance().getHomeBean();
+        int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);
+        VpPosition = intent.getIntExtra("position",-1);
 
         ArrayList<Fragment> list = new ArrayList<>();
         list.add(new HomeFragment());
@@ -94,7 +92,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
                     builder.setPositiveButton(getString(R.string.welcomeActivity_alert_button_yes), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("position",position).navigation();
+                            ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withString("toShopCar","toShopCar").navigation();
                         }
                     });
                     builder.show();
@@ -126,8 +124,12 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
 
             }
         });
-
-        mainVp.setCurrentItem(VpPosition);
+        if (VpPosition!=-1){
+            mainVp.setCurrentItem(VpPosition);
+        }
+        if (shopMallPosition!=1){
+            mainVp.setCurrentItem(shopMallPosition);
+        }
     }
     //双击退出
     private long i;
