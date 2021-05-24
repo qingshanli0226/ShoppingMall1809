@@ -1,4 +1,4 @@
-package com.example.shoppingmall1809.adapter;
+package com.example.shoppingcar.shoppingtrolley.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -12,7 +12,7 @@ import com.example.commom.Constants;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.ShoppingTrolleyBean;
-import com.example.shoppingmall1809.R;
+import com.example.shoppingcar.R;
 
 import java.util.List;
 

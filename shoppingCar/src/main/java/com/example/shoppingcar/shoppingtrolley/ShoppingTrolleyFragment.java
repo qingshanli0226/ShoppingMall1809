@@ -1,24 +1,23 @@
-package com.example.shoppingmall1809.main.shoppingtrolley;
+package com.example.shoppingcar.shoppingtrolley;
 
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.net.model.ShoppingTrolleyBean;
-import com.example.shoppingmall1809.R;
-import com.example.shoppingmall1809.adapter.ShoppingCarAdapter;
+import com.example.shoppingcar.R;
+import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 
 import java.util.List;
 
-public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShopping, FiannceUserManager.IUserLoginChanged {
+public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShopping, ShopeUserManager.IUserLoginChanged {
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
@@ -34,7 +33,7 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
 
     @Override
     protected void initData() {
-        LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
+        LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
         if (loginBean!=null){
             httpPresenter.getShoppingData();
         }
@@ -66,7 +65,7 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
         price = (TextView) findViewById(R.id.price);
         accout = (TextView) findViewById(R.id.accout);
 
-        FiannceUserManager.getInstance().register(this);
+        ShopeUserManager.getInstance().register(this);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
     @Override
     public void onDestroy() {
         super.onDestroy();
-        FiannceUserManager.getInstance().unregister(this);
+        ShopeUserManager.getInstance().unregister(this);
     }
 
     @Override

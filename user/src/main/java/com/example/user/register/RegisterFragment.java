@@ -7,14 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
-import com.example.framework.BaseActivity;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheManager;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
@@ -145,7 +143,7 @@ public class RegisterFragment extends BaseFragment<RegisterPresneter> implements
     @Override
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
-            FiannceUserManager.getInstance().setLoginBean(loginBean);
+            ShopeUserManager.getInstance().setLoginBean(loginBean);
             SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
             if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
                 getActivity().finish();

@@ -8,10 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.LoginBean;
 
@@ -59,7 +58,7 @@ public class ShopService extends Service {
                     @Override
                     public void onNext(@NonNull LoginBean loginBean) {
                         if (loginBean.getCode().equals("200")) {
-                            FiannceUserManager.getInstance().setLoginBean(loginBean);
+                            ShopeUserManager.getInstance().setLoginBean(loginBean);
                             SpUtil.setString(ShopService.this, ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
                         }
                     }

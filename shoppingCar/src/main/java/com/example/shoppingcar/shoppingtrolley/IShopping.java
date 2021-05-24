@@ -1,4 +1,4 @@
-package com.example.shoppingmall1809.main.shoppingtrolley;
+package com.example.shoppingcar.shoppingtrolley;
 
 import com.example.framework.IBaseView;
 import com.example.net.model.ShoppingTrolleyBean;
