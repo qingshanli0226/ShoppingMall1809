@@ -43,9 +43,12 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private SelectAllProductBean list;
     private List<ShortcartProductBean.ResultBean> result;
     private double allPrice;
+    private int num=0;
+    private boolean isShow=false;
 
     @Override
     protected void initData() {
+
 
 
 
@@ -75,11 +78,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     httpPresenter.postSelectAllProductData(isSelect);
 
                 }else {
+
                     httpPresenter.postSelectAllProductData(isSelect);
 
                 }
             }
         });
+
 
 
 
@@ -97,7 +102,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         if (eve.equals("request_buyCar")){
             Toast.makeText(getContext(), "接收到广播", Toast.LENGTH_SHORT).show();
             ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-
 
             if (shortProductBean!=null){
                 result = shortProductBean.getResult();
@@ -161,9 +165,48 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
 
             shoppingAdapter = new ShoppingAdapter();
+
+           // shoppingAdapter = new ShoppingAdapter();
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
+
+            shoppingAdapter.setChildItemClickListener(new ShoppingAdapter.iChildItemClickListener() {
+                @Override
+                public void OnChildItemListener(View view, int position) {
+                    num=0;
+                    switch (view.getId()){
+
+                        case R.id.is_select:
+                            ImageView img= (ImageView) view;
+                            isShow=result.get(position).isAll();
+                            if (isShow){
+                                img.setImageResource(R.drawable.checkbox_unselected);
+                                result.get(position).setAll(false);
+                            }else {
+                                img.setImageResource(R.drawable.checkbox_selected);
+                                result.get(position).setAll(true);
+
+                            }
+
+                            for (ShortcartProductBean.ResultBean resultBean : result) {
+                                if (resultBean.isAll()){
+                                    num++;
+                                }
+                            }
+                            Log.i("aa", "OnChildItemListener: num="+num);
+                            Log.i("aa", "OnChildItemListener: size="+result.size());
+                            if (num==result.size()){
+                                all.setImageResource(R.drawable.checkbox_selected);
+                            }else {
+                                all.setImageResource(R.drawable.checkbox_unselected);
+                            }
+                            shoppingAdapter.notifyDataSetChanged();
+                            break;
+                    }
+                }
+            });
+
         }
     }
 
@@ -191,6 +234,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         }
         shoppingAdapter.notifyDataSetChanged();
+
 
 
 

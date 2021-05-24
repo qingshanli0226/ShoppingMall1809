@@ -63,6 +63,7 @@ class TypeAdapter extends BaseAdapter<Object> {
                     public void OnItemLongClick(int position) {
 
                     }
+
                 });
 
 
