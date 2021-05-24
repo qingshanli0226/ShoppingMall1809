@@ -35,7 +35,7 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
 
     @Override
     public void initPresenter() {
-        rootPresenter = new RegisPresenter(this);
+        mPresenter = new RegisPresenter(this);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
                 Toast.makeText(getActivity(), getString(R.string.notNull), Toast.LENGTH_SHORT).show();
             }
             //注册
-            rootPresenter.getRegister(ename, epwd);
+            mPresenter.getRegister(ename, epwd);
         });
     }
 

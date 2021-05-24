@@ -12,7 +12,7 @@ import mvp.presenter.BasePresenter;
 import mvp.view.IActivity;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity,CacheUserManager.IloginChange{
-   protected P rootPresenter;
+   protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +56,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     public void destroy(){
-        if (rootPresenter!=null){
-            rootPresenter.destroy();
+        if (mPresenter !=null){
+            mPresenter.destroy();
         }
     }
 }

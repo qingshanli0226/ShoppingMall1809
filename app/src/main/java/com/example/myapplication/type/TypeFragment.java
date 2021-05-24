@@ -41,7 +41,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
 
     @Override
     public void initPresenter() {
-         rootPresenter=new SkirtPresenter(this);
+         mPresenter =new SkirtPresenter(this);
 
          list.add(getString(R.string.skirt));
          list.add(getString(R.string.jacket));
@@ -68,7 +68,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
         classAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                rootPresenter.onSkirt(urls[position]);
+                mPresenter.onSkirt(urls[position]);
             }
 
             @Override
