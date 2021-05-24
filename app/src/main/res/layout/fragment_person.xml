@@ -51,6 +51,7 @@
                     android:layout_marginLeft="@dimen/dp_120"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/new_user_icon"></ImageView>
 
                 <TextView
@@ -61,6 +62,7 @@
                     android:layout_marginLeft="@dimen/dp_160"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:text="请登录"></TextView>
 
 
@@ -117,7 +119,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:src="@drawable/aaa"></ImageView>
 
                     <TextView
@@ -139,7 +141,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:src="@drawable/new_order_status_fahuo"></ImageView>
 
                     <TextView
@@ -161,7 +163,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:src="@drawable/bbb"></ImageView>
 
                     <TextView
@@ -183,7 +185,7 @@
 
                     <ImageView
                         android:layout_width="@dimen/dp_60"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_10"
                         android:src="@drawable/ccc"></ImageView>
@@ -206,7 +208,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:src="@drawable/ddd"></ImageView>
 
                     <TextView

@@ -26,11 +26,11 @@
             app:titleText="@string/details_tob_tit"
             app:titleTextColor="#000000"></com.example.view.ToolBar>
 
-        <ImageView
-            android:id="@+id/details_img"
+        <WebView
+            android:id="@+id/details_web"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_250"
-            android:src="@mipmap/ic_launcher_round"></ImageView>
+            android:src="@mipmap/ic_launcher_round"></WebView>
 
         <TextView
             android:id="@+id/details_name"

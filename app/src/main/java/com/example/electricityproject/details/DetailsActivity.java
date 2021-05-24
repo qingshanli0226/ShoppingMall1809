@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,18 +18,11 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
-<<<<<<< HEAD
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
-=======
-import com.example.glide.ShopGlide;
-import com.example.manager.BusinessARouter;
-import com.example.electricityproject.R;
-import com.example.framework.BaseActivity;
 import com.example.manager.BusinessUserManager;
->>>>>>> 0523
 import com.example.view.ToolBar;
 
 import java.util.ArrayList;
@@ -37,7 +32,7 @@ import java.util.Map;
 
 public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView{
     private ToolBar toolbar;
-    private ImageView detailsImg;
+    private WebView detailsWeb;
     private TextView detailsName;
     private TextView detailsPrice;
     private LinearLayout addShop;
@@ -79,7 +74,15 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
 
         if (img!=null){
-            ShopGlide.getInstance().with(this).load(Constants.BASE_URl_IMAGE+img).init(detailsImg);
+            detailsWeb.loadUrl(Constants.BASE_URl_IMAGE+img);
+            detailsWeb.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    detailsWeb.loadUrl(url);
+                    return super.shouldOverrideUrlLoading(view, url);
+
+                }
+            });
         }
         if (name!=null){
             detailsName.setText(name+"");
@@ -161,8 +164,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             popupWindow.dismiss();
                             linLin.setVisibility(View.VISIBLE);
 
-
-
                         }
                     });
 
@@ -209,7 +210,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Override
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
-        detailsImg = (ImageView) findViewById(R.id.details_img);
+        detailsWeb = (WebView) findViewById(R.id.details_web);
         detailsName = (TextView) findViewById(R.id.details_name);
         detailsPrice = (TextView) findViewById(R.id.details_price);
         addShop = (LinearLayout) findViewById(R.id.add_shop);

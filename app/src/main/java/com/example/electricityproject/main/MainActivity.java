@@ -1,6 +1,7 @@
 package com.example.electricityproject.main;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -10,8 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.common.bean.LogBean;
-import com.example.manager.BusinessARouter;
-import com.example.manager.BusinessUserManager;
 import com.example.electricityproject.R;
 import com.example.electricityproject.classify.ClassifyFragment;
 import com.example.electricityproject.find.FindFragment;
@@ -19,6 +18,8 @@ import com.example.electricityproject.home.HomeFragment;
 import com.example.electricityproject.person.PersonFragment;
 import com.example.electricityproject.shopp.ShoppingFragment;
 import com.example.framework.BaseActivity;
+import com.example.manager.BusinessARouter;
+import com.example.manager.BusinessUserManager;
 
 
 public class MainActivity extends BaseActivity {
@@ -122,19 +123,18 @@ public class MainActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        btnBuycar.setChecked(true);
 
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        fragmentTransaction = supportFragmentManager.beginTransaction();
+            btnBuycar.setChecked(true);
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            fragmentTransaction = supportFragmentManager.beginTransaction();
+            fragmentTransaction.hide(homeFragment);
+            fragmentTransaction.hide(classifyFragment);
+            fragmentTransaction.hide(findFragment);
+            fragmentTransaction.show(shoppingFragment);
+            fragmentTransaction.hide(personFragment);
+            fragmentTransaction.commit();
 
-        fragmentTransaction.hide(homeFragment);
-        fragmentTransaction.hide(classifyFragment);
-        fragmentTransaction.hide(findFragment);
-        fragmentTransaction.show(shoppingFragment);
-        fragmentTransaction.hide(personFragment);
 
-
-        fragmentTransaction.commit();
     }
 
     private void BeginTransaction(Fragment showFragment,Fragment hideFragmentOne,Fragment hideFragmentTwo,Fragment hideFragmentThree,Fragment hideFragmentFour) {

@@ -23,12 +23,13 @@ public class PersonFragment extends BaseFragment {
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (BusinessUserManager.getInstance().getIsLog()!=null){
                     LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+                    pleaseLogin.setText(isLog.getResult().getName()+"");
                     Toast.makeText(getContext(), "当前"+isLog.getResult().getName()+"用户已经登陆", Toast.LENGTH_SHORT).show();
                 }else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);
-
                 }
 
             }
@@ -76,5 +77,8 @@ public class PersonFragment extends BaseFragment {
     public void onLoginChange(LogBean isLog) {
 
     }
+
+
+
 
 }

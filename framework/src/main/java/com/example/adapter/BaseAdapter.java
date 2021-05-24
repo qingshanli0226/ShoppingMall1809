@@ -102,4 +102,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
         void OnItemClick(int position);
         void OnItemLongClick(int position);
     }
+    public void Notify(){
+        notifyDataSetChanged();
+    }
 }

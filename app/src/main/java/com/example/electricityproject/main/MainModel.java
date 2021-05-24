@@ -19,12 +19,15 @@ public class MainModel implements BusinessARouter.iAppManager {
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra("notifyss",notify);
         }
+
         Intent intent = new Intent(context, MainActivity.class);
 
         if (context instanceof Activity){
+
             context.startActivity(intent);
+
         }else {
-            //intent.FLAG_ACTIVITY_NEW_TASK
+
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 

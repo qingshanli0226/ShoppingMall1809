@@ -27,7 +27,6 @@ public class AutoService extends Service {
                     @Override
                     public void onAutoData(LogBean logBean) {
                         if (logBean.getCode().equals("200")) {
-                            Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
                         } else {

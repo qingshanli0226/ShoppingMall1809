@@ -87,6 +87,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     }
                 });
                 banner.start();
+
                 break;
             case 1:
                 List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans= (List<HomeBean.ResultBean.ChannelInfoBean>) itemData;

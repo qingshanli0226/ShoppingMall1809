@@ -3,16 +3,15 @@ package com.example.electricityproject.shopp;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
-import com.example.manager.BusinessARouter;
 import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
+import com.example.manager.BusinessARouter;
 import com.example.view.ToolBar;
 
 public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView {
@@ -79,7 +78,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
         if (shortcartProductBean.getCode().equals("200")) {
-            Toast.makeText(getContext(), "获得服务端数据", Toast.LENGTH_SHORT).show();
             shoppingAdapter = new ShoppingAdapter();
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
