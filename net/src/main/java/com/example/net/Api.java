@@ -33,7 +33,8 @@ public interface Api {
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
+
+    @POST("autoLogin")
     @FormUrlEncoded
-    @POST
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
 }
