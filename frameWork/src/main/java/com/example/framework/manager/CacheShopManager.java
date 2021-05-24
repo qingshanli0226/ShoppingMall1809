@@ -2,6 +2,7 @@ package com.example.framework.manager;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.MainThread;
 
@@ -12,6 +13,9 @@ import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -75,8 +79,8 @@ public class CacheShopManager {
                 });
     }
 
-    public void updateProductSelect(ProductBean productBean){
-        String s = new Gson().toJson(productBean);
+    public void updateProductSelect(CartBean.ResultBean resultBean){
+        String s = new Gson().toJson(resultBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
 
         RequestBody requestBody = RequestBody.create(parse, s);
@@ -92,15 +96,14 @@ public class CacheShopManager {
 
                     @Override
                     public void onNext(@NonNull SelectBean selectBean) {
-                        Log.i("TAG", "onNext: "+selectBean);
                         if (selectBean.getCode().equals("200")) {
-                            showCart();
+                            Log.i("zyb", "onNext: 成功");
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("CacheShopManager", e.getMessage());
+                        Log.i("zyb", e.getMessage());
                     }
 
                     @Override
@@ -109,7 +112,45 @@ public class CacheShopManager {
                     }
                 });
     }
+    public void selectAll(boolean isAll){
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("selected",isAll);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+
+        RequestBody requestBody = RequestBody.create(parse, jsonObject.toString());
+        RetrofitManager.getHttpApiService()
+                .selectAll(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            Log.i("zyb", "onNext: 成功");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i("zyb", e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
     public synchronized void registerCart(ICartChange iCartChange){
         cartChanges.add(iCartChange);
     }
@@ -121,8 +162,9 @@ public class CacheShopManager {
         return carts;
     }
 
-    public void setCarts(List<CartBean.ResultBean> carts) {
+    public synchronized void setCarts(List<CartBean.ResultBean> carts) {
         this.carts = carts;
+        Log.i("zyb", "setCarts: "+carts);
         for (ICartChange cartChange : cartChanges) {
             cartChange.onShowCart(carts);
         }

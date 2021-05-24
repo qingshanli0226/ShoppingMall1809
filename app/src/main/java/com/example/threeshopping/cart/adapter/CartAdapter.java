@@ -40,7 +40,7 @@ public class CartAdapter extends BaseRvAdapter<CartBean.ResultBean> {
         ImageView shopCartAdd = holder.getView(R.id.shopCartAdd);
 
 
-        ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemView.getUrl()).into(shopCartImg);
+        ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(itemView.getUrl()).into(shopCartImg);
         shopCartTitle.setText(itemView.getProductName());
         shopCartPrice.setText(itemView.getProductPrice()+"");
         shopCartNum.setText(itemView.getProductNum());
@@ -69,6 +69,14 @@ public class CartAdapter extends BaseRvAdapter<CartBean.ResultBean> {
                 }
             }
         });
+
+        if (itemView.isProductSelected()) {
+            shopCartCheck.setImageResource(R.drawable.checkbox_selected);
+
+        } else{
+            shopCartCheck.setImageResource(R.drawable.checkbox_unselected);
+
+        }
 
     }
 

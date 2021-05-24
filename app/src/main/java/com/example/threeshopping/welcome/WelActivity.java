@@ -1,6 +1,7 @@
 package com.example.threeshopping.welcome;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.common.Constants;
@@ -72,6 +73,6 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
 
     @Override
     public void showError(String error) {
-        Toast.makeText(this, "错误"+error, Toast.LENGTH_SHORT).show();
+        Log.i("zyb", "showError: "+error);
     }
 }

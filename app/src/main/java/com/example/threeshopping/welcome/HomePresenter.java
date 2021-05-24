@@ -22,7 +22,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     public void getHome(){
         RetrofitManager.getHttpApiService()
                 .getHomeData()
-                .delay(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeBean>() {

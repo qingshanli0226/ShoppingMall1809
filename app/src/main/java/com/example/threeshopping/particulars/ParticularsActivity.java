@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.InventoryBean;
@@ -144,9 +145,10 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
 
+                            //请求数据
+                            CacheShopManager.getInstance().showCart();
 
                             ProductBean inventoryBean = new ProductBean();
-
                             mPresenter.checkInventory(productBean);
                             LogUtils.json(productBean);
                         }
