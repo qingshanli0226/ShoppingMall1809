@@ -40,9 +40,9 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
             e.printStackTrace();
         }
 
-        ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getFiannceApiService()
-                .addProduct(responseBody)
+                .addProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ProductBean>() {

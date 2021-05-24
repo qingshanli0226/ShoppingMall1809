@@ -160,7 +160,7 @@ public interface FiannceApiService {
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
     @POST("addOneProduct")
-    Observable<ProductBean> addProduct(@Body ResponseBody responseBody);
+    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
 
     @GET("getShortcartProducts")
     Observable<ShoppingCarBean> getShoppingTrolley();

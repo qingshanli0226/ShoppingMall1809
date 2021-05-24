@@ -38,12 +38,11 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter = new ShoppingPresenter(this);
     }
 
     @Override
     protected void initData() {
-
 
     }
 
@@ -95,6 +94,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     public void onShopping(ShoppingCarBean shoppingCarBean) {
+
         if (shoppingCarBean.getCode().equals("200")) {
             List<ShoppingCarBean.ResultBean> result = shoppingCarBean.getResult();
 
