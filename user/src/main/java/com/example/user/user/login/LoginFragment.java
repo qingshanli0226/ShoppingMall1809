@@ -1,4 +1,4 @@
-package com.example.user.login;
+package com.example.user.user.login;
 
 
 import android.os.Bundle;
@@ -21,14 +21,17 @@ import com.example.framework.BaseFragment;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.RegisterBean;
 import com.example.user.R;
+import com.example.user.user.IUserView;
+import com.example.user.user.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends BaseFragment<LoginPresenter> implements ToolBar.OnClickListener, ILoginView {
+public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBar.OnClickListener, IUserView {
 
 
     private ToolBar toolbar;
@@ -66,7 +69,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ToolB
 
     @Override
     protected void initPrensenter() {
-        mPresenter = new LoginPresenter(this);
+        mPresenter = new UserPresenter(this);
     }
 
     @Override
@@ -149,14 +152,21 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ToolB
         loadPage.showSuccessLayout();
         LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")) {
+            getActivity().finish();
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
-            Bundle bundle = new Bundle();
-            bundle.putInt("page", page);
-            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("page", page);
+//            LogUtils.json(loginBean.getResult().getToken());
+//            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onRegister(RegisterBean registerBean) {
+
     }
 
     @Override

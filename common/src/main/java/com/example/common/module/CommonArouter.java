@@ -22,7 +22,7 @@ public class CommonArouter {
     }
 
 
-    //第二章 arouter
+    //arouter
     private Map<String,Class<?>> map = new HashMap<>();
     private Class<?> displayActivity;
     private Context context;

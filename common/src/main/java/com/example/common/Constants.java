@@ -113,6 +113,8 @@ public class Constants {
 
     //检查服务端多个产品是否库存充足
     public static final String CHECKINVENTORY = "checkInventory";
+//    检查服务端一个产品库存情况的接口
+    public static final String CHECKONEPRODUCTINVENTORY= "checkOneProductInventory";
 
 
     //向服务端下订单接口

@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 import com.example.user.R;
-import com.example.user.login.LoginFragment;
-import com.example.user.register.RegisterFragment;
+import com.example.user.user.login.LoginFragment;
+import com.example.user.user.register.RegisterFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

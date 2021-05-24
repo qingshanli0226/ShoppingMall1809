@@ -149,6 +149,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                         bundle.putString("pic",Constants.BASE_URl_IMAGE +seckillInfoBeans.getList().get(position).getFigure());
                         bundle.putString("title",seckillInfoBeans.getList().get(position).getName());
                         bundle.putString("price",seckillInfoBeans.getList().get(position).getCover_price());
+                        bundle.putString("id",seckillInfoBeans.getList().get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
@@ -182,6 +183,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                         bundle.putString("pic",Constants.BASE_URl_IMAGE +recommendInfoBeans.get(position).getFigure());
                         bundle.putString("title",recommendInfoBeans.get(position).getName());
                         bundle.putString("price",recommendInfoBeans.get(position).getCover_price());
+                        bundle.putString("id",recommendInfoBeans.get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
@@ -217,6 +219,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                         bundle.putString("pic",Constants.BASE_URl_IMAGE +hotInfoBeans.get(position).getFigure());
                         bundle.putString("title",hotInfoBeans.get(position).getName());
                         bundle.putString("price",hotInfoBeans.get(position).getCover_price());
+                        bundle.putString("id",hotInfoBeans.get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 

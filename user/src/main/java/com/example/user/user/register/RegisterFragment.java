@@ -1,4 +1,4 @@
-package com.example.user.register;
+package com.example.user.user.register;
 
 
 import android.os.Bundle;
@@ -19,13 +19,15 @@ import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
+import com.example.user.user.IUserView;
+import com.example.user.user.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegisterFragment extends BaseFragment<RegisterPresenter> implements ToolBar.OnClickListener, IRegisterView {
+public class RegisterFragment extends BaseFragment<UserPresenter> implements ToolBar.OnClickListener, IUserView {
 
 
     private ToolBar toolbar;
@@ -56,7 +58,7 @@ public class RegisterFragment extends BaseFragment<RegisterPresenter> implements
 
     @Override
     protected void initPrensenter() {
-        mPresenter = new RegisterPresenter(this);
+        mPresenter = new UserPresenter(this);
     }
 
     @Override
@@ -118,10 +120,6 @@ public class RegisterFragment extends BaseFragment<RegisterPresenter> implements
 
     }
 
-    @Override
-    public void onAutoLogin(LoginBean loginBean) {
-
-    }
 
     @Override
     public void showLoading() {
