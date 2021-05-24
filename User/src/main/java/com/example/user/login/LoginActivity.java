@@ -17,6 +17,8 @@ import com.example.user.R;
 import com.example.user.register.RegisterActivity;
 import com.example.view.ToolBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
     private com.example.view.ToolBar toolbar;
@@ -87,6 +89,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     public void onLoginData(LogBean logBean) {
         if (logBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setIsLog(logBean);
+            EventBus.getDefault().postSticky("acc_username");
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
         }

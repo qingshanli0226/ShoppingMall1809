@@ -7,6 +7,6 @@ public
 interface IDetailsView extends IBaseView {
 
     void getAddOneProduct(AddOneProductBean addOneProductBean);
-
+    void checkOneProductInventory(AddOneProductBean addOneProductBean);
 
 }

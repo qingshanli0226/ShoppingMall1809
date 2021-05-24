@@ -41,6 +41,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private String img;
     private String price;
     private Map<String,String> map = new HashMap<>();
+    private Map<String,Integer> map2 = new HashMap<>();
     private String productId;
     private String productPrice;
     private int productNum;
@@ -147,7 +148,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     pop_sub.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             if (prod_num < 0){
                                 Toast.makeText(DetailsActivity.this, "库存不可为0", Toast.LENGTH_SHORT).show();
                             }else {
@@ -164,10 +164,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
 
-
-
                             httpPresenter.postAddOneProduct(map);
-
                         }
                     });
 
@@ -177,8 +174,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     Toast.makeText(DetailsActivity.this, "当前用户未登录", Toast.LENGTH_SHORT).show();
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(DetailsActivity.this,null);
                 }
-
-
 
             }
         });
@@ -253,6 +248,13 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
         String result = addOneProductBean.getResult();
         Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void checkOneProductInventory(AddOneProductBean addOneProductBean) {
+        if (addOneProductBean.getCode().equals("200")){
+            Toast.makeText(this, "1231232", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

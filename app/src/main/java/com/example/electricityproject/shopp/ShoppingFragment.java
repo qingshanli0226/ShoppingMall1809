@@ -15,6 +15,7 @@ import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
+import com.example.manager.BusinessBuyCarManger;
 import com.example.view.ToolBar;
 
 import java.util.HashMap;
@@ -71,6 +72,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 }
             }
         });
+        ShortcartProductBean shortProductBean = BusinessBuyCarManger.getBusinessBuyCarManger().getShortProductBean();
+
+        if (shortProductBean!=null){
+            shoppingAdapter = new ShoppingAdapter();
+            buyCarRv.setAdapter(shoppingAdapter);
+            shoppingAdapter.notifyDataSetChanged();
+        }
 
 
     }
@@ -123,9 +131,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         if (shortcartProductBean.getCode().equals("200")) {
             shoppingAdapter = new ShoppingAdapter();
             shoppingAdapter.updateData(shortcartProductBean.getResult());
+
+            BusinessBuyCarManger.getBusinessBuyCarManger().setShortProductBean(shortcartProductBean);
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
-
         }
     }
 

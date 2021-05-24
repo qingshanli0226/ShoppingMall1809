@@ -11,14 +11,20 @@ import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.view.ToolBar;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class PersonFragment extends BaseFragment {
 
 
     private ToolBar toolbar;
     private TextView pleaseLogin;
+    private LogBean logBean;
 
     @Override
     protected void initData() {
+
+        EventBus.getDefault().register(this);
 
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +43,15 @@ public class PersonFragment extends BaseFragment {
 
     }
 
+    @Subscribe
+    public void EvenBus(String eve){
+        if (eve.equals("acc_username")){
+            Toast.makeText(getContext(), "123456", Toast.LENGTH_SHORT).show();
+            logBean = BusinessUserManager.getInstance().getIsLog();
+            pleaseLogin.setText(""+logBean.getResult().getName());
+        }
+    }
+
     @Override
     protected void initPresenter() {
 
@@ -46,11 +61,7 @@ public class PersonFragment extends BaseFragment {
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         pleaseLogin = (TextView) findViewById(R.id.please_login);
-        if (BusinessUserManager.getInstance().getIsLog()!=null){
-            LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-            String name = isLog.getResult().getName();
-            pleaseLogin.setText(""+name);
-        }
+
     }
 
     @Override
@@ -75,7 +86,7 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     public void onLoginChange(LogBean isLog) {
-
+        logBean = isLog;
     }
 
 
