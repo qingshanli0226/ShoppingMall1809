@@ -98,8 +98,12 @@ public interface IHttpApiService {
 
 
 
-
+    //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
+
+    //选中全部
+    @POST(Constants.SELECTALL)
+    Observable<SelectBean> selectAll(@Body RequestBody requestBody);
 
 }
