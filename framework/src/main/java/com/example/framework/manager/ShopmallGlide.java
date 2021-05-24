@@ -3,6 +3,7 @@ package com.example.framework.manager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.Log;
 import android.util.LruCache;
@@ -291,6 +292,7 @@ public class ShopmallGlide {
 
             imageView.setTag(picUrl);
             imageView.setImageResource(R.mipmap.ic_launcher);
+            imageView.setBackgroundColor(Color.parseColor("#00000000"));
 
             String key=ShopmallGlide.getInstance().generateCacheKey(picUrl);
             //先从内存中获取Bitmap

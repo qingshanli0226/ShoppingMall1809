@@ -1,13 +1,18 @@
 package com.example.shoppingmall1809.main.user;
 
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
+import com.example.net.model.FindForBean;
 import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
 
-public class UserFragment extends BaseFragment implements FiannceUserManager.IUserLoginChanged {
+public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUserManager.IUserLoginChanged ,IUserView{
 
 
     private LinearLayout fragUserFukuan;
@@ -20,12 +25,31 @@ public class UserFragment extends BaseFragment implements FiannceUserManager.IUs
 
     @Override
     protected void initData() {
+        if (ShopeUserManager.getInstance().getLoginBean()!=null) {
+            httpPresenter.getFindForPayData();
+            httpPresenter.getFindForSendData();
+        }
 
+        fragUserFukuan.setOnClickListener(view -> {
+            if (ShopeUserManager.getInstance().getLoginBean()!=null) {
+                ARouter.getInstance().build(ShopConstants.SHOP_PAY).navigation();
+            }else {
+                Toast.makeText(getActivity(), ""+getResources().getString(R.string.loginFirst), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        fragUserFahuo.setOnClickListener(view -> {
+            if (ShopeUserManager.getInstance().getLoginBean()!=null) {
+                ARouter.getInstance().build(ShopConstants.SHOP_PAY).navigation();
+            }else {
+                Toast.makeText(getActivity(), ""+getResources().getString(R.string.loginFirst), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter = new UserPresenter(this);
     }
 
     @Override
@@ -37,6 +61,34 @@ public class UserFragment extends BaseFragment implements FiannceUserManager.IUs
 
     @Override
     public void onLoginChange(LoginBean loginBean) {
+        httpPresenter.getFindForPayData();
+        httpPresenter.getFindForSendData();
+    }
 
+    @Override
+    public void onFindForPayData(FindForBean findForBean) {
+        LogUtils.json(findForBean);
+    }
+
+    @Override
+    public void onFindForSendData(FindForBean findForBean) {
+        LogUtils.json(findForBean);
+    }
+
+
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void Error(String error) {
+        Toast.makeText(getActivity(), ""+error, Toast.LENGTH_SHORT).show();
     }
 }

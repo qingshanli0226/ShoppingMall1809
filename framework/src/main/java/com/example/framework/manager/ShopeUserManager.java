@@ -5,7 +5,7 @@ import com.example.net.model.LoginBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiannceUserManager {
+public class ShopeUserManager {
 
     private List<IUserLoginChanged> iUserLoginChangedList = new ArrayList<>();
 
@@ -36,12 +36,12 @@ public class FiannceUserManager {
     }
 
 
-    private static FiannceUserManager fiannceUserManager;
+    private static ShopeUserManager shopeUserManager;
 
-    public static FiannceUserManager getInstance() {
-        if (fiannceUserManager == null) {
-            fiannceUserManager = new FiannceUserManager();
+    public static ShopeUserManager getInstance() {
+        if (shopeUserManager == null) {
+            shopeUserManager = new ShopeUserManager();
         }
-        return fiannceUserManager;
+        return shopeUserManager;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.user.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -10,14 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
-import com.example.framework.BaseActivity;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheManager;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.user.R;
@@ -163,7 +160,7 @@ public class LoginFragment extends BaseFragment<LoginPresneter> implements ILogi
     @Override
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
-            FiannceUserManager.getInstance().setLoginBean(loginBean);
+            ShopeUserManager.getInstance().setLoginBean(loginBean);
             SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
             if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
                 getActivity().finish();

@@ -6,11 +6,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.framework.manager.FiannceUserManager;
 import com.example.framework.manager.ShopManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
-import com.example.net.model.LoginBean;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener , ShopManager.IConnectListener {
 

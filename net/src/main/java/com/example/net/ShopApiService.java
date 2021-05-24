@@ -2,6 +2,7 @@ package com.example.net;
 
 import com.example.commom.Constants;
 import com.example.net.model.CategoryBean;
+import com.example.net.model.FindForBean;
 import com.example.net.model.HoemBean;
 import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
@@ -59,11 +60,11 @@ public interface ShopApiService {
 
     //待支付
     @GET("findForPay")
-    Observable<SortBean> getFindForPayData();
+    Observable<FindForBean> getFindForPayData();
 
     //待发货
     @GET("findForSend")
-    Observable<SortBean> getFindForSendData();
+    Observable<FindForBean> getFindForSendData();
 
 
 }

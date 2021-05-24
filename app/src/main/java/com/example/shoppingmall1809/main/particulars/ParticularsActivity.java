@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +16,7 @@ import com.example.commom.Constants;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheManager;
-import com.example.framework.manager.FiannceUserManager;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ShopmallGlide;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.CategoryBean;
@@ -28,8 +26,6 @@ import com.example.net.model.RegisterBean;
 import com.example.shoppingcar.addOneProduct.AddOnrProductPresenter;
 import com.example.shoppingcar.addOneProduct.IAddOneProduct;
 import com.example.shoppingmall1809.R;
-
-import java.io.Serializable;
 
 public class ParticularsActivity extends BaseActivity implements IAddOneProduct {
     private ToolBar toolbar;
@@ -77,7 +73,7 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
         particularsAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginBean loginBean = FiannceUserManager.getInstance().getLoginBean();
+                LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
                 if (loginBean == null) {
                     CacheManager.getInstance().decideARoutPage = ShopConstants.AROUT_PARTICULARS;
                     ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
