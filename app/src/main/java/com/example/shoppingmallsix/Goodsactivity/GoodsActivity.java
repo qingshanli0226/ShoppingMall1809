@@ -19,6 +19,7 @@ import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
 import com.example.shoppingmallsix.Goodsactivity.adapter.GoodsAdapter;
@@ -197,7 +198,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
 
     @Override
     public void onUpdateNum(UpdateProductNumBean bean) {
-
+        
     }
 
     @Override
