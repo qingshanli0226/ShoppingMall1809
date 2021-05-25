@@ -192,6 +192,9 @@ public class ShopmallGlide {
                             });
                         } else {
                             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
+                            if (originalBitmap == null) {
+                                return;
+                            }
                             //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
                             Bitmap bitmap = sampleBitmap(imageView, originalBitmap);
                             originalBitmap.recycle();//已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了

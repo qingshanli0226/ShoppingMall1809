@@ -2,6 +2,7 @@ package com.example.shoppingcar.shoppingtrolley.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,10 +42,49 @@ public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.Result
         textView.setText(itemData.getProductName());
         price.setText("￥"+itemData.getProductPrice().toString());
         num.setText(itemData.getProductNum());
+
+        CheckBox checkBox = holder.getView(R.id.shoppingTrolley_check);
+        checkBox.setChecked(itemData.isProductSelected());
+        if (itemData.isProductSelected()) {
+            checkBox.setBackgroundResource(R.drawable.checkbox_selected);
+        }else {
+            checkBox.setBackgroundResource(R.drawable.checkbox_unselected);
+        }
+
+
+        checkBox.setOnClickListener(view -> {
+            if (iShopItemListener != null) {
+                iShopItemListener.onItemChildClick(position,view);
+            }
+        });
+
+        sub.setOnClickListener(view -> {
+            if (iShopItemListener != null) {
+                iShopItemListener.onItemChildClick(position,view);
+            }
+        });
+
+        add.setOnClickListener(view -> {
+            if (iShopItemListener != null) {
+                iShopItemListener.onItemChildClick(position,view);
+            }
+        });
+
     }
 
     @Override
     protected int getRootViewType(int position) {
         return 0;
+    }
+
+
+    public interface IShopItemListener{
+        void onItemChildClick(int position,View view);
+    }
+
+    private IShopItemListener iShopItemListener;
+
+    public void setShopItemListener(IShopItemListener iShopItemListener) {
+        this.iShopItemListener = iShopItemListener;
     }
 }

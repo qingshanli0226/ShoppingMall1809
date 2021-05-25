@@ -3,12 +3,15 @@ package com.example.shoppingcar.shoppingtrolley;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShopeUserManager;
+import com.example.framework.view.BaseRVAdapter;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.net.model.ShoppingTrolleyBean;
@@ -78,6 +81,19 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
             ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
             shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
             shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
+
+            shoppingCarAdapter.setShopItemListener((position, view) -> {
+                int id = view.getId();
+                if (id == R.id.shoppingTrolley_add) {
+                } else if (id == R.id.shoppingTrolley_sub) {
+                } else if (id == R.id.shoppingTrolley_check) {
+                    CheckBox checkBox = (CheckBox) view;
+                    result.get(position).setProductSelected(checkBox.isChecked());
+                }
+                shoppingCarAdapter.notifyDataSetChanged();
+                LogUtils.json(result.get(position));
+            });
+
         }
     }
 
