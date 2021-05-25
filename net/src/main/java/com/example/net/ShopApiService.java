@@ -59,7 +59,8 @@ public interface ShopApiService {
     Observable<RegisterBean> addOneProduct(@Body RequestBody requestBody);
 
     @POST("checkOneProductInventory")
-    Observable<RegisterBean> getCheckOneProductInventory(@Body ResponseBody responseBody);
+    @FormUrlEncoded
+    Observable<RegisterBean> getCheckOneProductInventory(@Field("productId")String productId,@Field("productNum")String productNum);
 
     @POST("updateProductSelected")
     Observable<RegisterBean> getUpdateProductSelected(@Body RequestBody requestBody);
