@@ -37,14 +37,9 @@ public interface Api {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-<<<<<<< HEAD
     @POST("autoLogin")
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
-=======
-    @FormUrlEncoded
-    @POST
-    Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
     //购物车
     @POST("addOneProduct")
@@ -52,10 +47,5 @@ public interface Api {
 
     //库存
     @POST("checkOneProductInventory")
-    Observable<RegisterBean> getInventory(@Body RequestBody body);
-
-
-
-
->>>>>>> zkhone
+    Observable<RegisterBean> getInventory(@Body ResponseBody body);
 }

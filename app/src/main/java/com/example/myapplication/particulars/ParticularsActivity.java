@@ -158,13 +158,8 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             int num = Integer.parseInt(popNum.getText().toString());
             int a=num;
             if (a--<=1){
-                Toast.makeText(ParticularsActivity.this, "不能小于1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ParticularsActivity.this, getString(R.string.notLessThanOne), Toast.LENGTH_SHORT).show();
             }else {
-<<<<<<< HEAD
-//                PopupWindow popupWindow = new PopupWindow();
-//                LayoutInflater.from(this).inflate(R.layout.)
-//                popupWindow.setContentView();
-=======
                 num--;
             }
             popNum.setText(num+"");
@@ -181,11 +176,12 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             @Override
             public void onClick(View v) {
                 //刷新加入购物车数量
-                int num = Integer.parseInt(popNum.getText().toString());
-//                mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
+//                int num = Integer.parseInt(popNum.getText().toString());
                 //获取库存
-                mPresenter.getInventory(id,num+"");
->>>>>>> zkhone
+//                mPresenter.getInventory(id,num+"");
+
+                //直接调用购物车
+                mPresenter.getAddShoppingCart(id,popNum+"",name,pic,price);
             }
         });
     }
@@ -206,20 +202,19 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     public void onAddShoppingCart(ShoppingCartBean shoppingCartBean) {
         String code = shoppingCartBean.getCode();
         if (code.equals("200")){
-            Toast.makeText(this, "成功",  Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.addShoppingSucceed),  Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onIsInventory(RegisterBean registerBean) {
-        Toast.makeText(this,"库存"+registerBean.toString(), Toast.LENGTH_SHORT).show();
         if (registerBean.getCode().equals("200")){
             int num = Integer.parseInt(popNum.getText().toString());
             mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
         }else {
-            Toast.makeText(this, "库存不够", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.inventoryNot), Toast.LENGTH_SHORT).show();
         }
     }
 }

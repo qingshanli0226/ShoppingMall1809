@@ -10,6 +10,15 @@ public class ShoppingCartBean {
     private String message;
     private String result;
 
+    @Override
+    public String toString() {
+        return "ShoppingCartBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result='" + result + '\'' +
+                '}';
+    }
+
     public String getCode() {
         return code;
     }

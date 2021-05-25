@@ -21,6 +21,7 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView> {
 
@@ -99,7 +100,7 @@ public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView>
             e.printStackTrace();
         }
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        ResponseBody body = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitManager.getApi().getInventory(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

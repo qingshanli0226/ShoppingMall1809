@@ -1,7 +1,9 @@
-package com.example.common.autoservice;
+package com.example.net;
 
 
-import com.example.framework.SpUtil;
+
+import android.util.Log;
+
 
 import java.io.IOException;
 
@@ -13,8 +15,9 @@ import okhttp3.Response;
 public class TokenInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String string = SpUtil.getString(AppMoudel.context, FiannceContants.Token_key);
-        Request build = chain.request().newBuilder().addHeader(FiannceContants.Token_key, string).build();
+        String token = SpUtil.getString(AppMoudel.context, FiannceContants.Token_key);
+        Request build = chain.request().newBuilder().addHeader(FiannceContants.Token_key, token).build();
+        Log.d("TokenInterceptor", token);
         return chain.proceed(build);
     }
 }
