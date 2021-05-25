@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'org.greenrobot.greendao' // 1.apply plugin
 }
 
 android {
@@ -27,8 +28,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+greendao {
+    // 指定数据库schema版本号，迁移等操作会用到
+    schemaVersion 1
+    // 设置生成数据库文件的目录，默认是在build中，可以将生成的文件放到我们的java目录中
+    targetGenDir 'src/main/java'
+    // 设置生成的数据库相关文件的包名，默认为entity所在的包名
+    daoPackage 'com.example.framework.db'
+}
 
 dependencies {
+    implementation 'org.greenrobot:greendao:3.3.0' // 2.add library
     //异步线程
     api 'io.reactivex.rxjava2:rxjava:2.2.6'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'

@@ -13,11 +13,19 @@ import mvp.view.IActivity;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity,CacheUserManager.IloginChange{
    protected P mPresenter;
+   protected LoadingPage loadingPage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(bandLayout());
+         loadingPage = new LoadingPage(this) {
+
+            @Override
+            protected int getSuccessLayoutId() {
+                return bandLayout();
+            }
+        };
+        setContentView(loadingPage);
         initView();
         initPresenter();
         initData();
@@ -26,21 +34,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
+    protected abstract int bandLayout();
 
 
     @Override

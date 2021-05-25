@@ -1551,6 +1551,7 @@ int id dialog_button 0x0
 int id dropdown_menu 0x0
 int id edit_query 0x0
 int id end 0x0
+int id error 0x0
 int id expand_activities_button 0x0
 int id expanded_menu 0x0
 int id fade 0x0
@@ -1579,6 +1580,7 @@ int id line1 0x0
 int id line3 0x0
 int id listMode 0x0
 int id list_item 0x0
+int id loadingbar 0x0
 int id masked 0x0
 int id message 0x0
 int id mini 0x0
@@ -1845,6 +1847,8 @@ int layout text_view_with_line_height_from_style 0x0
 int layout text_view_with_theme_line_height 0x0
 int layout text_view_without_line_height 0x0
 int layout toorbarview 0x0
+int layout view_error 0x0
+int layout view_loading 0x0
 int mipmap ic_launcher 0x0
 int mipmap ic_launcher_round 0x0
 int mipmap main_cart 0x0

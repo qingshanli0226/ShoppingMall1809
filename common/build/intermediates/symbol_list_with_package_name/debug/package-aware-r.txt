@@ -1552,6 +1552,7 @@ id dialog_button
 id dropdown_menu
 id edit_query
 id end
+id error
 id expand_activities_button
 id expanded_menu
 id fade
@@ -1580,6 +1581,7 @@ id line1
 id line3
 id listMode
 id list_item
+id loadingbar
 id masked
 id message
 id mini
@@ -1846,6 +1848,8 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout toorbarview
+layout view_error
+layout view_loading
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap main_cart

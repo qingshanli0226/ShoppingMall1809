@@ -21,6 +21,7 @@ public class CaCheArote {
 //    private IPayInterface iPayInterface;
     private IAppInterface iAppInterface;
     private IParticularsInterface iParticularsInterface;
+    private IMsgInterface iMsgInterface;
     private Context context;
 
     public void init(Context context) {
@@ -38,6 +39,12 @@ public class CaCheArote {
 
     public void registerIParticularsInterface(IParticularsInterface iParticularsInterface) {
         this.iParticularsInterface = iParticularsInterface;
+    }
+    public IMsgInterface getImsgInterface(){
+        return iMsgInterface;
+    }
+    public void registerImsgInterface(IMsgInterface iMsgInterface){
+        this.iMsgInterface=iMsgInterface;
     }
     public IParticularsInterface getParticularsInterface() {
         return iParticularsInterface;
@@ -67,6 +74,10 @@ public class CaCheArote {
         return iAppInterface;
     }
 
+    public interface IMsgInterface{
+        void openMsgActivity(Context context,Bundle bundle);
+
+    }
 
     ////在框架里约定好熬User要实现的接口，其他页面可以调用此接口
     public interface IUserInterface {

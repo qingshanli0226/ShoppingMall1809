@@ -34,8 +34,6 @@
     <string name="priceFlag">￥</string>
 
 
-
-
     <string name="popType">样式</string>
     <string name="popSizeM">M</string>
     <string name="popSizeL">L</string>
@@ -51,6 +49,7 @@
     <string name="inventoryNot">库存不够</string>
     <string name="notLessThanOne">库存不够</string>
 
+<<<<<<< HEAD
     <string name="welcomeNotExit">稍后退出</string>
 
     <string name="personOrder">我的订单</string>
@@ -71,4 +70,7 @@
     <string name="personServiceCenter">客服中心</string>
     <string name="personServiceFeedback">服务反馈</string>
 
+=======
+    <string name="title_msg">消息</string>
+>>>>>>> 30d9ea6619d50bedc00071e173b66dd9693a3020
 </resources>

@@ -48,6 +48,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="@dimen/dp_40"
+                android:id="@+id/msg"
                 android:src="@drawable/community_message_icon"></ImageView>
 
             <TextView
