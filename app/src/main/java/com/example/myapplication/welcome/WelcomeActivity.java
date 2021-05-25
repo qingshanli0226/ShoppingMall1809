@@ -40,12 +40,12 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void initPresenter() {
-        rootPresenter = new WelcomePresenter(this);
+        mPresenter = new WelcomePresenter(this);
     }
 
     @Override
     public void initData() {
-        rootPresenter.getHome();//获取首页数据
+        mPresenter.getHome();//获取首页数据
         //给倒计时初始值
         timeTv=getString(R.string.welcomeCoundDownNum);
         coundDownTv.setText(timeTv);

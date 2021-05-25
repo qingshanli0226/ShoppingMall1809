@@ -1,4 +1,4 @@
-package com.example.common.autoservice;
+package com.example.net;
 
 import android.content.Context;
 
@@ -7,4 +7,9 @@ public class AppMoudel {
         context=applicatin;
     }
     public static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
+
 }

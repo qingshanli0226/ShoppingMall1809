@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com/example/common/autoservice/FiannceContants.java
  com.example.common.autoservice.FiannceContants
 com/example/common/type/ToLoginType.java
@@ -8,5 +9,11 @@ com/example/common/type/TypeString.java
  com.example.common.type.TypeString
 com/example/common/autoservice/AppMoudel.java
  com.example.common.autoservice.AppMoudel
+=======
+com/example/common/type/ToLoginType.java
+ com.example.common.type.ToLoginType
+com/example/common/type/TypeString.java
+ com.example.common.type.TypeString
+>>>>>>> d626073620d031eae8c27edd2f6c8a90781ce8cb
 com/example/common/BuildConfig.java
  com.example.common.BuildConfig

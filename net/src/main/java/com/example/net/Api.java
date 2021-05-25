@@ -3,11 +3,14 @@ package com.example.net;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
+import com.example.net.bean.ShoppingCartBean;
 import com.example.net.bean.SkirtBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -34,7 +37,18 @@ public interface Api {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
+
+    //购物车
+    @POST("addOneProduct")
+    Observable<ShoppingCartBean> getAddShoppingCart(@Body RequestBody body);
+
+    //库存
+    @POST("checkOneProductInventory")
+    Observable<RegisterBean> getInventory(@Body ResponseBody body);
+
     @POST("autoLogin")
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
+
+
 }

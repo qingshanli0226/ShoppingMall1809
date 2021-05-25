@@ -35,6 +35,19 @@
 
 
     <string name="popType">样式</string>
+    <string name="popSizeM">M</string>
+    <string name="popSizeL">L</string>
+    <string name="popSizeXL">XL</string>
+    <string name="numIndex">数量</string>
+    <string name="index">1</string>
+    <string name="popCencelTv">取消</string>
+    <string name="popConfirmTv">确定</string>
+
+
+    <string name="addShoppingSucceed">添加购物车成功</string>
+    <string name="addShoppingeError">添加购物车失败</string>
+    <string name="inventoryNot">库存不够</string>
+    <string name="notLessThanOne">库存不够</string>
 
     <string name="title_msg">消息</string>
 </resources>

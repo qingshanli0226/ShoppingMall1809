@@ -8,6 +8,7 @@ import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.AppModule;
 import com.example.myapplication.MsgMoudel;
 import com.example.myapplication.particulars.ParticularsModule;
+import com.example.net.AppMoudel;
 import com.example.user.AutoService;
 
 
@@ -17,7 +18,7 @@ public class App extends Application {
         super.onCreate();
 
 
-
+        AppMoudel.init(this);
         UserModule.init();
         AppModule.init();
         ParticularsModule.init();

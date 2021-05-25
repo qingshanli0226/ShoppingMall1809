@@ -1,20 +1,18 @@
 package com.example.net.bean;
 
-public class RegisterBean {
-
+public class ShoppingCartBean {
     /**
      * code : 200
      * message : 请求成功
-     * result : 注册成功
+     * result : 请求成功
      */
-
     private String code;
     private String message;
     private String result;
 
     @Override
     public String toString() {
-        return "RegisterBean{" +
+        return "ShoppingCartBean{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
                 ", result='" + result + '\'' +

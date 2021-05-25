@@ -61,9 +61,6 @@ public class UserActivity extends BaseActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("page","0");
                 CaCheArote.getInstance().getAppInterface().openMainActivity(this,bundle);
-            }else if (toLoginType.equals(TypeString.PARTICALARS_TYPE)){
-                //返回详情页面
-                CaCheArote.getInstance().getParticularsInterface().openParticularsctivity(this,null);
             }
             finish();
         }
