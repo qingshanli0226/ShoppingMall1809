@@ -188,9 +188,9 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     @Override
     public void onAddCart(AddOneProductBean productBean) {
         if (productBean.getCode().equals("200")){
-            Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.add), Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.dda), Toast.LENGTH_SHORT).show();
         }
     }
 

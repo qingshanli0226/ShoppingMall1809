@@ -44,7 +44,7 @@ public class GoodsAdapter extends BaseRvAdapter<GoodAdapterBean> {
                 goodsAdapterItemWebView.loadUrl(Constants.BASE_URl_IMAGE+itemData.getFigure());
 
                 goodsAdapterItemTextName.setText(itemData.getName());
-                goodsAdapterItemTextPrice.setText("￥"+itemData.getPrice());
+                goodsAdapterItemTextPrice.setText(holder.itemView.getResources().getString(R.string.bi)+itemData.getPrice());
                 goodsAdapterItemTextPrice.setTextColor(Color.parseColor("#ff0000"));
                 break;
             case 1:

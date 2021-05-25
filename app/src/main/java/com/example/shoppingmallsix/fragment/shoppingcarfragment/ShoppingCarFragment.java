@@ -87,7 +87,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         });
 
     }
-
+             
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
