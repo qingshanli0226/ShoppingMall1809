@@ -33,8 +33,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     private ImageView all;
     private ToolBar toolbar;
-    private Button goHome;
-    private ImageView shoppingImg;
+
     private ShoppingAdapter shoppingAdapter;
     private RecyclerView buyCarRv;
     private TextView shoppingSelectAll;
@@ -98,7 +97,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             result.get(position).setAll(true);
 
                         }
-
                         for (ShortcartProductBean.ResultBean resultBean : result) {
                             if (resultBean.isAll()) {
                                 num++;

@@ -56,7 +56,6 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
             @Override
             public void onClick(View v) {
                 if (childItemClickListener!=null){
-                    Log.i("zx", "onClick: 123");
                     childItemClickListener.OnChildItemListener(v,position);
                 }
 
