@@ -58,8 +58,8 @@ public class ShopService extends Service {
                     @Override
                     public void onNext(@NonNull LoginBean loginBean) {
                         if (loginBean.getCode().equals("200")) {
-                            ShopeUserManager.getInstance().setLoginBean(loginBean);
                             SpUtil.setString(ShopService.this, ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
+                            ShopeUserManager.getInstance().setLoginBean(loginBean);
                         }
                     }
 
