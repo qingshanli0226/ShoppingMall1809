@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.minefragment.MineFragment">
+    tools:context=".fragment.mine.MineFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

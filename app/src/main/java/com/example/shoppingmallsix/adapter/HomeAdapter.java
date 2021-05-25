@@ -20,7 +20,7 @@ import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.goodsactivity.GoodsActivity;
+import com.example.shoppingmallsix.goods.GoodsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 

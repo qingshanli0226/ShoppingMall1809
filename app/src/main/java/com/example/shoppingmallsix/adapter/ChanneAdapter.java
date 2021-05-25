@@ -1,6 +1,5 @@
 package com.example.shoppingmallsix.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,7 +8,6 @@ import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.fragment.homefragment.IHomeView;
 
 public class ChanneAdapter extends BaseRvAdapter<HomeBean.ResultBean.ChannelInfoBean> {
     @Override

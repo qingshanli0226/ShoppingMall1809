@@ -4,6 +4,7 @@ package com.example.net;
 
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.CheckInventoryBean;
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
@@ -119,7 +120,7 @@ public interface FiannceApiService {
 
     //检查服务端多个产品是否库存充足
     @POST(Constants.BUSINESS_CHECKINVENTORY)
-    Observable<CheckInventoryBean> getCheckInventory(@Body RequestBody body);
+    Observable<CheckInventoryBean> getCheckInventory(@Body ResponseBody body);
 
     //向服务端下订单接口
     @POST(Constants.BUSINESS_GETORDERINFO)
@@ -132,5 +133,10 @@ public interface FiannceApiService {
     //获取服务端购物车产品信息的接口
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
+
+
+    @FormUrlEncoded
+    @POST(Constants.BUSINESS_CHECKONEPRODUCTINVENTORY)
+    Observable<CheckOneInventoryBean> getInventory(@Field("productId")String productId, @Field("productNum")String productNum);
 
 }
