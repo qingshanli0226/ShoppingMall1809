@@ -201,6 +201,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     public void onAddShoppingCart(ShoppingCartBean shoppingCartBean) {
         String code = shoppingCartBean.getCode();
         if (code.equals("200")){
+            loadingPage.showSuccessView();
             Toast.makeText(this, getString(R.string.addShoppingSucceed),  Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
@@ -215,5 +216,20 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         }else {
             Toast.makeText(this, getString(R.string.inventoryNot), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void showLoading() {
+        loadingPage.showLoadingView();
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
     }
 }

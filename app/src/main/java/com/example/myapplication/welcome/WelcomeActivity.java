@@ -93,6 +93,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
         isHome = true;
         handler.sendEmptyMessage(HANDLER_HOMEDATE);
+        loadingPage.showSuccessView();
     }
     @Override
     protected void onDestroy() {
@@ -103,4 +104,19 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         destroy();
     }
 
+    @Override
+    public void showLoading() {
+
+      loadingPage.showLoadingView();
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

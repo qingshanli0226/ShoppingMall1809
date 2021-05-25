@@ -25,6 +25,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         return rootView = inflater.inflate(bandLayout(), container, false);
     }
 
+    protected abstract int bandLayout();
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
