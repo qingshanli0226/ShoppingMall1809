@@ -70,17 +70,8 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
     }
 
     public void CheckOneProductInventory(String productId, String productNum) {
-        JSONObject jsonObject = new JSONObject();
-
-        try {
-            jsonObject.put("productId", productId);
-            jsonObject.put("productNum", productNum);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getShopApiService()
-                .getCheckOneProductInventory(responseBody)
+                .getCheckOneProductInventory(productId,productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterBean>() {
