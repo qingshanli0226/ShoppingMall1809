@@ -27,6 +27,8 @@ import com.example.myapplication.R;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
+import retrofit2.http.HEAD;
+
 
 public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements AddShoppingCartView {
 
@@ -176,16 +178,9 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             @Override
             public void onClick(View v) {
                 //刷新加入购物车数量
-//                int num = Integer.parseInt(popNum.getText().toString());
-                //获取库存
-<<<<<<< HEAD
-                mPresenter.getInventory(id,num+"");
-=======
-//                mPresenter.getInventory(id,num+"");
-
+                int num = Integer.parseInt(popNum.getText().toString());
                 //直接调用购物车
-                mPresenter.getAddShoppingCart(id,popNum+"",name,pic,price);
->>>>>>> xsp
+                mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
             }
         });
     }

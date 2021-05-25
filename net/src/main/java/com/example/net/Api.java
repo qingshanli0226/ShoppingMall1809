@@ -37,12 +37,6 @@ public interface Api {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-<<<<<<< HEAD
-=======
-    @POST("autoLogin")
-    @FormUrlEncoded
-    Observable<LoginBean> getAutoLogin(@Field("token")String token);
->>>>>>> xsp
 
     //购物车
     @POST("addOneProduct")
@@ -50,16 +44,11 @@ public interface Api {
 
     //库存
     @POST("checkOneProductInventory")
-<<<<<<< HEAD
-    Observable<RegisterBean> getInventory(@Body RequestBody body);
-
-
-
+    Observable<RegisterBean> getInventory(@Body ResponseBody body);
 
     @POST("autoLogin")
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
-=======
-    Observable<RegisterBean> getInventory(@Body ResponseBody body);
->>>>>>> xsp
+
+
 }
