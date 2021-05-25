@@ -145,8 +145,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
 
-                            //请求数据
-                            CacheShopManager.getInstance().showCart();
 
 //                            ProductBean inventoryBean = new ProductBean();
 //                            mPresenter.checkInventory(productBean);
@@ -189,6 +187,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     @Override
     public void onAddCart(ProductBean productBean) {
         Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

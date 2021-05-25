@@ -7,6 +7,7 @@ import android.app.Application;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
@@ -26,7 +27,7 @@ public class App extends Application {
         AppModule.init();
         UserModule.init();
         NetModule.context = this;
-
+        CacheShopManager.getInstance().init();
  }
 
     private void configUnits() {
