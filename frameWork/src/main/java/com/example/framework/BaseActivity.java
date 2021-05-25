@@ -21,6 +21,7 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
     protected P mPresenter;
     protected ToolBar toolBar;
     protected LoadPage loadPage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

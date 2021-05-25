@@ -24,10 +24,17 @@ import com.example.framework.view.ToolBar;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
+import com.example.net.bean.SelectBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
 import com.example.user.user.UserActivity;
+import com.fiannce.sql.SqlBean;
+import com.fiannce.sql.UtileSql;
+
+import java.util.List;
+
+import okhttp3.internal.Util;
 
 public class ParticularsActivity extends BaseActivity<DetailPresenter> implements IDetailView {
 
@@ -144,13 +151,29 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setUrl(pic);
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
+                            //数据库
+                            SqlBean sqlBean = new SqlBean();
+                            sqlBean.setProductId(id);
+                            sqlBean.setProductName(title);
+                            sqlBean.setProductNum(num);
+                            sqlBean.setUrl(pic);
+                            sqlBean.setProductPrice(price);
+                            UtileSql.getInstance().getDaoSession().insert(sqlBean);
+                            List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
+                            LogUtils.json(sqlBean);
 
                             //请求数据
                             CacheShopManager.getInstance().showCart();
 
+<<<<<<< HEAD
 //                            ProductBean inventoryBean = new ProductBean();
 //                            mPresenter.checkInventory(productBean);
 //                            LogUtils.json(productBean);
+=======
+                            ProductBean inventoryBean = new ProductBean();
+
+                            LogUtils.json(productBean);
+>>>>>>> zzy
                         }
                     });
 
@@ -187,8 +210,10 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     }
 
     @Override
-    public void onAddCart(ProductBean productBean) {
-        Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+    public void onAddCart(SelectBean selectBean) {
+         if (selectBean.getCode().equals("200")){
+             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+         }
     }
 
     @Override

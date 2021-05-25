@@ -58,18 +58,26 @@ public interface IHttpApiService {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-
+    //添加数据
     @POST(Constants.ADDPRODUCT)
-    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
+    Observable<SelectBean> addProduct(@Body RequestBody requestBody);
 
     //获取服务端购物车产品信息的接口
     @GET(Constants.SHORTACRT)
     Observable<CartBean> showCart();
 
+<<<<<<< HEAD
     //    检查服务端一个产品库存情况的接口
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
+=======
+
+    @FormUrlEncoded
+    @POST(Constants.CHECKONEPRODUCTINVENTORY)
+    Observable<SelectBean> inventory(@Field("name")String name, @Field("password")String password);
+
+>>>>>>> zzy
     //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);

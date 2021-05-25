@@ -150,6 +150,6 @@ public class Constants {
     public static final String REMOVEMANY = "removeManyProduct";
 
 
-
+    public static final String SQLDB = "shopcar.db";
 
 }

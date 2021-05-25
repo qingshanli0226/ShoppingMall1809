@@ -33,16 +33,16 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                 .addProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProductBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ProductBean productBean) {
+                    public void onNext(@NonNull SelectBean selectBean) {
                         if (mView != null) {
-                            mView.onAddCart(productBean);
+                            mView.onAddCart(selectBean);
                         }
                     }
 
@@ -62,6 +62,7 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
     }
 
 
+<<<<<<< HEAD
   //检查数量
     public void inventory(CartBean.ResultBean resultBean) {
         String s = new Gson().toJson(resultBean);
@@ -94,6 +95,9 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                     }
                 });
     }
+=======
+
+>>>>>>> zzy
 
 
 //    public void UpdateProductNum(){
