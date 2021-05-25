@@ -1,4 +1,4 @@
-package com.example.shoppingmallsix.Goodsactivity;
+package com.example.shoppingmallsix.goodsactivity;
 
 import com.example.framework.IBaseView;
 import com.example.net.bean.business.AddOneProductBean;

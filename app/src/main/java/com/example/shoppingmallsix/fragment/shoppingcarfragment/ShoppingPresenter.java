@@ -4,6 +4,10 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.business.SelectAllProductBean;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -12,6 +16,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class ShoppingPresenter extends BasePresenter<IShopping> {
     public ShoppingPresenter(IShopping iShopping) {
@@ -50,6 +56,62 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                        LogUtils.json(shoppingCarBean);
                        if (iView!=null){
                            iView.onShopping(shoppingCarBean);
+                       }
+                   }
+
+                   @Override
+                   public void onError(@NonNull Throwable e) {
+                       if (iView!=null){
+                           iView.showToast(e.getMessage());
+                       }
+                   }
+
+                   @Override
+                   public void onComplete() {
+
+                   }
+               });
+    }
+    public void getSelectAllProduct(boolean mBoolean){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("selected",mBoolean);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getFiannceApiService()
+               .getSelectAllProduct(requestBody)
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .doOnSubscribe(new Consumer<Disposable>() {
+                   @Override
+                   public void accept(Disposable disposable) throws Exception {
+                       if (iView!=null){
+                           iView.showLoading();
+                       }
+                   }
+               })
+               .doFinally(new Action() {
+                   @Override
+                   public void run() throws Exception {
+                       if (iView!=null){
+                           iView.hideLoading();
+                       }
+                   }
+               })
+               .subscribe(new Observer<SelectAllProductBean>() {
+                   @Override
+                   public void onSubscribe(@NonNull Disposable d) {
+
+                   }
+
+                   @Override
+                   public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
+                       LogUtils.json(selectAllProductBean);
+                       if (iView!=null){
+                           iView.onSelectAllProductBean(selectAllProductBean);
                        }
                    }
 

@@ -4,6 +4,7 @@ package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,20 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
-
-import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheUserManager;
-
-
+import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.shoppingmallsix.R;
-
-import com.example.shoppingmallsix.fragment.classifyfragment.ClassifyFragment;
-import com.example.shoppingmallsix.mainactivity.MainActivity;
 import com.example.user.login.LoginActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,6 +41,11 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private Button shouCangBt;
     private RecyclerView recyclerView;
     private int index;
+    private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
+    private ShoppingCarAdapter shoppingCarAdapter;
+    private ToolBar toolbar;
+    private RecyclerView shopcarRv;
+    private CheckBox shopCheck;
 
     @Override
     protected void initPresenter() {
@@ -59,6 +62,14 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
+        shopCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                httpPresenter.getSelectAllProduct(shopCheck.isChecked());
+                shopCheck.setChecked(!shopCheck.isChecked());
+            }
+        });
+
     }
 
     @Override
@@ -71,6 +82,10 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         deleteBt = mBaseView.findViewById(R.id.deleteBt);
         shouCangBt = mBaseView.findViewById(R.id.shouCangBt);
         recyclerView = mBaseView.findViewById(R.id.shopcarRv);
+        shopCheck = mBaseView.findViewById(R.id.shopCheck);
+        shoppingCarAdapter = new ShoppingCarAdapter(resultBeans);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(shoppingCarAdapter);
 
         shopText.setText(bianji);
         shopText.setTag(false);
@@ -99,9 +114,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 }
             }
         });
-
     }
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
@@ -110,13 +123,30 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     @Override
     public void onShopping(GetShortcartProductsBean shoppingCarBean) {
 
-
         if (shoppingCarBean.getCode().equals("200")) {
             List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
+            resultBeans.addAll(result);
+            shoppingCarAdapter.notifyDataSetChanged();
+        }
+    }
 
-            ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(shoppingCarAdapter);
+    @Override
+    public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean) {
+        if (selectAllProductBean.getCode().equals("200")){
+            shopCheck.setChecked(!shopCheck.isChecked());
+            if (shopCheck.isChecked()){
+                for (int i = 0; i <resultBeans.size() ; i++) {
+                    GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(i);
+                    resultBean.setProductSelected(true);
+                }
+            }else {
+                for (int i = 0; i <resultBeans.size() ; i++) {
+                    GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(i);
+                    resultBean.setProductSelected(false);
+                }
+            }
+
+            shoppingCarAdapter.notifyDataSetChanged();
         }
     }
 
@@ -137,7 +167,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     public void onLoginChange(LoginBean loginBean) {
-        if (loginBean != null){
+        if (loginBean != null) {
             httpPresenter.getShoppingData();
         }
     }

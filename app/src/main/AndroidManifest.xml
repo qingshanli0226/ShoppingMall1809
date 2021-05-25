@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".message.MessageActivity"></activity>
-        <activity android:name=".Goodsactivity.GoodsActivity" />
+        <activity android:name=".goodsactivity.GoodsActivity" />
         <activity android:name=".sendgoodsactivity.SendGoodsActivity" />
         <activity android:name=".obligationactivity.ObligationActivity" />
         <activity android:name=".messageactivity.MessageActivity" />

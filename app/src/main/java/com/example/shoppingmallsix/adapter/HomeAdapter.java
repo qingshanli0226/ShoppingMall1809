@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +20,7 @@ import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.Goodsactivity.GoodsActivity;
+import com.example.shoppingmallsix.goodsactivity.GoodsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 

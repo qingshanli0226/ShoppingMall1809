@@ -57,6 +57,7 @@
                 android:button="@drawable/check_choose"
                 android:textSize="@dimen/dp_20"
                 android:layout_gravity="center"
+                android:id="@+id/shopCheck"
                 ></CheckBox>
 
             <TextView

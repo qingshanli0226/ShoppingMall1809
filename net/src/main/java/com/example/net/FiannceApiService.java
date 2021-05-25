@@ -133,5 +133,4 @@ public interface FiannceApiService {
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
 
-
 }

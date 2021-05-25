@@ -1,4 +1,4 @@
-package com.example.shoppingmallsix.Goodsactivity;
+package com.example.shoppingmallsix.goodsactivity;
 
 import android.content.Intent;
 import android.view.Gravity;
@@ -21,7 +21,7 @@ import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
-import com.example.shoppingmallsix.Goodsactivity.adapter.GoodsAdapter;
+import com.example.shoppingmallsix.goodsactivity.adapter.GoodsAdapter;
 import com.example.shoppingmallsix.R;
 
 import java.util.ArrayList;

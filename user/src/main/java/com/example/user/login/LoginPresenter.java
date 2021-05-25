@@ -31,7 +31,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-                        iView.hideLoading();
+                        if (iView!=null){
+                            iView.hideLoading();
+                        }
                     }
                 })
                 .subscribe(new Observer<LoginBean>() {

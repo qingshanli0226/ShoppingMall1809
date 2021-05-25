@@ -19,6 +19,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/check_choose"
+            android:id="@+id/shoppingTrolley_CheckBox"
             android:button="@null"></CheckBox>
 
         <ImageView

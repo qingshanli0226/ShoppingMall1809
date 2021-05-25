@@ -1,4 +1,4 @@
-package com.example.shoppingmallsix.Goodsactivity.adapter;
+package com.example.shoppingmallsix.goodsactivity.adapter;
 
 import android.graphics.Color;
 import android.webkit.WebView;
