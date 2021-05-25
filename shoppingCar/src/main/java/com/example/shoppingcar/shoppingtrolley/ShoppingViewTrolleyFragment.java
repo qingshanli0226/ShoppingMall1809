@@ -11,23 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShopeUserManager;
-import com.example.framework.view.BaseRVAdapter;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
+import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
 import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 
 import java.util.List;
 
-public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShopping, ShopeUserManager.IUserLoginChanged {
+public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged {
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
     private TextView price;
     private TextView accout;
-
+    private ShoppingCarAdapter shoppingCarAdapter;
     private boolean isCheck = false;
+    private List<ShoppingTrolleyBean.ResultBean> result;
+    private CheckBox checkBox;
+    private int position;
+    private boolean isRequest = true;
 
     @Override
     protected int getLayoutId() {
@@ -36,11 +40,14 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
 
     @Override
     protected void initData() {
+
+
         ShopeUserManager.getInstance().register(this::onLoginChange);
 
         LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
-        if (loginBean!=null){
+        if (loginBean != null) {
             httpPresenter.getShoppingData();
+            isRequest =false;
         }
 
 
@@ -75,10 +82,11 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
 
     @Override
     public void onShopping(ShoppingTrolleyBean shoppingTrolleyBean) {
+        isRequest = true;
         if (shoppingTrolleyBean.getCode().equals("200")) {
-            List<ShoppingTrolleyBean.ResultBean> result = shoppingTrolleyBean.getResult();
+            result = shoppingTrolleyBean.getResult();
 
-            ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(result);
+            shoppingCarAdapter = new ShoppingCarAdapter(result);
             shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
             shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
 
@@ -87,14 +95,25 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
                 if (id == R.id.shoppingTrolley_add) {
                 } else if (id == R.id.shoppingTrolley_sub) {
                 } else if (id == R.id.shoppingTrolley_check) {
-                    CheckBox checkBox = (CheckBox) view;
-                    result.get(position).setProductSelected(checkBox.isChecked());
+                    checkBox = (CheckBox) view;
+                    this.position = position;
+                    ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
+                    httpPresenter.getUpDateSelected(resultBean.getProductId(), resultBean.isProductSelected(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice().toString());
+                    isRequest = false;
                 }
-                shoppingCarAdapter.notifyDataSetChanged();
-                LogUtils.json(result.get(position));
             });
 
         }
+    }
+
+    @Override
+    public void onUpDateSelected(RegisterBean registerBean) {
+        if (registerBean.getCode().equals("200")) {
+            isRequest = true;
+            result.get(position).setProductSelected(checkBox.isChecked());
+            shoppingCarAdapter.notifyItemChanged(position);
+        }
+//        LogUtils.json(result.get(position));
     }
 
 
@@ -110,13 +129,14 @@ public class ShoppingTrolleyFragment extends BaseFragment<ShoppingPresenter> imp
 
     @Override
     public void Error(String error) {
-
+        Toast.makeText(getActivity(), ""+error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLoginChange(LoginBean loginBean) {
         if (loginBean != null) {
             httpPresenter.getShoppingData();
+            isRequest = false;
         }
     }
 

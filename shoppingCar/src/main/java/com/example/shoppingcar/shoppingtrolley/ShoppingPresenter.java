@@ -3,7 +3,11 @@ package com.example.shoppingcar.shoppingtrolley;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
+import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -12,58 +16,124 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
-public class ShoppingPresenter extends BasePresenter<IShopping> {
-    public ShoppingPresenter(IShopping iShopping) {
+public class ShoppingPresenter extends BasePresenter<IShoppingView> {
+    public ShoppingPresenter(IShoppingView iShopping) {
         attachView(iShopping);
     }
 
-    public void getShoppingData(){
-       RetrofitCreator.getShopApiService()
-               .getShoppingTrolley()
-               .subscribeOn(Schedulers.io())
-               .observeOn(AndroidSchedulers.mainThread())
-               .doOnSubscribe(new Consumer<Disposable>() {
-                   @Override
-                   public void accept(Disposable disposable) throws Exception {
-                       if (iView!=null){
-                           iView.showLoading();
-                       }
-                   }
-               })
-               .doFinally(new Action() {
-                   @Override
-                   public void run() throws Exception {
-                       if (iView!=null){
-                           iView.hideLoading();
-                       }
-                   }
-               })
-               .subscribe(new Observer<ShoppingTrolleyBean>() {
-                   @Override
-                   public void onSubscribe(@NonNull Disposable d) {
+    public void getShoppingData() {
+        RetrofitCreator.getShopApiService()
+                .getShoppingTrolley()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView != null) {
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView != null) {
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<ShoppingTrolleyBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-                   }
+                    }
 
-                   @Override
-                   public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
-                       LogUtils.json(shoppingTrolleyBean);
-                       if (iView!=null){
-                           iView.onShopping(shoppingTrolleyBean);
-                       }
-                   }
+                    @Override
+                    public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
+                        LogUtils.json(shoppingTrolleyBean);
+                        if (iView != null) {
+                            iView.onShopping(shoppingTrolleyBean);
+                        }
+                    }
 
-                   @Override
-                   public void onError(@NonNull Throwable e) {
-                       if (iView!=null){
-                           iView.Error(e.getMessage());
-                       }
-                   }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.getMessage());
+                        }
+                    }
 
-                   @Override
-                   public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-                   }
-               });
+                    }
+                });
+    }
+
+
+    public void getUpDateSelected(String productId, boolean productSelected, String productName, String url, String productPrice) {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productId", productId);
+            jsonObject.put("productSelected", productSelected);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
+
+        RetrofitCreator.getShopApiService()
+                .getUpdateProductSelected(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView != null) {
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView != null) {
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RegisterBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegisterBean registerBean) {
+                        if (iView != null) {
+                            iView.onUpDateSelected(registerBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

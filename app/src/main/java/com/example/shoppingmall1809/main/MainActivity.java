@@ -2,7 +2,6 @@ package com.example.shoppingmall1809.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -14,12 +13,11 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopeUserManager;
-import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.discover.DiscoverFragment;
 import com.example.shoppingmall1809.main.home.HomeFragment;
-import com.example.shoppingcar.shoppingtrolley.ShoppingTrolleyFragment;
+import com.example.shoppingcar.shoppingtrolley.ShoppingViewTrolleyFragment;
 import com.example.shoppingmall1809.main.type.TypeFragment;
 import com.example.shoppingmall1809.main.user.UserFragment;
 
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment homeFragment = new HomeFragment();
         TypeFragment typeFragment = new TypeFragment();
         DiscoverFragment discoverFragment = new DiscoverFragment();
-        ShoppingTrolleyFragment shoppingTrolleyFragment = new ShoppingTrolleyFragment();
+        ShoppingViewTrolleyFragment shoppingTrolleyFragment = new ShoppingViewTrolleyFragment();
         UserFragment userFragment = new UserFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.act_home_ll, homeFragment);
