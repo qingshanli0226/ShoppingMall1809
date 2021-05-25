@@ -11,4 +11,8 @@
     <string name="stati">办公文具</string>
     <string name="digit">数码周边</string>
     <string name="game">游戏专区</string>
+    <string name="payfor">待支付订单</string>
+    <string name="sendfor">待发货订单</string>
+
+
 </resources>
