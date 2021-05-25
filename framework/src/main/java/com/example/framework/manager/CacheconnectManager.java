@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CacheconnectManager {
+
     public static  CacheconnectManager cacheconnectManager;
 
     public CacheconnectManager() {
@@ -39,7 +40,6 @@ public class CacheconnectManager {
         context.registerReceiver(broadcastReceiver,intentFilter);
     }
 
-
     private BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -49,6 +49,7 @@ public class CacheconnectManager {
             }
         }
     };
+
     private void getCurrentConnectStatus() {
         ConnectivityManager connectivityManager  = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

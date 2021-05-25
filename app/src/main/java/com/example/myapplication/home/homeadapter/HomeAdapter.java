@@ -60,10 +60,6 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
             case GOOD_TYPE:
                 layoutId = R.layout.home_item_good;
                 break;
-//            case Skirt_TYPE:
-//                layoutId=R.layout.item_skirt;
-//                break;
-
         }
         return layoutId;
     }
@@ -96,16 +92,14 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                 recommentRecAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-
                     }
 
                     @Override
                     public void onItemLongClick(int position) {
-
                     }
                 });
                 break;
-            case 2:
+            case 2://Viewpager设置滑动图片
                 List<HomeBean.ResultBean.ActInfoBean> listAct = (List<HomeBean.ResultBean.ActInfoBean>) itemData;
                 ViewPager vp = holder.getView(R.id.homeViewPagerImage);
 
@@ -169,7 +163,6 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
 
                     @Override
                     public void onItemLongClick(int position) {
-//                        Toast.makeText(holder.itemView.getContext(), "长按了Item", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -197,7 +190,6 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
 
                     @Override
                     public void onItemLongClick(int position) {
-//                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -227,19 +219,9 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
 
                     @Override
                     public void onItemLongClick(int position) {
-//                        Toast.makeText(holder.itemView.getContext(), "长按1", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
-//            case 6:
-//                List<SkirtBean.ResultBean.ChildBean> list4= (List<SkirtBean.ResultBean.ChildBean>) itemData;
-//                RecyclerView view = holder.getView(R.id.img);
-//                SkirAdapter skirAdapter = new SkirAdapter();
-//                skirAdapter.updataData(list4);
-//                view.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
-//                view.setAdapter(skirAdapter);
-//
-//                break;
         }
     }
 
@@ -265,8 +247,6 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
             case 5:
                 type = GOOD_TYPE;
                 break;
-//            case 6:
-//                type=Skirt_TYPE;
         }
         return type;
     }

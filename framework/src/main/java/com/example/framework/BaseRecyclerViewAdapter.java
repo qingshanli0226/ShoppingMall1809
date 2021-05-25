@@ -27,6 +27,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             View rootView= LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType),parent,false);
         return new BaseViewHolder(rootView);
     }
+
     //让子类根据viewType返回相应的布局
     public abstract int getLayoutId(int viewType);
 
@@ -47,7 +48,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             return true;
         });
     }
+
     public abstract void displayViewHolder(BaseViewHolder holder,int position,T itemData);
+
     //注册点击
     public void setRecyclerItemClickListener(IRecyclerItemClickListener listener){
         iRecyclerItemClickListener=listener;
@@ -85,6 +88,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             }
         }
     }
+
     //接口
     public interface IRecyclerItemClickListener{
         void onItemClick(int position);

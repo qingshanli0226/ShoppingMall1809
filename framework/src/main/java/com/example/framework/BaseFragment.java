@@ -15,14 +15,21 @@ import com.example.framework.manager.CacheUserManager;
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment,CacheUserManager.IloginChange {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange {
     protected P mPresenter;
     protected View rootView;
+    protected LoadingPage loadingPage;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return rootView = inflater.inflate(bandLayout(), container, false);
+        rootView = loadingPage = new LoadingPage(getActivity()) {
+            @Override
+            protected int getSuccessLayoutId() {
+                return bandLayout();
+            }
+        };
+        return rootView;
     }
 
     protected abstract int bandLayout();
@@ -42,18 +49,25 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     public void showToast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    //加载界面
+    @Override
+    public void showLoading() {
+        loadingPage.showLoadingView();
+    }
+
+    //隐藏加载页面
+    @Override
+    public void hideLoading() {
+        loadingPage.setVisibility(View.GONE);
+    }
+
+    //监听登陆状态
+    @Override
+    public void onLoginChange(boolean loginBean) {
     }
 
     @Override
@@ -61,11 +75,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onDestroy();
         destroy();
         CacheUserManager.getInstance().unregisterLogin(this);
-    }
-
-    @Override
-    public void onLoginChange(boolean loginBean) {
-
     }
 
     public void destroy() {

@@ -14,31 +14,24 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class AutoLoginPresenter extends BasePresenter<ILoginView> {
+
     public AutoLoginPresenter(ILoginView iLoginView) {
         attView(iLoginView);
     }
+
     public void getAutoLogin(String token){
         RetrofitManager.getApi()
                 .getAutoLogin(token)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        add(disposable);
-                        mView.showLoading();
-                    }
+                .observeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> {
+                    add(disposable);
+                    mView.showLoading();
                 })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.hideLoading();
-                    }
-                })
+                .doFinally(() -> mView.hideLoading())
                 .subscribe(new Observer<LoginBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -57,7 +50,6 @@ public class AutoLoginPresenter extends BasePresenter<ILoginView> {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
 

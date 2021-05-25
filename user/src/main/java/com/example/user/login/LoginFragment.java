@@ -22,7 +22,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
     private Button loginBtn;
     private Button toRegister;
 
-
     @Override
     public int bandLayout() {
         return R.layout.fragment_login;
@@ -34,7 +33,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         editpwd = (EditText) findViewById(R.id.editpwd);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         toRegister = (Button) findViewById(R.id.toRegister);
-
     }
 
     @Override
@@ -74,9 +72,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
 
     @Override
     public void onAutoLogin(LoginBean loginBean) {
-
     }
-
 
     @Override
     public void initPresenter() {

@@ -14,7 +14,6 @@ import com.example.myapplication.R;
 
 public class DiscoverFragment extends BaseFragment {
 
-
     @Override
     public int bandLayout() {
         return R.layout.fragment_discover;

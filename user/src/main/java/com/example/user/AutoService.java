@@ -27,7 +27,6 @@ public class AutoService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("zyh", "onCreate: ");
     }
 
     @Override
@@ -36,7 +35,6 @@ public class AutoService extends Service {
         new AutoLoginPresenter(new ILoginView() {
             @Override
             public void onLogin(LoginBean loginBean) {
-
             }
 
             @Override
@@ -51,19 +49,17 @@ public class AutoService extends Service {
 
             @Override
             public void showLoading() {
-
             }
 
             @Override
             public void hideLoading() {
-
             }
 
             @Override
             public void showToast(String msg) {
-
             }
         }).getAutoLogin(SpUtil.getString(this, "token"));
+
         return super.onStartCommand(intent, flags, startId);
     }
 }

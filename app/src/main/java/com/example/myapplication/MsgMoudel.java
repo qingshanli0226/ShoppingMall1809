@@ -23,12 +23,10 @@ public class MsgMoudel implements CaCheArote.IAppInterface {
         }else {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-
         }
     }
 
     @Override
     public void onEvent(String event) {
-
     }
 }

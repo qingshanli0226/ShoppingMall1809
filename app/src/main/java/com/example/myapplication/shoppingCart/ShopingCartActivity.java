@@ -1,4 +1,4 @@
-package com.example.myapplication.msg;
+package com.example.myapplication.shoppingCart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +7,11 @@ import android.os.Bundle;
 import com.example.framework.BaseActivity;
 import com.example.myapplication.R;
 
-public class MsgMainActivity extends BaseActivity {
+public class ShopingCartActivity extends BaseActivity {
 
     @Override
     protected int bandLayout() {
-        return R.layout.activity_msg_main;
+        return R.layout.activity_shoping_cart;
     }
 
     @Override

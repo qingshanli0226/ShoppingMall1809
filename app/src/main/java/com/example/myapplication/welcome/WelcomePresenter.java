@@ -11,9 +11,11 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class WelcomePresenter extends BasePresenter<IWelcomeView> {
+
     public WelcomePresenter(IWelcomeView view) {
         attView(view);
     }
+
     public void getHome(){
         RetrofitManager.getApi().getHomebean()
                 .subscribeOn(Schedulers.io())
@@ -32,7 +34,6 @@ public class WelcomePresenter extends BasePresenter<IWelcomeView> {
                 .subscribe(new Observer<HomeBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -51,7 +52,6 @@ public class WelcomePresenter extends BasePresenter<IWelcomeView> {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }

@@ -20,9 +20,8 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
     private ClassifyAdapter classifyAdapter;
     private List<String> list=new ArrayList<>();
     private List<Object> data=new ArrayList<>();
-    private ClassAdapter classAdapter;
+    private TypeAdapter classAdapter;
     private String[] urls = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};
-
 
     @Override
     public int bandLayout() {
@@ -31,12 +30,10 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
 
     @Override
     public void initView() {
-
         lv = (RecyclerView) findViewById(R.id.lv);
         rv = (RecyclerView) findViewById(R.id.rv);
        classifyAdapter=new ClassifyAdapter();
-       classAdapter= new ClassAdapter();
-
+       classAdapter= new TypeAdapter();
     }
 
     @Override
@@ -56,7 +53,6 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
          list.add(getString(R.string.game));
         classAdapter.updataData(list);
         mPresenter.onSkirt(urls[0]);
-
     }
 
     @Override
@@ -74,7 +70,6 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
 
             @Override
             public void onItemLongClick(int position) {
-
             }
         });
     }
@@ -88,9 +83,5 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
         data.add(hot_product_list);
         data.add(child);
         classifyAdapter.updataData(data);
-
-
     }
-
-
 }

@@ -6,5 +6,4 @@ import mvp.view.IBaseVIew;
 
 public interface ISkirtView extends IBaseVIew {
     void onSkirt(SkirtBean skirtBean);
-
 }

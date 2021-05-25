@@ -1,4 +1,4 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.shoppingCart;
 
 import android.os.Bundle;
 
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.example.framework.BaseFragment;
 import com.example.myapplication.R;
 
-public class PersonalCenterFragment extends BaseFragment {
+public class ShoppingCartFragment extends BaseFragment {
     @Override
     protected int bandLayout() {
-        return R.layout.fragment_personalcenter;
+        return R.layout.fragment_shopping_cart;
     }
 
     @Override

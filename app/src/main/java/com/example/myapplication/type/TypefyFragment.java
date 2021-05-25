@@ -14,43 +14,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClassifyFragment extends BaseFragment {
-
+public class TypefyFragment extends BaseFragment {
 
     private ViewPager vp;
     private List<Fragment> list = new ArrayList<>();
     private RadioButton type;
-    private RadioButton biao;
+    private RadioButton label;
     private FragmentAdapter fragmentAdapter;
     private RadioGroup rp;
 
     @Override
     public int bandLayout() {
-        return R.layout.fragment_classify;
+        return R.layout.fragment_type;
     }
 
     @Override
     public void initView() {
-
         vp = (ViewPager) findViewById(R.id.vp);
-
-
         type = (RadioButton) findViewById(R.id.type);
-        biao = (RadioButton) findViewById(R.id.biao);
+        label = (RadioButton) findViewById(R.id.label);
         rp = (RadioGroup) findViewById(R.id.rp);
 
         list.add(new TypeFragment());
         list.add(new ShowFragment());
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager(), list);
         vp.setAdapter(fragmentAdapter);
-          rp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-              @Override
-              public void onCheckedChanged(RadioGroup group, int checkedId) {
-                  if (checkedId==R.id.type){
-                      vp.setCurrentItem(0);
-                  }else if (checkedId==R.id.biao){
-                      vp.setCurrentItem(1);
-                  }
+          rp.setOnCheckedChangeListener((group, checkedId) -> {
+              if (checkedId==R.id.type){
+                  vp.setCurrentItem(0);
+              }else if (checkedId==R.id.label){
+                  vp.setCurrentItem(1);
               }
           });
     }

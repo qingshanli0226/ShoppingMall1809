@@ -26,7 +26,6 @@ import mvp.CaCheMannager;
 
 public class HomeFragment extends BaseFragment {
     private EditText etDevOpsPassWord;
-    //    private Banner homeBanner;
     private RecyclerView homeRec;
     private HomeAdapter homeAdapter;
     private List<Object> objectList = new ArrayList<>();
@@ -40,13 +39,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initView() {
         etDevOpsPassWord = (EditText) findViewById(R.id.et_devOps_passWord);
-//        homeBanner = (Banner) findViewById(R.id.homeBanner);
         homeRec = (RecyclerView) findViewById(R.id.homeRec);
-
-
+        //获取缓存的首页值
         HomeBean homeBean = CaCheMannager.getInstance().getHomeBean();
-
-//        Toast.makeText(getActivity(), homeBean.toString(), Toast.LENGTH_SHORT).show();
         HomeBean.ResultBean result = homeBean.getResult();
 
         objectList.add(result.getBanner_info());
@@ -55,22 +50,17 @@ public class HomeFragment extends BaseFragment {
         objectList.add(result.getSeckill_info().getList());
         objectList.add(result.getRecommend_info());
         objectList.add(result.getHot_info());
-
-
+        //适配器
         homeAdapter = new HomeAdapter();
         homeAdapter.updataData(objectList);
         homeRec.setAdapter(homeAdapter);
-
         homeRec.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         msg = (ImageView) findViewById(R.id.msg);
-        msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("falg","2");
-                CaCheArote.getInstance().getUserInterface().openLoginActivity(getContext(),bundle);
-            }
+        msg.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("falg","2");
+            CaCheArote.getInstance().getUserInterface().openLoginActivity(getContext(),bundle);
         });
     }
 

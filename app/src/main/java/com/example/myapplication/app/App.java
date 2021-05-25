@@ -17,7 +17,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-
         AppMoudel.init(this);
         UserModule.init();
         AppModule.init();
@@ -25,6 +24,5 @@ public class App extends Application {
         MsgMoudel.init();
 
         CaCheArote.getInstance().init(this);
-
     }
 }

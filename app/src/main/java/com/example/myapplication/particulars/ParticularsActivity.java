@@ -69,6 +69,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         particularsCommodityCollect = (RadioButton) findViewById(R.id.particularsCommodityCollect);
         particularsCommodityShoppingCart = (RadioButton) findViewById(R.id.particularsCommodityShoppingCart);
         particularsCommodityAddShoppingCart = (Button) findViewById(R.id.particularsCommodityAddShoppingCart);
+
         isLogin = CacheUserManager.getInstance().getIsLogin();//获取登陆状态
 
         //设置pop
@@ -78,6 +79,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         popupWindow.setOutsideTouchable(true);
         popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+
         //给pop赋值
         popImage = inflate.findViewById(R.id.popImage);
         popName = inflate.findViewById(R.id.popName);
@@ -104,19 +106,20 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
              name = extras.getString("name");
              price = extras.getString("price");
              id = extras.getString("id");
-            //赋值
+            //给控件赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
             particularsCommodityName.setText(name);
             particularsCommodityPrice.setText(price);
-            //给pop赋值
+            //给pop控件赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(popImage);
             popName.setText(name);
             popPrice.setText(price);
         }
+
         //收藏点击
         particularsCommodityCollect.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
@@ -124,22 +127,24 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             } else {
             }
         });
+
         //购物车点击
         particularsCommodityShoppingCart.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
-                ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
+                ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);//存入跳转登录页面的页面类型
                 CaCheArote.getInstance().getUserInterface().openLoginActivity(this, bundle);
             } else {
 
             }
         });
+
         //加入购物车点击
         particularsCommodityAddShoppingCart.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
@@ -149,12 +154,14 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
                 popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
             }
         });
+
         //pop加号点击
         popAdd.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
             num++;
             popNum.setText(num+"");
         });
+
         //pop减号点击
         popSub.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
@@ -166,22 +173,16 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             }
             popNum.setText(num+"");
         });
+
         //pop取消
-        popCencel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+        popCencel.setOnClickListener(v -> popupWindow.dismiss());
+
         //pop确定
-        popConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //刷新加入购物车数量
-                int num = Integer.parseInt(popNum.getText().toString());
-                //直接调用购物车
-                mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
-            }
+        popConfirm.setOnClickListener(v -> {
+            //刷新加入购物车数量
+            int num = Integer.parseInt(popNum.getText().toString());
+            //直接调用购物车
+            mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
         });
     }
 
@@ -225,11 +226,9 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void hideLoading() {
-
     }
 
     @Override
     public void showToast(String msg) {
-
     }
 }

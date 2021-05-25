@@ -80,6 +80,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         }
     };
 
+    //欢迎页不可退出
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return false;
@@ -87,11 +88,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void onWelcome(HomeBean homeBean) {
-        Toast.makeText(this, "获取到首页数据", Toast.LENGTH_SHORT).show();
-        Log.d("WelcomeActivity", homeBean.toString());
         CaCheMannager.getInstance().setHomeBean(homeBean);
-
+        //将获取首页数据标识变为true
         isHome = true;
+        //通知handler
         handler.sendEmptyMessage(HANDLER_HOMEDATE);
         loadingPage.showSuccessView();
     }
@@ -102,21 +102,5 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             handler.removeCallbacksAndMessages(null);
         }
         destroy();
-    }
-
-    @Override
-    public void showLoading() {
-
-      loadingPage.showLoadingView();
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-
     }
 }

@@ -46,27 +46,20 @@ public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView>
         RetrofitManager.getApi().getAddShoppingCart(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (mView != null) {
-                            add(disposable);
-                            mView.showLoading();
-                        }
+                .doOnSubscribe(disposable -> {
+                    if (mView != null) {
+                        add(disposable);
+                        mView.showLoading();
                     }
                 })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        if (mView != null) {
-                            mView.hideLoading();
-                        }
+                .doFinally(() -> {
+                    if (mView != null) {
+                        mView.hideLoading();
                     }
                 })
                 .subscribe(new Observer<ShoppingCartBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -85,23 +78,13 @@ public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView>
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
 
     //库存
     public void getInventory(String id, String num) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("productId", id);
-            jsonObject.put("productNum", num);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        ResponseBody body = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
-        RetrofitManager.getApi().getInventory(body)
+        RetrofitManager.getApi().getInventory(id,num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
@@ -110,18 +93,14 @@ public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView>
                         mView.showLoading();
                     }
                 })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        if (mView != null) {
-                            mView.hideLoading();
-                        }
+                .doFinally(() -> {
+                    if (mView != null) {
+                        mView.hideLoading();
                     }
                 })
                 .subscribe(new Observer<RegisterBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -140,7 +119,6 @@ public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView>
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }

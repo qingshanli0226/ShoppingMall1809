@@ -8,5 +8,4 @@ import mvp.view.IBaseVIew;
 public interface AddShoppingCartView extends IBaseVIew {
     void onAddShoppingCart(ShoppingCartBean shoppingCartBean);
     void onIsInventory(RegisterBean registerBean);
-
 }
