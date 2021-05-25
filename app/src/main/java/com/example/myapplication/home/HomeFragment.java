@@ -69,7 +69,7 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("falg","2");
-                CaCheArote.getInstance().getUserInterface().openLoginActivity(getContext(),bundle);
+                CaCheArote.getInstance().getImsgInterface().openMsgActivity(getContext(),bundle);
             }
         });
     }
