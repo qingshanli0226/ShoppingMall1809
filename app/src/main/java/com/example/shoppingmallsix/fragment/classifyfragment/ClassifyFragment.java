@@ -71,7 +71,7 @@ public class ClassifyFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-    
+
     }
 
     @Override

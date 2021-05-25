@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
                         } else {
                             mainCommon.setCurrentTab(0);
-                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new DiscoverFragment()).commitAllowingStateLoss();
                         } else {
                             mainCommon.setCurrentTab(0);
-                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -103,7 +103,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ShoppingCarFragment()).commitAllowingStateLoss();
                         } else {
                             mainCommon.setCurrentTab(0);
-                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new MineFragment()).commitAllowingStateLoss();
                         } else {
                             mainCommon.setCurrentTab(0);
-                            Toast.makeText(MainActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }

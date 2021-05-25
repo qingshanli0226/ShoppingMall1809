@@ -115,6 +115,10 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }
         });
     }
+<<<<<<< HEAD
+=======
+             
+>>>>>>> qq0524
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
