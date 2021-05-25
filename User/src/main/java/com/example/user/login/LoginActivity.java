@@ -20,7 +20,7 @@ import com.example.view.ToolBar;
 import org.greenrobot.eventbus.EventBus;
 
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView,BusinessUserManager.IUserLoginChanged {
     private com.example.view.ToolBar toolbar;
     private android.widget.EditText loginUsername;
     private android.widget.EditText loginPwd;
@@ -93,6 +93,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             EventBus.getDefault().postSticky("login_success");
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
+
         }
     }
 

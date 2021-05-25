@@ -63,6 +63,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         EventBus.getDefault().register(this);
 
 
+
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
