@@ -17,14 +17,15 @@ import com.example.framework.R;
 public class ToolBar extends RelativeLayout {
 
     private String titleText;
+    private String rightTvs;
     private ImageView leftImg;
-    private ImageView rightImg;
+    private TextView rightText;
     private TextView rightTv;
     private boolean rightIsShow,leftIsShow;
     private int rightImgId,leftImgId;
     private TextView titleTv;
     private LinearLayout rightArea;
-    private int titletextColor;
+    private int titleTextColor;
     private IToolbarListener iToolbarListener;
 
     public ToolBar(Context context) {
@@ -46,7 +47,8 @@ public class ToolBar extends RelativeLayout {
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ToolBar);
         titleText = typedArray.getString(R.styleable.ToolBar_titleText);
-        titletextColor = typedArray.getColor(R.styleable.ToolBar_titleTextColor,Color.RED);
+        rightTvs = typedArray.getString(R.styleable.ToolBar_rightText);
+        titleTextColor = typedArray.getColor(R.styleable.ToolBar_titleTextColor,Color.RED);
         leftImgId = typedArray.getResourceId(R.styleable.ToolBar_leftImg,0);
         rightImgId = typedArray.getResourceId(R.styleable.ToolBar_rightImage,0);
         rightIsShow = typedArray.getBoolean(R.styleable.ToolBar_rightIsShow,false);
@@ -60,20 +62,18 @@ public class ToolBar extends RelativeLayout {
         titleTv = findViewById(R.id.titleTv);
         rightArea = findViewById(R.id.rightArea);
         leftImg = findViewById(R.id.leftImg);
-        rightImg = findViewById(R.id.rightImg);
+        rightText = findViewById(R.id.rightText);
         rightTv = findViewById(R.id.rightTv);
 
         titleTv.setText(titleText);
-        titleTv.setTextColor(titletextColor);
-        if (rightIsShow && rightImgId!=0) {
-            rightImg.setImageResource(rightImgId);
-        }
-        if (leftIsShow && leftImgId!=0) {
-            leftImg.setImageResource(leftImgId);
-        }
+        titleTv.setTextColor(titleTextColor);
+
+        rightText.setText(rightTvs);
+        rightText.setTextColor(titleTextColor);
 
 
-        rightImg.setOnClickListener(new OnClickListener() {
+
+        rightText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (iToolbarListener!=null) {

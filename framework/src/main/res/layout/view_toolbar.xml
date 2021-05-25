@@ -29,8 +29,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/rightImg"
+            <TextView
+                android:id="@+id/rightText"
                 android:layout_width="@dimen/toolbar_img_size"
                 android:layout_height="@dimen/toolbar_img_size"
                 android:layout_centerVertical="true"/>
@@ -39,10 +39,10 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/rightTv"
-                style="@style/midTextStyle"
-                android:layout_centerVertical="true"/>
+                style="@style/midTextStyle" />
         </RelativeLayout>
 
 

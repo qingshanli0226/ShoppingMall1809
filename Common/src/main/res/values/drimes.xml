@@ -6,6 +6,7 @@
     <dimen name="toolbar_margin_size">5dp</dimen>
     <dimen name="big_text_size">30sp</dimen>
     <dimen name="text_mid_size">20sp</dimen>
+    <dimen name="text_sml_size">16</dimen>
     <dimen name="size_fivting">15sp</dimen>
     <dimen name="size_view_height">2dp</dimen>
     <dimen name="moniview_height">50dp</dimen>

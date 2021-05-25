@@ -14,6 +14,7 @@
         android:layout_weight="0.9">
 
         <com.example.view.ToolBar
+            app:rightText="编辑"
             android:gravity="center"
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
@@ -40,6 +41,7 @@
         android:id="@+id/buy_car_rv"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/shopping_di"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"

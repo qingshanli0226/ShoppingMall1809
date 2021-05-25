@@ -29,6 +29,7 @@ public class AutoService extends Service {
                         if (logBean.getCode().equals("200")) {
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
+
                         } else {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }

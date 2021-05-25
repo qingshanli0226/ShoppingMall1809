@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="ToolBar">
         <attr name="titleText" format="string"></attr>
+        <attr name="rightText" format="string"></attr>
         <attr name="rightImage" format="reference"></attr>
         <attr name="rightIsShow" format="boolean"></attr>
         <attr name="leftImg" format="reference"></attr>

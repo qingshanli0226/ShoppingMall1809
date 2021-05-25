@@ -14,4 +14,12 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="smlTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_sml_size</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

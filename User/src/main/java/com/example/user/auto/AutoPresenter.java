@@ -1,7 +1,5 @@
 package com.example.user.auto;
 
-import android.util.Log;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.LogBean;
 import com.example.framework.BasePresenter;
@@ -32,7 +30,6 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
 
                     @Override
                     public void onNext(@NonNull LogBean logBean) {
-                        Log.i("zx", "onNext: "+logBean.toString());
                         IView.onAutoData(logBean);
                         LogUtils.json(logBean);
                     }
