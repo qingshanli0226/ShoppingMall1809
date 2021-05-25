@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -18,6 +19,8 @@ import com.example.net.bean.user.LoginBean;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
 
+import java.net.Proxy;
+
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
     private ToolBar toolbar;
@@ -28,6 +31,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private String password1;
     private SharedPreferences sharedPreferences;
     private android.widget.TextView registName;
+    private ImageView passwordImg;
 
     @Override
     protected void initPresenter() {
@@ -63,7 +67,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         etLoginNumber = findViewById(R.id.et_login_number);
         etLoginPwd = findViewById(R.id.et_login_pwd);
         btnLogin = findViewById(R.id.btn_login);
-
+        passwordImg = findViewById(R.id.password_img);
         registName = findViewById(R.id.regist_name);
 
         registName.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +75,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        passwordImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etLoginPwd.setInputType(Integer.parseInt("0x00000001"));
             }
         });
     }

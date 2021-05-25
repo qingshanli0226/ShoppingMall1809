@@ -87,17 +87,34 @@
             android:textColor="@color/colorThree"
             android:textSize="@dimen/sp_14" />
 
-        <EditText
-            android:id="@+id/et_login_pwd"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/inputPassword"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/colorFive"
-            android:textSize="@dimen/sp_14" />
+            >
+            <EditText
+                android:id="@+id/et_login_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/inputPassword"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="111"
+                android:singleLine="true"
+                android:textColor="@color/colorFive"
+                android:layout_gravity="center"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/select_password"
+                android:layout_gravity="center"
+                android:layout_marginLeft="110dp"
+                android:id="@+id/password_img"
+                ></ImageView>
+        </FrameLayout>
+
+
     </LinearLayout>
 
     <View

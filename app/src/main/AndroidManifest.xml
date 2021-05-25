@@ -16,7 +16,6 @@
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
         <activity android:name=".obligation.ObligationActivity" />
-        <activity android:name=".message.MessageActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"
             android:screenOrientation="portrait"
