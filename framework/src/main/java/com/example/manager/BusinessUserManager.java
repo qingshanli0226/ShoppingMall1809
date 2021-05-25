@@ -36,6 +36,7 @@ public class BusinessUserManager {
         this.isLog = isLog;
     }
 
+
     public interface IUserLoginChanged{
 
         void onLoginChange(LogBean isLog);

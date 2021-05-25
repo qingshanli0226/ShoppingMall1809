@@ -3,6 +3,7 @@ package com.example.electricityproject.shopp;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.bean.RegBean;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
@@ -32,7 +33,7 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
         attachView(iShoppingView);
     }
 
-    public void getShortProductsData(){
+    public void getShortProductsData() {
         RetrofitCreate.getFiannceApiService()
                 .getShortProductData()
                 .subscribeOn(Schedulers.io())
@@ -57,19 +58,19 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.getShortProductData(shortcartProductBean);
                             LogUtils.json(shortcartProductBean);
                             List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                             for (int i = 0; i < result.size(); i++) {
-                                Log.i("zrf", "onNext: "+result.get(i).getProductPrice());
+                                Log.i("zrf", "onNext: " + result.get(i).getProductPrice());
                             }
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.showError(e.getMessage());
                         }
                     }
@@ -82,12 +83,12 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
 
-    public void postSelectAllProductData(boolean isSelect){
+    public void postSelectAllProductData(boolean isSelect) {
 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("selected",isSelect);
+            jsonObject.put("selected", isSelect);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -105,7 +106,7 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     @Override
                     public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.postSelectAllProductData(selectAllProductBean);
                             LogUtils.json(selectAllProductBean);
                         }
@@ -113,7 +114,7 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.showError(e.getMessage());
                         }
                     }
@@ -124,14 +125,15 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     }
                 });
     }
-    public void getUpdateProduct(String productId,String productNum,String productName,String url,String productPrice){
+
+    public void getUpdateProduct(String productId, String productNum, String productName, String url, String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("productId",productId);
-            jsonObject.put("productNum",productNum);
-            jsonObject.put("productName",productName);
-            jsonObject.put("url",url);
-            jsonObject.put("productPrice",productPrice);
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -148,8 +150,41 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     @Override
                     public void onNext(@NonNull UpdateProductNumBean updateProductNumBean) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.amendProductData(updateProductNumBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (IView != null) {
+                            IView.showError(e.getMessage() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+    }
+    public void getCheckShopBean(String productId,String productNum){
+        RetrofitCreate.getFiannceApiService()
+                .checkOneProductInventory(productId,productNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RegBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegBean regBean) {
+                        if (IView!=null){
+                            IView.CheckProductData(regBean);
                         }
                     }
 
@@ -165,7 +200,6 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     }
                 });
-
 
     }
 

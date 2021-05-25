@@ -16,7 +16,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 public
 class DetailsPresenter extends BasePresenter<IDetailsView> {
@@ -63,14 +62,10 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
 
     }
 
-    public void checkOneProductInventory(Map<String,String> map){
-
-        String s = new Gson().toJson(map);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        ResponseBody responseBody = ResponseBody.create(parse, s);
+    public void checkOneProductInventory(String productId,String productNum){
 
         RetrofitCreate.getFiannceApiService()
-                .checkOneProductInventory(responseBody)
+                .checkOneProductInventory(productId,productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegBean>() {

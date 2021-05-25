@@ -1,7 +1,5 @@
 package com.example.electricityproject.home;
 
-import android.util.Log;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +58,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     public void onHomeBanner(HomeBean homeBean) {
-        Log.i("zx", "onHomeBanner: "+homeBean.toString());
+
         HomeAdapter homeAdapter = new HomeAdapter();
 
         List<Object> objectList=new ArrayList<>();

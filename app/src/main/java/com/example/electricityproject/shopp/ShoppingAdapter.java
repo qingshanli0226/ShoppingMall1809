@@ -36,28 +36,28 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         ImageView sub = baseViewHolder.getView(R.id.image_sub);
 
 
-        shop_name.setText(itemData.getProductName()+"");
-        shop_money.setText("￥"+itemData.getProductPrice());
-        shop_product_num.setText(itemData.getProductNum()+"");
+        shop_name.setText(itemData.getProductName() + "");
+        shop_money.setText("￥" + itemData.getProductPrice());
+        shop_product_num.setText(itemData.getProductNum() + "");
 
         selectImg.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
 
-        Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE+itemData.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
+        Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
 
         ImageView img = baseViewHolder.getView(R.id.is_select);
 
-        if (itemData.isAll()){
+        if (itemData.isAll()) {
             img.setImageResource(R.drawable.checkbox_selected);
-        }else {
+        } else {
             img.setImageResource(R.drawable.checkbox_unselected);
         }
 
         selectImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (childItemClickListener!=null){
+                if (childItemClickListener != null) {
                     Log.i("zx", "onClick: 123");
-                    childItemClickListener.OnChildItemListener(v,position);
+                    childItemClickListener.OnChildItemListener(v, position);
                 }
 
             }
@@ -65,16 +65,16 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (childItemClickListener!=null){
-                    childItemClickListener.OnChildItemListener(v,position);
+                if (childItemClickListener != null) {
+                    childItemClickListener.OnChildItemListener(v, position);
                 }
             }
         });
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (childItemClickListener!=null){
-                    childItemClickListener.OnChildItemListener(v,position);
+                if (childItemClickListener != null) {
+                    childItemClickListener.OnChildItemListener(v, position);
                 }
             }
         });
@@ -86,7 +86,7 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         return 1;
     }
 
-    public interface iChildItemClickListener{
+    public interface iChildItemClickListener {
         void OnChildItemListener(View view, int position);
     }
 }

@@ -154,7 +154,10 @@ public interface BusinessApi {
 
     //检查单个库存
     @POST("checkOneProductInventory")
-    Observable<RegBean> checkOneProductInventory(@Body ResponseBody responseBody);
+    @FormUrlEncoded
+    Observable<RegBean> checkOneProductInventory(@Field("productId") String productId,@Field("productNum") String productNum);
+
+
 
     //获取服务端购物车产品信息的接口
     @GET("getShortcartProducts")

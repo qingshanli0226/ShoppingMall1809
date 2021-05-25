@@ -4,11 +4,17 @@ import com.example.common.bean.ShortcartProductBean;
 
 public class BusinessBuyCarManger {
 
+    private iShopBeanChange shopBeanChange;
     private static BusinessBuyCarManger businessBuyCarManger;
     private ShortcartProductBean shortcartProductBean;
 
+
     public BusinessBuyCarManger() {
 
+    }
+
+    public void setShopBeanChange(iShopBeanChange shopBeanChange) {
+        this.shopBeanChange = shopBeanChange;
     }
 
     public static BusinessBuyCarManger getInstance() {
@@ -18,11 +24,28 @@ public class BusinessBuyCarManger {
         return businessBuyCarManger;
     }
 
+    private boolean isChange;
+
+    public boolean isChange() {
+        return isChange;
+    }
+
+    public void setChange(boolean change) {
+        isChange = change;
+    }
+
+
     public ShortcartProductBean getShortcartProductBean() {
         return shortcartProductBean;
     }
 
     public void setShortcartProductBean(ShortcartProductBean shortcartProductBean) {
         this.shortcartProductBean = shortcartProductBean;
+    }
+
+    public interface iShopBeanChange{
+
+        void OnShopBeanChange();
+
     }
 }

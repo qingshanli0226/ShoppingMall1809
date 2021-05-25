@@ -32,6 +32,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initData();
 
         BusinessUserManager.getInstance().Register(this);
+
         toolBar.setToolbarListener(this);
     }
 

@@ -22,7 +22,7 @@ class WelcomePresenter extends BasePresenter<IWelcomeView> {
         attachView(iWelcomeView);
     }
 
-    public void getShortProductsData(){
+    public void getShortProductsData() {
         RetrofitCreate.getFiannceApiService()
                 .getShortProductData()
                 .subscribeOn(Schedulers.io())
@@ -35,19 +35,19 @@ class WelcomePresenter extends BasePresenter<IWelcomeView> {
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.getShortProductData(shortcartProductBean);
                             LogUtils.json(shortcartProductBean);
                             List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                             for (int i = 0; i < result.size(); i++) {
-                                Log.i("zrf", "onNext: "+result.get(i).getProductPrice());
+                                Log.i("zrf", "onNext: " + result.get(i).getProductPrice());
                             }
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (IView!=null){
+                        if (IView != null) {
                             IView.showError(e.getMessage());
                         }
                     }

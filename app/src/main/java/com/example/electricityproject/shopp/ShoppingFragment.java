@@ -1,10 +1,13 @@
 package com.example.electricityproject.shopp;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.SpUtils;
 import com.example.common.bean.LogBean;
+import com.example.common.bean.RegBean;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
@@ -42,12 +46,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private Button goZfb;
     private Map<String, Boolean> map = new HashMap<>();
     private boolean isSelect = false;
+    private boolean isDelAll = false;
     private SelectAllProductBean list;
     private List<ShortcartProductBean.ResultBean> result;
     private double allPrice;
     private int num = 0;
     private boolean isShow = false;
     private LinearLayout shoppingDi;
+    private ImageView delImg;
+    private int DelPosition=0;
+    private boolean SYMBOL=false;
+
 
     @Override
     protected void initData() {
@@ -58,19 +67,21 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Boolean selectAllBol = SpUtils.getSelectAllBol(getContext());
                 if (selectAllBol) {
                     SpUtils.putSelectAllBol(getContext(), false);
                 } else {
                     SpUtils.putSelectAllBol(getContext(), true);
                 }
+
                 map.put("selected", selectAllBol);
-                //httpPresenter.postSelectAllProductData(map);
+
                 shoppingAdapter.notifyDataSetChanged();
 
             }
         });
-
+        //全选
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +92,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 }
             }
         });
-
+        //适配器点击
         shoppingAdapter.setChildItemClickListener(new ShoppingAdapter.iChildItemClickListener() {
             @Override
             public void OnChildItemListener(View view, int position) {
+
                 num = 0;
                 switch (view.getId()) {
                     case R.id.is_select:
@@ -104,8 +116,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                                 num++;
                             }
                         }
-                        Log.i("aa", "OnChildItemListener: num=" + num);
-                        Log.i("aa", "OnChildItemListener: size=" + result.size());
                         if (num == result.size()) {
                             all.setImageResource(R.drawable.checkbox_selected);
                         } else {
@@ -114,30 +124,65 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                         shoppingAdapter.notifyDataSetChanged();
                         count();
                         break;
+                    //数量加
                     case R.id.image_add:
-                        Toast.makeText(getContext(), "111", Toast.LENGTH_SHORT).show();
-                        int plus = Integer.parseInt(result.get(position).getProductNum());
-                        result.get(position).setProductNum(plus + 1 + "");
-                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), result.get(position).getProductNum(), result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
-                        shoppingAdapter.notifyDataSetChanged();
-                        count();
+
+                        DelPosition=position;
+                        SYMBOL=true;
+                        httpPresenter.getCheckShopBean(result.get(position).getProductId(),result.get(position).getProductNum());
+
 
                         break;
+                    //数量减
                     case R.id.image_sub:
-                        Toast.makeText(getContext(), "111", Toast.LENGTH_SHORT).show();
-                        int lose = Integer.parseInt(result.get(position).getProductNum());
-                        if (lose<=0){
-                            Toast.makeText(getContext(), "不能小于0", Toast.LENGTH_SHORT).show();
-                        }
-                        result.get(position).setProductNum(lose - 1 + "");
-                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), result.get(position).getProductNum(), result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
-                        shoppingAdapter.notifyDataSetChanged();
-                        count();
+
+                        DelPosition=position;
+                        SYMBOL=false;
+                        httpPresenter.getCheckShopBean(result.get(position).getProductId(),result.get(position).getProductNum());
+
+
                         break;
                 }
             }
         });
 
+        //tob右边(编辑)点击弹出Pop
+        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
+            @Override
+            public void onLeftClick() {
+
+            }
+
+            @Override
+            public void onRightImgClick() {
+                PopupWindow popupWindow = new PopupWindow(getContext());
+                View shopDeleteView = LayoutInflater.from(getContext()).inflate(R.layout.item_delete_shop, null);
+                popupWindow.setContentView(shopDeleteView);
+                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(150);
+                popupWindow.setOutsideTouchable(true);
+                delImg = shopDeleteView.findViewById(R.id.delAll);
+
+                delImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isDelAll) {
+                            httpPresenter.postSelectAllProductData(isDelAll);
+                        } else {
+                            httpPresenter.postSelectAllProductData(isDelAll);
+                        }
+                    }
+                });
+
+                popupWindow.showAsDropDown(buyCarRv);
+
+            }
+
+            @Override
+            public void onRightTvClick() {
+
+            }
+        });
     }
 
 
@@ -151,7 +196,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Subscribe
     public void getBuyCarData(String eve) {
         if (eve.equals("request_buyCar")) {
-            Toast.makeText(getContext(), "接收到广播", Toast.LENGTH_SHORT).show();
+
             ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
 
             if (shortProductBean != null) {
@@ -210,7 +255,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void showError(String error) {
         loadingPage.showErrorView();
-        Log.i("zx", "showError: " + error);
     }
 
     @Override
@@ -226,7 +270,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
-        }else {
+
+        } else {
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
@@ -235,20 +280,49 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
 
-
         }
     }
 
+    //修改产品返回Bean
     @Override
     public void amendProductData(UpdateProductNumBean updateProductNumBean) {
-        Log.i("zx", "amendProductData: "+updateProductNumBean.toString());
+        Log.i("zx", "amendProductData: " + updateProductNumBean.toString());
+        if (updateProductNumBean.getCode().equals("200")) {
+            shoppingAdapter.notifyDataSetChanged();
+            count();
+        }
+
+    }
+
+    @Override
+    public void CheckProductData(RegBean regBean) {
+        Log.i("zx", "CheckProductData: "+regBean.toString());
+        if (regBean.getMessage().equals("请求成功")){
+            if (SYMBOL==true) {
+                int plus = Integer.parseInt(result.get(DelPosition).getProductNum());
+                result.get(DelPosition).setProductNum(plus + 1 + "");
+                httpPresenter.getUpdateProduct(result.get(DelPosition).getProductId(), result.get(DelPosition).getProductNum(), result.get(DelPosition).getProductName(), result.get(DelPosition).getUrl(), result.get(DelPosition).getProductPrice());
+            }else if (SYMBOL==false){
+                int lose = Integer.parseInt(result.get(DelPosition).getProductNum());
+                if (lose <= 0) {
+                    Toast.makeText(getContext(), "不能小于0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                result.get(DelPosition).setProductNum(lose - 1 + "");
+                httpPresenter.getUpdateProduct(result.get(DelPosition).getProductId(), result.get(DelPosition).getProductNum(), result.get(DelPosition).getProductName(), result.get(DelPosition).getUrl(), result.get(DelPosition).getProductPrice());
+            }
+        }else {
+            Toast.makeText(getContext(), "库存不够", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
 
+    //全选返回的Bean
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
         list = selectAllProductBean;
-
+        //全选
         if (!isSelect) {
             if (list.getCode().equals("200")) {
                 isSelect = true;
@@ -259,22 +333,39 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 count();
             }
         } else {
-            all.setImageResource(R.drawable.checkbox_unselected);
             if (list.getCode().equals("200")) {
                 isSelect = false;
+                all.setImageResource(R.drawable.checkbox_unselected);
                 for (ShortcartProductBean.ResultBean resultBean : result) {
                     resultBean.setAll(false);
                 }
                 count();
             }
         }
+
+        //弹出Pop的全选
+        if (!isDelAll) {
+            if (list.getCode().equals("200")) {
+                isDelAll = true;
+                delImg.setImageResource(R.drawable.checkbox_selected);
+                for (ShortcartProductBean.ResultBean resultBean : result) {
+                    resultBean.setAll(true);
+                }
+            }
+        } else {
+            if (list.getCode().equals("200")) {
+                isDelAll = false;
+                delImg.setImageResource(R.drawable.checkbox_unselected);
+                for (ShortcartProductBean.ResultBean resultBean : result) {
+                    resultBean.setAll(false);
+                }
+            }
+        }
         shoppingAdapter.notifyDataSetChanged();
+
     }
 
-
-
-
-
+    //计算价钱
     public void count() {
         allPrice = 0;
         for (ShortcartProductBean.ResultBean resultBean : result) {
@@ -292,7 +383,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         }
         shoppingMoney.setText("￥" + allPrice + "");
-
     }
 
 }

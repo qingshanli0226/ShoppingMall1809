@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="@dimen/dp_50">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@drawable/checkbox_unselected"
+            android:id="@+id/delAll"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全选"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/dp_25"></TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_30"
+            android:background="@drawable/words_del"
+            android:text="删除"
+            android:gravity="center"
+
+            android:layout_gravity="center_vertical"
+            android:id="@+id/del_shop"></TextView>
+        <TextView
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_30"
+            android:background="@drawable/wordsred_collect"
+            android:text="收藏"
+            android:gravity="center"
+            android:textColor="#f47575"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/collect_shop"></TextView>
+    </LinearLayout>
+</RelativeLayout>
