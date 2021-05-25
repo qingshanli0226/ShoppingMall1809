@@ -22,13 +22,13 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
         httpPresenter.getShortProductsData();
 
-        time=3;
+        time = 3;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 time--;
-                if (time<=0){
+                if (time <= 0) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -39,7 +39,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
                     });
                 }
             }
-        },0,1000);
+        }, 0, 1000);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
-        if (shortcartProductBean.getCode().equals("200")){
+        if (shortcartProductBean.getCode().equals("200")) {
             Toast.makeText(this, "欢迎页面加载完成数据", Toast.LENGTH_SHORT).show();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
         }

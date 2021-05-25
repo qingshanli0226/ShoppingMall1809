@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
                         if (logBean == null) {
                             Toast.makeText(MainActivity.this, "用户未登录，请先登录", Toast.LENGTH_SHORT).show();
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
-                        }else {
+                        } else {
                             Toast.makeText(MainActivity.this, "用户已经登录", Toast.LENGTH_SHORT).show();
                             EventBus.getDefault().post("request_buyCar");
                         }
@@ -154,7 +154,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onLoginChange(LogBean isLog) {
-
+        if (isLog != null) {
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

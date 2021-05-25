@@ -30,13 +30,17 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
 
                     @Override
                     public void onNext(@NonNull LogBean logBean) {
-                        IView.onAutoData(logBean);
+                        if (IView!=null) {
+                            IView.onAutoData(logBean);
+                        }
                         LogUtils.json(logBean);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        IView.showError(e.getMessage());
+                        if (IView!=null) {
+                            IView.showError(e.getMessage());
+                        }
                     }
 
                     @Override

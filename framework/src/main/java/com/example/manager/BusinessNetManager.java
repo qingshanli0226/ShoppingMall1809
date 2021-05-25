@@ -20,7 +20,9 @@ public class BusinessNetManager {
 
     public static BusinessNetManager getInstance() {
         if (manager==null){
+
             manager=new BusinessNetManager();
+
         }
         return manager;
     }
@@ -48,6 +50,7 @@ public class BusinessNetManager {
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(broadcastReceiver,intentFilter);
     }
+
     private BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -63,6 +66,7 @@ public class BusinessNetManager {
             }
         }
     };
+
     private void getCurrentContextStatus() {
         ConnectivityManager connectivityManager= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -75,9 +79,9 @@ public class BusinessNetManager {
     }
 
 
-
     public interface NetConnectListener{
         void OnConnect();
         void DisConnect();
     }
+
 }
