@@ -1,20 +1,25 @@
 package com.example.shoppingmallsix.fragment.shoppingcarfragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
+
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
@@ -25,10 +30,11 @@ import com.example.user.login.LoginActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping, CacheUserManager.ILoginChange {
+public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping, CacheUserManager.ILoginChange,SoppingCartMemoryDataManager.ISoppingDateChange {
 
     private TextView shopText;
     private String bianji = "编辑";
@@ -56,7 +62,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     protected void initData() {
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
-            httpPresenter.getShoppingData();
+            handler.sendEmptyMessageDelayed(1,1000);
         } else {
             Toast.makeText(getActivity(), "请先登录账户", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -69,8 +75,29 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 shopCheck.setChecked(!shopCheck.isChecked());
             }
         });
-
+        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
     }
+
+    //子线程获取数据 实时刷新
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            if (resultBean!=null){
+                resultBeans.clear();
+                List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
+                if (result!=null){
+                    resultBeans.addAll(result);
+                    shoppingCarAdapter.notifyDataSetChanged();
+                }
+
+            }else {
+                handler.sendEmptyMessageDelayed(1,1000);
+            }
+        }
+    };
+
 
     @Override
     protected void initView() {
@@ -119,30 +146,17 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
     }
-
-    @Override
-    public void onShopping(GetShortcartProductsBean shoppingCarBean) {
-
-        if (shoppingCarBean.getCode().equals("200")) {
-            List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
-            resultBeans.addAll(result);
-            shoppingCarAdapter.notifyDataSetChanged();
-        }
-    }
-
     @Override
     public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean) {
         if (selectAllProductBean.getCode().equals("200")){
             shopCheck.setChecked(!shopCheck.isChecked());
             if (shopCheck.isChecked()){
                 for (int i = 0; i <resultBeans.size() ; i++) {
-                    GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(i);
-                    resultBean.setProductSelected(true);
+                  resultBeans.get(i).setProductSelected(true);
                 }
             }else {
                 for (int i = 0; i <resultBeans.size() ; i++) {
-                    GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(i);
-                    resultBean.setProductSelected(false);
+                    resultBeans.get(i).setProductSelected(false);
                 }
             }
 
@@ -168,7 +182,24 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     @Override
     public void onLoginChange(LoginBean loginBean) {
         if (loginBean != null) {
-            httpPresenter.getShoppingData();
+
         }
+    }
+
+    @Override
+    public void onSoppingDataChange(GetShortcartProductsBean getShortcartProductsBean) {
+        resultBeans.clear();
+        List<GetShortcartProductsBean.ResultBean> result = getShortcartProductsBean.getResult();
+        if (result!=null){
+            resultBeans.addAll(result);
+            shoppingCarAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 }

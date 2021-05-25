@@ -16,18 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
+import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.goodsactivity.adapter.GoodsAdapter;
 import com.example.shoppingmallsix.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView {
+public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView , SoppingCartMemoryDataManager.ISoppingDateChange {
 
 
     private com.example.framework.view.ToolBar toolbar;
@@ -46,10 +49,12 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     @Override
     protected void initPresenter() {
        httpPresenter = new GoodsPresenter(this);
+
     }
 
     @Override
     protected void initData() {
+        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         name = intent.getStringExtra("name");
@@ -95,7 +100,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
 
                 popNum.setText(num+"");
                 Glide.with(GoodsActivity.this)
-                        .load(figure)
+                        .load(Constants.BASE_URl_IMAGE+figure)
                         .into(popImg);
                 popText.setText(name);
                 popPrice.setText(price);
@@ -126,8 +131,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        GoodsPresenter goodsPresenter = new GoodsPresenter(GoodsActivity.this);
-                        goodsPresenter.ddOneProduct(id,num+"",name,figure,price);
+                        httpPresenter.ddOneProduct(id,num+"",name,figure,price);
                         popupWindow.dismiss();
                     }
                 });
@@ -206,4 +210,17 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     }
 
 
+    @Override
+    public void onSoppingDataChange(GetShortcartProductsBean getShortcartProductsBean) {
+        List<GetShortcartProductsBean.ResultBean> result = getShortcartProductsBean.getResult();
+        if (result != null){
+            //红点刷新数量
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+    }
 }

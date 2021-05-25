@@ -9,6 +9,7 @@ import android.os.IBinder;
 import com.example.commened.FiannceContants;
 import com.example.commened.SpUtil;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.user.RegisterBean;
 import com.example.user.register.IUserView;
@@ -45,7 +46,9 @@ public class AutoService extends Service {
                 if (loginBean.getResult() != null) {
                     SpUtil.putString(AutoService.this, FiannceContants.TOKEN_KEY, loginBean.getResult().getToken());
                     CacheUserManager.getInstance().setLoginBean(loginBean);
+                    SoppingCartMemoryDataManager.getShoppingData();
                 }
+
             }
 
             @Override
