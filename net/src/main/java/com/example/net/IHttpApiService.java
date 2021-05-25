@@ -66,18 +66,18 @@ public interface IHttpApiService {
     @GET(Constants.SHORTACRT)
     Observable<CartBean> showCart();
 
-<<<<<<< HEAD
+
     //    检查服务端一个产品库存情况的接口
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
-=======
+
 
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("name")String name, @Field("password")String password);
 
->>>>>>> zzy
+
     //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);

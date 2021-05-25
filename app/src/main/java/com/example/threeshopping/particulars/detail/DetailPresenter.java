@@ -62,7 +62,7 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
     }
 
 
-<<<<<<< HEAD
+
   //检查数量
     public void inventory(CartBean.ResultBean resultBean) {
         String s = new Gson().toJson(resultBean);
@@ -95,11 +95,6 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                     }
                 });
     }
-=======
-
->>>>>>> zzy
-
-
 //    public void UpdateProductNum(){
 //        RetrofitManager.getHttpApiService()
 //                .UpdateProductNum()

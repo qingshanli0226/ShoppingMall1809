@@ -164,16 +164,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
                             //请求数据
                             CacheShopManager.getInstance().showCart();
-
-<<<<<<< HEAD
-//                            ProductBean inventoryBean = new ProductBean();
-//                            mPresenter.checkInventory(productBean);
-//                            LogUtils.json(productBean);
-=======
                             ProductBean inventoryBean = new ProductBean();
-
                             LogUtils.json(productBean);
->>>>>>> zzy
                         }
                     });
 
