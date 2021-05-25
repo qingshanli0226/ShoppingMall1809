@@ -1,5 +1,6 @@
 package com.example.electricityproject.shopp;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.example.common.SpUtils;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
+import com.example.common.bean.UpdateProductNumBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseFragment;
 import com.example.manager.BusinessBuyCarManger;
@@ -63,6 +65,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     SpUtils.putSelectAllBol(getContext(), true);
                 }
                 map.put("selected", selectAllBol);
+                //httpPresenter.postSelectAllProductData(map);
                 shoppingAdapter.notifyDataSetChanged();
 
             }
@@ -84,7 +87,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             public void OnChildItemListener(View view, int position) {
                 num = 0;
                 switch (view.getId()) {
-
                     case R.id.is_select:
                         ImageView img = (ImageView) view;
                         isShow = result.get(position).isAll();
@@ -102,12 +104,35 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                                 num++;
                             }
                         }
+                        Log.i("aa", "OnChildItemListener: num=" + num);
+                        Log.i("aa", "OnChildItemListener: size=" + result.size());
                         if (num == result.size()) {
                             all.setImageResource(R.drawable.checkbox_selected);
                         } else {
                             all.setImageResource(R.drawable.checkbox_unselected);
                         }
                         shoppingAdapter.notifyDataSetChanged();
+                        count();
+                        break;
+                    case R.id.image_add:
+                        Toast.makeText(getContext(), "111", Toast.LENGTH_SHORT).show();
+                        int plus = Integer.parseInt(result.get(position).getProductNum());
+                        result.get(position).setProductNum(plus + 1 + "");
+                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), result.get(position).getProductNum(), result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
+                        shoppingAdapter.notifyDataSetChanged();
+                        count();
+
+                        break;
+                    case R.id.image_sub:
+                        Toast.makeText(getContext(), "111", Toast.LENGTH_SHORT).show();
+                        int lose = Integer.parseInt(result.get(position).getProductNum());
+                        if (lose<=0){
+                            Toast.makeText(getContext(), "不能小于0", Toast.LENGTH_SHORT).show();
+                        }
+                        result.get(position).setProductNum(lose - 1 + "");
+                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), result.get(position).getProductNum(), result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
+                        shoppingAdapter.notifyDataSetChanged();
+                        count();
                         break;
                 }
             }
@@ -115,6 +140,32 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     }
 
+
+    @Subscribe
+    public void getEvent(String eve) {
+        if (eve.equals("login_success")) {
+            httpPresenter.getShortProductsData();
+        }
+    }
+
+    @Subscribe
+    public void getBuyCarData(String eve) {
+        if (eve.equals("request_buyCar")) {
+            Toast.makeText(getContext(), "接收到广播", Toast.LENGTH_SHORT).show();
+            ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+
+            if (shortProductBean != null) {
+
+                result = shortProductBean.getResult();
+                shoppingAdapter.updateData(shortProductBean.getResult());
+                buyCarRv.setAdapter(shoppingAdapter);
+                shoppingAdapter.notifyDataSetChanged();
+
+            } else {
+                Toast.makeText(getContext(), "欢迎页面没有加载数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     protected void initPresenter() {
@@ -132,6 +183,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         all = mView.findViewById(R.id.all);
         shoppingAdapter = new ShoppingAdapter();
         shoppingDi = (LinearLayout) findViewById(R.id.shopping_di);
+
+        shoppingAdapter = new ShoppingAdapter();
     }
 
     @Override
@@ -157,6 +210,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void showError(String error) {
         loadingPage.showErrorView();
+        Log.i("zx", "showError: " + error);
     }
 
     @Override
@@ -175,8 +229,21 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }else {
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
+            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+
+            shoppingAdapter.updateData(shortcartProductBean.getResult());
+            buyCarRv.setAdapter(shoppingAdapter);
+            shoppingAdapter.notifyDataSetChanged();
+
+
         }
     }
+
+    @Override
+    public void amendProductData(UpdateProductNumBean updateProductNumBean) {
+        Log.i("zx", "amendProductData: "+updateProductNumBean.toString());
+    }
+
 
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
@@ -204,33 +271,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingAdapter.notifyDataSetChanged();
     }
 
-    @Subscribe
-    public void getEvent(String eve) {
-        if (eve.equals("login_success")) {
-            httpPresenter.getShortProductsData();
-        }
-    }
 
-    @Subscribe
-    public void getBuyCarData(String eve) {
-        if (eve.equals("request_buyCar")) {
-            Toast.makeText(getContext(), "接收到广播", Toast.LENGTH_SHORT).show();
-            ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
 
-            if (shortProductBean != null) {
-                result = shortProductBean.getResult();
 
-                shoppingAdapter.updateData(shortProductBean.getResult());
-                buyCarRv.setAdapter(shoppingAdapter);
-                shoppingAdapter.notifyDataSetChanged();
-            } else {
-                Toast.makeText(getContext(), "欢迎页面没有加载数据", Toast.LENGTH_SHORT).show();
-                shoppingDi.setVisibility(View.GONE);
-                buyCarRv.setVisibility(View.GONE);
-                httpPresenter.getShortProductsData();
-            }
-        }
-    }
 
     public void count() {
         allPrice = 0;
@@ -239,7 +282,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 if (resultBean != null) {
                     int num = Integer.parseInt(resultBean.getProductNum());
                     double price = Double.parseDouble(resultBean.getProductPrice());
-                    allPrice += (double) (num * price);
+                    Log.i("zx", "num: " + resultBean.getProductNum() + "price:" + resultBean.getProductPrice());
+                    int a = Integer.parseInt(resultBean.getProductNum());
+                    double b = Double.parseDouble(resultBean.getProductPrice());
+
+                    allPrice += (double) (a * b);
                 }
 
             }
@@ -247,4 +294,5 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingMoney.setText("￥" + allPrice + "");
 
     }
+
 }

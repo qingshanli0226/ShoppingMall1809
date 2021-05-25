@@ -35,4 +35,13 @@ public class UpdateProductNumBean {
     public void setResult(String result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateProductNumBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result='" + result + '\'' +
+                '}';
+    }
 }

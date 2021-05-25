@@ -62,6 +62,22 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
 
             }
         });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (childItemClickListener!=null){
+                    childItemClickListener.OnChildItemListener(v,position);
+                }
+            }
+        });
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (childItemClickListener!=null){
+                    childItemClickListener.OnChildItemListener(v,position);
+                }
+            }
+        });
 
     }
 
