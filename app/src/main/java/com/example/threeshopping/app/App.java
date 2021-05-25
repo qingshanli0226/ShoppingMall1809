@@ -7,6 +7,7 @@ import android.app.Application;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
@@ -18,6 +19,7 @@ import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.unit.Subunits;
 import me.jessyan.autosize.utils.AutoSizeLog;
+import retrofit2.http.HEAD;
 
 public class App extends Application {
     @Override
@@ -27,15 +29,10 @@ public class App extends Application {
         AppModule.init();
         UserModule.init();
         NetModule.context = this;
-        UtileSql.getInstance().setContext(this);
- }
 
-    private void configUnits() {
-        AutoSizeConfig.getInstance()
-                .getUnitsManager()
-                .setSupportDP(true)
-                .setDesignSize(2160, 3840)
-                .setSupportSP(true)
-                .setSupportSubunits(Subunits.MM);
-    }
+        UtileSql.getInstance().setContext(this);
+
+        CacheShopManager.getInstance().init();
+
+ }
 }

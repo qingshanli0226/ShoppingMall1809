@@ -84,7 +84,7 @@ public interface IHttpApiService {
 
     //更新服务端购物车产品的数量的接口
     @POST(Constants.UPDATEPRODUCTNUM)
-    Observable<UpdateProductNumBean> updateProductNum(@Body RequestBody requestBody);
+    Observable<SelectBean> updateProductNum(@Body RequestBody requestBody);
 
 
     //选中全部

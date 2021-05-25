@@ -44,12 +44,22 @@ public class CacheShopManager {
         return cacheShopManager;
     }
 
+    public void init(){
+        UserManager.getInstance().registerLogin(new UserManager.IUserChange() {
+            @Override
+            public void onUserChange(LoginBean loginBean) {
+                getShowCart();
+            }
+        });
+    }
+
     //购物车数据源
     private List<CartBean.ResultBean> carts;
     private List<ICartChange> cartChanges = new LinkedList<>();
 
+
     //购物车数据源
-    public void showCart() {
+    public void getShowCart() {
         RetrofitManager.getHttpApiService()
                 .showCart()
                 .subscribeOn(Schedulers.io())
@@ -81,7 +91,7 @@ public class CacheShopManager {
     }
 
     //单选
-    public void updateProductSelect(CartBean.ResultBean resultBean) {
+    public void updateProductSelect(int position,CartBean.ResultBean resultBean) {
         String s = new Gson().toJson(resultBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
 
@@ -100,6 +110,8 @@ public class CacheShopManager {
                     public void onNext(@NonNull SelectBean selectBean) {
                         if (selectBean.getCode().equals("200")) {
                             Log.i("zyb", "onNext: 成功");
+                            carts.get(position).setProductSelected(resultBean.isProductSelected());
+                            setCheck(position,resultBean.isProductSelected());
                         }
                     }
 
@@ -173,12 +185,49 @@ public class CacheShopManager {
 
                     @Override
                     public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+
+                        }
                         Log.i("zyb", "onNext: 成功" + selectBean);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("zyb错误", "onError: "+e);
+                        Log.i("zyb", e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //更新服务数量
+    public void upDateNum(CartBean.ResultBean resultBean) {
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitManager.getHttpApiService()
+                .updateProductNum(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+
+                        }
+                        Log.i("zyb", "onNext: 成功" + selectBean);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
                         Log.i("zyb", e.getMessage());
                     }
 
@@ -201,7 +250,7 @@ public class CacheShopManager {
     public List<CartBean.ResultBean> getCarts() {
         return carts;
     }
-
+    //发送信息
     public synchronized void setCarts(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         Log.i("zyb", "setCarts: " + carts);
@@ -209,9 +258,33 @@ public class CacheShopManager {
             cartChange.onShowCart(carts);
         }
     }
+    //单选通知
+    public synchronized void setCheck(int position,boolean isCheck){
+        for (ICartChange cartChange : cartChanges) {
+            cartChange.onCheck(position,isCheck);
+        }
+    }
+    //添加数据
+    public synchronized void addData(CartBean.ResultBean resultBean){
+        int count = 0;
+        for (CartBean.ResultBean cart : carts) {
+            if (cart.getProductId().equals(resultBean.getProductId())) {
+                int cartNum = Integer.parseInt(cart.getProductNum());
+                int resultNum = Integer.parseInt(resultBean.getProductNum());
+                cart.setProductNum(cartNum+resultNum+"");
+            } else{
+                count++;
+            }
+        }
+        if(count == carts.size()){
+            carts.add(resultBean);
+        }
+    }
+
 
     public interface ICartChange {
         void onShowCart(List<CartBean.ResultBean> carts);
+        void onCheck(int position,boolean isCheck);
     }
 
 

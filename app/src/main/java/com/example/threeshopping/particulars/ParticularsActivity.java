@@ -34,7 +34,6 @@ import com.fiannce.sql.UtileSql;
 
 import java.util.List;
 
-import okhttp3.internal.Util;
 
 public class ParticularsActivity extends BaseActivity<DetailPresenter> implements IDetailView {
 
@@ -162,10 +161,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
                             LogUtils.json(sqlBean);
 
-                            //请求数据
-                            CacheShopManager.getInstance().showCart();
-                            ProductBean inventoryBean = new ProductBean();
-                            LogUtils.json(productBean);
+
+
                         }
                     });
 
@@ -203,9 +200,9 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onAddCart(SelectBean selectBean) {
-         if (selectBean.getCode().equals("200")){
-             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
-         }
+        if (selectBean.getCode().equals("200")) {
+            Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

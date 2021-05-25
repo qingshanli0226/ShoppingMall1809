@@ -158,8 +158,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             UserManager.getInstance().setLoginBean(loginBean);
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
-            //购物车数据加载
-            CacheShopManager.getInstance().showCart();
 
             CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
 
