@@ -29,8 +29,8 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     private List<ClassLeftBean> list = new ArrayList<>();
     private String[] strings = new String[]{Constants.SKIRT_URL, Constants.JACKET_URL, Constants.PANTS_URL, Constants.OVERCOAT_URL, Constants.ACCESSORY_URL, Constants.BAG_URL, Constants.DRESS_UP_URL, Constants.HOME_PRODUCTS_URL, Constants.STATIONERY_URL, Constants.DIGIT_URL, Constants.GAME_URL};
 
-    private List<Object> objectList = new ArrayList<>();
-    private ClassRightAdapter<Object> resultBeanClassRightAdapter;
+    private List<ClassBean.ResultBean> objectList = new ArrayList<>();
+    private ClassRightAdapter resultBeanClassRightAdapter;
     @Override
     protected void initPresenter() {
         httpPresenter = new ClassPresenter(this);
@@ -58,7 +58,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         classifyLeftRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //右布局初始化
         //Top
-        resultBeanClassRightAdapter = new ClassRightAdapter<>();
+        resultBeanClassRightAdapter = new ClassRightAdapter();
         classifyRightRecyclerView.setAdapter(resultBeanClassRightAdapter);
         classifyRightRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

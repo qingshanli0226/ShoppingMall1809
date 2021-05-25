@@ -34,11 +34,8 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
-
         intent = new Intent(this, AutoService.class);
         startService(intent);
-
     }
 
 

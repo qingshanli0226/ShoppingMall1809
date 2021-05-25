@@ -50,9 +50,6 @@ dependencies {
     implementation project(path: ':commened')
     implementation project(path: ':net')
     api 'org.greenrobot:greendao:3.3.0' // 2.add library
-
-
-
     //工具类
     api 'com.blankj:utilcodex:1.26.0'
 }

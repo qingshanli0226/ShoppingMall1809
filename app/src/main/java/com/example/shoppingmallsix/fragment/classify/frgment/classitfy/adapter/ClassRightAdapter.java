@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,25 +15,12 @@ import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.classify.ClassBean;
 
 import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.fragment.classify.frgment.classitfy.manager.FullyGridLayoutManager;
 
 import java.util.List;
 
-public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
-
-    public static final int SKIRT_TYPE = 0;
-    public static final int JACKET_TYPE = 1;
-    public static final int PANTS_TYPE = 2;
-    public static final int OVERCOAT_TYPE = 3;
-    public static final int ACCRSSORY_TYPE = 4;
-    public static final int BAG_TYPE = 5;
-    public static final int DRESS_TYPE = 6;
-    public static final int PRODUCTS_TYPE = 7;
-    public static final int STATIONERY_TYPE = 8;
-    public static final int DIGIT_TYPE = 9;
-    public static final int GAME_TYPE = 10;
+public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean>{
     private Context context;
-    public void  setUpdateData(List<T> strings,Context context){
+    public void  setUpdateData(List<ClassBean.ResultBean> strings,Context context){
 
         this.context=context;
         setDataList(strings);
@@ -45,7 +33,7 @@ public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
         return R.layout.class_right_item;
     }
     @Override
-    public void displayViewHolder(BaseViewHolder holder, int position, T itemData) {
+    public void displayViewHolder(BaseViewHolder holder, int position, ClassBean.ResultBean itemData) {
         RecyclerView recyclerViewTop = holder.getView(R.id.classify_right_item_rv_top);
         RecyclerView recyclerViewButton = holder.getView(R.id.classify_right_item_rv_button);
 
@@ -53,11 +41,8 @@ public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
 
-        //获取强转数据
-        ClassBean.ResultBean resultBean = (ClassBean.ResultBean) itemData;
-
-        List<ClassBean.ResultBean.HotProductListBean> hot_product_list = resultBean.getHot_product_list();
-        List<ClassBean.ResultBean.ChildBean> child = resultBean.getChild();
+        List<ClassBean.ResultBean.HotProductListBean> hot_product_list = itemData.getHot_product_list();
+        List<ClassBean.ResultBean.ChildBean> child = itemData.getChild();
         //判断lngearlayout
         int indext = child.size() /4;
         if (indext >1){
@@ -72,7 +57,7 @@ public class ClassRightAdapter<T> extends BaseRvAdapter<T>{
         //button
         ClassRightButtonAdapter<ClassBean.ResultBean.ChildBean> childBeanClassRightButtonAdapter = new ClassRightButtonAdapter<>(child);
         recyclerViewButton.setAdapter(childBeanClassRightButtonAdapter);
-        recyclerViewButton.setLayoutManager(new FullyGridLayoutManager(context,3));
+        recyclerViewButton.setLayoutManager(new GridLayoutManager(context,3));
 
 
     }

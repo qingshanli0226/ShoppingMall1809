@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
@@ -23,12 +24,17 @@ import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
 import com.example.shoppingmallsix.goods.adapter.GoodsAdapter;
+
+import com.example.net.bean.business.GetShortcartProductsBean;
+
+import com.example.net.constants.Constants;
+
 import com.example.shoppingmallsix.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView {
+public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView , SoppingCartMemoryDataManager.ISoppingDateChange {
 
 
     private com.example.framework.view.ToolBar toolbar;
@@ -43,8 +49,9 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     private int num = 1;
     private String id;
     private GoodAdapterBean goodAdapterBean;
-    private GoodsPresenter goodsPresenter;
-
+    private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
+    private GetShortcartProductsBean.ResultBean resultBean = null;
+    private int index;
     @Override
     protected void initPresenter() {
        httpPresenter = new GoodsPresenter(this);
@@ -61,6 +68,10 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
         list.add(goodAdapterBean);
         list.add(goodAdapterBean);
         goodsAdapter.notifyDataSetChanged();
+        //注册接口
+        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        //获取内存数据
+        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
     }
 
     @Override
@@ -97,7 +108,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
 
                 popNum.setText(num+"");
                 Glide.with(GoodsActivity.this)
-                        .load(figure)
+                        .load(Constants.BASE_URl_IMAGE+figure)
                         .into(popImg);
                 popText.setText(name);
                 popPrice.setText(price);
@@ -128,8 +139,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        goodsPresenter = new GoodsPresenter(GoodsActivity.this);
-                        goodsPresenter.checkInventory(id,num + "");
+                        httpPresenter.checkInventory(id,num + "");
                         popupWindow.dismiss();
                     }
                 });
@@ -156,11 +166,8 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
             popupWindow.setOutsideTouchable(true);
             popupWindow.setFocusable(true);
 
-
-
             View inflate = LayoutInflater.from(this).inflate(R.layout.item_pop, null);
             popupWindow.setContentView(inflate);
-
 
             LinearLayout viewById = inflate.findViewById(R.id.toMain);
             viewById.setOnClickListener(new View.OnClickListener() {
@@ -192,8 +199,14 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     public void onAddCart(AddOneProductBean productBean) {
         if (productBean.getCode().equals("200")){
             Toast.makeText(this, getString(R.string.add), Toast.LENGTH_SHORT).show();
-
-            goodsPresenter.updateProduceNum(id,num+"",name,figure,price);
+            GetShortcartProductsBean.ResultBean resultBean = new GetShortcartProductsBean.ResultBean();
+            resultBean.setProductId(id);
+            resultBean.setUrl(figure);
+            resultBean.setProductName(name);
+            resultBean.setProductNum(num+"");
+            resultBean.setProductPrice(price);
+            resultBeans.add(resultBean);
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }else {
             Toast.makeText(this, getString(R.string.dda), Toast.LENGTH_SHORT).show();
         }
@@ -203,7 +216,18 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     public void onCheckInventory(CheckOneInventoryBean bean) {
         if (bean.getCode().equals("200")){
             Toast.makeText(this, "检查库存有", Toast.LENGTH_SHORT).show();
-            goodsPresenter.addOneProduct(id,num+"",name,figure,price);
+            for (int i = 0; i <resultBeans.size() ; i++) {
+                if (name.equals(resultBeans.get(i).getProductName())){
+                    resultBean = resultBeans.get(i);
+                    index =i ;
+                }
+            }
+            if (resultBean!=null){
+                httpPresenter.updateProduceNum(id,(Integer.parseInt(resultBean.getProductNum())+num)+"",name,figure,price);
+            }else {
+                httpPresenter.addOneProduct(id,num+"",name,figure,price);
+            }
+
         }else {
             Toast.makeText(this, "检查库存没有", Toast.LENGTH_SHORT).show();
         }
@@ -213,9 +237,28 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean) {
         if (updateProductNumBean.getCode().equals("200")){
             Toast.makeText(this, "更新", Toast.LENGTH_SHORT).show();
+            //更新
+            resultBeans.get(index).setProductNum(""+(Integer.parseInt(resultBean.getProductNum())+num));
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }else {
             Toast.makeText(this, "没有更新", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+
+    @Override
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
+        if (getShortcartProductsBean != null){
+            //红点刷新数量
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //销毁接口
+        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 
 }
