@@ -5,6 +5,7 @@ import android.util.Log;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
+import com.example.common.bean.UpdateProductNumBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
 
@@ -108,6 +109,50 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     }
                 });
+    }
+    public void getUpdateProduct(String productId,String productNum,String productName,String url,String productPrice){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productId",productId);
+            jsonObject.put("productNum",productNum);
+            jsonObject.put("productName",productName);
+            jsonObject.put("url",url);
+            jsonObject.put("productPrice",productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitCreate.getFiannceApiService()
+                .setUpdateProductNum(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UpdateProductNumBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull UpdateProductNumBean updateProductNumBean) {
+                        if (IView!=null){
+                            IView.amendProductData(updateProductNumBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (IView!=null){
+                            IView.showError(e.getMessage()+"");
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
     }
 
 }
