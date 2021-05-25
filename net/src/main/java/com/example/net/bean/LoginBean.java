@@ -10,6 +10,16 @@ public class LoginBean {
 
     private String code;
     private String message;
+
+    @Override
+    public String toString() {
+        return "LoginBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     /**
      * id : 1610
      * name : 1610
@@ -63,6 +73,22 @@ public class LoginBean {
 
         public String getId() {
             return id;
+        }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", password='" + password + '\'' +
+                    ", email=" + email +
+                    ", phone=" + phone +
+                    ", point=" + point +
+                    ", address=" + address +
+                    ", money=" + money +
+                    ", avatar=" + avatar +
+                    ", token='" + token + '\'' +
+                    '}';
         }
 
         public void setId(String id) {

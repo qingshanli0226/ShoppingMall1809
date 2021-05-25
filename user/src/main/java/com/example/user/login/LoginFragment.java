@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.framework.BaseFragment;
+import com.example.framework.SpUtil;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
@@ -62,6 +63,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
     public void onLogin(LoginBean loginBean) {
         String code = loginBean.getCode();
         if (code.equals("200")) {
+            SpUtil.setString(getActivity(),"token",loginBean.getResult().getToken());
             Toast.makeText(getActivity(), getString(R.string.loginYes), Toast.LENGTH_SHORT).show();
             CacheUserManager.getInstance().setLoginBean(true);//修改登录状态
             EventBus.getDefault().post("2");

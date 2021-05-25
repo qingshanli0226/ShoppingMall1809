@@ -3,6 +3,8 @@ package com.example.user;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -23,6 +25,12 @@ public class AutoService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.i("zyh", "onCreate: ");
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         new AutoLoginPresenter(new ILoginView() {
@@ -33,8 +41,12 @@ public class AutoService extends Service {
 
             @Override
             public void onAutoLogin(LoginBean loginBean) {
-                SpUtil.setString(AutoService.this,"token",loginBean.getResult().getToken());
-                CacheUserManager.getInstance().setLoginBean(true);
+                if (loginBean.getCode().equals("200")) {
+                    SpUtil.setString(AutoService.this, "token", loginBean.getResult().getToken());
+                    CacheUserManager.getInstance().setLoginBean(true);
+                    return;
+                }
+                CacheUserManager.getInstance().setLoginBean(false);
             }
 
             @Override
@@ -51,7 +63,7 @@ public class AutoService extends Service {
             public void showToast(String msg) {
 
             }
-        }).getAutoLogin(SpUtil.getString(this,"token"));
+        }).getAutoLogin(SpUtil.getString(this, "token"));
         return super.onStartCommand(intent, flags, startId);
     }
 }

@@ -44,7 +44,7 @@ public class AutoLoginPresenter extends BasePresenter<ILoginView> {
                     @Override
                     public void onNext(@NonNull LoginBean loginBean) {
                         if (mView!=null){
-                            mView.onLogin(loginBean);
+                            mView.onAutoLogin(loginBean);
                         }
                     }
 
