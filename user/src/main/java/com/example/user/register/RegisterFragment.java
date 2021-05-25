@@ -53,6 +53,10 @@ public class RegisterFragment extends BaseFragment<RegisPresenter> implements IR
         });
     }
 
+    @Override
+    public void showLoading() {
+        super.showLoading();
+    }
 
     @Override
     public void OnRegister(RegisterBean registerBean) {

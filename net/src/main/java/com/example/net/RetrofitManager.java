@@ -23,9 +23,9 @@ public class RetrofitManager {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .addInterceptor(new TokenInterceptor())
-                .writeTimeout(2, TimeUnit.MINUTES)
-                .readTimeout(2, TimeUnit.MINUTES)
-                .connectTimeout(2, TimeUnit.MINUTES)
+                .writeTimeout(5*1000, TimeUnit.MILLISECONDS)
+                    .readTimeout(5*1000, TimeUnit.MILLISECONDS)
+                .connectTimeout(5*1000, TimeUnit.MILLISECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)

@@ -8,16 +8,18 @@ import android.os.Bundle;
 import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.msg.MsgMainActivity;
 
-public class MsgMoudel implements CaCheArote.IAppInterface {
+public class MsgMoudel implements CaCheArote.IMsgInterface {
     public static void init() {
         MsgMoudel msgMoudel = new MsgMoudel();
-        CaCheArote.getInstance().registerIAppInterface(msgMoudel);
+        CaCheArote.getInstance().registerIMsgInterface(msgMoudel);
     }
 
     @Override
-    public void openMainActivity(Context context, Bundle bundle) {
+    public void openMsgActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MsgMainActivity.class);
-        intent.putExtras(bundle);
+        if (bundle!=null){
+            intent.putExtras(bundle);
+        }
         if (context instanceof Activity){
             context.startActivity(intent);
         }else {
@@ -26,7 +28,4 @@ public class MsgMoudel implements CaCheArote.IAppInterface {
         }
     }
 
-    @Override
-    public void onEvent(String event) {
-    }
 }

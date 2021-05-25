@@ -42,13 +42,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     //加载界面
     @Override
     public void showLoading() {
-        loadingPage.showLoadingView();
     }
 
     //隐藏加载页面
     @Override
     public void hideLoading() {
-        loadingPage.setVisibility(View.GONE);
     }
 
     @Override

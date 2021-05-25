@@ -1,5 +1,7 @@
 package com.example.myapplication.type;
 
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,11 +79,36 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
     @Override
     public void onSkirt(SkirtBean skirtBean) {
         data.clear();
-        List<SkirtBean.ResultBean> result = skirtBean.getResult();
-        List<SkirtBean.ResultBean.ChildBean> child = result.get(0).getChild();
-        List<SkirtBean.ResultBean.HotProductListBean> hot_product_list = result.get(0).getHot_product_list();
-        data.add(hot_product_list);
-        data.add(child);
-        classifyAdapter.updataData(data);
+        if (skirtBean.getCode()==200){
+            hideLoading();
+            List<SkirtBean.ResultBean> result = skirtBean.getResult();
+            List<SkirtBean.ResultBean.ChildBean> child = result.get(0).getChild();
+            List<SkirtBean.ResultBean.HotProductListBean> hot_product_list = result.get(0).getHot_product_list();
+            data.add(hot_product_list);
+            data.add(child);
+            classifyAdapter.updataData(data);
+        }else {
+            Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
+            loadingPage.showErrorView();
+        }
     }
+
+    @Override
+    public void onLoginChange(boolean loginBean) {
+        super.onLoginChange(loginBean);
+        hideLoading();
+    }
+
+    @Override
+    public void showLoading() {
+        super.showLoading();
+        loadingPage.showLoadingView();
+    }
+
+    @Override
+    public void hideLoading() {
+        super.hideLoading();
+        loadingPage.showSuccessView();
+    }
+
 }

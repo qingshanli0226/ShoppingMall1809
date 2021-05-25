@@ -92,6 +92,11 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
+    public void showLoading() {
+        super.showLoading();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);

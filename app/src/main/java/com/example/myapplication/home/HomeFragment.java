@@ -58,9 +58,7 @@ public class HomeFragment extends BaseFragment {
 
         msg = (ImageView) findViewById(R.id.msg);
         msg.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("falg","2");
-            CaCheArote.getInstance().getUserInterface().openLoginActivity(getContext(),bundle);
+            CaCheArote.getInstance().getMsgInterface().openMsgActivity(getActivity(),null);
         });
     }
 

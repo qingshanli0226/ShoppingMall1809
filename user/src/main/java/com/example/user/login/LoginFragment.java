@@ -58,6 +58,11 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
     }
 
     @Override
+    public void showLoading() {
+        super.showLoading();
+    }
+
+    @Override
     public void onLogin(LoginBean loginBean) {
         String code = loginBean.getCode();
         if (code.equals("200")) {

@@ -62,7 +62,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     //隐藏加载页面
     @Override
     public void hideLoading() {
-        loadingPage.setVisibility(View.GONE);
+        loadingPage.showSuccessView();
     }
 
     //监听登陆状态
