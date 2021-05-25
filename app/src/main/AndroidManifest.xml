@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricityProject">
+        <activity android:name=".person.findforpay.FindForPayActivity"></activity>
         <activity android:name=".details.DetailsActivity" />
         <activity
             android:name=".main.MainActivity"

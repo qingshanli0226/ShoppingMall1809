@@ -72,6 +72,9 @@ public class ToolBar extends RelativeLayout {
         rightText.setTextColor(titleTextColor);
 
 
+        if (leftIsShow && leftImgId!=0) {
+            leftImg.setImageResource(leftImgId);
+        }
 
         rightText.setOnClickListener(new OnClickListener() {
             @Override
