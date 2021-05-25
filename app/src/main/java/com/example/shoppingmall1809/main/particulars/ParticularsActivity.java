@@ -1,6 +1,7 @@
 package com.example.shoppingmall1809.main.particulars;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,11 +82,13 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
                     return;
                 }
 
+                num=1;
+
                 PopupWindow popupWindow = new PopupWindow();
 
-                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setFocusable(true);
+                popupWindow.setFocusable(false);
                 popupWindow.setOutsideTouchable(true);
 
                 View inflate = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.item_particulars_pop, null);
@@ -145,6 +148,9 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
             }
         });
     }
+
+    //e02704ec-23d0-413b-82ed-995c8df11f11AND1621946419772
+    //a82cb2ca-9598-4d73-9684-6da2a3789414AND1621946176675
 
     @Override
     protected void initPresenter() {

@@ -160,8 +160,8 @@ public class LoginFragment extends BaseFragment<LoginPresneter> implements ILogi
     @Override
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
-            ShopeUserManager.getInstance().setLoginBean(loginBean);
             SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
+            ShopeUserManager.getInstance().setLoginBean(loginBean);
             if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
                 getActivity().finish();
                 return;

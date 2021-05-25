@@ -35,6 +35,9 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        requestPermissions(new String[]{"android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"},100);
+
         handler.sendEmptyMessageDelayed(0,2000);
 
         intent = new Intent(this, ShopService.class);

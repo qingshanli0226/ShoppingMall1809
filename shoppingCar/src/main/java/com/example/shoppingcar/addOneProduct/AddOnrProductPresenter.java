@@ -78,10 +78,9 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        ResponseBody requestBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
         RetrofitCreator.getShopApiService()
-                .getCheckOneProductInventory(requestBody)
+                .getCheckOneProductInventory(responseBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterBean>() {
