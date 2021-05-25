@@ -15,7 +15,7 @@ import com.example.net.model.LoginBean;
 import com.example.shoppingcar.user.findforpay.FindForPayActivity;
 import com.example.shoppingmall1809.R;
 
-public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUserManager.IUserLoginChanged ,IUserView{
+public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUserManager.IUserLoginChanged ,IUserView , ShoppingCarManager.IFindForBean {
 
 
     private LinearLayout fragUserFukuan;
@@ -28,6 +28,9 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
 
     @Override
     protected void initData() {
+
+        ShoppingCarManager.getInstance().registerFindForBean(this::onFindForBean);
+
         ShopeUserManager.getInstance().register(this::onLoginChange);
         if (ShopeUserManager.getInstance().getLoginBean()!=null) {
             httpPresenter.getFindForPayData();
@@ -104,5 +107,13 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
     public void destroy() {
         super.destroy();
         ShopeUserManager.getInstance().unregister(this::onLoginChange);
+        ShoppingCarManager.getInstance().unRegisterFindForBean();
     }
+
+    @Override
+    public void onFindForBean() {
+        httpPresenter.getFindForPayData();
+        httpPresenter.getFindForSendData();
+    }
+
 }

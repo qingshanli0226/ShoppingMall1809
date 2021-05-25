@@ -1,5 +1,6 @@
 package com.example.framework.manager;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.net.model.FindForBean;
 import com.example.net.model.ShoppingTrolleyBean;
 
@@ -33,8 +34,8 @@ public class ShoppingCarManager {
         void onFindForBean();
     }
 
-    public IFindForBean unRegisterFindForBean() {
-        return iFindForBean;
+    public void unRegisterFindForBean() {
+        iFindForBean =null;
     }
     public void registerFindForBean(IFindForBean iFindForBean) {
         this.iFindForBean = iFindForBean;
@@ -55,7 +56,7 @@ public class ShoppingCarManager {
 
     //删除购物车集合
     public synchronized void deleteResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
-        result.add(resultBean);
+        result.remove(resultBean);
     }
 
     //修改购物车集合
@@ -125,7 +126,7 @@ public class ShoppingCarManager {
     //接口回调
     private List<IShoppingCar> list = new ArrayList<>();
 
-    public interface IShoppingCar {
+    private interface IShoppingCar {
         void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result);
     }
 
