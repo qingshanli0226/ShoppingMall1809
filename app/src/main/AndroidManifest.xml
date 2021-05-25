@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".msg.MsgMainActivity"></activity>
+        <activity android:name=".findforsend.FindsendMainActivity"></activity>
+        <activity android:name=".findforpay.FindPayMainActivity" />
+        <activity android:name=".msg.MsgMainActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"
@@ -27,7 +29,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance"></activity>
+            android:launchMode="singleInstance" />
     </application>
 
 </manifest>

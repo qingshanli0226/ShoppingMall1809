@@ -1,5 +1,7 @@
 package com.example.net;
 
+import com.example.net.bean.FindForPayBean;
+import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
@@ -50,5 +52,11 @@ public interface Api {
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
 
+    //待支付
+    @GET
+    Observable<FindForPayBean> getForPay();
+    //待发货
+    @GET
+    Observable<FindForSendBean> getForSend();
 
 }
