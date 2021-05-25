@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.LogUtils;
+
 import com.example.common.SpUtil;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
@@ -51,7 +51,7 @@ public class AutoService extends Service {
                         if (loginBean.getResult()!= null){
                             if(loginBean.getCode().equals("200")){
                                 Toast.makeText(AutoService.this, "自动登录成功", Toast.LENGTH_SHORT).show();
-                                LogUtils.json(loginBean.getResult().getToken()+"User");
+
                                 SpUtil.putString(AutoService.this,loginBean.getResult().getToken());
                                 UserManager.getInstance().setLoginBean(loginBean);
 

@@ -91,5 +91,11 @@ public interface IHttpApiService {
     @POST(Constants.SELECTALL)
     Observable<SelectBean> selectAll(@Body RequestBody requestBody);
 
+    //删除
+    @POST(Constants.REMOVEPRODUCT)
+    Observable<SelectBean> removeOneProduct(@Body RequestBody requestBody);
 
+    //删除全部
+    @POST(Constants.REMOVEMANY)
+    Observable<SelectBean> removeMany(@Body RequestBody requestBody);
 }

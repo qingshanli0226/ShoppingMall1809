@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.common.Constants;
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.UserManager;
@@ -185,5 +186,6 @@ public class MainActivity extends BaseActivity {
     public void onUserChange(LoginBean loginBean) {
         super.onUserChange(loginBean);
         this.loginBean = loginBean;
+        LogUtil.d("登录");
     }
 }

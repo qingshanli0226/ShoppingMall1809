@@ -21,6 +21,7 @@ import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.CartBean;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
@@ -55,6 +56,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private ImageView popPic;
     View view;
     int num = 1;
+    private ProductBean productBean;
 
     @Override
     public int getLayoutId() {
@@ -143,13 +145,14 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                         @Override
                         public void onClick(View v) {
                             popupWindow.dismiss();
-                            ProductBean productBean = new ProductBean();
+                            productBean = new ProductBean();
                             productBean.setProductId(id);
                             productBean.setProductName(title);
                             productBean.setProductNum(num);
                             productBean.setUrl(pic);
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
+
                             //数据库
                             SqlBean sqlBean = new SqlBean();
                             sqlBean.setProductId(id);
@@ -160,9 +163,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             UtileSql.getInstance().getDaoSession().insert(sqlBean);
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
                             LogUtils.json(sqlBean);
-
-
-
                         }
                     });
 
@@ -202,6 +202,13 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     public void onAddCart(SelectBean selectBean) {
         if (selectBean.getCode().equals("200")) {
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+            //添加数据
+            CartBean.ResultBean resultBean = new CartBean.ResultBean();
+            resultBean.setProductId(productBean.getProductId());
+            resultBean.setProductNum(productBean.getProductNum()+"");
+            resultBean.setProductPrice(productBean.getProductPrice());
+            resultBean.setUrl(productBean.getUrl());
+            CacheShopManager.getInstance().addData(resultBean);
         }
     }
 
@@ -222,7 +229,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void showError(String error) {
-        Log.i("zyb", "showError: " + error);
+
     }
 
     @Override

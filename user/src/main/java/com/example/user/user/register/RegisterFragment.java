@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
@@ -72,7 +73,6 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(again)){
                     if (pass.equals(again)){
-                        LogUtils.json(name+":"+pass);
                         mPresenter.getRegister(name,pass);
                     }else {
                         Toast.makeText(getActivity(), "两次密码不一致", Toast.LENGTH_SHORT).show();

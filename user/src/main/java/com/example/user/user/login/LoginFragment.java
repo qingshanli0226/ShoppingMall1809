@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.LogUtils;
+
 import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
@@ -151,7 +151,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     @Override
     public void onLogin(LoginBean loginBean) {
         loadPage.showSuccessLayout();
-        LogUtils.json(loginBean);
         if (loginBean.getCode().equals("200")) {
             getActivity().finish();
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
@@ -184,6 +183,5 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     @Override
     public void showError(String error) {
         Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
-        LogUtils.json(error);
     }
 }

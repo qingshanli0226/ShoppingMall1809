@@ -73,6 +73,6 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
 
     @Override
     public void showError(String error) {
-        Log.i("zyb", "showError: "+error);
+
     }
 }

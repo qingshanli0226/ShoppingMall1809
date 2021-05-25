@@ -65,7 +65,6 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
 
     @Subscribe
     public void getEventBus(Integer i){
-        Log.i("zzy", "getEventBus: "+i);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (i){
             case 0:
