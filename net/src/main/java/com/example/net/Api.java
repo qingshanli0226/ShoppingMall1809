@@ -1,10 +1,7 @@
 package com.example.net;
 
 import com.example.net.bean.FindForPayBean;
-<<<<<<< HEAD
-=======
 import com.example.net.bean.FindForSendBean;
->>>>>>> 2923f91eee36e2d88726dc7942c3d8596271fa96
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
@@ -53,22 +50,15 @@ public interface Api {
     //库存
     @POST("checkOneProductInventory")
     @FormUrlEncoded
-    Observable<RegisterBean> getInventory(@Field("productId") String productId,@Field("productNum") String productNum);
+    Observable<RegisterBean> getInventory(@Field("productId") String productId, @Field("productNum") String productNum);
 
     //自动登录
     @POST("autoLogin")
     @FormUrlEncoded
-<<<<<<< HEAD
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
-=======
-    Observable<LoginBean> getAutoLogin(@Field("token")String token);
 
-    //待支付
-    @GET
-    Observable<FindForPayBean> getForPay();
     //待发货
     @GET
     Observable<FindForSendBean> getForSend();
 
->>>>>>> 2923f91eee36e2d88726dc7942c3d8596271fa96
 }

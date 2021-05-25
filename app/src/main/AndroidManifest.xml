@@ -14,12 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
         <activity android:name=".shoppingCart.ShopingCartActivity"></activity>
-=======
         <activity android:name=".findforsend.FindsendMainActivity"></activity>
         <activity android:name=".findforpay.FindPayMainActivity" />
->>>>>>> 2923f91eee36e2d88726dc7942c3d8596271fa96
         <activity android:name=".msg.MsgMainActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
         <activity
