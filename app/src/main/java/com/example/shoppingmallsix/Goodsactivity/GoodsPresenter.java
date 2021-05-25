@@ -3,6 +3,7 @@ package com.example.shoppingmallsix.Goodsactivity;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.AddOneProductBean;
+import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 
 
@@ -23,7 +24,7 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
         attachView(iDetailView);
     }
 
-    public void ddOneProduct(String productId,String productNum,String productName,
+    public void addOneProduct(String productId,String productNum,String productName,
                               String url,String productPrice){
 
         JSONObject jsonObject = new JSONObject();
@@ -70,7 +71,8 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
                 });
     }
 
-    public void UpData(String productId, int productNum, String productName, String url, String productPrice) {
+    public void checkInventory(String productId,String productNum,String productName,
+                               String url,String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId",productId);
@@ -81,27 +83,27 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-        RetrofitCreator.getFiannceApiService().getUpdateProductNum(body)
+        ResponseBody body = ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getFiannceApiService().getCheckInventory(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UpdateProductNumBean>() {
+                .subscribe(new Observer<CheckInventoryBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(UpdateProductNumBean bean) {
+                    public void onNext(CheckInventoryBean bean) {
                         if (iView!=null){
-                            iView.onUpdateNum(bean);
+                            iView.onCheckInventory(bean);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         if (iView != null){
-                            iView.onUpDataError(e.getMessage());
+                            iView.showToast(e.getMessage());
                         }
                     }
 

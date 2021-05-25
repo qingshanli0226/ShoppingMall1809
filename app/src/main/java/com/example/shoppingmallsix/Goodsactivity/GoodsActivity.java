@@ -19,6 +19,7 @@ import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
+import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
@@ -43,6 +44,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     private int num = 1;
     private String id;
     private GoodAdapterBean goodAdapterBean;
+    private GoodsPresenter goodsPresenter;
 
     @Override
     protected void initPresenter() {
@@ -127,8 +129,8 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        GoodsPresenter goodsPresenter = new GoodsPresenter(GoodsActivity.this);
-                        goodsPresenter.ddOneProduct(id,num+"",name,figure,price);
+                        goodsPresenter = new GoodsPresenter(GoodsActivity.this);
+                        goodsPresenter.checkInventory(id,num + "",name,figure,price);
                         popupWindow.dismiss();
                     }
                 });
@@ -197,13 +199,13 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     }
 
     @Override
-    public void onUpdateNum(UpdateProductNumBean bean) {
-        
-    }
-
-    @Override
-    public void onUpDataError(String msg) {
-
+    public void onCheckInventory(CheckInventoryBean bean) {
+        if (bean.getCode().equals("200")){
+            Toast.makeText(this, "检查库存有", Toast.LENGTH_SHORT).show();
+            goodsPresenter.addOneProduct(id,num+"",name,figure,price);
+        }else {
+            Toast.makeText(this, "检查库存没有", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
