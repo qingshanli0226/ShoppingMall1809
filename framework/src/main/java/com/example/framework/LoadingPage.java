@@ -33,6 +33,7 @@ public abstract class LoadingPage extends FrameLayout {
         LayoutInflater inflate = LayoutInflater.from(context);
          error = inflate.inflate(R.layout.view_error, null);
          textView = error.findViewById(R.id.error);
+
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addView(error,layoutParams);
          success = inflate.inflate(getSuccessLayoutId(), null);
@@ -51,17 +52,19 @@ public abstract class LoadingPage extends FrameLayout {
         loadingview.setBackgroundColor(Color.WHITE);
         loadingview.setVisibility(VISIBLE);
     }
+
     public void showErrorView(){
         error.setVisibility(VISIBLE);
         success.setVisibility(GONE);
         loadingview.setVisibility(GONE);
     }
+
     public void showSuccessView(){
         error.setVisibility(GONE);
         success.setVisibility(VISIBLE);
         loadingview.setVisibility(GONE);
-
     }
+
     public void showError(String errorinfo){
         showErrorView();
         textView.setText(errorinfo);

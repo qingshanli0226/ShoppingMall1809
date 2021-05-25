@@ -33,39 +33,40 @@ public class MyToorbar extends RelativeLayout {
         int rightimg = typedArray.getResourceId(R.styleable.MyToorbar_rightimg, 0);
         boolean isleft = typedArray.getBoolean(R.styleable.MyToorbar_isleft, false);
         boolean isright = typedArray.getBoolean(R.styleable.MyToorbar_isright, false);
-        typedArray.recycle();
+        typedArray.recycle();//回收
 
+        //给控件赋值
         View mytoorbar = LayoutInflater.from(context).inflate(R.layout.toorbarview, this);
         TextView title = mytoorbar.findViewById(R.id.title);
         ImageView left= mytoorbar.findViewById(R.id.leftimg);
         ImageView right  = mytoorbar.findViewById(R.id.rightimg);
         title.setText(titletext);
+
         if (isleft&&leftimg!=0){
             left.setImageResource(leftimg);
         }
+
         if (isright&&rightimg!=0){
             right.setImageResource(rightimg);
         }
-        left.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (iToorbarListener!=null){
-                    iToorbarListener.onleftClick();
-                }
+
+        left.setOnClickListener(v -> {
+            if (iToorbarListener!=null){
+                iToorbarListener.onleftClick();
             }
         });
-        right.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (iToorbarListener!=null){
-                    iToorbarListener.onrightClick();
-                }
+
+        right.setOnClickListener(v -> {
+            if (iToorbarListener!=null){
+                iToorbarListener.onrightClick();
             }
         });
     }
+
     public void setToorbarListener(IToorbarListener iToorbarListener){
         this.iToorbarListener=iToorbarListener;
     }
+    //点击回调借口
     public static interface IToorbarListener{
         void onleftClick();
         void onrightClick();

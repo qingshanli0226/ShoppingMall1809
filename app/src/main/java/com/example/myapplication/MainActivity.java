@@ -6,18 +6,16 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CacheUserManager;
-import com.example.myapplication.type.ClassifyFragment;
+import com.example.myapplication.type.TypefyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
 import com.example.myapplication.personalCenter.PersonalCenterFragment;
-import com.example.myapplication.shoppingtrolley.ShoppingTrolleyFragment;
+import com.example.myapplication.shoppingCart.ShoppingCartFragment;
 import com.example.user.AutoService;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -36,7 +34,6 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
     private boolean isLogin;//判断是否登陆
-    private FrameLayout mainFra;
 
     @Override
     public int bandLayout() {
@@ -53,13 +50,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Toast.makeText(this, "运行了", Toast.LENGTH_SHORT).show();
            Bundle extras = intent.getExtras();
            String page = extras.getString("page");
            mainComm.setCurrentTab(Integer.parseInt(page));
@@ -68,9 +63,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         fragments.add(new HomeFragment());
-        fragments.add(new ClassifyFragment());
+        fragments.add(new TypefyFragment());
         fragments.add(new DiscoverFragment());
-        fragments.add(new ShoppingTrolleyFragment());
+        fragments.add(new ShoppingCartFragment());
         fragments.add(new PersonalCenterFragment());
 
         strings.add(getString(R.string.mainFragmentTitle1));
@@ -108,22 +103,8 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselect(int position) {
-
             }
         });
     }
 
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-
-    }
 }

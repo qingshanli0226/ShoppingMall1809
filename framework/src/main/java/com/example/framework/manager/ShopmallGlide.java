@@ -38,7 +38,6 @@ public class ShopmallGlide  {
 
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
-
     private Handler mainHandler = new Handler();//通过handler实现在主线程里返回数据
 
     private boolean isInited;
@@ -56,6 +55,7 @@ public class ShopmallGlide  {
         }
         return instance;
     }
+
     //加载框架只可以初始化一次
     public boolean isInited() {
         return isInited;
@@ -72,6 +72,7 @@ public class ShopmallGlide  {
                 return value.getByteCount();
             }
         };
+
         //在sd卡上应用程序空间里的shopmall目录里存储本地图片
         cacheFileDir = new File(context.getExternalCacheDir().getAbsolutePath()+"/shopmall/");
         if (!cacheFileDir.exists()) {//如果该目录不存在，则创建它
@@ -85,7 +86,6 @@ public class ShopmallGlide  {
         isInited = true;
     }
 
-
     //从内存缓存中读取Bitmap
     public Bitmap getFromMem(String url) {
         synchronized (memCache) {
@@ -94,6 +94,7 @@ public class ShopmallGlide  {
 
         }
     }
+
     //向内存中写入Bitmap
     public void setBitmapToMem(String url,Bitmap bitmap) {
         synchronized (memCache) {
@@ -102,23 +103,20 @@ public class ShopmallGlide  {
 
         }
     }
+
     //向磁盘中存储Bitmap
     public void setBitmapToDisk(String url, Bitmap bitmap) {
-        executorService.execute(new Runnable() {
-
-            @Override
-            public void run() {
-                synchronized (diskLruCache) {
-                    String key = generateCacheKey(url);
-                    try {
-                        DiskLruCache.Editor editor = diskLruCache.edit(key);
-                        OutputStream outputStream = editor.newOutputStream(0);//文件输出流,通过该输出流可以把bitmap写到一个文件里
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);//bitmap产生的文件时JPEG的格式，且质量没有压缩
-                        editor.commit();
-                        diskLruCache.flush();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        executorService.execute(() -> {
+            synchronized (diskLruCache) {
+                String key = generateCacheKey(url);
+                try {
+                    DiskLruCache.Editor editor = diskLruCache.edit(key);
+                    OutputStream outputStream = editor.newOutputStream(0);//文件输出流,通过该输出流可以把bitmap写到一个文件里
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);//bitmap产生的文件时JPEG的格式，且质量没有压缩
+                    editor.commit();
+                    diskLruCache.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -126,47 +124,51 @@ public class ShopmallGlide  {
 
     //从磁盘中读取Bitmap
     public void getBitmapFromDisk(String url, ShopmallGlide.IBitmapReceivedListener listener) {
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (diskLruCache) {
-                    String key = generateCacheKey(url);
-                    try {
-                        DiskLruCache.Snapshot snapshot = diskLruCache.get(key);
-                        if (snapshot == null) {//如果为空证明磁盘里没有该文件
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    listener.onBitmap(url, null);
-                                }
-                            });
-                        } else {
-                            InputStream inputStream = snapshot.getInputStream(0);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//从输入流里读出Bitmap
-                            setBitmapToMem(url, bitmap);//先存到内存里一份
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    listener.onBitmap(url, bitmap);
-                                }
-                            });
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        executorService.execute(() -> {
+            synchronized (diskLruCache) {
+                String key = generateCacheKey(url);
+                try {
+                    DiskLruCache.Snapshot snapshot = diskLruCache.get(key);
+                    if (snapshot == null) {//如果为空证明磁盘里没有该文件
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                listener.onBitmap(url, null);
+                            }
+                        });
+                    } else {
+                        InputStream inputStream = snapshot.getInputStream(0);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//从输入流里读出Bitmap
+                        setBitmapToMem(url, bitmap);//先存到内存里一份
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                listener.onBitmap(url, bitmap);
+                            }
+                        });
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
     }
 
     public void getBitmapFromServer(String url, ShopmallGlide.IBitmapReceivedListener listener, ImageView imageView) {
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                Call call = RetrofitManager.getApi().downloadFile(url);
-                try {
-                    Response<ResponseBody> response = call.execute();
-                    if (response.body() == null) {
+        executorService.execute(() -> {
+            Call call = RetrofitManager.getApi().downloadFile(url);
+            try {
+                Response<ResponseBody> response = call.execute();
+                if (response.body() == null) {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onBitmap(url,null);
+                        }
+                    });
+                } else {
+                    InputStream inputStream = response.body().byteStream();
+                    if (inputStream==null) {
                         mainHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -174,35 +176,24 @@ public class ShopmallGlide  {
                             }
                         });
                     } else {
-                        InputStream inputStream = response.body().byteStream();
-                        if (inputStream==null) {
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    listener.onBitmap(url,null);
-                                }
-                            });
-                        } else {
-                            Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
-                            //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
-                            Bitmap sBitmap = sampleBitmap(imageView,originalBitmap);
-                            originalBitmap.recycle();//已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了
-                            originalBitmap=null;
-                            setBitmapToDisk(url,sBitmap);//存到sd卡
-                            setBitmapToMem(url,sBitmap);
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    listener.onBitmap(url,sBitmap);
-                                }
-                            });
+                        Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
+                        //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
+                        Bitmap sBitmap = sampleBitmap(imageView,originalBitmap);
+                        originalBitmap.recycle();//已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了
+                        originalBitmap=null;
+                        setBitmapToDisk(url,sBitmap);//存到sd卡
+                        setBitmapToMem(url,sBitmap);
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                listener.onBitmap(url,sBitmap);
+                            }
+                        });
 
-                        }
                     }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -236,17 +227,14 @@ public class ShopmallGlide  {
         return sampleBitmap;
     }
 
-
     //因为读取Bitmap是异步方法，所以需要定义一个接口，通过该接口返回Bitmap
     public interface IBitmapReceivedListener {
         void onBitmap(String url, Bitmap bitmap);
     }
 
-
     //通过图片的地址生成一个32位的Hash key作为内存缓存和本地缓存的key，这个是唯一的，地址不同，生成的key肯定不同，并且Hash key里面没有乱码
     public String generateCacheKey(String url) {
         byte[] hash;
-
         try {
             hash = MessageDigest.getInstance("MD5").digest(
                     url.getBytes("UTF-8"));

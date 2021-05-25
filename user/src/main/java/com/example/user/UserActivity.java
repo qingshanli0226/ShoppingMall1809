@@ -19,7 +19,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,27 +27,27 @@ import com.example.framework.BaseActivity;
 
 public class UserActivity extends BaseActivity {
 
-
     private androidx.viewpager.widget.ViewPager vp;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private List<Fragment> list = new ArrayList<>();
     private String toLoginType;
+
     @Override
     public int bandLayout() {
-        return R.layout.activity_main5;
+        return R.layout.activity_user;
     }
 
     @Override
     public void initView() {
         EventBus.getDefault().register(this);
         vp = findViewById(R.id.vp);
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMain(String aa) {
         toLoginType= ToLoginType.getInstance().getActivityType();
         int a = Integer.parseInt(aa);
+
         if (a == 0) {
             //注册
             vp.setCurrentItem(0);
@@ -68,7 +67,6 @@ public class UserActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-
     }
 
     @Override
@@ -100,17 +98,4 @@ public class UserActivity extends BaseActivity {
         destroy();
     }
 
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-
-    }
 }

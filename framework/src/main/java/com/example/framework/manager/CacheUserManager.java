@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CacheUserManager {
+
     public static CacheUserManager cacheUserManager;
 
     public synchronized static CacheUserManager getInstance() {

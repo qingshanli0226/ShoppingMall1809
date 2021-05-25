@@ -4,39 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".type.ClassifyFragment">
+    tools:context=".type.TypefyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:gravity="center">
 
-
-
-        <RadioGroup
-            android:id="@+id/rp"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_50"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/type"
+            <RadioGroup
+                android:id="@+id/rp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_50"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp_30"
+                    android:button="@null"
+                    android:text="@string/typeType"
+                    android:textSize="@dimen/dp_15"></RadioButton>
+
+                <RadioButton
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:button="@null"
+                    android:text="@string/typeLabel"
+                    android:textSize="@dimen/dp_15"></RadioButton>
+            </RadioGroup>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="分类     |"
-                android:textSize="@dimen/dp_15"></RadioButton>
+                android:layout_centerHorizontal="true"
+                android:text="@string/typeLabel1"></TextView>
 
-
-            <RadioButton
-                android:id="@+id/biao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:text="   标签"
-                android:textSize="@dimen/dp_15"></RadioButton>
-        </RadioGroup>
-
+        </RelativeLayout>
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

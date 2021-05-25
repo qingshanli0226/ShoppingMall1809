@@ -20,10 +20,7 @@ public class TypeAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.Ch
         TextView view = holder.getView(R.id.text);
         view.setText(itemData.getName());
         Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getPic()).into((ImageView) holder.getView(R.id.img));
-
     }
-
-
 
     @Override
     public int getRootViewType(int position) {

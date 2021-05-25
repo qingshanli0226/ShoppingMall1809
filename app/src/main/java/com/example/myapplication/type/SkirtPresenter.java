@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class SkirtPresenter extends BasePresenter<ISkirtView> {
+
     public SkirtPresenter(ISkirtView iSkirtView) {
         attView(iSkirtView);
     }
@@ -23,23 +24,14 @@ public class SkirtPresenter extends BasePresenter<ISkirtView> {
                 .getSkirt(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        add(disposable);
-                        mView.showLoading();
-                    }
+                .doOnSubscribe(disposable -> {
+                    add(disposable);
+                    mView.showLoading();
                 })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.hideLoading();
-                    }
-                })
+                .doFinally(() -> mView.hideLoading())
                 .subscribe(new Observer<SkirtBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -59,11 +51,7 @@ public class SkirtPresenter extends BasePresenter<ISkirtView> {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
-
-
-
 }

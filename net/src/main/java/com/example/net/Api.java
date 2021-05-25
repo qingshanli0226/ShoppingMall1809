@@ -42,19 +42,17 @@ public interface Api {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-
     //购物车
     @POST("addOneProduct")
     Observable<ShoppingCartBean> getAddShoppingCart(@Body RequestBody body);
 
     //库存
     @POST("checkOneProductInventory")
-    Observable<RegisterBean> getInventory(@Body ResponseBody body);
+    @FormUrlEncoded
+    Observable<RegisterBean> getInventory(@Field("productId") String productId,@Field("productNum") String productNum);
 
     //自动登录
     @POST("autoLogin")
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
-
-
 }

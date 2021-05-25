@@ -39,17 +39,4 @@ public class UserModule implements CaCheArote.IUserInterface {
             ((Activity) context).startActivityForResult(intent,100);
         }
     }
-//
-//    @Override
-//    public void openUserMessageActivity(Context context, Bundle bundle) {
-//        Intent intent = new Intent(context, UserMessageActivity.class);
-//        if (context instanceof Activity){
-//            intent.putExtra("param",bundle);
-//            context.startActivity(intent);
-//        }else {
-//            intent.putExtra("param",bundle);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(intent);
-//        }
-//    }
 }

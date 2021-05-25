@@ -5,7 +5,7 @@ import android.widget.TextView;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
 
-public class ClassAdapter extends BaseRecyclerViewAdapter<String> {
+public class TypeAdapter extends BaseRecyclerViewAdapter<String> {
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_tit;

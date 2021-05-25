@@ -26,6 +26,8 @@ import com.example.myapplication.R;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
+import retrofit2.http.HEAD;
+
 
 public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements IAddShoppingCartView {
 
@@ -66,6 +68,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         particularsCommodityCollect = (RadioButton) findViewById(R.id.particularsCommodityCollect);
         particularsCommodityShoppingCart = (RadioButton) findViewById(R.id.particularsCommodityShoppingCart);
         particularsCommodityAddShoppingCart = (Button) findViewById(R.id.particularsCommodityAddShoppingCart);
+
         isLogin = CacheUserManager.getInstance().getIsLogin();//获取登陆状态
 
         //设置pop
@@ -75,6 +78,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         popupWindow.setOutsideTouchable(true);
         popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+
         //给pop赋值
         popImage = inflate.findViewById(R.id.popImage);
         popName = inflate.findViewById(R.id.popName);
@@ -97,23 +101,24 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            pic = extras.getString("pic");
-            name = extras.getString("name");
-            price = extras.getString("price");
-            id = extras.getString("id");
-            //赋值
+             pic = extras.getString("pic");
+             name = extras.getString("name");
+             price = extras.getString("price");
+             id = extras.getString("id");
+            //给控件赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
             particularsCommodityName.setText(name);
             particularsCommodityPrice.setText(price);
-            //给pop赋值
+            //给pop控件赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(popImage);
             popName.setText(name);
             popPrice.setText(price);
         }
+
         //收藏点击
         particularsCommodityCollect.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
@@ -121,22 +126,24 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             } else {
             }
         });
+
         //购物车点击
         particularsCommodityShoppingCart.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
-                ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
+                ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);//存入跳转登录页面的页面类型
                 CaCheArote.getInstance().getUserInterface().openLoginActivity(this, bundle);
             } else {
 
             }
         });
+
         //加入购物车点击
         particularsCommodityAddShoppingCart.setOnClickListener(v -> {
             if (!isLogin) {
-                //详情页面跳转
+                //未登录则跳转登陆页面
                 Bundle bundle = new Bundle();
                 bundle.putString("falg", "2");
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);
@@ -146,12 +153,14 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
                 popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
             }
         });
+
         //pop加号点击
         popAdd.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
             num++;
             popNum.setText(num + "");
         });
+
         //pop减号点击
         popSub.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
@@ -163,6 +172,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             }
             popNum.setText(num + "");
         });
+
         //pop取消
         popCencel.setOnClickListener(v -> popupWindow.dismiss());
         //pop确定
@@ -170,7 +180,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             //刷新加入购物车数量
             int num = Integer.parseInt(popNum.getText().toString());
             //直接调用购物车
-            mPresenter.getAddShoppingCart(id, num + "", name, pic, price);
+            mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
         });
     }
 
@@ -189,16 +199,10 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     @Override
     public void onAddShoppingCart(ShoppingCartBean shoppingCartBean) {
         String code = shoppingCartBean.getCode();
-<<<<<<< HEAD
-        if (code.equals("200")) {
-            Toast.makeText(this, getString(R.string.addShoppingSucceed), Toast.LENGTH_SHORT).show();
-        } else {
-=======
         if (code.equals("200")){
             loadingPage.showSuccessView();
             Toast.makeText(this, getString(R.string.addShoppingSucceed),  Toast.LENGTH_SHORT).show();
         }else {
->>>>>>> 30d9ea6619d50bedc00071e173b66dd9693a3020
             Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
         }
     }
@@ -220,11 +224,9 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void hideLoading() {
-
     }
 
     @Override
     public void showToast(String msg) {
-
     }
 }

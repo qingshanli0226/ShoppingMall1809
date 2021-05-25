@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
 public class LoginPresenter extends BasePresenter<ILoginView> {
+
     public LoginPresenter(ILoginView iLoginView) {
         attView(iLoginView);
     }
@@ -22,23 +23,14 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 .getLogin(name, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        add(disposable);
-                        mView.showLoading();
-                    }
+                .doOnSubscribe(disposable -> {
+                    add(disposable);
+                    mView.showLoading();
                 })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.hideLoading();
-                    }
-                })
+                .doFinally(() -> mView.hideLoading())
                 .subscribe(new Observer<LoginBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override
@@ -57,7 +49,6 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }

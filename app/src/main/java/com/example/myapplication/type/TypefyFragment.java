@@ -14,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClassifyFragment extends BaseFragment {
-
+public class TypefyFragment extends BaseFragment {
 
     private ViewPager vp;
     private List<Fragment> list = new ArrayList<>();
     private RadioButton type;
-    private RadioButton biao;
+    private RadioButton label;
     private FragmentAdapter fragmentAdapter;
     private RadioGroup rp;
 
@@ -31,12 +30,9 @@ public class ClassifyFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
         vp = (ViewPager) findViewById(R.id.vp);
-
-
         type = (RadioButton) findViewById(R.id.type);
-        biao = (RadioButton) findViewById(R.id.biao);
+        label = (RadioButton) findViewById(R.id.label);
         rp = (RadioGroup) findViewById(R.id.rp);
 
         list.add(new TypeFragment());
@@ -46,7 +42,7 @@ public class ClassifyFragment extends BaseFragment {
           rp.setOnCheckedChangeListener((group, checkedId) -> {
               if (checkedId==R.id.type){
                   vp.setCurrentItem(0);
-              }else if (checkedId==R.id.biao){
+              }else if (checkedId==R.id.label){
                   vp.setCurrentItem(1);
               }
           });
