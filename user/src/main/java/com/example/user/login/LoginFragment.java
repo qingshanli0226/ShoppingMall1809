@@ -16,6 +16,7 @@ import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.TokenInterceptor;
 import com.example.net.model.LoginBean;
 import com.example.user.R;
 
