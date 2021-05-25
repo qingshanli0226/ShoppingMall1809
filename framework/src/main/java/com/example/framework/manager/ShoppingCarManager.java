@@ -55,7 +55,7 @@ public class ShoppingCarManager {
 
     //删除购物车集合
     public synchronized void deleteResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
-        result.add(resultBean);
+        result.remove(resultBean);
     }
 
     //修改购物车集合
@@ -107,7 +107,6 @@ public class ShoppingCarManager {
             iFindForBean.onFindForBean();
         }
     }
-
 
     //单例
     private static ShoppingCarManager shoppingCarManager;

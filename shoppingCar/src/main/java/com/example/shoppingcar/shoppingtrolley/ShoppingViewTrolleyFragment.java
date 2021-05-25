@@ -40,8 +40,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
     @Override
     protected void initData() {
-
-
         ShopeUserManager.getInstance().register(this::onLoginChange);
 
         LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();

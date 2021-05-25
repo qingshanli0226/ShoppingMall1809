@@ -19,12 +19,14 @@ import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopeUserManager;
+import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ShopmallGlide;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.CategoryBean;
 import com.example.net.model.HoemBean;
 import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
+import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.addOneProduct.AddOnrProductPresenter;
 import com.example.shoppingcar.addOneProduct.IAddOneProduct;
 import com.example.shoppingmall1809.R;
@@ -137,6 +139,13 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
                 popConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+//                        ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
+//                        if (resultBean!=null){
+//                            popupWindow.dismiss();
+//                            return;
+//                        }
+
                         addOnrProductPresenter = new AddOnrProductPresenter(ParticularsActivity.this);
 
                         addOnrProductPresenter.CheckOneProductInventory(productId,num+"");
@@ -213,6 +222,18 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
     public void onAddOneProduct(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+
+            ShoppingTrolleyBean.ResultBean resultBean=new ShoppingTrolleyBean.ResultBean();
+
+            resultBean.setProductId(productId);
+            resultBean.setProductName(productName);
+            resultBean.setProductNum(num+"");
+            resultBean.setProductPrice(productPrice);
+            resultBean.setProductSelected(false);
+            resultBean.setUrl(url);
+
+            ShoppingCarManager.getInstance().insertResultBean(resultBean);
+            ShoppingCarManager.getInstance().refreshData();
         } else {
             Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
         }
@@ -221,7 +242,7 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
     @Override
     public void onCheckOneProductInventory(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")){
-            if (Integer.parseInt(registerBean.getResult()) > num) {
+            if (Integer.parseInt(registerBean.getResult()) >= num) {
                 addOnrProductPresenter
                         .AddOneProduct(productId, num + "", productName, url, productPrice);
             } else {
