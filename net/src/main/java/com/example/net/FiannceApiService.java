@@ -4,6 +4,7 @@ package com.example.net;
 
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.CheckInventoryBean;
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
@@ -133,5 +134,7 @@ public interface FiannceApiService {
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
 
-
+    @FormUrlEncoded
+    @POST(Constants.BUSINESS_CHECKONEPRODUCTINVENTORY)
+    Observable<CheckOneInventoryBean> getInventory(@Field("productId")String productId, @Field("productNum")String productNum);
 }

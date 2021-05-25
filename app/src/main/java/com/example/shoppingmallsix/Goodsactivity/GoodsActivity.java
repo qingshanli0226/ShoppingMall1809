@@ -20,6 +20,7 @@ import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.CheckInventoryBean;
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.store.GoodAdapterBean;
@@ -130,7 +131,7 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
                     @Override
                     public void onClick(View view) {
                         goodsPresenter = new GoodsPresenter(GoodsActivity.this);
-                        goodsPresenter.checkInventory(id,num + "",name,figure,price);
+                        goodsPresenter.checkInventory(id,num + "");
                         popupWindow.dismiss();
                     }
                 });
@@ -193,13 +194,14 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
     public void onAddCart(AddOneProductBean productBean) {
         if (productBean.getCode().equals("200")){
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+            goodsPresenter.updateProduceNum(id,num+"",name,figure,price);
         }else {
             Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onCheckInventory(CheckInventoryBean bean) {
+    public void onCheckInventory(CheckOneInventoryBean bean) {
         if (bean.getCode().equals("200")){
             Toast.makeText(this, "检查库存有", Toast.LENGTH_SHORT).show();
             goodsPresenter.addOneProduct(id,num+"",name,figure,price);
@@ -208,5 +210,13 @@ public class  GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoo
         }
     }
 
+    @Override
+    public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean) {
+        if (updateProductNumBean.getCode().equals("200")){
+            Toast.makeText(this, "更新", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "没有更新", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

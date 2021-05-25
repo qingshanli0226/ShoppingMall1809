@@ -4,6 +4,7 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.CheckInventoryBean;
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 
 
@@ -71,7 +72,41 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
                 });
     }
 
-    public void checkInventory(String productId,String productNum,String productName,
+
+
+    public void checkInventory(String productId,String productNum){
+        RetrofitCreator.getFiannceApiService()
+                .getInventory(productId,productNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CheckOneInventoryBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CheckOneInventoryBean checkOneInventoryBean) {
+                        if (iView != null){
+                            iView.onCheckInventory(checkOneInventoryBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (iView != null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+        public void updateProduceNum(String productId,String productNum,String productName,
                                String url,String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -83,20 +118,20 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ResponseBody body = ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-        RetrofitCreator.getFiannceApiService().getCheckInventory(body)
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getFiannceApiService().getUpdateProductNum(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CheckInventoryBean>() {
+                .subscribe(new Observer<UpdateProductNumBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(CheckInventoryBean bean) {
+                    public void onNext(UpdateProductNumBean bean) {
                         if (iView!=null){
-                            iView.onCheckInventory(bean);
+                            iView.onUpdateProductNum(bean);
                         }
                     }
 
