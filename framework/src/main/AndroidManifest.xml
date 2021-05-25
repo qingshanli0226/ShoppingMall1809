@@ -2,5 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.framework">
 
+<<<<<<< HEAD
+    <application>
+
+    </application>
+
+=======
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+>>>>>>> 7f1ee6cd84de70ec6eb715b944a3eb31599de42b
 </manifest>
