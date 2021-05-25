@@ -160,7 +160,6 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             if (a--<=1){
                 Toast.makeText(ParticularsActivity.this, "不能小于1", Toast.LENGTH_SHORT).show();
             }else {
-<<<<<<< HEAD
                 num--;
             }
             popNum.setText(num+"");
@@ -181,11 +180,6 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 //                mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
                 //获取库存
                 mPresenter.getInventory(id,num+"");
-=======
-//                PopupWindow popupWindow = new PopupWindow();
-//                LayoutInflater.from(this).inflate(R.layout.)
-//                popupWindow.setContentView();
->>>>>>> 6793e3ba87808553a312ff057be2141e71073ca2
             }
         });
     }

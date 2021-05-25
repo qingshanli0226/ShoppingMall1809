@@ -55,7 +55,7 @@ public class TypeFragment extends BaseFragment<SkirtPresenter> implements ISkirt
          list.add(getString(R.string.digit));
          list.add(getString(R.string.game));
         classAdapter.updataData(list);
-        rootPresenter.onSkirt(urls[0]);
+        mPresenter.onSkirt(urls[0]);
 
     }
 

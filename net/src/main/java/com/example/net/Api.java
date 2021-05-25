@@ -37,10 +37,6 @@ public interface Api {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-<<<<<<< HEAD
-    @FormUrlEncoded
-    @POST
-    Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
     //购物车
     @POST("addOneProduct")
@@ -53,9 +49,7 @@ public interface Api {
 
 
 
-=======
     @POST("autoLogin")
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
->>>>>>> 6793e3ba87808553a312ff057be2141e71073ca2
 }
