@@ -65,6 +65,15 @@ public interface ShopApiService {
     @POST("updateProductSelected")
     Observable<RegisterBean> getUpdateProductSelected(@Body RequestBody requestBody);
 
+    @POST("selectAllProduct")
+    Observable<RegisterBean> getSelectAllProduct(@Body RequestBody requestBody);
+
+    @POST("removeManyProduct")
+    Observable<RegisterBean> getRemoveManyProduct(@Body RequestBody requestBody);
+
+    @POST("checkInventory")
+    Observable<RegisterBean> getCheckInventory(@Body RequestBody requestBody);
+
     //待支付
     @GET("findForPay")
     Observable<FindForBean> getFindForPayData();

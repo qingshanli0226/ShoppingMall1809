@@ -44,7 +44,9 @@ public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.Result
         num.setText(itemData.getProductNum());
 
         CheckBox checkBox = holder.getView(R.id.shoppingTrolley_check);
+
         checkBox.setChecked(itemData.isProductSelected());
+
         if (itemData.isProductSelected()) {
             checkBox.setBackgroundResource(R.drawable.checkbox_selected);
         }else {
