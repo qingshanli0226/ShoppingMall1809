@@ -113,10 +113,9 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
         cartAdapter.setCartItemListener(new CartAdapter.ICartItemListener() {
             @Override
             public void onItemChildClick(int position, View view) {
+                CartBean.ResultBean resultBean = cartAdapter.getData().get(position);
                 switch (view.getId()) {
                     case R.id.shopCartCheck:
-                        //选中
-                        CartBean.ResultBean resultBean = cartAdapter.getData().get(position);
                         //修改
                         ImageView imageView = (ImageView) view;
 
@@ -143,12 +142,25 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
                         }
                         break;
                     case R.id.shopCartSub:
-                        Toast.makeText(getActivity(), "你好2", Toast.LENGTH_SHORT).show();
+                        //判断库存
+                        if(Integer.parseInt(resultBean.getProductNum()) ==0){
+                            return;
+                        }
+                        resultBean.setProductNum(Integer.parseInt(resultBean.getProductNum())-1+"");
+                        Log.i("zyb", "onItemChildClick: "+resultBean);
+                        CacheShopManager.getInstance().inventory(resultBean);
+                        //增加数量
                         break;
                     case R.id.shopCartAdd:
-                        Toast.makeText(getActivity(), "你好3", Toast.LENGTH_SHORT).show();
+                        //判断库存
+                        resultBean.setProductNum(Integer.parseInt(resultBean.getProductNum())+1+"");
+                        Log.i("zyb", "onItemChildClick: "+resultBean);
+                        CacheShopManager.getInstance().inventory(resultBean);
+
+
                         break;
                 }
+                cartAdapter.notifyDataSetChanged();
             }
         });
         //全选

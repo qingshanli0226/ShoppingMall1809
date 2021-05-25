@@ -4,8 +4,10 @@ import android.util.Log;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
+import com.example.net.bean.CartBean;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.ProductBean;
+import com.example.net.bean.SelectBean;
 import com.example.net.bean.UpdateProductNumBean;
 import com.google.gson.Gson;
 
@@ -60,32 +62,30 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
     }
 
 
-    public void checkInventory(ProductBean productBean){
-        String s = new Gson().toJson(productBean);
+  //检查数量
+    public void inventory(CartBean.ResultBean resultBean) {
+        String s = new Gson().toJson(resultBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        ResponseBody responseBody = ResponseBody.create(parse, s);
+        RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitManager.getHttpApiService()
-                .inventory(responseBody)
+                .inventory(Integer.parseInt(resultBean.getProductId()),Integer.parseInt(resultBean.getProductNum()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProductBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ProductBean productBean) {
-                        if (mView != null){
-                            mView.onInventory(productBean);
-                        }
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        Log.i("zyb", "onNext: 成功" + selectBean);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        if (mView != null){
-                            mView.showError(e.getMessage());
-                        }
+                    public void onError(@NonNull Throwable e) {
+                        Log.i("zyb错误", "onError: "+e);
+                        Log.i("zyb", e.getMessage());
                     }
 
                     @Override
@@ -94,6 +94,7 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                     }
                 });
     }
+
 
 //    public void UpdateProductNum(){
 //        RetrofitManager.getHttpApiService()

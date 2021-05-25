@@ -29,13 +29,6 @@ import retrofit2.http.Url;
 
 public interface IHttpApiService {
 
-//    @GET(AppNetConfig.UPDATE)
-//    Observable<UpdateBean> getAppUpdate();
-//
-//    @GET(AppNetConfig.PRODUCT)
-//    Observable<ProductBean> getProduct();
-//
-//
     @FormUrlEncoded
     @POST(Constants.USERREGISTER)
     Observable<RegisterBean> getRegister(@Field("name")String name, @Field("password")String password);
@@ -52,34 +45,15 @@ public interface IHttpApiService {
     @GET(Constants.TAG_URL)
     Observable<LabelBean> getLabel();
 
-
-//
-//
-//    @POST(AppNetConfig.LOGOUT)
-//    Observable<GesturePassword> exit();
-//    //下载
-//    @Streaming
-//    @GET
-//    Observable<ResponseBody> getDownLoad(@Url String url);
-//
-//
-//    //设置密码
-//    @POST(AppNetConfig.SETGESTUREPASSWORD)
-//    Observable<GesturePassword> setGesturePassword(@Body RequestBody requestBody);
-//    //登录密码
-//    @POST(AppNetConfig.LOGINGESTUREPASSWORD)
-//    Observable<GesturePassword> loginGesturePassword(@Body RequestBody requestBody);
-//    //清除密码
-//    @POST(AppNetConfig.CLEARESTUREPASSWORD)
-//    Observable<GesturePassword> clearPassword();
-
-
+    //首页
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomeData();
 
+    //分类
     @GET
     Observable<TypeBean> getType(@Url String url);
 
+    //glide下载
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
@@ -88,22 +62,21 @@ public interface IHttpApiService {
     @POST(Constants.ADDPRODUCT)
     Observable<ProductBean> addProduct(@Body RequestBody requestBody);
 
-
+    //获取服务端购物车产品信息的接口
     @GET(Constants.SHORTACRT)
     Observable<CartBean> showCart();
 
-
-
+    //    检查服务端一个产品库存情况的接口
+    @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
-    Observable<ProductBean> inventory(@Body ResponseBody responseBody);
-
+    Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
     //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
 
-
+    //更新服务端购物车产品的数量的接口
     @POST(Constants.UPDATEPRODUCTNUM)
-    Observable<UpdateProductNumBean> UpdateProductNum();
+    Observable<UpdateProductNumBean> updateProductNum(@Body RequestBody requestBody);
 
 
     //选中全部
