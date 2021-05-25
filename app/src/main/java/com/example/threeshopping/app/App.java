@@ -10,6 +10,7 @@ import com.example.common.module.CommonArouter;
 import com.example.net.module.NetModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
+import com.fiannce.sql.UtileSql;
 
 import java.util.Locale;
 
@@ -26,7 +27,7 @@ public class App extends Application {
         AppModule.init();
         UserModule.init();
         NetModule.context = this;
-
+        UtileSql.getInstance().setContext(this);
  }
 
     private void configUnits() {

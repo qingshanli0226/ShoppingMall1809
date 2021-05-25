@@ -84,18 +84,18 @@ public interface IHttpApiService {
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
 
-
+    //添加数据
     @POST(Constants.ADDPRODUCT)
-    Observable<ProductBean> addProduct(@Body RequestBody requestBody);
+    Observable<SelectBean> addProduct(@Body RequestBody requestBody);
 
 
     @GET(Constants.SHORTACRT)
     Observable<CartBean> showCart();
 
 
-
+    @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
-    Observable<ProductBean> inventory(@Body ResponseBody responseBody);
+    Observable<SelectBean> inventory(@Field("name")String name, @Field("password")String password);
 
     //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)

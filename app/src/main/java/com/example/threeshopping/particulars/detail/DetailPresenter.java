@@ -6,6 +6,7 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.ProductBean;
+import com.example.net.bean.SelectBean;
 import com.example.net.bean.UpdateProductNumBean;
 import com.google.gson.Gson;
 
@@ -31,16 +32,16 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
                 .addProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProductBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ProductBean productBean) {
+                    public void onNext(@NonNull SelectBean selectBean) {
                         if (mView != null) {
-                            mView.onAddCart(productBean);
+                            mView.onAddCart(selectBean);
                         }
                     }
 
@@ -60,40 +61,7 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
     }
 
 
-    public void checkInventory(ProductBean productBean){
-        String s = new Gson().toJson(productBean);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        ResponseBody responseBody = ResponseBody.create(parse, s);
-        RetrofitManager.getHttpApiService()
-                .inventory(responseBody)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ProductBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onNext(ProductBean productBean) {
-                        if (mView != null){
-                            mView.onInventory(productBean);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (mView != null){
-                            mView.showError(e.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
 //    public void UpdateProductNum(){
 //        RetrofitManager.getHttpApiService()
