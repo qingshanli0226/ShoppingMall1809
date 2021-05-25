@@ -13,10 +13,9 @@ public class TokenInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Context context=TokenInterceptorContext.context;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token", "");
+        String string = context.getSharedPreferences(Constants.SP_NAME, Context.MODE_PRIVATE).getString("token", "");
         Request request = chain.request();
-        Request build = request.newBuilder().addHeader("token", token).build();
+        Request build = request.newBuilder().addHeader("token", string).build();
         Response proceed = chain.proceed(build);
         return proceed;
     }

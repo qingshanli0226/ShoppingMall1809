@@ -45,16 +45,18 @@ public class HomeFragment extends BaseFragment {
         homeRv.setAdapter(homeAdapter);
         //得到数据
         HomeBean homeBean = CacheManager.getInstance().getHomeBean();
+        if (homeBean!=null){
+            //添加数据
+            List<Object> objects = new ArrayList<>();
+            objects.add(homeBean.getResult().getBanner_info());
+            objects.add(homeBean.getResult().getChannel_info());
+            objects.add(homeBean.getResult().getAct_info());
+            objects.add(homeBean.getResult().getSeckill_info());
+            objects.add(homeBean.getResult().getRecommend_info());
+            objects.add(homeBean.getResult().getHot_info());
+            homeAdapter.updateData(objects);
+        }
 
-        //添加数据
-        List<Object> objects = new ArrayList<>();
-        objects.add(homeBean.getResult().getBanner_info());
-        objects.add(homeBean.getResult().getChannel_info());
-        objects.add(homeBean.getResult().getAct_info());
-        objects.add(homeBean.getResult().getSeckill_info());
-        objects.add(homeBean.getResult().getRecommend_info());
-        objects.add(homeBean.getResult().getHot_info());
-        homeAdapter.updateData(objects);
     }
 
 }

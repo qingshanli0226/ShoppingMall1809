@@ -1,27 +1,20 @@
 package com.shoppingmall.net.model;
 
-import com.shoppingmall.net.bean.AccessoryBean;
-import com.shoppingmall.net.bean.BagBean;
+import com.shoppingmall.net.bean.AddProductBean;
+import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.BuyBean;
-import com.shoppingmall.net.bean.DialogBean;
-import com.shoppingmall.net.bean.DigitBean;
-import com.shoppingmall.net.bean.DressBean;
-import com.shoppingmall.net.bean.GameBean;
 import com.shoppingmall.net.bean.GoodsBean;
 import com.shoppingmall.net.bean.HomeBean;
-import com.shoppingmall.net.bean.Home_ProductsBean;
-import com.shoppingmall.net.bean.JacketBean;
 import com.shoppingmall.net.bean.LabelBean;
 import com.shoppingmall.net.bean.LoginBean;
-import com.shoppingmall.net.bean.OvercoatBean;
-import com.shoppingmall.net.bean.PantsBean;
 import com.shoppingmall.net.bean.RegisterBean;
-import com.shoppingmall.net.bean.SkirtBean;
-import com.shoppingmall.net.bean.StationeryBean;
+import com.shoppingmall.net.bean.ShopCarBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -50,6 +43,7 @@ public interface ShoppingMallApiService {
     //抢购图片
     @GET("/atguigu/json/NEW_POST_URL.json")
     Observable<BuyBean> getBuyData();
+
     //http://49.233.0.68:8080/atguigu/json/HOT_POST_URL.json
     @GET
     Observable<GoodsBean> Goods(@Url String url);
@@ -63,7 +57,12 @@ public interface ShoppingMallApiService {
     @POST("autoLogin")
     Observable<LoginBean> getAuto(@Field("token")String token);
 
-    @FormUrlEncoded
-    @POST("autoLogin")
-    Observable<LoginBean> getAutoLogin(@Field("token")String token);
+    //添加购物车
+    @POST("addOneProduct")
+    Observable<AddProductBean> addProduct(@Body RequestBody body);
+
+    //http://49.233.0.68:8080/getShortcartProducts
+    @GET("getShortcartProducts")
+    Observable<ShopCarBean> getShopCarProduct();
+
 }

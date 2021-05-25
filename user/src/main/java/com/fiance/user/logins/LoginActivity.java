@@ -138,7 +138,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         Intent intent = getIntent();
         int position = intent.getIntExtra("position",0);
         int toDetail = intent.getIntExtra("toDetail",-1);
-        String addDetail = intent.getStringExtra("addDetail");
+        int addDetail = intent.getIntExtra("addDetail",-1);
 
         Log.i("hqy", "onLoginData: "+position+toDetail+addDetail);
         LogUtils.json(loginBean);
@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             if (toDetail==1){
                 EventBus.getDefault().post("startAutoService");
                 finish();
-            }else if (addDetail.equals("addDetail")){
+            }else if (addDetail==1){
                 EventBus.getDefault().post("startAutoService");
                 finish();
             }else {

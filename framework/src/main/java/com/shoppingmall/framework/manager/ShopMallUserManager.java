@@ -20,6 +20,7 @@ public class ShopMallUserManager {
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
         for (IUserLoginChanged iUserLoginChanged : list) {
+            //退出登录
             iUserLoginChanged.onLoginChanged(loginBean);
         }
     }

@@ -1,10 +1,10 @@
 package com.shoppingmall.detail;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.fiance.user.AutoService;
 import com.finance.detail.R;
 import com.shoppingmall.detail.bean.ProductGoodBean;
@@ -23,18 +24,20 @@ import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.glide.ShopMallGlide;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.net.bean.AddProductBean;
+import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LoginBean;
-import com.shoppingmall.net.sp.SpUtil;
 import com.yoho.greendao.gen.DaoSession;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Route(path = Constants.TO_DETAIL_ACTIVITY)
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends BaseActivity<DetailPresenter> implements IDetailView {
 
     private ImageView detailBack;
     private ImageView detailMenu;
@@ -42,6 +45,7 @@ public class DetailActivity extends BaseActivity {
     private TextView detailTitle;
     private TextView detailPrice;
     private PopupWindow popupWindow;
+    private PopupWindow popupWindow2;
     private ProductGoodBean productGoodBean;
     private TextView tvGoodInfoCallcenter;
     private TextView tvGoodInfoCollection;
@@ -54,6 +58,7 @@ public class DetailActivity extends BaseActivity {
     private TextView popAddNum;
     private Button no;
     private Button yes;
+    private int GoodsNum;
 
     @Override
     public int getLayoutId() {
@@ -76,7 +81,7 @@ public class DetailActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-
+        httpPresenter = new DetailPresenter(this);
     }
 
     @Subscribe
@@ -139,10 +144,11 @@ public class DetailActivity extends BaseActivity {
         //加入购物车
         addShopMallCar.setOnClickListener(v->{
             if (loginBean==null){
-                ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withString("addDetail","addDetail").navigation();
+                startAutoService();
+                ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("addDetail",1).navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
-                PopupWindow popupWindow = new PopupWindow();
+                popupWindow = new PopupWindow();
                 View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
                 popupWindow.setContentView(inflate);
                 popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
@@ -152,43 +158,74 @@ public class DetailActivity extends BaseActivity {
 
                 popRemoveNum = (TextView) inflate.findViewById(R.id.popRemoveNum);
                 popNum = (TextView) inflate.findViewById(R.id.popNum);
+                int trim = Integer.parseInt(popNum.getText().toString().trim());
                 popAddNum = (TextView) inflate.findViewById(R.id.popAddNum);
                 no = (Button) inflate.findViewById(R.id.no);
                 yes = (Button) inflate.findViewById(R.id.yes);
-
+                int text = Integer.parseInt(popNum.getText().toString().trim());
+                GoodsNum = text;
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        popupWindow.dismiss();
                     }
                 });
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //数据库存储
+                        List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
+                        for (GoodsTable goodsTable : goodsTables) {
+                            if ( goodsTable.getGoodName()==productGoodBean.getName()){
 
+                            }else {
+                                daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
+                                        productGoodBean.getName(),productGoodBean.getCover_price(),
+                                        trim));
+                                Toast.makeText(DetailActivity.this, "加入了一条数据", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        //服务端存储
+                        httpPresenter.addProduct("1",
+                                productGoodBean.getNumber(),
+                                productGoodBean.getName(),
+                                productGoodBean.getFigure(),
+                                productGoodBean.getCover_price());
                     }
                 });
                 popRemoveNum.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (GoodsNum<=1){
+                            Toast.makeText(DetailActivity.this, "数量已经为零，不能在减少了", Toast.LENGTH_SHORT).show();
+                        }else {
+                            GoodsNum--;
+                        }
+                        popNum.setText(""+GoodsNum);
                     }
                 });
                 popAddNum.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        GoodsNum++;
+                        popNum.setText(""+GoodsNum);
                     }
                 });
-//                daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
-//                        productGoodBean.getName(),productGoodBean.getCover_price(),
-//                        productGoodBean.getNumber()));
-//                Toast.makeText(this, "加入了一条数据", Toast.LENGTH_SHORT).show();
             }
-
         });
 
     }
+
+    @Override
+    public void addProduct(AddProductBean addProductBean) {
+        if (addProductBean.getCode().equals("200")){
+            if (popupWindow!=null){
+                popupWindow.dismiss();
+            }
+            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void startAutoService() {
         Intent intent1 = new Intent(DetailActivity.this, AutoService.class);
@@ -197,6 +234,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void setUI(ProductGoodBean productGoodBean) {
+        LogUtils.json(productGoodBean);
         //加载数据
         ShopMallGlide.with(this).load(Constants.IMG_HTTPS+productGoodBean.getFigure()).into(detailImg);
         detailTitle.setText(""+productGoodBean.getName());
@@ -208,13 +246,13 @@ public class DetailActivity extends BaseActivity {
         detailMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow = new PopupWindow();
+                popupWindow2 = new PopupWindow();
                 View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_pop_wiondow_layout, null);
-                popupWindow.setContentView(inflate);
-                popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
-                popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.showAtLocation(inflate,Gravity.TOP,0,190);
+                popupWindow2.setContentView(inflate);
+                popupWindow2.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+                popupWindow2.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow2.setOutsideTouchable(true);
+                popupWindow2.showAtLocation(inflate,Gravity.TOP,0,190);
             }
         });
     }
@@ -234,8 +272,6 @@ public class DetailActivity extends BaseActivity {
         if (EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().unregister(this);
         }
-//        if (popupWindow.isShowing()||popupWindow!=null){
-//            popupWindow.dismiss();
-//        }
     }
+
 }

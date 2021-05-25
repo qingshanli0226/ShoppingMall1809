@@ -56,11 +56,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);
         }
 
-
-        Intent intent = new Intent(this, AutoService.class);
-        startService(intent);
-
-
+        if (ShopMallUserManager.getInstance().getLoginBean()==null){
+            Intent intent = new Intent(this, AutoService.class);
+            startService(intent);
+        }
     }
     private final Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")

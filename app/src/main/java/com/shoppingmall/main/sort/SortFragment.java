@@ -54,19 +54,6 @@ public class SortFragment extends BaseFragment {
 
     @Override
     public void initData() {
-//        LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
-//        if (loginBean==null){
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//            builder.setTitle(getString(R.string.Tips));
-//            builder.setMessage(getString(R.string.TipsMessage));
-//            builder.setPositiveButton(getString(R.string.welcomeActivity_alert_button_yes), new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("",0).navigation();
-//                }
-//            });
-//            builder.show();
-//        }else {
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(new ClassificationFragment());
             fragmentList.add(new LabelFragment());

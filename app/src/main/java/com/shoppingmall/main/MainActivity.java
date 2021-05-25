@@ -51,7 +51,6 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     public void initView() {
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
-
     }
 
     @Override
@@ -99,9 +98,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
                 }else {
                     mainVp.setCurrentItem(position);
                 }
-
             }
-
             @Override
             public void onTabReselect(int position) {
 
@@ -149,5 +146,11 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     @Override
     public void onLoginChanged(LoginBean loginBean) {
         Toast.makeText(this, ""+getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
 }
