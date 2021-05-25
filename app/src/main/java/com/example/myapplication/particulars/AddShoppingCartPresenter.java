@@ -1,9 +1,7 @@
 package com.example.myapplication.particulars;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.example.framework.SpUtil;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
@@ -23,9 +21,9 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
-public class AddShoppingCartPresenter extends BasePresenter<AddShoppingCartView> {
+public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView> {
 
-    public AddShoppingCartPresenter(AddShoppingCartView view) {
+    public AddShoppingCartPresenter(IAddShoppingCartView view) {
         attView(view);
     }
 

@@ -7,8 +7,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.framework.BaseFragment;
-import com.example.framework.SpUtil;
 import com.example.framework.manager.CacheUserManager;
+import com.example.net.SpUtil;
 import com.example.net.bean.LoginBean;
 import com.example.user.R;
 

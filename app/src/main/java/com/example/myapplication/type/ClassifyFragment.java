@@ -43,14 +43,11 @@ public class ClassifyFragment extends BaseFragment {
         list.add(new ShowFragment());
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager(), list);
         vp.setAdapter(fragmentAdapter);
-          rp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-              @Override
-              public void onCheckedChanged(RadioGroup group, int checkedId) {
-                  if (checkedId==R.id.type){
-                      vp.setCurrentItem(0);
-                  }else if (checkedId==R.id.biao){
-                      vp.setCurrentItem(1);
-                  }
+          rp.setOnCheckedChangeListener((group, checkedId) -> {
+              if (checkedId==R.id.type){
+                  vp.setCurrentItem(0);
+              }else if (checkedId==R.id.biao){
+                  vp.setCurrentItem(1);
               }
           });
     }

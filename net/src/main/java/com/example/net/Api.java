@@ -1,5 +1,6 @@
 package com.example.net;
 
+import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
@@ -33,6 +34,10 @@ public interface Api {
     @GET
     Observable<SkirtBean> getSkirt(@Url String url);
 
+    //待支付
+    @GET("findForPay")
+    Observable<FindForPayBean> getForPay();
+
     @GET
     @Streaming
     Call<ResponseBody> downloadFile(@Url String url);
@@ -46,9 +51,10 @@ public interface Api {
     @POST("checkOneProductInventory")
     Observable<RegisterBean> getInventory(@Body ResponseBody body);
 
+    //自动登录
     @POST("autoLogin")
     @FormUrlEncoded
-    Observable<LoginBean> getAutoLogin(@Field("token")String token);
+    Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
 
 }

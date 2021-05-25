@@ -82,6 +82,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Toast.makeText(this, getString(R.string.welcomeNotExit), Toast.LENGTH_SHORT).show();
         return false;
     }
 

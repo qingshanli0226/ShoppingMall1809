@@ -9,7 +9,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp_0"
         android:layout_weight="3">
 
         <ImageView
@@ -18,30 +18,37 @@
             android:background="@drawable/new_user_icon_background"></ImageView>
 
         <com.example.framework.view.MyToorbar
+            android:id="@+id/toorBar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/dp_70"
             app:isleft="true"
             app:isright="true"
             app:rightimg="@drawable/community_message_icon"></com.example.framework.view.MyToorbar>
 
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:layout_gravity="center"
+            android:src="@color/red"></ImageView>
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp_0"
         android:layout_weight="1.5"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dp_0"
             android:layout_weight="0.5">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="我的订单"
+                android:text="@string/personOrder"
                 android:textSize="@dimen/dp_20"></TextView>
 
             <TextView
@@ -49,19 +56,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawableRight="@drawable/top_bar_right_back"
-                android:text="查看全部订单"
+                android:text="@string/personLookAllOrder"
                 android:textSize="@dimen/dp_20"></TextView>
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dp_0"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/awaitPay"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -74,11 +82,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待付款"></TextView>
+                    android:text="@string/personAwaitPay"></TextView>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/awaitDeliverGoods"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -91,11 +100,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待付款"></TextView>
+                    android:text="@string/personAwaitDeliverGoods"></TextView>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -108,11 +117,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待付款"></TextView>
+                    android:text="@string/personAwaitDeliverDelivery"></TextView>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -125,11 +134,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待付款"></TextView>
+                    android:text="@string/personOffTheStokcks"></TextView>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -142,7 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待付款"></TextView>
+                    android:text="@string/personSalesReturnOrRefund"></TextView>
             </LinearLayout>
 
         </LinearLayout>
@@ -152,63 +161,139 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp_0"
         android:layout_weight="5"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            android:layout_marginTop="@dimen/dp_10">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personMyCollect"></TextView>
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            android:layout_marginTop="@dimen/dp_10">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personMyDiscountCoupon"></TextView>
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            android:layout_marginTop="@dimen/dp_10">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personMyMelonSeeds"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_channel_icon_collect"
-            android:text="收货地址"></TextView>
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personMyPrize"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personMyE_Ticket"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personPassionShare"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personServiceCenter"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@drawable/user_channel_icon_collect"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personServiceFeedback"></TextView>
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

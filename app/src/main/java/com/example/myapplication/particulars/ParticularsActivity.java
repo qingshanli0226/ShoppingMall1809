@@ -2,7 +2,6 @@ package com.example.myapplication.particulars;
 
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,10 +26,8 @@ import com.example.myapplication.R;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
-import retrofit2.http.HEAD;
 
-
-public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements AddShoppingCartView {
+public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements IAddShoppingCartView {
 
     private ImageView particularsCommodityImage;
     private TextView particularsCommodityName;
@@ -91,7 +88,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void initPresenter() {
-        mPresenter=new AddShoppingCartPresenter(this);
+        mPresenter = new AddShoppingCartPresenter(this);
     }
 
     @Override
@@ -100,10 +97,10 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-             pic = extras.getString("pic");
-             name = extras.getString("name");
-             price = extras.getString("price");
-             id = extras.getString("id");
+            pic = extras.getString("pic");
+            name = extras.getString("name");
+            price = extras.getString("price");
+            id = extras.getString("id");
             //赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
             particularsCommodityName.setText(name);
@@ -153,35 +150,27 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         popAdd.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
             num++;
-            popNum.setText(num+"");
+            popNum.setText(num + "");
         });
         //pop减号点击
         popSub.setOnClickListener(v -> {
             int num = Integer.parseInt(popNum.getText().toString());
-            int a=num;
-            if (a--<=1){
+            int a = num;
+            if (a-- <= 1) {
                 Toast.makeText(ParticularsActivity.this, getString(R.string.notLessThanOne), Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 num--;
             }
-            popNum.setText(num+"");
+            popNum.setText(num + "");
         });
         //pop取消
-        popCencel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+        popCencel.setOnClickListener(v -> popupWindow.dismiss());
         //pop确定
-        popConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //刷新加入购物车数量
-                int num = Integer.parseInt(popNum.getText().toString());
-                //直接调用购物车
-                mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
-            }
+        popConfirm.setOnClickListener(v -> {
+            //刷新加入购物车数量
+            int num = Integer.parseInt(popNum.getText().toString());
+            //直接调用购物车
+            mPresenter.getAddShoppingCart(id, num + "", name, pic, price);
         });
     }
 
@@ -200,19 +189,19 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     @Override
     public void onAddShoppingCart(ShoppingCartBean shoppingCartBean) {
         String code = shoppingCartBean.getCode();
-        if (code.equals("200")){
-            Toast.makeText(this, getString(R.string.addShoppingSucceed),  Toast.LENGTH_SHORT).show();
-        }else {
+        if (code.equals("200")) {
+            Toast.makeText(this, getString(R.string.addShoppingSucceed), Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onIsInventory(RegisterBean registerBean) {
-        if (registerBean.getCode().equals("200")){
+        if (registerBean.getCode().equals("200")) {
             int num = Integer.parseInt(popNum.getText().toString());
-            mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
-        }else {
+            mPresenter.getAddShoppingCart(id, num + "", name, pic, price);
+        } else {
             Toast.makeText(this, getString(R.string.inventoryNot), Toast.LENGTH_SHORT).show();
         }
     }

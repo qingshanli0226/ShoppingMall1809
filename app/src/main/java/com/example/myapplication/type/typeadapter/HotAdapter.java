@@ -1,4 +1,4 @@
-package com.example.myapplication.typeadapter;
+package com.example.myapplication.type.typeadapter;
 
 import android.util.Log;
 import android.widget.ImageView;

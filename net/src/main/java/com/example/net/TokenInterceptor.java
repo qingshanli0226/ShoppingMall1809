@@ -15,9 +15,8 @@ import okhttp3.Response;
 public class TokenInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String token = SpUtil.getString(AppMoudel.context, FiannceContants.Token_key);
-        Request build = chain.request().newBuilder().addHeader(FiannceContants.Token_key, token).build();
-        Log.d("TokenInterceptor", token);
+        String token = SpUtil.getString(AppMoudel.context, FiannceContants.TOKEN_KEY);
+        Request build = chain.request().newBuilder().addHeader(FiannceContants.TOKEN_KEY, token).build();
         return chain.proceed(build);
     }
 }

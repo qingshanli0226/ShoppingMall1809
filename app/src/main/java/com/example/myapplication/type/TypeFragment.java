@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.BaseFragment;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
-import com.example.myapplication.typeadapter.ClassifyAdapter;
+import com.example.myapplication.type.typeadapter.ClassifyAdapter;
 import com.example.net.Constants;
 import com.example.net.bean.SkirtBean;
 

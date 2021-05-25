@@ -4,12 +4,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.framework.SpUtil;
 import com.example.framework.manager.CacheUserManager;
+import com.example.net.SpUtil;
 import com.example.net.bean.LoginBean;
 import com.example.user.autologin.AutoLoginPresenter;
 import com.example.user.login.ILoginView;

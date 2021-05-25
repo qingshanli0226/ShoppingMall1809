@@ -1,4 +1,4 @@
-package com.example.myapplication.typeadapter;
+package com.example.myapplication.type.typeadapter;
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,8 +7,6 @@ import com.bumptech.glide.Glide;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.myapplication.R;
 import com.example.net.bean.SkirtBean;
-
-import java.util.List;
 
 public class TypeAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.ChildBean> {
 

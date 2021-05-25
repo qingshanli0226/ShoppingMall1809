@@ -51,4 +51,24 @@
     <string name="inventoryNot">库存不够</string>
     <string name="notLessThanOne">库存不够</string>
 
+    <string name="welcomeNotExit">稍后退出</string>
+
+    <string name="personOrder">我的订单</string>
+    <string name="personLookAllOrder">查看全部订单</string>
+    <string name="personAwaitPay">待付款</string>
+    <string name="personAwaitDeliverGoods">待发货</string>
+    <string name="personAwaitDeliverDelivery">待收货</string>
+    <string name="personOffTheStokcks">已完成</string>
+    <string name="personSalesReturnOrRefund">退货/退款</string>
+
+    <string name="personShippingAddress">收货地址</string>
+    <string name="personMyCollect">我的收藏</string>
+    <string name="personMyDiscountCoupon">我的优惠券</string>
+    <string name="personMyMelonSeeds">我的瓜子</string>
+    <string name="personMyPrize">我的奖品</string>
+    <string name="personMyE_Ticket">我的电子票</string>
+    <string name="personPassionShare">激情分享</string>
+    <string name="personServiceCenter">客服中心</string>
+    <string name="personServiceFeedback">服务反馈</string>
+
 </resources>

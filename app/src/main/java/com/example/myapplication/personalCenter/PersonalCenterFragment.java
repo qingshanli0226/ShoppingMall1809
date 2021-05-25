@@ -1,66 +1,74 @@
 package com.example.myapplication.personalCenter;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.framework.BaseFragment;
+import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
+import com.example.net.bean.FindForPayBean;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PersonalCenterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PersonalCenterFragment extends Fragment {
+public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements IPersonalView {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private MyToorbar toorBar;
+    private ImageView userImage;
+    private LinearLayout awaitPay;
+    private LinearLayout awaitDeliverGoods;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PersonalCenterFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PersonalCenterFragment newInstance(String param1, String param2) {
-        PersonalCenterFragment fragment = new PersonalCenterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public int bandLayout() {
+        return R.layout.fragment_personalcenter;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void initView() {
+        toorBar = (MyToorbar) findViewById(R.id.toorBar);
+        userImage = (ImageView) findViewById(R.id.userImage);
+        awaitPay = (LinearLayout) findViewById(R.id.awaitPay);
+        awaitDeliverGoods = (LinearLayout) findViewById(R.id.awaitDeliverGoods);
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter = new PersonalPresenter(this);
+    }
+
+    @Override
+    public void initData() {
+        toorBar.setToorbarListener(new MyToorbar.IToorbarListener() {
+            @Override
+            public void onleftClick() {
+
+            }
+
+            @Override
+            public void onrightClick() {
+
+            }
+
+            @Override
+            public void ontextClick() {
+
+            }
+        });
+        //头像点击
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //获取待支付订单
+        awaitPay.setOnClickListener(v -> mPresenter.getFindForPay());
+    }
+
+    @Override
+    public void onShoppingPay(FindForPayBean findForPayBean) {
+        if (findForPayBean.getCode().equals("200")) {
+            Toast.makeText(getActivity(), "获取待支付订单成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), findForPayBean.toString(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personalcenter, container, false);
     }
 }

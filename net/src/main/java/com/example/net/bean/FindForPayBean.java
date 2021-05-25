@@ -11,6 +11,16 @@ public class FindForPayBean {
 
     private String code;
     private String message;
+
+    @Override
+    public String toString() {
+        return "FindForPayBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     /**
      * subject : buy
      * body : 测试数据
@@ -58,6 +68,19 @@ public class FindForPayBean {
 
         public String getSubject() {
             return subject;
+        }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "subject='" + subject + '\'' +
+                    ", body='" + body + '\'' +
+                    ", totalPrice='" + totalPrice + '\'' +
+                    ", time='" + time + '\'' +
+                    ", status=" + status +
+                    ", tradeNo='" + tradeNo + '\'' +
+                    ", orderInfo=" + orderInfo +
+                    '}';
         }
 
         public void setSubject(String subject) {
