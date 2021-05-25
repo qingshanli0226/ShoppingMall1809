@@ -1,16 +1,23 @@
 package com.example.myapplication.home;
 
+import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.type.ToLoginType;
+import com.example.common.type.TypeString;
 import com.example.framework.BaseFragment;
+
+import com.example.framework.manager.CaCheArote;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.home.homeadapter.HomeAdapter;
+import com.example.myapplication.msg.MsgMainActivity;
 import com.example.net.bean.HomeBean;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +30,7 @@ public class HomeFragment extends BaseFragment {
     private RecyclerView homeRec;
     private HomeAdapter homeAdapter;
     private List<Object> objectList = new ArrayList<>();
+    private ImageView msg;
 
     @Override
     public int bandLayout() {
@@ -55,6 +63,15 @@ public class HomeFragment extends BaseFragment {
 
         homeRec.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        msg = (ImageView) findViewById(R.id.msg);
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("falg","2");
+                CaCheArote.getInstance().getUserInterface().openLoginActivity(getContext(),bundle);
+            }
+        });
     }
 
     @Override
