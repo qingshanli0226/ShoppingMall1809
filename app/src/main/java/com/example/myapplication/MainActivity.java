@@ -63,8 +63,6 @@ public class MainActivity extends BaseActivity {
            Bundle extras = intent.getExtras();
            String page = extras.getString("page");
            mainComm.setCurrentTab(Integer.parseInt(page));
-
-
     }
 
     @Override
