@@ -16,7 +16,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            //定义一个log开关变量  LOG_DEBUG 它会在BUILD_CONFIG类里显示它的值
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+            buildConfigField("boolean", "LOG_ERROR", "true")
+        }
+
         release {
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            buildConfigField("boolean", "LOG_ERROR", "true")
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

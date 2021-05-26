@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import com.fiannce.bawei.framework.manager.CacheManager;
 import com.fiannce.bawei.framework.manager.FiannceConnectManager;
 import com.fiannce.bawei.framework.view.LoadingPage;
 import com.fiannce.bawei.framework.view.ToolBar;
@@ -42,6 +43,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
         //页面启动时，注册网络回调接口
         FiannceConnectManager.getInstance().registerConnectListener(this);
+        CacheManager.getInstance().addActivity(this);
     }
 
     private Handler handler = new Handler() {
@@ -67,6 +69,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         destroy();
         //页面销毁时，将回调接口注销，避免内存泄漏问题
         FiannceConnectManager.getInstance().unRegisterConnectListener(this);
+        CacheManager.getInstance().removeActivity(this);
     }
 
     public void destroy() {

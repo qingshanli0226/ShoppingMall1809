@@ -2,6 +2,7 @@ package com.fiannce.bawei.net;
 
 
 
+import com.fiannce.bawei.net.mode.CrashBean;
 import com.fiannce.bawei.net.mode.FocusBean;
 import com.fiannce.bawei.net.mode.HomeBean;
 import com.fiannce.bawei.net.mode.VersionBean;
@@ -25,7 +26,7 @@ import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 //认为是IMode
-public interface FiannceApiService {
+public interface ShopmallApiService {
 
     @GET("atguigu/json/P2PInvest/index.json")
     Observable<HomeBean> getHomeData();
@@ -38,5 +39,9 @@ public interface FiannceApiService {
 
     @GET("findFocusVideo")
     Observable<FocusBean> findFocus();
+
+    @POST("crash")
+    @FormUrlEncoded
+    Observable<CrashBean> crashReport(@FieldMap HashMap<String,String> params);
 
 }

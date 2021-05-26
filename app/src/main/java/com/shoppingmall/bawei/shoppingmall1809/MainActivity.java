@@ -1,9 +1,11 @@
 package com.shoppingmall.bawei.shoppingmall1809;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import com.fiannce.bawei.common.LogUtil;
 import com.fiannce.bawei.framework.BaseActivity;
 import com.fiannce.bawei.net.mode.ShopmallHomeBean;
 import com.google.gson.Gson;
@@ -11,6 +13,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.shoppingmall.bawei.shoppingmall1809.exception.ExceptionActivity;
 import com.shoppingmall.bawei.shoppingmall1809.glide.GlideActivity;
 import com.shoppingmall.bawei.shoppingmall1809.home.HomeAdapter;
 
@@ -42,6 +45,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        LogUtil.d("initView");
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -65,6 +69,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,GlideActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.btnE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ExceptionActivity.class);
                 startActivity(intent);
             }
         });
