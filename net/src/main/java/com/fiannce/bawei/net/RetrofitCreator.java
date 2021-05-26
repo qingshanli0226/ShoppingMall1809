@@ -8,15 +8,14 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 
 //定义网络框架
 public class RetrofitCreator {
 
-    private static FiannceApiService fiannceApiService;
+    private static ShopmallApiService fiannceApiService;
 
 
-    public static FiannceApiService getFiannceApiService() {
+    public static ShopmallApiService getFiannceApiService() {
         if (fiannceApiService == null) {
             fiannceApiService = createKSApiService();
         }
@@ -24,7 +23,7 @@ public class RetrofitCreator {
         return fiannceApiService;
     }
 
-    private static FiannceApiService createKSApiService() {
+    private static ShopmallApiService createKSApiService() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(15,TimeUnit.SECONDS)
                 .readTimeout(15,TimeUnit.SECONDS)
@@ -40,6 +39,6 @@ public class RetrofitCreator {
                 .build();
 
 
-        return retrofit.create(FiannceApiService.class);
+        return retrofit.create(ShopmallApiService.class);
     }
 }

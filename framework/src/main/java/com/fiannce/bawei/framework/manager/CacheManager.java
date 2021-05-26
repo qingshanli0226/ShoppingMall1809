@@ -1,5 +1,6 @@
 package com.fiannce.bawei.framework.manager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import com.fiannce.bawei.framework.R;
 import com.fiannce.bawei.net.mode.HomeBean;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import okhttp3.Cache;
@@ -19,6 +21,8 @@ public class CacheManager {
     private HomeBean homeBean;
 
     public List<Bitmap> bitmapList = new ArrayList<>();//bitmapList是成员变量
+
+    private List<Activity> activityList = new LinkedList<>();
 
 
     private CacheManager() {
@@ -45,6 +49,17 @@ public class CacheManager {
             instance = new CacheManager();
         }
         return instance;
+    }
+
+    public void addActivity(Activity activity) {
+        activityList.add(activity);
+    }
+    public void removeActivity(Activity activity) {
+        activityList.remove(activity);
+    }
+
+    public List<Activity> getActivityList() {
+        return activityList;
     }
 
 
