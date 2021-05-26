@@ -2,6 +2,7 @@ package com.example.threeshopping.cart;
 
 import android.util.Log;
 
+import com.example.common.LogUtil;
 import com.example.framework.BasePresenter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.RetrofitManager;
@@ -11,6 +12,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -186,4 +190,77 @@ public class CarPresenter extends BasePresenter<ICarView> {
                 });
     }
 
+    //删除一个
+    public void removeOneProduct(int position,CartBean.ResultBean resultBean){
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitManager.getHttpApiService()
+                .removeOneProduct(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        LogUtil.d("zyb"+selectBean);
+                        if (selectBean.getCode().equals("200")) {
+                            CacheShopManager.getInstance().removeProduct(resultBean);
+                            if (mView != null) {
+                                mView.removeProduct(position);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    //删除多个
+    public void removeMany(List<CartBean.ResultBean> resultBeans){
+        String s = new Gson().toJson(resultBeans);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitManager.getHttpApiService()
+                .removeMany(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            CacheShopManager.getInstance().removeMany(resultBeans);
+                            if (mView != null) {
+                                mView.removeMany(resultBeans);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 }

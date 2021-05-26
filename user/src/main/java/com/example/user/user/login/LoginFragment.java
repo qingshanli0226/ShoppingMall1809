@@ -37,7 +37,6 @@ import retrofit2.http.HEAD;
 public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBar.OnClickListener, IUserView {
 
 
-    private ToolBar toolbar;
     private EditText loginUsername;
     private EditText loginPassword;
     private CheckBox passwordInvisible;
@@ -56,8 +55,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
     @Override
     protected void initView() {
-
-        toolbar = (ToolBar) findViewById(R.id.toolbar);
         loginUsername = (EditText) findViewById(R.id.login_username);
         loginPassword = (EditText) findViewById(R.id.login_password);
         passwordInvisible = (CheckBox) findViewById(R.id.password_invisible);
@@ -67,7 +64,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
         weibo = (ImageView) findViewById(R.id.weibo);
         qq = (ImageView) findViewById(R.id.qq);
         weixin = (ImageView) findViewById(R.id.weixin);
-        toolbar.setToolbarOnClickLisenter(this);
     }
 
     @Override

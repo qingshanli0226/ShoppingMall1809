@@ -7,6 +7,7 @@ import android.app.Application;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.common.LogUtil;
+import com.example.common.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
@@ -34,6 +35,7 @@ public class App extends Application {
         UtileSql.getInstance().setContext(this);
 
         CacheShopManager.getInstance().init();
+        ShopCrashHandler.getInstance().init(this);
 
  }
 }

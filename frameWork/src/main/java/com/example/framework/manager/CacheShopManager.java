@@ -56,7 +56,7 @@ public class CacheShopManager {
 
     //购物车数据源
     private List<CartBean.ResultBean> carts;
-    private List<CartBean.ResultBean> cartsPrice;
+    private List<CartBean.ResultBean> cartsPrice = new ArrayList<>();
     private List<ICartChange> cartChanges = new LinkedList<>();
 
     public List<CartBean.ResultBean> getCartsPrice() {
@@ -79,7 +79,7 @@ public class CacheShopManager {
 
     public void setCarts(List<CartBean.ResultBean> carts) {
         this.carts = carts;
-        this.cartsPrice = carts;
+        cartsPrice.addAll(carts);
 
     }
 
@@ -164,8 +164,30 @@ public class CacheShopManager {
     //修改库存
     public synchronized void setNum(int position,String num){
         carts.get(position).setProductNum(num);
+
     }
 
+    public synchronized void removeProduct(CartBean.ResultBean resultBean) {
+        for (int i = carts.size()-1; i >= 0; i--) {
+            CartBean.ResultBean bean = carts.get(i);
+            if(bean.getProductId().equals(resultBean.getProductId())){
+                carts.remove(i);
+            }
+        }
+    }
+
+    public void removeMany(List<CartBean.ResultBean> resultBeans) {
+        for (int i = carts.size()-1; i >= 0; i--) {
+            CartBean.ResultBean bean = carts.get(i);
+            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
+                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
+                    carts.remove(i);
+                    resultBeans.remove(i1);
+                }
+            }
+        }
+        LogUtil.d("removeManyaaa");
+    }
 
 
     public interface ICartChange {

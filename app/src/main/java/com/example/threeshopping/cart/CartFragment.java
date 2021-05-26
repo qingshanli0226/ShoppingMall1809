@@ -23,6 +23,7 @@ import com.example.net.bean.LoginBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -166,6 +167,32 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
             }
         });
 
+        //删除
+        cartdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = -1;
+                ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
+                for (int i = 0; i < cartAdapter.getData().size(); i++) {
+                    if(cartAdapter.getData().get(i).isProductSelected()) {
+                        resultBeans.add(cartAdapter.getData().get(i));
+                        position = i;
+                    }
+                }
+
+                if(resultBeans.size() == 1){
+                    //选中一个
+                    mPresenter.removeOneProduct(position,resultBeans.get(0));
+                } else if(resultBeans.size() > 1){
+                    //选中多个
+                    mPresenter.removeMany(resultBeans);
+                } else{
+                    Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
 
 
 
@@ -233,6 +260,29 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
     @Override
     public void onNum(int position) {
         cartAdapter.notifyItemChanged(position);
+
+    }
+    //删除一个
+    @Override
+    public void removeProduct(int position) {
+        cartAdapter.getData().remove(position);
+        cartAdapter.notifyItemRemoved(position);
+        LogUtil.d("positona"+position);
+    }
+
+    @Override
+    public void removeMany(List<CartBean.ResultBean> resultBeans) {
+        for (int i = cartAdapter.getData().size()-1; i >= 0; i--) {
+            CartBean.ResultBean bean = cartAdapter.getData().get(i);
+            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
+                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
+                    cartAdapter.getData().remove(i);
+                    resultBeans.remove(i1);
+                }
+            }
+        }
+        LogUtil.d("removeMany");
+        cartAdapter.notifyDataSetChanged();
     }
 
     //添加数据
