@@ -19,13 +19,14 @@ import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.LoginBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
 import java.util.List;
 
 
-public class CartFragment extends BaseFragment implements CacheShopManager.ICartChange {
+public class CartFragment extends BaseFragment<CarPresenter> implements CacheShopManager.ICartChange,ICarView {
 
 
     private ToolBar toolbar;
@@ -41,6 +42,7 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
     private Button payment;
     private CartAdapter cartAdapter;
     private boolean isAll = false;
+    private ImageView itemImageView;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +66,7 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
 
     @Override
     protected void initPrensenter() {
+        mPresenter = new CarPresenter(this);
 
     }
     private List<CartBean.ResultBean> carts;
@@ -97,64 +100,45 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
         //数据
         cartRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         cartRv.setAdapter(cartAdapter);
-        cartAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-
-            }
-
-            @Override
-            public boolean onLongItemClick(int position, View view) {
-                return false;
-            }
-        });
 
         cartAdapter.setCartItemListener(new CartAdapter.ICartItemListener() {
             @Override
             public void onItemChildClick(int position, View view) {
                 CartBean.ResultBean resultBean = cartAdapter.getData().get(position);
+                CartBean.ResultBean result = new CartBean.ResultBean();
+
                 switch (view.getId()) {
                     case R.id.shopCartCheck:
                         //修改
-                        ImageView imageView = (ImageView) view;
-
+                        result.setProductId(resultBean.getProductId());
+                        result.setProductNum(resultBean.getProductNum());
+                        result.setProductPrice(resultBean.getProductPrice());
+                        itemImageView = (ImageView) view;
                         if (resultBean.isProductSelected()) {
-                            imageView.setImageResource(R.drawable.checkbox_unselected);
-                            resultBean.setProductSelected(false);
+                            result.setProductSelected(false);
                         } else{
-                            imageView.setImageResource(R.drawable.checkbox_selected);
-                            resultBean.setProductSelected(true);
+                            result.setProductSelected(true);
+                        }
+                        mPresenter.updateProductSelect(position,result);
 
-                        }
-                        CacheShopManager.getInstance().updateProductSelect(position,resultBean);
-                        //反选
-                        int count = 0;
-                        for (CartBean.ResultBean datum : cartAdapter.getData()) {
-                            if(datum.isProductSelected()){
-                                count++;
-                            }
-                        }
-                        if(count == cartAdapter.getData().size()){
-                            checkpayment.setChecked(true);
-                        } else{
-                            checkpayment.setChecked(false);
-                            isAll = false;
-                        }
+
                         break;
                     case R.id.shopCartSub:
                         //判断库存
-                        if(Integer.parseInt(resultBean.getProductNum()) ==0){
-
+                        if(Integer.parseInt(resultBean.getProductNum()) >0){
+                            result.setProductId(resultBean.getProductId());
+                            result.setProductNum(Integer.parseInt(resultBean.getProductNum())-1+"");
+                            result.setProductPrice(resultBean.getProductPrice());
+                            mPresenter.upDateNum(position,result);
                             return;
                         }
-
                         break;
                     case R.id.shopCartAdd:
                         //判断库存
-                        CartBean.ResultBean result = new CartBean.ResultBean();
                         result.setProductId(resultBean.getProductId());
                         result.setProductNum(Integer.parseInt(resultBean.getProductNum())+1+"");
-                        CacheShopManager.getInstance().inventory(position,result);
+                        result.setProductPrice(resultBean.getProductPrice());
+                        mPresenter.upDateNum(position,result);
 
 
                         break;
@@ -166,7 +150,12 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
         checkpayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectAll();
+                if(isAll){
+                    isAll = false;
+                } else{
+                    isAll = true;
+                }
+                mPresenter.selectAll(isAll);
             }
         });
         //编辑全选
@@ -184,18 +173,6 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
     }
 
 
-    private void selectAll() {
-        if(isAll){
-            isAll = false;
-        } else{
-            isAll = true;
-        }
-        for (CartBean.ResultBean datum : cartAdapter.getData()) {
-            datum.setProductSelected(isAll);
-        }
-        CacheShopManager.getInstance().selectAll(isAll);
-        cartAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onClickCenter() {
@@ -223,39 +200,67 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
     public void onShowCart(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         cartAdapter.updata(carts);
+        LogUtil.d("zyb"+carts);
     }
-    //添加数据
-    @Override
-    public void onAddCart(int position) {
-        if(position > cartAdapter.getData().size()){
-            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position));
-        } else{
-            cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
-        }
-        cartAdapter.notifyItemChanged(position);
-    }
-
     //单选
     @Override
     public void onCheck(int position, boolean isCheck) {
-        cartAdapter.getData().get(position).setProductSelected(isCheck);
+
         cartAdapter.notifyItemChanged(position);
+        //反选
+        int count = 0;
+        for (CartBean.ResultBean datum : cartAdapter.getData()) {
+            if(datum.isProductSelected()){
+                count++;
+            }
+        }
+        if(count == cartAdapter.getData().size()){
+            checkpayment.setChecked(true);
+            isAll = true;
+        } else{
+            checkpayment.setChecked(false);
+            isAll = false;
+        }
+
     }
     //全选
     @Override
     public void onCheckAll(boolean isChcekAll) {
-        for (CartBean.ResultBean datum : cartAdapter.getData()) {
-            datum.setProductSelected(isChcekAll);
-        }
+        this.isAll = isChcekAll;
         cartAdapter.notifyDataSetChanged();
     }
-
     //增加数量
-
     @Override
     public void onNum(int position) {
-//        CartBean.ResultBean bean = cartAdapter.getData().get(position);
-//        bean.setProductNum(Integer.parseInt(bean.getProductNum())+1+"");
-//        cartAdapter.notifyItemChanged(position);
+        cartAdapter.notifyItemChanged(position);
     }
+
+    //添加数据
+    @Override
+    public void onAddCart(int position) {
+        if(position > cartAdapter.getData().size()){
+            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position-1));
+            cartAdapter.notifyItemChanged(position-1);
+        } else{
+            cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
+            cartAdapter.notifyItemChanged(position);
+        }
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
+
 }

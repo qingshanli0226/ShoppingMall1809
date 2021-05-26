@@ -17,10 +17,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheShopManager;
+import com.example.framework.manager.UserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.LoginBean;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements ToolBar.IToolbarOnClickLisenter {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements ToolBar.IToolbarOnClickLisenter{
     protected P mPresenter;
     protected View rootView;
     protected ToolBar toolBar;
@@ -35,8 +38,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
                 return getLayoutId();
             }
         };
-
-
         toolBar = findViewById(R.id.toolbar);
         toolBar.setToolbarOnClickLisenter(this);
         initView();
@@ -72,5 +73,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
             mPresenter.detachView();
         }
     }
+
+
+
 
 }
