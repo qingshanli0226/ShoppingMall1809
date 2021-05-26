@@ -10,14 +10,15 @@ import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.msg.MsgMainActivity;
 
 
-public class AppModule implements CaCheArote.IMsgInterface {
+public class AppModule implements CaCheArote.IAppInterface {
     public static void init(){
         AppModule appModule=new AppModule();
-        CaCheArote.getInstance().registerImsgInterface(appModule);
+        CaCheArote.getInstance().registerIAppInterface(appModule);
     }
 
+
     @Override
-    public void openMsgActivity(Context context, Bundle bundle) {
+    public void openMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MsgMainActivity.class);
         intent.putExtras(bundle);
         if (context instanceof Activity){

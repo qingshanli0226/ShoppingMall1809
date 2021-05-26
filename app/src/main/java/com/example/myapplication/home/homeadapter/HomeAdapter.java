@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.myapplication.R;
 import com.example.myapplication.particulars.ParticularsActivity;
 import com.example.net.bean.HomeBean;
@@ -80,7 +80,7 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         HomeBean.ResultBean.BannerInfoBean a = (HomeBean.ResultBean.BannerInfoBean) path;
-                        Glide.with(context).load("http://49.233.0.68:8080" + "/atguigu/img" + a.getImage()).into(imageView);
+                        ShopmallGlide.with(context).load("http://49.233.0.68:8080" + "/atguigu/img" + a.getImage()).into(imageView);
                     }
                 }).start();
                 break;
@@ -111,11 +111,11 @@ public class HomeAdapter extends BaseRecyclerViewAdapter<Object> {
 
                 View view1 = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.home_item_view1, null);
                 ImageView ima1 = view1.findViewById(R.id.ima1);
-                Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080" + "/atguigu/img" + listAct.get(0).getIcon_url()).into(ima1);
+                ShopmallGlide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080" + "/atguigu/img" + listAct.get(0).getIcon_url()).into(ima1);
 
                 View view2 = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.home_item_view2, null);
                 ImageView ima2 = view2.findViewById(R.id.ima2);
-                Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080" + "/atguigu/img" + listAct.get(1).getIcon_url()).into(ima2);
+                ShopmallGlide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080" + "/atguigu/img" + listAct.get(1).getIcon_url()).into(ima2);
                 ArrayList<View> views = new ArrayList<>();
                 views.add(view1);
                 views.add(view2);

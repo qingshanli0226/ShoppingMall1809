@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRecyclerViewAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.myapplication.R;
 import com.example.net.bean.SkirtBean;
 
@@ -23,7 +24,7 @@ public class HotAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.Hot
         TextView view = holder.getView(R.id.money);
         view.setText(itemData.getCover_price()+"");
         Log.i("zyh", "displayViewHolder: "+itemData);
-        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getFigure()).into((ImageView) holder.getView(R.id.img));
+        ShopmallGlide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getFigure()).into((ImageView) holder.getView(R.id.img));
 
     }
 
