@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "SQL_BEAN".
 */
-public class SqlBeanDao extends AbstractDao<SqlBean, Void> {
+public class SqlBeanDao extends AbstractDao<SqlBean, Long> {
 
     public static final String TABLENAME = "SQL_BEAN";
 
@@ -22,12 +22,13 @@ public class SqlBeanDao extends AbstractDao<SqlBean, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property ProductId = new Property(0, String.class, "productId", false, "PRODUCT_ID");
-        public final static Property ProductNum = new Property(1, int.class, "productNum", false, "PRODUCT_NUM");
-        public final static Property ProductName = new Property(2, String.class, "productName", false, "PRODUCT_NAME");
-        public final static Property Url = new Property(3, String.class, "url", false, "URL");
-        public final static Property ProductPrice = new Property(4, String.class, "productPrice", false, "PRODUCT_PRICE");
-        public final static Property ProductSelected = new Property(5, boolean.class, "productSelected", false, "PRODUCT_SELECTED");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property ProductId = new Property(1, String.class, "productId", false, "PRODUCT_ID");
+        public final static Property ProductNum = new Property(2, int.class, "productNum", false, "PRODUCT_NUM");
+        public final static Property ProductName = new Property(3, String.class, "productName", false, "PRODUCT_NAME");
+        public final static Property Url = new Property(4, String.class, "url", false, "URL");
+        public final static Property ProductPrice = new Property(5, String.class, "productPrice", false, "PRODUCT_PRICE");
+        public final static Property ProductSelected = new Property(6, boolean.class, "productSelected", false, "PRODUCT_SELECTED");
     }
 
 
@@ -43,12 +44,13 @@ public class SqlBeanDao extends AbstractDao<SqlBean, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"SQL_BEAN\" (" + //
-                "\"PRODUCT_ID\" TEXT," + // 0: productId
-                "\"PRODUCT_NUM\" INTEGER NOT NULL ," + // 1: productNum
-                "\"PRODUCT_NAME\" TEXT," + // 2: productName
-                "\"URL\" TEXT," + // 3: url
-                "\"PRODUCT_PRICE\" TEXT," + // 4: productPrice
-                "\"PRODUCT_SELECTED\" INTEGER NOT NULL );"); // 5: productSelected
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"PRODUCT_ID\" TEXT NOT NULL ," + // 1: productId
+                "\"PRODUCT_NUM\" INTEGER NOT NULL ," + // 2: productNum
+                "\"PRODUCT_NAME\" TEXT," + // 3: productName
+                "\"URL\" TEXT," + // 4: url
+                "\"PRODUCT_PRICE\" TEXT," + // 5: productPrice
+                "\"PRODUCT_SELECTED\" INTEGER NOT NULL );"); // 6: productSelected
     }
 
     /** Drops the underlying database table. */
@@ -61,99 +63,106 @@ public class SqlBeanDao extends AbstractDao<SqlBean, Void> {
     protected final void bindValues(DatabaseStatement stmt, SqlBean entity) {
         stmt.clearBindings();
  
-        String productId = entity.getProductId();
-        if (productId != null) {
-            stmt.bindString(1, productId);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getProductNum());
+        stmt.bindString(2, entity.getProductId());
+        stmt.bindLong(3, entity.getProductNum());
  
         String productName = entity.getProductName();
         if (productName != null) {
-            stmt.bindString(3, productName);
+            stmt.bindString(4, productName);
         }
  
         String url = entity.getUrl();
         if (url != null) {
-            stmt.bindString(4, url);
+            stmt.bindString(5, url);
         }
  
         String productPrice = entity.getProductPrice();
         if (productPrice != null) {
-            stmt.bindString(5, productPrice);
+            stmt.bindString(6, productPrice);
         }
-        stmt.bindLong(6, entity.getProductSelected() ? 1L: 0L);
+        stmt.bindLong(7, entity.getProductSelected() ? 1L: 0L);
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, SqlBean entity) {
         stmt.clearBindings();
  
-        String productId = entity.getProductId();
-        if (productId != null) {
-            stmt.bindString(1, productId);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
-        stmt.bindLong(2, entity.getProductNum());
+        stmt.bindString(2, entity.getProductId());
+        stmt.bindLong(3, entity.getProductNum());
  
         String productName = entity.getProductName();
         if (productName != null) {
-            stmt.bindString(3, productName);
+            stmt.bindString(4, productName);
         }
  
         String url = entity.getUrl();
         if (url != null) {
-            stmt.bindString(4, url);
+            stmt.bindString(5, url);
         }
  
         String productPrice = entity.getProductPrice();
         if (productPrice != null) {
-            stmt.bindString(5, productPrice);
+            stmt.bindString(6, productPrice);
         }
-        stmt.bindLong(6, entity.getProductSelected() ? 1L: 0L);
+        stmt.bindLong(7, entity.getProductSelected() ? 1L: 0L);
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public SqlBean readEntity(Cursor cursor, int offset) {
         SqlBean entity = new SqlBean( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // productId
-            cursor.getInt(offset + 1), // productNum
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // productName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // url
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // productPrice
-            cursor.getShort(offset + 5) != 0 // productSelected
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.getString(offset + 1), // productId
+            cursor.getInt(offset + 2), // productNum
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // productName
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // url
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // productPrice
+            cursor.getShort(offset + 6) != 0 // productSelected
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, SqlBean entity, int offset) {
-        entity.setProductId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setProductNum(cursor.getInt(offset + 1));
-        entity.setProductName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setProductPrice(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setProductSelected(cursor.getShort(offset + 5) != 0);
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setProductId(cursor.getString(offset + 1));
+        entity.setProductNum(cursor.getInt(offset + 2));
+        entity.setProductName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setProductPrice(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setProductSelected(cursor.getShort(offset + 6) != 0);
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(SqlBean entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(SqlBean entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(SqlBean entity) {
-        return null;
+    public Long getKey(SqlBean entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(SqlBean entity) {
-        // TODO
-        return false;
+        return entity.getId() != null;
     }
 
     @Override

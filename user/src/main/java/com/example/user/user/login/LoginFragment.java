@@ -155,10 +155,16 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             getActivity().finish();
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
+<<<<<<< HEAD
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
+=======
 
-            CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+            //购物车数据加载
+            CacheShopManager.getInstance().showCart();
+>>>>>>> zzy
+
+            CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
 
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
