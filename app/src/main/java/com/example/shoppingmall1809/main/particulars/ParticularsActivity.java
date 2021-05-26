@@ -31,7 +31,7 @@ import com.example.shoppingcar.addOneProduct.AddOnrProductPresenter;
 import com.example.shoppingcar.addOneProduct.IAddOneProduct;
 import com.example.shoppingmall1809.R;
 
-public class ParticularsActivity extends BaseActivity implements IAddOneProduct {
+public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> implements IAddOneProduct {
     private ToolBar toolbar;
     private ImageView particularsImg;
     private TextView particularsText;
@@ -45,7 +45,6 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
     private String productPrice;
     private String url;
     private int num = 1;
-    private AddOnrProductPresenter addOnrProductPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -140,15 +139,17 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
                     @Override
                     public void onClick(View view) {
 
-//                        ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
-//                        if (resultBean!=null){
-//                            popupWindow.dismiss();
-//                            return;
-//                        }
+                        ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
+                        if (resultBean!=null){
 
-                        addOnrProductPresenter = new AddOnrProductPresenter(ParticularsActivity.this);
+                            httpPresenter.UpDateProductNum(productId, (num + Integer.parseInt(resultBean.getProductNum()))+"", productName, url, productPrice);
 
-                        addOnrProductPresenter.CheckOneProductInventory(productId,num+"");
+                            popupWindow.dismiss();
+
+                            return;
+                        }
+
+                        httpPresenter.CheckOneProductInventory(productId,num+"");
 
                         popupWindow.dismiss();
                     }
@@ -161,7 +162,7 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
 
     @Override
     protected void initPresenter() {
-
+        httpPresenter = new AddOnrProductPresenter(ParticularsActivity.this);
     }
 
     @Override
@@ -223,17 +224,15 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
         if (registerBean.getCode().equals("200")) {
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
 
-            ShoppingTrolleyBean.ResultBean resultBean=new ShoppingTrolleyBean.ResultBean();
-
-            resultBean.setProductId(productId);
-            resultBean.setProductName(productName);
-            resultBean.setProductNum(num+"");
-            resultBean.setProductPrice(productPrice);
-            resultBean.setProductSelected(false);
-            resultBean.setUrl(url);
-
-            ShoppingCarManager.getInstance().insertResultBean(resultBean);
+            ShoppingCarManager.getInstance().insertResultBean(upDate());
             ShoppingCarManager.getInstance().refreshData();
+
+            int[] startLocation=new int[2];
+            particularsAdd.getLocationInWindow(startLocation);
+
+            int[] endLocation=new int[2];
+            toShopCar.getLocationInWindow(endLocation);
+
         } else {
             Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
         }
@@ -243,12 +242,34 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
     public void onCheckOneProductInventory(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")){
             if (Integer.parseInt(registerBean.getResult()) >= num) {
-                addOnrProductPresenter
-                        .AddOneProduct(productId, num + "", productName, url, productPrice);
+                httpPresenter.AddOneProduct(productId, num + "", productName, url, productPrice);
             } else {
                 Toast.makeText(this, "该商品库存不足", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onUpDateProductNum(RegisterBean registerBean) {
+        if (registerBean.getCode().equals("200")){
+            Toast.makeText(this, "商品数量修改成功", Toast.LENGTH_SHORT).show();
+
+            ShoppingCarManager.getInstance().upDataResultBean(upDate());
+            ShoppingCarManager.getInstance().refreshData();
+        }
+    }
+
+    public ShoppingTrolleyBean.ResultBean upDate(){
+        ShoppingTrolleyBean.ResultBean resultBean=new ShoppingTrolleyBean.ResultBean();
+
+        resultBean.setProductId(productId);
+        resultBean.setProductName(productName);
+        resultBean.setProductNum(num+"");
+        resultBean.setProductPrice(productPrice);
+        resultBean.setProductSelected(false);
+        resultBean.setUrl(url);
+
+        return resultBean;
     }
 
     @Override

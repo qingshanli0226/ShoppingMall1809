@@ -7,4 +7,6 @@ public interface IAddOneProduct extends IBaseView {
     void onAddOneProduct(RegisterBean registerBean);
 
     void onCheckOneProductInventory(RegisterBean registerBean);
+
+    void onUpDateProductNum(RegisterBean registerBean);
 }

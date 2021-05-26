@@ -23,7 +23,7 @@ import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged {
+public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged, ShoppingCarManager.IShoppingCar {
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
@@ -244,5 +244,10 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void destroy() {
         super.destroy();
         ShopeUserManager.getInstance().unregister(this::onLoginChange);
+    }
+
+    @Override
+    public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
+
     }
 }

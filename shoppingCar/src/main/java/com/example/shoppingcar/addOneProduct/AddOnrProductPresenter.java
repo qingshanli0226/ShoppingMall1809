@@ -100,4 +100,51 @@ public class AddOnrProductPresenter extends BasePresenter<IAddOneProduct> {
                     }
                 });
     }
+
+    public void UpDateProductNum(String productId, String productNum, String productName,
+                              String url, String productPrice) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getShopApiService()
+                .getUpDateProductNum(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RegisterBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegisterBean registerBean) {
+                        if (iView != null) {
+                            iView.onUpDateProductNum(registerBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 }
