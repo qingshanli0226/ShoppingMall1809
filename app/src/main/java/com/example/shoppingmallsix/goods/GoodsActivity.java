@@ -1,15 +1,24 @@
 package com.example.shoppingmallsix.goods;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+
 import android.os.Handler;
 import android.os.Message;
+
+import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +108,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         insertShopcar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
                 List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
                 if (loginBean1 != null && result.size() != 0) {
@@ -110,6 +120,64 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
                     Intent intent = new Intent(GoodsActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
+
+                PopupWindow popupWindow = new PopupWindow();
+                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setFocusable(true);
+                popupWindow.setOutsideTouchable(true);
+
+                View inflate = LayoutInflater.from(GoodsActivity.this).inflate(R.layout.item_particulars_pop, null);
+
+                ImageView popImg = inflate.findViewById(R.id.pop_img);
+                TextView popText = inflate.findViewById(R.id.pop_text);
+                TextView popPrice = inflate.findViewById(R.id.pop_price);
+                ImageView popSub = inflate.findViewById(R.id.pop_sub);
+                ImageView popAdd = inflate.findViewById(R.id.pop_add);
+                TextView popNum = inflate.findViewById(R.id.pop_num);
+                TextView popCancel = inflate.findViewById(R.id.pop_cancel);
+                TextView popConfirm = inflate.findViewById(R.id.pop_confirm);
+                popupWindow.setContentView(inflate);
+
+                popNum.setText(num+"");
+                Glide.with(GoodsActivity.this)
+                        .load(Constants.BASE_URl_IMAGE+figure)
+                        .into(popImg);
+                popText.setText(name);
+                popPrice.setText(price);
+
+                popAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        num++;
+                        popNum.setText(num+"");
+                    }
+                });
+                popSub.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        num--;
+                        if (num<=0){
+                            num=1;
+                        }
+                        popNum.setText(num+"");
+                    }
+                });
+                popCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupWindow.dismiss();
+                    }
+                });
+                popConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        httpPresenter.checkInventory(id,num + "");
+                        popupWindow.dismiss();
+                        showBeisaierAnim();
+                    }
+                });
+                popupWindow.showAsDropDown(toolbar,0,900,Gravity.BOTTOM);
             }
         });
     }
@@ -296,11 +364,67 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         }
     }
 
+    private void showBeisaierAnim() {
+        ImageView imageView = new ImageView(this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100,100);
+        imageView.setLayoutParams(layoutParams);
+        imageView.setImageResource(R.drawable.sign);
+        rootView.addView(imageView);
+
+        int[] startLoacation = new int[2];//起始点坐标
+        /**startLoacation[0] = 300;
+         startLoacation[1] = 0;*/
+        textView.getLocationInWindow(startLoacation);
+
+        int[] endLocation = new int[2];//终点坐标
+        endLocation[0] = 600;
+        endLocation[1] = 1000;
+        int[] controlLocation = new int[2];//控制点坐标
+        controlLocation[0] = 0;
+        controlLocation[1] = 300;
+        int[] controlLocation2 = new int[2];//控制点坐标
+        controlLocation2[0] = 500;
+        controlLocation2[1] = 500;
+
+        Path path = new Path();
+        path.moveTo(startLoacation[0],startLoacation[1]);
+        path.cubicTo(controlLocation[0],controlLocation[1],controlLocation2[0],controlLocation2[1],endLocation[0],endLocation[1]);
+        PathMeasure pathMeasure = new PathMeasure(path,false);//是计算控件下一次要移动到的位置坐标
+
+        //使用属性动画
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,pathMeasure.getLength());
+        valueAnimator.setDuration(3*1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+
+                float value = (float) animation.getAnimatedValue();
+
+                float[] nextLocation = new float[2];
+                pathMeasure.getPosTan(value,nextLocation,null);
+                imageView.setTranslationX(nextLocation[0]);//让控件移动到下一个X，Y坐标处
+                imageView.setTranslationY(nextLocation[1]);
+
+                float percent = value/pathMeasure.getLength();
+                imageView.setAlpha(1-percent);
+                imageView.setScaleX(2*percent);
+                imageView.setScaleY(2*percent);
+            }
+        });
+
+        valueAnimator.start();
+
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //销毁接口
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
+
 
 }
