@@ -1,5 +1,6 @@
 package com.example.shoppingmallsix.fragment.shoppingcar;
 
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +14,15 @@ import com.example.shoppingmallsix.R;
 import java.util.List;
 
 public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.ResultBean> {
+
+    private IItemChildClick iItemChildClick;
+
     public ShoppingCarAdapter(List<GetShortcartProductsBean.ResultBean> datalist) {
         setDataList(datalist);
+    }
+
+    public void setItemListener(IItemChildClick iItemChildClick) {
+        this.iItemChildClick = iItemChildClick;
     }
 
     @Override
@@ -39,6 +47,15 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         textView.setText(itemData.getProductName());
         price.setText("￥" + itemData.getProductPrice().toString());
         num.setText(itemData.getProductNum());
+
+        shoppingTrolleyCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (iItemChildClick != null){
+                    iItemChildClick.onItemChildClick(position,view);
+                }
+            }
+        });
     }
 
     @Override
@@ -46,5 +63,7 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         return 0;
     }
 
-
+    public interface IItemChildClick{
+        void onItemChildClick(int position,View view);
+    }
 }

@@ -22,6 +22,7 @@ import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
+import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;
@@ -140,6 +141,24 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 }
             }
         });
+
+        shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
+            @Override
+            public void onItemChildClick(int position, View view) {
+                GetShortcartProductsBean.ResultBean resultBean = shoppingCarAdapter.dataList.get(position);
+                switch (view.getId()){
+                    case R.id.shoppingTrolley_CheckBox:
+                        if (resultBean.isProductSelected()){
+                            resultBean.setProductSelected(false);
+                        }else {
+                            resultBean.setProductSelected(true);
+                        }
+                        resultBeans.add(resultBean);
+                        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -161,6 +180,13 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }
 
             shoppingCarAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean) {
+        if (updateProductSelectedBean.getCode().equals("200")){
+
         }
     }
 
