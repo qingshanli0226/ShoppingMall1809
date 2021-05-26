@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CartFragment extends BaseFragment<CarPresenter> implements CacheShopManager.ICartChange,ICarView {
+public class CartFragment extends BaseFragment<CarPresenter> implements CacheShopManager.ICartChange, ICarView {
 
 
     private ToolBar toolbar;
@@ -70,6 +70,7 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
         mPresenter = new CarPresenter(this);
 
     }
+
     private List<CartBean.ResultBean> carts;
 
     @Override
@@ -77,11 +78,11 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
         checkcompile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     checkcompile.setText("完成");
                     cartLLpayment.setVisibility(View.GONE);
                     cartLLfinish.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     checkcompile.setText("编辑");
                     cartLLpayment.setVisibility(View.VISIBLE);
                     cartLLfinish.setVisibility(View.GONE);
@@ -117,17 +118,17 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
                         itemImageView = (ImageView) view;
                         if (resultBean.isProductSelected()) {
                             result.setProductSelected(false);
-                        } else{
+                        } else {
                             result.setProductSelected(true);
                         }
-                        mPresenter.updateProductSelect(position,result);
+                        mPresenter.updateProductSelect(position, result);
 
 
                         break;
                     case R.id.shopCartSub:
                         //判断库存
 
-                        if(Integer.parseInt(resultBean.getProductNum()) >0) {
+                        if (Integer.parseInt(resultBean.getProductNum()) > 0) {
                             result.setProductId(resultBean.getProductId());
                             result.setProductNum(Integer.parseInt(resultBean.getProductNum()) - 1 + "");
                             result.setProductPrice(resultBean.getProductPrice());
@@ -137,10 +138,10 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
                     case R.id.shopCartAdd:
                         //判断库存
                         result.setProductId(resultBean.getProductId());
-                        result.setProductNum(Integer.parseInt(resultBean.getProductNum())+1+"");
+                        result.setProductNum(Integer.parseInt(resultBean.getProductNum()) + 1 + "");
 
                         result.setProductPrice(resultBean.getProductPrice());
-                        mPresenter.upDateNum(position,result);
+                        mPresenter.upDateNum(position, result);
 
 
                         break;
@@ -153,9 +154,9 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
         checkpayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isAll){
+                if (isAll) {
                     isAll = false;
-                } else{
+                } else {
                     isAll = true;
                 }
                 mPresenter.selectAll(isAll);
@@ -168,36 +169,37 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
 
             }
         });
-    }
+
 
         //删除
-        cartdelete.setOnClickListener(new View.OnClickListener() {
+        cartdelete.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 int position = -1;
                 ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
                 for (int i = 0; i < cartAdapter.getData().size(); i++) {
-                    if(cartAdapter.getData().get(i).isProductSelected()) {
+                    if (cartAdapter.getData().get(i).isProductSelected()) {
                         resultBeans.add(cartAdapter.getData().get(i));
                         position = i;
                     }
                 }
 
-                if(resultBeans.size() == 1){
+                if (resultBeans.size() == 1) {
                     //选中一个
-                    mPresenter.removeOneProduct(position,resultBeans.get(0));
-                } else if(resultBeans.size() > 1){
+                    mPresenter.removeOneProduct(position, resultBeans.get(0));
+                } else if (resultBeans.size() > 1) {
                     //选中多个
                     mPresenter.removeMany(resultBeans);
-                } else{
+                } else {
                     Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
-
-
-
+    }
+    
 
 
     @Override
@@ -226,8 +228,9 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
     public void onShowCart(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         cartAdapter.updata(carts);
-        LogUtil.d("zyb"+carts);
+        LogUtil.d("zyb" + carts);
     }
+
     //单选
     @Override
     public void onCheck(int position, boolean isCheck) {
@@ -236,45 +239,48 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
         //反选
         int count = 0;
         for (CartBean.ResultBean datum : cartAdapter.getData()) {
-            if(datum.isProductSelected()){
+            if (datum.isProductSelected()) {
                 count++;
             }
         }
-        if(count == cartAdapter.getData().size()){
+        if (count == cartAdapter.getData().size()) {
             checkpayment.setChecked(true);
             isAll = true;
-        } else{
+        } else {
             checkpayment.setChecked(false);
             isAll = false;
         }
 
     }
+
     //全选
     @Override
     public void onCheckAll(boolean isChcekAll) {
         this.isAll = isChcekAll;
         cartAdapter.notifyDataSetChanged();
     }
+
     //增加数量
     @Override
     public void onNum(int position) {
         cartAdapter.notifyItemChanged(position);
 
     }
+
     //删除一个
     @Override
     public void removeProduct(int position) {
         cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
-        LogUtil.d("positona"+position);
+        LogUtil.d("positona" + position);
     }
 
     @Override
     public void removeMany(List<CartBean.ResultBean> resultBeans) {
-        for (int i = cartAdapter.getData().size()-1; i >= 0; i--) {
+        for (int i = cartAdapter.getData().size() - 1; i >= 0; i--) {
             CartBean.ResultBean bean = cartAdapter.getData().get(i);
-            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
-                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
+            for (int i1 = resultBeans.size() - 1; i1 >= 0; i1--) {
+                if (bean.getProductId().equals(resultBeans.get(i1).getProductId())) {
                     cartAdapter.getData().remove(i);
                     resultBeans.remove(i1);
                 }
@@ -287,10 +293,10 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
     //添加数据
     @Override
     public void onAddCart(int position) {
-        if(position > cartAdapter.getData().size()){
-            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position-1));
-            cartAdapter.notifyItemChanged(position-1);
-        } else{
+        if (position > cartAdapter.getData().size()) {
+            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position - 1));
+            cartAdapter.notifyItemChanged(position - 1);
+        } else {
             cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
             cartAdapter.notifyItemChanged(position);
         }
