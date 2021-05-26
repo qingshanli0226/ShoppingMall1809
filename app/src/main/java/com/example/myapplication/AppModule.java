@@ -19,7 +19,7 @@ public class AppModule implements CaCheArote.IAppInterface {
 
     @Override
     public void openMainActivity(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, MsgMainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.putExtras(bundle);
         if (context instanceof Activity){
             context.startActivity(intent);
