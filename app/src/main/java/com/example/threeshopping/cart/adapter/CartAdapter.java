@@ -42,7 +42,10 @@ public class CartAdapter extends BaseRvAdapter<CartBean.ResultBean> {
 
         ShopmallGlide.getInstance().with(holder.itemView.getContext()).load(itemView.getUrl()).into(shopCartImg);
         shopCartTitle.setText(itemView.getProductName());
-        shopCartPrice.setText(itemView.getProductPrice()+"");
+        float v = Float.parseFloat(itemView.getProductPrice() + "");
+        int i = Integer.parseInt(itemView.getProductNum());
+
+        shopCartPrice.setText(v*i+"");
         shopCartNum.setText(itemView.getProductNum());
 
         shopCartCheck.setOnClickListener(new View.OnClickListener() {

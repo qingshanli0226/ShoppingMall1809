@@ -27,6 +27,7 @@ import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
 import com.example.threeshopping.personal.PersonalFragment;
 import com.example.threeshopping.type.TypeFragment;
+import com.example.threeshopping.welcome.WelActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
         //添加fragment
         fragments.add(new HomeFragment());
         fragments.add(new TypeFragment());
@@ -106,7 +108,6 @@ public class MainActivity extends BaseActivity {
         });
 
         loginBean = UserManager.getInstance().getLoginBean();
-
 
     }
 

@@ -6,8 +6,12 @@ import com.example.net.bean.CartBean;
 import java.util.List;
 
 public interface ICarView extends IBaseView {
-    void onShowCart(List<CartBean.ResultBean> carts);
     void onCheck(int position,boolean isCheck);
     void onCheckAll(boolean isChcekAll);
     void onNum(int position);
+    //删除一个
+    void removeProduct(int position);
+
+    //删错多个
+    void removeMany(List<CartBean.ResultBean> resultBeans);
 }

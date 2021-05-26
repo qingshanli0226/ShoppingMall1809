@@ -39,6 +39,7 @@ public class WelActivity extends BaseActivity<HomePresenter>  implements IHomeVi
 
     @Override
     public void onHome(HomeBean homeBean) {
+
         CacheHomeManager.getInstance().setHomeBean(homeBean);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
         finish();
