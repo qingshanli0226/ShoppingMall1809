@@ -1,154 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/particulars"
     tools:context=".particulars.ParticularsActivity">
-
-    <com.example.framework.view.ToolBar
-        android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:app_back_color_toob="@color/white"
-        app:app_text="商品详情"
-        app:app_text_color="@color/black"
-        app:app_left_src="@drawable/top_bar_left_back"
-        app:app_left_isshow="true"
-        app:app_right_src="@drawable/menu"
-        app:app_right_isshow="true"
-        />
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:scrollbars="none"
-        >
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <ImageView
-                android:id="@+id/pariculars_img"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_300"
-                ></ImageView>
-            <TextView
-                android:id="@+id/pariculars_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="预售截至10月15日，预售期为限量礼盒版，包括特质木盒x1、画集x1、邮票x1、书签x1、贴纸x1、信封x1、礼盒特"
-                ></TextView>
-            <TextView
-                android:id="@+id/pariculars_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:textSize="@dimen/dm_dp_25"
-                ></TextView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_1"
-                android:background="@color/brodergray"
-                ></View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_30"
-                android:text="由尚硅谷发货"
-                android:gravity="center"
-                ></TextView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_10"
-                android:background="@color/brodergray"
-                ></View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_30"
-                android:text="请选择款式"
-                android:gravity="center"
-                ></TextView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_10"
-                android:background="@color/brodergray"
-                ></View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_40"
-                android:text="提示:普通商品享有质量问题7天退货,签收后3个工作日内可换货。其他特殊商品(如手办)的售后以页面说明为准"
-                ></TextView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_10"
-                android:background="@color/brodergray"
-                ></View>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_30"
-                android:text="图文详情"
-                android:gravity="center"
-                ></TextView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_1"
-                android:background="@color/red"
-                ></View>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dm_dp_500"
-                ></ImageView>
-        </LinearLayout>
-    </ScrollView>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
+        <com.example.framework.view.ToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:app_back_color_toob="@color/white"
+            app:app_text="商品详情"
+            app:app_text_color="@color/black"
+            app:app_left_src="@drawable/top_bar_left_back"
+            app:app_left_isshow="true"
+            app:app_right_src="@drawable/menu"
+            app:app_right_isshow="true"
+            />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:scrollbars="none"
             >
-            <ImageView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/icon_callserver_unpressed"
-                ></ImageView>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/good_uncollected"
-                ></ImageView>
-            <ImageView
-                android:id="@+id/shopcar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/icon_good_detail_cart"
-                ></ImageView>
-        </LinearLayout>
-        <Button
-            android:id="@+id/particulars_join"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:id="@+id/pariculars_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_300"
+                    ></ImageView>
+                <TextView
+                    android:id="@+id/pariculars_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="预售截至10月15日，预售期为限量礼盒版，包括特质木盒x1、画集x1、邮票x1、书签x1、贴纸x1、信封x1、礼盒特"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/pariculars_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/dm_dp_25"
+                    ></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_1"
+                    android:background="@color/brodergray"
+                    ></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_30"
+                    android:text="由尚硅谷发货"
+                    android:gravity="center"
+                    ></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_10"
+                    android:background="@color/brodergray"
+                    ></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_30"
+                    android:text="请选择款式"
+                    android:gravity="center"
+                    ></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_10"
+                    android:background="@color/brodergray"
+                    ></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_40"
+                    android:text="提示:普通商品享有质量问题7天退货,签收后3个工作日内可换货。其他特殊商品(如手办)的售后以页面说明为准"
+                    ></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_10"
+                    android:background="@color/brodergray"
+                    ></View>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_30"
+                    android:text="图文详情"
+                    android:gravity="center"
+                    ></TextView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_1"
+                    android:background="@color/red"
+                    ></View>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dm_dp_500"
+                    ></ImageView>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="加入购物车"
-            android:background="@color/red"
-            android:textColor="@color/white"
-            ></Button>
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/icon_callserver_unpressed"
+                    ></ImageView>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/good_uncollected"
+                    ></ImageView>
+                <ImageView
+                    android:id="@+id/shopcar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/icon_good_detail_cart"
+                    ></ImageView>
+            </LinearLayout>
+            <Button
+                android:id="@+id/particulars_join"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="加入购物车"
+                android:background="@color/red"
+                android:textColor="@color/white"
+                ></Button>
+        </LinearLayout>
+
+
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>
