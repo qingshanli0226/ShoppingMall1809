@@ -16,6 +16,16 @@ android {
     }
 
     buildTypes {
+
+        debug{
+            buildConfigField("boolean","LOG_DEBUG","false");
+            buildConfigField("boolean","LOG_ERROR","false");
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -46,7 +56,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.jakewharton:disklrucache:2.0.2'
     api 'com.blankj:utilcodex:1.26.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'//recyclerview
+    implementation 'com.android.support:recyclerview-v7:30.0.0'//recyclerview
     implementation project(path: ':commened')
     implementation project(path: ':net')
     api 'org.greenrobot:greendao:3.3.0' // 2.add library

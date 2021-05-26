@@ -12,13 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.business.ConfirmServerPayResultBean;
+import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.user.LoginBean;
+import com.example.pay.demo.PayDemoActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;
 
@@ -42,6 +44,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private RecyclerView recyclerView;
     private int index;
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
+    private List<GetOrderInfoBean.ResultBean> order = new ArrayList<>();
+    private List<ConfirmServerPayResultBean> confirmServerPayResultBeans = new ArrayList<>();
     private ShoppingCarAdapter shoppingCarAdapter;
     private ToolBar toolbar;
     private RecyclerView shopcarRv;
@@ -67,6 +71,14 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             public void onClick(View view) {
                 httpPresenter.getSelectAllProduct(shopCheck.isChecked());
                 shopCheck.setChecked(!shopCheck.isChecked());
+            }
+        });
+
+        buyBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), PayDemoActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -149,6 +161,25 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
             shoppingCarAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
+        if (getOrderInfoBean.getCode().equals("200")){
+            GetOrderInfoBean.ResultBean result = getOrderInfoBean.getResult();
+            order.add(result);
+        }
+
+    }
+
+    @Override
+    public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
+
+        if (confirmServerPayResultBean.getCode().equals("200")){
+
+            confirmServerPayResultBeans.add(confirmServerPayResultBean);
+        }
+
     }
 
     @Override

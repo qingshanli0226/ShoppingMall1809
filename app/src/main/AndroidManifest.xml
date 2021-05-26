@@ -17,6 +17,7 @@
         <activity android:name=".sendgoodsactivity.SendGoodsActivity" />
         <activity android:name=".obligationactivity.ObligationActivity" />
         <activity android:name=".messageactivity.MessageActivity" />
+        <activity android:name="com.example.pay.demo.PayDemoActivity" />
         <activity
             android:name=".welcomeactivity.WelcomeActivity"
             android:screenOrientation="portrait"
