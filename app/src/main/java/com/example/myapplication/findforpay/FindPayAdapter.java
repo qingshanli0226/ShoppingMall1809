@@ -25,7 +25,7 @@ public class FindPayAdapter extends BaseRecyclerViewAdapter<FindForPayBean.Resul
         String format = simpleDateFormat.format(date);
         textView.setText(format+"");
         TextView name = holder.getView(R.id.name);
-        
+
     }
 
     @Override
