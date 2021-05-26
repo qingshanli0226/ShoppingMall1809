@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_marginLeft="@dimen/dm_dp_20"
-        android:layout_toRightOf="@id/shopCartPrice"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/dm_dp_90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

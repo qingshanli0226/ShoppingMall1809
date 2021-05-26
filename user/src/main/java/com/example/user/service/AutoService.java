@@ -51,7 +51,6 @@ public class AutoService extends Service {
                         if (loginBean.getResult()!= null){
                             if(loginBean.getCode().equals("200")){
                                 Toast.makeText(AutoService.this, "自动登录成功", Toast.LENGTH_SHORT).show();
-
                                 SpUtil.putString(AutoService.this,loginBean.getResult().getToken());
                                 UserManager.getInstance().setLoginBean(loginBean);
 

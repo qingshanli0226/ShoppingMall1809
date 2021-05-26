@@ -49,8 +49,6 @@ public class CacheShopManager {
         UserManager.getInstance().registerLogin(new UserManager.IUserChange() {
             @Override
             public void onUserChange(LoginBean loginBean) {
-                LogUtil.d("登录");
-
                 getShowCart();
             }
         });
@@ -58,10 +56,33 @@ public class CacheShopManager {
 
     //购物车数据源
     private List<CartBean.ResultBean> carts;
+    private List<CartBean.ResultBean> cartsPrice;
     private List<ICartChange> cartChanges = new LinkedList<>();
 
+    public List<CartBean.ResultBean> getCartsPrice() {
+        return cartsPrice;
+    }
 
-    //购物车数据源
+
+
+    public synchronized void registerCart(ICartChange iCartChange) {
+        cartChanges.add(iCartChange);
+    }
+
+    public synchronized void unRegisterCart(ICartChange iCartChange) {
+        cartChanges.remove(iCartChange);
+    }
+
+    public List<CartBean.ResultBean> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<CartBean.ResultBean> carts) {
+        this.carts = carts;
+        this.cartsPrice = carts;
+
+    }
+
     public synchronized void getShowCart() {
         RetrofitManager.getHttpApiService()
                 .showCart()
@@ -76,7 +97,8 @@ public class CacheShopManager {
                     @Override
                     public void onNext(@NonNull CartBean cartBean) {
                         if (cartBean.getCode().equals("200")) {
-                            notifyCarts(cartBean.getResult());
+                            setCarts(cartBean.getResult());
+                            notifyCar(carts);
                         }
                     }
 
@@ -92,187 +114,12 @@ public class CacheShopManager {
                 });
     }
 
-    //单选
-    public synchronized void updateProductSelect(int position,CartBean.ResultBean resultBean) {
-        String s = new Gson().toJson(resultBean);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-
-        RequestBody requestBody = RequestBody.create(parse, s);
-        RetrofitManager.getHttpApiService()
-                .updateProductSelect(requestBody)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SelectBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull SelectBean selectBean) {
-                        if (selectBean.getCode().equals("200")) {
-                            //更改数据
-                            carts.get(position).setProductSelected(resultBean.isProductSelected());
-                            notifyCheck(position,resultBean.isProductSelected());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    //全选
-    public synchronized void selectAll(boolean isAll) {
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("selected", isAll);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-
-        RequestBody requestBody = RequestBody.create(parse, jsonObject.toString());
-        RetrofitManager.getHttpApiService()
-                .selectAll(requestBody)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SelectBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull SelectBean selectBean) {
-                        if (selectBean.getCode().equals("200")) {
-                            //全选更改数据源
-                            setChackAll(isAll);
-                            notifyCheckAll(isAll);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    //检查数量
-    public synchronized void inventory(int position,CartBean.ResultBean resultBean) {
-        String s = new Gson().toJson(resultBean);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        RequestBody requestBody = RequestBody.create(parse, s);
-        RetrofitManager.getHttpApiService()
-                .inventory(Integer.parseInt(resultBean.getProductId()),Integer.parseInt(resultBean.getProductNum()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SelectBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull SelectBean selectBean) {
-                        if (selectBean.getCode().equals("200")) {
-                            //修改库存
-                            carts.get(position).setProductNum(resultBean.getProductNum());
-                            //服务端
-                            upDateNum(position,resultBean);
-                        }
-                        Log.i("zyb", "onNext: 成功" + selectBean);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    //更新服务数量
-    public void upDateNum(int position,CartBean.ResultBean resultBean) {
-        String s = new Gson().toJson(resultBean);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        RequestBody requestBody = RequestBody.create(parse, s);
-        RetrofitManager.getHttpApiService()
-                .updateProductNum(requestBody)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SelectBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull SelectBean selectBean) {
-                        if (selectBean.getCode().equals("200")) {
-                            //通知更改数量
-                            notifyNum(position);
-                        } else{
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-
-    public synchronized void registerCart(ICartChange iCartChange) {
-        cartChanges.add(iCartChange);
-    }
-
-    public synchronized void unRegisterCart(ICartChange iCartChange) {
-        cartChanges.remove(iCartChange);
-    }
-
-    public List<CartBean.ResultBean> getCarts() {
-        return carts;
-    }
-    //发送信息
-    public synchronized void notifyCarts(List<CartBean.ResultBean> carts) {
-        this.carts = carts;
+    public synchronized void notifyCar(List<CartBean.ResultBean> carts){
         for (ICartChange cartChange : cartChanges) {
             cartChange.onShowCart(carts);
         }
+    }
 
-    }
-    //单选通知
-    public synchronized void notifyCheck(int position,boolean isCheck){
-        for (ICartChange cartChange : cartChanges) {
-            cartChange.onCheck(position,isCheck);
-        }
-    }
     //添加数据
     public synchronized void addData(CartBean.ResultBean resultBean){
         int count = 0;
@@ -290,17 +137,22 @@ public class CacheShopManager {
         }
         if(count == carts.size()){
             carts.add(resultBean);
+            cartsPrice.add(resultBean);
             position = carts.size();
         }
         //通知
-//        notifyAdd(position);
-        notifyCarts(carts);
+        notifyAdd(position);
     }
     //添加通知
     public synchronized void notifyAdd(int position){
         for (ICartChange cartChange : cartChanges) {
             cartChange.onAddCart(position);
         }
+    }
+
+    //单选改变
+    public synchronized void setCheck(int position,boolean isCheck){
+        carts.get(position).setProductSelected(isCheck);
     }
     
     //全选
@@ -309,27 +161,16 @@ public class CacheShopManager {
             cart.setProductSelected(isCheckAll);
         }
     }
-    
-    //全选通知
-    public synchronized void notifyCheckAll(boolean isCheckAll){
-        for (ICartChange cartChange : cartChanges) {
-            cartChange.onCheckAll(isCheckAll);
-        }
+    //修改库存
+    public synchronized void setNum(int position,String num){
+        carts.get(position).setProductNum(num);
     }
-    //通知更改数量
-    public synchronized void notifyNum(int position){
-        for (ICartChange cartChange : cartChanges) {
-            cartChange.onNum(position);
-        }
-    }
+
 
 
     public interface ICartChange {
         void onShowCart(List<CartBean.ResultBean> carts);
         void onAddCart(int position);
-        void onCheck(int position,boolean isCheck);
-        void onCheckAll(boolean isChcekAll);
-        void onNum(int position);
     }
 
 

@@ -208,6 +208,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             resultBean.setProductNum(productBean.getProductNum()+"");
             resultBean.setProductPrice(productBean.getProductPrice());
             resultBean.setUrl(productBean.getUrl());
+            resultBean.setProductName(productBean.getProductName());
             CacheShopManager.getInstance().addData(resultBean);
         }
     }
