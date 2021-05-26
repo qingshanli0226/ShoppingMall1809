@@ -28,14 +28,12 @@ public class AutoService extends Service implements BusinessUserManager.IUserLog
                     @Override
                     public void onAutoData(LogBean logBean) {
                         if (logBean.getCode().equals("200")) {
-                           // BusinessUserManager.getInstance().Register(this);
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
-
+                            BusinessUserManager.getInstance().setLogList(logBean.getResult());
                         } else {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
@@ -53,9 +51,7 @@ public class AutoService extends Service implements BusinessUserManager.IUserLog
 
                     }
                 }).getAutoData(TokenSPUtility.getString(this));
-
             }
-
             return super.onStartCommand(intent, flags, startId);
         }
 

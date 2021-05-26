@@ -128,8 +128,9 @@ public interface BusinessApi {
     Observable<LogBean> postAutoLogin(@Field("token") String token);
 
     //更新用户绑定的电话
+    @FormUrlEncoded
     @POST("updatePhone")
-    Observable<UpdatePhoneBean> setUpdatePhone(@Body RequestBody requestBody);
+    Observable<UpdatePhoneBean> setUpdatePhone(@Field("phone") String phone);
 
     //更新现金的接口
     @POST("updateMoney")
@@ -144,8 +145,9 @@ public interface BusinessApi {
     Observable<UpdateEmailBean> setUpdateEmail(@Body RequestBody requestBody);
 
     //更新地址的接口
+    @FormUrlEncoded
     @POST("updateAddress")
-    Observable<UpdateAddress> setUpdateAddress(@Body RequestBody requestBody);
+    Observable<UpdateAddress> setUpdateAddress(@Field("address") String address);
 
 
     //请求添加产品的接口

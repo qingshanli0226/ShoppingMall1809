@@ -73,11 +73,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         productNum = prod_num;
         url = "http://www.baidu.com";
 
-
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
         map.put("productId",productId);
-        map2.put("productId",productId);
         map.put("url",url);
         map.put("productPrice",price);
         map.put("productName",name);
@@ -90,7 +88,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     detailsWeb.loadUrl(url);
                     return super.shouldOverrideUrlLoading(view, url);
-
                 }
             });
         }
@@ -171,9 +168,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             popupWindow.dismiss();
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
-                            map2.put("productNum", String.valueOf(prod_num));
-                            httpPresenter.postAddOneProduct(map);
-//                            httpPresenter.checkOneProductInventory(map2);
+                            httpPresenter.checkOneProductInventory(productId, String.valueOf(prod_num));
                         }
                     });
 
@@ -260,7 +255,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
 
-             CacheManger.getInstance().requestShortProductData();
+            CacheManger.getInstance().requestShortProductData();
 
 
 
@@ -272,6 +267,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     public void checkOneProductInventory(RegBean checkInventoryBean) {
         if (checkInventoryBean.getCode().equals("200")){
             Toast.makeText(this, "1231232", Toast.LENGTH_SHORT).show();
+            String result = checkInventoryBean.getResult();
+            if (!result.equals("0")){
+                httpPresenter.postAddOneProduct(map);
+            }
         }
     }
 

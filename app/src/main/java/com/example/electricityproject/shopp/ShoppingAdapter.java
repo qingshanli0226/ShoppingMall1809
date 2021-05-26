@@ -26,7 +26,6 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, ShortcartProductBean.ResultBean itemData) {
-
         TextView shop_name = baseViewHolder.getView(R.id.shop_name);
         TextView shop_money = baseViewHolder.getView(R.id.text_money);
         TextView shop_product_num = baseViewHolder.getView(R.id.product_num);
@@ -34,15 +33,11 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         ImageView add = baseViewHolder.getView(R.id.image_add);
         ImageView sub = baseViewHolder.getView(R.id.image_sub);
 
-
         shop_name.setText(itemData.getProductName() + "");
         shop_money.setText("￥" + itemData.getProductPrice());
         shop_product_num.setText(itemData.getProductNum() + "");
-
         selectImg.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
-
         Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
-
         ImageView img = baseViewHolder.getView(R.id.is_select);
 
         if (itemData.isAll()) {
@@ -74,8 +69,6 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
                }
            }
        });
-
-
 }
 
 

@@ -85,7 +85,6 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
     public void postSelectAllProductData(boolean isSelect) {
 
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("selected", isSelect);
@@ -200,7 +199,6 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     }
                 });
-
     }
 
 }

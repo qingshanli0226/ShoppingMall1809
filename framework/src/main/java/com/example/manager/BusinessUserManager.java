@@ -27,6 +27,43 @@ public class BusinessUserManager {
     }
     
     private LogBean isLog;
+    private boolean isBindAddress;
+    private boolean isBindTel;
+    private LogBean.ResultBean logList;
+
+    public LogBean.ResultBean getLogList() {
+        return logList;
+    }
+
+    public void setLogList(LogBean.ResultBean logList) {
+        this.logList = logList;
+    }
+
+    public boolean isBindAddress() {
+        if (logList.getAddress()!=null && logList!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public void setBindAddress(String address) {
+        if (logList!=null){
+            logList.setAddress(address);
+        }
+    }
+
+    public boolean isBindTel() {
+        if (!logList.getPhone().equals("") && logList!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public void setBindTel(String bindTel) {
+        if (logList!=null){
+            logList.setAddress(bindTel);
+        }
+    }
 
     public LogBean getIsLog() {
         return isLog;
