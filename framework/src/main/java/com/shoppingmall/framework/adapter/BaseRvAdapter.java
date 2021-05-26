@@ -22,7 +22,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,7 +45,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-
             @Override
             public boolean onLongClick(View v) {
                 if (iRecyclerItemClickListener!=null) {
@@ -64,6 +62,8 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
     public void setRecyclerItemClickListener(IRecyclerItemClickListener listener) {
         iRecyclerItemClickListener = listener;
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -102,4 +102,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
         void onItemClick(int position);
         void onItemLongClick(int position);
     }
+
+
 }

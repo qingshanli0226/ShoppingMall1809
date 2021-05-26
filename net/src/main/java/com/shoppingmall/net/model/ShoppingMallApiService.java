@@ -1,6 +1,7 @@
 package com.shoppingmall.net.model;
 
 import com.shoppingmall.net.bean.AddProductBean;
+import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.BuyBean;
 import com.shoppingmall.net.bean.GoodsBean;
@@ -61,8 +62,20 @@ public interface ShoppingMallApiService {
     @POST("addOneProduct")
     Observable<AddProductBean> addProduct(@Body RequestBody body);
 
+    //获取购物车数据
     //http://49.233.0.68:8080/getShortcartProducts
     @GET("getShortcartProducts")
     Observable<ShopCarBean> getShopCarProduct();
 
+    //检查服务端一个产品库存情况的接口
+    //http://49.233.0.68:8080/checkOneProductInventory
+    @POST("checkOneProductInventory")
+    @FormUrlEncoded
+    Observable<CheckProductBean> checkProduct
+    (@Field("productId")String productId,@Field("productNum")String productNum);
+
+    //更新服务端购物车产品的数量的接口
+    //http://49.233.0.68:8080/updateProductNum
+    @POST("updateProductNum")
+    Observable<ProductBean> updateProduct(@Body RequestBody body);
 }

@@ -148,72 +148,76 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("addDetail",1).navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
-                popupWindow = new PopupWindow();
-                View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
-                popupWindow.setContentView(inflate);
-                popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
-                popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.showAtLocation(inflate,Gravity.BOTTOM,0,0);
-
-                popRemoveNum = (TextView) inflate.findViewById(R.id.popRemoveNum);
-                popNum = (TextView) inflate.findViewById(R.id.popNum);
-                int trim = Integer.parseInt(popNum.getText().toString().trim());
-                popAddNum = (TextView) inflate.findViewById(R.id.popAddNum);
-                no = (Button) inflate.findViewById(R.id.no);
-                yes = (Button) inflate.findViewById(R.id.yes);
-                int text = Integer.parseInt(popNum.getText().toString().trim());
-                GoodsNum = text;
-                no.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
-                    }
-                });
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //数据库存储
-                        List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
-                        for (GoodsTable goodsTable : goodsTables) {
-                            if ( goodsTable.getGoodName()==productGoodBean.getName()){
-
-                            }else {
-                                daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
-                                        productGoodBean.getName(),productGoodBean.getCover_price(),
-                                        trim));
-                                Toast.makeText(DetailActivity.this, "加入了一条数据", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        //服务端存储
-                        httpPresenter.addProduct("1",
-                                productGoodBean.getNumber(),
-                                productGoodBean.getName(),
-                                productGoodBean.getFigure(),
-                                productGoodBean.getCover_price());
-                    }
-                });
-                popRemoveNum.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (GoodsNum<=1){
-                            Toast.makeText(DetailActivity.this, "数量已经为零，不能在减少了", Toast.LENGTH_SHORT).show();
-                        }else {
-                            GoodsNum--;
-                        }
-                        popNum.setText(""+GoodsNum);
-                    }
-                });
-                popAddNum.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        GoodsNum++;
-                        popNum.setText(""+GoodsNum);
-                    }
-                });
+                setPopupWindow();
             }
         });
 
+    }
+
+    public void setPopupWindow(){
+        popupWindow = new PopupWindow();
+        View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
+        popupWindow.setContentView(inflate);
+        popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(inflate,Gravity.BOTTOM,0,0);
+
+        popRemoveNum = (TextView) inflate.findViewById(R.id.popRemoveNum);
+        popNum = (TextView) inflate.findViewById(R.id.popNum);
+        int trim = Integer.parseInt(popNum.getText().toString().trim());
+        popAddNum = (TextView) inflate.findViewById(R.id.popAddNum);
+        no = (Button) inflate.findViewById(R.id.no);
+        yes = (Button) inflate.findViewById(R.id.yes);
+        int text = Integer.parseInt(popNum.getText().toString().trim());
+        GoodsNum = text;
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //数据库存储
+                List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
+                for (GoodsTable goodsTable : goodsTables) {
+                    if ( goodsTable.getGoodName()==productGoodBean.getName()){
+
+                    }else {
+                        daoSession.insert(new GoodsTable(null,productGoodBean.getFigure(),
+                                productGoodBean.getName(),productGoodBean.getCover_price(),
+                                trim));
+                        Toast.makeText(DetailActivity.this, "加入了一条数据", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                //服务端存储
+                httpPresenter.addProduct(null,
+                        productGoodBean.getNumber(),
+                        productGoodBean.getName(),
+                        productGoodBean.getFigure(),
+                        productGoodBean.getCover_price());
+            }
+        });
+        popRemoveNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (GoodsNum<=1){
+                    Toast.makeText(DetailActivity.this, "数量已经为零，不能在减少了", Toast.LENGTH_SHORT).show();
+                }else {
+                    GoodsNum--;
+                }
+                popNum.setText(""+GoodsNum);
+            }
+        });
+        popAddNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoodsNum++;
+                popNum.setText(""+GoodsNum);
+            }
+        });
     }
 
     @Override
@@ -222,7 +226,12 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             if (popupWindow!=null){
                 popupWindow.dismiss();
             }
-            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+addProductBean.getResult(), Toast.LENGTH_SHORT).show();
+        }else {
+            if (popupWindow!=null){
+                popupWindow.dismiss();
+            }
+            Toast.makeText(this, ""+addProductBean.getResult(), Toast.LENGTH_SHORT).show();
         }
     }
 
