@@ -231,7 +231,6 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
             Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
 
             ShoppingCarManager.getInstance().insertResultBean(upDate());
-            ShoppingCarManager.getInstance().refreshData();
 
             path();
         } else {
@@ -333,7 +332,6 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
             Toast.makeText(this, "商品数量修改成功", Toast.LENGTH_SHORT).show();
 
             ShoppingCarManager.getInstance().upDataResultBean(upDate());
-            ShoppingCarManager.getInstance().refreshData();
 
             path();
         }

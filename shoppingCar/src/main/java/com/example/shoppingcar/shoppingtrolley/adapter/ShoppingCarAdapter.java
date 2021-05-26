@@ -22,6 +22,9 @@ public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.Result
         super(datalist);
     }
 
+    public ShoppingCarAdapter() {
+    }
+
     @Override
     protected int getLayoutId(int viewType) {
         return R.layout.item_shoppingtrolley;

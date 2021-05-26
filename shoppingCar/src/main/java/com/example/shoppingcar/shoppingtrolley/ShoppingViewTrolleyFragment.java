@@ -9,13 +9,11 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.LogUtils;
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.DeleteBean;
-import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
@@ -24,7 +22,7 @@ import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged , ShoppingCarManager.IShoppingCar {
+public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShoppingCarManager.IShoppingCar {
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
@@ -32,13 +30,16 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     private TextView accout;
     private ShoppingCarAdapter shoppingCarAdapter;
     private boolean isCheck = false;
-    private List<ShoppingTrolleyBean.ResultBean> result;
+    private List<ShoppingTrolleyBean.ResultBean> result = new ArrayList<>();
     private CheckBox checkBox;
     private int position;
     private boolean isRequest = true;
     private boolean isDelete = false;
     private RelativeLayout shopDeletLayout;
     private TextView delete;
+    private int count = 0;
+    private RelativeLayout vain;
+    private boolean isOneNotifyDataSetChanged = true;
 
     @Override
     protected int getLayoutId() {
@@ -48,15 +49,52 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     protected void initData() {
 
-        //注册登录的回调和购物车添加的回调
-        ShopeUserManager.getInstance().register(this::onLoginChange);
+        List<ShoppingTrolleyBean.ResultBean> resultManager = ShoppingCarManager.getInstance().getResult();
+        if (resultManager != null) {
+            result = resultManager;
+        }
+
+        if (result.size() <= 0) {
+            vain.setVisibility(View.VISIBLE);
+        } else {
+            vain.setVisibility(View.GONE);
+        }
+
+        //购物车添加的回调
         ShoppingCarManager.getInstance().register(this::onShoppingCar);
 
-        LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
-        if (loginBean != null) {
-            httpPresenter.getShoppingData();
-            isRequest = false;
-        }
+
+        shoppingCarAdapter = new ShoppingCarAdapter(this.result);
+        shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
+
+        shoppingCarAdapter.setShopItemListener((position, view) -> {
+            int id = view.getId();
+            this.position = position;
+            if (id == R.id.shoppingTrolley_add) {
+                //添加是否去判断库存是否够
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
+                isRequest = false;
+                httpPresenter.getCheckOneProductInventory(resultBean.getProductId(), resultBean.getProductNum());
+            } else if (id == R.id.shoppingTrolley_sub) {
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
+                count = Integer.parseInt(resultBean.getProductNum());
+                if (count <= 1) {
+                    Toast.makeText(getActivity(), "已经是最小了", Toast.LENGTH_SHORT).show();
+                } else {
+                    isRequest = false;
+                    --count;
+                    httpPresenter.getUpDateProductNum(resultBean.getProductId(), count + "", resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
+                }
+
+            } else if (id == R.id.shoppingTrolley_check) {
+                checkBox = (CheckBox) view;
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
+                httpPresenter.getUpDateSelected(resultBean.getProductId(), checkBox.isSelected(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice().toString());
+                isRequest = false;
+            }
+        });
+
 
         //全选
         checkAll.setOnClickListener(view -> {
@@ -67,11 +105,11 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         //删除
         delete.setOnClickListener(view -> {
             isRequest = false;
-            List<DeleteBean> delete  = new ArrayList<>();
-            for (int i = result.size() - 1; i >= 0; i--) {
-                ShoppingTrolleyBean.ResultBean resultBean = result.get(i);
-                if (resultBean.isProductSelected()){
-                    DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(),resultBean.getUrl());
+            List<DeleteBean> delete = new ArrayList<>();
+            for (int i = this.result.size() - 1; i >= 0; i--) {
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
+                if (resultBean.isProductSelected()) {
+                    DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl());
                     delete.add(deleteBean);
                 }
             }
@@ -81,11 +119,11 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
         //确定
         accout.setOnClickListener(view -> {
-            List<DeleteBean> enough  = new ArrayList<>();
-            for (int i = result.size() - 1; i >= 0; i--) {
-                ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
-                if (resultBean.isProductSelected()){
-                    DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(),resultBean.getUrl());
+            List<DeleteBean> enough = new ArrayList<>();
+            for (int i = this.result.size() - 1; i >= 0; i--) {
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
+                if (resultBean.isProductSelected()) {
+                    DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl());
                     enough.add(deleteBean);
                 }
             }
@@ -108,56 +146,29 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         accout = (TextView) findViewById(R.id.accout);
         shopDeletLayout = (RelativeLayout) findViewById(R.id.shop_delet_layout);
         delete = (TextView) findViewById(R.id.delete);
+        vain = (RelativeLayout) findViewById(R.id.vain);
     }
 
-    @Override
-    public void onShopping(ShoppingTrolleyBean shoppingTrolleyBean) {
-        isRequest = true;
-        if (shoppingTrolleyBean.getCode().equals("200")) {
-            result = shoppingTrolleyBean.getResult();
-
-            //初始化购物车管理类
-            ShoppingCarManager.getInstance().initResult(result);
-
-            shoppingCarAdapter = new ShoppingCarAdapter(result);
-            shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
-            shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
-
-            shoppingCarAdapter.setShopItemListener((position, view) -> {
-                int id = view.getId();
-                if (id == R.id.shoppingTrolley_add) {
-                } else if (id == R.id.shoppingTrolley_sub) {
-                } else if (id == R.id.shoppingTrolley_check) {
-                    checkBox = (CheckBox) view;
-                    this.position = position;
-                    ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
-                    httpPresenter.getUpDateSelected(resultBean.getProductId(),checkBox.isSelected(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice().toString());
-                    isRequest = false;
-                }
-            });
-
-        }
-    }
 
     //修改选择
     @Override
     public void onUpDateSelected(RegisterBean registerBean) {
         isRequest = true;
         if (registerBean.getCode().equals("200")) {
+            isOneNotifyDataSetChanged =true;
             ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
             resultBean.setProductSelected(checkBox.isChecked());
             ShoppingCarManager.getInstance().upDataResultBean(resultBean);
-            result.get(position).setProductSelected(checkBox.isChecked());
-            shoppingCarAdapter.notifyItemChanged(position);
+
         }
-//        LogUtils.json(result.get(position));
     }
 
     //全部选择
     @Override
     public void onSelectAllProduct(RegisterBean registerBean) {
         isRequest = true;
-        if (registerBean.getCode().equals("200")){
+        if (registerBean.getCode().equals("200")) {
+            isOneNotifyDataSetChanged =false;
             if (!isCheck) {
                 checkAll.setBackgroundResource(R.drawable.checkbox_selected);
                 ShoppingCarManager.getInstance().checkAll();
@@ -167,12 +178,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 ShoppingCarManager.getInstance().unCheckAll();
                 isCheck = false;
             }
-            for (ShoppingTrolleyBean.ResultBean resultBean : result) {
-               if (resultBean.isProductSelected()!=isCheck){
-                   resultBean.setProductSelected(isCheck);
-               }
-            }
-            shoppingCarAdapter.notifyDataSetChanged();
         }
     }
 
@@ -180,19 +185,17 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     public void onRemoveManyProduct(RegisterBean registerBean) {
         isRequest = true;
-        if (registerBean.getCode().equals("200")){
-            List<ShoppingTrolleyBean.ResultBean> delete  = new ArrayList<>();
-            //删除本地
+        if (registerBean.getCode().equals("200")) {
+            isOneNotifyDataSetChanged =false;
+            List<ShoppingTrolleyBean.ResultBean> delete = new ArrayList<>();
+            //获取要删除的
             for (int i = result.size() - 1; i >= 0; i--) {
-                if (result.get(i).isProductSelected()){
+                if (result.get(i).isProductSelected()) {
                     delete.add(result.get(i));
-                    result.remove(i);
                 }
             }
             //删除管理类
-            ShoppingCarManager.getInstance().deletePartResult(false,delete);
-            //刷新数据库
-            shoppingCarAdapter.notifyDataSetChanged();
+            ShoppingCarManager.getInstance().deletePartResult(false, delete);
             //删除成功后隐藏
             toolbar.setRightTitle(getResources().getString(R.string.compile));
             shopDeletLayout.setVisibility(View.GONE);
@@ -208,6 +211,36 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             Toast.makeText(getActivity(), "判断库存", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    //加减库存
+    @Override
+    public void onUpDateProductNum(RegisterBean registerBean) {
+        if (registerBean.getCode().equals("200")) {
+            isOneNotifyDataSetChanged =true;
+            ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
+            resultBean.setProductNum(count + "");
+            ShoppingCarManager.getInstance().upDataResultBean(resultBean);
+        }
+    }
+
+    //判断单个是否有库存
+    @Override
+    public void onCheckOneProductInventory(RegisterBean registerBean) {
+        isRequest = true;
+        if (registerBean.getCode().equals("200")) {
+            LogUtils.d("判断是否有库存");
+            ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
+            if (Integer.parseInt(registerBean.getResult()) >0) {
+                isOneNotifyDataSetChanged =true;
+                LogUtils.d("有库存");
+                count = Integer.parseInt(resultBean.getProductNum());
+                count++;
+                httpPresenter.getUpDateProductNum(resultBean.getProductId(), count + "", resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
+            } else {
+                Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
@@ -241,28 +274,27 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     }
 
 
-    //登录额时候请求数据
-    @Override
-    public void onLoginChange(LoginBean loginBean) {
-        if (loginBean != null) {
-            httpPresenter.getShoppingData();
-            isRequest = false;
-        }
-    }
-
     @Override
     public void destroy() {
         super.destroy();
-        //取消注册登录的回调和购物车添加的回调
-        ShopeUserManager.getInstance().unregister(this::onLoginChange);
+        //购物车添加的回调
         ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
     }
 
     //改变数据源后的通知
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
-       this.result = result;
-       shoppingCarAdapter.notifyDataSetChanged();
+        if (result.size() <= 0) {
+            vain.setVisibility(View.VISIBLE);
+        } else {
+            vain.setVisibility(View.GONE);
+            this.result = result;
+            if (isOneNotifyDataSetChanged) {
+                shoppingCarAdapter.notifyItemChanged(position);
+            }else {
+                shoppingCarAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
 

@@ -88,10 +88,11 @@
             android:text="0"
             android:id="@+id/label"
             android:gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
             android:visibility="gone"
             android:textColor="@color/white"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp_85"
+            android:layout_marginRight="@dimen/dp_90"
             android:background="@drawable/text_background"></TextView>
 
     </RelativeLayout>

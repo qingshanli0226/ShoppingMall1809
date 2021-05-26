@@ -29,55 +29,6 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
         attachView(iShopping);
     }
 
-    public void getShoppingData() {
-        RetrofitCreator.getShopApiService()
-                .getShoppingTrolley()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (iView != null) {
-                            iView.showLoading();
-                        }
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        if (iView != null) {
-                            iView.hideLoading();
-                        }
-                    }
-                })
-                .subscribe(new Observer<ShoppingTrolleyBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
-                        LogUtils.json(shoppingTrolleyBean);
-                        if (iView != null) {
-                            iView.onShopping(shoppingTrolleyBean);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        if (iView != null) {
-                            iView.Error(e.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
 
     public void getUpDateSelected(String productId, boolean productSelected, String productName, String url, String productPrice) {
 
@@ -285,6 +236,119 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
                         if (iView != null) {
                             iView.onCheckInventory(shoppingTrolleyBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    public void getUpDateProductNum(String productId, String productNum, String productName, String url, String productPrice){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
+
+        RetrofitCreator.getShopApiService()
+                .getUpDateProductNum(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView != null) {
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView != null) {
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RegisterBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegisterBean registerBean) {
+                        if (iView != null) {
+                            iView.onUpDateProductNum(registerBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    public void getCheckOneProductInventory(String productId,String productNum){
+
+        RetrofitCreator.getShopApiService()
+                .getCheckOneProductInventory(productId,productNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView != null) {
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView != null) {
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RegisterBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RegisterBean registerBean) {
+                        if (iView != null) {
+                            iView.onCheckOneProductInventory(registerBean);
                         }
                     }
 

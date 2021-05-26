@@ -1,9 +1,10 @@
 package com.example.shoppingmall1809.app;
 
 import android.app.Application;
-import android.os.UserManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.framework.manager.ShoppingCarManager;
+import com.example.framework.view.ShopmallCrashHandler;
 import com.example.framework.manager.ShopManager;
 import com.example.net.NetModule;
 
@@ -19,5 +20,8 @@ public class App extends Application {
 
         ShopManager.getInstance().init(this);
 
+//        ShopmallCrashHandler.getInstance().init(this);
+
+        ShoppingCarManager.getInstance().initLogin();
     }
 }

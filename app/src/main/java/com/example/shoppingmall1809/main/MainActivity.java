@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         initView();
 
         ShoppingCarManager.getInstance().register(this::onShoppingCar);
+        List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
+        if (result != null) {
+            showLabel(result);
+        }
 
         HomeFragment homeFragment = new HomeFragment();
         TypeFragment typeFragment = new TypeFragment();
@@ -179,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
         LogUtils.e(result.size());
+        showLabel(result);
+    }
+
+    private void showLabel(List<ShoppingTrolleyBean.ResultBean> result) {
         if (result.size()<=0){
             label.setVisibility(View.GONE);
         }else {
