@@ -29,6 +29,8 @@ import com.example.user.user.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
+import retrofit2.http.HEAD;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -155,15 +157,9 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             getActivity().finish();
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
-<<<<<<< HEAD
+
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
-=======
-
-            //购物车数据加载
-            CacheShopManager.getInstance().showCart();
->>>>>>> zzy
-
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
 
         } else {

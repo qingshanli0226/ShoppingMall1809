@@ -35,6 +35,8 @@ import com.fiannce.sql.UtileSql;
 
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 
 public class ParticularsActivity extends BaseActivity<DetailPresenter> implements IDetailView {
 
@@ -55,14 +57,10 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private TextView popTitle;
     private ImageView popPic;
     View view;
-<<<<<<< HEAD
-    int num = 1;
     private ProductBean productBean;
-
-=======
     int num = 1;//购买数量
     int count = 0;
->>>>>>> zzy
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_particulars;
@@ -150,7 +148,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                         @Override
                         public void onClick(View v) {
                             popupWindow.dismiss();
-<<<<<<< HEAD
+
                             productBean = new ProductBean();
                             productBean.setProductId(id);
                             productBean.setProductName(title);
@@ -159,13 +157,10 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
 
-=======
->>>>>>> zzy
+
                             //数据库
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
-<<<<<<< HEAD
-                            LogUtils.json(sqlBean);
-=======
+
                             for (int i = 0; i <sqlBeans.size() ; i++) {
                                 if (id.equals(sqlBeans.get(i).getProductId())){
                                     SqlBean sqlBean = new SqlBean();
@@ -174,7 +169,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                     sqlBean.setProductNum(num);
                                     sqlBean.setUrl(pic);
                                     sqlBean.setProductPrice(price);
-                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
+//                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
 
                                     ProductBean productBean = new ProductBean();
                                     productBean.setProductId(id);
@@ -198,11 +193,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                 UtileSql.getInstance().getDaoSession().insert(sqlBean);
                                 LogUtils.json(sqlBeans);
                             }
-                            //请求数据
-                            CacheShopManager.getInstance().showCart();
-                            ProductBean inventoryBean = new ProductBean();
-//                            LogUtils.json(productBean);
->>>>>>> zzy
                         }
                     });
 
