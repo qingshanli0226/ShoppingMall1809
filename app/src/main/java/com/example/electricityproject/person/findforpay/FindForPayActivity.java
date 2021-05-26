@@ -3,7 +3,6 @@ package com.example.electricityproject.person.findforpay;
 import android.widget.Toast;
 
 import com.example.common.bean.FindForPayBean;
-import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 
@@ -56,8 +55,4 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
 
     }
 
-    @Override
-    public void onLoginChange(LogBean isLog) {
-
-    }
 }

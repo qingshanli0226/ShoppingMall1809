@@ -2,20 +2,29 @@ package com.example.manager;
 
 import com.example.common.bean.ShortcartProductBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BusinessBuyCarManger {
 
     private iShopBeanChange shopBeanChange;
     private static BusinessBuyCarManger businessBuyCarManger;
     private ShortcartProductBean shortcartProductBean;
+    private List<iShopBeanChange> list = new ArrayList<>();
 
 
     public BusinessBuyCarManger() {
 
     }
 
-    public void setShopBeanChange(iShopBeanChange shopBeanChange) {
-        this.shopBeanChange = shopBeanChange;
+    public void Register(iShopBeanChange shopBeanChange){
+        list.add(shopBeanChange);
     }
+
+    public void UnRegister(iShopBeanChange shopBeanChange){
+        list.remove(shopBeanChange);
+    }
+
 
     public static BusinessBuyCarManger getInstance() {
         if (businessBuyCarManger==null){
@@ -23,6 +32,7 @@ public class BusinessBuyCarManger {
         }
         return businessBuyCarManger;
     }
+
 
     private boolean isChange;
 
@@ -41,11 +51,16 @@ public class BusinessBuyCarManger {
 
     public void setShortcartProductBean(ShortcartProductBean shortcartProductBean) {
         this.shortcartProductBean = shortcartProductBean;
+        if (shortcartProductBean!=null){
+            for (iShopBeanChange iShopBeanChange : list) {
+                iShopBeanChange.OnShopBeanChange(shortcartProductBean);
+            }
+        }
     }
 
     public interface iShopBeanChange{
 
-        void OnShopBeanChange();
+        void OnShopBeanChange(ShortcartProductBean shortcartProductBean);
 
     }
 }

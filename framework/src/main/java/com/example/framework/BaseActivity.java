@@ -5,12 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, BusinessUserManager.IUserLoginChanged,ToolBar.IToolbarListener{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener{
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -31,7 +30,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initPresenter();
         initData();
 
-        BusinessUserManager.getInstance().Register(this);
 
         toolBar.setToolbarListener(this);
     }
@@ -48,7 +46,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         destroy();
-        BusinessUserManager.getInstance().UnRegister(this);
     }
 
     public void destroy(){

@@ -25,9 +25,6 @@ import com.example.framework.BaseFragment;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.view.ToolBar;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +57,29 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     protected void initData() {
 
-        EventBus.getDefault().register(this);
 
+        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
+            @Override
+            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
+                if (shortcartProductBean!=null){
+//                    result.clear();
+                    Log.i("ccccccc", "OnShopBeanChange: "+"fdfdfdfdfd");
+
+                    result = shortcartProductBean.getResult();
+
+                    shoppingDi.setVisibility(View.VISIBLE);
+                    buyCarRv.setVisibility(View.VISIBLE);
+                    String s = result.toString();
+                    Log.i("ccccccc", "OnShopBeanChange: "+s);
+                    shoppingAdapter.updateData(shortcartProductBean.getResult());
+                    buyCarRv.setAdapter(shoppingAdapter);
+                    shoppingAdapter.notifyDataSetChanged();
+                }else {
+                    Log.i("ccccccc", "OnShopBeanChange: "+"sasadsdsdsds");
+
+                }
+            }
+        });
 
 
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
@@ -185,31 +203,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     }
 
 
-    @Subscribe
-    public void getEvent(String eve) {
-        if (eve.equals("login_success")) {
-            httpPresenter.getShortProductsData();
-        }
-    }
-
-    @Subscribe
-    public void getBuyCarData(String eve) {
-        if (eve.equals("request_buyCar")) {
-
-            ShortcartProductBean shortProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-
-            if (shortProductBean != null) {
-
-                result = shortProductBean.getResult();
-                shoppingAdapter.updateData(shortProductBean.getResult());
-                buyCarRv.setAdapter(shoppingAdapter);
-                shoppingAdapter.notifyDataSetChanged();
-
-            } else {
-                Toast.makeText(getContext(), "欢迎页面没有加载数据", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     protected void initPresenter() {
@@ -229,6 +222,15 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingDi = (LinearLayout) findViewById(R.id.shopping_di);
 
         shoppingAdapter = new ShoppingAdapter();
+
+        ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+        result = shortcartProductBean.getResult();
+
+        shoppingAdapter.updateData(shortcartProductBean.getResult());
+        buyCarRv.setAdapter(shoppingAdapter);
+        shoppingAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override
@@ -259,27 +261,19 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
 
-        if (shortcartProductBean.getCode().equals("200")) {
-            result = shortcartProductBean.getResult();
-
-            loadingPage.showSuccessView();
-            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
-            shoppingDi.setVisibility(View.VISIBLE);
-            buyCarRv.setVisibility(View.VISIBLE);
-            shoppingAdapter.updateData(shortcartProductBean.getResult());
-            buyCarRv.setAdapter(shoppingAdapter);
-            shoppingAdapter.notifyDataSetChanged();
-
-        } else {
-            Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
-            httpPresenter.getShortProductsData();
-            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
-
-            shoppingAdapter.updateData(shortcartProductBean.getResult());
-            buyCarRv.setAdapter(shoppingAdapter);
-            shoppingAdapter.notifyDataSetChanged();
-
-        }
+//        if (shortcartProductBean.getCode().equals("200")) {
+//
+//
+//        } else {
+//            Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
+//            httpPresenter.getShortProductsData();
+//            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+//
+//            shoppingAdapter.updateData(shortcartProductBean.getResult());
+//            buyCarRv.setAdapter(shoppingAdapter);
+//            shoppingAdapter.notifyDataSetChanged();
+//
+//        }
     }
 
     //修改产品返回Bean

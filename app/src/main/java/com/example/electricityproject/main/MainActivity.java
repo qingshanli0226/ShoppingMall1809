@@ -91,7 +91,6 @@ public class MainActivity extends BaseActivity {
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
                         } else {
                             Toast.makeText(MainActivity.this, "用户已经登录", Toast.LENGTH_SHORT).show();
-                            EventBus.getDefault().post("request_buyCar");
                         }
                         break;
 
@@ -116,6 +115,7 @@ public class MainActivity extends BaseActivity {
         group = (RadioGroup) findViewById(R.id.group);
         btnHome = (RadioButton) findViewById(R.id.btn_home);
         btnBuycar = (RadioButton) findViewById(R.id.btn_buycar);
+
     }
 
     @Override
@@ -151,15 +151,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
-    @Override
-    public void onLoginChange(LogBean isLog) {
-        if (isLog != null) {
-            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public void showLoading() {

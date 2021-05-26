@@ -1,6 +1,5 @@
 package com.example.electricityproject.shopp;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,11 +71,6 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
            public void onClick(View v) {
                if (childItemClickListener != null) {
                    childItemClickListener.OnChildItemListener(v, position);
-                   if (childItemClickListener != null) {
-                       Log.i("zx", "onClick: 123");
-                       childItemClickListener.OnChildItemListener(v, position);
-                   }
-
                }
            }
        });

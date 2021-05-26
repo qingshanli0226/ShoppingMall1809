@@ -3,7 +3,6 @@ package com.example.electricityproject.welcome;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.common.bean.LogBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.main.MainActivity;
@@ -20,7 +19,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
     @Override
     protected void initData() {
 
-        httpPresenter.getShortProductsData();
+//        httpPresenter.getShortProductsData();
 
         time = 3;
         Timer timer = new Timer();
@@ -55,12 +54,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
     @Override
     protected int getLayoutId() {
         return R.layout.activity_welcome;
-    }
-
-
-    @Override
-    public void onLoginChange(LogBean isLog) {
-
     }
 
 

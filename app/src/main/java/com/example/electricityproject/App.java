@@ -4,9 +4,9 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.example.common.NetModel;
-import com.example.common.TokenSPUtility;
 import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
+import com.example.manager.CacheManger;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
 
@@ -18,9 +18,12 @@ public class App extends Application {
         FrameModel.init(this);
         UserModel.init();
         MainModel.init();
-        if (TokenSPUtility.getString(this)!=null) {
-            startService(new Intent(this, AutoService.class));
-        }
+
+        CacheManger.getInstance().init(this);
+        CacheManger.getInstance().registerUserManger();
+        CacheManger.getInstance().registerBuyCarManger();
+
+        startService(new Intent(this, AutoService.class));
 
     }
 }

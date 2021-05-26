@@ -1,9 +1,6 @@
 package com.example.user.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
 import com.example.framework.BaseActivity;
 import com.example.user.R;
@@ -98,10 +94,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         return R.layout.activity_register;
     }
 
-    @Override
-    public void onLoginChange(LogBean isLog) {
-
-    }
 
     @Override
     public void onRegisterData(RegBean regBean) {

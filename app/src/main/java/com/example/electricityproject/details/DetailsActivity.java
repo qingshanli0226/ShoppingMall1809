@@ -30,6 +30,7 @@ import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.CacheManger;
 import com.example.view.ToolBar;
 
 import java.util.ArrayList;
@@ -116,7 +117,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.showAsDropDown(toolbar,0,0);
             }
-
             @Override
             public void onRightTvClick() {
 
@@ -126,7 +126,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
                 if (isLog!=null){
                     linLin.setVisibility(View.GONE);
@@ -173,7 +172,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
                             map2.put("productNum", String.valueOf(prod_num));
-
                             httpPresenter.postAddOneProduct(map);
 //                            httpPresenter.checkOneProductInventory(map2);
                         }
@@ -208,6 +206,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
 
+
+
     }
 
 
@@ -236,10 +236,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         return R.layout.activity_details;
     }
 
-    @Override
-    public void onLoginChange(LogBean isLog) {
-
-    }
 
     @Override
     public void showLoading() {
@@ -258,10 +254,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
+
         if (addOneProductBean.getCode().equals("200")){
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+
+             CacheManger.getInstance().requestShortProductData();
+
+
+
         }
 
     }
