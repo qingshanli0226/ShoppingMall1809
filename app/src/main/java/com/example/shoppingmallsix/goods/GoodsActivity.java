@@ -68,6 +68,8 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     private GetShortcartProductsBean.ResultBean resultBean = null;
     private int index;
     private TextView goodsSign;
+    private RelativeLayout rootView;
+    private TextView textView;
 
     @Override
     protected void initPresenter() {
@@ -87,10 +89,16 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         goodsAdapter.notifyDataSetChanged();
         //注册接口
         SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
-        //获取内存数据
-        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
-    }
 
+        LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
+        if (loginBean1 != null){
+            List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
+            if (result.size() != 0) {
+                goodsSign.setVisibility(View.VISIBLE);
+                goodsSign.setText(result.size() + "");
+            }
+        }
+    }
     @Override
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
@@ -98,6 +106,8 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         shopcar = findViewById(R.id.shopcar);
         insertShopcar = findViewById(R.id.insertShopcar);
         goodsSign = (TextView) findViewById(R.id.goodsSign);
+        rootView = findViewById(R.id.rootView);
+        textView = findViewById(R.id.centerTv);
 
 
         goodsAdapter = new GoodsAdapter(list);
@@ -110,74 +120,18 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             public void onClick(View view) {
 
                 LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
-                List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
-                if (loginBean1 != null && result.size() != 0) {
-                    goodsSign.setVisibility(View.VISIBLE);
-                    goodsSign.setText(result.size() + "");
+                if (loginBean1 != null){
+                    List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
+                    if (result.size() != 0) {
+                        goodsSign.setVisibility(View.VISIBLE);
+                        goodsSign.setText(result.size() + "");
+                    }
                     initPopupWindow();
                 } else {
                     Toast.makeText(GoodsActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(GoodsActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
-
-                PopupWindow popupWindow = new PopupWindow();
-                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setFocusable(true);
-                popupWindow.setOutsideTouchable(true);
-
-                View inflate = LayoutInflater.from(GoodsActivity.this).inflate(R.layout.item_particulars_pop, null);
-
-                ImageView popImg = inflate.findViewById(R.id.pop_img);
-                TextView popText = inflate.findViewById(R.id.pop_text);
-                TextView popPrice = inflate.findViewById(R.id.pop_price);
-                ImageView popSub = inflate.findViewById(R.id.pop_sub);
-                ImageView popAdd = inflate.findViewById(R.id.pop_add);
-                TextView popNum = inflate.findViewById(R.id.pop_num);
-                TextView popCancel = inflate.findViewById(R.id.pop_cancel);
-                TextView popConfirm = inflate.findViewById(R.id.pop_confirm);
-                popupWindow.setContentView(inflate);
-
-                popNum.setText(num+"");
-                Glide.with(GoodsActivity.this)
-                        .load(Constants.BASE_URl_IMAGE+figure)
-                        .into(popImg);
-                popText.setText(name);
-                popPrice.setText(price);
-
-                popAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        num++;
-                        popNum.setText(num+"");
-                    }
-                });
-                popSub.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        num--;
-                        if (num<=0){
-                            num=1;
-                        }
-                        popNum.setText(num+"");
-                    }
-                });
-                popCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
-                    }
-                });
-                popConfirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        httpPresenter.checkInventory(id,num + "");
-                        popupWindow.dismiss();
-                        showBeisaierAnim();
-                    }
-                });
-                popupWindow.showAsDropDown(toolbar,0,900,Gravity.BOTTOM);
             }
         });
     }
@@ -228,7 +182,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         popCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow.dismiss();
+                popupWindow.dismiss(); 
             }
         });
         popConfirm.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +190,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             public void onClick(View view) {
                 httpPresenter.checkInventory(id, num + "");
                 popupWindow.dismiss();
+                showBeisaierAnim();
             }
         });
         popupWindow.showAsDropDown(toolbar, 0, 900, Gravity.BOTTOM);
@@ -346,6 +301,8 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             if (resultBean != null) {
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
                 if (result != null && result.size() != 0) {
+                    //获取内存数据
+                    resultBeans.addAll(result);
                     goodsSign.setVisibility(View.VISIBLE);
                     goodsSign.setText(result.size() + "");
                 }
