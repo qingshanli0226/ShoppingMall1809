@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRecyclerViewAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.myapplication.R;
 import com.example.net.bean.HomeBean;
 
@@ -16,7 +17,7 @@ public class RecommentRecAdapter extends BaseRecyclerViewAdapter<HomeBean.Result
 
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.ChannelInfoBean itemData) {
-        Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getImage())
+        ShopmallGlide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getImage())
                 .into((ImageView) holder.getView(R.id.recommendItemImage));
         TextView nameTv = holder.getView(R.id.recommendItemTv);
         nameTv.setText(itemData.getChannel_name());

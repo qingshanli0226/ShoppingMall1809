@@ -16,6 +16,7 @@ public class AppModule implements CaCheArote.IAppInterface {
         CaCheArote.getInstance().registerIAppInterface(appModule);
     }
 
+
     @Override
     public void openMainActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, MainActivity.class);

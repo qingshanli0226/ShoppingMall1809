@@ -79,7 +79,7 @@ public class ShopmallGlide  {
             cacheFileDir.mkdir();
         }
         try {
-            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1*1024*1024);
+            diskLruCache = DiskLruCache.open(cacheFileDir,1,1,1024*1024*1024);
         } catch (IOException e) {
             e.printStackTrace();
         }

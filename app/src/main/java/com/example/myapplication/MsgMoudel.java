@@ -11,8 +11,13 @@ import com.example.myapplication.msg.MsgMainActivity;
 public class MsgMoudel implements CaCheArote.IMsgInterface {
     public static void init() {
         MsgMoudel msgMoudel = new MsgMoudel();
+<<<<<<< HEAD
         CaCheArote.getInstance().registerIMsgInterface(msgMoudel);
+=======
+        CaCheArote.getInstance().registerImsgInterface(msgMoudel);
+>>>>>>> zyh
     }
+
 
     @Override
     public void openMsgActivity(Context context, Bundle bundle) {
@@ -24,8 +29,20 @@ public class MsgMoudel implements CaCheArote.IMsgInterface {
             context.startActivity(intent);
         }else {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+<<<<<<< HEAD
                 context.startActivity(intent);
         }
     }
 
+=======
+            context.startActivity(intent);
+
+        }
+    }
+
+
+    public void onEvent(String event) {
+
+    }
+>>>>>>> zyh
 }
