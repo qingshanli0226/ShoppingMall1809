@@ -71,13 +71,7 @@ public interface IHttpApiService {
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
-
-
-    @FormUrlEncoded
-    @POST(Constants.CHECKONEPRODUCTINVENTORY)
-    Observable<SelectBean> inventory(@Field("name")String name, @Field("password")String password);
-
-
+    
     //选中一个\
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);

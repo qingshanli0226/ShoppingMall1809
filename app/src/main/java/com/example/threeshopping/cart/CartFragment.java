@@ -125,23 +125,25 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
                         break;
                     case R.id.shopCartSub:
                         //判断库存
-                        if(Integer.parseInt(resultBean.getProductNum()) >0){
+
+                        if(Integer.parseInt(resultBean.getProductNum()) >0) {
                             result.setProductId(resultBean.getProductId());
-                            result.setProductNum(Integer.parseInt(resultBean.getProductNum())-1+"");
+                            result.setProductNum(Integer.parseInt(resultBean.getProductNum()) - 1 + "");
                             result.setProductPrice(resultBean.getProductPrice());
-                            mPresenter.upDateNum(position,result);
-                            return;
+                            mPresenter.upDateNum(position, result);
                         }
                         break;
                     case R.id.shopCartAdd:
                         //判断库存
                         result.setProductId(resultBean.getProductId());
                         result.setProductNum(Integer.parseInt(resultBean.getProductNum())+1+"");
+
                         result.setProductPrice(resultBean.getProductPrice());
                         mPresenter.upDateNum(position,result);
 
 
                         break;
+
                 }
                 cartAdapter.notifyDataSetChanged();
             }
@@ -165,12 +167,9 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
 
             }
         });
-
-
-
-
-
     }
+
+
 
 
 

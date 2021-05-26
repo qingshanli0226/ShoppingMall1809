@@ -16,6 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
+import com.example.common.Constants;
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
@@ -114,8 +116,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
 
         particularsJoin.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 if (loginBean != null) {
@@ -149,27 +149,28 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                         public void onClick(View v) {
                             popupWindow.dismiss();
 
-                            productBean = new ProductBean();
-                            productBean.setProductId(id);
-                            productBean.setProductName(title);
-                            productBean.setProductNum(num);
-                            productBean.setUrl(pic);
-                            productBean.setProductPrice(price);
-                            mPresenter.addProduct(productBean);
+                            CartBean.ResultBean result = new CartBean.ResultBean();
+                            result.setProductId(id);
+                            result.setProductNum(""+num);
+                            mPresenter.inventory(result);
+
+
 
                             //数据库
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
+                            LogUtil.i(sqlBeans.toString());
 
                             for (int i = 0; i <sqlBeans.size() ; i++) {
                                 if (id.equals(sqlBeans.get(i).getProductId())){
+                                    Long autoincrementid = sqlBeans.get(i).getId();
                                     SqlBean sqlBean = new SqlBean();
-                                    sqlBean.setProductId(id);
+                                    sqlBean.setId(autoincrementid);
+                                    sqlBean.setProductId(ParticularsActivity.this.id);
                                     sqlBean.setProductName(title);
                                     sqlBean.setProductNum(num);
                                     sqlBean.setUrl(pic);
                                     sqlBean.setProductPrice(price);
-//                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
-                                    LogUtils.json("zzy"+sqlBeans);
+                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
                                 }else {
                                     count++;
                                 }
@@ -182,8 +183,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                 sqlBean.setUrl(pic);
                                 sqlBean.setProductPrice(price);
                                 UtileSql.getInstance().getDaoSession().insert(sqlBean);
-                                LogUtils.json(sqlBeans);
                             }
+                            LogUtils.json(sqlBeans);
                         }
                     });
 
@@ -198,6 +199,9 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 //                    CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
                     Intent intent = new Intent(ParticularsActivity.this, UserActivity.class);
                     startActivityForResult(intent,101);
+//                    Bundle bundle1 = new Bundle();
+//                    bundle1.putString("name","Particulars");
+//                    CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle1).startActivityForResult();
                 }
             }
         });
@@ -235,8 +239,16 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     }
 
     @Override
-    public void onInventory(ProductBean inventoryBean) {
-//        LogUtils.json(inventoryBean);
+    public void onInventory(SelectBean selectBean) {
+        if (selectBean.getCode().equals("200")){
+            productBean = new ProductBean();
+            productBean.setProductId(id);
+            productBean.setProductName(title);
+            productBean.setProductNum(num);
+            productBean.setUrl(pic);
+            productBean.setProductPrice(price);
+            mPresenter.addProduct(productBean);
+        }
     }
 
     @Override

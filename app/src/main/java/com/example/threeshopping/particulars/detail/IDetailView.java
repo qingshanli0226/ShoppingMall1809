@@ -8,6 +8,6 @@ import com.example.net.bean.UpdateProductNumBean;
 
 public interface IDetailView extends IBaseView {
     void onAddCart(SelectBean selectBean);
-    void onInventory(ProductBean inventoryBean);
-//    void onUpdateProductNum(UpdateProductNumBean updateProductNumBean);
+    void onInventory(SelectBean selectBean);
+
 }

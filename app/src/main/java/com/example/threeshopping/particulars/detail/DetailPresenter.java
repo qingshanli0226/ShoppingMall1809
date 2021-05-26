@@ -65,9 +65,6 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
 
   //检查数量
     public void inventory(CartBean.ResultBean resultBean) {
-        String s = new Gson().toJson(resultBean);
-        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
-        RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitManager.getHttpApiService()
                 .inventory(Integer.parseInt(resultBean.getProductId()),Integer.parseInt(resultBean.getProductNum()))
                 .subscribeOn(Schedulers.io())
@@ -80,13 +77,16 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
 
                     @Override
                     public void onNext(@NonNull SelectBean selectBean) {
-                        Log.i("zyb", "onNext: 成功" + selectBean);
+                        if (mView != null){
+                            mView.onInventory(selectBean);
+                        }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("zyb错误", "onError: "+e);
-                        Log.i("zyb", e.getMessage());
+                      if (mView != null){
+                          mView.showError(e.getMessage());
+                      }
                     }
 
                     @Override
