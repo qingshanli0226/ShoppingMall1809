@@ -140,11 +140,11 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
                     @Override
                     public void onClick(View view) {
 
-//                        ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
-//                        if (resultBean!=null){
-//                            popupWindow.dismiss();
-//                            return;
-//                        }
+                        ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
+                        if (resultBean!=null){
+                            popupWindow.dismiss();
+                            return;
+                        }
 
                         addOnrProductPresenter = new AddOnrProductPresenter(ParticularsActivity.this);
 
@@ -161,7 +161,7 @@ public class ParticularsActivity extends BaseActivity implements IAddOneProduct 
 
     @Override
     protected void initPresenter() {
-
+        
     }
 
     @Override

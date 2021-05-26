@@ -145,6 +145,8 @@ public class ToolBar extends RelativeLayout {
     }
 
     public void setRightTitle(String rightTitle) {
-        RightTitle = rightTitle;
+        this.RightTitle = rightTitle;
+        toolbarRightTitle.setText(RightTitle);
+       invalidate();
     }
 }

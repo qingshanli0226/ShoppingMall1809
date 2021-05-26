@@ -181,7 +181,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     @Override
                     public void onNext(@NonNull RegisterBean registerBean) {
                         if (iView != null) {
-                            iView.onUpDateSelected(registerBean);
+                            iView.onSelectAllProduct(registerBean);
                         }
                     }
 
@@ -233,7 +233,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     @Override
                     public void onNext(@NonNull RegisterBean registerBean) {
                         if (iView != null) {
-                            iView.onUpDateSelected(registerBean);
+                            iView.onRemoveManyProduct(registerBean);
                         }
                     }
 
@@ -275,16 +275,16 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                         }
                     }
                 })
-                .subscribe(new Observer<RegisterBean>() {
+                .subscribe(new Observer<ShoppingTrolleyBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull RegisterBean registerBean) {
+                    public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
                         if (iView != null) {
-                            iView.onUpDateSelected(registerBean);
+                            iView.onCheckInventory(shoppingTrolleyBean);
                         }
                     }
 

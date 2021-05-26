@@ -125,7 +125,7 @@ public class ShoppingCarManager {
     //接口回调
     private List<IShoppingCar> list = new ArrayList<>();
 
-    private interface IShoppingCar {
+    public interface IShoppingCar {
         void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result);
     }
 
