@@ -6,6 +6,7 @@ import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
+import com.example.net.bean.business.UpdateProductSelectedBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,5 +83,52 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
 
                    }
                });
+    }
+
+    public void getUpProductSelect(String productId,String productNum,String productName,
+                              String url,String productPrice){
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("productId",productId);
+            jsonObject.put("productNum",productNum);
+            jsonObject.put("productName",productName);
+            jsonObject.put("url",url);
+            jsonObject.put("productPrice",productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getFiannceApiService()
+                .getUpdateProductSelected(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UpdateProductSelectedBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull UpdateProductSelectedBean selectedBean) {
+                        if (iView!=null){
+                            iView.onUpdateProductSelect(selectedBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView!=null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
