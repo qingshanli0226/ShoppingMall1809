@@ -44,6 +44,7 @@ import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.constants.Constants;
 
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.shopcar.ShoppingCarActivity;
 import com.example.user.login.LoginActivity;
 
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     private TextView goodsSign;
     private RelativeLayout rootView;
     private TextView textView;
+    private ImageView imageView;
 
     @Override
     protected void initPresenter() {
@@ -108,7 +110,15 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         goodsSign = (TextView) findViewById(R.id.goodsSign);
         rootView = findViewById(R.id.rootView);
         textView = findViewById(R.id.centerTv);
+        imageView = findViewById(R.id.shopCar);
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoodsActivity.this, ShoppingCarActivity.class);
+                startActivity(intent);
+            }
+        });
 
         goodsAdapter = new GoodsAdapter(list);
         moreRv.setAdapter(goodsAdapter);
@@ -182,7 +192,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         popCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popupWindow.dismiss(); 
+                popupWindow.dismiss();
             }
         });
         popConfirm.setOnClickListener(new View.OnClickListener() {
