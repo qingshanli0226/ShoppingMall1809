@@ -157,7 +157,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             productBean.setProductPrice(price);
                             mPresenter.addProduct(productBean);
 
-
                             //数据库
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
 
@@ -170,14 +169,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                     sqlBean.setUrl(pic);
                                     sqlBean.setProductPrice(price);
 //                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
-
-                                    ProductBean productBean = new ProductBean();
-                                    productBean.setProductId(id);
-                                    productBean.setProductName(title);
-                                    productBean.setProductNum(num);
-                                    productBean.setUrl(pic);
-                                    productBean.setProductPrice(price);
-                                    mPresenter.addProduct(productBean);
                                     LogUtils.json("zzy"+sqlBeans);
                                 }else {
                                     count++;
