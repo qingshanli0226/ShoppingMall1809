@@ -22,8 +22,7 @@ public class CacheManger {
     private static CacheManger cacheManger;
     private Context context;
 
-    List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
-
+    private List<ShortcartProductBean.ResultBean> shortBeanList=new ArrayList<>();
 
     public synchronized static CacheManger getInstance() {
         if (cacheManger==null){
@@ -31,6 +30,29 @@ public class CacheManger {
         }
         return cacheManger;
     }
+
+    public List<ShortcartProductBean.ResultBean> getShortBeanList() {
+        return shortBeanList;
+    }
+
+
+    public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBean) {
+        if (shortBean!=null) {
+            shortBean.clear();
+            shortBeanList.addAll(shortBean);
+        }
+    }
+
+
+    //选中的商品
+    public void setOneSelectBeanList(int position,boolean isSelect) {
+        if (shortBeanList!=null){
+            shortBeanList.get(position).setAll(!isSelect);
+        }
+
+
+    }
+
 
     public void init(Context application){
         context = application;

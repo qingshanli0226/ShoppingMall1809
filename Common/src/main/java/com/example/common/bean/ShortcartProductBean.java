@@ -56,6 +56,15 @@ class ShortcartProductBean {
         private String productPrice;
         private boolean isAll=false;
 
+        public ResultBean(String productId, String productName, String productNum, String url, String productPrice, boolean isAll) {
+            this.productId = productId;
+            this.productName = productName;
+            this.productNum = productNum;
+            this.url = url;
+            this.productPrice = productPrice;
+            this.isAll = isAll;
+        }
+
         @Override
         public String toString() {
             return "ResultBean{" +

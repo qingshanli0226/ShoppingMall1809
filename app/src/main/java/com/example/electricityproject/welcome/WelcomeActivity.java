@@ -8,7 +8,10 @@ import com.example.electricityproject.R;
 import com.example.electricityproject.main.MainActivity;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessBuyCarManger;
+import com.example.manager.CacheManger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -77,6 +80,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         if (shortcartProductBean.getCode().equals("200")) {
             Toast.makeText(this, "欢迎页面加载完成数据", Toast.LENGTH_SHORT).show();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+            List<ShortcartProductBean.ResultBean> list=new ArrayList<>();
+            list.addAll(shortcartProductBean.getResult());
+            CacheManger.getInstance().setShortBeanList(list);
+
         }
     }
 }
