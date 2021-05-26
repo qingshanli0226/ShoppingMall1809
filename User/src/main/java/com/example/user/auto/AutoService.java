@@ -9,7 +9,8 @@ import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.manager.BusinessUserManager;
 
-public class AutoService extends Service {
+public class AutoService extends Service implements BusinessUserManager.IUserLoginChanged{
+
     public AutoService() {
     }
 
@@ -27,6 +28,7 @@ public class AutoService extends Service {
                     @Override
                     public void onAutoData(LogBean logBean) {
                         if (logBean.getCode().equals("200")) {
+                           // BusinessUserManager.getInstance().Register(this);
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
 
@@ -56,4 +58,9 @@ public class AutoService extends Service {
 
             return super.onStartCommand(intent, flags, startId);
         }
+
+    @Override
+    public void onLoginChange(LogBean isLog) {
+
     }
+}

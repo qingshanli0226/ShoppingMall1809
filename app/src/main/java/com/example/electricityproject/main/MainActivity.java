@@ -1,6 +1,7 @@
 package com.example.electricityproject.main;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -115,6 +116,13 @@ public class MainActivity extends BaseActivity {
         group = (RadioGroup) findViewById(R.id.group);
         btnHome = (RadioButton) findViewById(R.id.btn_home);
         btnBuycar = (RadioButton) findViewById(R.id.btn_buycar);
+//        if (BusinessUserManager.getInstance().getIsLog()!=null){
+//            Log.i("zx", "onLoginChange: 登录成功");
+//            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+//        }else {
+//            Log.i("zx", "onLoginChange: 登录失败");
+//            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

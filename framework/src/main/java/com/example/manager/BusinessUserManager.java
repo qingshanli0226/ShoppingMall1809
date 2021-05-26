@@ -44,4 +44,5 @@ public class BusinessUserManager {
     public interface IUserLoginChanged{
         void onLoginChange(LogBean isLog);
     }
+
 }

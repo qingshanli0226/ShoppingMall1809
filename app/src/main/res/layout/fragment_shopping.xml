@@ -41,58 +41,120 @@
         android:id="@+id/buy_car_rv"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
-        android:id="@+id/shopping_di"
+        android:id="@+id/shopping_sta"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
         android:layout_weight="1">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/checkbox_unselected"
-            android:id="@+id/all"></ImageView>
+            <LinearLayout
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/checkbox_unselected"
+                    android:id="@+id/all"></ImageView>
 
-        <TextView
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="全选"
-            android:id="@+id/shopping_selectAll"
-            android:textSize="@dimen/dp_25"
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/dp_10"></TextView>
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="全选"
+                    android:id="@+id/shopping_selectAll"
+                    android:textSize="@dimen/dp_25"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/dp_10"></TextView>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="合计："
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_25"
-            android:layout_marginLeft="@dimen/dp_10"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="合计："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_10"></TextView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="价格"
-            android:textColor="@color/red"
-            android:id="@+id/shopping_money"
-            android:textSize="@dimen/dp_25"
-            android:layout_marginLeft="@dimen/dp_10"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="价格"
+                    android:textColor="@color/red"
+                    android:id="@+id/shopping_money"
+                    android:textSize="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_10"></TextView>
 
-        <Button
-            android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/red"
+                    android:textColor="@color/white"
+                    android:text="去结算"
+                    android:id="@+id/go_zfb"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="@dimen/dp_50"></Button>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/shopping_end"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:background="@color/red"
-            android:textColor="@color/white"
-            android:text="去结算"
-            android:id="@+id/go_zfb"
+            android:layout_weight="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/del_all"
+                android:src="@drawable/checkbox_unselected"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:gravity="center"
+                android:text="全选"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_25"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/en"
             android:layout_gravity="right"
-            android:layout_marginLeft="@dimen/dp_50"></Button>
+
+            android:layout_weight="2">
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/words_del"
+                android:text="删除"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/del_shop"></TextView>
+            <TextView
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/wordsred_collect"
+                android:text="收藏"
+                android:gravity="center"
+                android:textColor="#f47575"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/collect_shop"></TextView>
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

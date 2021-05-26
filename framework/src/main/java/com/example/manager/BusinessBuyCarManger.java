@@ -10,8 +10,8 @@ public class BusinessBuyCarManger {
     private iShopBeanChange shopBeanChange;
     private static BusinessBuyCarManger businessBuyCarManger;
     private ShortcartProductBean shortcartProductBean;
-    private List<iShopBeanChange> list = new ArrayList<>();
 
+    private List<iShopBeanChange> list=new ArrayList<>();
 
     public BusinessBuyCarManger() {
 
