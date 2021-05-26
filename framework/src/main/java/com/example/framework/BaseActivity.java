@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
@@ -32,7 +33,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initData();
 
         ShopManager.getInstance().registerConnectListener(this);
-
+        //注册Activity管理
+        CacheManager.getInstance().addActivityList(this);
     }
 
     protected abstract int getLayoutId();
@@ -51,6 +53,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     public void destroy() {
+        CacheManager.getInstance().removeActivityList(this);
         if (httpPresenter != null) {
             httpPresenter.detachView();
             httpPresenter = null;

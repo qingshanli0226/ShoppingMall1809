@@ -58,6 +58,7 @@
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
     <string name="delete">删除</string>
+    <string name="noShop">购物车还没有数据,去逛逛吧...</string>
 
 
     <string name="app_name">XXX购物车</string>

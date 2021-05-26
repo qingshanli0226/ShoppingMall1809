@@ -6,19 +6,13 @@
     android:orientation="vertical">
 
 
-    <RelativeLayout
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_50"
+        app:wp_CenterTitle="@string/shoppingTrolley"
+        app:wp_RightTitle="@string/compile"></com.example.framework.view.ToolBar>
 
-        <com.example.framework.view.ToolBar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            app:wp_CenterTitle="@string/shoppingTrolley"
-            app:wp_RightTitle="@string/compile"></com.example.framework.view.ToolBar>
-
-
-    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/shoppingTrolley_rv"
@@ -101,6 +95,32 @@
                 android:id="@+id/delete"
                 android:textSize="@dimen/dp_17"></TextView>
         </RelativeLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vain"
+        android:background="@color/white">
+        <com.example.framework.view.ToolBar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            app:wp_CenterTitle="@string/shoppingTrolley"></com.example.framework.view.ToolBar>
+
+
+        <ImageView
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@drawable/atguigu_logo"
+            android:layout_centerInParent="true"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_500"
+            android:text="@string/noShop"></TextView>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -1,13 +1,37 @@
 package com.example.framework.manager;
 
+import android.os.UserManager;
+
 import com.blankj.utilcode.util.LogUtils;
+import com.example.net.RetrofitCreator;
 import com.example.net.model.FindForBean;
+import com.example.net.model.LoginBean;
 import com.example.net.model.ShoppingTrolleyBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCarManager {
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
+public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
+
+
+    //监听登录
+    @Override
+    public void onLoginChange(LoginBean loginBean) {
+        getShoppingData();
+    }
+
+    public void initLogin(){
+        ShopeUserManager.getInstance().register(this::onLoginChange);
+    }
+
     //待付款
     private FindForBean findForPayBean;
     //待发货
@@ -30,6 +54,8 @@ public class ShoppingCarManager {
     }
 
     private IFindForBean iFindForBean;
+
+
     public interface IFindForBean{
         void onFindForBean();
     }
@@ -44,28 +70,36 @@ public class ShoppingCarManager {
     //购物车集合
     private List<ShoppingTrolleyBean.ResultBean> result;
 
+    public List<ShoppingTrolleyBean.ResultBean> getResult() {
+        return result;
+    }
+
     //初始化购物车集合
-    public synchronized void initResult(List<ShoppingTrolleyBean.ResultBean> result) {
+    private synchronized void initResult(List<ShoppingTrolleyBean.ResultBean> result) {
         this.result = result;
+        refreshData();
     }
 
     //添加购物车集合
     public synchronized void insertResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
         result.add(resultBean);
+        refreshData();
     }
 
     //删除购物车集合
     public synchronized void deleteResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
         result.remove(resultBean);
+        refreshData();
     }
 
     //修改购物车集合
     public synchronized void upDataResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
         for (ShoppingTrolleyBean.ResultBean bean : result) {
             if (bean.getProductId().equals(resultBean.getProductId())) {
-                bean = resultBean;
+                bean .setProductNum(resultBean.getProductNum());
             }
         }
+        refreshData();
     }
 
     //查询集合
@@ -83,6 +117,7 @@ public class ShoppingCarManager {
         for (ShoppingTrolleyBean.ResultBean resultBean : result) {
             resultBean.setProductSelected(true);
         }
+        refreshData();
         return true;
     }
 
@@ -91,6 +126,7 @@ public class ShoppingCarManager {
         for (ShoppingTrolleyBean.ResultBean resultBean : result) {
             resultBean.setProductSelected(false);
         }
+        refreshData();
         return true;
     }
 
@@ -104,6 +140,7 @@ public class ShoppingCarManager {
                 }
             }
         }
+        refreshData();
         if (isIrder) {
             iFindForBean.onFindForBean();
         }
@@ -145,4 +182,48 @@ public class ShoppingCarManager {
             iShoppingCar.onShoppingCar(result);
         }
     }
+
+
+
+
+
+    private void getShoppingData() {
+        RetrofitCreator.getShopApiService()
+                .getShoppingTrolley()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                    }
+                })
+                .subscribe(new Observer<ShoppingTrolleyBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ShoppingTrolleyBean shoppingTrolleyBean) {
+                        LogUtils.json(shoppingTrolleyBean);
+                        initResult(shoppingTrolleyBean.getResult());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }
