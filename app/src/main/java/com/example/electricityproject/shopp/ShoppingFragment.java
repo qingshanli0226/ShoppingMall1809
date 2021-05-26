@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.common.SpUtils;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
+import com.example.common.bean.RemoveManyProductBean;
+import com.example.common.bean.RemoveOneProductBean;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
@@ -23,8 +25,10 @@ import com.example.electricityproject.shopp.userinfo.BindUserInfoActivity;
 import com.example.framework.BaseFragment;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.CacheManger;
 import com.example.view.ToolBar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +45,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private TextView shoppingMoney;
     private Button goZfb;
     private Map<String, Boolean> map = new HashMap<>();
-    private boolean isSelect = false;
+    private boolean isSelect =false;
     private boolean isDelAll = false;
     private SelectAllProductBean list;
     private List<ShortcartProductBean.ResultBean> result;
@@ -57,8 +61,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private ImageView delAll;
     private TextView delShop;
     private TextView collectShop;
-
-
+    private int delShopNum;
+    private int delOne;
+    private int selectPosition=-1;
+    private ImageView isSelectImg;
+    private String isAllStr="";
+    private String isOneCheckStr="";
+    private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
     @Override
     protected void initData() {
 
@@ -66,8 +75,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             @Override
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
                 if (shortcartProductBean!=null){
+
                     result = shortcartProductBean.getResult();
                     buyCarRv.setVisibility(View.VISIBLE);
+                    String s = result.toString();
                     shoppingAdapter.updateData(shortcartProductBean.getResult());
                     buyCarRv.setAdapter(shoppingAdapter);
                     shoppingAdapter.notifyDataSetChanged();
@@ -92,6 +103,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isAllStr="all";
                 del();
             }
         });
@@ -99,6 +111,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         delAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isAllStr="all";
                 del();
             }
         });
@@ -110,29 +123,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 num = 0;
                 switch (view.getId()) {
                     case R.id.is_select:
-                        ImageView img = (ImageView) view;
+                        //单选
+                        selectPosition=position;
+                        isSelectImg = (ImageView) view;
                         isShow = result.get(position).isAll();
-                        if (isShow) {
-                            img.setImageResource(R.drawable.checkbox_unselected);
-                            result.get(position).setAll(false);
-                        } else {
-                            img.setImageResource(R.drawable.checkbox_selected);
-                            result.get(position).setAll(true);
-                        }
-                        for (ShortcartProductBean.ResultBean resultBean : result) {
-                            if (resultBean.isAll()) {
-                                num++;
-                            }
-                        }
-                        if (num == result.size()) {
-                            all.setImageResource(R.drawable.checkbox_selected);
-                            delAll.setImageResource(R.drawable.checkbox_selected);
-                        } else {
-                            all.setImageResource(R.drawable.checkbox_unselected);
-                            delAll.setImageResource(R.drawable.checkbox_unselected);
-                        }
-                        shoppingAdapter.notifyDataSetChanged();
-                        count();
+                       
+                        httpPresenter.postSelectAllProductData(isShow);
+                        isOneCheckStr="check";
                         break;
                     //数量加
                     case R.id.image_add:
@@ -184,7 +181,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         delShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                deleteShopmall();
             }
         });
 
@@ -205,6 +202,47 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         });
     }
 
+    //删除
+    private void deleteShopmall() {
+        delShopNum=0;
+        delOne=-1;
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).isAll()){
+                delShopNum++;
+                delOne=i;
+                removeAllShopBean.add(result.get(i));
+            }
+        }
+        if (delShopNum==1){
+            httpPresenter.getRemoveOneShopBean(result.get(delOne).getProductId(),result.get(delOne).getProductName(),result.get(delOne).getProductNum(),result.get(delOne).getUrl(),result.get(delOne).getProductPrice());
+        }
+        if (removeAllShopBean.size()>1){
+            Toast.makeText(getContext(), "大于1", Toast.LENGTH_SHORT).show();
+            httpPresenter.getRemoveManyShopBean(removeAllShopBean);
+        }
+
+    }
+    //删除一个
+    @Override
+    public void removeOneShop(RemoveOneProductBean removeOneProductBean) {
+        if (removeOneProductBean.getCode().equals("200")){
+
+            Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+            result.remove(delOne);
+            CacheManger.getInstance().requestShortProductData();
+        }
+        shoppingAdapter.notifyItemChanged(delOne);
+    }
+    //删除选中大于1个
+    @Override
+    public void removeManyShop(RemoveManyProductBean removeManyProductBean) {
+        if (removeManyProductBean.getCode().equals("200")){
+            Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+            result.remove(removeAllShopBean);
+            CacheManger.getInstance().requestShortProductData();
+        }
+        shoppingAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void initPresenter() {
@@ -231,10 +269,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
         if (shortcartProductBean!=null){
             result = shortcartProductBean.getResult();
+
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
+
+
+
     }
 
     @Override
@@ -306,37 +348,72 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     }
 
 
+
+
     //全选返回的Bean
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
         list = selectAllProductBean;
-        //全选
-        if (!isSelect) {
-            if (list.getCode().equals("200")) {
-                isSelect = true;
-                all.setImageResource(R.drawable.checkbox_selected);
-                delAll.setImageResource(R.drawable.checkbox_selected);
-                for (ShortcartProductBean.ResultBean resultBean : result) {
-                    resultBean.setAll(true);
+
+                if (list.getCode().equals("200")) {
+                    //单选
+                    if (!isOneCheckStr.equals("")) {
+                        if (result.get(selectPosition).isAll()) {
+                            isSelectImg.setImageResource(R.drawable.checkbox_unselected);
+                            result.get(selectPosition).setAll(false);
+                            count();
+                            shoppingAdapter.notifyItemChanged(selectPosition);
+                        } else {
+                            isSelectImg.setImageResource(R.drawable.checkbox_selected);
+                            result.get(selectPosition).setAll(true);
+                            count();
+                            shoppingAdapter.notifyItemChanged(selectPosition);
+                        }
+
+                        //反选
+                        for (ShortcartProductBean.ResultBean resultBean : result) {
+                            if (resultBean.isAll()) {
+                                num++;
+                            }
+                        }
+                        if (num == result.size()) {
+                            all.setImageResource(R.drawable.checkbox_selected);
+                            delAll.setImageResource(R.drawable.checkbox_selected);
+                        } else {
+                            all.setImageResource(R.drawable.checkbox_unselected);
+                            delAll.setImageResource(R.drawable.checkbox_unselected);
+                        }
+                    }
+                    //全选
+                    if (!isAllStr.equals("")) {
+                        if (!isSelect) {
+                            isSelect = true;
+                            all.setImageResource(R.drawable.checkbox_selected);
+                            delAll.setImageResource(R.drawable.checkbox_selected);
+                            for (ShortcartProductBean.ResultBean bean : result) {
+                                bean.setAll(true);
+                            }
+                            count();
+
+                        } else {
+                            isSelect = false;
+                            all.setImageResource(R.drawable.checkbox_unselected);
+                            delAll.setImageResource(R.drawable.checkbox_unselected);
+                            for (ShortcartProductBean.ResultBean bean : result) {
+                                bean.setAll(false);
+                            }
+                            count();
+
+                        }
+                        isAllStr = "";
+                    }
+                    shoppingAdapter.notifyDataSetChanged();
                 }
-                count();
+
             }
-        } else {
-            if (list.getCode().equals("200")) {
-                isSelect = false;
-                all.setImageResource(R.drawable.checkbox_unselected);
-                delAll.setImageResource(R.drawable.checkbox_unselected);
-                for (ShortcartProductBean.ResultBean resultBean : result) {
-                    resultBean.setAll(false);
-                }
-                count();
-            }
-        }
-        shoppingAdapter.notifyDataSetChanged();
-    }
 
     //计算价钱
-    public void count() {
+    public void count () {
         allPrice = 0;
         for (ShortcartProductBean.ResultBean resultBean : result) {
             if (resultBean.isAll()) {
@@ -350,12 +427,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingMoney.setText("￥" + allPrice + "");
     }
 
-    public void del() {
+    public void del () {
         if (isSelect) {
             httpPresenter.postSelectAllProductData(isSelect);
         } else {
             httpPresenter.postSelectAllProductData(isSelect);
         }
     }
+
 
 }

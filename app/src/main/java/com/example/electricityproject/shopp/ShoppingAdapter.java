@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.example.adapter.BaseAdapter;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
+import com.example.glide.ShopGlide;
 
 import static com.example.common.Constants.BASE_URl_IMAGE;
 
@@ -37,7 +38,10 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         shop_money.setText("￥" + itemData.getProductPrice());
         shop_product_num.setText(itemData.getProductNum() + "");
         selectImg.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
-        Glide.with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).placeholder(R.drawable.new_img_loading_1).into((ImageView) baseViewHolder.getView(R.id.shop_image));
+        ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).init((ImageView) baseViewHolder.getView(R.id.shop_image));
+
+        ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).init(baseViewHolder.getView(R.id.shop_image));
+
         ImageView img = baseViewHolder.getView(R.id.is_select);
 
         if (itemData.isAll()) {
