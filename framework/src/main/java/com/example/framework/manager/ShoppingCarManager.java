@@ -63,7 +63,7 @@ public class ShoppingCarManager {
     public synchronized void upDataResultBean(ShoppingTrolleyBean.ResultBean resultBean) {
         for (ShoppingTrolleyBean.ResultBean bean : result) {
             if (bean.getProductId().equals(resultBean.getProductId())) {
-                bean = resultBean;
+                bean.setProductNum(resultBean.getProductNum());
             }
         }
     }

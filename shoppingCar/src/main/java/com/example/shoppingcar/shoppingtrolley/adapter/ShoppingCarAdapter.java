@@ -40,7 +40,8 @@ public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.Result
                 .load(itemData.getUrl())
                 .into(imageView);
         textView.setText(itemData.getProductName());
-        price.setText("￥"+itemData.getProductPrice().toString());
+        float priceNum=Float.parseFloat(itemData.getProductPrice()+"")*Integer.parseInt(itemData.getProductNum());
+        price.setText("￥"+priceNum);
         num.setText(itemData.getProductNum());
 
         CheckBox checkBox = holder.getView(R.id.shoppingTrolley_check);

@@ -2,27 +2,35 @@ package com.example.shoppingmall1809.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopeUserManager;
+import com.example.framework.manager.ShoppingCarManager;
 import com.example.net.model.LoginBean;
+import com.example.net.model.ShoppingTrolleyBean;
+import com.example.shoppingcar.shoppingtrolley.ShoppingViewTrolleyFragment;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.discover.DiscoverFragment;
 import com.example.shoppingmall1809.main.home.HomeFragment;
-import com.example.shoppingcar.shoppingtrolley.ShoppingViewTrolleyFragment;
 import com.example.shoppingmall1809.main.type.TypeFragment;
 import com.example.shoppingmall1809.main.user.UserFragment;
 
+import java.util.List;
+
 @Route(path = "/main/MainActivity")
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ShoppingCarManager.IShoppingCar {
 
     private RadioButton actRadioCart;
     private RadioButton actRadioUser;
@@ -30,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton actRadioType;
     private RadioButton actRadioCommunity;
     private RadioButton actRadioRecord;
+    private LinearLayout actHomeLl;
+    private RadioGroup actRadioGroup;
+    private TextView label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
 
+        ShoppingCarManager.getInstance().register(this::onShoppingCar);
 
         HomeFragment homeFragment = new HomeFragment();
         TypeFragment typeFragment = new TypeFragment();
@@ -153,5 +165,25 @@ public class MainActivity extends AppCompatActivity {
         actRadioHome = (RadioButton) findViewById(R.id.act_radio_home);
         actRadioType = (RadioButton) findViewById(R.id.act_radio_type);
         actRadioCommunity = (RadioButton) findViewById(R.id.act_radio_community);
+        actHomeLl = (LinearLayout) findViewById(R.id.act_home_ll);
+        actRadioGroup = (RadioGroup) findViewById(R.id.act_radio_group);
+        label = (TextView) findViewById(R.id.label);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
+    }
+
+    @Override
+    public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
+        LogUtils.e(result.size());
+        if (result.size()<=0){
+            label.setVisibility(View.GONE);
+        }else {
+            label.setVisibility(View.VISIBLE);
+            label.setText(result.size()+"");
+        }
     }
 }

@@ -1,18 +1,26 @@
 package com.example.shoppingmall1809.main.particulars;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.example.commom.Constants;
 import com.example.commom.ShopConstants;
@@ -39,12 +47,14 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     private LinearLayout toShopCar;
     private TextView particularsAdd;
     private View tou;
+    private TextView textView;
 
     private String productId;
     private String productName;
     private String productPrice;
     private String url;
     private int num = 1;
+    private RelativeLayout particularsRe;
 
     @Override
     protected int getLayoutId() {
@@ -141,7 +151,8 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
                         ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
                         if (resultBean != null) {
-                            httpPresenter.UpDateProductNum(productId, (num + Integer.parseInt(resultBean.getProductNum())) + "", productName, url, productPrice);
+                            num += Integer.parseInt(resultBean.getProductNum());
+                            httpPresenter.UpDateProductNum(productId, num + "", productName, url, productPrice);
                             popupWindow.dismiss();
                             return;
                         }
@@ -169,6 +180,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
         particularsAdd = (TextView) findViewById(R.id.particulars_add);
         tou = (View) findViewById(R.id.tou);
+        particularsRe = (RelativeLayout) findViewById(R.id.particulars_re);
     }
 
     @Override
@@ -221,15 +233,87 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
             ShoppingCarManager.getInstance().insertResultBean(upDate());
             ShoppingCarManager.getInstance().refreshData();
 
-            int[] startLocation = new int[2];
-            particularsAdd.getLocationInWindow(startLocation);
-
-            int[] endLocation = new int[2];
-            toShopCar.getLocationInWindow(endLocation);
-
+            path();
         } else {
             Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void path() {
+        textView = new TextView(this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(50,50);
+        textView.setLayoutParams(layoutParams);
+        textView.setText("1");
+        textView.setTextColor(getResources().getColor(R.color.white));
+        textView.setBackgroundResource(R.drawable.text_background);
+        textView.setGravity(Gravity.CENTER);
+
+        particularsRe.addView(textView);
+
+        int[] startLocation = new int[2];
+        startLocation[0]=800;
+        startLocation[1]=1680;
+//        particularsAdd.getLocationInWindow(startLocation);
+        LogUtils.e(startLocation[0],startLocation[1]);
+
+        int[] endLocation = new int[2];
+        endLocation[0]=550;
+        endLocation[1]=1680;
+//        toShopCar.getLocationInWindow(endLocation);
+        LogUtils.e(endLocation[0],endLocation[1]);
+
+        int[] controlLocation=new int[2];
+        controlLocation[0]=700;
+        controlLocation[1]=500;
+
+        Path path = new Path();
+        path.moveTo(startLocation[0],startLocation[1]);
+        path.quadTo(controlLocation[0],controlLocation[1],endLocation[0],endLocation[1]);
+
+        //计算控件下一次要移动到的位置坐标
+        PathMeasure pathMeasure = new PathMeasure(path, false);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float value = (float) valueAnimator.getAnimatedValue();
+
+                float[] nextLocation=new float[2];
+
+                pathMeasure.getPosTan(value,nextLocation,null);
+                textView.setTranslationX(nextLocation[0]);
+                textView.setTranslationY(nextLocation[1]);
+            }
+        });
+
+        valueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                particularsRe.removeView(textView);
+                textView=null;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+        valueAnimator.start();
     }
 
     @Override
@@ -250,6 +334,8 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
             ShoppingCarManager.getInstance().upDataResultBean(upDate());
             ShoppingCarManager.getInstance().refreshData();
+
+            path();
         }
     }
 
@@ -258,6 +344,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
         resultBean.setProductId(productId);
         resultBean.setProductName(productName);
+        Log.i("123", "upDate: " + num);
         resultBean.setProductNum(num + "");
         resultBean.setProductPrice(productPrice);
         resultBean.setProductSelected(false);
