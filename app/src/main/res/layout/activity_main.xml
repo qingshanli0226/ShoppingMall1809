@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".main.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <com.example.framework.view.ToolBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:visibility="gone"
+            ></com.example.framework.view.ToolBar>
 
-    <com.example.framework.view.ToolBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.8"
+            android:id="@+id/mainFram"
+            ></FrameLayout>
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/mainCommon"
+            android:layout_weight="1.2"
+            app:tl_textSelectColor="#FF3D27"
+            app:tl_textUnselectColor="#797373"
+            ></com.flyco.tablayout.CommonTabLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:background="@drawable/sign"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/mainSign"
         android:visibility="gone"
-        ></com.example.framework.view.ToolBar>
+        android:layout_marginBottom="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_310"
+        />
 
-
-    <FrameLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8.8"
-        android:id="@+id/mainFram"
-        ></FrameLayout>
-
-    <com.flyco.tablayout.CommonTabLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/mainCommon"
-        android:layout_weight="1.2"
-        app:tl_textSelectColor="#FF3D27"
-        app:tl_textUnselectColor="#797373"
-        ></com.flyco.tablayout.CommonTabLayout>
-
-</LinearLayout>
+</RelativeLayout>

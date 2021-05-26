@@ -1,16 +1,24 @@
 package com.example.shoppingmallsix.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.MainBean;
 import com.example.shoppingmallsix.R;
@@ -28,12 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/main/MainActivity")
-public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange{
+public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, SoppingCartMemoryDataManager.ISoppingDateChange {
 
     private FrameLayout mainFram;
     private CommonTabLayout mainCommon;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private List<Fragment> list = new ArrayList<>();
+    private android.widget.TextView sign;
 
     @Override
     protected void initPresenter() {
@@ -55,8 +64,9 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     protected void initView() {
         mainFram = findViewById(R.id.mainFram);
         mainCommon = findViewById(R.id.mainCommon);
+        sign = (TextView) findViewById(R.id.mainSign);
 
-        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mTabEntities.add(new MainBean(getString(R.string.homepage), R.drawable.main_home_press, R.drawable.main_home));
         mTabEntities.add(new MainBean(getString(R.string.classify), R.drawable.main_type_press, R.drawable.main_type));
@@ -64,14 +74,17 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         mTabEntities.add(new MainBean(getString(R.string.shopping), R.drawable.main_cart_press, R.drawable.main_cart));
         mTabEntities.add(new MainBean(getString(R.string.personal), R.drawable.main_user_press, R.drawable.main_user));
         mainCommon.setTabData(mTabEntities);
-
+        //handler实时监听子线程更新数据
+        handler.sendEmptyMessageDelayed(1, 1000);
+        //注册接口
+        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
 
         mainCommon.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
                         break;
@@ -81,7 +94,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
                         } else {
                             mainCommon.setCurrentTab(0);
-                            Toast.makeText(MainActivity.this,getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.Pleaselogintoyouraccountfirst), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -143,5 +156,35 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     protected void onDestroy() {
         super.onDestroy();
         CacheUserManager.getInstance().unRegisterLogin(this);
+        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
+
+    //子线程获取数据 实时刷新
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            if (resultBean != null) {
+                List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
+                if (result != null && result.size() != 0) {
+                    sign.setVisibility(View.VISIBLE);
+                    sign.setText(result.size() + "");
+                }
+            } else {
+                sign.setVisibility(View.GONE);
+                handler.sendEmptyMessageDelayed(1, 1000);
+
+            }
+        }
+    };
+
+    @Override
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
+        if (getShortcartProductsBean != null && getShortcartProductsBean.size() != 0) {
+            sign.setVisibility(View.VISIBLE);
+            sign.setText(getShortcartProductsBean.size() + "");
+        }
+    }
+
 }

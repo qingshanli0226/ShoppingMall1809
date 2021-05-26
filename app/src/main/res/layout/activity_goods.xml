@@ -110,6 +110,18 @@
             android:background="#f00"
             android:id="@+id/insertShopcar"
             />
-
     </LinearLayout>
+    <TextView
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:background="@drawable/sign"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/goodsSign"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_285"
+        />
+
 </RelativeLayout>
