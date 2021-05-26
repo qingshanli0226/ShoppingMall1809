@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,27 +19,23 @@ import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.UserManager;
+import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
 import com.example.threeshopping.personal.PersonalFragment;
 import com.example.threeshopping.type.TypeFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-
-    private android.widget.LinearLayout mainLinear;
-    private android.widget.RadioGroup mainGroup;
-    private android.widget.RadioButton mainOne;
-    private android.widget.RadioButton mainTwo;
-    private android.widget.RadioButton mainThree;
-    private android.widget.RadioButton mainFour;
-    private android.widget.RadioButton mainFive;
     private LoginBean loginBean;
+    private com.example.framework.view.ToolBar toolbar;
+    private com.google.android.material.bottomnavigation.BottomNavigationView btv;
 
     @Override
     public int getLayoutId() {
@@ -45,15 +44,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mainLinear = (LinearLayout) findViewById(R.id.mainLinear);
-        mainGroup = (RadioGroup) findViewById(R.id.mainGroup);
-        mainOne = (RadioButton) findViewById(R.id.mainOne);
-        mainTwo = (RadioButton) findViewById(R.id.mainTwo);
-        mainThree = (RadioButton) findViewById(R.id.mainThree);
-        mainFour = (RadioButton) findViewById(R.id.mainFour);
-        mainFive = (RadioButton) findViewById(R.id.mainFive);
-
         fragments = new ArrayList<>();
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
+        btv = (BottomNavigationView) findViewById(R.id.btv);
     }
 
     @Override
@@ -82,16 +75,11 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.commit();
 
         //第一个显示
-        mainOne.setChecked(true);
-        showFragment(0);
-
-
-        loginBean = UserManager.getInstance().getLoginBean();
-        mainGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        btv.setSelectedItemId(R.id.mainOne);
+        btv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                switch (checkedId) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
                     case R.id.mainOne:
                         showFragment(0);
                         break;
@@ -112,19 +100,22 @@ public class MainActivity extends BaseActivity {
                         skip(4);
                         break;
                 }
+                return true;
             }
         });
+
+        loginBean = UserManager.getInstance().getLoginBean();
+
+
     }
 
     private void skip(int page) {
         if (loginBean == null) {
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
-//            CommonArouter.getInstance().build(Constants.PATH_LOGIN).with(bundle).navigation();
             CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
         }
     }
-
 
     //显示那个fargment
     private void showFragment(int position) {
@@ -147,24 +138,12 @@ public class MainActivity extends BaseActivity {
 
         Log.i("zzy", "onNew: " + page);
         showFragment(page);
+
         switch (page) {
             case 0:
-                mainOne.setChecked(true);
-                break;
-            case 1:
-                mainTwo.setChecked(true);
-                break;
-            case 2:
-                mainThree.setChecked(true);
-                break;
-            case 3:
-                mainFour.setChecked(true);
-                break;
-            case 4:
-                mainFive.setChecked(true);
+                btv.setSelectedItemId(R.id.mainOne);
                 break;
         }
-
     }
 
     @Override
@@ -179,6 +158,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onClickRight() {
+
     }
 
     @Override

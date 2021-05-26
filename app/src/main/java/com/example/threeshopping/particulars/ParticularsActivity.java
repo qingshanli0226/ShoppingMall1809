@@ -55,8 +55,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private TextView popTitle;
     private ImageView popPic;
     View view;
-    int num = 1;
-
+    int num = 1;//购买数量
+    int count = 0;
     @Override
     public int getLayoutId() {
         return R.layout.activity_particulars;
@@ -144,28 +144,44 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                         @Override
                         public void onClick(View v) {
                             popupWindow.dismiss();
-                            ProductBean productBean = new ProductBean();
-                            productBean.setProductId(id);
-                            productBean.setProductName(title);
-                            productBean.setProductNum(num);
-                            productBean.setUrl(pic);
-                            productBean.setProductPrice(price);
-                            mPresenter.addProduct(productBean);
                             //数据库
-                            SqlBean sqlBean = new SqlBean();
-                            sqlBean.setProductId(id);
-                            sqlBean.setProductName(title);
-                            sqlBean.setProductNum(num);
-                            sqlBean.setUrl(pic);
-                            sqlBean.setProductPrice(price);
-                            UtileSql.getInstance().getDaoSession().insert(sqlBean);
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
-                            LogUtils.json(sqlBean);
+                            for (int i = 0; i <sqlBeans.size() ; i++) {
+                                if (id.equals(sqlBeans.get(i).getProductId())){
+                                    SqlBean sqlBean = new SqlBean();
+                                    sqlBean.setProductId(id);
+                                    sqlBean.setProductName(title);
+                                    sqlBean.setProductNum(num);
+                                    sqlBean.setUrl(pic);
+                                    sqlBean.setProductPrice(price);
+                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
 
+                                    ProductBean productBean = new ProductBean();
+                                    productBean.setProductId(id);
+                                    productBean.setProductName(title);
+                                    productBean.setProductNum(num);
+                                    productBean.setUrl(pic);
+                                    productBean.setProductPrice(price);
+                                    mPresenter.addProduct(productBean);
+                                    LogUtils.json("zzy"+sqlBeans);
+                                }else {
+                                    count++;
+                                }
+                            }
+                            if (count == sqlBeans.size()){
+                                SqlBean sqlBean = new SqlBean();
+                                sqlBean.setProductId(id);
+                                sqlBean.setProductName(title);
+                                sqlBean.setProductNum(num);
+                                sqlBean.setUrl(pic);
+                                sqlBean.setProductPrice(price);
+                                UtileSql.getInstance().getDaoSession().insert(sqlBean);
+                                LogUtils.json(sqlBeans);
+                            }
                             //请求数据
                             CacheShopManager.getInstance().showCart();
                             ProductBean inventoryBean = new ProductBean();
-                            LogUtils.json(productBean);
+//                            LogUtils.json(productBean);
                         }
                     });
 
@@ -210,7 +226,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onInventory(ProductBean inventoryBean) {
-        LogUtils.json(inventoryBean);
+//        LogUtils.json(inventoryBean);
     }
 
     @Override

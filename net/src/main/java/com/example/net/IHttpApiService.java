@@ -78,7 +78,7 @@ public interface IHttpApiService {
     Observable<SelectBean> inventory(@Field("name")String name, @Field("password")String password);
 
 
-    //选中一个
+    //选中一个\
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
 
