@@ -96,6 +96,12 @@ public class ToolBar extends RelativeLayout {
 
     }
 
+    public void setRightTvs(String str) {
+        this.rightTvs = rightTvs;
+        rightText.setText(str+"");
+        invalidate();
+    }
+
     //注册一个回调接口
     public void setToolbarListener(IToolbarListener iToolbarListener) {
         this.iToolbarListener = iToolbarListener;
