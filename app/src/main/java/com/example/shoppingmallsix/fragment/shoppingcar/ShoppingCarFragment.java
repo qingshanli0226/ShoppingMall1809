@@ -16,15 +16,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.business.ConfirmServerPayResultBean;
+import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
+import com.example.pay.demo.PayDemoActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;
 
@@ -48,6 +50,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private Button shouCangBt;
     private RecyclerView recyclerView;
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
+    private List<GetOrderInfoBean.ResultBean> order = new ArrayList<>();
+    private List<ConfirmServerPayResultBean> confirmServerPayResultBeans = new ArrayList<>();
     private ShoppingCarAdapter shoppingCarAdapter;
     private CheckBox shopCheck;
 
@@ -75,6 +79,18 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 shopCheck.setChecked(!shopCheck.isChecked());
             }
         });
+<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingCarFragment.java
+=======
+
+        buyBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), PayDemoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+>>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java
     }
 
     //子线程获取数据 实时刷新
@@ -178,6 +194,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
+<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingCarFragment.java
     public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position) {
         if (updateProductSelectedBean.getCode().equals("200")){
             if (resultBeans.get(position).isProductSelected()){
@@ -187,6 +204,24 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
+=======
+    public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
+        if (getOrderInfoBean.getCode().equals("200")){
+            GetOrderInfoBean.ResultBean result = getOrderInfoBean.getResult();
+            order.add(result);
+        }
+
+    }
+
+    @Override
+    public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
+
+        if (confirmServerPayResultBean.getCode().equals("200")){
+
+            confirmServerPayResultBeans.add(confirmServerPayResultBean);
+        }
+
+>>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java
     }
 
     @Override

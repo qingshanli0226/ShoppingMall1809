@@ -4,7 +4,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
-
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 30
@@ -25,11 +29,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    repositories {
 
+
+        flatDir {
+            dirs 'libs'
+        }
+
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar','*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -38,4 +49,8 @@ dependencies {
     implementation project(path: ':net')
     implementation project(path: ':commened')
     implementation project(path: ':framework')
+
+    // 支付宝 SDK AAR 包所需的配置
+    implementation  fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
+
 }
