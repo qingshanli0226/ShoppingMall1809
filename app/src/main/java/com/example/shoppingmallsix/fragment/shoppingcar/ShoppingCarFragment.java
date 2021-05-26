@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
@@ -46,11 +47,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private Button deleteBt;
     private Button shouCangBt;
     private RecyclerView recyclerView;
-    private int index;
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
     private ShoppingCarAdapter shoppingCarAdapter;
-    private ToolBar toolbar;
-    private RecyclerView shopcarRv;
     private CheckBox shopCheck;
 
     @Override
@@ -60,6 +58,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     protected void initData() {
+        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
             handler.sendEmptyMessageDelayed(1,1000);
@@ -75,7 +75,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 shopCheck.setChecked(!shopCheck.isChecked());
             }
         });
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
     }
 
     //子线程获取数据 实时刷新
@@ -91,7 +90,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                     resultBeans.addAll(result);
                     shoppingCarAdapter.notifyDataSetChanged();
                 }
-
             }else {
                 handler.sendEmptyMessageDelayed(1,1000);
             }
@@ -145,15 +143,15 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
             @Override
             public void onItemChildClick(int position, View view) {
-                GetShortcartProductsBean.ResultBean resultBean = shoppingCarAdapter.dataList.get(position);
                 switch (view.getId()){
                     case R.id.shoppingTrolley_CheckBox:
-                        if (resultBean.isProductSelected()){
-                            resultBean.setProductSelected(false);
+                        GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
+                        httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
+                        if (resultBeans.get(position).isProductSelected()){
+                            resultBeans.get(position).setProductSelected(false);
                         }else {
-                            resultBean.setProductSelected(true);
+                            resultBeans.get(position).setProductSelected(true);
                         }
-                        resultBeans.add(resultBean);
                         SoppingCartMemoryDataManager.setResultBean(resultBeans);
                         break;
                 }
@@ -178,7 +176,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                     resultBeans.get(i).setProductSelected(false);
                 }
             }
-
             shoppingCarAdapter.notifyDataSetChanged();
         }
     }
@@ -212,19 +209,18 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         }
     }
 
-    @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
-        resultBeans.clear();
-        if (getShortcartProductsBean!=null){
-            resultBeans.addAll(getShortcartProductsBean);
-            shoppingCarAdapter.notifyDataSetChanged();
-        }
-
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
+
+    @Override
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
+        if (getShortcartProductsBean != null){
+            shoppingCarAdapter.notifyDataSetChanged();
+        }
+    }
+
 }

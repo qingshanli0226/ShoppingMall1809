@@ -85,8 +85,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                });
     }
 
-    public void getUpProductSelect(String productId,String productNum,String productName,
-                              String url,String productPrice){
+    public void getUpProductSelect(String productId,String productNum,String productName,String url,String productPrice){
 
         JSONObject jsonObject = new JSONObject();
 

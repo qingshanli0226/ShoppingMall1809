@@ -43,7 +43,6 @@ public class SoppingCartMemoryDataManager {
 
                     @Override
                     public void onNext(@NonNull GetShortcartProductsBean shoppingCarBean) {
-                        LogUtils.json(shoppingCarBean);
                         List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
                         SoppingCartMemoryDataManager.setResultBean(result);
                     }
@@ -66,7 +65,7 @@ public class SoppingCartMemoryDataManager {
         getShortcartProductsBean.setResult(resultBean);
         SoppingCartMemoryDataManager.resultBean = getShortcartProductsBean;
         for (int i = 0; i <iSoppingDateChangeArrayList.size() ; i++) {
-            iSoppingDateChangeArrayList.get(i).onSoppingDataChange(resultBean);
+            iSoppingDateChangeArrayList.get(i).onSoppingDataChange(SoppingCartMemoryDataManager.resultBean.getResult());
         }
     }
     //注册
