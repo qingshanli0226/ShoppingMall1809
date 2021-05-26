@@ -2,12 +2,15 @@ package com.example.manager;
 
 import com.example.common.bean.ShortcartProductBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BusinessBuyCarManger {
 
     private iShopBeanChange shopBeanChange;
     private static BusinessBuyCarManger businessBuyCarManger;
     private ShortcartProductBean shortcartProductBean;
-
+    private List<iShopBeanChange> list=new ArrayList<>();
 
     public BusinessBuyCarManger() {
 
@@ -15,6 +18,7 @@ public class BusinessBuyCarManger {
 
     public void setShopBeanChange(iShopBeanChange shopBeanChange) {
         this.shopBeanChange = shopBeanChange;
+
     }
 
     public static BusinessBuyCarManger getInstance() {

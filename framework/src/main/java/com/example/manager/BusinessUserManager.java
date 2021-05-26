@@ -34,6 +34,11 @@ public class BusinessUserManager {
 
     public void setIsLog(LogBean isLog) {
         this.isLog = isLog;
+        if (isLog!=null){
+            for (IUserLoginChanged iUserLoginChanged : list) {
+                iUserLoginChanged.onLoginChange(isLog);
+            }
+        }
     }
 
 
@@ -42,4 +47,5 @@ public class BusinessUserManager {
         void onLoginChange(LogBean isLog);
 
     }
+
 }
