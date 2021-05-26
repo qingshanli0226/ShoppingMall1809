@@ -83,4 +83,8 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                    }
                });
     }
+
+
+
+
 }
