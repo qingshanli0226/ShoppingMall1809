@@ -85,7 +85,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                });
     }
 
-    public void getUpProductSelect(String productId,String productNum,String productName,String url,String productPrice){
+    public void getUpProductSelect(String productId,String productNum,String productName,String url,String productPrice,int position){
 
         JSONObject jsonObject = new JSONObject();
 
@@ -113,7 +113,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     @Override
                     public void onNext(@NonNull UpdateProductSelectedBean selectedBean) {
                         if (iView!=null){
-                            iView.onUpdateProductSelect(selectedBean);
+                            iView.onUpdateProductSelect(selectedBean,position);
                         }
                     }
 

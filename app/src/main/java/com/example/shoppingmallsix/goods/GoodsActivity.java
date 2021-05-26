@@ -253,7 +253,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             resultBean.setProductNum(num + "");
             resultBean.setProductPrice(price);
             resultBeans.add(resultBean);
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            SoppingCartMemoryDataManager.notifyDataSetChanged();
         } else {
             Toast.makeText(this, getString(R.string.dda), Toast.LENGTH_SHORT).show();
         }
@@ -286,7 +286,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             Toast.makeText(this, "更新", Toast.LENGTH_SHORT).show();
             //更新
             resultBeans.get(index).setProductNum("" + (Integer.parseInt(resultBean.getProductNum()) + num));
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            SoppingCartMemoryDataManager.notifyDataSetChanged();
         } else {
             Toast.makeText(this, "没有更新", Toast.LENGTH_SHORT).show();
         }
@@ -313,11 +313,12 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     };
 
     @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
-        if (getShortcartProductsBean != null && getShortcartProductsBean.size() != 0) {
+    public void onSoppingDataChange() {
+        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
+        if (resultBeans.size() != 0) {
             //红点刷新数量
             goodsSign.setVisibility(View.VISIBLE);
-            goodsSign.setText(getShortcartProductsBean.size() + "");
+            goodsSign.setText(resultBeans.size() + "");
         }
     }
 

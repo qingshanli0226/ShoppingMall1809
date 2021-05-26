@@ -64,8 +64,10 @@ public class SoppingCartMemoryDataManager {
         GetShortcartProductsBean getShortcartProductsBean = new GetShortcartProductsBean();
         getShortcartProductsBean.setResult(resultBean);
         SoppingCartMemoryDataManager.resultBean = getShortcartProductsBean;
+    }
+    public synchronized static void notifyDataSetChanged(){
         for (int i = 0; i <iSoppingDateChangeArrayList.size() ; i++) {
-            iSoppingDateChangeArrayList.get(i).onSoppingDataChange(SoppingCartMemoryDataManager.resultBean.getResult());
+            iSoppingDateChangeArrayList.get(i).onSoppingDataChange();
         }
     }
     //注册
@@ -78,6 +80,6 @@ public class SoppingCartMemoryDataManager {
     }
     //接口回调
     public interface ISoppingDateChange{
-       void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean);
+       void onSoppingDataChange();
    }
 }

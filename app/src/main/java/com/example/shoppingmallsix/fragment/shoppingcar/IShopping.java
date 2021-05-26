@@ -8,5 +8,5 @@ import com.example.net.bean.business.UpdateProductSelectedBean;
 public interface IShopping extends IBaseView {
     void onSelectAllProductBean(SelectAllProductBean selectAllProductBean);
 
-    void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean);
+    void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position);
 }

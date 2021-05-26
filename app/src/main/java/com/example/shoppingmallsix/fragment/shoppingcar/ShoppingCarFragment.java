@@ -146,13 +146,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 switch (view.getId()){
                     case R.id.shoppingTrolley_CheckBox:
                         GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
-                        httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
-                        if (resultBeans.get(position).isProductSelected()){
-                            resultBeans.get(position).setProductSelected(false);
-                        }else {
-                            resultBeans.get(position).setProductSelected(true);
-                        }
-                        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+                        httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(),position);
                         break;
                 }
             }
@@ -181,9 +175,15 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean) {
+    public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position) {
         if (updateProductSelectedBean.getCode().equals("200")){
+            if (resultBeans.get(position).isProductSelected()){
+                resultBeans.get(position).setProductSelected(false);
+            }else {
+                resultBeans.get(position).setProductSelected(true);
+            }
 
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
 
@@ -217,10 +217,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
-        if (getShortcartProductsBean != null){
+    public void onSoppingDataChange() {
             shoppingCarAdapter.notifyDataSetChanged();
-        }
     }
 
 }

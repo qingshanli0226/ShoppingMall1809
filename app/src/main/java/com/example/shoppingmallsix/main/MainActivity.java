@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private List<Fragment> list = new ArrayList<>();
     private android.widget.TextView sign;
-
+    private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
     @Override
     protected void initPresenter() {
 
@@ -166,24 +166,26 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
             super.handleMessage(msg);
             GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
+                resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
                 if (result != null && result.size() != 0) {
+                    resultBeans.addAll(result);
                     sign.setVisibility(View.VISIBLE);
                     sign.setText(result.size() + "");
                 }
             } else {
                 sign.setVisibility(View.GONE);
                 handler.sendEmptyMessageDelayed(1, 1000);
-
             }
         }
     };
 
     @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> getShortcartProductsBean) {
-        if (getShortcartProductsBean != null && getShortcartProductsBean.size() != 0) {
+    public void onSoppingDataChange() {
+        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
+        if (resultBeans.size() != 0) {
             sign.setVisibility(View.VISIBLE);
-            sign.setText(getShortcartProductsBean.size() + "");
+            sign.setText(resultBeans.size() + "");
         }
     }
 
