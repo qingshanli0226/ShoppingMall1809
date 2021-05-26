@@ -181,11 +181,10 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     };
 
     @Override
-    public void onSoppingDataChange() {
-        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
-        if (resultBeans.size() != 0) {
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+        if (resultBeanList.size() != 0) {
             sign.setVisibility(View.VISIBLE);
-            sign.setText(resultBeans.size() + "");
+            sign.setText(resultBeanList.size() + "");
         }
     }
 

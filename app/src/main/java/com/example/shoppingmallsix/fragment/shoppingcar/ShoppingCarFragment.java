@@ -79,6 +79,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     //子线程获取数据 实时刷新
     private Handler handler = new Handler(){
+
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -151,12 +152,14 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 }
             }
         });
+
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
     }
+
     @Override
     public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean) {
         if (selectAllProductBean.getCode().equals("200")){
@@ -182,7 +185,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }else {
                 resultBeans.get(position).setProductSelected(true);
             }
-
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
@@ -217,7 +219,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onSoppingDataChange() {
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
             shoppingCarAdapter.notifyDataSetChanged();
     }
 

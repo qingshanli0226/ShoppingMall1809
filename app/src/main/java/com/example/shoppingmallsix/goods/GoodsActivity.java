@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
@@ -89,6 +90,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         goodsAdapter.notifyDataSetChanged();
         //注册接口
         SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        handler.sendEmptyMessageDelayed(1, 1000);
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null){
@@ -113,7 +115,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         goodsAdapter = new GoodsAdapter(list);
         moreRv.setAdapter(goodsAdapter);
         moreRv.setLayoutManager(new LinearLayoutManager(this));
-
 
         insertShopcar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +254,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             resultBean.setProductNum(num + "");
             resultBean.setProductPrice(price);
             resultBeans.add(resultBean);
-            SoppingCartMemoryDataManager.notifyDataSetChanged();
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(this, getString(R.string.dda), Toast.LENGTH_SHORT).show();
         }
@@ -286,11 +287,14 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             Toast.makeText(this, "更新", Toast.LENGTH_SHORT).show();
             //更新
             resultBeans.get(index).setProductNum("" + (Integer.parseInt(resultBean.getProductNum()) + num));
-            SoppingCartMemoryDataManager.notifyDataSetChanged();
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(this, "没有更新", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 
     //子线程获取数据 实时刷新
     private Handler handler = new Handler() {
@@ -303,6 +307,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
                 if (result != null && result.size() != 0) {
                     //获取内存数据
                     resultBeans.addAll(result);
+                    LogUtils.json(resultBeans);
                     goodsSign.setVisibility(View.VISIBLE);
                     goodsSign.setText(result.size() + "");
                 }
@@ -313,12 +318,11 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     };
 
     @Override
-    public void onSoppingDataChange() {
-        resultBeans = SoppingCartMemoryDataManager.getResultBean().getResult();
-        if (resultBeans.size() != 0) {
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+        if (resultBeanList.size() != 0) {
             //红点刷新数量
             goodsSign.setVisibility(View.VISIBLE);
-            goodsSign.setText(resultBeans.size() + "");
+            goodsSign.setText(resultBeanList.size() + "");
         }
     }
 
@@ -383,6 +387,4 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         //销毁接口
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
-
-
 }
