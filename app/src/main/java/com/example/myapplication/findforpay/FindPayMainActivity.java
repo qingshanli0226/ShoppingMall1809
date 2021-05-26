@@ -3,14 +3,20 @@ package com.example.myapplication.findforpay;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.framework.BaseActivity;
 import com.example.myapplication.R;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implements IFindPayView {
 
+
+    private androidx.recyclerview.widget.RecyclerView rv;
 
     @Override
     protected int bandLayout() {
@@ -29,6 +35,8 @@ public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implemen
 
     @Override
     public void initView() {
+        rv = findViewById(R.id.rv);
+
 
     }
 

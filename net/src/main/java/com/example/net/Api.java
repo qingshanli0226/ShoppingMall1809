@@ -58,7 +58,8 @@ public interface Api {
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
     //待发货
-    @GET
+    @GET("findForSend")
     Observable<FindForSendBean> getForSend();
+
 
 }

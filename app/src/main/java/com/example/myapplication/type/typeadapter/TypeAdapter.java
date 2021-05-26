@@ -20,12 +20,12 @@ public class TypeAdapter extends BaseRecyclerViewAdapter<SkirtBean.ResultBean.Ch
     public void displayViewHolder(BaseViewHolder holder, int position, SkirtBean.ResultBean.ChildBean itemData) {
         TextView view = holder.getView(R.id.text);
         view.setText(itemData.getName());
-<<<<<<< HEAD:app/src/main/java/com/example/myapplication/type/typeadapter/TypeAdapter.java
+
         Glide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getPic()).into((ImageView) holder.getView(R.id.img));
-=======
+
         ShopmallGlide.with(holder.itemView.getContext()).load("http://49.233.0.68:8080"+"/atguigu/img"+itemData.getPic()).into((ImageView) holder.getView(R.id.img));
 
->>>>>>> zyh:app/src/main/java/com/example/myapplication/typeadapter/TypeAdapter.java
+
     }
 
     @Override
