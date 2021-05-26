@@ -6,7 +6,7 @@ import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 
 public interface IShopping extends IBaseView {
-    void onSelectAllProductBean(SelectAllProductBean selectAllProductBean);
+    void onSelectAllProductBean(SelectAllProductBean selectAllProductBean,boolean mBooleans);
 
     void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position);
 }

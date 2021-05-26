@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -50,7 +51,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
     private ShoppingCarAdapter shoppingCarAdapter;
     private CheckBox shopCheck;
-
+    private int price = 0;
     @Override
     protected void initPresenter() {
         httpPresenter = new ShoppingPresenter(this);
@@ -71,8 +72,15 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shopCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                httpPresenter.getSelectAllProduct(shopCheck.isChecked());
+                httpPresenter.getSelectAllProduct(shopCheck.isChecked(),false);
                 shopCheck.setChecked(!shopCheck.isChecked());
+            }
+        });
+        //切换后删除数据
+        deleteBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -89,6 +97,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
                 if (result!=null){
                     resultBeans.addAll(result);
+                    AllProductBeanAndProductSelect();
                     shoppingCarAdapter.notifyDataSetChanged();
                 }
             }else {
@@ -161,19 +170,25 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean) {
+    public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean,boolean mBooleans) {
         if (selectAllProductBean.getCode().equals("200")){
-            shopCheck.setChecked(!shopCheck.isChecked());
-            if (shopCheck.isChecked()){
-                for (int i = 0; i <resultBeans.size() ; i++) {
-                  resultBeans.get(i).setProductSelected(true);
-                }
+            if (mBooleans){
             }else {
-                for (int i = 0; i <resultBeans.size() ; i++) {
-                    resultBeans.get(i).setProductSelected(false);
+                shopCheck.setChecked(!shopCheck.isChecked());
+                if (shopCheck.isChecked()){
+                    for (int i = 0; i <resultBeans.size() ; i++) {
+                        resultBeans.get(i).setProductSelected(true);
+                    }
+                }else {
+                    for (int i = 0; i <resultBeans.size() ; i++) {
+                        resultBeans.get(i).setProductSelected(false);
+                    }
                 }
+                SoppingCartMemoryDataManager.setResultBean(resultBeans);
             }
-            shoppingCarAdapter.notifyDataSetChanged();
+            setPrice();
+
+
         }
     }
 
@@ -185,8 +200,55 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }else {
                 resultBeans.get(position).setProductSelected(true);
             }
+            AllProductBeanAndProductSelect();
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
+    }
+
+
+    public void AllProductBeanAndProductSelect(){
+        int index = 0;
+        for (int i = 0; i < resultBeans.size() ; i++) {
+            if (resultBeans.get(i).isProductSelected()){
+                index++;
+            }
+        }
+        if (index==resultBeans.size()){
+            shopCheck.setChecked(true);
+            httpPresenter.getSelectAllProduct(true,true);
+        }else {
+            shopCheck.setChecked(false);
+            httpPresenter.getSelectAllProduct(false,true);
+        }
+        setPrice();
+    }
+    public void setPrice(){
+        for (int i = 0; i < resultBeans.size() ; i++) {
+            if (resultBeans.get(i).isProductSelected()){
+                String productPrice = (String) resultBeans.get(i).getProductPrice();
+                LogUtils.e(productPrice);
+                float v = Float.parseFloat(productPrice);
+                String productNum = resultBeans.get(i).getProductNum();
+                int parseInt = Integer.parseInt(productNum);
+                price= (int) (price+ (v*parseInt));
+            }
+        }
+        shopMoney.setText(""+price);
+        price = 0;
+    }
+    public void DletData(){
+        for (int i = 0; i < resultBeans.size() ; i++) {
+            if (resultBeans.get(i).isProductSelected()){
+                String productPrice = (String) resultBeans.get(i).getProductPrice();
+                LogUtils.e(productPrice);
+                float v = Float.parseFloat(productPrice);
+                String productNum = resultBeans.get(i).getProductNum();
+                int parseInt = Integer.parseInt(productNum);
+                price= (int) (price+ (v*parseInt));
+            }
+        }
+        shopMoney.setText(""+price);
+        price = 0;
     }
 
     @Override

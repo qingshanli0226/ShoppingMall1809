@@ -28,7 +28,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
     }
 
 
-    public void getSelectAllProduct(boolean mBoolean){
+    public void getSelectAllProduct(boolean mBoolean,boolean mBooleans){
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -67,7 +67,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                    public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
                        LogUtils.json(selectAllProductBean);
                        if (iView!=null){
-                           iView.onSelectAllProductBean(selectAllProductBean);
+                           iView.onSelectAllProductBean(selectAllProductBean,mBooleans);
                        }
                    }
 
