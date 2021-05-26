@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
@@ -23,7 +24,7 @@ import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged, ShoppingCarManager.IShoppingCar {
+public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShopeUserManager.IUserLoginChanged , ShoppingCarManager.IShoppingCar {
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
@@ -46,7 +47,10 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
     @Override
     protected void initData() {
+
+        //注册登录的回调和购物车添加的回调
         ShopeUserManager.getInstance().register(this::onLoginChange);
+        ShoppingCarManager.getInstance().register(this::onShoppingCar);
 
         LoginBean loginBean = ShopeUserManager.getInstance().getLoginBean();
         if (loginBean != null) {
@@ -56,16 +60,8 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
         //全选
         checkAll.setOnClickListener(view -> {
-            if (!isCheck) {
-                checkAll.setBackgroundResource(R.drawable.checkbox_selected);
-                isCheck = true;
-
-            } else {
-                checkAll.setBackgroundResource(R.drawable.checkbox_unselected);
-                isCheck = false;
-            }
-            httpPresenter.getSelectAllProduct(isCheck);
             isRequest = false;
+            httpPresenter.getSelectAllProduct(!isCheck);
         });
 
         //删除
@@ -73,7 +69,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             isRequest = false;
             List<DeleteBean> delete  = new ArrayList<>();
             for (int i = result.size() - 1; i >= 0; i--) {
-                ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
+                ShoppingTrolleyBean.ResultBean resultBean = result.get(i);
                 if (resultBean.isProductSelected()){
                     DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(),resultBean.getUrl());
                     delete.add(deleteBean);
@@ -143,7 +139,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         }
     }
 
-    //单个选择
+    //修改选择
     @Override
     public void onUpDateSelected(RegisterBean registerBean) {
         isRequest = true;
@@ -161,11 +157,15 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     public void onSelectAllProduct(RegisterBean registerBean) {
         isRequest = true;
-        if (registerBean.equals("200")){
-            if (isCheck) {
+        if (registerBean.getCode().equals("200")){
+            if (!isCheck) {
+                checkAll.setBackgroundResource(R.drawable.checkbox_selected);
                 ShoppingCarManager.getInstance().checkAll();
-            }else {
+                isCheck = true;
+            } else {
+                checkAll.setBackgroundResource(R.drawable.checkbox_unselected);
                 ShoppingCarManager.getInstance().unCheckAll();
+                isCheck = false;
             }
             for (ShoppingTrolleyBean.ResultBean resultBean : result) {
                if (resultBean.isProductSelected()!=isCheck){
@@ -180,16 +180,23 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     public void onRemoveManyProduct(RegisterBean registerBean) {
         isRequest = true;
-        if (registerBean.equals("200")){
+        if (registerBean.getCode().equals("200")){
             List<ShoppingTrolleyBean.ResultBean> delete  = new ArrayList<>();
+            //删除本地
             for (int i = result.size() - 1; i >= 0; i--) {
-                if (result.get(position).isProductSelected()){
-                    delete.add(result.get(position));
+                if (result.get(i).isProductSelected()){
+                    delete.add(result.get(i));
                     result.remove(i);
                 }
             }
+            //删除管理类
             ShoppingCarManager.getInstance().deletePartResult(false,delete);
+            //刷新数据库
             shoppingCarAdapter.notifyDataSetChanged();
+            //删除成功后隐藏
+            toolbar.setRightTitle(getResources().getString(R.string.compile));
+            shopDeletLayout.setVisibility(View.GONE);
+            isDelete = false;
         }
     }
 
@@ -214,16 +221,17 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
     }
 
+    //toolber的点击事件 判断是否显示删除
     @Override
     public void onRightTitle() {
-        if (isDelete) {
+        if (!isDelete) {
             toolbar.setRightTitle(getResources().getString(R.string.iscompleted));
             shopDeletLayout.setVisibility(View.VISIBLE);
-            isCheck = false;
+            isDelete = true;
         } else {
             toolbar.setRightTitle(getResources().getString(R.string.compile));
             shopDeletLayout.setVisibility(View.GONE);
-            isCheck = true;
+            isDelete = false;
         }
     }
 
@@ -232,6 +240,8 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
     }
 
+
+    //登录额时候请求数据
     @Override
     public void onLoginChange(LoginBean loginBean) {
         if (loginBean != null) {
@@ -243,11 +253,17 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     public void destroy() {
         super.destroy();
+        //取消注册登录的回调和购物车添加的回调
         ShopeUserManager.getInstance().unregister(this::onLoginChange);
+        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
     }
 
+    //改变数据源后的通知
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
-
+       this.result = result;
+       shoppingCarAdapter.notifyDataSetChanged();
     }
+
+
 }

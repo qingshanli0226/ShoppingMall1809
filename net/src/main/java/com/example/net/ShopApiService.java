@@ -72,7 +72,7 @@ public interface ShopApiService {
     Observable<RegisterBean> getRemoveManyProduct(@Body RequestBody requestBody);
 
     @POST("checkInventory")
-    Observable<RegisterBean> getCheckInventory(@Body RequestBody requestBody);
+    Observable<ShoppingTrolleyBean> getCheckInventory(@Body RequestBody requestBody);
 
     @POST("updateProductNum")
     Observable<RegisterBean> getUpDateProductNum(@Body RequestBody requestBody);

@@ -84,7 +84,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
                     return;
                 }
 
-                num=1;
+                num = 1;
 
                 PopupWindow popupWindow = new PopupWindow();
 
@@ -140,22 +140,16 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
                     public void onClick(View view) {
 
                         ShoppingTrolleyBean.ResultBean resultBean = ShoppingCarManager.getInstance().selectResultBean(productId);
-                        if (resultBean!=null){
-
-                            httpPresenter.UpDateProductNum(productId, (num + Integer.parseInt(resultBean.getProductNum()))+"", productName, url, productPrice);
-
+                        if (resultBean != null) {
+                            httpPresenter.UpDateProductNum(productId, (num + Integer.parseInt(resultBean.getProductNum())) + "", productName, url, productPrice);
                             popupWindow.dismiss();
-
                             return;
                         }
-
-                        httpPresenter.CheckOneProductInventory(productId,num+"");
-
+                        httpPresenter.CheckOneProductInventory(productId, num + "");
                         popupWindow.dismiss();
                     }
                 });
-
-                popupWindow.showAtLocation(particularsAdd, Gravity.BOTTOM,0,0);
+                popupWindow.showAtLocation(particularsAdd, Gravity.BOTTOM, 0, 0);
             }
         });
     }
@@ -227,10 +221,10 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
             ShoppingCarManager.getInstance().insertResultBean(upDate());
             ShoppingCarManager.getInstance().refreshData();
 
-            int[] startLocation=new int[2];
+            int[] startLocation = new int[2];
             particularsAdd.getLocationInWindow(startLocation);
 
-            int[] endLocation=new int[2];
+            int[] endLocation = new int[2];
             toShopCar.getLocationInWindow(endLocation);
 
         } else {
@@ -240,7 +234,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
     @Override
     public void onCheckOneProductInventory(RegisterBean registerBean) {
-        if (registerBean.getCode().equals("200")){
+        if (registerBean.getCode().equals("200")) {
             if (Integer.parseInt(registerBean.getResult()) >= num) {
                 httpPresenter.AddOneProduct(productId, num + "", productName, url, productPrice);
             } else {
@@ -251,7 +245,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
     @Override
     public void onUpDateProductNum(RegisterBean registerBean) {
-        if (registerBean.getCode().equals("200")){
+        if (registerBean.getCode().equals("200")) {
             Toast.makeText(this, "商品数量修改成功", Toast.LENGTH_SHORT).show();
 
             ShoppingCarManager.getInstance().upDataResultBean(upDate());
@@ -259,12 +253,12 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         }
     }
 
-    public ShoppingTrolleyBean.ResultBean upDate(){
-        ShoppingTrolleyBean.ResultBean resultBean=new ShoppingTrolleyBean.ResultBean();
+    public ShoppingTrolleyBean.ResultBean upDate() {
+        ShoppingTrolleyBean.ResultBean resultBean = new ShoppingTrolleyBean.ResultBean();
 
         resultBean.setProductId(productId);
         resultBean.setProductName(productName);
-        resultBean.setProductNum(num+"");
+        resultBean.setProductNum(num + "");
         resultBean.setProductPrice(productPrice);
         resultBean.setProductSelected(false);
         resultBean.setUrl(url);
