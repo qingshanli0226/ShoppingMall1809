@@ -144,10 +144,8 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
                     case R.id.shopCartSub:
                         //判断库存
                         if(Integer.parseInt(resultBean.getProductNum()) ==0){
-
                             return;
                         }
-
                         break;
                     case R.id.shopCartAdd:
                         //判断库存
@@ -155,8 +153,6 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
                         result.setProductId(resultBean.getProductId());
                         result.setProductNum(Integer.parseInt(resultBean.getProductNum())+1+"");
                         CacheShopManager.getInstance().inventory(position,result);
-
-
                         break;
                 }
                 cartAdapter.notifyDataSetChanged();
@@ -176,13 +172,7 @@ public class CartFragment extends BaseFragment implements CacheShopManager.ICart
 
             }
         });
-
-
-
-
-
     }
-
 
     private void selectAll() {
         if(isAll){

@@ -9,11 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommonArouter {
+
     private static CommonArouter frameArouter;
 
     private CommonArouter() {
 
     }
+
     public synchronized static CommonArouter getInstance(){
         if (frameArouter == null) {
             frameArouter = new CommonArouter();
@@ -56,6 +58,18 @@ public class CommonArouter {
             intent.putExtra("param",bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
+        }
+    }
+
+    public void startActivityForResult(){
+        intent = new Intent(context, displayActivity);
+        if(context instanceof Activity){
+            intent.putExtra("param",bundle);
+            ((Activity) context).startActivityForResult(intent,101);
+        } else{
+            intent.putExtra("param",bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ((Activity) context).startActivityForResult(intent,101);
         }
     }
 

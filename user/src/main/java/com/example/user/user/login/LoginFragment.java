@@ -154,13 +154,20 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     public void onLogin(LoginBean loginBean) {
         loadPage.showSuccessLayout();
         if (loginBean.getCode().equals("200")) {
-            getActivity().finish();
+
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
 
-            Bundle bundle = new Bundle();
-            bundle.putInt("page", page);
-            CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+//            Bundle bundle1 = CommonArouter.getInstance().getBundle();
+//            String name = bundle1.getString("name");
+//            if (name.equals("Particulars")){
+                getActivity().finish();
+//            }else {
+                Bundle bundle = new Bundle();
+                bundle.putInt("page", page);
+                CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+//            }
+
 
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
