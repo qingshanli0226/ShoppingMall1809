@@ -100,8 +100,6 @@ public class Constants {
     public static final int HOME_HOT = 5;
 
 
-    //购物车说明：检查服务端一个产品库存情况的接口请求头需要添加token
-    public static final String CHECKOUTPRODUCT = "checkOneProductInventory";
     //向服务端购物车添加一个产品的接口
     public static final String ADDPRODUCT = "addOneProduct";
 
@@ -109,8 +107,6 @@ public class Constants {
     //获取服务端购物车产品信息的接口
     public static final String SHORTACRT = "getShortcartProducts";
 
-    //更新服务端购物车产品的数量的接口
-    public static final String UPDATEPRODUCT = "updateProductNum";
 
 
 
@@ -151,5 +147,10 @@ public class Constants {
 
 
     public static final String SQLDB = "shopcar.db";
+
+    //更新电话
+    public static final String UPDATEPHONE = "updatePhone";
+    //更新地址
+    public static final String UPDATEADDRESS = "updateAddress";
 
 }

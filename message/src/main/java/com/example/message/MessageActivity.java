@@ -1,9 +1,8 @@
-package com.example.pay.message;
+package com.example.message;
+
 
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
-import com.example.pay.R;
-
 
 public class MessageActivity extends BaseActivity {
 

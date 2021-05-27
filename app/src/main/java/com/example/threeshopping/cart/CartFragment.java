@@ -1,5 +1,6 @@
 package com.example.threeshopping.cart;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.common.LogUtil;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheShopManager;
+import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.LoginBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
@@ -191,7 +194,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                     mPresenter.removeMany(resultBeans);
                 } else {
                     Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -205,17 +207,35 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             @Override
             public void onClick(View v) {
                 //判断是否选中
-                int position = -1;
+                ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
                 for (int i = 0; i < cartAdapter.getData().size(); i++) {
-                    if(cartAdapter.getData().get(i).isProductSelected()){
-                        position = i;
+                    if (cartAdapter.getData().get(i).isProductSelected()) {
+                        resultBeans.add(cartAdapter.getData().get(i));
                     }
                 }
-                if(position != -1) {
-                    //判断绑定信息
+                LoginBean.ResultBean result = UserManager.getInstance().getLoginBean().getResult();
 
+                if (resultBeans.size() == 1) {
+                    //选中一个
+                    //判断是否绑定信息
+                    if(result.getPhone() != null && result.getAddress() !=null ){
 
+                    } else{
+
+                    }
+                } else if (resultBeans.size() > 1) {
+                    //选中多个
+                    //判断是否绑定信息
+                    if(result.getPhone() != null && result.getAddress() !=null ){
+
+                    } else{
+
+                    }
+
+                } else {
+                    Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
