@@ -1,4 +1,4 @@
-package com.example.shoppingmallsix.fragment.shoppingcarfragment;
+package com.example.shoppingmallsix.fragment.shoppingcar;
 
 import java.util.List;
 

@@ -2,17 +2,18 @@ package com.example.shoppingmallsix.fragment.shoppingcar;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingPresenter.java
+
 import com.example.net.bean.business.UpdateProductSelectedBean;
-=======
+
 import com.google.gson.Gson;
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingPresenter.java
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,10 +35,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
     public ShoppingPresenter(IShopping iShopping) {
         attachView(iShopping);
     }
-
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingPresenter.java
-
-=======
 
     public void getConfiemserverpayresult(String outTradeNo,String result,boolean clientPayResult){
 
@@ -99,8 +96,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     }
                 });
     }
-
-
     public void getOrderinfo(String subject,String totalPrice,String productName,String productId){
         Orbean orbean = new Orbean();
         List<Orbean.BodyBean> body = new Orbean().getBody();
@@ -161,63 +156,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                 });
     }
 
-
-
-
-
-
-    public void getShoppingData(){
-       RetrofitCreator.getFiannceApiService()
-               .getShortcartProductsBean()
-               .subscribeOn(Schedulers.io())
-               .observeOn(AndroidSchedulers.mainThread())
-               .doOnSubscribe(new Consumer<Disposable>() {
-                   @Override
-                   public void accept(Disposable disposable) throws Exception {
-                       if (iView!=null){
-                           iView.showLoading();
-                       }
-                   }
-               })
-               .doFinally(new Action() {
-                   @Override
-                   public void run() throws Exception {
-                       if (iView!=null){
-                           iView.hideLoading();
-                       }
-                   }
-               })
-               .subscribe(new Observer<GetShortcartProductsBean>() {
-                   @Override
-                   public void onSubscribe(@NonNull Disposable d) {
-
-                   }
-
-                   @Override
-                   public void onNext(@NonNull GetShortcartProductsBean shoppingCarBean) {
-                       LogUtils.json(shoppingCarBean);
-                       if (iView!=null){
-                           iView.onShopping(shoppingCarBean);
-                       }
-                   }
-
-                   @Override
-                   public void onError(@NonNull Throwable e) {
-                       if (iView!=null){
-                           iView.showToast(e.getMessage());
-                       }
-                   }
-
-                   @Override
-                   public void onComplete() {
-
-                   }
-               });
-    }
-
-
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingPresenter.java
-    public void getSelectAllProduct(boolean mBoolean){
+    public void getSelectAllProduct(boolean mBoolean,boolean mBooleans){
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -256,7 +195,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                    public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
                        LogUtils.json(selectAllProductBean);
                        if (iView!=null){
-                           iView.onSelectAllProductBean(selectAllProductBean);
+                           iView.onSelectAllProductBean(selectAllProductBean,mBooleans);
                        }
                    }
 
@@ -273,7 +212,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                    }
                });
     }
-
     public void getUpProductSelect(String productId,String productNum,String productName,String url,String productPrice,int position){
 
         JSONObject jsonObject = new JSONObject();
@@ -303,6 +241,55 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     public void onNext(@NonNull UpdateProductSelectedBean selectedBean) {
                         if (iView!=null){
                             iView.onUpdateProductSelect(selectedBean,position);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView!=null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void removeManyProduct(List<GetShortcartProductsBean.ResultBean> resultBeans){
+        String s = new Gson().toJson(resultBeans);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
+        RetrofitCreator.getFiannceApiService()
+                .removeManyProduct(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView!=null){
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView!=null){
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RemoveManyProductBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RemoveManyProductBean removeManyProductBean) {
+                        if (iView!=null){
+                            iView.onRemoveManyProductBean(removeManyProductBean);
                         }
                     }
 

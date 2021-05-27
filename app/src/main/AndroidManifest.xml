@@ -13,17 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".message.MessageActivity"></activity>
-<<<<<<< HEAD
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
         <activity android:name=".obligation.ObligationActivity" />
-=======
-        <activity android:name=".goodsactivity.GoodsActivity" />
-        <activity android:name=".sendgoodsactivity.SendGoodsActivity" />
-        <activity android:name=".obligationactivity.ObligationActivity" />
-        <activity android:name=".messageactivity.MessageActivity" />
         <activity android:name="com.example.pay.demo.PayDemoActivity" />
->>>>>>> wqq0525
+
         <activity
             android:name=".welcome.WelcomeActivity"
             android:screenOrientation="portrait"
