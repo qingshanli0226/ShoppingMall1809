@@ -17,7 +17,7 @@ import com.example.framework.view.ToolBar;
 import com.example.net.model.RegisterBean;
 import com.example.user.R;
 
-@Route(path = "address/ShoppingAddressActivity")
+@Route(path = "/address/ShoppingAddressActivity")
 public class ShoppingAddressActivity extends BaseActivity<AddressPresenter> implements IAddress {
 
     private com.example.framework.view.ToolBar toolbar;
