@@ -62,7 +62,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private ScrollView detailsLin;
     private PopupWindow popupWindow;
     private int prod_num = 1;
-    private ScrollView liner;
+    private RelativeLayout relative;
+
+
 
     @Override
     protected void initData() {
@@ -72,7 +74,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         img = intent.getStringExtra("img");
         price = intent.getStringExtra("price");
         productNum = prod_num;
-        url = "http://www.baidu.com";
+        url = intent.getStringExtra("url");
 
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
@@ -208,7 +210,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         addShop = (LinearLayout) findViewById(R.id.add_shop);
         btnAdd = (Button) findViewById(R.id.btn_add);
         buyCar = (ImageView) findViewById(R.id.buy_car);
-
+        relative = (RelativeLayout) findViewById(R.id.relative);
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
     }
 
@@ -241,14 +243,11 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
 
-<<<<<<< HEAD
-            CacheManger.getInstance().requestShortProductData();
-=======
+            ShopCacheManger.getInstance().requestShortProductData();
             ShopCacheManger.getInstance().requestShortProductData();
 
 
 
->>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
         }
 
     }
@@ -256,7 +255,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Override
     public void checkOneProductInventory(RegBean checkInventoryBean) {
         if (checkInventoryBean.getCode().equals("200")){
-            Toast.makeText(this, "1231232", Toast.LENGTH_SHORT).show();
             String result = checkInventoryBean.getResult();
             if (!result.equals("0")){
                 httpPresenter.postAddOneProduct(map);
@@ -271,7 +269,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         imageView.setLayoutParams(params);
 //        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
         Glide.with(DetailsActivity.this).load(url).into(imageView);
-        liner.addView(imageView);
+        relative.addView(imageView);
 
         //起始点坐标
         int[] startLoa = new int[2];

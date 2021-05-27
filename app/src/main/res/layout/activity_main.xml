@@ -92,16 +92,16 @@
     </LinearLayout>
 
 
-    <TextView
+    <com.example.electricityproject.view.CircleView
         android:gravity="center"
         android:textColor="@color/white"
         android:id="@+id/buy_car_num"
         android:layout_alignParentBottom="true"
+        android:visibility="invisible"
         android:layout_marginBottom="@dimen/dp_30"
         android:layout_marginLeft="@dimen/dp_300"
         android:layout_width="@dimen/dp_20"
-        android:layout_height="@dimen/dp_20"
-        android:background="@drawable/view_tytle"></TextView>
+        android:layout_height="@dimen/dp_20"></com.example.electricityproject.view.CircleView>
 
 
 </RelativeLayout>

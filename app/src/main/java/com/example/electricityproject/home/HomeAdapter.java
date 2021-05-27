@@ -167,6 +167,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",list.get(position).getFigure());
                         intent.putExtra("name",list.get(position).getName()+"");
                         intent.putExtra("price",list.get(position).getCover_price());
+                        intent.putExtra("url",list.get(position).getFigure());
                         intent.putExtra("productId",list.get(position).getProduct_id());
                         intent.putExtra("productPrice",list.get(position).getCover_price());
                         baseViewHolder.itemView.getContext().startActivity(intent);
@@ -194,6 +195,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("name",recommendInfoBeans.get(position).getName()+"");
                         intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
+                        intent.putExtra("url",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("productId",recommendInfoBeans.get(position).getProduct_id());
                         intent.putExtra("productPrice",recommendInfoBeans.get(position).getCover_price());
                         baseViewHolder.itemView.getContext().startActivity(intent);
@@ -220,6 +222,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
                         intent.putExtra("img",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("name",hotInfoBeans.get(position).getName()+"");
                         intent.putExtra("price",hotInfoBeans.get(position).getCover_price());
+                        intent.putExtra("url",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("productId",hotInfoBeans.get(position).getProduct_id());
                         intent.putExtra("productPrice",hotInfoBeans.get(position).getCover_price());
                         intent.putExtra("position", position);

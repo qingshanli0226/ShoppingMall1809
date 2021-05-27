@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.manager.BusinessUserManager;
-import com.example.manager.CacheManger;
+import com.example.manager.ShopCacheManger;
 
 public class AutoService extends Service implements BusinessUserManager.IUserLoginChanged{
 
@@ -30,7 +30,7 @@ public class AutoService extends Service implements BusinessUserManager.IUserLog
                     public void onAutoData(LogBean logBean) {
                         if (logBean.getCode().equals("200")) {
                             BusinessUserManager.getInstance().setIsLog(logBean);
-                            CacheManger.getInstance().requestShortProductData();
+                            ShopCacheManger.getInstance().requestShortProductData();
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
                             BusinessUserManager.getInstance().setLogList(logBean.getResult());
                         } else {

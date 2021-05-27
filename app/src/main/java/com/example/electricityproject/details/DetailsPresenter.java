@@ -13,6 +13,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -33,6 +35,23 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
                 .setAddOneProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (IView!=null){
+                            add(disposable);
+                            IView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (IView!=null){
+                            IView.hideLoading();
+                        }
+                    }
+                })
                 .subscribe(new Observer<AddOneProductBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -68,6 +87,23 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
                 .checkOneProductInventory(productId,productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (IView!=null){
+                            IView.showLoading();
+                            add(disposable);
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (IView!=null){
+                            IView.hideLoading();
+                        }
+                    }
+                })
                 .subscribe(new Observer<RegBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

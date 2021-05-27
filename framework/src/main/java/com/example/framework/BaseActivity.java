@@ -5,11 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.manager.BusinessNetManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener {
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -32,6 +33,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 
         toolBar.setToolbarListener(this);
+        BusinessNetManager.getInstance().RegisterConnect(this);
     }
 
     protected abstract void initData();
@@ -46,6 +48,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         destroy();
+        BusinessNetManager.getInstance().UnRegisterConnect(this);
     }
 
     public void destroy(){
@@ -67,6 +70,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 
     public void onRightTvClick() {
+
+    }
+
+    @Override
+    public void OnConnect() {
+
+    }
+
+    @Override
+    public void DisConnect() {
 
     }
 }

@@ -1,11 +1,11 @@
 package com.example.electricityproject.main;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +20,7 @@ import com.example.electricityproject.find.FindFragment;
 import com.example.electricityproject.home.HomeFragment;
 import com.example.electricityproject.person.PersonFragment;
 import com.example.electricityproject.shopp.ShoppingFragment;
+import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessBuyCarManger;
@@ -31,6 +32,7 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
+
     private HomeFragment homeFragment;
     private ClassifyFragment classifyFragment;
     private FindFragment findFragment;
@@ -45,7 +47,8 @@ public class MainActivity extends BaseActivity {
     private RadioButton btnKind;
     private RadioButton btnFind;
     private RadioButton btnPerson;
-    private android.widget.TextView buyCarNum;
+    private CircleView buyCarNum;
+
     private List<ShortcartProductBean.ResultBean> resultBeanList = new ArrayList<>();
 
 
@@ -90,8 +93,6 @@ public class MainActivity extends BaseActivity {
                         if (logBean == null) {
                             Toast.makeText(MainActivity.this, "用户未登录，请先登录", Toast.LENGTH_SHORT).show();
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
-                        } else {
-                            Toast.makeText(MainActivity.this, "用户已经登录", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case R.id.btn_person:
@@ -101,10 +102,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
         if (BusinessUserManager.getInstance().getIsLog()!=null && BusinessBuyCarManger.getInstance().getShortcartProductBean()!=null){
             ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
             buyCarNum.setVisibility(View.VISIBLE);
-            buyCarNum.setText(""+shortcartProductBean.getResult().size());
+            buyCarNum.setCurrentNum(""+shortcartProductBean.getResult().size());
         }else {
             buyCarNum.setVisibility(View.GONE);
         }
@@ -114,17 +116,16 @@ public class MainActivity extends BaseActivity {
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
                 resultBeanList = shortcartProductBean.getResult();
                 buyCarNum.setVisibility(View.VISIBLE);
-                buyCarNum.setText(""+resultBeanList.size());
+                buyCarNum.setCurrentNum(""+resultBeanList.size());
             }
         });
+        //判断是否登录
         BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
             @Override
             public void onLoginChange(LogBean isLog) {
                 if (isLog!=null){
                     buyCarNum.setVisibility(View.VISIBLE);
-                    buyCarNum.setText(""+resultBeanList.size());
-                }else {
-                    Toast.makeText(MainActivity.this, "123456", Toast.LENGTH_SHORT).show();
+                    buyCarNum.setCurrentNum(""+resultBeanList.size());
                 }
             }
         });
@@ -146,7 +147,7 @@ public class MainActivity extends BaseActivity {
         btnKind = (RadioButton) findViewById(R.id.btn_kind);
         btnFind = (RadioButton) findViewById(R.id.btn_find);
         btnPerson = (RadioButton) findViewById(R.id.btn_person);
-        buyCarNum = (TextView) findViewById(R.id.buy_car_num);
+        buyCarNum = (CircleView) findViewById(R.id.buy_car_num);
     }
 
     @Override
@@ -193,6 +194,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void showError(String error) {
-
+        Log.i("zx", "showError: "+error);
     }
+
 }

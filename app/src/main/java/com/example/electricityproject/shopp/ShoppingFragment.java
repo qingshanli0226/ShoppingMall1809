@@ -203,25 +203,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     requestOrderInfo.setSubject("buy");
                     ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
                     List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-//                    if (result!=null){
-//                        Log.i("oreder", "onClick: "+"购物车有数据");
-//                        for (int i = 0; i < result.size(); i++) {
-//                            if (result.get(i).isAll()){
-//                                Log.i("oreder", "onClick: "+"当前有选中的"+result.get(i).isAll());
-//                                B b = new B(result.get(i).getProductName(), result.get(i).getProductId());
-//                                bodyBeanList.add(b)
-//                                requestOrderInfo.setBody();
-//                                bodyBeanList.get(i).setProductId();
-//                                price = Float.parseFloat(price + result.get(i).getProductPrice());
-//                            }
-//                        }
-//                    }
-//                    requestOrderInfo.setBody(bodyBeanList);
-//                    requestOrderInfo.setTotalPrice(String.valueOf(price));
-//
-//                    if (bodyBeanList!=null){
-//                        httpPresenter.getOrderInfo(requestOrderInfo);
-//                    }
+
 
                 }else {
                     Intent intent = new Intent(getContext(), BindUserInfoActivity.class);
@@ -345,6 +327,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
 
         if (shortcartProductBean.getCode().equals("200")) {
+
             result = shortcartProductBean.getResult();
             loadingPage.showSuccessView();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
@@ -352,26 +335,32 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
+
         } else {
+
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
+
         }
     }
+
 
     //修改产品返回Bean
     @Override
     public void amendProductData(UpdateProductNumBean updateProductNumBean) {
+
         Log.i("zx", "amendProductData: " + updateProductNumBean.toString());
         if (updateProductNumBean.getCode().equals("200")) {
             shoppingAdapter.notifyDataSetChanged();
             count();
         }
-    }
 
+    }
+    //检查库存
     @Override
     public void CheckProductData(RegBean regBean) {
 
@@ -388,7 +377,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
 
 
-    //全选返回的Bean
+    // 单选和全选点击请求数据返回的数据
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
         list = selectAllProductBean;
@@ -425,7 +414,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             all.setImageResource(R.drawable.checkbox_unselected);
                             delAll.setImageResource(R.drawable.checkbox_unselected);
                         }
-
                     }
                     //全选
                     if (!isAllStr.equals("")) {
@@ -476,6 +464,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingMoney.setText("￥" + allPrice + "");
     }
 
+
     public void del () {
         if (isSelect) {
             httpPresenter.postSelectAllProductData(isSelect);
@@ -488,5 +477,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void onSelectBean(List<ShortcartProductBean.ResultBean> selectShopList) {
         Log.i("zx", "onSelectBean: "+selectShopList.toString());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

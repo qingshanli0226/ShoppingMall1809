@@ -28,11 +28,16 @@ import retrofit2.Response;
 
 
 public class ShopGlide {
+    // 删除最早存储的图片，然后再存储新的图片。
     private LruCache<String, Bitmap> menCache;
+    //在磁盘中存储图片的数据结构，它的逻辑和LruCache类似
     private com.jakewharton.disklrucache.DiskLruCache disCache;
+    //磁盘存储图片时，diskLruCache使用的目录
     private File cacheFileDir;
+
     private static ShopGlide shopGlide;
     private Handler handler=new Handler();
+    //创建一个缓存线程池，来负责从磁盘中读取或者写入Bitmap，还有网络下载图片
     private ExecutorService executorService= Executors.newCachedThreadPool();
     private boolean isInit;
 

@@ -9,6 +9,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class AutoPresenter extends BasePresenter<IAutoView> {
@@ -22,10 +24,26 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
                 .postAutoLogin(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (IView!=null){
+                            add(disposable);
+                            IView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (IView!=null){
+                            IView.hideLoading();
+                        }
+                    }
+                })
                 .subscribe(new Observer<LogBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        add(d);
                     }
 
                     @Override

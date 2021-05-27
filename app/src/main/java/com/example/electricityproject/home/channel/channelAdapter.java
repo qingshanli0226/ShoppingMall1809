@@ -18,7 +18,6 @@ public class channelAdapter extends BaseAdapter<HomeBean.ResultBean.ChannelInfoB
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, HomeBean.ResultBean.ChannelInfoBean itemData) {
-//        List<HomeBean.ResultBean.ChannelInfoBean> list= (List<HomeBean.ResultBean.ChannelInfoBean>) itemData;
         ImageView img = baseViewHolder.getView(R.id.channel_img);
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE +itemData.getImage()).init(img);
         TextView name = baseViewHolder.getView(R.id.channel_name);
