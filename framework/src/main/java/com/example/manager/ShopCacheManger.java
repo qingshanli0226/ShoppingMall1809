@@ -50,7 +50,7 @@ public class ShopCacheManger {
         onSelectShopList.remove(iSelectShop);
     }
 
-    public void setSelectList(ShortcartProductBean.ResultBean select) {
+    public void setSelect(ShortcartProductBean.ResultBean select) {
 
         if (select != null) {
             if (!selectList.contains(select)) {
@@ -62,6 +62,23 @@ public class ShopCacheManger {
                 if (!select.isAll()){
                     Log.i("zx", "setSelectList: 删除");
                     selectList.remove(select);
+                }
+            }
+        }
+    }
+    public void setSelectList(List<ShortcartProductBean.ResultBean> selectShortBeanList){
+        if (selectShortBeanList!=null){
+            for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
+                if (!selectList.contains(bean)){
+                    if (bean.isAll()){
+                        Log.i("zx", "setSelectList: 添加");
+                        selectList.add(bean);
+                    }
+                }else {
+                    if (!bean.isAll()){
+                        Log.i("zx", "setSelectList: 删除");
+                        selectList.remove(bean);
+                    }
                 }
             }
         }

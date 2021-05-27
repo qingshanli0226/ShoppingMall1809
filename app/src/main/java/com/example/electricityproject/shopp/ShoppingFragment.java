@@ -67,6 +67,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private ImageView isSelectImg;
     private String isAllStr="";
     private String isOneCheckStr="";
+
     private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
     @Override
     protected void initData() {
@@ -371,13 +372,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             result.get(selectPosition).setAll(false);
                             count();
                             shoppingAdapter.notifyItemChanged(selectPosition);
-                            ShopCacheManger.getInstance().setSelectList(result.get(selectPosition));
+                            ShopCacheManger.getInstance().setSelect(result.get(selectPosition));
                         } else {
                             isSelectImg.setImageResource(R.drawable.checkbox_selected);
                             result.get(selectPosition).setAll(true);
                             count();
                             shoppingAdapter.notifyItemChanged(selectPosition);
-                            ShopCacheManger.getInstance().setSelectList(result.get(selectPosition));
+                            ShopCacheManger.getInstance().setSelect(result.get(selectPosition));
                         }
 
                         //反选
@@ -415,12 +416,18 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             for (ShortcartProductBean.ResultBean bean : result) {
                                 bean.setAll(false);
                             }
+
                             count();
 
                         }
                         isAllStr = "";
+                        shoppingAdapter.notifyDataSetChanged();
+                        for (ShortcartProductBean.ResultBean bean : result) {
+                            ShopCacheManger.getInstance().setSelect(bean);
+                        }
+
                     }
-                    shoppingAdapter.notifyDataSetChanged();
+
                 }
 
             }
