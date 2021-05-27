@@ -152,95 +152,114 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_80"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_height="80dp">
 
         <LinearLayout
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="5">
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true">
 
             <LinearLayout
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="5">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/main_user"></ImageView>
+                <LinearLayout
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:text="@string/contact"></TextView>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/main_user"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/contact"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/good_uncollected"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/collect"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/toShopCar"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_good_detail_cart"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/shoppingTrolley"></TextView>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="3"
+                android:background="@drawable/button_false"
                 android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/good_uncollected"></ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:text="@string/collect"></TextView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/toShopCar"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_good_detail_cart"></ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:text="@string/shoppingTrolley"></TextView>
-
-            </LinearLayout>
+                android:id="@+id/particulars_add"
+                android:text="@string/AddToCart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_20"></TextView>
 
         </LinearLayout>
 
         <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@drawable/button_false"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:text="0"
+            android:id="@+id/particulars_label"
             android:gravity="center"
-            android:id="@+id/particulars_add"
-            android:text="@string/AddToCart"
+            android:visibility="visible"
             android:textColor="@color/white"
-            android:textSize="@dimen/dp_20"></TextView>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_150"
+            android:background="@drawable/text_background"></TextView>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

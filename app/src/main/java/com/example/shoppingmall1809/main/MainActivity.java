@@ -172,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         actHomeLl = (LinearLayout) findViewById(R.id.act_home_ll);
         actRadioGroup = (RadioGroup) findViewById(R.id.act_radio_group);
         label = (TextView) findViewById(R.id.label);
+
+        requestPermissions(new String[]{"android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"},100);
     }
 
     @Override
@@ -182,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
 
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
-        LogUtils.e(result.size());
         showLabel(result);
     }
 

@@ -3,7 +3,8 @@
     package="com.example.shoppingcar">
 
     <application>
-        <activity android:name=".user.findforpay.FindForPayActivity"></activity>
+        <activity android:name=".shoppingtrolley.ShoppingCarActivity"></activity>
+        <activity android:name=".user.findforpay.FindForPayActivity" />
     </application>
 
 </manifest>

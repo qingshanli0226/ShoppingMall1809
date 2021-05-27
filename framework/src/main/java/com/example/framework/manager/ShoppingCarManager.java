@@ -183,10 +183,6 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
         }
     }
 
-
-
-
-
     private void getShoppingData() {
         RetrofitCreator.getShopApiService()
                 .getShoppingTrolley()

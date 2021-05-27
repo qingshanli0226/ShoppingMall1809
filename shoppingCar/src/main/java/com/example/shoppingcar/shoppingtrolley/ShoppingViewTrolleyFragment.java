@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.commom.LogUtils;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.DeleteBean;
+import com.example.net.model.LoginBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
@@ -22,7 +24,7 @@ import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShoppingCarManager.IShoppingCar {
+public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView, ShoppingCarManager.IShoppingCar{
     private ToolBar toolbar;
     private RecyclerView shoppingTrolleyRv;
     private CheckBox checkAll;
@@ -32,7 +34,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     private boolean isCheck = false;
     private List<ShoppingTrolleyBean.ResultBean> result = new ArrayList<>();
     private CheckBox checkBox;
-    private int position;
+    private int position=-1;
     private boolean isRequest = true;
     private boolean isDelete = false;
     private RelativeLayout shopDeletLayout;
@@ -210,7 +212,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             List<ShoppingTrolleyBean.ResultBean> result = shoppingTrolleyBean.getResult();
             Toast.makeText(getActivity(), "判断库存", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     //加减库存
@@ -254,7 +255,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
     }
 
-    //toolber的点击事件 判断是否显示删除
+    //toolbar的点击事件 判断是否显示删除
     @Override
     public void onRightTitle() {
         if (!isDelete) {
@@ -290,12 +291,14 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             vain.setVisibility(View.GONE);
             this.result = result;
             if (isOneNotifyDataSetChanged) {
+                if(position==-1){
+                    shoppingCarAdapter.notifyDataSetChanged();
+                    return;
+                }
                 shoppingCarAdapter.notifyItemChanged(position);
             }else {
                 shoppingCarAdapter.notifyDataSetChanged();
             }
         }
     }
-
-
 }

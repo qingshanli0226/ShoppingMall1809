@@ -39,7 +39,9 @@ import com.example.shoppingcar.addOneProduct.AddOnrProductPresenter;
 import com.example.shoppingcar.addOneProduct.IAddOneProduct;
 import com.example.shoppingmall1809.R;
 
-public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> implements IAddOneProduct {
+import java.util.List;
+
+public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> implements IAddOneProduct, ShoppingCarManager.IShoppingCar {
     private ToolBar toolbar;
     private ImageView particularsImg;
     private TextView particularsText;
@@ -55,6 +57,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     private String url;
     private int num = 1;
     private RelativeLayout particularsRe;
+    private TextView particularsLabel;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +67,12 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     @Override
     protected void initData() {
         Intent intent = getIntent();
+
+        ShoppingCarManager.getInstance().register(this::onShoppingCar);
+        List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
+        if (result != null) {
+            showLabel(result);
+        }
 
         int code = intent.getIntExtra("code", 0);
         if (code == 1) {
@@ -83,6 +92,13 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         Glide.with(this).load(url).into(particularsImg);
         particularsText.setText(productName);
         particularsPrice.setText("￥" + productPrice);
+
+        toShopCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ARouter.getInstance().build(ShopConstants.SHOP_CAR).navigation();
+            }
+        });
 
         particularsAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +197,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         particularsAdd = (TextView) findViewById(R.id.particulars_add);
         tou = (View) findViewById(R.id.tou);
         particularsRe = (RelativeLayout) findViewById(R.id.particulars_re);
+        particularsLabel = (TextView) findViewById(R.id.particulars_label);
     }
 
     @Override
@@ -225,6 +242,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         this.url = Constants.BASE_URl_IMAGE + url;
     }
 
+    //添加商品
     @Override
     public void onAddOneProduct(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
@@ -238,6 +256,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         }
     }
 
+    //贝塞尔曲线
     private void path() {
         textView = new TextView(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(50,50);
@@ -252,14 +271,10 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         int[] startLocation = new int[2];
         startLocation[0]=800;
         startLocation[1]=1680;
-//        particularsAdd.getLocationInWindow(startLocation);
-        LogUtils.e(startLocation[0],startLocation[1]);
 
         int[] endLocation = new int[2];
         endLocation[0]=550;
         endLocation[1]=1680;
-//        toShopCar.getLocationInWindow(endLocation);
-        LogUtils.e(endLocation[0],endLocation[1]);
 
         int[] controlLocation=new int[2];
         controlLocation[0]=700;
@@ -315,6 +330,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         valueAnimator.start();
     }
 
+    //判断商品库存
     @Override
     public void onCheckOneProductInventory(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
@@ -326,6 +342,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         }
     }
 
+    //修改商品数量
     @Override
     public void onUpDateProductNum(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
@@ -351,6 +368,15 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         return resultBean;
     }
 
+    private void showLabel(List<ShoppingTrolleyBean.ResultBean> result) {
+        if (result.size()<=0){
+            particularsLabel.setVisibility(View.GONE);
+        }else {
+            particularsLabel.setVisibility(View.VISIBLE);
+            particularsLabel.setText(result.size()+"");
+        }
+    }
+
     @Override
     public void showLoading() {
 
@@ -364,5 +390,16 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     @Override
     public void Error(String error) {
         Toast.makeText(this, "" + error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
+        showLabel(result);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
     }
 }
