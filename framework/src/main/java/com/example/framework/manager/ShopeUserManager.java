@@ -45,4 +45,10 @@ public class ShopeUserManager {
         }
         return shopeUserManager;
     }
+
+    public void addPhoneAddress(String phone,String address){
+        LoginBean.ResultBean result = loginBean.getResult();
+        result.setPhone(phone);
+        result.setAddress(address);
+    }
 }

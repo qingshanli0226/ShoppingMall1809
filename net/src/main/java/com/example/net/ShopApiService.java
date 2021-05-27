@@ -98,5 +98,13 @@ public interface ShopApiService {
     @GET("crash")
     Observable<FindForBean> getCrash(@FieldMap HashMap<String,String> params);
 
+    //更新用户绑定的电话
+    @POST("updatePhone")
+    @FormUrlEncoded
+    Observable<RegisterBean> getUpDataPhone(@Field("phone")String phone);
 
+    //更新地址的接口
+    @POST("updateAddress")
+    @FormUrlEncoded
+    Observable<RegisterBean> getUpDataAddress(@Field("address")String address);
 }

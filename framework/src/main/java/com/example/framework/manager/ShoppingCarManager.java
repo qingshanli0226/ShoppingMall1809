@@ -183,6 +183,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //刷新接口回调
     public synchronized void refreshData() {
         for (IShoppingCar iShoppingCar : list) {
+            iShoppingCar.onShoppingCarAdapter(result);
             iShoppingCar.onShoppingCar(result);
         }
     }

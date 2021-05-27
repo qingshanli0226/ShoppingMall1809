@@ -49,8 +49,6 @@ public class ShopManager {
                 notifyConnectChanged();
             }
         }
-
-
     };
 
     private void notifyConnectChanged() {

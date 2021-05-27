@@ -3,7 +3,8 @@
     package="com.example.user">
 
     <application>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".address.ShoppingAddressActivity"></activity>
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

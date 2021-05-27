@@ -65,7 +65,7 @@ public class ShopService extends Service {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Toast.makeText(ShopService.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ShopService.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
