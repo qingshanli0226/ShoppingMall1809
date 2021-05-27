@@ -73,7 +73,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         img = intent.getStringExtra("img");
         price = intent.getStringExtra("price");
         productNum = prod_num;
-        url = "http://www.baidu.com";
+        url = intent.getStringExtra("url");
 
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");

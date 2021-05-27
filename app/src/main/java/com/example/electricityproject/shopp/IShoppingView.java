@@ -1,5 +1,6 @@
 package com.example.electricityproject.shopp;
 
+import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
@@ -19,5 +20,5 @@ interface IShoppingView extends IBaseView {
     void removeOneShop(RemoveOneProductBean removeOneProductBean);
     void removeManyShop(RemoveManyProductBean removeManyProductBean);
     void getOrderInfoData(OrderInfoBean orderInfoBean);
-
+    void checkInventory(CheckInventoryBean checkInventoryBean);
 }

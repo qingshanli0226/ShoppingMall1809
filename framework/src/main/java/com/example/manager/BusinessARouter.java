@@ -5,9 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 
 public class BusinessARouter {
+
     private iUserManager userManager;
     private iAppManager appManager;
     private iPayManager payManager;
+
     public BusinessARouter() {
     }
     private static BusinessARouter businessARouter;

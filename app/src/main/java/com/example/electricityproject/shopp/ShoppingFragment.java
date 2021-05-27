@@ -1,6 +1,7 @@
 package com.example.electricityproject.shopp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,18 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.SpUtils;
+import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
+import com.example.common.bean.OrderBean;
 import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
 import com.example.common.bean.RequestOrderInfo;
 import com.example.common.bean.SelectAllProductBean;
+import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.shopp.orderdetails.OrderDetailsActivity;
 import com.example.electricityproject.shopp.userinfo.BindUserInfoActivity;
 import com.example.framework.BaseFragment;
+import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
@@ -68,6 +74,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private String isOneCheckStr="";
 
     private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
+    private List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
+    private List<ShortcartProductBean.ResultBean> notEnoughList=new ArrayList<>();
+
     private List<RequestOrderInfo.BodyBean> bodyBeanList = new ArrayList<>();
     @Override
     protected void initData() {
@@ -83,6 +92,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     shoppingAdapter.updateData(shortcartProductBean.getResult());
                     buyCarRv.setAdapter(shoppingAdapter);
                     shoppingAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
+            @Override
+            public void onLoginChange(LogBean isLog) {
+                if (isLog!=null){
+                    ShopCacheManger.getInstance().requestShortProductData();
+                }else {
+                    Toast.makeText(getContext(), "当前未登录", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -200,13 +220,21 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             @Override
             public void onClick(View v) {
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
-                    float price = 0;
-                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
-                    requestOrderInfo.setSubject("buy");
 
-                    List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
+                    selectList = ShopCacheManger.getInstance().getSelectList();
                     if (selectList.size() > 0){
-
+                        List<OrderBean> orderBeanList = new ArrayList<>();
+                        for (ShortcartProductBean.ResultBean resultBean : selectList) {
+                            OrderBean orderBean = new OrderBean();
+                            orderBean.setProductId(resultBean.getProductId());
+                            orderBean.setProductName(resultBean.getProductName());
+                            orderBean.setProductNum(resultBean.getProductNum());
+                            orderBean.setUrl(resultBean.getUrl());
+                            orderBeanList.add(orderBean);
+                        }
+                        if (orderBeanList!=null){
+                            httpPresenter.checkInventory(orderBeanList);
+                        }
                     }else {
                         Toast.makeText(getContext(), "未选中商品", Toast.LENGTH_SHORT).show();
                     }
@@ -261,10 +289,62 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingAdapter.notifyDataSetChanged();
     }
 
+    //向服务器下订单
     @Override
     public void getOrderInfoData(OrderInfoBean orderInfoBean) {
-        if (orderInfoBean.getCode().equals("200")){
-            Toast.makeText(getContext(), ""+orderInfoBean.getResult().getOrderInfo(), Toast.LENGTH_SHORT).show();
+        if(orderInfoBean.getCode().equals("200")){
+            loadingPage.showSuccessView();
+            String outTradeNo = orderInfoBean.getResult().getOutTradeNo();
+            String orderInfo = orderInfoBean.getResult().getOrderInfo();
+            Log.i("www", "getOrderInfoData: "+orderInfoBean.getResult().getOrderInfo());
+            Log.i("www", "getOrderInfoData: "+orderInfoBean.getResult().getOutTradeNo());
+            BusinessARouter.getInstance().getPayManager().OpenPayActivity(getContext(),null);
+        }else {
+            Toast.makeText(getContext(), ""+orderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void checkInventory(CheckInventoryBean checkInventoryBean) {
+        if(checkInventoryBean.getCode().equals("200")){
+            loadingPage.showSuccessView();
+            List<CheckInventoryBean.ResultBean> result = checkInventoryBean.getResult();
+            int i = result.size();
+            boolean isEnough=true;
+
+            for (int j = 0; j < result.size(); j++) {
+                if(Integer.parseInt(result.get(j).getProductNum())<Integer.parseInt(selectList.get(j).getProductNum())){
+                    isEnough=false;
+                    notEnoughList.add(selectList.get(j));
+                    Log.i("Check", "onCheckOk: "+result.get(j).getProductName());
+                }
+            }
+            if(isEnough){
+                List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
+                List<SelectOrderBean> list = ShopCacheManger.getInstance().getList();
+                for (ShortcartProductBean.ResultBean resultBean : selectList) {
+                    SelectOrderBean selectOrderBean = new SelectOrderBean(resultBean.getUrl(), resultBean.getProductName(), resultBean.getProductPrice(), resultBean.getProductNum());
+                    list.add(selectOrderBean);
+                }
+                ShopCacheManger.getInstance().setList(list);
+
+                LogBean.ResultBean result1 = BusinessUserManager.getInstance().getIsLog().getResult();
+                Intent intent = new Intent(getContext(), OrderDetailsActivity.class);
+                intent.putExtra("username",result1.getName());
+                intent.putExtra("address", (String) result1.getAddress());
+                intent.putExtra("phone", (String) result1.getPhone());
+                if (list!=null){
+                    startActivity(intent);
+                }
+            }else {
+                String notEnough="";
+                for (ShortcartProductBean.ResultBean resultBean : notEnoughList) {
+                    notEnough+=resultBean.getProductName()+"    ";
+                }
+                Toast.makeText(getContext(), notEnough+"库存不足", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            Toast.makeText(getContext(), ""+checkInventoryBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -298,8 +378,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
-
-
 
     }
 
@@ -371,9 +449,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             return;
         }
     }
-
-
-
 
     //全选返回的Bean
     @Override

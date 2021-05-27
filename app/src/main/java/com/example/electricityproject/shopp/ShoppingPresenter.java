@@ -3,18 +3,21 @@ package com.example.electricityproject.shopp;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.bean.CheckInventoryBean;
+import com.example.common.bean.OrderBean;
 import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
-import com.example.common.bean.RequestOrderInfo;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
 import com.example.framework.BasePresenter;
+import com.example.manager.ShopCacheManger;
 import com.example.net.RetrofitCreate;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,6 +81,54 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                         if (IView != null) {
                             IView.showError(e.getMessage());
                         }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //检查选中的商品库存
+    public void checkInventory(List<OrderBean> list) {
+        JSONArray jsonArray = new JSONArray();
+        try {
+            for (OrderBean orderBean : list) {
+                JSONObject object = new JSONObject();
+                object.put("productId",orderBean.getProductId());
+                object.put("productNum",orderBean.getProductNum());
+                object.put("productName",orderBean.getProductName());
+                object.put("url",orderBean.getUrl());
+                jsonArray.put(object);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonArray.toString());
+        RetrofitCreate.getFiannceApiService().setCheckInventory(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        IView.showLoading();
+                    }
+                })
+                .subscribe(new Observer<CheckInventoryBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CheckInventoryBean bean) {
+                        IView.checkInventory(bean);
+                        LogUtils.json(bean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                     }
 
                     @Override
@@ -286,9 +337,25 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 });
     }
 
-    public void getOrderInfo(RequestOrderInfo requestOrderInfo){
-        String json = new Gson().toJson(requestOrderInfo);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+    public void getOrderInfo(List<ShortcartProductBean.ResultBean> list){
+
+        JSONObject object = new JSONObject();
+        JSONArray body = new JSONArray();
+        try {
+            object.put("subject","buy");
+            object.put("totalPrice", ShopCacheManger.getInstance().getMoneyValue()+"");
+            for (ShortcartProductBean.ResultBean resultBean : list) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("productName",resultBean.getProductName());
+                jsonObject.put("productId",resultBean.getProductId());
+                body.put(jsonObject);
+            }
+            object.put("body",body);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), object.toString());
 
         RetrofitCreate.getFiannceApiService()
                 .GetOrderInfo(requestBody)

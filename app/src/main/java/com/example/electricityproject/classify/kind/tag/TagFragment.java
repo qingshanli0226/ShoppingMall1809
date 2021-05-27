@@ -13,7 +13,6 @@ import java.util.List;
 
 public class TagFragment extends BaseFragment<TagPresenter> implements ITagView {
 
-
     private RecyclerView tagRv;
 
     @Override

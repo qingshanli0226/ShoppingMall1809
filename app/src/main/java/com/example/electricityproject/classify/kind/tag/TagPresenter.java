@@ -1,5 +1,7 @@
 package com.example.electricityproject.classify.kind.tag;
 
+import android.util.Log;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.ClassifyBean;
 import com.example.framework.BasePresenter;
@@ -11,8 +13,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public
-class TagPresenter extends BasePresenter<ITagView> {
+public class TagPresenter extends BasePresenter<ITagView> {
 
     public TagPresenter(ITagView iTagView) {
         attachView(iTagView);
@@ -34,6 +35,7 @@ class TagPresenter extends BasePresenter<ITagView> {
                         if (IView!=null){
                             IView.onTagData(classifyBean);
                             LogUtils.json(classifyBean);
+                            Log.i("zrfs", "onNext: "+classifyBean.getResult().toString());
                         }
                     }
 

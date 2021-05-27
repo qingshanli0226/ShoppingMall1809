@@ -62,5 +62,13 @@ public class ClassifyBean {
         public void setTag_id(String tag_id) {
             this.tag_id = tag_id;
         }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "name='" + name + '\'' +
+                    ", tag_id='" + tag_id + '\'' +
+                    '}';
+        }
     }
 }

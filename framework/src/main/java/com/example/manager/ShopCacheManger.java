@@ -6,6 +6,7 @@ import android.util.Log;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
+import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.net.RetrofitCreate;
 
@@ -30,6 +31,8 @@ public class ShopCacheManger {
     private List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
 
     private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>();
+
+    private List<SelectOrderBean> list = new ArrayList<>();
 
 
     public synchronized static ShopCacheManger getInstance() {
@@ -66,6 +69,15 @@ public class ShopCacheManger {
             }
         }
     }
+
+    public List<SelectOrderBean> getList() {
+        return list;
+    }
+
+    public void setList(List<SelectOrderBean> list) {
+        this.list = list;
+    }
+
     public void setSelectList(List<ShortcartProductBean.ResultBean> selectShortBeanList){
         if (selectShortBeanList!=null){
             for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
@@ -100,7 +112,17 @@ public class ShopCacheManger {
         }
     }
 
-
+    public String getMoneyValue() {
+        float sumPrice=0;
+        for (ShortcartProductBean.ResultBean resultBean : shortBeanList) {
+            if(resultBean.isAll()){
+                float productPrice=Float.parseFloat(resultBean.getProductPrice()+"");
+                int productNum=Integer.parseInt(resultBean.getProductNum());
+                sumPrice=sumPrice+productPrice*productNum;
+            }
+        }
+        return String.valueOf(sumPrice);
+    }
 
 
     public void init(Context application){
