@@ -33,23 +33,23 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void initListener() {
         super.initListener();
-        adapter.setiRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener(){
+        adapter.setiRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
 
             @Override
             public void onItemClick(int position) {
                 CacheMessage messageBean = messageBeans.get(position);
-                if(messageBean.getIsNew()){
+                if (messageBean.getIsNew()) {
                     messageBean.setIsNew(false);
                     MSGManager.getInstance().updateMessage(messageBean, new MSGManager.IMessageListener() {
                         @Override
                         public void onResult(boolean isSuccess, List<CacheMessage> messageBeanList) {
-                            if(isSuccess){
+                            if (isSuccess) {
                                 Toast.makeText(MessageActivity.this, "确认消息", Toast.LENGTH_SHORT).show();
                                 adapter.updateData(messageBeans);
                             }
                         }
                     });
-                }else {
+                } else {
                     Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -90,7 +90,7 @@ public class MessageActivity extends BaseActivity {
     protected void initView() {
         rvMessage = (RecyclerView) findViewById(R.id.rv_message);
         rvMessage.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new MessageAdapter();
+        adapter = new MessageAdapter();
         rvMessage.setAdapter(adapter);
     }
 

@@ -5,47 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <com.example.framework.view.ToolBar
+            android:id="@+id/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:visibility="gone"
-            ></com.example.framework.view.ToolBar>
+            android:visibility="gone"></com.example.framework.view.ToolBar>
 
 
         <FrameLayout
 
+            android:id="@+id/mainFram"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8.8"
-            android:id="@+id/mainFram"
-            ></FrameLayout>
+            android:layout_weight="8.8"></FrameLayout>
 
         <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/mainCommon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/mainCommon"
             android:layout_weight="1.2"
             app:tl_textSelectColor="#FF3D27"
-            app:tl_textUnselectColor="#797373"
-            ></com.flyco.tablayout.CommonTabLayout>
+            app:tl_textUnselectColor="#797373"></com.flyco.tablayout.CommonTabLayout>
     </LinearLayout>
+
     <TextView
+        android:id="@+id/mainSign"
         android:layout_width="@dimen/dp_20"
         android:layout_height="@dimen/dp_20"
-        android:background="@drawable/sign"
-        android:textColor="#fff"
-        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:id="@+id/mainSign"
-        android:visibility="gone"
-        android:layout_marginBottom="@dimen/dp_40"
         android:layout_marginLeft="@dimen/dp_310"
-        />
+        android:layout_marginBottom="@dimen/dp_40"
+        android:background="@drawable/sign"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:visibility="gone" />
 
 </RelativeLayout>

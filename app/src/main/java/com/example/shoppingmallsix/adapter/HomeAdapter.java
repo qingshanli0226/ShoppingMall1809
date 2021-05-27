@@ -39,7 +39,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
     private final int HOTT_TYPE = 5;
     private Context context;
 
-    public HomeAdapter(List<Object> list,Context context){
+    public HomeAdapter(List<Object> list, Context context) {
         setDataList(list);
         this.context = context;
     }
@@ -48,7 +48,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
     public int getLayoutId(int viewType) {
 
         int layoutId = -1;
-        switch (viewType){
+        switch (viewType) {
             case BANNER_TYPE:
                 layoutId = R.layout.home_banner;
                 break;
@@ -77,10 +77,11 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, Object itemData) {
-        switch (position){
+        switch (position) {
             case 0:
                 List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemData;
-                if (BuildConfig.DEBUG) Log.d("HomeAdapter", "bannerInfoBeans:" + bannerInfoBeans.toString());
+                if (BuildConfig.DEBUG)
+                    Log.d("HomeAdapter", "bannerInfoBeans:" + bannerInfoBeans.toString());
                 Banner banner = holder.getView(R.id.banner);
                 banner.setImages(bannerInfoBeans);
                 banner.setImageLoader(new ImageLoader() {
@@ -91,7 +92,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                         String image = bean.getImage();
 
                         Glide.with(holder.itemView)
-                                .load(Constants.BASE_URl_IMAGE+image)
+                                .load(Constants.BASE_URl_IMAGE + image)
                                 .into(imageView);
 
                     }
@@ -104,7 +105,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 List<HomeBean.ResultBean.ChannelInfoBean> channelInfoBeans = (List<HomeBean.ResultBean.ChannelInfoBean>) itemData;
                 RecyclerView recyclerView = holder.getView(R.id.recommendRv);
 
-                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL));
                 ChanneAdapter channeAdapter = new ChanneAdapter();
                 recyclerView.setAdapter(channeAdapter);
                 channeAdapter.dataList.addAll(channelInfoBeans);
@@ -130,7 +131,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
                     ImageView imageView = new ImageView(holder.itemView.getContext());
-                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+actInfoBean.getIcon_url())
+                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url())
                             .error(R.drawable.animation_loading)
                             .into(imageView);
                     imageViews.add(imageView);
@@ -158,10 +159,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
-                        intent.putExtra("id",seckillInfoBeans.get(position).getProduct_id());
-                        intent.putExtra("name",seckillInfoBeans.get(position).getName());
-                        intent.putExtra("figure",seckillInfoBeans.get(position).getFigure());
-                        intent.putExtra("price",seckillInfoBeans.get(position).getCover_price());
+                        intent.putExtra("id", seckillInfoBeans.get(position).getProduct_id());
+                        intent.putExtra("name", seckillInfoBeans.get(position).getName());
+                        intent.putExtra("figure", seckillInfoBeans.get(position).getFigure());
+                        intent.putExtra("price", seckillInfoBeans.get(position).getCover_price());
                         holder.itemView.getContext().startActivity(intent);
                     }
 
@@ -174,7 +175,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
             case 4:
                 List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans = (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;
                 RecyclerView recommendRecyclerView = holder.getView(R.id.recommendRv);
-                recommendRecyclerView.setLayoutManager(new GridLayoutManager(context,3));
+                recommendRecyclerView.setLayoutManager(new GridLayoutManager(context, 3));
                 RecommendAdapter recommendAdapter = new RecommendAdapter();
                 recommendRecyclerView.setAdapter(recommendAdapter);
                 recommendAdapter.dataList.addAll(recommendInfoBeans);
@@ -182,10 +183,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
-                        intent.putExtra("id",recommendInfoBeans.get(position).getProduct_id());
-                        intent.putExtra("name",recommendInfoBeans.get(position).getName());
-                        intent.putExtra("figure",recommendInfoBeans.get(position).getFigure());
-                        intent.putExtra("price",recommendInfoBeans.get(position).getCover_price());
+                        intent.putExtra("id", recommendInfoBeans.get(position).getProduct_id());
+                        intent.putExtra("name", recommendInfoBeans.get(position).getName());
+                        intent.putExtra("figure", recommendInfoBeans.get(position).getFigure());
+                        intent.putExtra("price", recommendInfoBeans.get(position).getCover_price());
                         holder.itemView.getContext().startActivity(intent);
                     }
 
@@ -198,7 +199,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
             case 5:
                 List<HomeBean.ResultBean.HotInfoBean> hotInfoBeans = (List<HomeBean.ResultBean.HotInfoBean>) itemData;
                 RecyclerView hotRecyclerView = holder.getView(R.id.hotRv);
-                hotRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+                hotRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 HotAdapter hotAdapter = new HotAdapter();
                 hotRecyclerView.setAdapter(hotAdapter);
                 hotAdapter.dataList.addAll(hotInfoBeans);
@@ -206,10 +207,10 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                     @Override
                     public void onItemClick(int position) {
                         Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
-                        intent.putExtra("id",hotInfoBeans.get(position).getProduct_id());
-                        intent.putExtra("name",hotInfoBeans.get(position).getName());
-                        intent.putExtra("figure",hotInfoBeans.get(position).getFigure());
-                        intent.putExtra("price",hotInfoBeans.get(position).getCover_price());
+                        intent.putExtra("id", hotInfoBeans.get(position).getProduct_id());
+                        intent.putExtra("name", hotInfoBeans.get(position).getName());
+                        intent.putExtra("figure", hotInfoBeans.get(position).getFigure());
+                        intent.putExtra("price", hotInfoBeans.get(position).getCover_price());
                         holder.itemView.getContext().startActivity(intent);
                     }
 
@@ -239,7 +240,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 hours.setText(getTv(mHour));
                 minutes.setText(getTv(mMin));
                 seconds.setText(getTv(mSecond));
-                if (mSecond == 0 && mHour == 0 && mMin == 0 ) {
+                if (mSecond == 0 && mHour == 0 && mMin == 0) {
                     timer.cancel();
                 }
             }
@@ -274,14 +275,14 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 timeHandler.sendMessage(message);
             }
         };
-        timer.schedule(mTimerTask,0,1000);
+        timer.schedule(mTimerTask, 0, 1000);
     }
 
-    private String getTv(long l){
-        if(l>=10){
-            return l+"";
-        }else{
-            return "0"+l;//小于10,,前面补位一个"0"
+    private String getTv(long l) {
+        if (l >= 10) {
+            return l + "";
+        } else {
+            return "0" + l;//小于10,,前面补位一个"0"
         }
     }
 
@@ -290,7 +291,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
         int type = -1;
 
-        switch (position){
+        switch (position) {
             case 0:
                 type = BANNER_TYPE;
                 break;

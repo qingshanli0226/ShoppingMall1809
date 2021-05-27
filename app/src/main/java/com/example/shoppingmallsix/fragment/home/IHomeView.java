@@ -7,5 +7,4 @@ public interface IHomeView  extends IBaseView {
 
     void getHomeData(HomeBean homeBean);
 
-
 }

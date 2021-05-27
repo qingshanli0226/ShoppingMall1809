@@ -18,7 +18,7 @@ public class ChanneAdapter extends BaseRvAdapter<HomeBean.ResultBean.ChannelInfo
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.ChannelInfoBean itemData) {
         Glide.with(holder.itemView.getContext())
-                .load(Constants.BASE_URl_IMAGE+itemData.getImage())
+                .load(Constants.BASE_URl_IMAGE + itemData.getImage())
                 .into((ImageView) holder.getView(R.id.channelImage));
 
         TextView view = holder.getView(R.id.nameTv);

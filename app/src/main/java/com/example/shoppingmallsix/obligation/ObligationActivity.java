@@ -8,6 +8,7 @@ import com.example.shoppingmallsix.R;
 
 public class ObligationActivity extends BaseActivity {
     private ToolBar toolbar;
+
     @Override
     protected void initPresenter() {
 
@@ -20,8 +21,6 @@ public class ObligationActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
 
         toolbar.setOnClickListener(new View.OnClickListener() {

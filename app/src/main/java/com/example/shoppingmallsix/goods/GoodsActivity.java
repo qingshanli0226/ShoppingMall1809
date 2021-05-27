@@ -26,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
@@ -96,7 +95,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         handler.sendEmptyMessageDelayed(1, 1000);
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
-        if (loginBean1 != null){
+        if (loginBean1 != null) {
             List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
             if (result.size() != 0) {
                 goodsSign.setVisibility(View.VISIBLE);
@@ -104,6 +103,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             }
         }
     }
+
     @Override
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
@@ -132,7 +132,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             public void onClick(View view) {
 
                 LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
-                if (loginBean1 != null){
+                if (loginBean1 != null) {
                     List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
                     if (result.size() != 0) {
                         goodsSign.setVisibility(View.VISIBLE);
@@ -305,8 +305,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     }
 
 
-
-
     //子线程获取数据 实时刷新
     private Handler handler = new Handler() {
         @Override
@@ -318,7 +316,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
                 if (result != null && result.size() != 0) {
                     //获取内存数据
                     resultBeans.addAll(result);
-                    LogUtils.json(resultBeans);
                     goodsSign.setVisibility(View.VISIBLE);
                     goodsSign.setText(result.size() + "");
                 }
@@ -334,12 +331,14 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             //红点刷新数量
             goodsSign.setVisibility(View.VISIBLE);
             goodsSign.setText(resultBeanList.size() + "");
+        } else {
+            goodsSign.setVisibility(View.GONE);
         }
     }
 
     private void showBeisaierAnim() {
         ImageView imageView = new ImageView(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100,100);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
         imageView.setLayoutParams(layoutParams);
         imageView.setImageResource(R.drawable.sign);
         rootView.addView(imageView);
@@ -360,13 +359,13 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         controlLocation2[1] = 500;
 
         Path path = new Path();
-        path.moveTo(startLoacation[0],startLoacation[1]);
-        path.cubicTo(controlLocation[0],controlLocation[1],controlLocation2[0],controlLocation2[1],endLocation[0],endLocation[1]);
-        PathMeasure pathMeasure = new PathMeasure(path,false);//是计算控件下一次要移动到的位置坐标
+        path.moveTo(startLoacation[0], startLoacation[1]);
+        path.cubicTo(controlLocation[0], controlLocation[1], controlLocation2[0], controlLocation2[1], endLocation[0], endLocation[1]);
+        PathMeasure pathMeasure = new PathMeasure(path, false);//是计算控件下一次要移动到的位置坐标
 
         //使用属性动画
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,pathMeasure.getLength());
-        valueAnimator.setDuration(3*1000);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+        valueAnimator.setDuration(3 * 1000);
         valueAnimator.setInterpolator(new LinearInterpolator());
 
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -376,14 +375,14 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
                 float value = (float) animation.getAnimatedValue();
 
                 float[] nextLocation = new float[2];
-                pathMeasure.getPosTan(value,nextLocation,null);
+                pathMeasure.getPosTan(value, nextLocation, null);
                 imageView.setTranslationX(nextLocation[0]);//让控件移动到下一个X，Y坐标处
                 imageView.setTranslationY(nextLocation[1]);
 
-                float percent = value/pathMeasure.getLength();
-                imageView.setAlpha(1-percent);
-                imageView.setScaleX(2*percent);
-                imageView.setScaleY(2*percent);
+                float percent = value / pathMeasure.getLength();
+                imageView.setAlpha(1 - percent);
+                imageView.setScaleX(2 * percent);
+                imageView.setScaleY(2 * percent);
             }
         });
 

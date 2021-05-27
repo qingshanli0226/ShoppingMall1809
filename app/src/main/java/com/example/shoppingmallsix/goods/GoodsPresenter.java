@@ -24,17 +24,16 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
         attachView(iDetailView);
     }
 
-    public void addOneProduct(String productId,String productNum,String productName,
-                              String url,String productPrice){
+    public void addOneProduct(String productId, String productNum, String productName, String url, String productPrice) {
 
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("productId",productId);
-            jsonObject.put("productNum",productNum);
-            jsonObject.put("productName",productName);
-            jsonObject.put("url",url);
-            jsonObject.put("productPrice",productPrice);
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -52,14 +51,14 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
                     @Override
                     public void onNext(@NonNull AddOneProductBean productBean) {
-                        if (iView!=null){
+                        if (iView != null) {
                             iView.onAddCart(productBean);
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (iView!=null){
+                        if (iView != null) {
                             iView.showToast(e.getMessage());
                         }
                     }
@@ -72,10 +71,9 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
     }
 
 
-
-    public void checkInventory(String productId,String productNum){
+    public void checkInventory(String productId, String productNum) {
         RetrofitCreator.getFiannceApiService()
-                .getInventory(productId,productNum)
+                .getInventory(productId, productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CheckOneInventoryBean>() {
@@ -86,14 +84,14 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
                     @Override
                     public void onNext(CheckOneInventoryBean checkOneInventoryBean) {
-                        if (iView != null){
+                        if (iView != null) {
                             iView.onCheckInventory(checkOneInventoryBean);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (iView != null){
+                        if (iView != null) {
                             iView.showToast(e.getMessage());
                         }
                     }
@@ -105,15 +103,15 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
                 });
     }
 
-        public void updateProduceNum(String productId,String productNum,String productName,
-                               String url,String productPrice) {
+    public void updateProduceNum(String productId, String productNum, String productName,
+                                 String url, String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("productId",productId);
-            jsonObject.put("productNum",productNum);
-            jsonObject.put("productName",productName);
-            jsonObject.put("url",url);
-            jsonObject.put("productPrice",productPrice);
+            jsonObject.put("productId", productId);
+            jsonObject.put("productNum", productNum);
+            jsonObject.put("productName", productName);
+            jsonObject.put("url", url);
+            jsonObject.put("productPrice", productPrice);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -129,14 +127,14 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
                     @Override
                     public void onNext(UpdateProductNumBean bean) {
-                        if (iView!=null){
+                        if (iView != null) {
                             iView.onUpdateProductNum(bean);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (iView != null){
+                        if (iView != null) {
                             iView.showToast(e.getMessage());
                         }
                     }

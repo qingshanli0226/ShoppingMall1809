@@ -18,11 +18,12 @@ import com.example.shoppingmallsix.R;
 
 import java.util.List;
 
-public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean>{
+public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean> {
     private Context context;
-    public void  setUpdateData(List<ClassBean.ResultBean> strings,Context context){
 
-        this.context=context;
+    public void setUpdateData(List<ClassBean.ResultBean> strings, Context context) {
+
+        this.context = context;
         setDataList(strings);
         notifyDataSetChanged();
     }
@@ -32,6 +33,7 @@ public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean>{
     public int getLayoutId(int viewType) {
         return R.layout.class_right_item;
     }
+
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, ClassBean.ResultBean itemData) {
         RecyclerView recyclerViewTop = holder.getView(R.id.classify_right_item_rv_top);
@@ -44,10 +46,10 @@ public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean>{
         List<ClassBean.ResultBean.HotProductListBean> hot_product_list = itemData.getHot_product_list();
         List<ClassBean.ResultBean.ChildBean> child = itemData.getChild();
         //判断lngearlayout
-        int indext = child.size() /4;
-        if (indext >1){
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,200+(indext-4*100)));
-        }else {
+        int indext = child.size() / 4;
+        if (indext > 1) {
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200 + (indext - 4 * 100)));
+        } else {
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         //top
@@ -57,10 +59,11 @@ public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean>{
         //button
         ClassRightButtonAdapter<ClassBean.ResultBean.ChildBean> childBeanClassRightButtonAdapter = new ClassRightButtonAdapter<>(child);
         recyclerViewButton.setAdapter(childBeanClassRightButtonAdapter);
-        recyclerViewButton.setLayoutManager(new GridLayoutManager(context,3));
+        recyclerViewButton.setLayoutManager(new GridLayoutManager(context, 3));
 
 
     }
+
     @Override
     public int getRootViewType(int position) {
         return position;

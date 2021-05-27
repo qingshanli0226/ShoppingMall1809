@@ -51,8 +51,8 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         shoppingTrolleyCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (iItemChildClick != null){
-                    iItemChildClick.onItemChildClick(position,view);
+                if (iItemChildClick != null) {
+                    iItemChildClick.onItemChildClick(position, view);
                 }
             }
         });
@@ -63,7 +63,7 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         return 0;
     }
 
-    public interface IItemChildClick{
-        void onItemChildClick(int position,View view);
+    public interface IItemChildClick {
+        void onItemChildClick(int position, View view);
     }
 }

@@ -31,6 +31,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
 
     private List<ClassBean.ResultBean> objectList = new ArrayList<>();
     private ClassRightAdapter resultBeanClassRightAdapter;
+
     @Override
     protected void initPresenter() {
         httpPresenter = new ClassPresenter(this);
@@ -44,9 +45,9 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     protected void initData() {
         for (int i = 0; i < strings.length; i++) {
             list.add(new ClassLeftBean());
-            httpPresenter.getClassData(strings[i],true);
+            httpPresenter.getClassData(strings[i], true);
         }
-        httpPresenter.getClassData(strings[0],false);
+        httpPresenter.getClassData(strings[0], false);
         inits();
     }
 
@@ -77,12 +78,12 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     @Override
     public void onItemClick(int position) {
 
-        for (int i = 0; i <list.size() ; i++) {
+        for (int i = 0; i < list.size(); i++) {
             list.get(i).setaBoolean(false);
 
         }
         list.get(position).setaBoolean(true);
-        httpPresenter.getClassData(strings[position],false);
+        httpPresenter.getClassData(strings[position], false);
         classifyAdapter.notifyDataSetChanged();
     }
 
@@ -90,8 +91,6 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     public void onItwmLongClick(int position) {
 
     }
-
-
 
 
     @Override
@@ -110,16 +109,16 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     }
 
     @Override
-    public void onClassData(ClassBean classBean,boolean mBoolean,String url) {
+    public void onClassData(ClassBean classBean, boolean mBoolean, String url) {
         objectList.clear();
         loadingPage.showSuccessView();
-        if (mBoolean){
-            for (int i = 0; i <strings.length ; i++) {
+        if (mBoolean) {
+            for (int i = 0; i < strings.length; i++) {
 
-                if (url.equals(strings[i])){
-                    if (url == strings[0]){
+                if (url.equals(strings[i])) {
+                    if (url == strings[0]) {
                         list.get(i).setaBoolean(true);
-                    }else {
+                    } else {
                         list.get(i).setaBoolean(false);
                     }
                     list.get(i).setString(classBean.getResult().get(0).getName());
@@ -127,10 +126,10 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
             }
 
             classifyAdapter.notifyDataSetChanged();
-        }else {
+        } else {
             List<ClassBean.ResultBean> result = classBean.getResult();
             objectList.addAll(result);
-            resultBeanClassRightAdapter.setUpdateData(objectList,getActivity());
+            resultBeanClassRightAdapter.setUpdateData(objectList, getActivity());
         }
 
     }

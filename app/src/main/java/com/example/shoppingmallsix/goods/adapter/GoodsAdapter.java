@@ -16,43 +16,39 @@ public class GoodsAdapter extends BaseRvAdapter<GoodAdapterBean> {
     private TextView goodsAdapterItemTextName;
     private TextView goodsAdapterItemTextPrice;
     private int mType;
+
     public GoodsAdapter(List<GoodAdapterBean> list) {
         setDataList(list);
     }
 
     @Override
     public int getLayoutId(int viewType) {
-        switch (viewType){
+        switch (viewType) {
             case 0:
-               mType =   R.layout.goods_adapter_item_top;
-               break;
+                mType = R.layout.goods_adapter_item_top;
+                break;
             case 1:
                 mType = R.layout.goods_adapter_item_button;
         }
-
-
         return mType;
     }
 
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, GoodAdapterBean itemData) {
-        switch (position){
+        switch (position) {
             case 0:
                 goodsAdapterItemWebView = (WebView) holder.getView(R.id.goods_adapter_item_web_view);
                 goodsAdapterItemTextName = (TextView) holder.getView(R.id.goods_adapter_item_text_name);
                 goodsAdapterItemTextPrice = (TextView) holder.getView(R.id.goods_adapter_item_text_price);
-                goodsAdapterItemWebView.loadUrl(Constants.BASE_URl_IMAGE+itemData.getFigure());
+                goodsAdapterItemWebView.loadUrl(Constants.BASE_URl_IMAGE + itemData.getFigure());
 
                 goodsAdapterItemTextName.setText(itemData.getName());
-                goodsAdapterItemTextPrice.setText(holder.itemView.getResources().getString(R.string.bi)+itemData.getPrice());
+                goodsAdapterItemTextPrice.setText(holder.itemView.getResources().getString(R.string.bi) + itemData.getPrice());
                 goodsAdapterItemTextPrice.setTextColor(Color.parseColor("#ff0000"));
                 break;
             case 1:
                 break;
-
         }
-
-
     }
 
     @Override
