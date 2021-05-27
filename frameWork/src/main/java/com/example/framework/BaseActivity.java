@@ -9,15 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
-<<<<<<< HEAD
 import com.example.framework.manager.ActManager;
-=======
+
 import com.example.framework.manager.CacheShopManager;
->>>>>>> zzy
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
+
+import retrofit2.http.HEAD;
 
 
 public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, UserManager.IUserChange {
@@ -39,11 +39,11 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
         toolBar.setToolbarOnClickLisenter(this);
 
         UserManager.getInstance().registerLogin(this);
-<<<<<<< HEAD
+
         ActManager.getActManager().register(this);
-=======
+
         CacheShopManager.getInstance().addActivity(this);
->>>>>>> zzy
+
         initView();
         initPresenter();
         initData();
@@ -84,12 +84,10 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
             mPresenter.detachView();
         }
         UserManager.getInstance().unregisterLogin(this);
-<<<<<<< HEAD
         ActManager.getActManager().unRegister(this);
 
-=======
         CacheShopManager.getInstance().removeActivity(this);
->>>>>>> zzy
+
     }
 
     @Override

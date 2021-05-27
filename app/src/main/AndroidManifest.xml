@@ -14,16 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-        <activity android:name="com.example.pay.message.MessageActivity"></activity>
-        <activity android:name="com.example.pay.shipments.ShipmentsActivity" />
-        <activity android:name="com.example.pay.payment.PaymentActivity" />
-=======
-        <activity android:name=".exception.ExceptionActivity"></activity>
-        <activity android:name=".message.MessageActivity" />
-        <activity android:name=".shipments.ShipmentsActivity" />
-        <activity android:name=".payment.PaymentActivity" />
->>>>>>> zzy
         <activity android:name=".particulars.ParticularsActivity" />
         <activity android:name=".welcome.WelActivity">
             <intent-filter>

@@ -7,11 +7,10 @@ import com.example.framework.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
-<<<<<<< HEAD
 import com.example.pay.module.PayModule;
-=======
+
 import com.example.threeshopping.exception.ShopmallCrashHandler;
->>>>>>> zzy
+
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
 import com.fiannce.sql.UtileSql;
