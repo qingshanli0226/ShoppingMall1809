@@ -77,6 +77,9 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //初始化购物车集合
     private synchronized void initResult(List<ShoppingTrolleyBean.ResultBean> result) {
         this.result = result;
+        for (IShoppingCar iShoppingCar : list) {
+            iShoppingCar.onShoppingCarAdapter(result);
+        }
         refreshData();
     }
 
@@ -164,6 +167,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
 
     public interface IShoppingCar {
         void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result);
+        void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result);
     }
 
     //注册接口

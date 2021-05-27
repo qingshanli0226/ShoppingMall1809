@@ -59,9 +59,18 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
         }
 
+        //购物车添加的回调
+        ShoppingCarManager.getInstance().register(this);
+
+
+        shoppingCarAdapter = new ShoppingCarAdapter();
+        shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
+
         List<ShoppingTrolleyBean.ResultBean> resultManager = ShoppingCarManager.getInstance().getResult();
         if (resultManager != null) {
-            result = resultManager;
+            this.result =resultManager;
+            shoppingCarAdapter.updateDate(this.result);
         }
 
         if (result.size() <= 0) {
@@ -70,13 +79,9 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             vain.setVisibility(View.GONE);
         }
 
-        //购物车添加的回调
-        ShoppingCarManager.getInstance().register(this::onShoppingCar);
 
 
-        shoppingCarAdapter = new ShoppingCarAdapter(this.result);
-        shoppingTrolleyRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        shoppingTrolleyRv.setAdapter(shoppingCarAdapter);
+
 
         shoppingCarAdapter.setShopItemListener((position, view) -> {
             int id = view.getId();
@@ -365,7 +370,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void destroy() {
         super.destroy();
         //购物车添加的回调
-        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
+        ShoppingCarManager.getInstance().unregister(this);
     }
 
     //改变数据源后的通知
@@ -375,7 +380,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             vain.setVisibility(View.VISIBLE);
         } else {
             vain.setVisibility(View.GONE);
-            this.result = result;
             if (isOneNotifyDataSetChanged) {
                 shoppingCarAdapter.notifyItemChanged(position);
             } else {
@@ -384,5 +388,11 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
             totalPrice();
         }
+    }
+
+    @Override
+    public void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result) {
+        this.result = result;
+        shoppingCarAdapter.updateDate(this.result);
     }
 }

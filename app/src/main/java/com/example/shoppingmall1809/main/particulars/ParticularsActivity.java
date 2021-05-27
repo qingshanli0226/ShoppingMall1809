@@ -68,7 +68,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     protected void initData() {
         Intent intent = getIntent();
 
-        ShoppingCarManager.getInstance().register(this::onShoppingCar);
+        ShoppingCarManager.getInstance().register(this);
         List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
         if (result != null) {
             showLabel(result);
@@ -398,8 +398,13 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     }
 
     @Override
+    public void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result) {
+
+    }
+
+    @Override
     public void destroy() {
         super.destroy();
-        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
+        ShoppingCarManager.getInstance().unregister(this);
     }
 }

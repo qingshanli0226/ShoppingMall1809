@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         setContentView(R.layout.activity_main);
         initView();
 
-        ShoppingCarManager.getInstance().register(this::onShoppingCar);
+        ShoppingCarManager.getInstance().register(this);
         List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
         if (result != null) {
             showLabel(result);
@@ -180,12 +180,17 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ShoppingCarManager.getInstance().unregister(this::onShoppingCar);
+        ShoppingCarManager.getInstance().unregister(this);
     }
 
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
         showLabel(result);
+    }
+
+    @Override
+    public void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result) {
+
     }
 
     private void showLabel(List<ShoppingTrolleyBean.ResultBean> result) {
