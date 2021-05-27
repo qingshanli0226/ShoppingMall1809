@@ -121,7 +121,7 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                 });
     }
 
-    public void updateProduct(String productId, String productNum, String url, String productPrice) {
+    public void updateProduct(String productId, int productNum, String url, String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId",productId);

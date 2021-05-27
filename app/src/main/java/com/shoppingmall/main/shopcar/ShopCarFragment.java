@@ -43,6 +43,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
     private Button payment;
     private boolean isOpenDel = false;
     private List<ShopCarBean> shopCarBeanList;
+    private static int AddOrRemove = 0;
 
     private int nowPosition = 0;
     @Override
@@ -130,14 +131,15 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
             String productNum = shopCarBeanList.get(0).getResult().get(nowPosition).getProductNum();
             String url = shopCarBeanList.get(0).getResult().get(nowPosition).getUrl();
             String productPrice = (String) shopCarBeanList.get(0).getResult().get(nowPosition).getProductPrice();
-            LogUtils.json(checkProductBean);
-            Toast.makeText(getContext(), "添加成功！", Toast.LENGTH_SHORT).show();
-            httpPresenter.updateProduct(productId,productNum , url, productPrice);
+            httpPresenter.updateProduct(productId,Integer.parseInt(productNum)-1, url, productPrice);
         }
     }
 
     @Override
     public void updateProduct(AddProductBean addProductBean) {
-
+        LogUtils.json(addProductBean);
+        if (addProductBean.getCode().equals("200")){
+            shopCarAdapter.notifyItemChanged(nowPosition);
+        }
     }
 }
