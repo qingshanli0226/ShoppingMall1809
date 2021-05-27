@@ -12,5 +12,4 @@ public interface IShoppingView extends IBaseView {
     void onCheckInventory(ShoppingTrolleyBean shoppingTrolleyBean);
     void onUpDateProductNum(RegisterBean registerBean);
     void onCheckOneProductInventory(RegisterBean registerBean);
-    void onOrderInfo(OrderinfoBean orderinfoBean);
 }

@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.FindForBean;
 import com.example.net.model.LoginBean;
+import com.example.net.model.OrderInfoParamBean;
 import com.example.net.model.ShoppingTrolleyBean;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
         getShoppingData();
     }
 
-    public void initLogin(){
+    public void initLogin() {
         ShopeUserManager.getInstance().register(this::onLoginChange);
     }
 
@@ -56,16 +57,18 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     private IFindForBean iFindForBean;
 
 
-    public interface IFindForBean{
+    public interface IFindForBean {
         void onFindForBean();
     }
 
     public void unRegisterFindForBean() {
-        iFindForBean =null;
+        iFindForBean = null;
     }
+
     public void registerFindForBean(IFindForBean iFindForBean) {
         this.iFindForBean = iFindForBean;
     }
+
 
     //购物车集合
     private List<ShoppingTrolleyBean.ResultBean> result;
@@ -167,6 +170,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
 
     public interface IShoppingCar {
         void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result);
+
         void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result);
     }
 
@@ -225,4 +229,14 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
                 });
     }
 
+
+    private ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean;
+
+    public ArrayList<ShoppingTrolleyBean.ResultBean> getDeleteBean() {
+        return deleteBean;
+    }
+
+    public void setDeleteBean(ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean) {
+        this.deleteBean = deleteBean;
+    }
 }
