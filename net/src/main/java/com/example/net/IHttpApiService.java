@@ -1,11 +1,14 @@
 package com.example.net;
 
 
+import android.content.Context;
+
 import com.example.common.Constants;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.OrderBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
 
@@ -92,4 +95,9 @@ public interface IHttpApiService {
     //删除全部
     @POST(Constants.REMOVEMANY)
     Observable<SelectBean> removeMany(@Body RequestBody requestBody);
+
+
+    //订单接口
+    @POST(Constants.GETORDER)
+    Observable<OrderBean> getOrder(@Body RequestBody requestBody);
 }

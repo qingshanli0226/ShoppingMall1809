@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity{
         Bundle bundle = CommonArouter.getInstance().getBundle();
         int page = bundle.getInt("page");
 
-        Log.i("zzy", "onNew: " + page);
+
         showFragment(page);
 
         switch (page) {

@@ -46,13 +46,15 @@ public class CacheShopManager {
     }
 
     public void init(){
-        UserManager.getInstance().registerLogin(new UserManager.IUserChange() {
+        iUserChange = new UserManager.IUserChange() {
             @Override
             public void onUserChange(LoginBean loginBean) {
                 getShowCart();
             }
-        });
+        };
+        UserManager.getInstance().registerLogin(iUserChange);
     }
+    private UserManager.IUserChange iUserChange;
 
     //购物车数据源
     private List<CartBean.ResultBean> carts = new ArrayList<>();
@@ -78,7 +80,7 @@ public class CacheShopManager {
     }
 
     public void setCarts(List<CartBean.ResultBean> carts) {
-        carts.addAll(carts);
+        this.carts.addAll(carts);
         cartsPrice.addAll(carts);
 
     }
@@ -194,6 +196,8 @@ public class CacheShopManager {
         void onShowCart(List<CartBean.ResultBean> carts);
         void onAddCart(int position);
     }
-
+    public void destory(){
+        UserManager.getInstance().unregisterLogin(iUserChange);
+    }
 
 }

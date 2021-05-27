@@ -1,12 +1,9 @@
-package com.example.threeshopping.shipments;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+package com.example.pay.shipments;
 
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
-import com.example.threeshopping.R;
+import com.example.pay.R;
+
 
 public class ShipmentsActivity extends BaseActivity {
 

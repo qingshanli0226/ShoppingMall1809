@@ -22,9 +22,9 @@ public class RetrofitManager {
 
     private static IHttpApiService serviceCreator() {
         OkHttpClient build = new OkHttpClient.Builder()
-                .readTimeout(2, TimeUnit.MINUTES)
-                .writeTimeout(2, TimeUnit.MINUTES)
-                .connectTimeout(2, TimeUnit.MINUTES)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
                 .addInterceptor(new TokenInterceptor())
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();

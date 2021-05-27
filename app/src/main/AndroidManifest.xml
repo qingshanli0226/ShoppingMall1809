@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
-        <activity android:name=".message.MessageActivity"></activity>
-        <activity android:name=".shipments.ShipmentsActivity" />
-        <activity android:name=".payment.PaymentActivity" />
+        <activity android:name="com.example.pay.message.MessageActivity"></activity>
+        <activity android:name="com.example.pay.shipments.ShipmentsActivity" />
+        <activity android:name="com.example.pay.payment.PaymentActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
         <activity android:name=".welcome.WelActivity">
             <intent-filter>

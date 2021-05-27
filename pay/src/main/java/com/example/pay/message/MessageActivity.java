@@ -1,20 +1,17 @@
-package com.example.threeshopping.payment;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+package com.example.pay.message;
 
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
-import com.example.threeshopping.R;
+import com.example.pay.R;
 
-public class PaymentActivity extends BaseActivity {
+
+public class MessageActivity extends BaseActivity {
 
     private com.example.framework.view.ToolBar toolbar;
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_payment;
+        return R.layout.activity_message;
     }
 
     @Override

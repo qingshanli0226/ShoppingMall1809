@@ -154,9 +154,14 @@
                 android:textColor="@color/white"
                 ></Button>
         </LinearLayout>
-
-
-
-
     </LinearLayout>
+    <com.example.framework.view.CircleView
+        android:id="@+id/detailCircle"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dm_dp_40"
+        android:layout_marginRight="@dimen/dm_dp_120"
+        android:layout_width="@dimen/dm_dp_20"
+        android:layout_height="@dimen/dm_dp_20"/>
 </RelativeLayout>

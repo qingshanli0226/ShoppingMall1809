@@ -28,6 +28,7 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
+import com.example.framework.view.CircleView;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.InventoryBean;
@@ -71,6 +72,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private ProductBean productBean;
     int num = 1;//购买数量
     int count = 0;
+    private CircleView detailCircle;
 
     @Override
     public int getLayoutId() {
@@ -98,6 +100,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         popAdd = (ImageView) view.findViewById(R.id.pop_add);
         popNo = (Button) view.findViewById(R.id.pop_no);
         popYes = (Button) view.findViewById(R.id.pop_yes);
+        detailCircle = (CircleView) findViewById(R.id.detailCircle);
     }
 
 
@@ -249,15 +252,18 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             CacheShopManager.getInstance().addData(resultBean);
             //再次更新小远点
             EventBus.getDefault().post("");
-
+            showAnima();
+            //这个页面的小数点
+            detailCircle.setVisibility(View.VISIBLE);
+            detailCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
 
         }
     }
 
+
     @Override
     public void onInventory(SelectBean selectBean) {
         if (selectBean.getCode().equals("200")){
-            showBezierAnim();
             productBean = new ProductBean();
             productBean.setProductId(id);
             productBean.setProductName(title);
@@ -303,7 +309,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         int[] startLoacation = new int[2];
         startLoacation[0] = 300;
         startLoacation[1] = 300;
-//        particularsJoin.getLocationInWindow(startLoacation);
         int[] endLoacation = new int[2];
         endLoacation[0] = 800;
         endLoacation[1] = 1800;
@@ -312,6 +317,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         controlLoacation[1] = 500;
         Path path = new Path();
         path.moveTo(startLoacation[0],startLoacation[1]);
+
         path.quadTo(controlLoacation[0],controlLoacation[1],endLoacation[0],endLoacation[1]);
         PathMeasure pathMeasure = new PathMeasure(path, false);
 
@@ -331,6 +337,58 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             }
         });
         valueAnimator.start();
+    }
+
+    private void showAnima(){
+        ImageView imageView = new ImageView(this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
+        imageView.setLayoutParams(layoutParams);
+        Glide.with(this).load(pic).into(imageView);
+        rootview.addView(imageView);
+        //起点坐标
+        int[] startLoacation = new int[2];
+        startLoacation[0] = 800;
+        startLoacation[1] = 300;
+        //终点坐标
+        int[] endLoacation = new int[2];
+        shopcar.getLocationInWindow(endLoacation);
+        //控制点
+        int[]  constrod = new int[2];
+        constrod[0] = Math.abs(startLoacation[0] - endLoacation[0]);
+        constrod[1] = Math.abs(startLoacation[1] - endLoacation[1]);
+
+        int[]  constrod1 = new int[2];
+        constrod1[0] =  constrod[0];
+        constrod1[1] = constrod[1]-100;
+        Path path = new Path();
+        path.moveTo(startLoacation[0],startLoacation[1]);
+        //两个转折点
+        path.cubicTo(constrod[0],constrod[1],constrod1[0],constrod1[1],endLoacation[0],endLoacation[1]);
+        //一个转折点
+//        path.quadTo(constrod[0],constrod[1],endLoacation[0],endLoacation[1]);
+        PathMeasure pathMeasure = new PathMeasure(path, false);
+        //属性动画
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+        valueAnimator.setDuration(2000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float animatedValue = (float) animation.getAnimatedValue();
+                float[] floats = new float[2];
+                pathMeasure.getPosTan(animatedValue, floats, null);
+                imageView.setTranslationX(floats[0]);
+                imageView.setTranslationY(floats[1]);
+
+                float percent = animatedValue / pathMeasure.getLength();
+                imageView.setAlpha(1-percent);
+
+
+            }
+        });
+
+        valueAnimator.start();
+
 
     }
 

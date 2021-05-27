@@ -116,7 +116,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
                     ImageView imageView = new ImageView(holder.itemView.getContext());
-                    Log.i("TAG", "displayViewHolder: "+Constants.BASE_URl_IMAGE+actInfoBean.getIcon_url());
                     Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url()).into(imageView);
                     views.add(imageView);
                 }

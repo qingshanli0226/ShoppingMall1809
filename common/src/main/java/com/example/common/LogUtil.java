@@ -9,7 +9,7 @@ public class LogUtil {
 
 
     public static void v(String message){
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
             Log.v(""+className+""+methodName+""+lineName+"   ",message);
         }
@@ -18,21 +18,20 @@ public class LogUtil {
 
 
     public static void d(String message){
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
-
             Log.d(""+className+""+methodName+""+lineName+"   ",message);
         }
     }
     public static void i(String message){
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
 
             Log.i(""+className+""+methodName+""+lineName+"   ",message);
         }
     }
     public static void e(String message){
-        if(BuildConfig.DEBUG){
+        if(BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
             Log.e(""+className+""+methodName+""+lineName+"   ",message);
         }

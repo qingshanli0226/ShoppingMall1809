@@ -7,6 +7,7 @@ import com.example.framework.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
+import com.example.pay.module.PayModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
 import com.fiannce.sql.UtileSql;
@@ -17,6 +18,7 @@ public class App extends Application {
         super.onCreate();
         CommonArouter.getInstance().init(this);
         AppModule.init();
+        PayModule.init();
         UserModule.init();
         NetModule.context = this;
 

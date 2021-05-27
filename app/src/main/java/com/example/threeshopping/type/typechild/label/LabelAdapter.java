@@ -16,14 +16,12 @@ public class LabelAdapter extends BaseRvAdapter<LabelBean.ResultBean> {
 
     @Override
     protected int getLayoutId(int viewType) {
-        LogUtils.json("zzy");
 
         return R.layout.item_label_child;
     }
 
     @Override
     protected void displayViewHolder(BaseViewHolder holder, int position, LabelBean.ResultBean itemView) {
-        LogUtils.json(itemView+"zzy");
         TextView textView = holder.getView(R.id.label_tv);
         textView.setText(itemView.getName());
     }

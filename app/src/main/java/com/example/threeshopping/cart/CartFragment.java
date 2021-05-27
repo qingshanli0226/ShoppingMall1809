@@ -20,6 +20,8 @@ import com.example.net.bean.CartBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,11 +171,9 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
 
         //删除
-        cartdelete.setOnClickListener(new View.OnClickListener()
-
-        {
+        cartdelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 int position = -1;
                 ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
                 for (int i = 0; i < cartAdapter.getData().size(); i++) {
@@ -195,8 +195,31 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 }
             }
         });
+
+
+        //判断是否全选
+        isCheck();
+
+        //点击支付
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //判断是否选中
+                int position = -1;
+                for (int i = 0; i < cartAdapter.getData().size(); i++) {
+                    if(cartAdapter.getData().get(i).isProductSelected()){
+                        position = i;
+                    }
+                }
+                if(position != -1) {
+                    //判断绑定信息
+
+
+                }
+            }
+        });
+
     }
-    
 
 
     @Override
@@ -218,6 +241,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void destroy() {
         super.destroy();
         CacheShopManager.getInstance().unRegisterCart(this);
+        CacheShopManager.getInstance().destory();
     }
 
     //购物车数据
@@ -225,7 +249,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onShowCart(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         cartAdapter.updata(carts);
-        LogUtil.d("zyb" + carts);
+        EventBus.getDefault().post("");
     }
 
     //单选
@@ -234,6 +258,13 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
         cartAdapter.notifyItemChanged(position);
         //反选
+        isCheck();
+
+        //更改价格
+        priceCount();
+    }
+
+    private void isCheck() {
         int count = 0;
         for (CartBean.ResultBean datum : cartAdapter.getData()) {
             if (datum.isProductSelected()) {
@@ -247,7 +278,17 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             checkpayment.setChecked(false);
             isAll = false;
         }
+    }
 
+    //更改价格
+    private void priceCount() {
+        int priceCount = 0;
+        for (CartBean.ResultBean datum : cartAdapter.getData()) {
+            if (datum.isProductSelected()) {
+                priceCount += Integer.parseInt(datum.getProductNum()) * Float.parseFloat(datum.getProductPrice() + "");
+            }
+        }
+        paymentprice.setText(priceCount + "");
     }
 
     //全选
@@ -255,12 +296,17 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onCheckAll(boolean isChcekAll) {
         this.isAll = isChcekAll;
         cartAdapter.notifyDataSetChanged();
+        //更改价格
+        priceCount();
     }
 
     //增加数量
     @Override
     public void onNum(int position) {
         cartAdapter.notifyItemChanged(position);
+        LogUtil.d("zybprice");
+        //更改价格
+        priceCount();
 
     }
 
@@ -269,7 +315,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void removeProduct(int position) {
         cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
-        LogUtil.d("positona" + position);
     }
 
     @Override
@@ -283,7 +328,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 }
             }
         }
-        LogUtil.d("removeMany");
         cartAdapter.notifyDataSetChanged();
     }
 
@@ -297,6 +341,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
             cartAdapter.notifyItemChanged(position);
         }
+        LogUtil.d("zyb" + CacheShopManager.getInstance().getCarts());
     }
 
     @Override
