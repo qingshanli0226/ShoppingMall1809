@@ -39,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
+                android:id="@+id/message"
                 android:src="@drawable/community_message_icon"
                 android:text="xxx"></ImageView>
             <TextView

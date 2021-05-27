@@ -37,12 +37,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     public void showLoading() {
 
     }
-
     @Override
     public void hideLoading() {
 
     }
-
     @Override
     public void showError(String msg) {
 

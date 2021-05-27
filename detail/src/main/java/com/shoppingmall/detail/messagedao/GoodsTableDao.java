@@ -1,4 +1,4 @@
-package com.yoho.greendao.gen;
+package com.shoppingmall.detail.messagedao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;

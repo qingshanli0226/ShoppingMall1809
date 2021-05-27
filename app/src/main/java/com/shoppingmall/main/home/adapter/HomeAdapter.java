@@ -201,22 +201,23 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
         int hour = 0;
         int minute = 0;
         int second = 0;
+        int day=0;
         if (time <= 0)
             return "00:00:00";
         else {
             second = time /1000;
             minute = second / 60;
             if (second < 60) {
-
                 timeStr = "00:00:" + unitFormat(second);
             }else if (minute < 60) {
                 second = second % 60;
                 timeStr = "00:" + unitFormat(minute) + ":" + unitFormat(second);
             }else{//数字>=3600 000的时候
-                hour = minute /60;
+                day=minute/1440;
+                hour = minute /60-day*24;
                 minute = minute % 60;
-                second = second - hour * 3600 - minute * 60;
-                timeStr = unitFormat(hour) + ":" + unitFormat(minute) + ":" + unitFormat(second);
+                second = second - hour * 3600 - minute * 60-day * 86400;
+                timeStr = unitFormat(day)+"天"+ unitFormat(hour) + ":" + unitFormat(minute) + ":" + unitFormat(second);
             }
         }
         return timeStr;

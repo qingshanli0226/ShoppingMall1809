@@ -2,8 +2,9 @@ package com.shoppingmall.detail.greendao;
 
 import android.content.Context;
 
-import com.yoho.greendao.gen.DaoMaster;
-import com.yoho.greendao.gen.DaoSession;
+import com.shoppingmall.detail.messagedao.DaoMaster;
+import com.shoppingmall.detail.messagedao.DaoSession;
+
 
 public class TableManager {
     private DaoMaster daoMaster;
@@ -55,6 +56,4 @@ public class TableManager {
         }
         return tableManager;
     }
-
-
 }

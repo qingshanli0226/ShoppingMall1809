@@ -1,6 +1,9 @@
 package com.shoppingmall.main.home;
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +12,7 @@ import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.home.adapter.HomeAdapter;
+import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.HomeBean;
 
 import java.util.ArrayList;
@@ -21,6 +25,8 @@ public class HomeFragment extends BaseFragment {
     private EditText homeFragmentSearch;
     private RecyclerView homeRv;
     private HomeAdapter homeAdapter;
+    private ImageView message;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_home;
@@ -30,6 +36,7 @@ public class HomeFragment extends BaseFragment {
     public void initView() {
         homeFragmentSearch = (EditText) mView.findViewById(R.id.homeFragmentSearch);
         homeRv = (RecyclerView) mView.findViewById(R.id.homeRv);
+        message =mView.findViewById(R.id.message);
     }
 
     @Override
@@ -45,7 +52,7 @@ public class HomeFragment extends BaseFragment {
         homeRv.setAdapter(homeAdapter);
         //得到数据
         HomeBean homeBean = CacheManager.getInstance().getHomeBean();
-        if (homeBean!=null){
+        if (homeBean != null) {
             //添加数据
             List<Object> objects = new ArrayList<>();
             objects.add(homeBean.getResult().getBanner_info());
@@ -56,6 +63,15 @@ public class HomeFragment extends BaseFragment {
             objects.add(homeBean.getResult().getHot_info());
             homeAdapter.updateData(objects);
         }
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
