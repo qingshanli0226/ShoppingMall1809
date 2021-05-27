@@ -66,15 +66,15 @@
                 android:layout_weight="1"></RadioButton>
 
             <RadioButton
-                android:textColor="@drawable/text_color"
-                android:drawableTop="@drawable/buy_car"
-                android:button="@null"
-                android:gravity="center"
-                android:layout_width="@dimen/weight"
-                android:text="购物车"
                 android:id="@+id/btn_buycar"
+                android:layout_width="@dimen/weight"
                 android:layout_height="match_parent"
-                android:layout_weight="1"></RadioButton>
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/buy_car"
+                android:gravity="center"
+                android:text="购物车"
+                android:textColor="@drawable/text_color"></RadioButton>
 
             <RadioButton
                 android:textColor="@drawable/text_color"
@@ -96,8 +96,9 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:id="@+id/buy_car_num"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="@dimen/dp_290"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_300"
         android:layout_width="@dimen/dp_20"
         android:layout_height="@dimen/dp_20"
         android:background="@drawable/view_tytle"></TextView>

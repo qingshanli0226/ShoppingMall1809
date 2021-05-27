@@ -13,7 +13,7 @@ import com.example.common.bean.LogBean;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
-import com.example.manager.CacheManger;
+import com.example.manager.ShopCacheManger;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
 import com.example.view.ToolBar;
@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         if (logBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setLogList(logBean.getResult());
             BusinessUserManager.getInstance().setIsLog(logBean);
-            CacheManger.getInstance().requestShortProductData();
+            ShopCacheManger.getInstance().requestShortProductData();
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
         }
