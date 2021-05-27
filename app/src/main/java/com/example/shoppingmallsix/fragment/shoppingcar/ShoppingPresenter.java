@@ -1,16 +1,20 @@
 package com.example.shoppingmallsix.fragment.shoppingcar;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 
 import com.example.net.RetrofitCreator;
+<<<<<<< HEAD
 import com.example.net.bean.Orbean;
+=======
+import com.example.net.bean.business.CheckOneInventoryBean;
+>>>>>>> 0527s
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 
+import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 
 import com.google.gson.Gson;
@@ -260,7 +264,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
 
                    @Override
                    public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
-                       LogUtils.json(selectAllProductBean);
                        if (iView!=null){
                            iView.onSelectAllProductBean(selectAllProductBean,mBooleans);
                        }
@@ -363,6 +366,81 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (iView!=null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void checkInventory(String productId,String productNum,int position){
+        RetrofitCreator.getFiannceApiService()
+                .getInventory(productId,productNum)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CheckOneInventoryBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CheckOneInventoryBean checkOneInventoryBean) {
+                        if (iView != null){
+                            iView.onCheckInventory(checkOneInventoryBean,position);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (iView != null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void updateProduceNum(String productId,String productNum,String productName,
+                                 String url,String productPrice,int position,boolean mBoolean) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productId",productId);
+            jsonObject.put("productNum",productNum);
+            jsonObject.put("productName",productName);
+            jsonObject.put("url",url);
+            jsonObject.put("productPrice",productPrice);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        RetrofitCreator.getFiannceApiService().getUpdateProductNum(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UpdateProductNumBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(UpdateProductNumBean bean) {
+                        if (iView!=null){
+                            iView.onUpdateProductNum(bean,position,mBoolean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (iView != null){
                             iView.showToast(e.getMessage());
                         }
                     }

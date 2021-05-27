@@ -1,7 +1,7 @@
 package com.example.shoppingmallsix.fragment.classify.frgment.lab;
 
 
-import com.blankj.utilcode.util.LogUtils;
+
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.TabBean;
@@ -36,7 +36,6 @@ public class LabPresenter extends BasePresenter<ILabView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
                     }
 
                     @Override
