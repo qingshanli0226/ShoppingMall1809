@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
@@ -14,6 +17,8 @@ import com.example.net.bean.HomeBean;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.adapter.HomeAdapter;
+import com.example.shoppingmallsix.main.MainActivity;
+import com.example.shoppingmallsix.message.MessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +33,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private  HomeAdapter homeAdapter;
     private HomePresenter homePresenter;
     private List<Object> list = new ArrayList<>();
-
+    private LinearLayout homeMessage;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,11 +54,19 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         edtname = (EditText) mBaseView.findViewById(R.id.edtname);
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
+        homeMessage = mBaseView.findViewById(R.id.homeMessage);
+
         homeAdapter= new HomeAdapter(list,getActivity());
-
-
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(homeAdapter);
+
+        homeMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
