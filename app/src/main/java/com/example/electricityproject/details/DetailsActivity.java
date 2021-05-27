@@ -62,7 +62,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private ScrollView detailsLin;
     private PopupWindow popupWindow;
     private int prod_num = 1;
-    private ScrollView liner;
+    private RelativeLayout liner;
+    private RelativeLayout relitive;
 
     @Override
     protected void initData() {
@@ -191,7 +192,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 BusinessARouter.getInstance().getAppManager().OpenMainActivity(DetailsActivity.this,bundle);
             }
         });
-
     }
 
     @Override
@@ -208,15 +208,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         addShop = (LinearLayout) findViewById(R.id.add_shop);
         btnAdd = (Button) findViewById(R.id.btn_add);
         buyCar = (ImageView) findViewById(R.id.buy_car);
-
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
+        relitive = (RelativeLayout) findViewById(R.id.relitive);
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_details;
     }
-
 
     @Override
     public void showLoading() {
@@ -240,17 +239,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
-
-<<<<<<< HEAD
-            CacheManger.getInstance().requestShortProductData();
-=======
             ShopCacheManger.getInstance().requestShortProductData();
-
-
-
->>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
         }
-
     }
 
     @Override
@@ -271,7 +261,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         imageView.setLayoutParams(params);
 //        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
         Glide.with(DetailsActivity.this).load(url).into(imageView);
-        liner.addView(imageView);
+        relitive.addView(imageView);
 
         //起始点坐标
         int[] startLoa = new int[2];

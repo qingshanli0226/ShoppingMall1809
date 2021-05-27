@@ -203,28 +203,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     float price = 0;
                     RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
                     requestOrderInfo.setSubject("buy");
-                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-//                    if (result!=null){
-//                        Log.i("oreder", "onClick: "+"购物车有数据");
-//                        for (int i = 0; i < result.size(); i++) {
-//                            if (result.get(i).isAll()){
-//                                Log.i("oreder", "onClick: "+"当前有选中的"+result.get(i).isAll());
-//                                B b = new B(result.get(i).getProductName(), result.get(i).getProductId());
-//                                bodyBeanList.add(b)
-//                                requestOrderInfo.setBody();
-//                                bodyBeanList.get(i).setProductId();
-//                                price = Float.parseFloat(price + result.get(i).getProductPrice());
-//                            }
-//                        }
-//                    }
-//                    requestOrderInfo.setBody(bodyBeanList);
-//                    requestOrderInfo.setTotalPrice(String.valueOf(price));
-//
-//                    if (bodyBeanList!=null){
-//                        httpPresenter.getOrderInfo(requestOrderInfo);
-//                    }
 
+                    List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
+                    if (selectList.size() > 0){
+
+                    }else {
+                        Toast.makeText(getContext(), "未选中商品", Toast.LENGTH_SHORT).show();
+                    }
                 }else {
                     Intent intent = new Intent(getContext(), BindUserInfoActivity.class);
                     startActivity(intent);
