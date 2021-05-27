@@ -9,12 +9,14 @@ import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderBean;
+import com.example.net.bean.PaymentBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.RegisterBean;
 
 
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.SelectBean;
+import com.example.net.bean.ShipmentBean;
 import com.example.net.bean.TypeBean;
 import com.example.net.bean.UpdateProductNumBean;
 
@@ -47,7 +49,12 @@ public interface IHttpApiService {
 
     @GET(Constants.TAG_URL)
     Observable<LabelBean> getLabel();
-
+    //代付款
+    @GET(Constants.PAYMENT)
+    Observable<PaymentBean> getPayment();
+    //代发货
+    @GET(Constants.SHIPMENT)
+    Observable<ShipmentBean> getShipment();
     //首页
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomeData();

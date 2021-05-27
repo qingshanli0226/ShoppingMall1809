@@ -53,10 +53,10 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        for (Activity activity: CacheShopManager.getInstance().getActivityList()
-             ) {
-            activity.finish();
-        }
-        System.exit(1);
+//        for (Activity activity: CacheShopManager.getInstance().getActivityList()
+//             ) {
+//            activity.finish();
+//        }
+//        System.exit(1);
     }
 }

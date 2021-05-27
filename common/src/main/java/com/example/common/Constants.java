@@ -30,8 +30,10 @@ public class Constants {
     public static final String LOGIN = "login";//登录
     public static final String USERREGISTER = "register";//注册
     public static final String AUTOLOGIN = "autoLogin";//自动登录
-
-
+    //代付款
+    public static final String PAYMENT = "findForPay";
+    //代发货
+    public static final String SHIPMENT = "findForSend";
     //主页Fragment路径
     public static final String HOME_URL = BASE_URL_JSON + "HOME_URL.json";
     //分类Fragment里面的标签Fragment页面数据
@@ -81,11 +83,11 @@ public class Constants {
     //详情
     public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
     //信息
-    public static final String PATH_MESSAGE = "/app/MessageActivity";
+    public static final String PATH_MESSAGE = "/pay/MessageActivity";
     //待付款
-    public static final String PATH_PAYMENT = "/app/PaymentActivity";
+    public static final String PATH_PAYMENT = "/pay/PaymentActivity";
     //待发货
-    public static final String PATH_SHIPMENTS= "/app/ShipmentsActivity";
+    public static final String PATH_SHIPMENTS= "/pay/ShipmentsActivity";
 
     //用户
     public static final String PATH_USER = "/user/UserActivity";

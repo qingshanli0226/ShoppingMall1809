@@ -14,7 +14,5 @@ public class AppModule {
     public static void init() {
         CommonArouter.getInstance().registerPath(Constants.PATH_MAIN, MainActivity.class);
         CommonArouter.getInstance().registerPath(Constants.PATH_PARTICULARS, ParticularsActivity.class);
-
-
     }
 }
