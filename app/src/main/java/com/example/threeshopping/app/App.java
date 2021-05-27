@@ -11,6 +11,7 @@ import com.example.common.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.module.NetModule;
+import com.example.threeshopping.exception.ShopmallCrashHandler;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
 import com.fiannce.sql.UtileSql;
@@ -35,7 +36,8 @@ public class App extends Application {
         UtileSql.getInstance().setContext(this);
 
         CacheShopManager.getInstance().init();
-        ShopCrashHandler.getInstance().init(this);
 
+        ShopCrashHandler.getInstance().init(this);
+        ShopmallCrashHandler.getInstance().init(this);
  }
 }

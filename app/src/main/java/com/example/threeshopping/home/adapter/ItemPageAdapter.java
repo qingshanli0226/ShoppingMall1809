@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ItemPageAdapter extends PagerAdapter {
     private List<View> views;
+
     public ItemPageAdapter(List<View> views) {
         this.views = views;
     }

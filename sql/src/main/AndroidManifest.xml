@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fiannce.sql" />
+    package="com.fiannce.sql" >
+
+
+</manifest>

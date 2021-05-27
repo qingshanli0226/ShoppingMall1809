@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
@@ -36,7 +37,7 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
         toolBar.setToolbarOnClickLisenter(this);
 
         UserManager.getInstance().registerLogin(this);
-
+        CacheShopManager.getInstance().addActivity(this);
         initView();
         initPresenter();
         initData();
@@ -77,6 +78,7 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
             mPresenter.detachView();
         }
         UserManager.getInstance().unregisterLogin(this);
+        CacheShopManager.getInstance().removeActivity(this);
     }
 
     @Override

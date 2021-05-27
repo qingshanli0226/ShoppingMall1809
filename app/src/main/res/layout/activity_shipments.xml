@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".shipments.ShipmentsActivity">
     <com.example.framework.view.ToolBar
         android:id="@+id/toolbar"
@@ -14,5 +15,11 @@
         app:app_left_src="@drawable/top_bar_left_back"
         app:app_text="代发货订单"
         app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shipmentsRv"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
