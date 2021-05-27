@@ -18,19 +18,74 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class CacheManger {
+public class ShopCacheManger {
 
-    private static CacheManger cacheManger;
+    private static ShopCacheManger cacheManger;
     private Context context;
 
     private String productNum;
-    List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
 
-    public synchronized static CacheManger getInstance() {
+    private List<iSelectShop> onSelectShopList=new ArrayList<>();
+
+    private List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
+
+    private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>();
+
+
+    public synchronized static ShopCacheManger getInstance() {
         if (cacheManger==null){
-            cacheManger = new CacheManger();
+            cacheManger = new ShopCacheManger();
         }
         return cacheManger;
+    }
+
+
+
+
+    public void RegisterSelectShop(iSelectShop iSelectShop){
+        onSelectShopList.add(iSelectShop);
+    }
+
+    public void unRegisterSelectShop(iSelectShop iSelectShop){
+        onSelectShopList.remove(iSelectShop);
+    }
+
+    public void setSelect(ShortcartProductBean.ResultBean select) {
+
+        if (select != null) {
+            if (!selectList.contains(select)) {
+                if (select.isAll()){
+                    Log.i("zx", "setSelectList: 添加");
+                    selectList.add(select);
+                }
+            }else {
+                if (!select.isAll()){
+                    Log.i("zx", "setSelectList: 删除");
+                    selectList.remove(select);
+                }
+            }
+        }
+    }
+    public void setSelectList(List<ShortcartProductBean.ResultBean> selectShortBeanList){
+        if (selectShortBeanList!=null){
+            for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
+                if (!selectList.contains(bean)){
+                    if (bean.isAll()){
+                        Log.i("zx", "setSelectList: 添加");
+                        selectList.add(bean);
+                    }
+                }else {
+                    if (!bean.isAll()){
+                        Log.i("zx", "setSelectList: 删除");
+                        selectList.remove(bean);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<ShortcartProductBean.ResultBean> getSelectList() {
+        return selectList;
     }
 
     public List<ShortcartProductBean.ResultBean> getShortBeanList() {
@@ -46,13 +101,6 @@ public class CacheManger {
     }
 
 
-    //选中的商品
-    public void setOneSelectBeanList(int position,boolean isSelect) {
-        if (shortBeanList!=null){
-            shortBeanList.get(position).setAll(!isSelect);
-        }
-
-    }
 
 
     public void init(Context application){
@@ -153,6 +201,7 @@ public class CacheManger {
                 });
     }
 
+
     public String getProductNum() {
         return productNum;
     }
@@ -160,4 +209,9 @@ public class CacheManger {
     public void setProductNum(String productNum) {
         this.productNum = productNum;
     }
+    public interface iSelectShop {
+        void onSelectBean(List<ShortcartProductBean.ResultBean> selectShopList);
+    }
+
+
 }

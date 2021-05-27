@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.example.common.NetModel;
 import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
-import com.example.manager.CacheManger;
+import com.example.manager.ShopCacheManger;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
 
@@ -19,11 +19,16 @@ public class App extends Application {
         UserModel.init();
         MainModel.init();
 
-        CacheManger.getInstance().init(this);
-        CacheManger.getInstance().registerUserManger();
-        CacheManger.getInstance().registerBuyCarManger();
+        ShopCacheManger.getInstance().init(this);
+        ShopCacheManger.getInstance().registerUserManger();
+        ShopCacheManger.getInstance().registerBuyCarManger();
 
+            startService(new Intent(this, AutoService.class));
+
+<<<<<<< HEAD
         startService(new Intent(this, AutoService.class));
+=======
+>>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
 
     }
 }

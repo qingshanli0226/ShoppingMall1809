@@ -31,7 +31,7 @@ import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
-import com.example.manager.CacheManger;
+import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 
 import java.util.ArrayList;
@@ -241,7 +241,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
 
+<<<<<<< HEAD
             CacheManger.getInstance().requestShortProductData();
+=======
+            ShopCacheManger.getInstance().requestShortProductData();
+
+
+
+>>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
         }
 
     }
