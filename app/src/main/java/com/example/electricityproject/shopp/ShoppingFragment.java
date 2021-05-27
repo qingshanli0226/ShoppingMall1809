@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.SpUtils;
 import com.example.common.bean.LogBean;
+import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
+import com.example.common.bean.RequestOrderInfo;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
@@ -38,7 +40,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     private ImageView all;
     private ToolBar toolbar;
-
     private ShoppingAdapter shoppingAdapter;
     private RecyclerView buyCarRv;
     private TextView shoppingSelectAll;
@@ -52,12 +53,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private double allPrice;
     private int num = 0;
     private boolean isShow = false;
-
     private int DelPosition = 0;
     private boolean isChange = false;
     private LinearLayout shoppingSta;
     private LinearLayout shoppingEnd;
-
     private ImageView delAll;
     private TextView delShop;
     private TextView collectShop;
@@ -69,6 +68,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private String isOneCheckStr="";
 
     private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
+    private List<RequestOrderInfo.BodyBean> bodyBeanList = new ArrayList<>();
     @Override
     protected void initData() {
 
@@ -198,7 +198,31 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             @Override
             public void onClick(View v) {
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
-                    Log.i("xxx", "onClick: "+"qqq");
+                    float price = 0;
+                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
+                    requestOrderInfo.setSubject("buy");
+                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
+//                    if (result!=null){
+//                        Log.i("oreder", "onClick: "+"购物车有数据");
+//                        for (int i = 0; i < result.size(); i++) {
+//                            if (result.get(i).isAll()){
+//                                Log.i("oreder", "onClick: "+"当前有选中的"+result.get(i).isAll());
+//                                B b = new B(result.get(i).getProductName(), result.get(i).getProductId());
+//                                bodyBeanList.add(b)
+//                                requestOrderInfo.setBody();
+//                                bodyBeanList.get(i).setProductId();
+//                                price = Float.parseFloat(price + result.get(i).getProductPrice());
+//                            }
+//                        }
+//                    }
+//                    requestOrderInfo.setBody(bodyBeanList);
+//                    requestOrderInfo.setTotalPrice(String.valueOf(price));
+//
+//                    if (bodyBeanList!=null){
+//                        httpPresenter.getOrderInfo(requestOrderInfo);
+//                    }
+
                 }else {
                     Intent intent = new Intent(getContext(), BindUserInfoActivity.class);
                     startActivity(intent);
@@ -248,6 +272,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             ShopCacheManger.getInstance().requestShortProductData();
         }
         shoppingAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getOrderInfoData(OrderInfoBean orderInfoBean) {
+        if (orderInfoBean.getCode().equals("200")){
+            Toast.makeText(getContext(), ""+orderInfoBean.getResult().getOrderInfo(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

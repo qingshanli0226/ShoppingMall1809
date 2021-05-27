@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,10 +59,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private List<ShortcartProductBean.ResultBean> resultBeans = new ArrayList<>();
     private ImageView buyCar;
     private LinearLayout linLin;
-    private LinearLayout detailsLin;
+    private ScrollView detailsLin;
     private PopupWindow popupWindow;
     private int prod_num = 1;
-    private RelativeLayout liner;
+    private ScrollView liner;
 
     @Override
     protected void initData() {
@@ -125,10 +126,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
                 if (isLog!=null){
-                    linLin.setVisibility(View.GONE);
                     popupWindow = new PopupWindow();
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                     popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                    popupWindow.setOutsideTouchable(true);
                     View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.pop_products, null);
                     ImageView image = inflate.findViewById(R.id.pop_image);
                     TextView names = inflate.findViewById(R.id.pop_name);
@@ -173,7 +174,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     });
 
                     popupWindow.setContentView(inflate);
-                    popupWindow.showAsDropDown(btnAdd,0,0);
+                    popupWindow.showAsDropDown(detailsWeb,0,500 );
                 }else {
                     Toast.makeText(DetailsActivity.this, "当前用户未登录", Toast.LENGTH_SHORT).show();
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(DetailsActivity.this,null);
@@ -191,21 +192,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
 
-        detailsLin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (popupWindow!=null){
-                    popupWindow.dismiss();
-                    linLin.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-
-
     }
-
-
 
     @Override
     protected void initPresenter() {
@@ -221,9 +208,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         addShop = (LinearLayout) findViewById(R.id.add_shop);
         btnAdd = (Button) findViewById(R.id.btn_add);
         buyCar = (ImageView) findViewById(R.id.buy_car);
+
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
-        detailsLin = (LinearLayout) findViewById(R.id.details_lin);
-        liner = (RelativeLayout) findViewById(R.id.relative);
     }
 
     @Override
@@ -255,10 +241,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
 
+<<<<<<< HEAD
+            CacheManger.getInstance().requestShortProductData();
+=======
             ShopCacheManger.getInstance().requestShortProductData();
 
 
 
+>>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
         }
 
     }

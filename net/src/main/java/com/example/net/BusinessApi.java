@@ -20,6 +20,7 @@ import com.example.common.bean.KindPantsBean;
 import com.example.common.bean.KindSkirtBean;
 import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
+import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RecommendBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
@@ -192,6 +193,12 @@ public interface BusinessApi {
     //全选服务端购物车产品或者全不选
     @POST("selectAllProduct")
     Observable<SelectAllProductBean> SelectAllProduct(@Body RequestBody requestBody);
+
+    //向服务端下订单接口
+    @POST("getOrderInfo")
+    Observable<OrderInfoBean> GetOrderInfo(@Body RequestBody requestBody);
+
+
 
 
 }

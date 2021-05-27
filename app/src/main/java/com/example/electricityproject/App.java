@@ -25,6 +25,10 @@ public class App extends Application {
 
             startService(new Intent(this, AutoService.class));
 
+<<<<<<< HEAD
+        startService(new Intent(this, AutoService.class));
+=======
+>>>>>>> 93e18fd45699267a6cb57c6df0461a26e1180947
 
     }
 }
