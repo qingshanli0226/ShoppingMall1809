@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable;
 
 
 public class BasePresenter<V> {
+
     private List<Disposable> disposableList = new ArrayList<>();
     protected V IView;
 

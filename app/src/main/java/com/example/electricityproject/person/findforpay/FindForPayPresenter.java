@@ -31,13 +31,19 @@ class FindForPayPresenter extends BasePresenter<IFindForPayView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-                        IView.showLoading();
+                        if (IView!=null){
+                            IView.showLoading();
+                            add(disposable);
+                        }
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-                        IView.hideLoading();
+                        if (IView!=null){
+                            IView.hideLoading();
+
+                        }
                     }
                 })
                 .subscribe(new Observer<FindForPayBean>() {
@@ -56,7 +62,9 @@ class FindForPayPresenter extends BasePresenter<IFindForPayView> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("zrf", "onError: "+e.getMessage());
+                        if (IView!=null){
+                            IView.showError(e.getMessage());
+                        }
                     }
 
                     @Override

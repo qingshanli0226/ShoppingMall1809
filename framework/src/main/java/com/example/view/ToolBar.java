@@ -97,7 +97,6 @@ public class ToolBar extends RelativeLayout {
     }
 
     public void setRightTvs(String str) {
-        this.rightTvs = rightTvs;
         rightText.setText(str+"");
         invalidate();
     }

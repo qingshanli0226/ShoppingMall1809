@@ -1,13 +1,16 @@
 package com.example.electricityproject;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.example.common.NetModel;
 import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
+import com.example.manager.BusinessNetManager;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
+import com.example.user.auto.AutoService;
 
 public class App extends Application {
     @Override
@@ -23,8 +26,9 @@ public class App extends Application {
         ShopCacheManger.getInstance().registerUserManger();
         ShopCacheManger.getInstance().registerBuyCarManger();
 
-//        startService(new Intent(this, AutoService.class));
 
+        startService(new Intent(this, AutoService.class));
+        BusinessNetManager.getInstance().init(this);
 
     }
 }

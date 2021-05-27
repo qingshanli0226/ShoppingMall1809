@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//自定义适配器
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.BaseViewHolder> {
 
     private List<T> list=new ArrayList<>();
+
     private iRecyclerItemClickListener recyclerItemClickListener;
     //添加数据
     public void updateData(List<T> updateList){

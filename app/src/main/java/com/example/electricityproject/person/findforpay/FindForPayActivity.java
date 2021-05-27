@@ -45,7 +45,7 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
 
     @Override
     public void hideLoading() {
-
+        loadingPage.showSuccessView();
     }
 
     @Override
@@ -53,5 +53,15 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
         loadingPage.showErrorView();
 
     }
+    //网络从断开变为已连接,重新加载数据
+    @Override
+    public void OnConnect() {
+        Toast.makeText(this, "网络重新连接,重新加载数据", Toast.LENGTH_SHORT).show();
+        httpPresenter.getForPayData();
+    }
 
+    @Override
+    public void DisConnect() {
+
+    }
 }

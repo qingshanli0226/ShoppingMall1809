@@ -213,13 +213,17 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         });
 
-//        LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-//        BusinessUserManager.getInstance().setLogList(isLog.getResult());
         //去结算
         goZfb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
+                    float price = 0;
+                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
+                    requestOrderInfo.setSubject("buy");
+                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
+
 
                     selectList = ShopCacheManger.getInstance().getSelectList();
                     if (selectList.size() > 0){
@@ -410,6 +414,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
 
         if (shortcartProductBean.getCode().equals("200")) {
+
             result = shortcartProductBean.getResult();
             loadingPage.showSuccessView();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
@@ -417,26 +422,32 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
+
         } else {
+
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
+
         }
     }
+
 
     //修改产品返回Bean
     @Override
     public void amendProductData(UpdateProductNumBean updateProductNumBean) {
+
         Log.i("zx", "amendProductData: " + updateProductNumBean.toString());
         if (updateProductNumBean.getCode().equals("200")) {
             shoppingAdapter.notifyDataSetChanged();
             count();
         }
-    }
 
+    }
+    //检查库存
     @Override
     public void CheckProductData(RegBean regBean) {
 
@@ -450,7 +461,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }
     }
 
-    //全选返回的Bean
+    // 单选和全选点击请求数据返回的数据
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
         list = selectAllProductBean;
@@ -487,7 +498,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             all.setImageResource(R.drawable.checkbox_unselected);
                             delAll.setImageResource(R.drawable.checkbox_unselected);
                         }
-
                     }
                     //全选
                     if (!isAllStr.equals("")) {
@@ -538,6 +548,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingMoney.setText("￥" + allPrice + "");
     }
 
+
     public void del () {
         if (isSelect) {
             httpPresenter.postSelectAllProductData(isSelect);
@@ -550,5 +561,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void onSelectBean(List<ShortcartProductBean.ResultBean> selectShopList) {
         Log.i("zx", "onSelectBean: "+selectShopList.toString());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

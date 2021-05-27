@@ -4,19 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.common.bean.LogBean;
+import com.example.manager.BusinessNetManager;
 import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract   class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged {
+public abstract   class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener {
 
     protected T httpPresenter;
     protected View mView;
@@ -44,6 +44,7 @@ public abstract   class BaseFragment <T extends BasePresenter> extends Fragment 
         initPresenter();
         initData();
         BusinessUserManager.getInstance().Register(this);
+        BusinessNetManager.getInstance().RegisterConnect(this);
     }
 
 
@@ -56,6 +57,7 @@ public abstract   class BaseFragment <T extends BasePresenter> extends Fragment 
         super.onDestroy();
         destroy();
         BusinessUserManager.getInstance().UnRegister(this);
+        BusinessNetManager.getInstance().UnRegisterConnect(this);
     }
 
     public void destroy(){
@@ -75,6 +77,16 @@ public abstract   class BaseFragment <T extends BasePresenter> extends Fragment 
 
     @Override
     public void onLoginChange(LogBean isLog) {
+
+    }
+
+    @Override
+    public void OnConnect() {
+
+    }
+
+    @Override
+    public void DisConnect() {
 
     }
 }

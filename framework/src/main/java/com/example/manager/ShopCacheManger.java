@@ -58,12 +58,12 @@ public class ShopCacheManger {
         if (select != null) {
             if (!selectList.contains(select)) {
                 if (select.isAll()){
-                    Log.i("zx", "setSelectList: 添加");
+                    com.example.common.LogUtils.i("添加");
                     selectList.add(select);
                 }
             }else {
                 if (!select.isAll()){
-                    Log.i("zx", "setSelectList: 删除");
+                    com.example.common.LogUtils.i("删除");
                     selectList.remove(select);
                 }
             }
@@ -83,12 +83,12 @@ public class ShopCacheManger {
             for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
                 if (!selectList.contains(bean)){
                     if (bean.isAll()){
-                        Log.i("zx", "setSelectList: 添加");
+                        com.example.common.LogUtils.i("setSelectList: 添加");
                         selectList.add(bean);
                     }
                 }else {
                     if (!bean.isAll()){
-                        Log.i("zx", "setSelectList: 删除");
+                        com.example.common.LogUtils.i("setSelectList: 删除");
                         selectList.remove(bean);
                     }
                 }
@@ -148,9 +148,9 @@ public class ShopCacheManger {
             @Override
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
                 if (shortcartProductBean!=null){
-                    Log.i("zrf", "onLoginChange: "+"获得数据");
+                    com.example.common.LogUtils.i("setSelectList: 获得数据");
                 }else{
-                    Log.i("zrf", "onLoginChange: "+"没有数据" );
+                    com.example.common.LogUtils.i("setSelectList: 没有数据");
                 }
             }
         });

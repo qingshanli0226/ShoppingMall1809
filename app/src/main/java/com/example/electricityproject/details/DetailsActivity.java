@@ -64,6 +64,9 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private int prod_num = 1;
     private RelativeLayout liner;
     private RelativeLayout relitive;
+    private RelativeLayout relative;
+
+
 
     @Override
     protected void initData() {
@@ -240,13 +243,17 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             String result = addOneProductBean.getResult();
             Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
             ShopCacheManger.getInstance().requestShortProductData();
+            ShopCacheManger.getInstance().requestShortProductData();
+            ShopCacheManger.getInstance().requestShortProductData();
+
+
+
         }
     }
 
     @Override
     public void checkOneProductInventory(RegBean checkInventoryBean) {
         if (checkInventoryBean.getCode().equals("200")){
-            Toast.makeText(this, "1231232", Toast.LENGTH_SHORT).show();
             String result = checkInventoryBean.getResult();
             if (!result.equals("0")){
                 httpPresenter.postAddOneProduct(map);
@@ -262,6 +269,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 //        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
         Glide.with(DetailsActivity.this).load(url).into(imageView);
         relitive.addView(imageView);
+        relative.addView(imageView);
 
         //起始点坐标
         int[] startLoa = new int[2];
