@@ -30,6 +30,7 @@ import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.pay.demo.PayDemoActivity;
+import com.example.pay.order.GetOrderActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;
 
@@ -83,15 +84,20 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 shopCheck.setChecked(!shopCheck.isChecked());
             }
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> wqq0526
 
         buyBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), PayDemoActivity.class);
+                Intent intent = new Intent(getContext(), GetOrderActivity.class);
                 startActivity(intent);
             }
         });
 
+<<<<<<< HEAD
         //切换后删除数据
         deleteBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +105,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 DeleteServeData();
             }
         });
+=======
+>>>>>>> wqq0526
     }
 
     //子线程获取数据 实时刷新
@@ -221,22 +229,43 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
 
+<<<<<<< HEAD
     }
 
     public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
         if (getOrderInfoBean.getCode().equals("200")) {
             GetOrderInfoBean.ResultBean result = getOrderInfoBean.getResult();
             order.add(result);
+=======
+}
+
+    @Override
+    public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
+        if (getOrderInfoBean.getCode().equals("200")){
+
+            String orderInfo = getOrderInfoBean.getResult().getOrderInfo();
+            String outTradeNo = getOrderInfoBean.getResult().getOutTradeNo();
+
+            Intent intent = new Intent(getContext(), GetOrderActivity.class );
+            intent.putExtra("orderInfo",orderInfo);
+            intent.putExtra("outTradeNo",outTradeNo);
+            intent.putExtra("key","main");
+            startActivity(intent);
+
+
+        }else {
+            Toast.makeText(getContext(), ""+getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
+>>>>>>> wqq0526
         }
     }
 
     @Override
     public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-
         if (confirmServerPayResultBean.getCode().equals("200")){
 
             confirmServerPayResultBeans.add(confirmServerPayResultBean);
         }
+<<<<<<< HEAD
 
     }
     //删除多个的回调
@@ -309,6 +338,23 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         allPrice();
         AllProductBeanAndProductSelect();
         SoppingCartMemoryDataManager.setResultBean(resultBeans);
+=======
+>>>>>>> wqq0526
+    }
+
+    @Override
+    public void onShopping(GetShortcartProductsBean shoppingCarBean) {
+
+    }
+
+    @Override
+    public void onLoginChange(LoginBean loginBean) {
+
+    }
+
+    @Override
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+        shoppingCarAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -317,6 +363,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
+<<<<<<< HEAD
+=======
     public void hideLoading() {
 
     }
@@ -327,10 +375,12 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
+>>>>>>> wqq0526
     public void onDestroy() {
         super.onDestroy();
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
+<<<<<<< HEAD
 
     @Override
     public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
@@ -339,4 +389,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         }
     }
 
+=======
+>>>>>>> wqq0526
 }

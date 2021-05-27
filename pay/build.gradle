@@ -49,7 +49,7 @@ dependencies {
     implementation project(path: ':net')
     implementation project(path: ':commened')
     implementation project(path: ':framework')
-
+    implementation 'com.android.support:recyclerview-v7:30.0.0'//recyclerview
     // 支付宝 SDK AAR 包所需的配置
     implementation  fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
 
