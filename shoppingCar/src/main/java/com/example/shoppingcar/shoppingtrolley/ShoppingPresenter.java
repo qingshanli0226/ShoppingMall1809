@@ -54,6 +54,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -112,6 +113,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -164,6 +166,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -215,6 +218,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -278,6 +282,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -328,6 +333,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
                         if (iView != null) {
                             iView.showLoading();
                         }
@@ -369,58 +375,5 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
 
-    public void getOrderInfo(OrderInfoParamBean orderInfoParamBean) {
-
-        String json = new Gson().toJson(orderInfoParamBean);
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
-
-
-        RetrofitCreator.getShopApiService()
-                .getOrderInfo(requestBody)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (iView != null) {
-                            iView.showLoading();
-                        }
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        if (iView != null) {
-                            iView.hideLoading();
-                        }
-                    }
-                })
-                .subscribe(new Observer<OrderinfoBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull OrderinfoBean orderinfoBean) {
-                        if (iView != null) {
-                            iView.onOrderInfo(orderinfoBean);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        if (iView != null) {
-                            iView.Error(e.toString());
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
 }

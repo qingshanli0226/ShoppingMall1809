@@ -54,6 +54,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     public void destroy() {
         CacheManager.getInstance().removeActivityList(this);
+        ShopManager.getInstance().unregisterConnectListener(this);
         if (httpPresenter != null) {
             httpPresenter.detachView();
             httpPresenter = null;

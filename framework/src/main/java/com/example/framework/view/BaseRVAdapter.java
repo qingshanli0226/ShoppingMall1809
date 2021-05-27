@@ -19,9 +19,10 @@ public abstract class BaseRVAdapter<T> extends RecyclerView.Adapter<BaseRVAdapte
     }
 
     public void updateDate(List<T> datalist){
-        this.datalist.clear();
-        this.datalist.addAll(datalist);
-        notifyDataSetChanged();
+//        this.datalist.clear();
+//        this.datalist.addAll(datalist);
+//        notifyDataSetChanged();
+        this.datalist =datalist;
     }
 
     protected BaseRVAdapter() {

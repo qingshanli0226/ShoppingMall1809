@@ -12,8 +12,14 @@ import com.example.framework.manager.CacheManager;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.FindForBean;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.Observer;
@@ -25,6 +31,7 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler {
 
     private Context applicationContext;
     private Thread.UncaughtExceptionHandler systemDefaultHandler;
+    private String crashPath = "/sdcard/shopmallcrash/";
 
     public void init(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -85,8 +92,44 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler {
                     }
                 });
 
+        saveExecptionInfo(throwable);
     }
 
+
+    private void saveExecptionInfo(Throwable e) {
+        //将异常信息放到一个输出流里
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+
+        //生成一个文件名
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timeStr = simpleDateFormat.format(new Date());
+
+        File crashFile = new File(crashPath+timeStr+".txt");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(crashFile);
+            String crashStr = stringWriter.toString();
+            byte[] crashByteArray = crashStr.getBytes();
+            int length = crashByteArray.length;
+            try {
+                fileOutputStream.write(crashByteArray, 0, length);
+                fileOutputStream.flush();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }finally {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
+
+    }
 
     private static ShopmallCrashHandler shopmallCrashHandler;
 

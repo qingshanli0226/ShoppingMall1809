@@ -59,6 +59,13 @@
     <string name="confirm">确定</string>
     <string name="delete">删除</string>
     <string name="noShop">购物车还没有数据,去逛逛吧...</string>
+    <string name="alreadyTheSmallest">已经是最小了</string>
+    <string name="pleaseChooseOneFirst">请先选择一个</string>
+    <string name="understock">库存不足</string>
+    <string name="placeAnOrderSuccessfully">下单成功</string>
+    <string name="theOrderDetails">订单详情</string>
+    <string name="noAddressPhone">没有地址和电话是否现在去设置</string>
+    <string name="hint">提示</string>
 
 
     <string name="app_name">XXX购物车</string>

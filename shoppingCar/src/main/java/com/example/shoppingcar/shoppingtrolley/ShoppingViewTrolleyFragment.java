@@ -1,5 +1,6 @@
 package com.example.shoppingcar.shoppingtrolley;
 
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
@@ -16,6 +18,7 @@ import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.DeleteBean;
+import com.example.net.model.LoginBean;
 import com.example.net.model.OrderInfoParamBean;
 import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
@@ -39,6 +42,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     private int position;
     private boolean isRequest = true;
     private boolean isDelete = false;
+    private boolean isBack = false;
     private RelativeLayout shopDeletLayout;
     private TextView delete;
     private int count = 0;
@@ -55,7 +59,9 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     @Override
     public void onLeftImgClick() {
         super.onLeftImgClick();
-        getActivity().finish();
+        if (isBack) {
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -64,6 +70,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         String stringExtra = getActivity().getIntent().getStringExtra(ShopConstants.SHOP_CAR);
         if (stringExtra != null && stringExtra.equals(ShopConstants.SHOP_CAR)) {
            toolbar.setLeftImgId(R.drawable.back);
+            isBack=true;
         }
 
         //购物车添加的回调
@@ -78,6 +85,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         if (resultManager != null) {
             this.result =resultManager;
             shoppingCarAdapter.updateDate(this.result);
+            selectAll();
         }
 
         if (result.size() <= 0) {
@@ -102,7 +110,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
                 count = Integer.parseInt(resultBean.getProductNum());
                 if (count <= 1) {
-                    Toast.makeText(getActivity(), "已经是最小了", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.alreadyTheSmallest), Toast.LENGTH_SHORT).show();
                 } else {
                     --count;
                     isRequest = false;
@@ -136,7 +144,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 }
             }
             if (delete.size() <= 0) {
-                Toast.makeText(getActivity(), "请先选择一个", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.pleaseChooseOneFirst), Toast.LENGTH_SHORT).show();
             } else {
                 isRequest = false;
                 httpPresenter.getRemoveManyProduct(delete);
@@ -155,7 +163,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 }
             }
             if (enough.size() <= 0) {
-                Toast.makeText(getActivity(), "请先选择一个", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.pleaseChooseOneFirst), Toast.LENGTH_SHORT).show();
             } else {
                 isRequest = false;
                 httpPresenter.getCheckInventory(enough);
@@ -250,39 +258,37 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 }
             }
             if (ishttp) {
-                Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.understock), Toast.LENGTH_SHORT).show();
             } else {
-                ArrayList<OrderInfoParamBean.BodyBean> bodyBeans = new ArrayList<>();
+                ArrayList<ShoppingTrolleyBean.ResultBean> resultBeans = new ArrayList<>();
                 for (int i = this.result.size() - 1; i >= 0; i--) {
                     ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
                     if (resultBean.isProductSelected()) {
-                        bodyBeans.add(new OrderInfoParamBean.BodyBean(resultBean.getProductName(), resultBean.getProductId()));
+                        resultBeans.add(resultBean);
                     }
                 }
-                OrderInfoParamBean orderInfoParamBean = new OrderInfoParamBean("buy", money + "", bodyBeans);
-//                isRequest = false;
-//                httpPresenter.getOrderInfo(orderInfoParamBean);
-            }
-        }
-    }
+                ShoppingCarManager.getInstance().deletePartResult(true, resultBeans);
+                ShoppingCarManager.getInstance().setDeleteBean(resultBeans);
 
-    //下订单
-    @Override
-    public void onOrderInfo(OrderinfoBean orderinfoBean) {
-        isRequest = true;
-        if (orderinfoBean.getCode().equals("200")) {
-            ArrayList<ShoppingTrolleyBean.ResultBean> resultBeans = new ArrayList<>();
-            for (int i = this.result.size() - 1; i >= 0; i--) {
-                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
-                if (resultBean.isProductSelected()) {
-                    resultBeans.add(resultBean);
+
+                LoginBean.ResultBean login = ShopeUserManager.getInstance().getLoginBean().getResult();
+                if ((String)login.getAddress()!=null&&(String)login.getPhone()!=null){
+                    ARouter.getInstance().build(ShopConstants.ORDER_PATH).withFloat("money",money).navigation();
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle(getResources().getString(R.string.hint));
+                    builder.setMessage(getResources().getString(R.string.noAddressPhone));
+                    builder.setPositiveButton(getResources().getString(R.string.confirm),(dialogInterface, i) -> {
+                        ARouter.getInstance().build(ShopConstants.SHOP_ADDRESS).navigation();
+                    });
+                    builder.setNegativeButton(getResources().getString(R.string.cancel),(dialogInterface, i) -> {
+                    });
+                    builder.show();
                 }
+
             }
-            ShoppingCarManager.getInstance().deletePartResult(true, resultBeans);
-            Toast.makeText(getActivity(), "下单成功", Toast.LENGTH_SHORT).show();
         }
     }
-
     //加减库存
     @Override
     public void onUpDateProductNum(RegisterBean registerBean) {
@@ -308,7 +314,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 count++;
                 httpPresenter.getUpDateProductNum(resultBean.getProductId(), count + "", resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
             } else {
-                Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.understock), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -325,7 +331,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         this.price.setText("￥" + price);
         money = price;
     }
-
+    //选择
     public void selectAll() {
         int countSelect = 0;
         for (ShoppingTrolleyBean.ResultBean resultBean : result) {
@@ -392,7 +398,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             } else {
                 shoppingCarAdapter.notifyDataSetChanged();
             }
-
             totalPrice();
         }
     }
