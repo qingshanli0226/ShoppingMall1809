@@ -55,7 +55,7 @@ public class CacheShopManager {
     }
 
     //购物车数据源
-    private List<CartBean.ResultBean> carts;
+    private List<CartBean.ResultBean> carts = new ArrayList<>();
     private List<CartBean.ResultBean> cartsPrice = new ArrayList<>();
     private List<ICartChange> cartChanges = new LinkedList<>();
 
@@ -78,7 +78,7 @@ public class CacheShopManager {
     }
 
     public void setCarts(List<CartBean.ResultBean> carts) {
-        this.carts = carts;
+        carts.addAll(carts);
         cartsPrice.addAll(carts);
 
     }

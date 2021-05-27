@@ -1,10 +1,16 @@
-package com.example.common;
+package com.example.framework;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.example.common.LogUtil;
+import com.example.framework.manager.ActManager;
+
+import java.util.List;
 
 public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
     private static ShopCrashHandler instance;
@@ -28,7 +34,7 @@ public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
     public void init(Context context) {
         this.context = context;
         defaultUncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();//获取系统默认处理未捕获异常
-        Thread.setDefaultUncaughtExceptionHandler(defaultUncaughtExceptionHandler);
+        Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
     @Override
@@ -49,6 +55,11 @@ public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
             interruptedException.printStackTrace();
         }
 
+        List<Activity> activities = ActManager.getActManager().getActivities();
+        for (Activity activity : activities) {
+            activity.finish();
+        }
+        System.exit(1);
 
 
     }

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,25 +20,33 @@ import com.example.common.Constants;
 import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
+import com.example.framework.view.CircleView;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
+import com.example.threeshopping.particulars.ParticularsActivity;
 import com.example.threeshopping.personal.PersonalFragment;
 import com.example.threeshopping.type.TypeFragment;
 import com.example.threeshopping.welcome.WelActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     private LoginBean loginBean;
     private com.example.framework.view.ToolBar toolbar;
     private com.google.android.material.bottomnavigation.BottomNavigationView btv;
+    private CircleView mainCircle;
+
 
     @Override
     public int getLayoutId() {
@@ -49,6 +58,7 @@ public class MainActivity extends BaseActivity {
         fragments = new ArrayList<>();
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         btv = (BottomNavigationView) findViewById(R.id.btv);
+        mainCircle = (CircleView) findViewById(R.id.mainCircle);
     }
 
     @Override
@@ -60,6 +70,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
+        //注册
+
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
 
         //添加fragment
         fragments.add(new HomeFragment());
@@ -76,6 +92,7 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.add(R.id.mainLinear, fragments.get(3));
         fragmentTransaction.add(R.id.mainLinear, fragments.get(4));
         fragmentTransaction.commit();
+
 
         //第一个显示
         btv.setSelectedItemId(R.id.mainOne);
@@ -108,6 +125,12 @@ public class MainActivity extends BaseActivity {
         });
 
         loginBean = UserManager.getInstance().getLoginBean();
+        if(loginBean != null){
+            if(CacheShopManager.getInstance().getCarts().size() > 0){
+                mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+                mainCircle.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 
@@ -148,6 +171,14 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Subscribe
+    public void updateCircle(String string){
+        if(CacheShopManager.getInstance().getCarts().size() > 0){
+            mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+            mainCircle.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onClickCenter() {
 
@@ -167,6 +198,17 @@ public class MainActivity extends BaseActivity {
     public void onUserChange(LoginBean loginBean) {
         super.onUserChange(loginBean);
         this.loginBean = loginBean;
-        LogUtil.d("登录");
+        if(CacheShopManager.getInstance().getCarts().size() > 0){
+            mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+            mainCircle.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        if(EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

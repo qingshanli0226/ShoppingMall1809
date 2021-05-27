@@ -1,7 +1,5 @@
 package com.example.threeshopping.cart;
 
-import android.util.Log;
-
 import com.example.common.LogUtil;
 import com.example.framework.BasePresenter;
 import com.example.framework.manager.CacheShopManager;
@@ -13,7 +11,6 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -24,9 +21,9 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class CarPresenter extends BasePresenter<ICarView> {
+public class CartPresenter extends BasePresenter<ICartView> {
 
-    public CarPresenter(ICarView iCarView) {
+    public CartPresenter(ICartView iCarView) {
         attchView(iCarView);
     }
 
