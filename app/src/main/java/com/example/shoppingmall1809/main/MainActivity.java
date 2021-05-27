@@ -182,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
 
     @Override
     public void onShoppingCar(List<ShoppingTrolleyBean.ResultBean> result) {
-        LogUtils.e(result.size());
         showLabel(result);
     }
 

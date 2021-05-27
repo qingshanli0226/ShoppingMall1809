@@ -9,11 +9,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.commom.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.DeleteBean;
+import com.example.net.model.OrderInfoParamBean;
+import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
@@ -39,7 +41,9 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     private TextView delete;
     private int count = 0;
     private RelativeLayout vain;
-    private boolean isOneNotifyDataSetChanged = true;
+    private boolean isOneNotifyDataSetChanged = false;
+    private float money = 0;
+
 
     @Override
     protected int getLayoutId() {
@@ -48,6 +52,11 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
 
     @Override
     protected void initData() {
+
+        String stringExtra = getActivity().getIntent().getStringExtra("");
+        if (stringExtra != null && stringExtra.equals("")) {
+
+        }
 
         List<ShoppingTrolleyBean.ResultBean> resultManager = ShoppingCarManager.getInstance().getResult();
         if (resultManager != null) {
@@ -82,16 +91,16 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 if (count <= 1) {
                     Toast.makeText(getActivity(), "已经是最小了", Toast.LENGTH_SHORT).show();
                 } else {
-                    isRequest = false;
                     --count;
+                    isRequest = false;
                     httpPresenter.getUpDateProductNum(resultBean.getProductId(), count + "", resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
                 }
 
             } else if (id == R.id.shoppingTrolley_check) {
                 checkBox = (CheckBox) view;
                 ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
-                httpPresenter.getUpDateSelected(resultBean.getProductId(), checkBox.isSelected(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice().toString());
                 isRequest = false;
+                httpPresenter.getUpDateSelected(resultBean.getProductId(), checkBox.isSelected(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice().toString());
             }
         });
 
@@ -113,7 +122,12 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                     delete.add(deleteBean);
                 }
             }
-            httpPresenter.getRemoveManyProduct(delete);
+            if (delete.size() <= 0) {
+                Toast.makeText(getActivity(), "请先选择一个", Toast.LENGTH_SHORT).show();
+            } else {
+                isRequest = false;
+                httpPresenter.getRemoveManyProduct(delete);
+            }
 
         });
 
@@ -121,13 +135,18 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         accout.setOnClickListener(view -> {
             List<DeleteBean> enough = new ArrayList<>();
             for (int i = this.result.size() - 1; i >= 0; i--) {
-                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(position);
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
                 if (resultBean.isProductSelected()) {
                     DeleteBean deleteBean = new DeleteBean(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl());
                     enough.add(deleteBean);
                 }
             }
-            httpPresenter.getCheckInventory(enough);
+            if (enough.size() <= 0) {
+                Toast.makeText(getActivity(), "请先选择一个", Toast.LENGTH_SHORT).show();
+            } else {
+                isRequest = false;
+                httpPresenter.getCheckInventory(enough);
+            }
         });
 
     }
@@ -155,9 +174,10 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void onUpDateSelected(RegisterBean registerBean) {
         isRequest = true;
         if (registerBean.getCode().equals("200")) {
-            isOneNotifyDataSetChanged =true;
+            isOneNotifyDataSetChanged = true;
             ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
             resultBean.setProductSelected(checkBox.isChecked());
+            selectAll();
             ShoppingCarManager.getInstance().upDataResultBean(resultBean);
 
         }
@@ -168,7 +188,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void onSelectAllProduct(RegisterBean registerBean) {
         isRequest = true;
         if (registerBean.getCode().equals("200")) {
-            isOneNotifyDataSetChanged =false;
+            isOneNotifyDataSetChanged = false;
             if (!isCheck) {
                 checkAll.setBackgroundResource(R.drawable.checkbox_selected);
                 ShoppingCarManager.getInstance().checkAll();
@@ -186,7 +206,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void onRemoveManyProduct(RegisterBean registerBean) {
         isRequest = true;
         if (registerBean.getCode().equals("200")) {
-            isOneNotifyDataSetChanged =false;
+            isOneNotifyDataSetChanged = false;
             List<ShoppingTrolleyBean.ResultBean> delete = new ArrayList<>();
             //获取要删除的
             for (int i = result.size() - 1; i >= 0; i--) {
@@ -206,20 +226,60 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     //检查服务端多个产品是否库存充足
     @Override
     public void onCheckInventory(ShoppingTrolleyBean shoppingTrolleyBean) {
+        isRequest = true;
         if (shoppingTrolleyBean.getCode().equals("200")) {
             List<ShoppingTrolleyBean.ResultBean> result = shoppingTrolleyBean.getResult();
-            Toast.makeText(getActivity(), "判断库存", Toast.LENGTH_SHORT).show();
+            LogUtils.json(result);
+            boolean ishttp = false;
+            for (ShoppingTrolleyBean.ResultBean resultBean : result) {
+                if (Integer.parseInt(resultBean.getProductNum()) <= 0) {
+                    ishttp = true;
+                }
+            }
+            if (ishttp) {
+                Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+            } else {
+                ArrayList<OrderInfoParamBean.BodyBean> bodyBeans = new ArrayList<>();
+                for (int i = this.result.size() - 1; i >= 0; i--) {
+                    ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
+                    if (resultBean.isProductSelected()) {
+                        bodyBeans.add(new OrderInfoParamBean.BodyBean(resultBean.getProductName(), resultBean.getProductId()));
+                    }
+                }
+                OrderInfoParamBean orderInfoParamBean = new OrderInfoParamBean("buy", money + "", bodyBeans);
+//                isRequest = false;
+//                httpPresenter.getOrderInfo(orderInfoParamBean);
+            }
         }
 
+    }
+
+    //下订单
+    @Override
+    public void onOrderInfo(OrderinfoBean orderinfoBean) {
+        isRequest = true;
+        if (orderinfoBean.getCode().equals("200")) {
+            ArrayList<ShoppingTrolleyBean.ResultBean> resultBeans = new ArrayList<>();
+            for (int i = this.result.size() - 1; i >= 0; i--) {
+                ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
+                if (resultBean.isProductSelected()) {
+                    resultBeans.add(resultBean);
+                }
+            }
+            ShoppingCarManager.getInstance().deletePartResult(true, resultBeans);
+            Toast.makeText(getActivity(), "下单成功", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //加减库存
     @Override
     public void onUpDateProductNum(RegisterBean registerBean) {
+        isRequest = true;
         if (registerBean.getCode().equals("200")) {
-            isOneNotifyDataSetChanged =true;
+            isOneNotifyDataSetChanged = true;
             ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
             resultBean.setProductNum(count + "");
+
             ShoppingCarManager.getInstance().upDataResultBean(resultBean);
         }
     }
@@ -229,11 +289,9 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void onCheckOneProductInventory(RegisterBean registerBean) {
         isRequest = true;
         if (registerBean.getCode().equals("200")) {
-            LogUtils.d("判断是否有库存");
             ShoppingTrolleyBean.ResultBean resultBean = result.get(position);
-            if (Integer.parseInt(registerBean.getResult()) >0) {
-                isOneNotifyDataSetChanged =true;
-                LogUtils.d("有库存");
+            if (Integer.parseInt(registerBean.getResult()) > 0) {
+                isOneNotifyDataSetChanged = true;
                 count = Integer.parseInt(resultBean.getProductNum());
                 count++;
                 httpPresenter.getUpDateProductNum(resultBean.getProductId(), count + "", resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice());
@@ -243,6 +301,35 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         }
     }
 
+
+    //计算价格
+    public void totalPrice() {
+        float price = 0;
+        for (ShoppingTrolleyBean.ResultBean resultBean : result) {
+            if (resultBean.isProductSelected()) {
+                price += Float.valueOf((String) resultBean.getProductPrice()) * Float.valueOf(Integer.parseInt(resultBean.getProductNum()));
+            }
+        }
+        this.price.setText("￥" + price);
+        money = price;
+    }
+
+    public void selectAll() {
+        int countSelect = 0;
+        for (ShoppingTrolleyBean.ResultBean resultBean : result) {
+            if (resultBean.isProductSelected()) {
+                countSelect++;
+            }
+        }
+        if (countSelect == result.size()) {
+            checkAll.setBackgroundResource(R.drawable.checkbox_selected);
+            isCheck = true;
+        } else {
+            checkAll.setBackgroundResource(R.drawable.checkbox_unselected);
+            isCheck = false;
+        }
+
+    }
 
     @Override
     public void showLoading() {
@@ -291,9 +378,11 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             this.result = result;
             if (isOneNotifyDataSetChanged) {
                 shoppingCarAdapter.notifyItemChanged(position);
-            }else {
+            } else {
                 shoppingCarAdapter.notifyDataSetChanged();
             }
+
+            totalPrice();
         }
     }
 

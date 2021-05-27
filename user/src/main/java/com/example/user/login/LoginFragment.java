@@ -108,6 +108,11 @@ public class LoginFragment extends BaseFragment<LoginPresneter> implements ILogi
 
         loginConceal.setOnClickListener(new View.OnClickListener() {
             @Override
+            public int hashCode() {
+                return super.hashCode();
+            }
+
+            @Override
             public void onClick(View view) {
                 if (!isConceal) {
                     loginConceal.setImageResource(R.drawable.new_password_drawable_visible);
@@ -161,7 +166,7 @@ public class LoginFragment extends BaseFragment<LoginPresneter> implements ILogi
     @Override
     public void onLoginData(LoginBean loginBean) {
         if (loginBean.getCode().equals("200")) {
-            SpUtil.setString(getActivity(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
+            SpUtil.setString(getContext(), ShopConstants.TOKEN_KEY, loginBean.getResult().getToken());
             ShopeUserManager.getInstance().setLoginBean(loginBean);
             if (CacheManager.getInstance().decideARoutPage.equals(ShopConstants.AROUT_PARTICULARS)){
                 getActivity().finish();

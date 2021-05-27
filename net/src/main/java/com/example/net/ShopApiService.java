@@ -5,6 +5,7 @@ import com.example.net.model.CategoryBean;
 import com.example.net.model.FindForBean;
 import com.example.net.model.HoemBean;
 import com.example.net.model.LoginBean;
+import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.net.model.SortBean;
@@ -79,6 +80,11 @@ public interface ShopApiService {
     //修改数量
     @POST("updateProductNum")
     Observable<RegisterBean> getUpDateProductNum(@Body RequestBody requestBody);
+
+    //向服务端下订单接口
+    @POST("getOrderInfo")
+    Observable<OrderinfoBean> getOrderInfo(@Body RequestBody requestBody);
+
 
     //待支付
     @GET("findForPay")

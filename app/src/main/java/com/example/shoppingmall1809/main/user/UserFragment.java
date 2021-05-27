@@ -32,6 +32,8 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
         ShoppingCarManager.getInstance().registerFindForBean(this::onFindForBean);
 
         ShopeUserManager.getInstance().register(this::onLoginChange);
+
+
         if (ShopeUserManager.getInstance().getLoginBean()!=null) {
             httpPresenter.getFindForPayData();
             httpPresenter.getFindForSendData();

@@ -4,6 +4,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.DeleteBean;
+import com.example.net.model.OrderInfoParamBean;
+import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.google.gson.Gson;
@@ -151,7 +153,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
 
-    public void getRemoveManyProduct( List<DeleteBean> delete ){
+    public void getRemoveManyProduct(List<DeleteBean> delete) {
         String json = new Gson().toJson(delete);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
 
@@ -202,7 +204,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 });
     }
 
-    public void getCheckInventory( List<DeleteBean> enough ){
+    public void getCheckInventory(List<DeleteBean> enough) {
         String json = new Gson().toJson(enough);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
 
@@ -254,7 +256,7 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
 
-    public void getUpDateProductNum(String productId, String productNum, String productName, String url, String productPrice){
+    public void getUpDateProductNum(String productId, String productNum, String productName, String url, String productPrice) {
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -317,10 +319,10 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
 
-    public void getCheckOneProductInventory(String productId,String productNum){
+    public void getCheckOneProductInventory(String productId, String productNum) {
 
         RetrofitCreator.getShopApiService()
-                .getCheckOneProductInventory(productId,productNum)
+                .getCheckOneProductInventory(productId, productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -349,6 +351,61 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     public void onNext(@NonNull RegisterBean registerBean) {
                         if (iView != null) {
                             iView.onCheckOneProductInventory(registerBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView != null) {
+                            iView.Error(e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
+    public void getOrderInfo(OrderInfoParamBean orderInfoParamBean) {
+
+        String json = new Gson().toJson(orderInfoParamBean);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
+
+
+        RetrofitCreator.getShopApiService()
+                .getOrderInfo(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView != null) {
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView != null) {
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<OrderinfoBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull OrderinfoBean orderinfoBean) {
+                        if (iView != null) {
+                            iView.onOrderInfo(orderinfoBean);
                         }
                     }
 
