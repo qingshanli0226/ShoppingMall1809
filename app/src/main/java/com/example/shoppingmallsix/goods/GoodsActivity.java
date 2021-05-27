@@ -26,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
@@ -307,7 +306,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
                 if (result != null && result.size() != 0) {
                     //获取内存数据
                     resultBeans.addAll(result);
-                    LogUtils.json(resultBeans);
                     goodsSign.setVisibility(View.VISIBLE);
                     goodsSign.setText(result.size() + "");
                 }
@@ -323,6 +321,8 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             //红点刷新数量
             goodsSign.setVisibility(View.VISIBLE);
             goodsSign.setText(resultBeanList.size() + "");
+        }else {
+            goodsSign.setVisibility(View.GONE);
         }
     }
 

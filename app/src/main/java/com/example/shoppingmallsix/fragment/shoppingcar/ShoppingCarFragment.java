@@ -15,16 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
+import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.pay.demo.PayDemoActivity;
@@ -172,6 +173,12 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                         GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
                         httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(),position);
                         break;
+                    case R.id.shoppingTrolley_sub:
+
+                        break;
+                    case R.id.shoppingTrolley_add:
+                        httpPresenter.checkInventory(resultBeans.get(position).getProductId(),resultBeans.get(position).getProductNum(),position);
+                        break;
                 }
             }
         });
@@ -230,12 +237,9 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-
         if (confirmServerPayResultBean.getCode().equals("200")){
-
             confirmServerPayResultBeans.add(confirmServerPayResultBean);
         }
-
     }
     //删除多个的回调
     @Override
@@ -245,6 +249,35 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             DeleteMemoryData();
         }
     }
+    //检查库存的回调
+    @Override
+    public void onCheckInventory(CheckOneInventoryBean bean,int position) {
+        if (bean.getCode().equals("200")) {
+            Toast.makeText(getActivity(), "检查库存有", Toast.LENGTH_SHORT).show();
+
+            GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
+            //修改
+//            httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum())+1) + "", resultBean.getProductName(), resultBean.getUrl(), ""+price,position,false);
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        } else {
+            Toast.makeText(getActivity(), "检查库存没有", Toast.LENGTH_SHORT).show();
+        }
+    }
+    //修改更新的回调
+    @Override
+    public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean,int position,boolean mBoolena) {
+        if (updateProductNumBean.getCode().equals("200")){
+            if (mBoolena){
+                //修改内存数据
+//                resultBeans.get(position).setProductName((String)(Integer.parseInt(resultBeans.get(position).getProductNum())+1));
+            }else {
+//                resultBeans.get(position).setProductName(resultBeans.get(position).getProductNum()-1);
+            }
+
+
+        }
+    }
+
     //判断刷新是否全选
     public void AllProductBeanAndProductSelect(){
         int index = 0;
@@ -268,9 +301,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         for (int i = 0; i < resultBeans.size() ; i++) {
             if (resultBeans.get(i).isProductSelected()){
                 String productPrice = (String) resultBeans.get(i).getProductPrice();
-                LogUtils.e(productPrice);
                 float v = Float.parseFloat(productPrice);
-                LogUtils.e(v);
                 String productNum = resultBeans.get(i).getProductNum();
                 int parseInt = Integer.parseInt(productNum);
                 price= price+ (v*parseInt);

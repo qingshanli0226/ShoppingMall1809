@@ -185,6 +185,8 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         if (resultBeanList.size() != 0) {
             sign.setVisibility(View.VISIBLE);
             sign.setText(resultBeanList.size() + "");
+        }else {
+            sign.setVisibility(View.GONE);
         }
     }
 
