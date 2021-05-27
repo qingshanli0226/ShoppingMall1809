@@ -107,4 +107,11 @@ public interface IHttpApiService {
     //订单接口
     @POST(Constants.GETORDER)
     Observable<OrderBean> getOrder(@Body RequestBody requestBody);
+    //设置电话
+    @POST(Constants.UPDATEPHONE)
+    Observable<SelectBean> setPhone(@Field("phone")String phone);
+
+    //设置地址
+    @POST(Constants.UPDATEADDRESS)
+    Observable<SelectBean> setAddr(@Field("address")String address);
 }

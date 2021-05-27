@@ -3,8 +3,8 @@
     package="com.example.pay">
 
     <application>
-        <activity android:name=".order.OrderActivity"></activity>
-        <activity android:name=".message.MessageActivity" />
+
+        <activity android:name=".orderinfo.PayActivity"></activity>
         <activity android:name=".payment.PaymentActivity" />
         <activity android:name=".shipments.ShipmentsActivity" />
     </application>

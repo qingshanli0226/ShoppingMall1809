@@ -6,6 +6,7 @@ import android.app.Application;
 import com.example.framework.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
+import com.example.message.module.MessageModule;
 import com.example.net.module.NetModule;
 import com.example.pay.module.PayModule;
 
@@ -22,6 +23,7 @@ public class App extends Application {
         CommonArouter.getInstance().init(this);
         AppModule.init();
         PayModule.init();
+        MessageModule.init();
         UserModule.init();
         NetModule.context = this;
 
