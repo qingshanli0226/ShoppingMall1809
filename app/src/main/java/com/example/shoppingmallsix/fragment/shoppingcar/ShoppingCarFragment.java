@@ -23,6 +23,7 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
@@ -36,7 +37,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping, CacheUserManager.ILoginChange,SoppingCartMemoryDataManager.ISoppingDateChange {
+public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping,SoppingCartMemoryDataManager.ISoppingDateChange {
 
     private TextView shopText;
     private String bianji = "编辑";
@@ -52,6 +53,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private ShoppingCarAdapter shoppingCarAdapter;
     private CheckBox shopCheck;
     private int price = 0;
+    private List<GetShortcartProductsBean.ResultBean> listDelete = new ArrayList<>();
     @Override
     protected void initPresenter() {
         httpPresenter = new ShoppingPresenter(this);
@@ -80,7 +82,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         deleteBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                DeleteServeData();
             }
         });
     }
@@ -161,19 +163,21 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 }
             }
         });
-
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
     }
-
+    //全选回到
     @Override
     public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean,boolean mBooleans) {
         if (selectAllProductBean.getCode().equals("200")){
+            //服务端更改成功
             if (mBooleans){
+                //点击单选 多选改变
             }else {
+                //点击多选
                 shopCheck.setChecked(!shopCheck.isChecked());
                 if (shopCheck.isChecked()){
                     for (int i = 0; i <resultBeans.size() ; i++) {
@@ -184,28 +188,34 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                         resultBeans.get(i).setProductSelected(false);
                     }
                 }
+                //通知个个页面数据刷新
                 SoppingCartMemoryDataManager.setResultBean(resultBeans);
             }
-            setPrice();
-
-
+            //刷新金额
+            allPrice();
         }
     }
-
+    //修改单选的回调
     @Override
     public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position) {
         if (updateProductSelectedBean.getCode().equals("200")){
-            if (resultBeans.get(position).isProductSelected()){
-                resultBeans.get(position).setProductSelected(false);
-            }else {
-                resultBeans.get(position).setProductSelected(true);
-            }
+            //服务端请求成功  刷新内存数据
+            resultBeans.get(position).setProductSelected(!resultBeans.get(position).isProductSelected());
+            //刷新多选
             AllProductBeanAndProductSelect();
+            //通知内存数据刷新
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
-
-
+    //删除多个的回调
+    @Override
+    public void onRemoveManyProductBean(RemoveManyProductBean removeManyProductBean) {
+        if (removeManyProductBean.getCode().equals("200")){
+            //成功后 清除内存数据
+            DeleteMemoryData();
+        }
+    }
+    //判断刷新是否全选
     public void AllProductBeanAndProductSelect(){
         int index = 0;
         for (int i = 0; i < resultBeans.size() ; i++) {
@@ -220,9 +230,11 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             shopCheck.setChecked(false);
             httpPresenter.getSelectAllProduct(false,true);
         }
-        setPrice();
+        //刷新金额
+        allPrice();
     }
-    public void setPrice(){
+    //获取全部物品的金额
+    public void allPrice(){
         for (int i = 0; i < resultBeans.size() ; i++) {
             if (resultBeans.get(i).isProductSelected()){
                 String productPrice = (String) resultBeans.get(i).getProductPrice();
@@ -236,19 +248,33 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shopMoney.setText(""+price);
         price = 0;
     }
-    public void DletData(){
+    //删除服务端选中的商品
+    public void DeleteServeData(){
         for (int i = 0; i < resultBeans.size() ; i++) {
             if (resultBeans.get(i).isProductSelected()){
-                String productPrice = (String) resultBeans.get(i).getProductPrice();
-                LogUtils.e(productPrice);
-                float v = Float.parseFloat(productPrice);
-                String productNum = resultBeans.get(i).getProductNum();
-                int parseInt = Integer.parseInt(productNum);
-                price= (int) (price+ (v*parseInt));
+                GetShortcartProductsBean.ResultBean resultBean = new GetShortcartProductsBean.ResultBean();
+                resultBean.setProductNum(resultBeans.get(i).getProductNum());
+                resultBean.setUrl(resultBeans.get(i).getUrl());
+                resultBean.setProductPrice(resultBeans.get(i).getProductPrice());
+                resultBean.setProductName(resultBeans.get(i).getProductName());
+                resultBean.setProductId(resultBeans.get(i).getProductId());
+                resultBean.setProductSelected(resultBeans.get(i).isProductSelected());
+                listDelete.add(resultBean);
             }
         }
-        shopMoney.setText(""+price);
-        price = 0;
+        httpPresenter.removeManyProduct(listDelete);
+        //删除完进行刷新判断
+        AllProductBeanAndProductSelect();
+    }
+    //删除内存数据
+    public void DeleteMemoryData(){
+        for (int i = 0; i < resultBeans.size() ; i++) {
+            if (resultBeans.get(i).isProductSelected()){
+                resultBeans.remove(i);
+                i--;
+            }
+        }
+        SoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
 
     @Override
@@ -267,14 +293,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onLoginChange(LoginBean loginBean) {
-        if (loginBean != null) {
-
-        }
-    }
-
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
@@ -282,7 +300,9 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+        if (resultBeanList != null){
             shoppingCarAdapter.notifyDataSetChanged();
+        }
     }
 
 }

@@ -5,11 +5,16 @@ import com.example.framework.BasePresenter;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
+import com.example.shoppingmallsix.fragment.shoppingcar.bean.DeletesDataBean;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -85,6 +90,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                });
     }
 
+
     public void getUpProductSelect(String productId,String productNum,String productName,String url,String productPrice,int position){
 
         JSONObject jsonObject = new JSONObject();
@@ -114,6 +120,55 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     public void onNext(@NonNull UpdateProductSelectedBean selectedBean) {
                         if (iView!=null){
                             iView.onUpdateProductSelect(selectedBean,position);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView!=null){
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void removeManyProduct(List<GetShortcartProductsBean.ResultBean> resultBeans){
+        String s = new Gson().toJson(resultBeans);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
+        RetrofitCreator.getFiannceApiService()
+                .removeManyProduct(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView!=null){
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView!=null){
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RemoveManyProductBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RemoveManyProductBean removeManyProductBean) {
+                        if (iView!=null){
+                            iView.onRemoveManyProductBean(removeManyProductBean);
                         }
                     }
 
