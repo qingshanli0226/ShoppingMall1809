@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
 import com.shoppingmall.net.bean.AddProductBean;
@@ -42,10 +43,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
     private TextView paymentprice;
     private Button payment;
     private boolean isOpenDel = false;
-    private List<ShopCarBean> shopCarBeanList;
-    private static int AddOrRemove = 0;
+    private static int ADD_OR_REMOVE = 0;
 
     private int nowPosition = 0;
+    private ShopCarBean shopCarBean2;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop_car;
@@ -74,20 +75,16 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
 
     @Override
     public void initData() {
-        shopCarBeanList = new ArrayList<>();
+        //加载列表
+        shopCarAdapter = new ShopCarAdapter();
+        //判断是否点击编辑
+        checkcompileOnClick();
         httpPresenter.getShopCarData();
+
+
     }
 
-    @Override
-    public void getShopCarData(ShopCarBean shopCarBean) {
-        shopCarBeanList.add(shopCarBean);
-
-        LogUtils.json(shopCarBean);
-        shopCarAdapter = new ShopCarAdapter();
-        shopMallCarRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        shopMallCarRv.setAdapter(shopCarAdapter);
-        shopCarAdapter.updateData(shopCarBean.getResult());
-
+    private void checkcompileOnClick() {
         checkcompile.setOnClickListener(v->{
             if (isOpenDel){
                 cartLLpayment.setVisibility(View.VISIBLE);
@@ -99,20 +96,37 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
                 isOpenDel = true;
             }
         });
+    }
 
+    @Override
+    public void getShopCarData(ShopCarBean shopCarBean) {
+        CacheManager.getInstance().setShopCarBean(shopCarBean);
+
+        shopCarBean2 = CacheManager.getInstance().getShopCarBean();
+        //添加数据
+        shopMallCarRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        shopMallCarRv.setAdapter(shopCarAdapter);
+//        shopCarAdapter.notifyItemChanged(nowPosition);
+
+        //上传数据
+        shopCarAdapter.updateData(shopCarBean2.getResult());
+
+        //子点击
         shopCarAdapter.setRecyclerChildItemClickListener(new ShopCarAdapter.IRecyclerChildItemClickListener() {
             @Override
             public void onShopCarAddNumItemClick(int position, View v) {
-                httpPresenter.checkProductNum(shopCarBean.getResult().get(position).getProductId()
-                ,shopCarBean.getResult().get(position).getProductNum());
+                httpPresenter.checkProductNum(shopCarBean2.getResult().get(position).getProductId()
+                        ,shopCarBean2.getResult().get(position).getProductNum());
                 nowPosition = position;
+                ADD_OR_REMOVE = 1;
             }
 
             @Override
             public void onShopCarRemoveNumItemClick(int position, View v) {
-                httpPresenter.checkProductNum(shopCarBean.getResult().get(position).getProductId()
-                        ,shopCarBean.getResult().get(position).getProductNum());
+                httpPresenter.checkProductNum(shopCarBean2.getResult().get(position).getProductId()
+                        ,shopCarBean2.getResult().get(position).getProductNum());
                 nowPosition = position;
+                ADD_OR_REMOVE = 2;
             }
 
             @Override
@@ -121,25 +135,32 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
             }
         });
     }
+
     //String id,int num,String name,String url,String price
     @Override
     public void checkProductNum(CheckProductBean checkProductBean) {
-        LogUtils.json(checkProductBean);
-        if (checkProductBean.getCode().equals("200")){
-            String productId = shopCarBeanList.get(0).getResult().get(nowPosition).getProductId();
-            Log.i("hqy", "checkProductNum: "+productId);
-            String productNum = shopCarBeanList.get(0).getResult().get(nowPosition).getProductNum();
-            String url = shopCarBeanList.get(0).getResult().get(nowPosition).getUrl();
-            String productPrice = (String) shopCarBeanList.get(0).getResult().get(nowPosition).getProductPrice();
-            httpPresenter.updateProduct(productId,Integer.parseInt(productNum)-1, url, productPrice);
+//        LogUtils.json(checkProductBean);
+//        if (checkProductBean.getCode().equals("200")){
+        if (ADD_OR_REMOVE==1){
+            httpPresenter.updateProduct(shopCarBean2.getResult().get(nowPosition).getProductId(),
+                    Integer.parseInt(shopCarBean2.getResult().get(nowPosition).getProductNum())+1,
+                    shopCarBean2.getResult().get(nowPosition).getUrl(),
+                    (String) shopCarBean2.getResult().get(nowPosition).getProductPrice());
+        }else if(ADD_OR_REMOVE==2){
+            httpPresenter.updateProduct(shopCarBean2.getResult().get(nowPosition).getProductId(),
+                    Integer.parseInt(shopCarBean2.getResult().get(nowPosition).getProductNum())-1,
+                    shopCarBean2.getResult().get(nowPosition).getUrl(),
+                    (String) shopCarBean2.getResult().get(nowPosition).getProductPrice());
         }
+//        }
     }
 
     @Override
     public void updateProduct(AddProductBean addProductBean) {
         LogUtils.json(addProductBean);
         if (addProductBean.getCode().equals("200")){
-            shopCarAdapter.notifyItemChanged(nowPosition);
+            Toast.makeText(getContext(), "数量改变成功", Toast.LENGTH_SHORT).show();
+            httpPresenter.getShopCarData();
         }
     }
 }

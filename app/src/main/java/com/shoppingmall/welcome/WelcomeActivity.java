@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.fiance.user.AutoService;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
+import com.shoppingmall.net.bean.ShopCarBean;
 import com.shoppingmall.net.sp.SpUtil;
 import com.shoppingmall.main.MainActivity;
 import com.shoppingmall.R;
@@ -61,6 +62,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             startService(intent);
         }
     }
+
+
     private final Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")
         @Override

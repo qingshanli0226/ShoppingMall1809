@@ -2,6 +2,7 @@ package com.shoppingmall.welcome;
 
 import com.shoppingmall.framework.mvp.BasePresenter;
 import com.shoppingmall.net.bean.HomeBean;
+import com.shoppingmall.net.bean.ShopCarBean;
 import com.shoppingmall.net.model.RetrofitCreate;
 
 import io.reactivex.Observer;
@@ -64,5 +65,6 @@ public class WelcomePresenter extends BasePresenter<IWelcomeView> {
                     }
                 });
     }
+
 }
 

@@ -25,7 +25,6 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
     public ShopCarPresenter(IShopCarView iShopCarView){
         attachView(iShopCarView);
     }
-
     public void getShopCarData(){
         RetrofitCreate.getShoppingMallApiService()
                 .getShopCarProduct()
@@ -73,6 +72,7 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                     }
                 });
     }
+
     public void checkProductNum(String productId,String productNum){
         RetrofitCreate.getShoppingMallApiService()
                 .checkProduct(productId,productNum)
@@ -137,7 +137,7 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, jsonObject.toString());
         RetrofitCreate.getShoppingMallApiService()
-                .addProduct(requestBody)
+                .updateProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //该函数当RxJava发起网络请求时调用

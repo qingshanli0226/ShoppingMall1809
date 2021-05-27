@@ -77,5 +77,5 @@ public interface ShoppingMallApiService {
     //更新服务端购物车产品的数量的接口
     //http://49.233.0.68:8080/updateProductNum
     @POST("updateProductNum")
-    Observable<ProductBean> updateProduct(@Body RequestBody body);
+    Observable<AddProductBean> updateProduct(@Body RequestBody body);
 }
