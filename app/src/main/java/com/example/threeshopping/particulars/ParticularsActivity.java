@@ -28,12 +28,15 @@ import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
+import com.example.threeshopping.MainActivity;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.SqlBean;
 import com.fiannce.sql.UtileSql;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -235,6 +238,10 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             resultBean.setUrl(productBean.getUrl());
             resultBean.setProductName(productBean.getProductName());
             CacheShopManager.getInstance().addData(resultBean);
+            //再次更新小远点
+            EventBus.getDefault().post("");
+
+
         }
     }
 
@@ -271,4 +278,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         super.onUserChange(loginBean);
         this.loginBean = loginBean;
     }
+
+
 }

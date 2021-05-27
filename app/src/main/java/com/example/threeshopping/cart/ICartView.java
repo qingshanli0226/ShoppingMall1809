@@ -5,7 +5,7 @@ import com.example.net.bean.CartBean;
 
 import java.util.List;
 
-public interface ICarView extends IBaseView {
+public interface ICartView extends IBaseView {
     void onCheck(int position,boolean isCheck);
     void onCheckAll(boolean isChcekAll);
     void onNum(int position);

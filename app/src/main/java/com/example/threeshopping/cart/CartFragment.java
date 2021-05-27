@@ -1,6 +1,5 @@
 package com.example.threeshopping.cart;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,11 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.LogUtil;
 import com.example.framework.BaseFragment;
-import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
-import com.example.net.bean.LoginBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CartFragment extends BaseFragment<CarPresenter> implements CacheShopManager.ICartChange, ICarView {
+public class CartFragment extends BaseFragment<CartPresenter> implements CacheShopManager.ICartChange, ICartView {
 
 
     private ToolBar toolbar;
@@ -67,7 +64,7 @@ public class CartFragment extends BaseFragment<CarPresenter> implements CacheSho
 
     @Override
     protected void initPrensenter() {
-        mPresenter = new CarPresenter(this);
+        mPresenter = new CartPresenter(this);
 
     }
 
