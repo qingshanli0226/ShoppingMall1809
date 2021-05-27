@@ -193,8 +193,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         });
 
-//        LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-//        BusinessUserManager.getInstance().setLogList(isLog.getResult());
         //去结算
         goZfb.setOnClickListener(new View.OnClickListener() {
             @Override
