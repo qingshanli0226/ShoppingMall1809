@@ -4,7 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".shoppingCart.ShopingCartActivity">
+    android:orientation="vertical"
+    tools:context=".shoppingCart.ShoppingCartActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.framework.view.MyToorbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isleft="true"
+            app:isright="true"
+            app:leftimg="@drawable/back"
+            app:titletext="@string/myShoppingCart"></com.example.framework.view.MyToorbar>
+
+        <TextView
+            android:id="@+id/shoppingCartCompile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/myShoppingCartCompile"
+            android:textSize="@dimen/dp_30"></TextView>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shoppingCartRec"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="10"></androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/shoppingCartRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <CheckBox
+            android:id="@+id/shoppingCartCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/myShoppingCartAllSelect"></CheckBox>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myShoppingCartTotal"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="@string/myShoppingCartFlag"
+                android:textColor="@color/red"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/shoppingCartPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="@color/red"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btton_red"
+            android:text="@string/myShoppingCartToCloseAnAccount"
+            android:textColor="@color/white"></Button>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/shoppingCartCompileRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/shoppingCartCompileCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/myShoppingCartAllSelect"></CheckBox>
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/shoppingCartCompileDelete"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/words"
+                android:gravity="center"
+                android:text="@string/myShoppingCartDelete"></TextView>
+
+            <TextView
+                android:id="@+id/shoppingCartCompileCollect"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_weight="1"
+                android:background="@drawable/wordsred"
+                android:gravity="center"
+                android:text="@string/myShoppingCartCollet"
+                android:textColor="@color/red"></TextView>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

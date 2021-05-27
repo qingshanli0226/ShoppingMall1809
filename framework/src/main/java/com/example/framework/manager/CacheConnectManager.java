@@ -10,16 +10,16 @@ import android.net.NetworkInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CacheconnectManager {
+public class CacheConnectManager {
 
-    public static  CacheconnectManager cacheconnectManager;
+    public static CacheConnectManager cacheconnectManager;
 
-    public CacheconnectManager() {
+    public CacheConnectManager() {
     }
 
-    public static CacheconnectManager getInstance() {
+    public static CacheConnectManager getInstance() {
         if (cacheconnectManager==null){
-            cacheconnectManager=new CacheconnectManager();
+            cacheconnectManager=new CacheConnectManager();
         }
         return cacheconnectManager;
     }

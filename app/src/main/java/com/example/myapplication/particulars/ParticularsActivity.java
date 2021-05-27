@@ -21,12 +21,12 @@ import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.myapplication.R;
+import com.example.myapplication.shoppingCart.ShoppingCartActivity;
 import com.example.net.bean.RegisterBean;
-import com.example.net.bean.ShoppingCartBean;
-
-import retrofit2.http.HEAD;
+import com.example.net.bean.AddShoppingCartBean;
 
 
 public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements IAddShoppingCartView {
@@ -97,14 +97,15 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void initData() {
+        mPresenter.getShoppingCart();//刷新缓存类数据
         //获取传过来的值
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-             pic = extras.getString("pic");
-             name = extras.getString("name");
-             price = extras.getString("price");
-             id = extras.getString("id");
+            pic = extras.getString("pic");
+            name = extras.getString("name");
+            price = extras.getString("price");
+            id = extras.getString("id");
             //给控件赋值
             Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
             particularsCommodityName.setText(name);
@@ -136,7 +137,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
                 ToLoginType.getInstance().setActivityType(TypeString.PARTICALARS_TYPE);//存入跳转登录页面的页面类型
                 CaCheArote.getInstance().getUserInterface().openLoginActivity(this, bundle);
             } else {
-
+                startActivity(new Intent(this, ShoppingCartActivity.class));
             }
         });
 
@@ -180,7 +181,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             //刷新加入购物车数量
             int num = Integer.parseInt(popNum.getText().toString());
             //直接调用购物车
-            mPresenter.getAddShoppingCart(id,num+"",name,pic,price);
+            mPresenter.getInventory(id, num + "");
         });
     }
 
@@ -197,19 +198,23 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     //获取返回的加入购物车请求
     @Override
-    public void onAddShoppingCart(ShoppingCartBean shoppingCartBean) {
-        String code = shoppingCartBean.getCode();
-        if (code.equals("200")){
+    public void onAddShoppingCart(AddShoppingCartBean addShoppingCartBean) {
+        String code = addShoppingCartBean.getCode();
+        if (code.equals("200")) {
+            popupWindow.dismiss();
             loadingPage.showSuccessView();
-            Toast.makeText(this, getString(R.string.addShoppingSucceed),  Toast.LENGTH_SHORT).show();
-        }else {
+            Toast.makeText(this, getString(R.string.addShoppingSucceed), Toast.LENGTH_SHORT).show();
+            mPresenter.getShoppingCart();
+
+            CaCheMannager.getInstance().showShoppingData();
+        } else {
             Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onIsInventory(RegisterBean registerBean) {
-        if (registerBean.getCode().equals("200")) {
+        if (registerBean.getCode().equals("200")) {//库存还够
             int num = Integer.parseInt(popNum.getText().toString());
             mPresenter.getAddShoppingCart(id, num + "", name, pic, price);
         } else {

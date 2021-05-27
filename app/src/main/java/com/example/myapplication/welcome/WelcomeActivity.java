@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.net.bean.HomeBean;
 
-import mvp.CaCheMannager;
+import com.example.framework.manager.CaCheMannager;
 import com.example.framework.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements IWelcomeView {

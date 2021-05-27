@@ -1,25 +1,29 @@
 package com.example.myapplication.shoppingCart;
 
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.framework.BaseFragment;
+import com.example.framework.BaseActivity;
+import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
+import com.example.myapplication.home.homeadapter.HomeAdapter;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
+public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();
@@ -39,10 +43,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private TextView shoppingCartCompileDelete;
     private TextView shoppingCartCompileCollect;
 
-    private boolean getData=false;
     @Override
     protected int bandLayout() {
-        return R.layout.fragment_shopping_cart;
+        return R.layout.activity_shoping_cart;
     }
 
     @Override
@@ -58,7 +61,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         shoppingCartCompileCollect = (TextView) findViewById(R.id.shoppingCartCompileCollect);
         //万能适配器
         adapter = new ShoppingCartRecAdapter(list);
-        shoppingCartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
+        shoppingCartRec.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
     }
@@ -70,7 +73,11 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void initData() {
-
+        //数据
+        List<ShoppingCartBean.ResultBean> shoppingCartBeanList = CaCheMannager.getInstance().getShoppingCartBeanList();
+        list.clear();
+        list.addAll(shoppingCartBeanList);
+        adapter.notifyDataSetChanged();
         //全选按钮
         shoppingCartCheck.setOnClickListener(v -> {
             //获取当前的全选按钮
@@ -120,7 +127,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             @Override
             public void onClick(View v) {
                 if (delList.size() == 0) {
-                    Toast.makeText(getActivity(), "请选择商品", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShoppingCartActivity.this, "请选择商品", Toast.LENGTH_SHORT).show();
                 } else if (delList.size() == 1) {//删除单个
                     ShoppingCartBean.ResultBean resultBean = delList.get(0);
                     mPresenter.deleteOneShopping(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
@@ -172,10 +179,10 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
 
             if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
-                Toast.makeText(getActivity(), "全进了", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "全进了", Toast.LENGTH_SHORT).show();
                 delList.addAll(list);
             }else {
-                Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "每圈进", Toast.LENGTH_SHORT).show();
                 delList.clear();
             }
 
@@ -183,7 +190,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             //总价
             getTotalPrice();
         } else {
-            Toast.makeText(getActivity(), "修改全选按钮失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "修改全选按钮失败", Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
         //修改缓存类
@@ -198,10 +205,10 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
 
             if (nowIsSelect) {
-                Toast.makeText(getActivity(), "加入", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "加入", Toast.LENGTH_SHORT).show();
                 delList.add(list.get(itemPosition));
             } else {
-                Toast.makeText(getActivity(), "没有加入", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "没有加入", Toast.LENGTH_SHORT).show();
                 delList.remove(list.get(itemPosition));
             }
 
@@ -223,7 +230,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             //总价
             getTotalPrice();
         } else {
-            Toast.makeText(getActivity(), "选择错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "选择错误", Toast.LENGTH_SHORT).show();
             if (nowIsSelect) {
                 itemChe.setChecked(false);
             } else {
@@ -245,7 +252,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);//更改缓存类
             getTotalPrice();//更新价格
         } else {
-            Toast.makeText(getActivity(), "更改数量错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "更改数量错误", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -257,7 +264,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             mPresenter.updateShoppingNum(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
         } else {
             //库存不足
-            Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "库存不足", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -271,7 +278,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             //更新缓存类
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
         } else {
-            Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "删除失败", Toast.LENGTH_SHORT).show();
         }
     }
     //删除多个
@@ -279,7 +286,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     public void onRemoveManvProduct(RegisterBean registerBean) {
         if (registerBean.getCode().endsWith("200")){
 
-            Toast.makeText(getActivity(), "删除多个成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "删除多个成功", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
@@ -291,25 +298,13 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             //修改多选按钮
             shoppingCartCheck.setChecked(false);
         }else {
-            Toast.makeText(getActivity(), "删除多个失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "删除多个失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onShoppingData(ShoppingCartBean shoppingCartBean) {
-        if (shoppingCartBean.getCode().endsWith("200")){
-            //数据
-            List<ShoppingCartBean.ResultBean> shoppingCartBeanList = CaCheMannager.getInstance().getShoppingCartBeanList();
-            list.clear();
-            list.addAll(shoppingCartBeanList);
-            adapter.notifyDataSetChanged();
-        }
-    }
 
-    @Override
-    public void onShoppinCartgData(ShoppingCartBean shoppingCartBean) {
-        super.onShoppinCartgData(shoppingCartBean);
-        mPresenter.getShoppingCart();
     }
 
     public void getTotalPrice() {
@@ -325,22 +320,5 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         }
         shoppingCartPrice.setText(money + "");
     }
-
-
-    @Override
-    public void onLoginChange(boolean loginBean) {
-        super.onLoginChange(loginBean);
-        if (loginBean){
-            if (!getData){
-                loadingPage.showSuccessView();
-                mPresenter.getShoppingCart();//获取购物车数据
-
-                getData=true;
-            }
-        }else {
-            loadingPage.showErrorView();
-        }
-    }
-
 
 }
