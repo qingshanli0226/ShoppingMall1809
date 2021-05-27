@@ -4,15 +4,15 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BasePresenter;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.net.RetrofitCreator;
+import com.example.net.bean.Orbean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingPresenter.java
+
 import com.example.net.bean.business.UpdateProductSelectedBean;
-=======
+
 import com.google.gson.Gson;
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingPresenter.java
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,9 +35,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
         attachView(iShopping);
     }
 
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingPresenter.java
-
-=======
 
     public void getConfiemserverpayresult(String outTradeNo,String result,boolean clientPayResult){
 
@@ -216,7 +213,6 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
     }
 
 
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingPresenter.java
     public void getSelectAllProduct(boolean mBoolean){
 
         JSONObject jsonObject = new JSONObject();

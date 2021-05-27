@@ -26,22 +26,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- *  重要说明：
- *  
- *  本 Demo 只是为了方便直接向商户展示支付宝的整个支付流程，所以将加签过程直接放在客户端完成
- *  （包括 OrderInfoUtil2_0_HK 和 OrderInfoUtil2_0）。
- *
- *  在真实 App 中，私钥（如 RSA_PRIVATE 等）数据严禁放在客户端，同时加签过程务必要放在服务端完成，
- *  否则可能造成商户私密数据泄露或被盗用，造成不必要的资金损失，面临各种安全风险。
- *
- *  Warning:
- *
- *  For demonstration purpose, the assembling and signing of the request parameters are done on
- *  the client side in this demo application.
- *
- *  However, in practice, both assembling and signing must be carried out on the server side.
- */
+
 public class PayDemoActivity extends AppCompatActivity {
 	
 	/**
@@ -136,12 +121,12 @@ public class PayDemoActivity extends AppCompatActivity {
 			showAlert(this, getString(R.string.error_missing_appid_rsa_private));
 			return;
 		}
-	
+
 		/*
 		 * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
 		 * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-		 * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险； 
-		 * 
+		 * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
+		 *
 		 * orderInfo 的获取必须来自服务端；
 		 */
         boolean rsa2 = (RSA2_PRIVATE.length() > 0);
@@ -151,7 +136,7 @@ public class PayDemoActivity extends AppCompatActivity {
 		String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
 		String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
 		final String orderInfo = orderParam + "&" + sign;
-		
+
 		final Runnable payRunnable = new Runnable() {
 
 			@Override
@@ -159,7 +144,7 @@ public class PayDemoActivity extends AppCompatActivity {
 				PayTask alipay = new PayTask(PayDemoActivity.this);
 				Map<String, String> result = alipay.payV2(orderInfo, true);
 				Log.i("msp", result.toString());
-				
+
 				Message msg = new Message();
 				msg.what = SDK_PAY_FLAG;
 				msg.obj = result;
@@ -230,27 +215,7 @@ public class PayDemoActivity extends AppCompatActivity {
 	/**
 	 * 将 H5 网页版支付转换成支付宝 App 支付的示例
 	 */
-	public void h5Pay(View v) {
-		WebView.setWebContentsDebuggingEnabled(true);
-		Intent intent = new Intent(this, H5PayDemoActivity.class);
-		Bundle extras = new Bundle();
 
-		/*
-		 * URL 是要测试的网站，在 Demo App 中会使用 H5PayDemoActivity 内的 WebView 打开。
-		 *
-		 * 可以填写任一支持支付宝支付的网站（如淘宝或一号店），在网站中下订单并唤起支付宝；
-		 * 或者直接填写由支付宝文档提供的“网站 Demo”生成的订单地址
-		 * （如 https://mclient.alipay.com/h5Continue.htm?h5_route_token=303ff0894cd4dccf591b089761dexxxx）
-		 * 进行测试。
-		 * 
-		 * H5PayDemoActivity 中的 MyWebViewClient.shouldOverrideUrlLoading() 实现了拦截 URL 唤起支付宝，
-		 * 可以参考它实现自定义的 URL 拦截逻辑。
-		 */
-		String url = "https://m.taobao.com";
-		extras.putString("url", url);
-		intent.putExtras(extras);
-		startActivity(intent);
-	}
 
 	private static void showAlert(Context ctx, String info) {
 		showAlert(ctx, info, null);

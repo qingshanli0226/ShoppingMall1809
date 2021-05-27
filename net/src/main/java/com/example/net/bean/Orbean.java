@@ -1,4 +1,4 @@
-package com.example.shoppingmallsix.fragment.shoppingcarfragment;
+package com.example.net.bean;
 
 import java.util.List;
 

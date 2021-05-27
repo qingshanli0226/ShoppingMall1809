@@ -25,7 +25,7 @@
             android:onClick="authV2"
             android:textAllCaps="false"
             android:text="@string/auth_with_alipay" />
-        
+
         <Button
             android:id="@+id/h5pay"
             android:layout_width="match_parent"
@@ -42,8 +42,8 @@
             android:onClick="showSdkVersion"
             android:textAllCaps="false"
             android:text="@string/check_sdk_version" />
-        
-        <TextView 
+
+        <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_margin="12dp"

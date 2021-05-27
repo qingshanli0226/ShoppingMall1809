@@ -27,6 +27,7 @@ import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.pay.demo.PayDemoActivity;
+import com.example.pay.order.GetOrderActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;
 
@@ -79,18 +80,16 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 shopCheck.setChecked(!shopCheck.isChecked());
             }
         });
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingCarFragment.java
-=======
+
 
         buyBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), PayDemoActivity.class);
+                Intent intent = new Intent(getContext(), GetOrderActivity.class);
                 startActivity(intent);
             }
         });
 
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java
     }
 
     //子线程获取数据 实时刷新
@@ -194,7 +193,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/ShoppingCarFragment.java
     public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean,int position) {
         if (updateProductSelectedBean.getCode().equals("200")){
             if (resultBeans.get(position).isProductSelected()){
@@ -204,24 +202,49 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             }
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
-=======
+
+}
+
+    @Override
     public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
         if (getOrderInfoBean.getCode().equals("200")){
-            GetOrderInfoBean.ResultBean result = getOrderInfoBean.getResult();
-            order.add(result);
-        }
 
+            String orderInfo = getOrderInfoBean.getResult().getOrderInfo();
+            String outTradeNo = getOrderInfoBean.getResult().getOutTradeNo();
+
+            Intent intent = new Intent(getContext(), GetOrderActivity.class );
+            intent.putExtra("orderInfo",orderInfo);
+            intent.putExtra("outTradeNo",outTradeNo);
+            intent.putExtra("key","main");
+            startActivity(intent);
+
+
+        }else {
+            Toast.makeText(getContext(), ""+getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-
         if (confirmServerPayResultBean.getCode().equals("200")){
 
             confirmServerPayResultBeans.add(confirmServerPayResultBean);
         }
+    }
 
->>>>>>> wqq0525:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcarfragment/ShoppingCarFragment.java
+    @Override
+    public void onShopping(GetShortcartProductsBean shoppingCarBean) {
+
+    }
+
+    @Override
+    public void onLoginChange(LoginBean loginBean) {
+
+    }
+
+    @Override
+    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+        shoppingCarAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -240,22 +263,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onLoginChange(LoginBean loginBean) {
-        if (loginBean != null) {
-
-        }
-    }
-
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
-
-    @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
-            shoppingCarAdapter.notifyDataSetChanged();
-    }
-
 }
