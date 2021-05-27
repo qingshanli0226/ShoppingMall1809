@@ -3,9 +3,11 @@ package com.example.electricityproject.shopp;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.bean.OrderInfoBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
+import com.example.common.bean.RequestOrderInfo;
 import com.example.common.bean.SelectAllProductBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
@@ -267,6 +269,42 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     public void onNext(@NonNull RemoveManyProductBean removeManyProductBean) {
                         if (IView!=null){
                             IView.removeManyShop(removeManyProductBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (IView!=null){
+                            IView.showError(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getOrderInfo(RequestOrderInfo requestOrderInfo){
+        String json = new Gson().toJson(requestOrderInfo);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), json);
+
+        RetrofitCreate.getFiannceApiService()
+                .GetOrderInfo(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<OrderInfoBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull OrderInfoBean orderInfoBean) {
+                        if (IView!=null){
+                            IView.getOrderInfoData(orderInfoBean);
+                            LogUtils.json(orderInfoBean);
                         }
                     }
 

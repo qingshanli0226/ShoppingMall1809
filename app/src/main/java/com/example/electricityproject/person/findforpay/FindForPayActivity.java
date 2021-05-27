@@ -41,7 +41,6 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     @Override
     public void showLoading() {
         loadingPage.showLoadingView();
-
     }
 
     @Override

@@ -65,6 +65,7 @@ public class PersonFragment extends BaseFragment {
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
                 if (isLog!=null){
+                    
                 }else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);
                 }
