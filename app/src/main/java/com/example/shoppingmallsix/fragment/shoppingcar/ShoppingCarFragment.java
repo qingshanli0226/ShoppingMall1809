@@ -1,7 +1,5 @@
 package com.example.shoppingmallsix.fragment.shoppingcar;
 
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -16,11 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
-import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
