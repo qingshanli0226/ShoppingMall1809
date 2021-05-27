@@ -96,7 +96,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
         toShopCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ARouter.getInstance().build(ShopConstants.SHOP_CAR).navigation();
+                ARouter.getInstance().build(ShopConstants.SHOP_CAR).withString(ShopConstants.SHOP_CAR,ShopConstants.SHOP_CAR).navigation();
             }
         });
 

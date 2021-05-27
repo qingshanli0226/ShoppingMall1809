@@ -253,7 +253,7 @@
             android:text="0"
             android:id="@+id/particulars_label"
             android:gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_150"

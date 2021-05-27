@@ -138,6 +138,8 @@ public class ToolBar extends RelativeLayout {
 
     public void setLeftImgId(int leftImgId) {
         this.leftImgId = leftImgId;
+        toolbarLeftImg.setImageResource(this.leftImgId);
+        invalidate();
     }
 
     public void setRightImgId(int rightImgId) {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
@@ -52,11 +53,17 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     }
 
     @Override
+    public void onLeftImgClick() {
+        super.onLeftImgClick();
+        getActivity().finish();
+    }
+
+    @Override
     protected void initData() {
 
-        String stringExtra = getActivity().getIntent().getStringExtra("");
-        if (stringExtra != null && stringExtra.equals("")) {
-
+        String stringExtra = getActivity().getIntent().getStringExtra(ShopConstants.SHOP_CAR);
+        if (stringExtra != null && stringExtra.equals(ShopConstants.SHOP_CAR)) {
+           toolbar.setLeftImgId(R.drawable.back);
         }
 
         //购物车添加的回调
