@@ -27,6 +27,7 @@ public class ShopeUserManager {
     }
 
     public void register(IUserLoginChanged iUserLoginChanged){
+        new Throwable().printStackTrace();
         iUserLoginChangedList.add(iUserLoginChanged);
     }
 
