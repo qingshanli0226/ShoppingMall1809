@@ -95,6 +95,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
+                android:id="@+id/shopCar"
                 android:src="@drawable/icon_good_detail_cart"
                 />
             <TextView

@@ -30,6 +30,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         toolBar.setToolbarListener(this);
         initPresenter();
         initData();
+        initListener();
     }
 
     protected abstract void initPresenter();
@@ -39,6 +40,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected abstract void initView();
 
     protected abstract int getLayoutId();
+
+    protected  void initListener(){
+    }
 
     @Override
     protected void onDestroy() {

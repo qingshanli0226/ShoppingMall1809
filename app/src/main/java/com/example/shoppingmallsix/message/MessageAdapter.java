@@ -9,10 +9,16 @@ import com.example.framework.BaseRvAdapter;
 import com.example.framework.greendao.CacheMessage;
 import com.example.shoppingmallsix.R;
 
+import java.util.List;
+
 public class MessageAdapter extends BaseRvAdapter<CacheMessage> {
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_message;
+    }
+
+    public void updateData(List<CacheMessage> messageBeans) {
+        setDataList(messageBeans);
     }
 
     @Override
