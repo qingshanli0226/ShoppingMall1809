@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.framework.manager.CacheManager;
+import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
 import com.shoppingmall.net.bean.AddProductBean;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements IShopCarView {
+public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements CacheShopManager.ICartChange,IShopCarView {
 
     private ShopCarAdapter shopCarAdapter;
 
@@ -43,10 +45,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
     private TextView paymentprice;
     private Button payment;
     private boolean isOpenDel = false;
-    private static int ADD_OR_REMOVE = 0;
 
-    private int nowPosition = 0;
-    private ShopCarBean shopCarBean2;
+    private ImageView itemImageView;
+    private boolean isAll = false;
+    private List<ShopCarBean.ResultBean> carts;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop_car;
@@ -75,13 +77,103 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
 
     @Override
     public void initData() {
-        //加载列表
-        shopCarAdapter = new ShopCarAdapter();
         //判断是否点击编辑
         checkcompileOnClick();
-        httpPresenter.getShopCarData();
+        //注册
+        CacheShopManager.getInstance().registerCart((CacheShopManager.ICartChange) this);
+        carts = CacheShopManager.getInstance().getCarts();
+        //获取数据
+        shopCarAdapter = new ShopCarAdapter();
+        if (carts != null) {
+            shopCarAdapter.updateData(carts);
+        }
+        //数据
+        shopMallCarRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        shopMallCarRv.setAdapter(shopCarAdapter);
 
+        shopCarAdapter.setRecyclerChildItemClickListener(new ShopCarAdapter.IRecyclerChildItemClickListener() {
+            @Override
+            public void onShopCarAddNumItemClick(int position, View v) {
+                ShopCarBean.ResultBean resultBean = shopCarAdapter.getData().get(position);
+                ShopCarBean.ResultBean result = new ShopCarBean.ResultBean();
+                //判断库存
+                result.setProductId(resultBean.getProductId());
+                result.setProductNum(Integer.parseInt(resultBean.getProductNum()) + 1 + "");
 
+                result.setProductPrice(resultBean.getProductPrice());
+                httpPresenter.upDateNum(position, result);
+            }
+            @Override
+            public void onShopCarRemoveNumItemClick(int position, View v) {
+                ShopCarBean.ResultBean resultBean = shopCarAdapter.getData().get(position);
+                ShopCarBean.ResultBean result = new ShopCarBean.ResultBean();
+                if (Integer.parseInt(resultBean.getProductNum()) > 0) {
+                    result.setProductId(resultBean.getProductId());
+                    result.setProductNum(Integer.parseInt(resultBean.getProductNum()) - 1 + "");
+                    result.setProductPrice(resultBean.getProductPrice());
+                    httpPresenter.upDateNum(position, result);
+                }
+            }
+            @Override
+            public void onIsSelectItemClick(int position, View view) {
+                ShopCarBean.ResultBean resultBean = shopCarAdapter.getData().get(position);
+                ShopCarBean.ResultBean result = new ShopCarBean.ResultBean();
+                //修改
+                result.setProductId(resultBean.getProductId());
+                result.setProductNum(resultBean.getProductNum());
+                result.setProductPrice(resultBean.getProductPrice());
+                itemImageView = (ImageView) view;
+                if (resultBean.isProductSelected()) {
+                    result.setProductSelected(false);
+                } else {
+                    result.setProductSelected(true);
+                }
+                httpPresenter.updateProductSelect(position, result);
+            }
+        });
+        //全选
+        checkpayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isAll) {
+                    isAll = false;
+                } else {
+                    isAll = true;
+                }
+                httpPresenter.selectAll(isAll);
+            }
+        });
+        //编辑全选
+        checkdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //删除
+        cartdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v){
+                int position = -1;
+                ArrayList<ShopCarBean.ResultBean> resultBeans = new ArrayList<>();
+                for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
+                    if (shopCarAdapter.getData().get(i).isProductSelected()) {
+                        resultBeans.add(shopCarAdapter.getData().get(i));
+                        position = i;
+                    }
+                }
+                if (resultBeans.size() == 1) {
+                    //选中一个
+                    httpPresenter.removeOneProduct(position, resultBeans.get(0));
+                } else if (resultBeans.size() > 1) {
+                    //选中多个
+                    httpPresenter.removeMany(resultBeans);
+                } else {
+                    Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void checkcompileOnClick() {
@@ -99,68 +191,78 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements I
     }
 
     @Override
-    public void getShopCarData(ShopCarBean shopCarBean) {
-        CacheManager.getInstance().setShopCarBean(shopCarBean);
-
-        shopCarBean2 = CacheManager.getInstance().getShopCarBean();
-        //添加数据
-        shopMallCarRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        shopMallCarRv.setAdapter(shopCarAdapter);
-//        shopCarAdapter.notifyItemChanged(nowPosition);
-
-        //上传数据
-        shopCarAdapter.updateData(shopCarBean2.getResult());
-
-        //子点击
-        shopCarAdapter.setRecyclerChildItemClickListener(new ShopCarAdapter.IRecyclerChildItemClickListener() {
-            @Override
-            public void onShopCarAddNumItemClick(int position, View v) {
-                httpPresenter.checkProductNum(shopCarBean2.getResult().get(position).getProductId()
-                        ,shopCarBean2.getResult().get(position).getProductNum());
-                nowPosition = position;
-                ADD_OR_REMOVE = 1;
-            }
-
-            @Override
-            public void onShopCarRemoveNumItemClick(int position, View v) {
-                httpPresenter.checkProductNum(shopCarBean2.getResult().get(position).getProductId()
-                        ,shopCarBean2.getResult().get(position).getProductNum());
-                nowPosition = position;
-                ADD_OR_REMOVE = 2;
-            }
-
-            @Override
-            public void onIsSelectItemClick(int position, View view) {
-
-            }
-        });
+    public void onShowCart(List<ShopCarBean.ResultBean> carts) {
+        this.carts = carts;
+        shopCarAdapter.updateData(carts);
     }
-
-    //String id,int num,String name,String url,String price
+    //添加
     @Override
-    public void checkProductNum(CheckProductBean checkProductBean) {
-//        LogUtils.json(checkProductBean);
-//        if (checkProductBean.getCode().equals("200")){
-        if (ADD_OR_REMOVE==1){
-            httpPresenter.updateProduct(shopCarBean2.getResult().get(nowPosition).getProductId(),
-                    Integer.parseInt(shopCarBean2.getResult().get(nowPosition).getProductNum())+1,
-                    shopCarBean2.getResult().get(nowPosition).getUrl(),
-                    (String) shopCarBean2.getResult().get(nowPosition).getProductPrice());
-        }else if(ADD_OR_REMOVE==2){
-            httpPresenter.updateProduct(shopCarBean2.getResult().get(nowPosition).getProductId(),
-                    Integer.parseInt(shopCarBean2.getResult().get(nowPosition).getProductNum())-1,
-                    shopCarBean2.getResult().get(nowPosition).getUrl(),
-                    (String) shopCarBean2.getResult().get(nowPosition).getProductPrice());
+    public void onAddCart(int position) {
+        if (position > shopCarAdapter.getData().size()) {
+            shopCarAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position - 1));
+            shopCarAdapter.notifyItemChanged(position - 1);
+        } else {
+            shopCarAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
+            shopCarAdapter.notifyItemChanged(position);
         }
-//        }
     }
 
     @Override
-    public void updateProduct(AddProductBean addProductBean) {
-        LogUtils.json(addProductBean);
-        if (addProductBean.getCode().equals("200")){
-            Toast.makeText(getContext(), "数量改变成功", Toast.LENGTH_SHORT).show();
-            httpPresenter.getShopCarData();
+    public void onCheck(int position, boolean isCheck) {
+        shopCarAdapter.notifyItemChanged(position);
+        //反选
+        int count = 0;
+        for (ShopCarBean.ResultBean datum : shopCarAdapter.getData()) {
+            if (datum.isProductSelected()) {
+                count++;
+            }
+        }
+        if (count == shopCarAdapter.getData().size()) {
+            checkpayment.setChecked(true);
+            isAll = true;
+        } else {
+            checkpayment.setChecked(false);
+            isAll = false;
         }
     }
+
+    @Override
+    public void onCheckAll(boolean isChcekAll) {
+        this.isAll = isChcekAll;
+        shopCarAdapter.notifyDataSetChanged();
+    }
+    //
+    @Override
+    public void onNum(int position) {
+        shopCarAdapter.notifyItemChanged(position);
+    }
+    //删除一个
+    @Override
+    public void removeProduct(int position) {
+        shopCarAdapter.getData().remove(position);
+        shopCarAdapter.notifyItemRemoved(position);
+        LogUtils.d("position" + position);
+    }
+    //删除多个
+    @Override
+    public void removeMany(List<ShopCarBean.ResultBean> resultBeans) {
+        for (int i = shopCarAdapter.getData().size() - 1; i >= 0; i--) {
+            ShopCarBean.ResultBean bean = shopCarAdapter.getData().get(i);
+            for (int i1 = resultBeans.size() - 1; i1 >= 0; i1--) {
+                if (bean.getProductId().equals(resultBeans.get(i1).getProductId())) {
+                    shopCarAdapter.getData().remove(i);
+                    resultBeans.remove(i1);
+                }
+            }
+        }
+        LogUtils.d("removeMany");
+        shopCarAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        CacheShopManager.getInstance().unRegisterCart(this);
+    }
+
 }

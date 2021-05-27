@@ -1,15 +1,21 @@
 package com.shoppingmall.main.shopcar;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.google.gson.Gson;
+import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.mvp.BasePresenter;
 import com.shoppingmall.net.bean.AddProductBean;
 import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.ProductBean;
+import com.shoppingmall.net.bean.SelectBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 import com.shoppingmall.net.model.RetrofitCreate;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,48 +28,41 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class ShopCarPresenter extends BasePresenter<IShopCarView> {
-    public ShopCarPresenter(IShopCarView iShopCarView){
+    public ShopCarPresenter(IShopCarView iShopCarView) {
         attachView(iShopCarView);
     }
-    public void getShopCarData(){
+
+
+    //单选
+    public synchronized void updateProductSelect(int position,ShopCarBean.ResultBean resultBean) {
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+
+        RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitCreate.getShoppingMallApiService()
-                .getShopCarProduct()
+                .updateProductSelect(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                //该函数当RxJava发起网络请求时调用
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        //将disposable存储起来，当页面销毁时，可以通过它去判断当前获取数据的线程是否已经停止，如果没有停止，则停止
-                        add(disposable);
-                        iView.showLoading();
-                    }
-                })
-                //当网络请求结束时回调该方法
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        iView.hideLoading();
-                    }
-                })
-                .subscribe(new Observer<ShopCarBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull ShopCarBean shopCarBean) {
-                        if (iView!=null){
-                            iView.getShopCarData(shopCarBean);
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            //更改数据
+                            CacheShopManager.getInstance().setCheck(position,resultBean.isProductSelected());
+                            if (iView != null) {
+                                iView.onCheck(position,CacheShopManager.getInstance().getCarts().get(position).isProductSelected());
+                            }
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (iView!=null){
-                            iView.showError(e.getMessage());
-                        }
+
                     }
 
                     @Override
@@ -73,107 +72,115 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                 });
     }
 
-    public void checkProductNum(String productId,String productNum){
-        RetrofitCreate.getShoppingMallApiService()
-                .checkProduct(productId,productNum)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                //该函数当RxJava发起网络请求时调用
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        //将disposable存储起来，当页面销毁时，可以通过它去判断当前获取数据的线程是否已经停止，如果没有停止，则停止
-                        add(disposable);
-                        iView.showLoading();
-                    }
-                })
-                //当网络请求结束时回调该方法
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        iView.hideLoading();
-                    }
-                })
-                .subscribe(new Observer<CheckProductBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+    //全选
+    public synchronized void selectAll(boolean isAll) {
 
-                    }
-
-                    @Override
-                    public void onNext(@NonNull CheckProductBean checkProductBean) {
-                        if (iView!=null){
-                            iView.checkProductNum(checkProductBean);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        if (iView!=null){
-                            iView.showError(e.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    public void updateProduct(String productId, int productNum, String url, String productPrice) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("productId",productId);
-            jsonObject.put("productNum",productNum);
-            jsonObject.put("productName",url);
-            jsonObject.put("url",url);
-            jsonObject.put("productPrice",productPrice);
-            jsonObject.put("productSelected",true);
+            jsonObject.put("selected", isAll);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+
         RequestBody requestBody = RequestBody.create(parse, jsonObject.toString());
+        RetrofitCreate.getShoppingMallApiService()
+                .selectAll(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            //全选更改数据源
+                            CacheShopManager.getInstance().setChackAll(isAll);
+                            if (iView != null) {
+                                iView.onCheckAll(isAll);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //检查数量
+    public synchronized void inventory(int position,ShopCarBean.ResultBean resultBean) {
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitCreate.getShoppingMallApiService()
+                .checkProduct(Integer.parseInt(resultBean.getProductId()),
+                        Integer.parseInt(resultBean.getProductNum()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            //服务端
+                            upDateNum(position,resultBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    //更新服务数量
+    public void upDateNum(int position,ShopCarBean.ResultBean resultBean) {
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitCreate.getShoppingMallApiService()
                 .updateProduct(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                //该函数当RxJava发起网络请求时调用
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        //将disposable存储起来，当页面销毁时，可以通过它去判断当前获取数据的线程是否已经停止，如果没有停止，则停止
-                        add(disposable);
-                        iView.showLoading();
-                    }
-                })
-                //当网络请求结束时回调该方法
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        iView.hideLoading();
-                    }
-                })
-                .subscribe(new Observer<AddProductBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull AddProductBean addProductBean) {
-                        if (iView!=null){
-                            iView.updateProduct(addProductBean);
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            if (iView != null) {
+                                CacheShopManager.getInstance().setNum(position,resultBean.getProductNum());
+                                iView.onNum(position);
+                            }
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        if (iView!=null){
-                            iView.showError(e.getMessage());
-                        }
+
                     }
 
                     @Override
@@ -183,7 +190,77 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                 });
     }
 
-//    public void updateProduct(String productId, String productNum, String url, Object productPrice) {
-//
-//    }
+    //删除一个
+    public void removeOneProduct(int position,ShopCarBean.ResultBean resultBean){
+        String s = new Gson().toJson(resultBean);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitCreate.getShoppingMallApiService()
+                .removeOneProduct(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        LogUtils.d("hqy"+selectBean);
+                        if (selectBean.getCode().equals("200")) {
+                            CacheShopManager.getInstance().removeProduct(resultBean);
+                            if (iView != null) {
+                                iView.removeProduct(position);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    //删除多个
+    public void removeMany(List<ShopCarBean.ResultBean> resultBeans){
+        String s = new Gson().toJson(resultBeans);
+        MediaType parse = MediaType.parse("application/json;charset=UTF-8");
+        RequestBody requestBody = RequestBody.create(parse, s);
+        RetrofitCreate.getShoppingMallApiService()
+                .removeMany(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
+                            CacheShopManager.getInstance().removeMany(resultBeans);
+                            if (iView != null) {
+                                iView.removeMany(resultBeans);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 }

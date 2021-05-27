@@ -16,6 +16,10 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
     public List<T> dataList = new ArrayList<>();//通过泛型来支持不同的类型的数据
     private IRecyclerItemClickListener iRecyclerItemClickListener;
 
+    public List<T> getData(){
+        return this.dataList;
+    }
+
     public void updateData(List<T> dataList) {
         this.dataList.clear();
         this.dataList.addAll(dataList);

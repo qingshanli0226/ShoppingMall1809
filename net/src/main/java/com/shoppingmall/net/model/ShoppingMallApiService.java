@@ -1,14 +1,13 @@
 package com.shoppingmall.net.model;
 
 import com.shoppingmall.net.bean.AddProductBean;
-import com.shoppingmall.net.bean.CheckProductBean;
-import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.BuyBean;
 import com.shoppingmall.net.bean.GoodsBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LabelBean;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.RegisterBean;
+import com.shoppingmall.net.bean.SelectBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 
 import io.reactivex.Observable;
@@ -60,7 +59,7 @@ public interface ShoppingMallApiService {
 
     //添加购物车
     @POST("addOneProduct")
-    Observable<AddProductBean> addProduct(@Body RequestBody body);
+    Observable<SelectBean> addProduct(@Body RequestBody body);
 
     //获取购物车数据
     //http://49.233.0.68:8080/getShortcartProducts
@@ -71,11 +70,27 @@ public interface ShoppingMallApiService {
     //http://49.233.0.68:8080/checkOneProductInventory
     @POST("checkOneProductInventory")
     @FormUrlEncoded
-    Observable<CheckProductBean> checkProduct
-    (@Field("productId")String productId,@Field("productNum")String productNum);
+    Observable<SelectBean> checkProduct
+    (@Field("productId")int productId,@Field("productNum")int productNum);
 
     //更新服务端购物车产品的数量的接口
     //http://49.233.0.68:8080/updateProductNum
     @POST("updateProductNum")
-    Observable<AddProductBean> updateProduct(@Body RequestBody body);
+    Observable<SelectBean> updateProduct(@Body RequestBody body);
+
+    //选中一个\
+    @POST("updateProductSelected")
+    Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
+
+    //选中全部
+    @POST("selectAllProduct")
+    Observable<SelectBean> selectAll(@Body RequestBody requestBody);
+
+    //删除
+    @POST("removeOneProduct")
+    Observable<SelectBean> removeOneProduct(@Body RequestBody requestBody);
+
+    //删除全部
+    @POST("removeManyProduct")
+    Observable<SelectBean> removeMany(@Body RequestBody requestBody);
 }

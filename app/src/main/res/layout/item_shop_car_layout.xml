@@ -4,12 +4,12 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/dp_10"
     android:background="@color/gray">
-    <CheckBox
+    <ImageView
         android:layout_width="50dp"
         android:layout_height="100dp"
         android:button="@null"
-        android:drawableLeft="@drawable/cart_select_check"
-        android:id="@+id/is_select"></CheckBox>
+        android:src="@drawable/checkbox_unselected"
+        android:id="@+id/shopCarCheck"></ImageView>
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"

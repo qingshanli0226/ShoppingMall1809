@@ -22,12 +22,15 @@ import com.shoppingmall.detail.greendao.GoodsTable;
 import com.shoppingmall.detail.greendao.TableManager;
 import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.glide.ShopMallGlide;
+import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.AddProductBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.net.bean.SelectBean;
+import com.shoppingmall.net.bean.ShopCarBean;
 import com.yoho.greendao.gen.DaoSession;
 
 import org.greenrobot.eventbus.EventBus;
@@ -153,7 +156,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         });
 
     }
-
+    private ProductBean productBean;
     public void setPopupWindow(){
         popupWindow = new PopupWindow();
         View inflate = LayoutInflater.from(DetailActivity.this).inflate(R.layout.detail_add_shop_mall_car_pop_wiondow_layout, null);
@@ -193,18 +196,20 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                     }
                 }
                 //服务端存储
-                httpPresenter.addProduct(null,
-                        productGoodBean.getNumber(),
-                        productGoodBean.getName(),
-                        productGoodBean.getFigure(),
-                        productGoodBean.getCover_price());
+                productBean = new ProductBean();
+                productBean.setProductId(null);
+                productBean.setProductNum(productGoodBean.getNumber());
+                productBean.setProductName(productGoodBean.getName());
+                productBean.setUrl(productGoodBean.getFigure());
+                productBean.setProductPrice(productGoodBean.getCover_price());
+                httpPresenter.addProduct(productBean);
             }
         });
         popRemoveNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (GoodsNum<=1){
-                    Toast.makeText(DetailActivity.this, "数量已经为零，不能在减少了", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailActivity.this, "数量已经为一，不能在减少了", Toast.LENGTH_SHORT).show();
                 }else {
                     GoodsNum--;
                 }
@@ -221,17 +226,33 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     }
 
     @Override
-    public void addProduct(AddProductBean addProductBean) {
-        if (addProductBean.getCode().equals("200")){
+    public void addProduct(SelectBean selectBean) {
+        if (selectBean.getCode().equals("200")){
             if (popupWindow!=null){
                 popupWindow.dismiss();
             }
-            Toast.makeText(this, ""+addProductBean.getResult(), Toast.LENGTH_SHORT).show();
+            ShopCarBean.ResultBean resultBean = new ShopCarBean.ResultBean();
+            resultBean.setProductId(productBean.getProductId());
+            resultBean.setProductNum(productBean.getProductNum()+"");
+            resultBean.setProductPrice(productBean.getProductPrice());
+            resultBean.setUrl(productBean.getUrl());
+            resultBean.setProductName(productBean.getProductName());
+            LogUtils.json("resultBean"+resultBean.getProductPrice());
+
+            CacheShopManager.getInstance().addData(resultBean);
+            Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
         }else {
             if (popupWindow!=null){
                 popupWindow.dismiss();
             }
-            Toast.makeText(this, ""+addProductBean.getResult(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void checkProduct(SelectBean selectBean) {
+        if (selectBean.getCode().equals("200")){
+            httpPresenter.addProduct(productBean);
         }
     }
 

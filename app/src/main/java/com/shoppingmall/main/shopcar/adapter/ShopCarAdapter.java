@@ -11,7 +11,7 @@ import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.net.bean.ShopCarBean;
 
 public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
-    private CheckBox isSelect;
+    private ImageView shopCarCheck;
     private ImageView shopCarImg;
     private TextView shopCarTxt;
     private TextView shopCarPrice;
@@ -29,7 +29,7 @@ public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
 
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, ShopCarBean.ResultBean itemData) {
-        isSelect = (CheckBox) holder.getView(R.id.is_select);
+        shopCarCheck = (ImageView) holder.getView(R.id.shopCarCheck);
         shopCarImg = (ImageView) holder.getView(R.id.shopCar_img);
         shopCarTxt = (TextView) holder.getView(R.id.shopCar_txt);
         shopCarPrice = (TextView) holder.getView(R.id.shopCar_price);
@@ -58,7 +58,7 @@ public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
                 }
             }
         });
-        isSelect.setOnClickListener(new View.OnClickListener() {
+        shopCarCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (iRecyclerChildItemClickListener!=null){
@@ -66,7 +66,11 @@ public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
                 }
             }
         });
-
+        if (itemData.isProductSelected()) {
+            shopCarCheck.setImageResource(R.drawable.checkbox_selected);
+        } else{
+            shopCarCheck.setImageResource(R.drawable.checkbox_unselected);
+        }
     }
 
     @Override
