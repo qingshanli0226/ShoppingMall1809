@@ -2,135 +2,132 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".goods.GoodsActivity"
-    android:id="@+id/rootView"
-    >
+    tools:context=".goods.GoodsActivity">
 
     <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:id="@+id/toolbar"
         app:leftImg="@drawable/back"
         app:leftIsShow="true"
-        app:titleText="商品详情"
         app:rightImage="@drawable/menu"
-        app:rightIsShow="true"></com.example.framework.view.ToolBar>
+        app:rightIsShow="true"
+        app:titleText="商品详情"></com.example.framework.view.ToolBar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_50"
         android:layout_marginBottom="@dimen/dp_70"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/moreRv"
-                ></androidx.recyclerview.widget.RecyclerView>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_400"
-                />
+                android:layout_height="@dimen/dp_400" />
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        >
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
-                android:src="@drawable/icon_callserver_unpressed"
-                />
+                android:src="@drawable/icon_callserver_unpressed" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="联系客服"
-                />
+                android:text="联系客服" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
-                android:src="@drawable/good_uncollected"
-                />
+                android:src="@drawable/good_uncollected" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="收藏"
-                />
+                android:text="收藏" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
             android:id="@+id/shopcar"
-            >
-            <ImageView
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:id="@+id/shopCar"
-                android:src="@drawable/icon_good_detail_cart"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="购物车"
-                />
-        </LinearLayout>
-        <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="加入购物车"
-            android:textColor="#fff"
-            android:background="#f00"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/shopCar"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:src="@drawable/icon_good_detail_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购物车" />
+        </LinearLayout>
+
+        <Button
             android:id="@+id/insertShopcar"
-            />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#f00"
+            android:text="加入购物车"
+            android:textColor="#fff" />
     </LinearLayout>
-    <TextView
-        android:layout_width="@dimen/dp_20"
-        android:layout_height="@dimen/dp_20"
-        android:background="@drawable/sign"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/goodsSign"
-        android:visibility="gone"
-        android:layout_marginBottom="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_285"
-        />
 
     <TextView
+        android:id="@+id/goodsSign"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_285"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:background="@drawable/sign"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/centerTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/centerTv"
-        android:layout_centerInParent="true"
-        ></TextView>
+        android:layout_centerInParent="true"></TextView>
 
 </RelativeLayout>

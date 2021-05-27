@@ -18,7 +18,7 @@ public class HotAdapter extends BaseRvAdapter<HomeBean.ResultBean.HotInfoBean> {
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.HotInfoBean itemData) {
         Glide.with(holder.itemView.getContext())
-                .load(Constants.BASE_URl_IMAGE+itemData.getFigure())
+                .load(Constants.BASE_URl_IMAGE + itemData.getFigure())
                 .into((ImageView) holder.getView(R.id.hotImage));
 
         TextView view = holder.getView(R.id.hotTitle);

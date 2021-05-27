@@ -1,8 +1,5 @@
-<<<<<<< HEAD:app/src/main/java/com/example/shoppingmallsix/fragment/shoppingcar/Orbean.java
-package com.example.shoppingmallsix.fragment.shoppingcar;
-=======
 package com.example.net.bean;
->>>>>>> wqq0526:net/src/main/java/com/example/net/bean/Orbean.java
+
 
 import java.util.List;
 

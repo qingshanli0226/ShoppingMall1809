@@ -13,10 +13,9 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         ARouter.init(this);
-
         NetModule.init(this);
-
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
     }

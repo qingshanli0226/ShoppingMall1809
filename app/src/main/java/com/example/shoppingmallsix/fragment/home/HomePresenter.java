@@ -15,11 +15,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
 
-    public HomePresenter(IHomeView iHomeView){
+    public HomePresenter(IHomeView iHomeView) {
         attachView(iHomeView);
     }
 
-    public void getHomeDData(){
+    public void getHomeDData() {
 
         RetrofitCreator.getFiannceApiService().getHoemData()
                 .delay(2, TimeUnit.SECONDS)
@@ -46,9 +46,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onNext(HomeBean homeBean) {
-                            if (iView != null){
-                                iView.getHomeData(homeBean);
-                            }
+                        if (iView != null) {
+                            iView.getHomeData(homeBean);
+                        }
                     }
 
                     @Override

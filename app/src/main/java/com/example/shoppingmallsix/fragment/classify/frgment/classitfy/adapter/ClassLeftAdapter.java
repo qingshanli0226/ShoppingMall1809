@@ -10,9 +10,10 @@ import com.example.shoppingmallsix.R;
 
 import java.util.List;
 
-public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean>{
+public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean> {
     private LinearLayout linearLayout;
-    public ClassLeftAdapter(List<ClassLeftBean> strings){
+
+    public ClassLeftAdapter(List<ClassLeftBean> strings) {
         setDataList(strings);
     }
 
@@ -26,14 +27,14 @@ public class ClassLeftAdapter extends BaseRvAdapter<ClassLeftBean>{
     public void displayViewHolder(BaseViewHolder holder, int position, ClassLeftBean itemData) {
         linearLayout = holder.getView(R.id.classify_item_linear);
 
-        if (position == 0){
+        if (position == 0) {
             linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-        }else {
+        } else {
             linearLayout.setBackgroundColor(Color.parseColor("#E9E9E9"));
         }
-        if (itemData.isaBoolean()){
+        if (itemData.isaBoolean()) {
             linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-        }else {
+        } else {
             linearLayout.setBackgroundColor(Color.parseColor("#E9E9E9"));
         }
 

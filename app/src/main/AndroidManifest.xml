@@ -12,22 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
+
         <activity android:name=".shopcar.ShoppingCarActivity"></activity>
-=======
-        <activity android:name=".order.GetOrderActivity"></activity>
->>>>>>> wqq0526
+
+
         <activity android:name=".message.MessageActivity" />
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
         <activity android:name=".obligation.ObligationActivity" />
-<<<<<<< HEAD
+
         <activity android:name="com.example.pay.demo.PayDemoActivity" />
 
-=======
-        <activity android:name=".messageactivity.MessageActivity" />
-        <activity android:name="com.example.pay.demo.PayDemoActivity" />
->>>>>>> wqq0526
         <activity
             android:name=".welcome.WelcomeActivity"
             android:screenOrientation="portrait"

@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     private List<Fragment> list = new ArrayList<>();
     private android.widget.TextView sign;
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
+
     @Override
     protected void initPresenter() {
 
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         CacheUserManager.getInstance().registerLogin(this);
         LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
         if (loginBean == null) {
-            Toast.makeText(MainActivity.this, getString(R.string.loginNo), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, getString(R.string.loginNo), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, getString(R.string.login), Toast.LENGTH_SHORT).show();
         }
@@ -185,7 +186,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         if (resultBeanList.size() != 0) {
             sign.setVisibility(View.VISIBLE);
             sign.setText(resultBeanList.size() + "");
-        }else {
+        } else {
             sign.setVisibility(View.GONE);
         }
     }

@@ -28,9 +28,9 @@ public class MessageAdapter extends BaseRvAdapter<CacheMessage> {
         TextView msgItemMessage = holder.getView(R.id.msg_item_message);
         TextView timeItemMessage = holder.getView(R.id.time_item_message);
         titleItemMessage.setText(itemData.getTitle());
-        if(itemData.getIsNew()){
+        if (itemData.getIsNew()) {
             isnewItemMessage.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             isnewItemMessage.setVisibility(View.GONE);
         }
         msgItemMessage.setText(itemData.getMsg());

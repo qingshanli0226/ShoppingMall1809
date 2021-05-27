@@ -17,11 +17,13 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
+import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.pay.demo.PayDemoActivity;
@@ -65,7 +67,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
-            handler.sendEmptyMessageDelayed(1,1000);
+            handler.sendEmptyMessageDelayed(1, 1000);
         } else {
             Toast.makeText(ShoppingCarActivity.this, "请先登录账户", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ShoppingCarActivity.this, LoginActivity.class);
@@ -74,7 +76,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         shopcarCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                httpPresenter.getSelectAllProduct(shopcarCheck.isChecked(),false);
+                httpPresenter.getSelectAllProduct(shopcarCheck.isChecked(), false);
                 shopcarCheck.setChecked(!shopcarCheck.isChecked());
             }
         });
@@ -97,22 +99,22 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
     }
 
     //子线程获取数据 实时刷新
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
-            if (resultBean!=null){
+            if (resultBean != null) {
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
-                if (result!=null){
+                if (result != null) {
                     resultBeans.addAll(result);
                     AllProductBeanAndProductSelect();
                     shoppingCarAdapter.notifyDataSetChanged();
                 }
-            }else {
-                handler.sendEmptyMessageDelayed(1,1000);
+            } else {
+                handler.sendEmptyMessageDelayed(1, 1000);
             }
         }
     };
@@ -163,10 +165,10 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
             @Override
             public void onItemChildClick(int position, View view) {
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.shoppingTrolley_CheckBox:
                         GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
-                        httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(),position);
+                        httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
                         break;
                 }
             }
@@ -188,7 +190,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onConfiemserverpayresult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-        if (confirmServerPayResultBean.getCode().equals("200")){
+        if (confirmServerPayResultBean.getCode().equals("200")) {
 
             confirmServerPayResultBeans.add(confirmServerPayResultBean);
         }
@@ -196,19 +198,19 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean, boolean mBooleans) {
-        if (selectAllProductBean.getCode().equals("200")){
+        if (selectAllProductBean.getCode().equals("200")) {
             //服务端更改成功
-            if (mBooleans){
+            if (mBooleans) {
                 //点击单选 多选改变
-            }else {
+            } else {
                 //点击多选
                 shopcarCheck.setChecked(!shopcarCheck.isChecked());
-                if (shopcarCheck.isChecked()){
-                    for (int i = 0; i <resultBeans.size() ; i++) {
+                if (shopcarCheck.isChecked()) {
+                    for (int i = 0; i < resultBeans.size(); i++) {
                         resultBeans.get(i).setProductSelected(true);
                     }
-                }else {
-                    for (int i = 0; i <resultBeans.size() ; i++) {
+                } else {
+                    for (int i = 0; i < resultBeans.size(); i++) {
                         resultBeans.get(i).setProductSelected(false);
                     }
                 }
@@ -222,7 +224,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onUpdateProductSelect(UpdateProductSelectedBean updateProductSelectedBean, int position) {
-        if (updateProductSelectedBean.getCode().equals("200")){
+        if (updateProductSelectedBean.getCode().equals("200")) {
             //服务端请求成功  刷新内存数据
             resultBeans.get(position).setProductSelected(!resultBeans.get(position).isProductSelected());
             //刷新多选
@@ -234,57 +236,69 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onRemoveManyProductBean(RemoveManyProductBean removeManyProductBean) {
-        if (removeManyProductBean.getCode().equals("200")){
+        if (removeManyProductBean.getCode().equals("200")) {
             //成功后 清除内存数据
             DeleteMemoryData();
         }
     }
 
     @Override
+    public void onCheckInventory(CheckOneInventoryBean bean, int position) {
+
+    }
+
+    @Override
+    public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolean) {
+
+    }
+
+    @Override
     public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
-        if (resultBeanList != null){
+        if (resultBeanList != null) {
             shoppingCarAdapter.notifyDataSetChanged();
         }
     }
 
     //判断刷新是否全选
-    public void AllProductBeanAndProductSelect(){
+    public void AllProductBeanAndProductSelect() {
         int index = 0;
-        for (int i = 0; i < resultBeans.size() ; i++) {
-            if (resultBeans.get(i).isProductSelected()){
+        for (int i = 0; i < resultBeans.size(); i++) {
+            if (resultBeans.get(i).isProductSelected()) {
                 index++;
             }
         }
-        if (index==resultBeans.size()){
+        if (index == resultBeans.size()) {
             shopcarCheck.setChecked(true);
-            httpPresenter.getSelectAllProduct(true,true);
-        }else {
+            httpPresenter.getSelectAllProduct(true, true);
+        } else {
             shopcarCheck.setChecked(false);
-            httpPresenter.getSelectAllProduct(false,true);
+            httpPresenter.getSelectAllProduct(false, true);
         }
         //刷新金额
         allPrice();
     }
+
     //获取全部物品的金额
-    public void allPrice(){
-        for (int i = 0; i < resultBeans.size() ; i++) {
-            if (resultBeans.get(i).isProductSelected()){
+    public void allPrice() {
+        for (int i = 0; i < resultBeans.size(); i++) {
+            if (resultBeans.get(i).isProductSelected()) {
                 String productPrice = (String) resultBeans.get(i).getProductPrice();
                 LogUtils.e(productPrice);
                 float v = Float.parseFloat(productPrice);
                 LogUtils.e(v);
                 String productNum = resultBeans.get(i).getProductNum();
                 int parseInt = Integer.parseInt(productNum);
-                price= price+ (v*parseInt);
+                price = price + (v * parseInt);
             }
         }
-        shopcarMoney.setText(""+price);
+        shopcarMoney.setText("" + price);
         price = 0;
     }
+
     //删除服务端选中的商品
-    public void DeleteServeData(){
-        for (int i = 0; i < resultBeans.size() ; i++) {
-            if (resultBeans.get(i).isProductSelected()){
+    public void DeleteServeData() {
+        for (int i = 0; i < resultBeans.size(); i++) {
+            if (resultBeans.get(i).isProductSelected()) {
                 GetShortcartProductsBean.ResultBean resultBean = new GetShortcartProductsBean.ResultBean();
                 resultBean.setProductNum(resultBeans.get(i).getProductNum());
                 resultBean.setUrl(resultBeans.get(i).getUrl());
@@ -298,10 +312,11 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         httpPresenter.removeManyProduct(listDelete);
         //删除完进行刷新判断
     }
+
     //删除内存数据
-    public void DeleteMemoryData(){
-        for (int i = 0; i < resultBeans.size() ; i++) {
-            if (resultBeans.get(i).isProductSelected()){
+    public void DeleteMemoryData() {
+        for (int i = 0; i < resultBeans.size(); i++) {
+            if (resultBeans.get(i).isProductSelected()) {
                 resultBeans.remove(i);
                 i--;
             }

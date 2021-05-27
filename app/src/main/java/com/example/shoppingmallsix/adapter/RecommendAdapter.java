@@ -18,7 +18,7 @@ public class RecommendAdapter extends BaseRvAdapter<HomeBean.ResultBean.Recommen
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.RecommendInfoBean itemData) {
         Glide.with(holder.itemView.getContext())
-                .load(Constants.BASE_URl_IMAGE+itemData.getFigure())
+                .load(Constants.BASE_URl_IMAGE + itemData.getFigure())
                 .into((ImageView) holder.getView(R.id.recommendImage));
 
         TextView view = holder.getView(R.id.recommendTitle);

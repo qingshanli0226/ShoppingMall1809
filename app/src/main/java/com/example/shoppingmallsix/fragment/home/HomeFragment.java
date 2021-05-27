@@ -30,7 +30,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private ToolBar toolbar;
     private EditText edtname;
     private RecyclerView rv;
-    private  HomeAdapter homeAdapter;
+    private HomeAdapter homeAdapter;
     private HomePresenter homePresenter;
     private List<Object> list = new ArrayList<>();
     private LinearLayout homeMessage;
@@ -56,7 +56,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
         homeMessage = mBaseView.findViewById(R.id.homeMessage);
 
-        homeAdapter= new HomeAdapter(list,getActivity());
+        homeAdapter = new HomeAdapter(list, getActivity());
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(homeAdapter);
 
@@ -81,7 +81,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if (BuildConfig.DEBUG) Log.d("HomeFragment", "homeBean:" + homeBean);
         list.add(result.getBanner_info());
         list.add(result.getChannel_info());
-        list.add( result.getAct_info());
+        list.add(result.getAct_info());
         list.add(result.getSeckill_info().getList());
         list.add(result.getRecommend_info());
         list.add(result.getHot_info());
