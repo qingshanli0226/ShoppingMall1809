@@ -3,14 +3,14 @@
     package="com.example.user">
 
     <application>
+        <activity android:name=".phoneaddress.PhoneAddressMainActivity"></activity>
+
         <service
             android:name=".AutoService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".UserActivity" />
-
-
     </application>
 
 </manifest>

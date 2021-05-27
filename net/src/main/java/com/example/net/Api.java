@@ -7,6 +7,8 @@ import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.net.bean.SkirtBean;
+import com.example.net.bean.UpdateAddress;
+import com.example.net.bean.UpdatePhone;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -61,5 +63,12 @@ public interface Api {
     @GET("findForSend")
     Observable<FindForSendBean> getForSend();
 
+    //改手机
+    @POST("updatePhone")
+    @FormUrlEncoded
+    Observable<UpdatePhone> getUpdatephone(@Field("phone")String phone);
 
+    @POST("updataAddress")
+    @FormUrlEncoded
+    Observable<UpdateAddress> getupdataAddress(@Field("address")String address);
 }

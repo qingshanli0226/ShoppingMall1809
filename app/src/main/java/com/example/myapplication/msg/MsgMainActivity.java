@@ -9,6 +9,8 @@ import com.example.myapplication.R;
 
 public class MsgMainActivity extends BaseActivity {
 
+    private androidx.recyclerview.widget.RecyclerView rv;
+
     @Override
     protected int bandLayout() {
         return R.layout.activity_msg_main;
@@ -17,6 +19,7 @@ public class MsgMainActivity extends BaseActivity {
     @Override
     public void initView() {
 
+        rv = findViewById(R.id.rv);
     }
 
     @Override

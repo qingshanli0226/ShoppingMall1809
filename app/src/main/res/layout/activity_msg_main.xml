@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".msg.MsgMainActivity">
+    tools:context=".msg.MsgMainActivity"
+    android:orientation="vertical">
 
     <com.example.framework.view.MyToorbar
         android:layout_width="match_parent"
@@ -12,4 +13,8 @@
         app:titletext="@string/title_msg"
         app:isleft="true"
         app:leftimg="@drawable/top_bar_left_back"></com.example.framework.view.MyToorbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

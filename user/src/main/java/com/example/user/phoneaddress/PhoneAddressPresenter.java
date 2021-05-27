@@ -1,11 +1,8 @@
-package com.example.myapplication.findforpay;
+package com.example.user.phoneaddress;
 
-import android.util.Log;
-
-import com.example.framework.manager.PaySendCacheManager;
 import com.example.net.RetrofitManager;
-import com.example.net.bean.FindForPayBean;
-import com.example.net.bean.FindForSendBean;
+import com.example.net.bean.UpdateAddress;
+import com.example.net.bean.UpdatePhone;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,13 +13,12 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
-public class FindpayPresenter extends BasePresenter<IFindPayView> {
-    public FindpayPresenter(IFindPayView iFindPayView) {
-        attView(iFindPayView);
+public class PhoneAddressPresenter extends BasePresenter<IPhoneAndAddressView> {
+    public PhoneAddressPresenter(IPhoneAndAddressView iPhoneAndAddressView) {
     }
-    public void onFindPay(){
+    public void onPhone(String phone){
         RetrofitManager.getApi()
-                .getForPay()
+                .getUpdatephone(phone)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -38,27 +34,22 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                         mView.hideLoading();
                     }
                 })
-                .subscribe(new Observer<FindForPayBean>() {
+                .subscribe(new Observer<UpdatePhone>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull FindForPayBean findForPayBean) {
-                        if (mView!=null){
-                            mView.onFindPay(findForPayBean);
-                            PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
-                            Log.d("FindpayPresenter", findForPayBean.toString());
-
-                        }
+                    public void onNext(@NonNull UpdatePhone updatePhone) {
+                         if (mView!=null){
+                             mView.onBindphone(updatePhone);
+                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                          if (mView!=null){
-                              mView.showToast(e.getMessage());
-                          }
+
                     }
 
                     @Override
@@ -67,9 +58,9 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                     }
                 });
     }
-    public void onFindSend(){
+    public void onAddress(String address){
         RetrofitManager.getApi()
-                .getForSend()
+                .getupdataAddress(address)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -85,26 +76,22 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                         mView.hideLoading();
                     }
                 })
-                .subscribe(new Observer<FindForSendBean>() {
+                .subscribe(new Observer<UpdateAddress>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull FindForSendBean findForSendBean) {
-                          if (mView!=null){
-                              mView.onFindSend(findForSendBean);
-                              PaySendCacheManager.getInstance().setFindForSendBean(findForSendBean);
-
-                          }
+                    public void onNext(@NonNull UpdateAddress updateAddress) {
+                        if (mView!=null){
+                            mView.onBindAddress(updateAddress);
+                        }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                          if (mView!=null){
-                              mView.showToast(e.getMessage());
-                          }
+
                     }
 
                     @Override

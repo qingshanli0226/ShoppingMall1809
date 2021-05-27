@@ -9,4 +9,5 @@ import mvp.view.IBaseVIew;
 public interface IPersonalView extends IBaseVIew {
     void onShoppingPay(FindForPayBean findForPayBean);
     void onShoppingSend(FindForSendBean findForSendBean);
+    void ondend(FindForPayBean findForPayBean);
 }

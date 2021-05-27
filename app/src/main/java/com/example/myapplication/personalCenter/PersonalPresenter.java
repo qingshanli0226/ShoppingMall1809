@@ -2,6 +2,7 @@ package com.example.myapplication.personalCenter;
 
 import android.util.Log;
 
+import com.example.framework.manager.PaySendCacheManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
@@ -61,6 +62,57 @@ public class PersonalPresenter extends BasePresenter<IPersonalView> {
                     }
                 });
     }
+
+
+
+    public void onFindPay(){
+        RetrofitManager.getApi()
+                .getForPay()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        add(disposable);
+                        mView.showLoading();
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.hideLoading();
+                    }
+                })
+                .subscribe(new Observer<FindForPayBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull FindForPayBean findForPayBean) {
+                        if (mView!=null){
+                            PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
+                            Log.d("FindpayPresenter", findForPayBean.toString());
+                           mView.ondend(findForPayBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (mView!=null){
+                            mView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
     public void getFindSend(){
         RetrofitManager.getApi()
                 .getForSend()
