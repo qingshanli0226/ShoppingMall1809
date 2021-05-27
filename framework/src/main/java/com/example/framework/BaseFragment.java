@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
+import com.example.net.bean.ShoppingCartBean;
 
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange,CaCheMannager.IShoppingCartInterface {
     protected P mPresenter;
     protected View rootView;
     protected LoadingPage loadingPage;
@@ -37,6 +39,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        CaCheMannager.getInstance().registerIShoppingCart(this);//购物车注册接口
         initView();
         initPresenter();
         initData();
@@ -75,11 +78,32 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onDestroy();
         destroy();
         CacheUserManager.getInstance().unregisterLogin(this);
+        CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
     public void destroy() {
         if (mPresenter != null) {
             mPresenter.destroy();
         }
+    }
+
+    @Override
+    public void onShoppinCartgData(ShoppingCartBean shoppingCartBean) {
+
+    }
+
+    @Override
+    public void onShoppingCartAdd() {
+
+    }
+
+    @Override
+    public void onShoppingCartSub() {
+
+    }
+
+    @Override
+    public void onShoppingCartUpdata() {
+
     }
 }

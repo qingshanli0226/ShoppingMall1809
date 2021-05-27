@@ -56,8 +56,10 @@ public class MainActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
            Bundle extras = intent.getExtras();
-           String page = extras.getString("page");
-           mainComm.setCurrentTab(Integer.parseInt(page));
+           if (extras!=null){
+               String page = extras.getString("page");
+               mainComm.setCurrentTab(Integer.parseInt(page));
+           }
     }
 
     @Override
@@ -92,11 +94,13 @@ public class MainActivity extends BaseActivity {
                     //获取登陆状态
                     isLogin= CacheUserManager.getInstance().getIsLogin();
                     if (!isLogin){
+                        mainComm.setCurrentTab(0);
                         ToLoginType.getInstance().setActivityType(TypeString.MAIN_TYPE);
                         //没有登陆
                         Bundle bundle = new Bundle();
                         bundle.putString("falg","2");
                         CaCheArote.getInstance().getUserInterface().openLoginActivity(MainActivity.this,bundle);
+
                     }
                 }
             }

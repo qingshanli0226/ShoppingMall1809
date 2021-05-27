@@ -1,28 +1,22 @@
 package com.example.myapplication.home;
 
-import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.common.type.ToLoginType;
-import com.example.common.type.TypeString;
 import com.example.framework.BaseFragment;
 
 import com.example.framework.manager.CaCheArote;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.home.homeadapter.HomeAdapter;
-import com.example.myapplication.msg.MsgMainActivity;
 import com.example.net.bean.HomeBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mvp.CaCheMannager;
+import com.example.framework.manager.CaCheMannager;
 
 public class HomeFragment extends BaseFragment {
     private EditText etDevOpsPassWord;

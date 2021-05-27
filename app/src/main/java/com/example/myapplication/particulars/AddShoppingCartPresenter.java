@@ -2,8 +2,10 @@ package com.example.myapplication.particulars;
 
 import android.util.Log;
 
+import com.example.framework.manager.CaCheMannager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.RegisterBean;
+import com.example.net.bean.AddShoppingCartBean;
 import com.example.net.bean.ShoppingCartBean;
 
 import org.json.JSONException;
@@ -13,13 +15,10 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView> {
 
@@ -55,15 +54,15 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
                         mView.hideLoading();
                     }
                 })
-                .subscribe(new Observer<ShoppingCartBean>() {
+                .subscribe(new Observer<AddShoppingCartBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                     }
 
                     @Override
-                    public void onNext(@NonNull ShoppingCartBean shoppingCartBean) {
+                    public void onNext(@NonNull AddShoppingCartBean addShoppingCartBean) {
                         if (mView != null) {
-                            mView.onAddShoppingCart(shoppingCartBean);
+                            mView.onAddShoppingCart(addShoppingCartBean);
                         }
                     }
 
@@ -117,6 +116,37 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
 
                     @Override
                     public void onComplete() {
+                    }
+                });
+    }
+
+    //获取购物车数据
+    public synchronized void getShoppingCart() {
+        RetrofitManager.getApi().getShoppingCart()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ShoppingCartBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ShoppingCartBean shoppingCartBean) {
+                        //购物车数据
+                        CaCheMannager.getInstance().setShoppingCartBeanList(shoppingCartBean.getResult());
+                       CaCheMannager.getInstance().showShoppingData();
+                        Log.d("ShoppingCartActivity", "123123");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("ShoppingCartActivity", "1231234");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
