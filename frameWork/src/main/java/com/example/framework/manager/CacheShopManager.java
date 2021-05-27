@@ -1,5 +1,6 @@
 package com.example.framework.manager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -60,11 +61,22 @@ public class CacheShopManager {
     private List<CartBean.ResultBean> carts = new ArrayList<>();
     private List<CartBean.ResultBean> cartsPrice = new ArrayList<>();
     private List<ICartChange> cartChanges = new LinkedList<>();
+    private List<Activity> activityList = new LinkedList<>();
+
 
     public List<CartBean.ResultBean> getCartsPrice() {
         return cartsPrice;
     }
 
+    public void addActivity(Activity activity){
+        activityList.add(activity);
+    }
+    public void removeActivity(Activity activity){
+        activityList.remove(activity);
+    }
+    public List<Activity> getActivityList(){
+        return activityList;
+    }
 
 
     public synchronized void registerCart(ICartChange iCartChange) {

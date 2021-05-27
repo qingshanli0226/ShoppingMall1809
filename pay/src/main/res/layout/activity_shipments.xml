@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD:pay/src/main/res/layout/activity_shipments.xml
     tools:context="com.example.pay.shipments.ShipmentsActivity">
+=======
+    android:orientation="vertical"
+    tools:context=".shipments.ShipmentsActivity">
+>>>>>>> zzy:app/src/main/res/layout/activity_shipments.xml
     <com.example.framework.view.ToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -14,5 +19,11 @@
         app:app_left_src="@drawable/top_bar_left_back"
         app:app_text="@string/shipment"
         app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shipmentsRv"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

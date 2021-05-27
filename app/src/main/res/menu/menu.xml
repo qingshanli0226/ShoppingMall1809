@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mainOne" android:title="@string/main_one" android:icon="@drawable/main_home"></item>
-    <item android:id="@+id/mainTwo" android:title="@string/main_two" android:icon="@drawable/main_type"></item>
-    <item android:id="@+id/mainThree" android:title="@string/main_three" android:icon="@drawable/main_community"></item>
-    <item android:id="@+id/mainFour" android:title="@string/main_four" android:icon="@drawable/main_cart"></item>
-    <item android:id="@+id/mainFive" android:title="@string/main_five" android:icon="@drawable/main_user"></item>
+    <item android:id="@+id/mainOne" android:title="@string/main_one" android:icon="@drawable/main_home_press"></item>
+    <item android:id="@+id/mainTwo" android:title="@string/main_two" android:icon="@drawable/main_type_press"></item>
+    <item android:id="@+id/mainThree" android:title="@string/main_three" android:icon="@drawable/main_community_press"></item>
+    <item android:id="@+id/mainFour" android:title="@string/main_four" android:icon="@drawable/main_cart_press"></item>
+    <item android:id="@+id/mainFive" android:title="@string/main_five" android:icon="@drawable/main_user_press"></item>
 </menu>

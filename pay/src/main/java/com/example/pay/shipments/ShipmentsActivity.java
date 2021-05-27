@@ -17,7 +17,6 @@ public class ShipmentsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         toolbar.setToolbarOnClickLisenter(this);
     }
