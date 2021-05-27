@@ -14,6 +14,8 @@ import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.ShoppingCartBean;
 
+import java.util.List;
+
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
@@ -87,8 +89,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         }
     }
 
+
     @Override
-    public void onShoppinCartgData(ShoppingCartBean shoppingCartBean) {
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
 
     }
 

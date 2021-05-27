@@ -11,6 +11,8 @@ import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.ShoppingCartBean;
 
+import java.util.List;
+
 import mvp.presenter.BasePresenter;
 import mvp.view.IActivity;
 
@@ -72,8 +74,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
     }
 
+
     @Override
-    public void onShoppinCartgData(ShoppingCartBean shoppingCartBean) {
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
 
     }
 

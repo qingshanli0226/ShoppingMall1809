@@ -47,7 +47,7 @@ public class CaCheMannager {
 
     //购物车存接口
     public interface IShoppingCartInterface {
-        void onShoppinCartgData(ShoppingCartBean shoppingCartBean);
+        void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean);
 
         void onShoppingCartAdd();
 
@@ -94,7 +94,7 @@ public class CaCheMannager {
     public void showShoppingData(){
         this.shoppingCartBean=getShoppingCartBean();
         for (IShoppingCartInterface iShoppingCartInterface:list) {
-            iShoppingCartInterface.onShoppinCartgData(shoppingCartBean);
+            iShoppingCartInterface.onShoppinCartgData(CaCheMannager.getInstance().getShoppingCartBeanList());
         }
     }
 

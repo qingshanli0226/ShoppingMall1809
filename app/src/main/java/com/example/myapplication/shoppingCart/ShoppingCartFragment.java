@@ -306,11 +306,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         }
     }
 
-    @Override
-    public void onShoppinCartgData(ShoppingCartBean shoppingCartBean) {
-        super.onShoppinCartgData(shoppingCartBean);
-        mPresenter.getShoppingCart();
-    }
 
     public void getTotalPrice() {
         //遍历集合
@@ -343,4 +338,12 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     }
 
 
+    @Override
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+        if (shoppingCartBean!=null){
+            list.clear();
+            list.addAll(shoppingCartBean);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

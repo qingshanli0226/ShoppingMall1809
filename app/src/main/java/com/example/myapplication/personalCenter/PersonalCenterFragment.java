@@ -16,9 +16,6 @@ import com.example.myapplication.findforsend.FindsendMainActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
-import java.util.List;
-
-import mvp.CaCheMannager;
 
 public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements IPersonalView {
 
@@ -70,11 +67,9 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
     @Override
     public void onLoginChange(boolean loginBean) {
         super.onLoginChange(loginBean);
-        if (loginBean){
-mPresenter.onFindPay();
-
-
-        }else {
+        if (loginBean) {
+            mPresenter.onFindPay();
+        } else {
 
         }
     }
@@ -132,9 +127,9 @@ mPresenter.onFindPay();
 
     @Override
     public void ondend(FindForPayBean findForPayBean) {
-               PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
+        PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
 
-        paynum.setText(PaySendCacheManager.getInstance().getOneIndex() +"");
+        paynum.setText(PaySendCacheManager.getInstance().getOneIndex() + "");
     }
 
 }
