@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.framework.manager.CaCheLoginUserMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.SpUtil;
 import com.example.net.bean.LoginBean;
@@ -39,6 +40,7 @@ public class AutoService extends Service {
             @Override
             public void onAutoLogin(LoginBean loginBean) {
                 if (loginBean.getCode().equals("200")) {
+                    CaCheLoginUserMannager.getInstance().setBean(loginBean);//登陆成功将用户信息存储到用户信息缓存类
                     SpUtil.setString(AutoService.this, "token", loginBean.getResult().getToken());
                     CacheUserManager.getInstance().setLoginBean(true);
                     return;

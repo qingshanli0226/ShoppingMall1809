@@ -1,6 +1,6 @@
 package com.example.myapplication.type;
 
-import com.example.net.RetrofitManager;
+import com.example.net.retrogit.RetrofitManager;
 
 import com.example.net.bean.SkirtBean;
 
@@ -8,8 +8,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 

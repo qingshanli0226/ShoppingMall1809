@@ -1,5 +1,6 @@
-package com.example.net;
+package com.example.net.retrogit;
 
+import com.example.net.Constants;
 import com.example.net.bean.CheckInventoryBean;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;

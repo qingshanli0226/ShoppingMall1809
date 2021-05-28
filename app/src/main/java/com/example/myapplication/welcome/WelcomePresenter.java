@@ -1,6 +1,6 @@
 package com.example.myapplication.welcome;
 
-import com.example.net.RetrofitManager;
+import com.example.net.retrogit.RetrofitManager;
 import com.example.net.bean.HomeBean;
 
 import io.reactivex.Observer;

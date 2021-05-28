@@ -76,11 +76,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void initData() {
-
         //全选按钮
         shoppingCartCheck.setOnClickListener(v -> {
-            //获取当前的全选按钮
-            nowIsChe = shoppingCartCheck.isChecked();
+            nowIsChe = shoppingCartCheck.isChecked();//获取当前的按钮状态
             if (nowIsChe) {//当前按钮是true
                 mPresenter.updatateAllSelect(true);
             } else {
@@ -89,14 +87,14 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         });
         //编辑里面的全选
         shoppingCartCompileCheck.setOnClickListener(v -> {
-            //获取当前的全选按钮值
-            nowIsChe = shoppingCartCompileCheck.isChecked();
+            nowIsChe = shoppingCartCompileCheck.isChecked(); //获取当前的按钮状态
             if (nowIsChe) {//当前按钮是true
                 mPresenter.updatateAllSelect(true);
             } else {
                 mPresenter.updatateAllSelect(false);
             }
         });
+<<<<<<< HEAD
         //价格
         getTotalPrice();
 
@@ -109,39 +107,30 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             }
         });
 
+=======
+        getTotalPrice();//价格
+>>>>>>> xsp
         //点击编辑
-        shoppingCartCompile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (shoppingCartCompile.getText().toString().equals(getString(R.string.myShoppingCartCompile))) {
-                    //隐藏刚进去的布局
-                    shoppingCartRelativeLayout.setVisibility(View.GONE);
-                    //显示编辑布局
-                    shoppingCartCompileRelativeLayout.setVisibility(View.VISIBLE);
-                    //更换样式
-                    shoppingCartCompile.setText(getString(R.string.myShoppingCartFinish));
-                } else {
-                    //隐藏刚进去的布局
-                    shoppingCartRelativeLayout.setVisibility(View.VISIBLE);
-                    //显示编辑布局
-                    shoppingCartCompileRelativeLayout.setVisibility(View.GONE);
-                    //更换样式
-                    shoppingCartCompile.setText(getString(R.string.myShoppingCartCompile));
-                }
+        shoppingCartCompile.setOnClickListener(v -> {
+            if (shoppingCartCompile.getText().toString().equals(getString(R.string.myShoppingCartCompile))) {
+                shoppingCartRelativeLayout.setVisibility(View.GONE);//隐藏刚进去的布局
+                shoppingCartCompileRelativeLayout.setVisibility(View.VISIBLE);//显示编辑布局
+                shoppingCartCompile.setText(getString(R.string.myShoppingCartFinish));//更换样式
+            } else {
+                shoppingCartRelativeLayout.setVisibility(View.VISIBLE);//隐藏刚进去的布局
+                shoppingCartCompileRelativeLayout.setVisibility(View.GONE);//显示编辑布局
+                shoppingCartCompile.setText(getString(R.string.myShoppingCartCompile)); //更换样式
             }
         });
         //点击删除
-        shoppingCartCompileDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delList.size() == 0) {
-                    Toast.makeText(getActivity(), "请选择商品", Toast.LENGTH_SHORT).show();
-                } else if (delList.size() == 1) {//删除单个
-                    ShoppingCartBean.ResultBean resultBean = delList.get(0);
-                    mPresenter.deleteOneShopping(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
-                } else {//删除多个
-                    mPresenter.RemoveManvProduct(delList);
-                }
+        shoppingCartCompileDelete.setOnClickListener(v -> {
+            if (delList.size() == 0) {
+                Toast.makeText(getActivity(), getString(R.string.myShoppingCartSelectShopping), Toast.LENGTH_SHORT).show();
+            } else if (delList.size() == 1) {//删除单个
+                ShoppingCartBean.ResultBean resultBean = delList.get(0);
+                mPresenter.deleteOneShopping(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
+            } else {//删除多个
+                mPresenter.RemoveManvProduct(delList);
             }
         });
     }
@@ -184,6 +173,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     list) {
                 be.setCheck(nowIsChe);
             }
+<<<<<<< HEAD
 
 
             if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
@@ -191,18 +181,19 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 delList.addAll(list);
             } else {
                 Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
+=======
+            if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
+                delList.addAll(list);
+            }else {
+>>>>>>> xsp
                 delList.clear();
             }
-
-
-            //总价
-            getTotalPrice();
+            getTotalPrice();//总价
         } else {
-            Toast.makeText(getActivity(), "修改全选按钮失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartUpdataAllError), Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
-        //修改缓存类
-        CaCheMannager.getInstance().setShoppingCartBeanList(list);
+        CaCheMannager.getInstance().setShoppingCartBeanList(list);//修改缓存类
     }
 
     //单选返回值
@@ -210,17 +201,11 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     public void onupdateShoppingSelect(RegisterBean bean) {
         if (bean.getCode().equals("200")) {
             list.get(itemPosition).setCheck(nowIsSelect);
-
-
             if (nowIsSelect) {
-                Toast.makeText(getActivity(), "加入", Toast.LENGTH_SHORT).show();
                 delList.add(list.get(itemPosition));
             } else {
-                Toast.makeText(getActivity(), "没有加入", Toast.LENGTH_SHORT).show();
                 delList.remove(list.get(itemPosition));
             }
-
-
             CaCheMannager.getInstance().setShoppingCartBeanList(list);//修改缓存类
             //遍历  如果选择了全部商品则勾上全选
             boolean isAll = true;
@@ -235,10 +220,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             } else {
                 shoppingCartCheck.setChecked(false);
             }
-            //总价
-            getTotalPrice();
+            getTotalPrice();//总价
         } else {
-            Toast.makeText(getActivity(), "选择错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartUpdataError), Toast.LENGTH_SHORT).show();
             if (nowIsSelect) {
                 itemChe.setChecked(false);
             } else {
@@ -260,7 +244,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);//更改缓存类
             getTotalPrice();//更新价格
         } else {
-            Toast.makeText(getActivity(), "更改数量错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartUpdataNumError), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -272,7 +256,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             mPresenter.updateShoppingNum(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
         } else {
             //库存不足
-            Toast.makeText(getActivity(), "库存不足", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartUnderstock), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -283,31 +267,38 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             delList.clear();//清空编辑里面的集合
             list.remove(itemPosition);
             adapter.notifyDataSetChanged();
-            //更新缓存类
-            CaCheMannager.getInstance().setShoppingCartBeanList(list);
+            CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
         } else {
-            Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
     }
 
     //删除多个
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
+<<<<<<< HEAD
         if (registerBean.getCode().endsWith("200")) {
 
             Toast.makeText(getActivity(), "删除多个成功", Toast.LENGTH_SHORT).show();
+=======
+        if (registerBean.getCode().endsWith("200")){
+>>>>>>> xsp
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
-            //将删除集合里面的数据清空
-            delList.clear();
+            delList.clear();//将删除集合里面的数据清空
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
-
             adapter.notifyDataSetChanged();
+<<<<<<< HEAD
             //修改多选按钮
             shoppingCartCheck.setChecked(false);
         } else {
             Toast.makeText(getActivity(), "删除多个失败", Toast.LENGTH_SHORT).show();
+=======
+            shoppingCartCheck.setChecked(false); //修改多选按钮
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
+>>>>>>> xsp
         }
     }
 
@@ -345,8 +336,12 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             if (!getData) {
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
+<<<<<<< HEAD
 
                 getData = true;
+=======
+                getData=true;
+>>>>>>> xsp
             }
         } else {
             loadingPage.showErrorView();
@@ -361,5 +356,21 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             list.addAll(shoppingCartBean);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onShoppingCartRemove(int position) {
+        //删除一个商品
+        list.remove(position);
+        adapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+        //删除多个
+        for (int i = 0; i < shoppingCartBean.size(); i++) {
+            list.remove(shoppingCartBean.get(i));
+        }
+        adapter.notifyDataSetChanged();
     }
 }
