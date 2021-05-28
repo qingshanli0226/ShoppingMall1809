@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.shoppingmall.bawei.shoppingmall1809.mvvm.City"/>
+        <import type="com.fiannce.bawei.net.mode.VersionBean.ResultBean"/>
+        <variable
+            name="city"
+            type="City"/>
+        <variable
+            name="version"
+            type="com.fiannce.bawei.net.mode.VersionBean"/>
+        <variable
+            name="mvvmActivity"
+            type="com.shoppingmall.bawei.shoppingmall1809.mvvm.MVVMActivity"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mvvm.MVVMActivity"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{version.result.desc}"
+            android:onClick="@{()->mvvmActivity.onBtnVersionClick()}"/>
+
+        <Button
+            android:id="@+id/btnFocus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{version.result.version}" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/cityImg"
+            app:imageCity="@{city.imageUrl}"/>
+
+    </LinearLayout>
+</layout>

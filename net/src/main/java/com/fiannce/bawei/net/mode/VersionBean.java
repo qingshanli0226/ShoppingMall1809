@@ -1,5 +1,10 @@
 package com.fiannce.bawei.net.mode;
 
+import com.fiannce.bawei.net.BR;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 public class VersionBean {
 
     /**
@@ -36,7 +41,7 @@ public class VersionBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean extends BaseObservable {
         /**
          * version : 1.2
          * apkUrl : http://49.233.93.155:9999/atguigu/apk/P2PInvest/app-debug.apk
@@ -46,6 +51,8 @@ public class VersionBean {
          * apkHash : 59b2f08ca1598978c4f779e3e60ee90d
          */
 
+
+        @Bindable
         private String version;
         private String apkUrl;
         private String desc;
@@ -59,6 +66,7 @@ public class VersionBean {
 
         public void setVersion(String version) {
             this.version = version;
+            notifyPropertyChanged(BR.version);
         }
 
         public String getApkUrl() {

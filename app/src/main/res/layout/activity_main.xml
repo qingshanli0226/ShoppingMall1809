@@ -29,6 +29,11 @@
         android:layout_height="50dp"
         android:id="@+id/btnE"
         android:text="EXCEPTION"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/btnMVVM"
+        android:text="MVVM"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

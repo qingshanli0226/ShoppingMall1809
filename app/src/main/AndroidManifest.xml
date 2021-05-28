@@ -19,13 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".glide.GlideActivity"/>
-        <activity android:name=".beisaier.BeisaierActivity"/>
-
-        <activity android:name=".exception.ExceptionActivity"></activity>
-
+        <activity android:name=".glide.GlideActivity" />
+        <activity android:name=".beisaier.BeisaierActivity" />
+        <activity android:name=".exception.ExceptionActivity" />
+        <activity android:name=".mvvm.MVVMActivity" />
     </application>
 
 </manifest>
