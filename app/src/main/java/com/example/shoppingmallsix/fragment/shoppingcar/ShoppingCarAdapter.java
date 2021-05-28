@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
@@ -41,7 +42,7 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         TextView num = holder.getView(R.id.shoppingTrolley_num);
         CheckBox shoppingTrolleyCheckBox = holder.getView(R.id.shoppingTrolley_CheckBox);
         shoppingTrolleyCheckBox.setChecked(itemData.isProductSelected());
-        Glide.with(holder.itemView.getContext())
+        ShopmallGlide.with(holder.itemView.getContext())
                 .load(Constants.BASE_URl_IMAGE + itemData.getUrl())
                 .into(imageView);
         textView.setText(itemData.getProductName());

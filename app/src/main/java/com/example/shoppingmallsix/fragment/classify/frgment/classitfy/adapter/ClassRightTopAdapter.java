@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.classify.ClassBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
@@ -30,7 +31,7 @@ public class ClassRightTopAdapter<T> extends BaseRvAdapter<T> {
         TextView textView = holder.getView(R.id.classify_right_top_item_tv);
 
         ClassBean.ResultBean.HotProductListBean hotProductListBean = (ClassBean.ResultBean.HotProductListBean) itemData;
-        Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + hotProductListBean.getFigure()).into(imageView);
+        ShopmallGlide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + hotProductListBean.getFigure()).into(imageView);
         textView.setText("￥" + hotProductListBean.getCover_price());
 
 

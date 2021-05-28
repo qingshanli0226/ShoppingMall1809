@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
@@ -17,7 +18,7 @@ public class RecommendAdapter extends BaseRvAdapter<HomeBean.ResultBean.Recommen
 
     @Override
     public void displayViewHolder(BaseViewHolder holder, int position, HomeBean.ResultBean.RecommendInfoBean itemData) {
-        Glide.with(holder.itemView.getContext())
+        ShopmallGlide.with(holder.itemView.getContext())
                 .load(Constants.BASE_URl_IMAGE + itemData.getFigure())
                 .into((ImageView) holder.getView(R.id.recommendImage));
 

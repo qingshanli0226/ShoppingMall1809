@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.BuildConfig;
@@ -91,7 +92,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                         HomeBean.ResultBean.BannerInfoBean bean = (HomeBean.ResultBean.BannerInfoBean) path;
                         String image = bean.getImage();
 
-                        Glide.with(holder.itemView)
+                        ShopmallGlide.with(holder.itemView.getContext())
                                 .load(Constants.BASE_URl_IMAGE + image)
                                 .into(imageView);
 
@@ -131,8 +132,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
                     ImageView imageView = new ImageView(holder.itemView.getContext());
-                    Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url())
-                            .error(R.drawable.animation_loading)
+                    ShopmallGlide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + actInfoBean.getIcon_url())
                             .into(imageView);
                     imageViews.add(imageView);
                 }

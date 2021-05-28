@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 
@@ -168,7 +169,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         popupWindow.setContentView(inflate);
 
         popNum.setText(num + "");
-        Glide.with(GoodsActivity.this)
+        ShopmallGlide.with(GoodsActivity.this)
                 .load(Constants.BASE_URl_IMAGE + figure)
                 .into(popImg);
         popText.setText(name);
