@@ -2,6 +2,7 @@ package com.example.net;
 
 
 
+import com.example.net.bean.CrashBean;
 import com.example.net.bean.business.AddOneProductBean;
 import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
@@ -144,4 +145,7 @@ public interface FiannceApiService {
     @POST(Constants.BUSINESS_CHECKONEPRODUCTINVENTORY)
     Observable<CheckOneInventoryBean> getInventory(@Field("productId")String productId, @Field("productNum")String productNum);
 
+    @POST("crash")
+    @FormUrlEncoded
+    Observable<CrashBean> crashReport(@FieldMap HashMap<String,String> params);
 }

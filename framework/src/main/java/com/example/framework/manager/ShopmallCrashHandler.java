@@ -19,6 +19,7 @@ import java.util.HashMap;
 import androidx.annotation.NonNull;
 
 import com.example.net.RetrofitCreator;
+import com.example.net.bean.CrashBean;
 
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
