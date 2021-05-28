@@ -2,6 +2,7 @@ package com.example.myapplication.findforpay;
 
 import android.util.Log;
 
+import com.example.common.log.LogUtil;
 import com.example.framework.manager.PaySendCacheManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.FindForPayBean;
@@ -20,7 +21,7 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
     public FindpayPresenter(IFindPayView iFindPayView) {
         attView(iFindPayView);
     }
-    public void onFindPay(){
+    public void getFindPay(){
         RetrofitManager.getApi()
                 .getForPay()
                 .subscribeOn(Schedulers.io())
@@ -49,7 +50,7 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                         if (mView!=null){
                             mView.onFindPay(findForPayBean);
                             PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
-                            Log.d("FindpayPresenter", findForPayBean.toString());
+                            LogUtil.d(findForPayBean.toString());
 
                         }
                     }
@@ -67,7 +68,7 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                     }
                 });
     }
-    public void onFindSend(){
+    public void getFindSend(){
         RetrofitManager.getApi()
                 .getForSend()
                 .subscribeOn(Schedulers.io())

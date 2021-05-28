@@ -83,6 +83,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/btton_red"
             android:text="@string/myShoppingCartToCloseAnAccount"
+            android:id="@+id/btn"
             android:textColor="@color/white"></Button>
     </RelativeLayout>
 

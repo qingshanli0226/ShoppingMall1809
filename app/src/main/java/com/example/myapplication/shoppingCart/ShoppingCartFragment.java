@@ -1,18 +1,21 @@
 package com.example.myapplication.shoppingCart;
 
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
+import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -23,23 +26,25 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();
-    private android.widget.TextView shoppingCartCompile;
-    private androidx.recyclerview.widget.RecyclerView shoppingCartRec;
-    private android.widget.CheckBox shoppingCartCheck;
-    private android.widget.TextView shoppingCartPrice;
+    private TextView shoppingCartCompile;
+    private RecyclerView shoppingCartRec;
+    private CheckBox shoppingCartCheck;
+    private TextView shoppingCartPrice;
     private ShoppingCartRecAdapter adapter;
     private boolean nowIsChe;
     private boolean nowIsSelect;
     private CheckBox itemChe;
     private int itemPosition;
     private boolean AddorSub;//true为+  flase为-
-    private android.widget.RelativeLayout shoppingCartRelativeLayout;
-    private android.widget.RelativeLayout shoppingCartCompileRelativeLayout;
+    private RelativeLayout shoppingCartRelativeLayout;
+    private RelativeLayout shoppingCartCompileRelativeLayout;
     private CheckBox shoppingCartCompileCheck;
     private TextView shoppingCartCompileDelete;
     private TextView shoppingCartCompileCollect;
 
-    private boolean getData=false;
+    private boolean getData = false;
+    private Button btn;
+
     @Override
     protected int bandLayout() {
         return R.layout.fragment_shopping_cart;
@@ -61,6 +66,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
+        btn = findViewById(R.id.btn);
     }
 
     @Override
@@ -93,6 +99,15 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         });
         //价格
         getTotalPrice();
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OrderActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //点击编辑
         shoppingCartCompile.setOnClickListener(new View.OnClickListener() {
@@ -171,10 +186,10 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             }
 
 
-            if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
+            if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
                 Toast.makeText(getActivity(), "全进了", Toast.LENGTH_SHORT).show();
                 delList.addAll(list);
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
                 delList.clear();
             }
@@ -274,10 +289,11 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_SHORT).show();
         }
     }
+
     //删除多个
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
-        if (registerBean.getCode().endsWith("200")){
+        if (registerBean.getCode().endsWith("200")) {
 
             Toast.makeText(getActivity(), "删除多个成功", Toast.LENGTH_SHORT).show();
             for (int i = 0; i < delList.size(); i++) {
@@ -290,14 +306,14 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             adapter.notifyDataSetChanged();
             //修改多选按钮
             shoppingCartCheck.setChecked(false);
-        }else {
+        } else {
             Toast.makeText(getActivity(), "删除多个失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onShoppingData(ShoppingCartBean shoppingCartBean) {
-        if (shoppingCartBean.getCode().endsWith("200")){
+        if (shoppingCartBean.getCode().endsWith("200")) {
             //数据
             List<ShoppingCartBean.ResultBean> shoppingCartBeanList = CaCheMannager.getInstance().getShoppingCartBeanList();
             list.clear();
@@ -325,14 +341,14 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     @Override
     public void onLoginChange(boolean loginBean) {
         super.onLoginChange(loginBean);
-        if (loginBean){
-            if (!getData){
+        if (loginBean) {
+            if (!getData) {
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
 
-                getData=true;
+                getData = true;
             }
-        }else {
+        } else {
             loadingPage.showErrorView();
         }
     }
@@ -340,7 +356,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
-        if (shoppingCartBean!=null){
+        if (shoppingCartBean != null) {
             list.clear();
             list.addAll(shoppingCartBean);
             adapter.notifyDataSetChanged();

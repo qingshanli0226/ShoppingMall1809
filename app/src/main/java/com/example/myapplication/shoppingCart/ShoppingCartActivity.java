@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
 import com.example.myapplication.home.homeadapter.HomeAdapter;
+import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -42,6 +44,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
     private CheckBox shoppingCartCompileCheck;
     private TextView shoppingCartCompileDelete;
     private TextView shoppingCartCompileCollect;
+    private android.widget.Button btn;
 
     @Override
     protected int bandLayout() {
@@ -64,6 +67,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
+        btn = findViewById(R.id.btn);
     }
 
     @Override
@@ -101,6 +105,14 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         //价格
         getTotalPrice();
 
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShoppingCartActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
         //点击编辑
         shoppingCartCompile.setOnClickListener(new View.OnClickListener() {
             @Override

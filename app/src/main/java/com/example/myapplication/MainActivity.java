@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.example.common.log.LogUtil;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;

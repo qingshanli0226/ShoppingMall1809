@@ -14,8 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".shoppingCart.ShoppingCartActivity"></activity>
         <activity android:name=".findforsend.FindsendMainActivity"></activity>
+
+        <activity android:name=".payorder.OrderActivity"></activity>
+
+
         <activity android:name=".findforpay.FindPayMainActivity" />
         <activity android:name=".msg.MsgMainActivity" />
         <activity android:name=".particulars.ParticularsActivity" />

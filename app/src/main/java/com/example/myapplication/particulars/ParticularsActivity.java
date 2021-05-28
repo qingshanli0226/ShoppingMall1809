@@ -23,6 +23,7 @@ import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.ShopmallGlide;
 import com.example.myapplication.R;
 import com.example.myapplication.shoppingCart.ShoppingCartActivity;
 import com.example.net.bean.RegisterBean;
@@ -107,11 +108,11 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             price = extras.getString("price");
             id = extras.getString("id");
             //给控件赋值
-            Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
+            ShopmallGlide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(particularsCommodityImage);
             particularsCommodityName.setText(name);
             particularsCommodityPrice.setText(price);
             //给pop控件赋值
-            Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(popImage);
+            ShopmallGlide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(popImage);
             popName.setText(name);
             popPrice.setText(price);
         }
