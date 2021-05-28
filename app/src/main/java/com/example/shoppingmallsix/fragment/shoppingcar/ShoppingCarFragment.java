@@ -30,7 +30,6 @@ import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
-import com.example.pay.demo.PayDemoActivity;
 import com.example.pay.order.GetOrderActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.login.LoginActivity;

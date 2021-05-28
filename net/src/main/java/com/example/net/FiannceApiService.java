@@ -14,6 +14,8 @@ import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 
 import com.example.net.bean.classify.ClassBean;
+import com.example.net.bean.find.FindForPayBean;
+import com.example.net.bean.find.FindForSendbean;
 import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.user.RegisterBean;
 
@@ -130,6 +132,15 @@ public interface FiannceApiService {
     @POST(Constants.BUSINESS_CONFIRMSERVERPAYRESULT)
     Observable<ConfirmServerPayResultBean> getConfirmServerPayResult(@Body RequestBody body);
 
+    //查找待支付的订单
+    @GET(Constants.BUSINESS_FINDFORSEND)
+    Observable<FindForSendbean> getFindforsend();
+
+
+    //查找带发货订单
+    @GET(Constants.BUSINESS_FINDFORPAY)
+    Observable<FindForPayBean> getFindforpay();
+
     //获取服务端购物车产品信息的接口
     @GET(Constants.BUSINESS_GETSHORCARTPRODUCTS)
     Observable<GetShortcartProductsBean> getShortcartProductsBean();
@@ -138,5 +149,7 @@ public interface FiannceApiService {
     @FormUrlEncoded
     @POST(Constants.BUSINESS_CHECKONEPRODUCTINVENTORY)
     Observable<CheckOneInventoryBean> getInventory(@Field("productId")String productId, @Field("productNum")String productNum);
+
+
 
 }

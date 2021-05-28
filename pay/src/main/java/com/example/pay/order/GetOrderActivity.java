@@ -15,13 +15,16 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
+import com.example.net.bean.find.FindForPayBean;
+import com.example.net.bean.find.FindForSendbean;
 import com.example.pay.R;
 import com.example.pay.demo.AuthResult;
-import com.example.pay.demo.PayDemoActivity;
 import com.example.pay.demo.PayResult;
 import com.example.pay.demo.util.OrderInfoUtil2_0;
 
@@ -38,7 +41,9 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     private TextView priceOrder;
     private RelativeLayout llGoodsRoot;
     private TextView pricePay;
+
     private Button buyOrder;
+    GetOrderPPresenter getOrderPPresenter;
     public static final String APPID = "2021000117602508";
     public static final String PID = "2088912429840735";
     public static final String TARGET_ID = "123456";
@@ -46,14 +51,24 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     public static final String RSA_PRIVATE = "";
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
+    String orderInfos;
+    String key;
+    String outTradeNos;
 
     @Override
     protected void initPresenter() {
-
+        getOrderPPresenter = new GetOrderPPresenter(this);
     }
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        orderInfos = String.valueOf(intent.getStringArrayExtra("orderInfo"));
+        outTradeNos = String.valueOf(intent.getStringArrayExtra("outTradeNo"));
+        key = String.valueOf(intent.getStringArrayExtra("key"));
+
+
+
 
     }
 
@@ -69,16 +84,14 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         pricePay = (TextView) findViewById(R.id.price_pay);
         buyOrder = (Button) findViewById(R.id.buy_order);
 
-
         buyOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                payV2(buyOrder);
+                payV2();
 
                 //startActivity(new Intent(GetOrderActivity.this, PayDemoActivity.class));
             }
         });
-
 
     }
 
@@ -91,6 +104,28 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
 
     }
+
+    @Override
+    public void onfindForSend(FindForSendbean findForSendbean) {
+
+    }
+
+    @Override
+    public void onfindForPay(FindForPayBean findForPayBean) {
+
+    }
+
+
+    @Override
+    public void onConfirmServerPayResult(ConfirmServerPayResultBean confirmServerPayResultBean) {
+
+        if(confirmServerPayResultBean.getCode().equals("200")){
+
+            ARouter.getInstance().build("/main/MainActivity").withString("position","0").navigation();
+        }
+
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -105,13 +140,20 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
+                    String payMsg="";
                     if (TextUtils.equals(resultStatus, "9000")) {
-
+                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,true);
+                        payMsg = "支付成功";
+                        Toast.makeText(GetOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 
                     } else {
-
-
+                        payMsg = "支付失败";
+                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
+                        Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
+
+
+
                     break;
                 }
                 case SDK_AUTH_FLAG: {
@@ -137,7 +179,7 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         };
     };
 
-    public void payV2(View v) {
+    public void payV2() {
         if (TextUtils.isEmpty(APPID) || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))) {
             Toast.makeText(this, "买了吗", Toast.LENGTH_SHORT).show();
             return;
@@ -179,4 +221,18 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     }
 
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

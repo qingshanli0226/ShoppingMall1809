@@ -14,7 +14,11 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -50,6 +54,8 @@ dependencies {
     implementation project(path: ':commened')
     implementation project(path: ':framework')
     implementation 'com.android.support:recyclerview-v7:30.0.0'//recyclerview
+    implementation ('com.alibaba:arouter-api:1.4.1') //ARouter依赖
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
     // 支付宝 SDK AAR 包所需的配置
     implementation  fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
 
