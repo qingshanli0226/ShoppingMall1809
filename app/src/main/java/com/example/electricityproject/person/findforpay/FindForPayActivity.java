@@ -1,10 +1,13 @@
 package com.example.electricityproject.person.findforpay;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.adapter.BaseAdapter;
 import com.example.common.bean.FindForPayBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
@@ -14,29 +17,48 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     private RecyclerView unpaidRe;
 
     @Override
-    public void getFindForPayData(FindForPayBean findForPayBean) {
-        if (findForPayBean.getCode().equals("200")){
-            findForPayAdapter.updateData(findForPayBean.getResult());
-
-        }
-    }
-
-    @Override
     protected void initData() {
+        httpPresenter = new FindForPayPresenter(this);
         httpPresenter.getForPayData();
+        findForPayAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(FindForPayActivity.this);
+                builder.setTitle("确认支付该订单");
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+
+            @Override
+            public void OnItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
     protected void initPresenter() {
-        httpPresenter = new FindForPayPresenter(this);
-        unpaidRe.setLayoutManager(new LinearLayoutManager(FindForPayActivity.this));
 
-        unpaidRe.setAdapter(findForPayAdapter);
+
     }
 
     @Override
     protected void initView() {
         unpaidRe = (RecyclerView) findViewById(R.id.unpaid_re);
+
+        findForPayAdapter=new FindForPayAdapter();
+        unpaidRe.setLayoutManager(new LinearLayoutManager(FindForPayActivity.this));
     }
 
     @Override
@@ -69,5 +91,15 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     @Override
     public void DisConnect() {
 
+    }
+
+    @Override
+    public void getFindForPayData(FindForPayBean findForPayBean) {
+        if (findForPayBean.getCode().equals("200")){
+
+            findForPayAdapter.updateData(findForPayBean.getResult());
+            unpaidRe.setAdapter(findForPayAdapter);
+
+        }
     }
 }

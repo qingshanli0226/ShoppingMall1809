@@ -1,6 +1,7 @@
 package com.example.electricityproject.person;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.person.dropshipment.DropShipmentActivity;
 import com.example.electricityproject.person.findforpay.FindForPayActivity;
 import com.example.framework.BaseFragment;
 import com.example.manager.BusinessARouter;
@@ -25,20 +27,12 @@ public class PersonFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
-            @Override
-            public void onLoginChange(LogBean isLog) {
-                if (isLog!=null){
-                    pleaseLogin.setText("" + isLog.getResult().getName());
-                }
-            }
-        });
-
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+
                 if (BusinessUserManager.getInstance().getIsLog() != null) {
-                    LogBean isLog = BusinessUserManager.getInstance().getIsLog();
                     pleaseLogin.setText(isLog.getResult().getName() + "");
                     Toast.makeText(getContext(), "当前" + isLog.getResult().getName() + "用户已经登陆", Toast.LENGTH_SHORT).show();
                 } else {
@@ -51,6 +45,7 @@ public class PersonFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+
                 if (isLog!=null){
                     Intent intent = new Intent(getContext(), FindForPayActivity.class);
                     startActivity(intent);
@@ -64,8 +59,9 @@ public class PersonFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+
                 if (isLog!=null){
-                    
+                    startActivity(new Intent(getActivity(), DropShipmentActivity.class));
                 }else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);
                 }
@@ -102,12 +98,14 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     public void showError(String error) {
-
+        Log.i("zx", "showError: "+error);
     }
 
     @Override
     public void onLoginChange(LogBean isLog) {
-        logBean = isLog;
+        if (isLog!=null){
+            pleaseLogin.setText("" + isLog.getResult().getName());
+        }
     }
 
 

@@ -47,6 +47,15 @@ public class FindForSendBean {
         this.result = result;
     }
 
+    @Override
+    public String toString() {
+        return "FindForSendBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     public static class ResultBean {
         private String subject;
         private String body;
@@ -101,6 +110,18 @@ public class FindForSendBean {
 
         public void setTradeNo(String tradeNo) {
             this.tradeNo = tradeNo;
+        }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "subject='" + subject + '\'' +
+                    ", body='" + body + '\'' +
+                    ", totalPrice='" + totalPrice + '\'' +
+                    ", time='" + time + '\'' +
+                    ", status=" + status +
+                    ", tradeNo='" + tradeNo + '\'' +
+                    '}';
         }
     }
 }

@@ -21,11 +21,10 @@ public class FindForPayAdapter extends BaseAdapter<FindForPayBean.ResultBean> {
         TextView year = baseViewHolder.getView(R.id.unpaid_year);
         TextView order = baseViewHolder.getView(R.id.unpaid_order);
         TextView price = baseViewHolder.getView(R.id.unpaid_price);
-        String Unpaidtime = itemData.getTime();
-        int time = Integer.parseInt(Unpaidtime);
 
+        long time = Long.parseLong(itemData.getTime());
         year.setText(contDown(time));
-        order.setText(itemData.getOrderInfo()+"");
+        order.setText(itemData.getTradeNo()+"");
         price.setText("￥"+itemData.getTotalPrice()+"");
     }
 
@@ -34,9 +33,10 @@ public class FindForPayAdapter extends BaseAdapter<FindForPayBean.ResultBean> {
     public int getRootViewType(int position) {
         return 0;
     }
-    public String contDown(int time){
+    public String contDown(long time){
         String str="yyyy-MM--dd HH:mm:ss";
-        String format = new SimpleDateFormat(str).format(new Date(time));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);
+        String format = simpleDateFormat.format(new Date(time));
         return format;
     }
 }

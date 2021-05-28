@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".person.dropshipment.DropShipmentActivity">
+    <com.example.view.ToolBar
+        android:gravity="center"
+        android:layout_width="match_parent"
+        app:leftIsShow="true"
+        app:leftImg="@drawable/back"
+        android:id="@+id/toolbar"
+        app:titleText="待发货订单"
+        app:titleTextColor="#000000"
+        android:layout_height="@dimen/dp_50"></com.example.view.ToolBar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="@dimen/weight_9.3"
+        android:id="@+id/drop_re"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
