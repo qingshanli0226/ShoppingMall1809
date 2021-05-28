@@ -103,11 +103,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/user_other_login"
-        android:gravity="center"
+        android:layout_height="11dp"
         android:layout_marginTop="@dimen/dm_dp_10"
-        ></TextView>
+        android:gravity="center"
+        android:text="@string/user_other_login"></TextView>
 
     <RelativeLayout
         android:layout_width="match_parent"

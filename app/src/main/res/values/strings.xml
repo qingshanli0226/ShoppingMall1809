@@ -33,7 +33,18 @@
     <string name="here">这里都是买的棒棒哒</string>
     <string name="more">查看更多</string>
     <!--fragment_type-->
-
     <string name="type_one">热卖推荐</string>
     <string name="type_two">推荐商品</string>
+
+
+    <!--  绑定联系方式  -->
+    <string name="bindinfo_toolbar">绑定联系方式</string>
+    <string name="bindinfo_numbertv">电话</string>
+    <string name="bindinfo_numberev">请输入电话</string>
+    <string name="bindinfo_affirm_number">确认绑定电话号</string>
+    <string name="bindinfo_locationtv">地址</string>
+    <string name="bindinfo_locationev">请输入地址</string>
+    <string name="bindinfo_affirm_location">确认绑定地址</string>
+    <string name="bindinfo_affirm">点击确认，表示同意《尚硅谷用户协议》</string>
+
 </resources>
