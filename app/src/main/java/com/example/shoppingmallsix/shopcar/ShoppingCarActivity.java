@@ -166,10 +166,16 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
             @Override
             public void onItemChildClick(int position, View view) {
+                GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
                 switch (view.getId()) {
                     case R.id.shoppingTrolley_CheckBox:
-                        GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
                         httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
+                        break;
+                    case R.id.shoppingTrolley_sub:
+                        httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) - 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, true);
+                        break;
+                    case R.id.shoppingTrolley_add:
+                        httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
                         break;
                 }
             }
@@ -245,17 +251,47 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onCheckInventory(CheckOneInventoryBean bean, int position) {
+        if (bean.getCode().equals("200")) {
+            Toast.makeText(ShoppingCarActivity.this, "检查库存有", Toast.LENGTH_SHORT).show();
 
+            GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
+            //修改
+            httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum())+1) + "", resultBean.getProductName(), resultBean.getUrl(), ""+price,position,false);
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        } else {
+            Toast.makeText(ShoppingCarActivity.this, "检查库存没有", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolean) {
-
+        if (updateProductNumBean.getCode().equals("200")){
+            //修改内存数据
+            if (mBoolean){
+                //减少
+                if ((Integer.parseInt(resultBeans.get(position).getProductNum())>1)){
+                    resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum())-1)+"");
+                }else {
+                    httpPresenter.removeOneProductBean(resultBeans.get(position),position);
+                }
+            }else {
+                //增加
+                resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum())+1)+"");
+            }
+            allPrice();
+            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        }
     }
 
     @Override
     public void onRemoveOneProductBean(RemoveOneProductBean removeOneProductBean, int position) {
-
+        if (removeOneProductBean.getCode().equals("200")){
+            //服务端删除后删除缓存
+            resultBeans.remove(position);
+        }
+        allPrice();
+        //通知缓存改变
+        SoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
 
     @Override

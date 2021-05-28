@@ -1,5 +1,7 @@
 package com.example.shoppingmallsix.fragment.classify.frgment.classitfy.adapter;
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,9 +13,9 @@ import com.example.shoppingmallsix.R;
 
 import java.util.List;
 
-public class ClassRightButtonAdapter<T> extends BaseRvAdapter<T> {
+public class ClassRightBottomAdapter<T> extends BaseRvAdapter<T> {
 
-    public ClassRightButtonAdapter(List<T> strings) {
+    public ClassRightBottomAdapter(List<T> strings) {
         setDataList(strings);
     }
 
