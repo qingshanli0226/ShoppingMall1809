@@ -26,8 +26,9 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
-
+//实现一个Glide加载框架，理解里面使用的技术
 public class ShopmallGlide {
+<<<<<<< HEAD
 
     //使用该数据结构在内存中缓存图片。该数据结构的特点：1，初始化时可以指定它占用内存最大值，当该数据结构存储的数据超过最大值时，该数据结构将会
     // 删除最早存储的图片，然后再存储新的图片。
@@ -38,6 +39,16 @@ public class ShopmallGlide {
 
     private static ShopmallGlide instance;//使用单例
 
+=======
+    //使用该数据结构在内存中缓存图片。该数据结构的特点：1，初始化时可以指定它占用内存最大值，当该数据结构存储的数据超过最大值时，该数据结构将会
+    // 删除最早存储的图片，然后再存储新的图片。
+    private LruCache<String, Bitmap> memCache;
+    //在磁盘中存储图片的数据结构，它的逻辑和LruCache类似
+    private DiskLruCache diskLruCache;
+    private File cacheFileDir;//磁盘存储图片时，diskLruCache使用的目录
+
+    private static ShopmallGlide instance;//使用单例
+>>>>>>> wqq0527
     //创建一个缓存线程池，来负责从磁盘中读取或者写入Bitmap，还有网络下载图片
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -46,7 +57,10 @@ public class ShopmallGlide {
     private boolean isInited;
     private ShopmallGlide(){
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> wqq0527
     //单例使用双判断，主要是防止使用锁带来的性能损耗
     public static ShopmallGlide getInstance() {
         if (instance==null) {
@@ -59,7 +73,11 @@ public class ShopmallGlide {
         return instance;
     }
     //加载框架只可以初始化一次
+<<<<<<< HEAD
     public boolean isInited() {
+=======
+    public  boolean isInited(){
+>>>>>>> wqq0527
         return isInited;
     }
 
@@ -75,8 +93,15 @@ public class ShopmallGlide {
             }
         };
         //在sd卡上应用程序空间里的shopmall目录里存储本地图片
+<<<<<<< HEAD
         cacheFileDir = new File(context.getExternalCacheDir().getAbsolutePath()+"/shopmall/");
         if (!cacheFileDir.exists()) {//如果该目录不存在，则创建它
+=======
+        cacheFileDir = new File(context.getExternalCacheDir().getAbsolutePath()+"/shopmal");
+
+        if (!cacheFileDir.exists()){
+
+>>>>>>> wqq0527
             cacheFileDir.mkdir();
         }
         try {
@@ -86,7 +111,12 @@ public class ShopmallGlide {
         }
         isInited = true;
     }
+<<<<<<< HEAD
 
+=======
+    //从内存缓存中读取Bitmap
+    public Bitmap getFromMen(String url){
+>>>>>>> wqq0527
 
     //从内存缓存中读取Bitmap
     public Bitmap getFromMem(String url) {
@@ -96,15 +126,27 @@ public class ShopmallGlide {
         }
     }
     //向内存中写入Bitmap
+<<<<<<< HEAD
     public void setBitmapToMem(String url,Bitmap bitmap) {
         synchronized (memCache) {
+=======
+    public void setBitmapToMem(String url,Bitmap bitmap){
+
+        synchronized (memCache){
+
+>>>>>>> wqq0527
             String key = generateCacheKey(url);
             memCache.put(key,bitmap);
         }
     }
+<<<<<<< HEAD
 
     //向磁盘中存储Bitmap
     public void setBitmapToDisk(String url, Bitmap bitmap) {
+=======
+    //向磁盘中存储Bitmap
+    public void setBitmapToDisk(String url,Bitmap bitmap){
+>>>>>>> wqq0527
         //凡是IO操作都必须放到子线程中,使用线程池
         executorService.execute(new Runnable() {
             @Override
@@ -160,6 +202,7 @@ public class ShopmallGlide {
         });
     }
 
+<<<<<<< HEAD
     //从服务端读取
 
     /***
@@ -168,6 +211,9 @@ public class ShopmallGlide {
      * @param listener
      * @param imageView 对下载的文件做好二次采样，避免占用太多内存而出现OOM问题
      */
+=======
+//对下载的文件做好二次采样，避免占用太多内存而出现OOM问题
+>>>>>>> wqq0527
     public void getBitmapFromServer(String url, IBitmapReceivedListener listener, ImageView imageView) {
         executorService.execute(new Runnable() {
             @Override
@@ -192,10 +238,15 @@ public class ShopmallGlide {
                                 }
                             });
                         } else {
+                            //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
                             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
                             //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
                             Bitmap sBitmap = sampleBitmap(imageView,originalBitmap);
+<<<<<<< HEAD
                             originalBitmap.recycle();//已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了
+=======
+                            originalBitmap.recycle();////已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了
+>>>>>>> wqq0527
                             originalBitmap=null;
                             setBitmapToDisk(url,sBitmap);//存到sd卡
                             setBitmapToMem(url,sBitmap);
@@ -214,7 +265,29 @@ public class ShopmallGlide {
                 }
             }
         });
+<<<<<<< HEAD
     }
+=======
+            }
+
+            public Bitmap sampleBitmap(ImageView imageView, Bitmap originalBitmap) {
+                int originalWidth = originalBitmap.getWidth();
+                int originalHeight = originalBitmap.getHeight();
+                int imageViewWidht = imageView.getMeasuredWidth();
+                int imageViewHeight = imageView.getMeasuredHeight();
+                //一次采样
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                //求出采样因子
+                int samleSize = 1;
+                while (originalWidth/samleSize > imageViewWidht && originalHeight/samleSize > imageViewHeight) {
+                        samleSize = samleSize+1;
+                    }
+
+                //进行二次采样
+                options.inJustDecodeBounds = false;
+                options.inSampleSize = samleSize;
+                options.inPreferredConfig = Bitmap.Config.RGB_565;
+>>>>>>> wqq0527
 
     //对bitmap二次采样
     public Bitmap sampleBitmap(ImageView imageView, Bitmap originalBitmap) {
@@ -238,6 +311,7 @@ public class ShopmallGlide {
         options.inSampleSize = samleSize;
         options.inPreferredConfig = Bitmap.Config.RGB_565;
 
+<<<<<<< HEAD
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         originalBitmap.compress(Bitmap.CompressFormat.JPEG, 100,baos);
         byte[] bytes = baos.toByteArray();
@@ -245,16 +319,28 @@ public class ShopmallGlide {
         return sampleBitmap;
     }
 
+=======
+    //因为读取Bitmap是异步方法，所以需要定义一个接口，通过该接口返回Bitmap
+            public interface IBitmapReceivedListener {
+                void onBitmap(String url, Bitmap bitmap);
+             }
+>>>>>>> wqq0527
 
     //因为读取Bitmap是异步方法，所以需要定义一个接口，通过该接口返回Bitmap
     public interface IBitmapReceivedListener {
         void onBitmap(String url, Bitmap bitmap);
     }
 
+<<<<<<< HEAD
 
     //通过图片的地址生成一个32位的Hash key作为内存缓存和本地缓存的key，这个是唯一的，地址不同，生成的key肯定不同，并且Hash key里面没有乱码
     public String generateCacheKey(String url) {
         byte[] hash;
+=======
+    //通过图片的地址生成一个32位的Hash key作为内存缓存和本地缓存的key，这个是唯一的，地址不同，生成的key肯定不同，并且Hash key里面没有乱码
+            public String generateCacheKey(String url) {
+                byte[] hash;
+>>>>>>> wqq0527
 
         try {
             hash = MessageDigest.getInstance("MD5").digest(
@@ -296,6 +382,7 @@ public class ShopmallGlide {
             return this;
         }
 
+<<<<<<< HEAD
         public void into(final ImageView imageView) {
             this.imageView = imageView;
             imageView.setTag(picUrl);//让imageView去和要下载的地址进行绑定.
@@ -311,6 +398,12 @@ public class ShopmallGlide {
             }
             //从内存中没有获取到Bitmap，下面从本地获取bitmap
             shopmallGlide.getBitmapFromDisk(picUrl, new ShopmallGlide.IBitmapReceivedListener() {
+=======
+                                return;
+                            }
+                    //从内存中没有获取到Bitmap，下面从本地获取bitmap
+               shopmallGlide.getBitmapFromDisk(picUrl, new IBitmapReceivedListener() {
+>>>>>>> wqq0527
                 @Override
                 public void onBitmap(String url,Bitmap bitmap) {
                     if (bitmap!=null) {
@@ -323,7 +416,11 @@ public class ShopmallGlide {
                         return;
                     }
                     //如果从本地没有获取到bitmap,只能从网络获取
+<<<<<<< HEAD
                     shopmallGlide.getBitmapFromServer(picUrl,  new ShopmallGlide.IBitmapReceivedListener() {
+=======
+                    shopmallGlide.getBitmapFromServer(picUrl,  new IBitmapReceivedListener() {
+>>>>>>> wqq0527
                         @Override
                         public void onBitmap(String url, Bitmap bitmap) {
                             if (bitmap!=null) {

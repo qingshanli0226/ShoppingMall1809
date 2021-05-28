@@ -9,7 +9,8 @@
 
     <com.example.framework.view.ToolBar
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/toolbar"
         app:leftImg="@drawable/back"
         app:leftIsShow="true"
@@ -19,4 +20,12 @@
         android:layout_height="1dp"
         android:background="#B8B5B5"
         ></View>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/rv"
+        android:layout_weight="9"
+        ></androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

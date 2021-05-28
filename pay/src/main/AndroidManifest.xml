@@ -21,7 +21,6 @@
         android:theme="@style/AppTheme" >
 
         <activity android:name=".order.GetOrderActivity"></activity>
-        <activity android:name=".demo.PayDemoActivity"></activity>
 
     </application>
 

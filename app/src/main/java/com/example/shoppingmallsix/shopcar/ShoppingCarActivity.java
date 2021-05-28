@@ -1,15 +1,12 @@
 package com.example.shoppingmallsix.shopcar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +24,7 @@ import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
-import com.example.pay.demo.PayDemoActivity;
+import com.example.pay.order.GetOrderActivity;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.shoppingcar.IShopping;
 import com.example.shoppingmallsix.fragment.shoppingcar.ShoppingCarAdapter;
@@ -85,7 +82,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         buycarBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShoppingCarActivity.this, PayDemoActivity.class);
+                Intent intent = new Intent(ShoppingCarActivity.this, GetOrderActivity.class);
                 startActivity(intent);
             }
         });
