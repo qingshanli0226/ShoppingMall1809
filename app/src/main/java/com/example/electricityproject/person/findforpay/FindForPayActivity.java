@@ -2,18 +2,22 @@ package com.example.electricityproject.person.findforpay;
 
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.common.bean.FindForPayBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 
 public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implements IFindForPayView {
-
+    private FindForPayAdapter findForPayAdapter;
+    private RecyclerView unpaidRe;
 
     @Override
     public void getFindForPayData(FindForPayBean findForPayBean) {
         if (findForPayBean.getCode().equals("200")){
-            loadingPage.showSuccessView();
-            Toast.makeText(this, "请求成功", Toast.LENGTH_SHORT).show();
+            findForPayAdapter.updateData(findForPayBean.getResult());
+
         }
     }
 
@@ -25,12 +29,14 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     @Override
     protected void initPresenter() {
         httpPresenter = new FindForPayPresenter(this);
+        unpaidRe.setLayoutManager(new LinearLayoutManager(FindForPayActivity.this));
 
+        unpaidRe.setAdapter(findForPayAdapter);
     }
 
     @Override
     protected void initView() {
-
+        unpaidRe = (RecyclerView) findViewById(R.id.unpaid_re);
     }
 
     @Override
