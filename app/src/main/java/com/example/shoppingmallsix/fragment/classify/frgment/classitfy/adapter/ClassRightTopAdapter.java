@@ -1,5 +1,6 @@
 package com.example.shoppingmallsix.fragment.classify.frgment.classitfy.adapter;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class ClassRightTopAdapter<T> extends BaseRvAdapter<T> {
         ClassBean.ResultBean.HotProductListBean hotProductListBean = (ClassBean.ResultBean.HotProductListBean) itemData;
         Glide.with(holder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + hotProductListBean.getFigure()).into(imageView);
         textView.setText("￥" + hotProductListBean.getCover_price());
+
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.shoppingmallsix.fragment.classify.frgment.classitfy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -15,6 +16,7 @@ import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.classify.ClassBean;
 
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.goods.GoodsActivity;
 
 import java.util.List;
 
@@ -56,11 +58,26 @@ public class ClassRightAdapter extends BaseRvAdapter<ClassBean.ResultBean> {
         ClassRightTopAdapter<ClassBean.ResultBean.HotProductListBean> hotProductListBeanClassRightTopAdapter = new ClassRightTopAdapter<>(hot_product_list);
         recyclerViewTop.setAdapter(hotProductListBeanClassRightTopAdapter);
         recyclerViewTop.setLayoutManager(linearLayoutManager);
+        hotProductListBeanClassRightTopAdapter.setiRecyclerItemClickListener(new IRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(holder.itemView.getContext(), GoodsActivity.class);
+                intent.putExtra("id", hot_product_list.get(position).getProduct_id());
+                intent.putExtra("name", hot_product_list.get(position).getName());
+                intent.putExtra("figure", hot_product_list.get(position).getFigure());
+                intent.putExtra("price", hot_product_list.get(position).getCover_price());
+                holder.itemView.getContext().startActivity(intent);
+            }
+
+            @Override
+            public void onItwmLongClick(int position) {
+
+            }
+        });
         //button
-        ClassRightButtonAdapter<ClassBean.ResultBean.ChildBean> childBeanClassRightButtonAdapter = new ClassRightButtonAdapter<>(child);
+        ClassRightBottomAdapter<ClassBean.ResultBean.ChildBean> childBeanClassRightButtonAdapter = new ClassRightBottomAdapter<>(child);
         recyclerViewButton.setAdapter(childBeanClassRightButtonAdapter);
         recyclerViewButton.setLayoutManager(new GridLayoutManager(context, 3));
-
 
     }
 

@@ -298,8 +298,6 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             } else {
 //                resultBeans.get(position).setProductName(resultBeans.get(position).getProductNum()-1);
             }
-
-
         }
     }
 

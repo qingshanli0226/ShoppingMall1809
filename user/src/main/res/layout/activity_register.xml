@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:id="@+id/toolbar"
-        app:titleText="@string/login"
+        app:titleText="注册"
         app:leftImg="@drawable/back"
         app:leftIsShow="true"
         android:background="@color/colorWhite"
