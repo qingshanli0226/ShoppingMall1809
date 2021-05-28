@@ -1,23 +1,24 @@
 package com.example.myapplication.findforpay;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 
-import android.os.Bundle;
-import android.util.Log;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRecyclerViewAdapter;
-import com.example.framework.manager.PaySendCacheManager;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implements IFindPayView {
+import java.util.Map;
 
+public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implements IFindPayView {
 
 
     private androidx.recyclerview.widget.RecyclerView rv;
@@ -29,34 +30,35 @@ public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implemen
     }
 
 
-
     @Override
     public void initView() {
         rv = findViewById(R.id.rv);
-        findPayAdapter=new FindPayAdapter();
+        findPayAdapter = new FindPayAdapter();
 
     }
 
     @Override
     public void initPresenter() {
-//        findPayAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onItemLongClick(int position) {
-//
-//            }
-//        });
+        findPayAdapter.setRecyclerItemClickListener(new BaseRecyclerViewAdapter.IRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(FindPayMainActivity.this, OrderActivity.class);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+
+            }
+        });
 
     }
 
     @Override
     public void initData() {
-         mPresenter=new FindpayPresenter(this);
-         mPresenter.onFindPay();
+        mPresenter = new FindpayPresenter(this);
+        mPresenter.getFindPay();
 
     }
 
@@ -93,4 +95,8 @@ public class FindPayMainActivity extends BaseActivity<FindpayPresenter> implemen
     public void onFindSend(FindForSendBean findForSendBean) {
 
     }
+
+
+
+
 }

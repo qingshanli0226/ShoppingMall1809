@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.log.LogUtil;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.BaseFragment;
@@ -43,6 +44,8 @@ public class HomeFragment extends BaseFragment {
         //获取缓存的首页值
         HomeBean homeBean = CaCheMannager.getInstance().getHomeBean();
         HomeBean.ResultBean result = homeBean.getResult();
+        LogUtil.d(result.toString());
+
 
         objectList.add(result.getBanner_info());
         objectList.add(result.getChannel_info());

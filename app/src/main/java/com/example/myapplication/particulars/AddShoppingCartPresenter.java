@@ -2,6 +2,7 @@ package com.example.myapplication.particulars;
 
 import android.util.Log;
 
+import com.example.common.log.LogUtil;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
@@ -70,7 +71,7 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (mView != null) {
-                            Log.d("购物车错误AddShoppingCartPresente", e.getMessage());
+                            LogUtil.e(e.getMessage());
                         }
                     }
 
@@ -111,7 +112,7 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (mView != null) {
-                            Log.d("购物车错误AddShoppingCartPresente", e.getMessage());
+                            LogUtil.e(e.getMessage());
                         }
                     }
 

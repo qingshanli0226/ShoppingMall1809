@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.common.log.LogUtil;
 import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.msg.MsgMainActivity;
 
@@ -30,7 +31,7 @@ public class AppModule implements CaCheArote.IAppInterface {
     }
 
     public void onEvent(String event) {
-        Log.d("AppModule", event);
+        LogUtil.d( event);
     }
 
 }

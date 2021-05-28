@@ -2,7 +2,7 @@
     <string name="app_name">某某商城</string>
     <string name="welcomeCoundDownTv">秒</string>
     <string name="welcomeCoundDownNum">2</string>
-<!--    首页-->
+    <!--    首页-->
     <string name="homeSerchEdHint">请输入搜索信息</string>
     <string name="homeMessageTetview">消息</string>
     <string name="homeTitle">查看更多</string>
@@ -10,7 +10,7 @@
     <string name="homeNewShopping">新品推荐</string>
     <string name="homePayGood">这里都是买的棒棒哒</string>
 
-<!--    Main页面-->
+    <!--    Main页面-->
     <string name="mainFragmentTitle1">首页</string>
     <string name="mainFragmentTitle2">分类</string>
     <string name="mainFragmentTitle3">发现</string>
@@ -20,7 +20,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-<!--    详情-->
+    <!--    详情-->
     <string name="hint">提示：普通商品享有质量问题7天退货，签收后3个工作日内可换货。其他特殊商品（如手办）的售后以页面说明为准</string>
     <string name="present">预售截止10月15日，预售期为限量礼盒版，包括特质木盒X1、画集X1、邮票X1套、书签X1、贴纸X1、信封X1、</string>
     <string name="commodity1">由</string>
@@ -34,7 +34,7 @@
     <string name="addShoppingCart">加入购物车</string>
     <string name="particularsActivity">详情页面</string>
     <string name="priceFlag">￥</string>
-<!--    详情的pop-->
+    <!--    详情的pop-->
     <string name="popType">样式</string>
     <string name="popSizeM">M</string>
     <string name="popSizeL">L</string>
@@ -70,7 +70,7 @@
 
     <string name="title_msg">消息</string>
 
-<!--    分类页面-->
+    <!--    分类页面-->
     <string name="typeLabel">   标签</string>
     <string name="typeLabel1">  |</string>
     <string name="typeType">分类     </string>

@@ -4,6 +4,7 @@ import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.net.bean.SkirtBean;
@@ -71,4 +72,10 @@ public interface Api {
     @POST("updataAddress")
     @FormUrlEncoded
     Observable<UpdateAddress> getupdataAddress(@Field("address")String address);
+
+    //向服务端下订单
+        @POST("getOrderInfo")
+    @FormUrlEncoded
+    Observable<OrderinfoBean> getOrderInfo(@Field("subject")String subject,@Field("totalPrice")String totalprice,@Body RequestBody body);
+
 }

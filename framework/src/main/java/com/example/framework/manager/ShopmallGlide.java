@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.R;
 import com.example.net.RetrofitManager;
 import com.jakewharton.disklrucache.DiskLruCache;
@@ -285,7 +286,7 @@ public class ShopmallGlide  {
             bitmap = shopmallGlide.getFromMem(picUrl);
             if (bitmap!=null) {
                 imageView.setImageBitmap(bitmap);
-                Log.d("LQS", "内存中命中 效率最高。。。。");
+                LogUtils.d("内存中命中 效率最高");
                 return;
             }
             //从内存中没有获取到Bitmap，下面从本地获取bitmap
@@ -293,11 +294,11 @@ public class ShopmallGlide  {
                 @Override
                 public void onBitmap(String url,Bitmap bitmap) {
                     if (bitmap!=null) {
-                        Log.d("LQS", "本地中命中 效率中间。。。。");
+                        LogUtils.d( "本地中命中 效率中间。。。。");
                         if (imageView.getTag().equals(picUrl)) {//只有和imageVIew绑定的图片才能显示出来
                             imageView.setImageBitmap(bitmap);
                         } else {
-                            Log.d("LQS", "因为没有绑定，不显示。。。。");
+                            LogUtils.d( "因为没有绑定，不显示。。。。");
                         }
                         return;
                     }

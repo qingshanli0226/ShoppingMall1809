@@ -2,6 +2,7 @@ package com.example.myapplication.personalCenter;
 
 import android.util.Log;
 
+import com.example.common.log.LogUtil;
 import com.example.framework.manager.PaySendCacheManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.FindForPayBean;
@@ -51,7 +52,7 @@ public class PersonalPresenter extends BasePresenter<IPersonalView> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (mView!=null){
-                            Log.d("获取待支付订单错误PersonalPresenter", e.getMessage());
+                            LogUtil.e(e.getMessage());
                         }
 
                     }
@@ -93,7 +94,7 @@ public class PersonalPresenter extends BasePresenter<IPersonalView> {
                     public void onNext(@NonNull FindForPayBean findForPayBean) {
                         if (mView!=null){
                             PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
-                            Log.d("FindpayPresenter", findForPayBean.toString());
+                            LogUtil.d(findForPayBean.toString());
                            mView.ondend(findForPayBean);
                         }
                     }
