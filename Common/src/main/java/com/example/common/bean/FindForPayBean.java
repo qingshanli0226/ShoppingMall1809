@@ -48,6 +48,15 @@ public class FindForPayBean {
         this.result = result;
     }
 
+    @Override
+    public String toString() {
+        return "FindForPayBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     public static class ResultBean {
         private String subject;
         private String body;
@@ -111,6 +120,19 @@ public class FindForPayBean {
 
         public void setOrderInfo(Object orderInfo) {
             this.orderInfo = orderInfo;
+        }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "subject='" + subject + '\'' +
+                    ", body='" + body + '\'' +
+                    ", totalPrice='" + totalPrice + '\'' +
+                    ", time='" + time + '\'' +
+                    ", status=" + status +
+                    ", tradeNo='" + tradeNo + '\'' +
+                    ", orderInfo=" + orderInfo +
+                    '}';
         }
     }
 }

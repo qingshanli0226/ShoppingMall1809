@@ -37,9 +37,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
 
         if (BusinessNetManager.getInstance().getNetConnect()){
-            Toast.makeText(getContext(), "已连接", Toast.LENGTH_SHORT).show();
+
         }else {
-            Toast.makeText(getContext(), "已断开", Toast.LENGTH_SHORT).show();
+
         }
     }
 

@@ -6,6 +6,7 @@ import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.ClassifyBean;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.GoodsBean;
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.KindAccessoryBean;
@@ -186,6 +187,9 @@ public interface BusinessApi {
     @GET("findForPay")
     Observable<FindForPayBean> getFindForPayData();
 
+    //查找待发货的订单
+    @GET("findForSend")
+    Observable<FindForSendBean> getFindSendData();
     //从服务端购物车删除一多产品的接口
     @POST("removeManyProduct")
     Observable<RemoveManyProductBean> setRemoveManyProduct(@Body RequestBody requestBody);

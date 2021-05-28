@@ -1,7 +1,6 @@
-package com.example.electricityproject.person.findforpay;
+package com.example.electricityproject.person.dropshipment;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.FindForSendBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
 
@@ -13,25 +12,21 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public
-class FindForPayPresenter extends BasePresenter<IFindForPayView> {
-
-    public FindForPayPresenter(IFindForPayView iPersonView) {
-        attachView(iPersonView);
+public class DropShipmentPresenter extends BasePresenter<IDropShipmentView> {
+    public DropShipmentPresenter(IDropShipmentView dropShipmentView ) {
+        attachView(dropShipmentView);
     }
-
-    public void getForPayData(){
-
+    public void getDropShipment(){
         RetrofitCreate.getFiannceApiService()
-                .getFindForPayData()
-                .observeOn(AndroidSchedulers.mainThread())
+                .getFindSendData()
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         if (IView!=null){
-                            IView.showLoading();
                             add(disposable);
+                            IView.showLoading();
                         }
                     }
                 })
@@ -43,17 +38,16 @@ class FindForPayPresenter extends BasePresenter<IFindForPayView> {
                         }
                     }
                 })
-                .subscribe(new Observer<FindForPayBean>() {
+                .subscribe(new Observer<FindForSendBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull FindForPayBean findForPayBean) {
+                    public void onNext(@NonNull FindForSendBean findForSendBean) {
                         if (IView!=null){
-                            IView.getFindForPayData(findForPayBean);
-                            LogUtils.json(findForPayBean);
+                            IView.onDropShipmentBean(findForSendBean);
                         }
                     }
 
@@ -70,6 +64,7 @@ class FindForPayPresenter extends BasePresenter<IFindForPayView> {
                     }
                 });
 
-    }
 
+
+    }
 }
