@@ -5,13 +5,18 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 
 import com.example.net.bean.Orbean;
+<<<<<<< HEAD
 
 import com.example.net.bean.business.CheckOneInventoryBean;
 
+=======
+import com.example.net.bean.business.CheckOneInventoryBean;
+>>>>>>> 0527ss
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
+import com.example.net.bean.business.RemoveOneProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 
 import com.example.net.bean.business.UpdateProductNumBean;
@@ -41,7 +46,11 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
         attachView(iShopping);
     }
 
+<<<<<<< HEAD
     public void getConfiemserverpayresult(String outTradeNo, String result, boolean clientPayResult) {
+=======
+    public void getConfiemserverpayresult(String outTradeNo,String result,boolean clientPayResult){
+>>>>>>> 0527ss
 
 
         JSONObject jsonObject = new JSONObject();
@@ -162,9 +171,13 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                 });
     }
 
+<<<<<<< HEAD
 
     public void getSelectAllProduct(boolean mBoolean, boolean mBooleans) {
 
+=======
+    public void getSelectAllProduct(boolean mBoolean,boolean mBooleans){
+>>>>>>> 0527ss
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("selected", mBoolean);
@@ -304,6 +317,55 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (iView != null) {
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void removeOneProductBean(GetShortcartProductsBean.ResultBean resultBeans,int position){
+        String s = new Gson().toJson(resultBeans);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
+        RetrofitCreator.getFiannceApiService()
+                .removeOneProductBean(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        if (iView!=null){
+                            iView.showLoading();
+                        }
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (iView!=null){
+                            iView.hideLoading();
+                        }
+                    }
+                })
+                .subscribe(new Observer<RemoveOneProductBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull RemoveOneProductBean removeOneProductBean) {
+                        if (iView!=null){
+                            iView.onRemoveOneProductBean(removeOneProductBean,position);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (iView!=null){
                             iView.showToast(e.getMessage());
                         }
                     }

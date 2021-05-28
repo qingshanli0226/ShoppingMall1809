@@ -112,11 +112,18 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
     public void onClassData(ClassBean classBean, boolean mBoolean, String url) {
         objectList.clear();
         loadingPage.showSuccessView();
+<<<<<<< HEAD
         if (mBoolean) {
             for (int i = 0; i < strings.length; i++) {
 
                 if (url.equals(strings[i])) {
                     if (url == strings[0]) {
+=======
+        if (mBoolean){
+            for (int i = 0; i <strings.length ; i++) {
+                if (url.equals(strings[i])){
+                    if (url == strings[0]){
+>>>>>>> 0527ss
                         list.get(i).setaBoolean(true);
                     } else {
                         list.get(i).setaBoolean(false);

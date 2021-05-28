@@ -9,6 +9,7 @@ import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
+import com.example.net.bean.business.RemoveOneProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
@@ -105,6 +106,10 @@ public interface FiannceApiService {
     //从服务端购物车删除多个产品的接口
     @POST(Constants.BUSINESS_REMOVEMANYPRODUCT)
     Observable<RemoveManyProductBean> removeManyProduct(@Body RequestBody body);
+
+   //从服务端购物车删除多个产品的接口
+    @POST(Constants.BUSINESS_REMOVEONEPRODUCT)
+    Observable<RemoveOneProductBean> removeOneProductBean(@Body RequestBody body);
 
     //更新服务端购物车产品的数量的接口
     @POST(Constants.BUSINESS_UPDATEPRODUCTNUM)

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 package com.example.net.bean;
 
+=======
+
+package com.example.net.bean;
+>>>>>>> 0527ss
 
 import java.util.List;
 
