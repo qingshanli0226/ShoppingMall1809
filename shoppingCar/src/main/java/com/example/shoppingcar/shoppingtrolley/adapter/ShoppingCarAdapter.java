@@ -15,6 +15,7 @@ import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.ResultBean> {
@@ -44,7 +45,9 @@ public class ShoppingCarAdapter extends BaseRVAdapter<ShoppingTrolleyBean.Result
                 .into(imageView);
         textView.setText(itemData.getProductName());
         float priceNum=Float.parseFloat(itemData.getProductPrice()+"")*Integer.parseInt(itemData.getProductNum());
-        price.setText("￥"+priceNum);
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        Float aFloat = Float.valueOf(decimalFormat.format(priceNum));
+        price.setText("￥"+aFloat);
         num.setText(itemData.getProductNum());
 
         CheckBox checkBox = holder.getView(R.id.shoppingTrolley_check);

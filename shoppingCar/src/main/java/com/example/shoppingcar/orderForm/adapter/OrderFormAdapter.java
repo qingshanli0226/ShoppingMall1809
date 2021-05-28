@@ -10,6 +10,7 @@ import com.example.framework.view.ShopmallGlide;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderFormAdapter extends BaseRVAdapter<ShoppingTrolleyBean.ResultBean> {
@@ -37,8 +38,10 @@ public class OrderFormAdapter extends BaseRVAdapter<ShoppingTrolleyBean.ResultBe
                 .into(imageView);
         textView.setText(itemData.getProductName());
         float priceNum=Float.parseFloat(itemData.getProductPrice()+"")*Integer.parseInt(itemData.getProductNum());
-        price.setText("￥"+priceNum);
-        num.setText("数量"+itemData.getProductNum());
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        Float aFloat = Float.valueOf(decimalFormat.format(priceNum));
+        price.setText("￥"+aFloat);
+        num.setText(holder.itemView.getContext().getResources().getString(R.string.count)+itemData.getProductNum());
 
     }
 

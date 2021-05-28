@@ -137,19 +137,13 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     }
 
     //删除一部分
-    public synchronized void deletePartResult(boolean isIrder, List<ShoppingTrolleyBean.ResultBean> delete) {
+    public synchronized void deletePartResult() {
         for (int i = result.size() - 1; i >= 0; i--) {
-            for (int j = delete.size() - 1; j >= 0; j--) {
-                if (result.get(i).getProductId().equals(delete.get(j).getProductId())) {
-                    delete.remove(j);
-                    result.remove(i);
-                }
+            if (result.get(i).isProductSelected()){
+                result.remove(i);
             }
         }
         refreshData();
-        if (isIrder) {
-            iFindForBean.onFindForBean();
-        }
     }
 
     //单例
@@ -231,7 +225,19 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     }
 
 
-    private ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean;
+    private ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean =new ArrayList<>();
+
+
+    public ArrayList<ShoppingTrolleyBean.ResultBean> addDeleteBean() {
+        deleteBean.clear();
+        for (ShoppingTrolleyBean.ResultBean resultBean : result) {
+            if (resultBean.isProductSelected()) {
+                deleteBean.add(resultBean);
+            }
+        }
+        return deleteBean;
+    }
+
 
     public ArrayList<ShoppingTrolleyBean.ResultBean> getDeleteBean() {
         return deleteBean;

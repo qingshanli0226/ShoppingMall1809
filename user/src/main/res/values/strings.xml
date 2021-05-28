@@ -25,10 +25,10 @@
     <string name="OtherLoginMethods">其它登录方式</string>
     <string name="please">请再次输入密码</string>
     <string name="address">新建收货地址</string>
-    <string name="consignee">收货人</string>
-    <string name="phone">电话</string>
-    <string name="postcode">邮编</string>
-    <string name="detailedAddress">详细地址</string>
+    <string name="consignee">收货人：</string>
+    <string name="phone">电话：</string>
+    <string name="postcode">邮编：</string>
+    <string name="detailedAddress">详细地址：</string>
     <string name="use1">保存并使用</string>
 
     <!-- TODO: Remove or change this placeholder text -->
