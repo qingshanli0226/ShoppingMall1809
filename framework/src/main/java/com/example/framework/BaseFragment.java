@@ -19,7 +19,7 @@ import java.util.List;
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange,CaCheMannager.IShoppingCartInterface {
+public  abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange,CaCheMannager.IShoppingCartInterface {
     protected P mPresenter;
     protected View rootView;
     protected LoadingPage loadingPage;
@@ -95,18 +95,14 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     }
 
+
     @Override
-    public void onShoppingCartAdd() {
+    public void onShoppingCartRemove(int position) {
 
     }
 
     @Override
-    public void onShoppingCartSub() {
-
-    }
-
-    @Override
-    public void onShoppingCartUpdata() {
+    public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
 
     }
 }

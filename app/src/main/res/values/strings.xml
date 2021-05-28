@@ -86,4 +86,11 @@
     <string name="myShoppingCartDelete">删除</string>
     <string name="myShoppingCartCollet">收藏</string>
     <string name="myShoppingCartFinish">完成</string>
+
+    <string name="myShoppingCartSelectShopping">请选择商品</string>
+    <string name="myShoppingCartUpdataAllError">全选失败</string>
+    <string name="myShoppingCartUpdataError">选择商品失败</string>
+    <string name="myShoppingCartUnderstock">库存不足</string>
+    <string name="myShoppingCartRemoveError">删除失败</string>
+    <string name="myShoppingCartUpdataNumError">更改数量错误</string>
 </resources>

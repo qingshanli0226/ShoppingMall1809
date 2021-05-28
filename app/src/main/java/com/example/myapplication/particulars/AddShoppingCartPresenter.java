@@ -3,7 +3,7 @@ package com.example.myapplication.particulars;
 import android.util.Log;
 
 import com.example.framework.manager.CaCheMannager;
-import com.example.net.RetrofitManager;
+import com.example.net.retrogit.RetrofitManager;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.AddShoppingCartBean;
 import com.example.net.bean.ShoppingCartBean;

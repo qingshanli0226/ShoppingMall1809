@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CaCheLoginUserMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.SpUtil;
 import com.example.net.bean.LoginBean;
@@ -70,6 +71,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
             Toast.makeText(getActivity(), getString(R.string.loginYes), Toast.LENGTH_SHORT).show();
             CacheUserManager.getInstance().setLoginBean(true);//修改登录状态
             EventBus.getDefault().post("2");
+            CaCheLoginUserMannager.getInstance().setBean(loginBean);//存储登陆用户信息
         }else {
             Toast.makeText(getActivity(), loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -84,4 +86,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
         mPresenter = new LoginPresenter(this);
     }
 
+    @Override
+    public void onShoppingCartRemove(int position) {
+
+    }
 }

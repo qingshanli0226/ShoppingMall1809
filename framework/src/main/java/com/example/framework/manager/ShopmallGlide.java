@@ -9,7 +9,7 @@ import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.example.framework.R;
-import com.example.net.RetrofitManager;
+import com.example.net.retrogit.RetrofitManager;
 import com.jakewharton.disklrucache.DiskLruCache;
 
 import java.io.ByteArrayOutputStream;
@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;

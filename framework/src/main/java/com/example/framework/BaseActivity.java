@@ -16,7 +16,7 @@ import java.util.List;
 import mvp.presenter.BasePresenter;
 import mvp.view.IActivity;
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity, CacheUserManager.IloginChange , CaCheMannager.IShoppingCartInterface {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity, CacheUserManager.IloginChange  {
     protected P mPresenter;
     protected LoadingPage loadingPage;
 
@@ -30,7 +30,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             }
         };
         setContentView(loadingPage);
-        CaCheMannager.getInstance().registerIShoppingCart(this);//购物车注册接口
+//        CaCheMannager.getInstance().registerIShoppingCart(this);//购物车注册接口
         initView();
         initPresenter();
         initData();
@@ -65,7 +65,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         super.onDestroy();
         destroy();
         CacheUserManager.getInstance().unregisterLogin(this);
-//        CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
     public void destroy() {
@@ -74,24 +73,4 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
     }
 
-
-    @Override
-    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
-
-    }
-
-    @Override
-    public void onShoppingCartAdd() {
-
-    }
-
-    @Override
-    public void onShoppingCartSub() {
-
-    }
-
-    @Override
-    public void onShoppingCartUpdata() {
-
-    }
 }
