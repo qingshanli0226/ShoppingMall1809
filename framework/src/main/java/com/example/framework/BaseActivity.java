@@ -30,8 +30,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         toolBar = findViewById(R.id.toolbar);
         initPresenter();
         initData();
-
-
         toolBar.setToolbarListener(this);
         BusinessNetManager.getInstance().RegisterConnect(this);
     }

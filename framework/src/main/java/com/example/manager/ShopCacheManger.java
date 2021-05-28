@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.SelectOrderBean;
@@ -34,6 +35,10 @@ public class ShopCacheManger {
 
     private List<SelectOrderBean> list = new ArrayList<>();
 
+    private List<FindForPayBean.ResultBean> paySussList = new ArrayList<>();
+
+    private List<FindForPayBean.ResultBean> payFailList = new ArrayList<>();
+
 
     public synchronized static ShopCacheManger getInstance() {
         if (cacheManger==null){
@@ -41,8 +46,6 @@ public class ShopCacheManger {
         }
         return cacheManger;
     }
-
-
 
 
     public void RegisterSelectShop(iSelectShop iSelectShop){
@@ -223,6 +226,21 @@ public class ShopCacheManger {
                 });
     }
 
+    public List<FindForPayBean.ResultBean> getPayFailList() {
+        return payFailList;
+    }
+
+    public void setPayFailList(List<FindForPayBean.ResultBean> payFailList) {
+        this.payFailList = payFailList;
+    }
+
+    public List<FindForPayBean.ResultBean> getPaySussList() {
+        return paySussList;
+    }
+
+    public void setPaySussList(List<FindForPayBean.ResultBean> paySussList) {
+        this.paySussList = paySussList;
+    }
 
     public String getProductNum() {
         return productNum;

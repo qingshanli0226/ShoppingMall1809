@@ -52,5 +52,6 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0'
 
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
 
 }

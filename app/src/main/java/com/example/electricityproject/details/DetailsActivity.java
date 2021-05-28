@@ -87,6 +87,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
         if (img!=null){
             detailsWeb.loadUrl(Constants.BASE_URl_IMAGE+img);
+            //在webView加载数据
             detailsWeb.setWebViewClient(new WebViewClient(){
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -178,9 +179,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
                     popupWindow.setContentView(inflate);
                     popupWindow.showAsDropDown(detailsWeb,0,500 );
+
                 }else {
+
                     Toast.makeText(DetailsActivity.this, "当前用户未登录", Toast.LENGTH_SHORT).show();
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(DetailsActivity.this,null);
+
                 }
 
             }
@@ -189,9 +193,11 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         buyCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Bundle bundle = new Bundle();
                 bundle.putString("notify","go_buyCar");
                 BusinessARouter.getInstance().getAppManager().OpenMainActivity(DetailsActivity.this,bundle);
+
             }
         });
     }
@@ -240,7 +246,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         if (addOneProductBean.getCode().equals("200")){
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
-            Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+
             ShopCacheManger.getInstance().requestShortProductData();
             ShopCacheManger.getInstance().requestShortProductData();
             ShopCacheManger.getInstance().requestShortProductData();
@@ -265,7 +271,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         ImageView imageView = new ImageView(this);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
         imageView.setLayoutParams(params);
-//        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
         Glide.with(DetailsActivity.this).load(url).into(imageView);
         relitive.addView(imageView);
 

@@ -73,8 +73,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private String isOneCheckStr="";
 
     private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
-    private List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
     private List<ShortcartProductBean.ResultBean> notEnoughList=new ArrayList<>();
+    private List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
 
     private List<RequestOrderInfo.BodyBean> bodyBeanList = new ArrayList<>();
     @Override
@@ -216,15 +216,15 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         goZfb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
-                    float price = 0;
-                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
-                    requestOrderInfo.setSubject("buy");
-                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
+//                    float price = 0;
+//                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
+//                    requestOrderInfo.setSubject("buy");
+//                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+//                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
 
 
-                    selectList = ShopCacheManger.getInstance().getSelectList();
                     if (selectList.size() > 0){
                         List<OrderBean> orderBeanList = new ArrayList<>();
                         for (ShortcartProductBean.ResultBean resultBean : selectList) {
@@ -268,7 +268,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             Toast.makeText(getContext(), "大于1", Toast.LENGTH_SHORT).show();
             httpPresenter.getRemoveManyShopBean(removeAllShopBean);
         }
-
     }
     //删除一个
     @Override
@@ -298,10 +297,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         if(orderInfoBean.getCode().equals("200")){
             loadingPage.showSuccessView();
 
-            LogUtils.i(""+orderInfoBean.getResult().getOrderInfo());
-            LogUtils.i(""+orderInfoBean.getResult().getOutTradeNo());
+            String outTradeNo = orderInfoBean.getResult().getOutTradeNo();
+            String orderInfo = orderInfoBean.getResult().getOrderInfo();
 
-            List<SelectOrderBean> list = ShopCacheManger.getInstance().getList();
+            List<SelectOrderBean> list = new ArrayList<>();
             for (ShortcartProductBean.ResultBean resultBean : selectList) {
                 SelectOrderBean selectOrderBean = new SelectOrderBean(resultBean.getUrl(), resultBean.getProductName(), resultBean.getProductPrice(), resultBean.getProductNum());
                 list.add(selectOrderBean);
@@ -313,17 +312,18 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("username",result1.getName());
             intent.putExtra("address", (String) result1.getAddress());
             intent.putExtra("phone", (String) result1.getPhone());
-            intent.putExtra("orderInfo", orderInfoBean.getResult().getOrderInfo());
-            intent.putExtra("outTradeNo", orderInfoBean.getResult().getOutTradeNo());
-            if (list!=null){
+            intent.putExtra("outTradeNo", outTradeNo);
+            intent.putExtra("orderInfo", orderInfo);
+            if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
+//                deleteShopmall();
             }
 
         }else {
             Toast.makeText(getContext(), ""+orderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
+    //检查多个库存
     @Override
     public void checkInventory(CheckInventoryBean checkInventoryBean) {
         if(checkInventoryBean.getCode().equals("200")){
@@ -339,9 +339,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 }
             }
             if(isEnough){
-
+                //获取订单信息
                 httpPresenter.getOrderInfo(selectList);
-
             }else {
                 String notEnough="";
                 for (ShortcartProductBean.ResultBean resultBean : notEnoughList) {
@@ -379,7 +378,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
         if (shortcartProductBean!=null){
             result = shortcartProductBean.getResult();
-
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
@@ -519,7 +517,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             for (ShortcartProductBean.ResultBean bean : result) {
                                 bean.setAll(false);
                             }
-
                             count();
 
                         }
@@ -568,6 +565,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        BusinessUserManager.getInstance().UnRegister(this::onLoginChange);
+        BusinessBuyCarManger.getInstance().UnRegister(this::getShortProductData);
     }
 }
