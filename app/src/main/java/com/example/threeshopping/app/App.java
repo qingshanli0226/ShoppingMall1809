@@ -32,6 +32,7 @@ public class App extends Application {
         CacheShopManager.getInstance().init();
 
         ShopCrashHandler.getInstance().init(this);
+
 //        ShopmallCrashHandler.getInstance().init(this);
  }
 }

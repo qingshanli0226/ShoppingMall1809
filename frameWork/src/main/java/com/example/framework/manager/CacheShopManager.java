@@ -12,6 +12,7 @@ import com.example.net.BuildConfig;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.PayBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
 import com.google.gson.Gson;
@@ -203,6 +204,14 @@ public class CacheShopManager {
         LogUtil.d("removeManyaaa");
     }
 
+    public void removeMany() {
+        for (int i = carts.size()-1; i >= 0; i--) {
+            CartBean.ResultBean bean = carts.get(i);
+            if(bean.isProductSelected()){
+                carts.remove(i);
+            }
+        }
+    }
 
     public interface ICartChange {
         void onShowCart(List<CartBean.ResultBean> carts);

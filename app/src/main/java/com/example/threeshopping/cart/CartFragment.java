@@ -1,5 +1,6 @@
 package com.example.threeshopping.cart;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -13,18 +14,23 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.Constants;
 import com.example.common.LogUtil;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.OrderBean;
+import com.example.net.bean.PayBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +51,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     private Button payment;
     private CartAdapter cartAdapter;
     private boolean isAll = false;
-    private ImageView itemImageView;
+    private PayBean payBean;
 
     @Override
     protected int getLayoutId() {
@@ -117,7 +123,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                         result.setProductId(resultBean.getProductId());
                         result.setProductNum(resultBean.getProductNum());
                         result.setProductPrice(resultBean.getProductPrice());
-                        itemImageView = (ImageView) view;
+                        ImageView itemImageView = (ImageView) view;
                         if (resultBean.isProductSelected()) {
                             result.setProductSelected(false);
                         } else {
@@ -201,37 +207,43 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
         //判断是否全选
         isCheck();
+        //更改价格
+        priceCount();
 
         //点击支付
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //判断是否选中
-                ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
+                payBean = new PayBean();
+                payBean.setBody(new ArrayList<>());
+                payBean.setSubject("购买");
+                List<PayBean.BodyBean> body = payBean.getBody();
+
+                payBean.setTotalPrice(paymentprice.getText().toString());
                 for (int i = 0; i < cartAdapter.getData().size(); i++) {
                     if (cartAdapter.getData().get(i).isProductSelected()) {
-                        resultBeans.add(cartAdapter.getData().get(i));
+                        body.add(new PayBean.BodyBean(cartAdapter.getData().get(i).getProductName(),
+                                cartAdapter.getData().get(i).getProductId(),
+                                cartAdapter.getData().get(i).getProductNum(),
+                                cartAdapter.getData().get(i).getUrl(),
+                                cartAdapter.getData().get(i).getProductPrice()+""));
                     }
                 }
                 LoginBean.ResultBean result = UserManager.getInstance().getLoginBean().getResult();
 
-                if (resultBeans.size() == 1) {
+                if (body.size() >= 1) {
                     //选中一个
                     //判断是否绑定信息
                     if(result.getPhone() != null && result.getAddress() !=null ){
 
-                    } else{
-
-                    }
-                } else if (resultBeans.size() > 1) {
-                    //选中多个
-                    //判断是否绑定信息
-                    if(result.getPhone() != null && result.getAddress() !=null ){
+                        mPresenter.getOrder(payBean);
 
                     } else{
-
+                        getActivity().finish();
+                        //跳转绑定页面
+                        CommonArouter.getInstance().build(Constants.PATH_BIND).navigation();
                     }
-
                 } else {
                     Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
                 }
@@ -291,7 +303,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 count++;
             }
         }
-        if (count == cartAdapter.getData().size()) {
+        if (count == cartAdapter.getData().size() && count != 0) {
             checkpayment.setChecked(true);
             isAll = true;
         } else {
@@ -349,6 +361,15 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             }
         }
         cartAdapter.notifyDataSetChanged();
+    }
+    //支付
+    @Override
+    public void onOrder(OrderBean orderBean) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("data", (Serializable) payBean);
+        CommonArouter.getInstance().build(Constants.PATH_ORDERINFOACTIVITY).with(bundle).navigation();
+        getActivity().finish();
+
     }
 
     //添加数据

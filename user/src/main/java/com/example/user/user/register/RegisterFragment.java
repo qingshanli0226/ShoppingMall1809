@@ -31,7 +31,6 @@ import org.greenrobot.eventbus.EventBus;
 public class RegisterFragment extends BaseFragment<UserPresenter> implements ToolBar.OnClickListener, IUserView {
 
 
-    private ToolBar toolbar;
     private EditText registerUsername;
     private EditText registerPassword;
     private CheckBox passwordInvisible;
@@ -47,14 +46,12 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
     @Override
     protected void initView() {
 
-        toolbar = (ToolBar) findViewById(R.id.toolbar);
         registerUsername = (EditText) findViewById(R.id.register_username);
         registerPassword = (EditText) findViewById(R.id.register_password);
         passwordInvisible = (CheckBox) findViewById(R.id.password_invisible);
         registerPasswordAgain = (EditText) findViewById(R.id.register_password_again);
         passwordInvisibleAgain = (CheckBox) findViewById(R.id.password_invisible_again);
         register = (Button) findViewById(R.id.register);
-        toolbar.setToolbarOnClickLisenter(this);
     }
 
     @Override

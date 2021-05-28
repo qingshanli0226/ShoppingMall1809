@@ -82,13 +82,17 @@ public class Constants {
     public static final String PATH_MAIN = "/app/MainActivity";
     //详情
     public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
+
+    //绑定页面
+    public static final String PATH_BIND = "/app/BindInfoActivity";
     //信息
     public static final String PATH_MESSAGE = "/pay/MessageActivity";
     //待付款
     public static final String PATH_PAYMENT = "/pay/PaymentActivity";
     //待发货
     public static final String PATH_SHIPMENTS= "/pay/ShipmentsActivity";
-
+    //订单详细页面
+    public static final String PATH_ORDERINFOACTIVITY= "/pay/OrderInfoActivity";
     //用户
     public static final String PATH_USER = "/user/UserActivity";
 

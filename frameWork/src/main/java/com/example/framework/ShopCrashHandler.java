@@ -39,7 +39,7 @@ public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
-        LogUtil.e("zyb:"+e.getMessage());
+        LogUtil.e("error:"+e.getMessage());
         new Thread(new Runnable() {
             @Override
             public void run() {
