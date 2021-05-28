@@ -1,7 +1,6 @@
 package com.example.electricityproject.shopp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
@@ -30,7 +30,6 @@ import com.example.electricityproject.R;
 import com.example.electricityproject.shopp.orderdetails.OrderDetailsActivity;
 import com.example.electricityproject.shopp.userinfo.BindUserInfoActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
@@ -298,11 +297,28 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void getOrderInfoData(OrderInfoBean orderInfoBean) {
         if(orderInfoBean.getCode().equals("200")){
             loadingPage.showSuccessView();
-            String outTradeNo = orderInfoBean.getResult().getOutTradeNo();
-            String orderInfo = orderInfoBean.getResult().getOrderInfo();
-            Log.i("www", "getOrderInfoData: "+orderInfoBean.getResult().getOrderInfo());
-            Log.i("www", "getOrderInfoData: "+orderInfoBean.getResult().getOutTradeNo());
-            BusinessARouter.getInstance().getPayManager().OpenPayActivity(getContext(),null);
+
+            LogUtils.i(""+orderInfoBean.getResult().getOrderInfo());
+            LogUtils.i(""+orderInfoBean.getResult().getOutTradeNo());
+
+            List<SelectOrderBean> list = ShopCacheManger.getInstance().getList();
+            for (ShortcartProductBean.ResultBean resultBean : selectList) {
+                SelectOrderBean selectOrderBean = new SelectOrderBean(resultBean.getUrl(), resultBean.getProductName(), resultBean.getProductPrice(), resultBean.getProductNum());
+                list.add(selectOrderBean);
+            }
+            ShopCacheManger.getInstance().setList(list);
+
+            LogBean.ResultBean result1 = BusinessUserManager.getInstance().getIsLog().getResult();
+            Intent intent = new Intent(getContext(), OrderDetailsActivity.class);
+            intent.putExtra("username",result1.getName());
+            intent.putExtra("address", (String) result1.getAddress());
+            intent.putExtra("phone", (String) result1.getPhone());
+            intent.putExtra("orderInfo", orderInfoBean.getResult().getOrderInfo());
+            intent.putExtra("outTradeNo", orderInfoBean.getResult().getOutTradeNo());
+            if (list!=null){
+                startActivity(intent);
+            }
+
         }else {
             Toast.makeText(getContext(), ""+orderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -320,26 +336,12 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 if(Integer.parseInt(result.get(j).getProductNum())<Integer.parseInt(selectList.get(j).getProductNum())){
                     isEnough=false;
                     notEnoughList.add(selectList.get(j));
-                    Log.i("Check", "onCheckOk: "+result.get(j).getProductName());
                 }
             }
             if(isEnough){
-                List<ShortcartProductBean.ResultBean> selectList = ShopCacheManger.getInstance().getSelectList();
-                List<SelectOrderBean> list = ShopCacheManger.getInstance().getList();
-                for (ShortcartProductBean.ResultBean resultBean : selectList) {
-                    SelectOrderBean selectOrderBean = new SelectOrderBean(resultBean.getUrl(), resultBean.getProductName(), resultBean.getProductPrice(), resultBean.getProductNum());
-                    list.add(selectOrderBean);
-                }
-                ShopCacheManger.getInstance().setList(list);
 
-                LogBean.ResultBean result1 = BusinessUserManager.getInstance().getIsLog().getResult();
-                Intent intent = new Intent(getContext(), OrderDetailsActivity.class);
-                intent.putExtra("username",result1.getName());
-                intent.putExtra("address", (String) result1.getAddress());
-                intent.putExtra("phone", (String) result1.getPhone());
-                if (list!=null){
-                    startActivity(intent);
-                }
+                httpPresenter.getOrderInfo(selectList);
+
             }else {
                 String notEnough="";
                 for (ShortcartProductBean.ResultBean resultBean : notEnoughList) {

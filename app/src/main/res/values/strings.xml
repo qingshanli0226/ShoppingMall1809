@@ -40,4 +40,25 @@
     <string name="callCenter">我的电子票</string>
     <string name="serviceFeedback">服务反馈</string>
 
+    <string name="order_user">用户名：</string>
+    <string name="order_phone">电话：</string>
+    <string name="order_addr">地址：</string>
+    <string name="order_price">商品价格</string>
+    <string name="order_return">退换无忧</string>
+    <string name="order_num_price">￥0.00</string>
+    <string name="order_freight">运费</string>
+    <string name="order_sub">立减</string>
+    <string name="order_discount">优惠卷</string>
+    <string name="order_uesless">无可用</string>
+    <string name="order_dou">桂豆</string>
+    <string name="order_total">共999，满1000可用</string>
+    <string name="order_gift">礼品卡</string>
+    <string name="order_invoice">发票</string>
+    <string name="order_detailed">普通商品明细——个人</string>
+    <string name="order_mode">支付方式</string>
+    <string name="order_onlinepayment">在线支付</string>
+    <string name="order_commit">提交订单</string>
+    <string name="order_symbol">￥</string>
+
+
 </resources>

@@ -64,7 +64,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private int prod_num = 1;
     private RelativeLayout liner;
     private RelativeLayout relitive;
-    private RelativeLayout relative;
 
 
 
@@ -269,7 +268,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 //        imageView.setImageDrawable(getDrawable(R.drawable.aaa));
         Glide.with(DetailsActivity.this).load(url).into(imageView);
         relitive.addView(imageView);
-        relative.addView(imageView);
 
         //起始点坐标
         int[] startLoa = new int[2];

@@ -19,7 +19,6 @@ class OrderDetailsAdapter extends BaseAdapter<SelectOrderBean> {
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, SelectOrderBean itemData) {
-
         TextView order_title = baseViewHolder.getView(R.id.order_name);
         order_title.setText(""+itemData.getName());
         TextView order_money = baseViewHolder.getView(R.id.order_money);
@@ -28,8 +27,9 @@ class OrderDetailsAdapter extends BaseAdapter<SelectOrderBean> {
         Glide.with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemData.getUrl()).into(order_image);
         TextView order_num = baseViewHolder.getView(R.id.order_num);
         order_num.setText("数量:"+itemData.getNum());
-
     }
+
+
 
     @Override
     public int getRootViewType(int position) {

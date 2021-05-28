@@ -83,7 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="商品价格"></TextView>
+                        android:text="@string/order_price"></TextView>
 
                     <TextView
                         android:id="@+id/product_price"
@@ -107,7 +107,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="退换无忧"></TextView>
+                        android:text="@string/order_return"></TextView>
 
                     <TextView
                         android:gravity="right"
@@ -115,7 +115,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="￥0.00"></TextView>
+                        android:text="@string/order_num_price"></TextView>
 
                 </LinearLayout>
 
@@ -138,7 +138,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="￥0.00"></TextView>
+                        android:text="@string/order_num_price"></TextView>
 
                 </LinearLayout>
 
@@ -161,7 +161,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="￥0.00"></TextView>
+                        android:text="@string/order_num_price"></TextView>
 
                 </LinearLayout>
 
@@ -176,7 +176,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="优惠卷"></TextView>
+                        android:text="@string/order_discount"></TextView>
 
                     <TextView
                         android:gravity="right"
@@ -184,7 +184,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="无可用"></TextView>
+                        android:text="@string/order_uesless"></TextView>
 
                 </LinearLayout>
 
@@ -199,7 +199,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="桂豆"></TextView>
+                        android:text="@string/order_dou"></TextView>
 
                     <TextView
                         android:gravity="right"
@@ -222,7 +222,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="礼品卡"></TextView>
+                        android:text="@string/order_gift"></TextView>
 
                     <TextView
                         android:gravity="right"
@@ -248,14 +248,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_40"
-                        android:text="礼品卡"></TextView>
+                        android:text="@string/order_gift"></TextView>
 
                     <TextView
                         android:gravity="right"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
-                        android:text="普通商品明细——个人"></TextView>
+                        android:text="@string/order_detailed"></TextView>
 
                 </LinearLayout>
 
@@ -270,7 +270,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="支付方式"></TextView>
+                        android:text="@string/order_mode"></TextView>
 
                     <TextView
                         android:gravity="right"
@@ -278,7 +278,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:text="在线支付"></TextView>
+                        android:text="@string/order_onlinepayment"></TextView>
 
                 </LinearLayout>
 
@@ -287,10 +287,6 @@
         </LinearLayout>
 
     </ScrollView>
-
-
-
-
 
     <LinearLayout
         android:orientation="horizontal"
@@ -310,7 +306,7 @@
         <Button
             android:textColor="@color/white"
             android:textSize="@dimen/dp_30"
-            android:text="提交订单"
+            android:text="@string/order_commit"
             android:background="@color/red"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"

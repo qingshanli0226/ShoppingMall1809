@@ -26,7 +26,6 @@ public class OrderDetailsActivity extends BaseActivity implements ToolBar.IToolb
     private TextView productPrice;
     private OrderDetailsAdapter orderDetailsAdapter;
     private List<SelectOrderBean> list = new ArrayList<>();
-    private List<SelectOrderBean> selectOrderBeanList = new ArrayList<>();
 
     @Override
     protected void initData() {
@@ -34,13 +33,14 @@ public class OrderDetailsActivity extends BaseActivity implements ToolBar.IToolb
         String name = intent.getStringExtra("username");
         String address = intent.getStringExtra("address");
         String phone = intent.getStringExtra("phone");
+        String orderInfo = intent.getStringExtra("orderInfo");
+        String outTradeNo = intent.getStringExtra("outTradeNo");
 
         username.setText("用户名:"+name);
         userPhone.setText("手机号:"+phone);
         userAddress.setText("地址:"+address);
 
         list = ShopCacheManger.getInstance().getList();
-        selectOrderBeanList.addAll(list);
 
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
@@ -60,23 +60,7 @@ public class OrderDetailsActivity extends BaseActivity implements ToolBar.IToolb
             orderRv.setAdapter(orderDetailsAdapter);
         }
 
-        //问题代码
-        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
-            @Override
-            public void onLeftClick() {
-                list.clear();
-            }
 
-            @Override
-            public void onRightImgClick() {
-
-            }
-
-            @Override
-            public void onRightTvClick() {
-
-            }
-        });
 
     }
 
