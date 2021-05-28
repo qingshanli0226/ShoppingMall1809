@@ -11,6 +11,7 @@ public class ShopConstants {
     public final static String SHOP_CAR="/shoppingCar/ShoppingCarActivity";
     public final static String SHOP_ADDRESS="/address/ShoppingAddressActivity";
     public final static String ORDER_PATH="/orderForm/OrderFormActivity";
+    public final static String PAY_PATH="/pay/PayActivity";
 
 
     //跳转逻辑

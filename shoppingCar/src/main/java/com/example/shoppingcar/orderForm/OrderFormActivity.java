@@ -10,7 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.LogUtils;
+import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
@@ -37,7 +39,7 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
     private TextView productPrice;
     private TextView orderMoney;
     private Button orderBut;
-
+    private float aFloat;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_orde_form;
@@ -48,7 +50,7 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
         float money = getIntent().getFloatExtra("money", 0.00f);
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        Float aFloat = Float.valueOf(decimalFormat.format(money));
+        aFloat = Float.valueOf(decimalFormat.format(money));
 
         orderMoney.setText("￥"+aFloat + "");
         productPrice.setText("￥"+aFloat + "");
@@ -95,6 +97,7 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
         if (orderinfoBean.getCode().equals("200")) {
             Toast.makeText(OrderFormActivity.this, getResources().getString(R.string.placeAnOrderSuccessfully), Toast.LENGTH_SHORT).show();
             ShoppingCarManager.getInstance().deletePartResult();
+            ARouter.getInstance().build(ShopConstants.PAY_PATH).withSerializable("orderinfoBean",orderinfoBean).withFloat("money",aFloat).navigation();
         }
     }
 

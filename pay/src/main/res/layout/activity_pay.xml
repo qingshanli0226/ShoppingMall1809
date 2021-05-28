@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PayActivity"
+    android:orientation="vertical">
+
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        app:wp_istoolbarLeftImg="true"
+        app:wp_leftImId="@drawable/back"
+        app:wp_RightTitle="@string/orderCenter"
+        app:wp_CenterTitle="@string/cashierDesk"></com.example.framework.view.ToolBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/darkAshen"></View>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="@dimen/dp_10"
+        android:layout_weight="1">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:drawableLeft="@drawable/zfb"
+                android:button="@null"
+                android:text="@string/zfb"
+                android:textSize="@dimen/dp_20"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/darkAshen"></View>
+            <RadioButton
+                android:drawableLeft="@drawable/zfb"
+                android:button="@null"
+                android:text="@string/zfb"
+                android:textSize="@dimen/dp_20"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/darkAshen"></View>
+
+            <RadioButton
+                android:drawableLeft="@drawable/zfb"
+                android:button="@null"
+                android:text="@string/zfb"
+                android:textSize="@dimen/dp_20"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/darkAshen"></View>
+
+            <RadioButton
+                android:drawableLeft="@drawable/zfb"
+                android:button="@null"
+                android:text="@string/zfb"
+                android:textSize="@dimen/dp_20"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/darkAshen"></View>
+            <RadioButton
+                android:drawableLeft="@drawable/zfb"
+                android:button="@null"
+                android:text="@string/zfb"
+                android:textSize="@dimen/dp_20"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/darkAshen"></View>
+
+
+
+        </RadioGroup>
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/red"
+        android:textColor="@color/ashen"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/pay_but"
+        android:textSize="@dimen/dp_20"
+        android:layout_height="@dimen/dp_50"></TextView>
+
+</LinearLayout>

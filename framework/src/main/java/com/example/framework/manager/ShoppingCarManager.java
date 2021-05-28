@@ -28,10 +28,15 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     public void onLoginChange(LoginBean loginBean) {
         getShoppingData();
     }
-
+    //注册登录的方法
     public void initLogin() {
         ShopeUserManager.getInstance().register(this::onLoginChange);
     }
+
+    //待付款
+    List<FindForBean.ResultBean> forPay= new ArrayList<>();
+    //待发货
+    List<FindForBean.ResultBean> forSend = new ArrayList<>();
 
     //待付款
     private FindForBean findForPayBean;
