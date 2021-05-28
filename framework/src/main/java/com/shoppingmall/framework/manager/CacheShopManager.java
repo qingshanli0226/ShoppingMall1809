@@ -32,12 +32,13 @@ public class CacheShopManager {
     }
 
     public void init(){
-        ShopMallUserManager.getInstance().registerUserLoginChanged(new ShopMallUserManager.IUserLoginChanged() {
+        iUserChange = new ShopMallUserManager.IUserLoginChanged() {
             @Override
             public void onLoginChanged(LoginBean loginBean) {
-                getShowCart();
+                    getShowCart();
             }
-        });
+        };
+        ShopMallUserManager.getInstance().registerUserLoginChanged(iUserChange);
     }
     private ShopMallUserManager.IUserLoginChanged iUserChange;
 
@@ -116,7 +117,7 @@ public class CacheShopManager {
             if (cart.getProductId().equals(resultBean.getProductId())) {
                 int cartNum = Integer.parseInt(cart.getProductNum());
                 int resultNum = Integer.parseInt(resultBean.getProductNum());
-                cart.setProductNum(cartNum+resultNum+"");
+                cart.setProductNum(cartNum+"");
                 position = i;
             } else{
                 count++;
@@ -143,7 +144,7 @@ public class CacheShopManager {
     }
 
     //全选
-    public synchronized void setChackAll(boolean isCheckAll){
+    public synchronized void setCheckAll(boolean isCheckAll){
         for (ShopCarBean.ResultBean cart : carts) {
             cart.setProductSelected(isCheckAll);
         }
@@ -181,7 +182,8 @@ public class CacheShopManager {
         void onShowCart(List<ShopCarBean.ResultBean> carts);
         void onAddCart(int position);
     }
-    public void destory(){
+
+    public void destroy(){
         ShopMallUserManager.getInstance().unregisterUserLoginChanged(iUserChange);
     }
 }

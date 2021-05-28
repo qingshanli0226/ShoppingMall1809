@@ -62,7 +62,7 @@ public class AutoService extends Service {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(AutoService.this, "自动登录失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override

@@ -65,7 +65,7 @@ public class DetailPresenter extends BasePresenter<IDetailView> {
 
 
     //检查数量
-    public void inventory(ShopCarBean.ResultBean resultBean) {
+    public void checkProduct(ShopCarBean.ResultBean resultBean) {
         RetrofitCreate.getShoppingMallApiService()
                 .checkProduct(Integer.parseInt(resultBean.getProductId()),Integer.parseInt(resultBean.getProductNum()))
                 .subscribeOn(Schedulers.io())

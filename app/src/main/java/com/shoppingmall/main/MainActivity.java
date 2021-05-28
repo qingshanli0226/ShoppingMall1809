@@ -1,5 +1,6 @@
 package com.shoppingmall.main;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.fiance.user.AutoService;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -60,6 +62,11 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
 
     @Override
     public void initData() {
+        if (ShopMallUserManager.getInstance().getLoginBean()==null){
+            Intent intent = new Intent(this, AutoService.class);
+            startService(intent);
+        }
+
         Intent intent = getIntent();
         int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);
         VpPosition = intent.getIntExtra("position",-1);

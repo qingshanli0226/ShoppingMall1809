@@ -61,7 +61,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     private TextView popAddNum;
     private Button no;
     private Button yes;
-    private int GoodsNum;
+    private int GoodsNum=1;
 
     @Override
     public int getLayoutId() {
@@ -183,6 +183,13 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                popupWindow.dismiss();
+                LogUtils.json(productGoodBean);
+                ShopCarBean.ResultBean result = new ShopCarBean.ResultBean();
+                result.setProductId(productGoodBean.getProduct_id());
+                result.setProductNum(""+productGoodBean.getNumber());
+                httpPresenter.checkProduct(result);
+
                 //数据库存储
                 List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
                 for (GoodsTable goodsTable : goodsTables) {
@@ -197,7 +204,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 }
                 //服务端存储
                 productBean = new ProductBean();
-                productBean.setProductId(null);
+                productBean.setProductId(productGoodBean.getProduct_id());
                 productBean.setProductNum(productGoodBean.getNumber());
                 productBean.setProductName(productGoodBean.getName());
                 productBean.setUrl(productGoodBean.getFigure());
@@ -214,6 +221,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                     GoodsNum--;
                 }
                 popNum.setText(""+GoodsNum);
+                productGoodBean.setNumber(GoodsNum);
             }
         });
         popAddNum.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +229,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             public void onClick(View view) {
                 GoodsNum++;
                 popNum.setText(""+GoodsNum);
+                productGoodBean.setNumber(GoodsNum);
             }
         });
     }
@@ -228,23 +237,16 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     public void addProduct(SelectBean selectBean) {
         if (selectBean.getCode().equals("200")){
-            if (popupWindow!=null){
-                popupWindow.dismiss();
-            }
             ShopCarBean.ResultBean resultBean = new ShopCarBean.ResultBean();
-            resultBean.setProductId(productBean.getProductId());
-            resultBean.setProductNum(productBean.getProductNum()+"");
-            resultBean.setProductPrice(productBean.getProductPrice());
-            resultBean.setUrl(productBean.getUrl());
-            resultBean.setProductName(productBean.getProductName());
-            LogUtils.json("resultBean"+resultBean.getProductPrice());
-
+            resultBean.setProductId(productGoodBean.getProduct_id());
+            resultBean.setProductNum(String.valueOf(productGoodBean.getNumber()));
+            resultBean.setProductPrice(productGoodBean.getCover_price());
+            resultBean.setUrl(productGoodBean.getFigure());
+            resultBean.setProductName(productGoodBean.getName());
             CacheShopManager.getInstance().addData(resultBean);
+
             Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
         }else {
-            if (popupWindow!=null){
-                popupWindow.dismiss();
-            }
             Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -264,7 +266,6 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     }
 
     private void setUI(ProductGoodBean productGoodBean) {
-        LogUtils.json(productGoodBean);
         //加载数据
         ShopMallGlide.with(this).load(Constants.IMG_HTTPS+productGoodBean.getFigure()).into(detailImg);
         detailTitle.setText(""+productGoodBean.getName());

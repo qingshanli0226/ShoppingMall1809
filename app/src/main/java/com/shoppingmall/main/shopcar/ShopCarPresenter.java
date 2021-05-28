@@ -98,7 +98,7 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                     public void onNext(@NonNull SelectBean selectBean) {
                         if (selectBean.getCode().equals("200")) {
                             //全选更改数据源
-                            CacheShopManager.getInstance().setChackAll(isAll);
+                            CacheShopManager.getInstance().setCheckAll(isAll);
                             if (iView != null) {
                                 iView.onCheckAll(isAll);
                             }

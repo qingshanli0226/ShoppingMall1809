@@ -57,10 +57,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);
         }
 
-        if (ShopMallUserManager.getInstance().getLoginBean()==null){
-            Intent intent = new Intent(this, AutoService.class);
-            startService(intent);
-        }
+
     }
 
 
@@ -83,7 +80,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void showLoading() {
-
        loadingPage.showTransparentLoadingView();
     }
 

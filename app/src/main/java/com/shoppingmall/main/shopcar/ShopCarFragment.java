@@ -25,6 +25,8 @@ import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,13 +82,15 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         //判断是否点击编辑
         checkcompileOnClick();
         //注册
-        CacheShopManager.getInstance().registerCart((CacheShopManager.ICartChange) this);
+        CacheShopManager.getInstance().registerCart(this);
         carts = CacheShopManager.getInstance().getCarts();
+        LogUtils.json(carts);
         //获取数据
         shopCarAdapter = new ShopCarAdapter();
         if (carts != null) {
             shopCarAdapter.updateData(carts);
         }
+
         //数据
         shopMallCarRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         shopMallCarRv.setAdapter(shopCarAdapter);
@@ -99,7 +103,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 //判断库存
                 result.setProductId(resultBean.getProductId());
                 result.setProductNum(Integer.parseInt(resultBean.getProductNum()) + 1 + "");
-
                 result.setProductPrice(resultBean.getProductPrice());
                 httpPresenter.upDateNum(position, result);
             }
@@ -174,6 +177,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 }
             }
         });
+        isCheck();
     }
 
     private void checkcompileOnClick() {
@@ -194,6 +198,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void onShowCart(List<ShopCarBean.ResultBean> carts) {
         this.carts = carts;
         shopCarAdapter.updateData(carts);
+        EventBus.getDefault().post("");
     }
     //添加
     @Override
@@ -211,6 +216,13 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void onCheck(int position, boolean isCheck) {
         shopCarAdapter.notifyItemChanged(position);
         //反选
+        isCheck();
+
+        //更改价格
+        priceCount();
+    }
+
+    private void isCheck() {
         int count = 0;
         for (ShopCarBean.ResultBean datum : shopCarAdapter.getData()) {
             if (datum.isProductSelected()) {
@@ -226,22 +238,34 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         }
     }
 
+    //更改价格
+    private void priceCount() {
+        int priceCount = 0;
+        for (ShopCarBean.ResultBean datum : shopCarAdapter.getData()) {
+            if(datum.isProductSelected()){
+                priceCount += Integer.parseInt(datum.getProductNum()) * Float.parseFloat(datum.getProductPrice()+"");
+            }
+        }
+        paymentprice.setText(priceCount+"");
+    }
+
     @Override
     public void onCheckAll(boolean isChcekAll) {
         this.isAll = isChcekAll;
         shopCarAdapter.notifyDataSetChanged();
+        priceCount();
     }
     //
     @Override
     public void onNum(int position) {
         shopCarAdapter.notifyItemChanged(position);
+        priceCount();
     }
     //删除一个
     @Override
     public void removeProduct(int position) {
         shopCarAdapter.getData().remove(position);
         shopCarAdapter.notifyItemRemoved(position);
-        LogUtils.d("position" + position);
     }
     //删除多个
     @Override
@@ -255,14 +279,12 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 }
             }
         }
-        LogUtils.d("removeMany");
         shopCarAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void destroy() {
         CacheShopManager.getInstance().unRegisterCart(this);
+        CacheShopManager.getInstance().destroy();
     }
 
 }

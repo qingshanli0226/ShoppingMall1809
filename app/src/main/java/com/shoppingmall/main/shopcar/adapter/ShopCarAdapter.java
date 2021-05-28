@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.net.Constants;
 import com.shoppingmall.net.bean.ShopCarBean;
 
 public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
@@ -37,7 +38,7 @@ public class ShopCarAdapter extends BaseRvAdapter<ShopCarBean.ResultBean> {
         shopCarNum = (TextView) holder.getView(R.id.shopCar_num);
         shopCarAddNum = (TextView) holder.getView(R.id.shopCar_addNum);
 
-        Glide.with(shopCarImg.getContext()).load("https://browser9.qhimg.com/bdr/__85/t010448c46c1ecf7cab.jpg").into(shopCarImg);
+        Glide.with(shopCarImg.getContext()).load(Constants.IMG_HTTPS+itemData.getUrl()).into(shopCarImg);
         shopCarTxt.setText(""+itemData.getProductName());
         shopCarPrice.setText(""+itemData.getProductPrice());
         shopCarNum.setText(""+itemData.getProductNum());
