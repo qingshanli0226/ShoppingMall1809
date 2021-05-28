@@ -5,13 +5,8 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 
 import com.example.net.bean.Orbean;
-<<<<<<< HEAD
-
 import com.example.net.bean.business.CheckOneInventoryBean;
 
-=======
-import com.example.net.bean.business.CheckOneInventoryBean;
->>>>>>> 0527ss
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
@@ -46,12 +41,7 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
         attachView(iShopping);
     }
 
-<<<<<<< HEAD
     public void getConfiemserverpayresult(String outTradeNo, String result, boolean clientPayResult) {
-=======
-    public void getConfiemserverpayresult(String outTradeNo,String result,boolean clientPayResult){
->>>>>>> 0527ss
-
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -171,13 +161,9 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                 });
     }
 
-<<<<<<< HEAD
 
     public void getSelectAllProduct(boolean mBoolean, boolean mBooleans) {
 
-=======
-    public void getSelectAllProduct(boolean mBoolean,boolean mBooleans){
->>>>>>> 0527ss
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("selected", mBoolean);

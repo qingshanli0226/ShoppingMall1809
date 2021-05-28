@@ -173,35 +173,29 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
             @Override
             public void onItemChildClick(int position, View view) {
-
-                switch (view.getId()) {
-                    case R.id.shoppingTrolley_CheckBox:
                         GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
-                        httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
+                        switch (view.getId()) {
+                            case R.id.shoppingTrolley_CheckBox:
+                                httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
 
-                GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
-                switch (view.getId()){
-                    case R.id.shoppingTrolley_CheckBox:
-                        httpPresenter.getUpProductSelect(resultBean.getProductId(),resultBean.getProductNum(),resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(),position);
-
-                        break;
-                    case R.id.shoppingTrolley_sub:
-                        httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum())-1) + "", resultBean.getProductName(), resultBean.getUrl(), ""+price,position,true);
-                        break;
-                    case R.id.shoppingTrolley_add:
-                        httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
-                        break;
+                                break;
+                            case R.id.shoppingTrolley_sub:
+                                httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) - 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, true);
+                                break;
+                            case R.id.shoppingTrolley_add:
+                                httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
+                                break;
+                        }
                 }
-            }
         });
-    }
+     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping_car;
     }
 
-    //全选回到
+    //全选回调
     @Override
     public void onSelectAllProductBean(SelectAllProductBean selectAllProductBean, boolean mBooleans) {
         if (selectAllProductBean.getCode().equals("200")) {
@@ -255,10 +249,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             intent.putExtra("key", "main");
             startActivity(intent);
         } else {
-            Toast.makeText(getContext(), "" + getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
-        }else {
             Toast.makeText(getContext(), ""+getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
-
         }
     }
 

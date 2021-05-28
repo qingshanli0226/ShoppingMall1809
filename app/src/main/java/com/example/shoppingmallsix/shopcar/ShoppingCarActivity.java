@@ -22,6 +22,7 @@ import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
+import com.example.net.bean.business.RemoveOneProductBean;
 import com.example.net.bean.business.SelectAllProductBean;
 import com.example.net.bean.business.UpdateProductNumBean;
 import com.example.net.bean.business.UpdateProductSelectedBean;
@@ -249,6 +250,11 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolean) {
+
+    }
+
+    @Override
+    public void onRemoveOneProductBean(RemoveOneProductBean removeOneProductBean, int position) {
 
     }
 

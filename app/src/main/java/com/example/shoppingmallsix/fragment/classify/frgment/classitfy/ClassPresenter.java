@@ -34,44 +34,42 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-<<<<<<< HEAD
                         if (!mBoolean) {
                             iView.hideLoading();
-=======
-                        if (!mBoolean){
-                            if (iView!=null){
-                                iView.hideLoading();
+
+                            if (!mBoolean) {
+                                if (iView != null) {
+                                    iView.hideLoading();
+                                }
+
                             }
->>>>>>> 0527ss
                         }
-                    }
-                })
-                .subscribe(new Observer<ClassBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+                     }
+                    }).subscribe(new Observer<ClassBean>() {
+                        @Override
+                        public void onSubscribe (Disposable d){
 
-                    }
-
-                    @Override
-                    public void onNext(ClassBean classBean) {
-                        if (iView != null) {
-                            iView.onClassData(classBean, mBoolean, url);
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        if (iView != null) {
-                            iView.showToast(e.getMessage());
+                        @Override
+                        public void onNext (ClassBean classBean){
+                            if (iView != null) {
+                                iView.onClassData(classBean, mBoolean, url);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onError (Throwable e){
+                            if (iView != null) {
+                                iView.showToast(e.getMessage());
+                            }
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onComplete () {
+
+                        }
+                    });
+                }
     }
 
-
-}
