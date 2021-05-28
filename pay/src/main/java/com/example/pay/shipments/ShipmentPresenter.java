@@ -2,7 +2,6 @@ package com.example.pay.shipments;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
-import com.example.net.bean.PaymentBean;
 import com.example.net.bean.ShipmentBean;
 
 import io.reactivex.Observer;
@@ -12,7 +11,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
+/**
+ *代发货
+ * 赵子裕
+ */
 public class ShipmentPresenter extends BasePresenter<IShipmentView> {
 
     public ShipmentPresenter(IShipmentView iShipmentView) {

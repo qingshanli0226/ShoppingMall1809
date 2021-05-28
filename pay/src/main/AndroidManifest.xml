@@ -3,9 +3,9 @@
     package="com.example.pay">
 
     <application>
-
-        <activity android:name=".orderinfo.PayActivity"></activity>
-        <activity android:name=".payment.PaymentActivity" />
+        <activity android:name=".payment.PaymentActivity"></activity>
+        <activity android:name=".orderinfo.PayActivity" />
+        <activity android:name=".awaitpayment.AwaitPaymentActivity" />
         <activity android:name=".shipments.ShipmentsActivity" />
     </application>
 

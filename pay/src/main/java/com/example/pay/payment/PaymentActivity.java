@@ -1,19 +1,18 @@
 package com.example.pay.payment;
 
-import androidx.recyclerview.widget.RecyclerView;
+import android.widget.Button;
+import android.widget.CheckBox;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.LoginBean;
-import com.example.net.bean.PaymentBean;
 import com.example.pay.R;
 
-
-public class PaymentActivity extends BaseActivity<PaymentPresenter> implements IPaymentView {
+public class PaymentActivity extends BaseActivity {
 
     private com.example.framework.view.ToolBar toolbar;
-    private androidx.recyclerview.widget.RecyclerView paymentRv;
+    private android.widget.CheckBox weiCheck;
+    private android.widget.CheckBox zfbCheck;
+    private android.widget.Button pay;
 
     @Override
     public int getLayoutId() {
@@ -24,14 +23,15 @@ public class PaymentActivity extends BaseActivity<PaymentPresenter> implements I
     public void initView() {
 
         toolbar = (ToolBar) findViewById(R.id.toolbar);
+        weiCheck = (CheckBox) findViewById(R.id.weiCheck);
+        zfbCheck = (CheckBox) findViewById(R.id.zfbCheck);
+        pay = (Button) findViewById(R.id.pay);
         toolbar.setToolbarOnClickLisenter(this);
-        paymentRv = (RecyclerView) findViewById(R.id.paymentRv);
     }
 
     @Override
     public void initPresenter() {
-        mPresenter = new PaymentPresenter(this);
-        mPresenter.getpay();
+
     }
 
     @Override
@@ -52,25 +52,5 @@ public class PaymentActivity extends BaseActivity<PaymentPresenter> implements I
     @Override
     public void onClickRight() {
 
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showError(String error) {
-
-    }
-
-    @Override
-    public void onPayment(PaymentBean paymentBean) {
-        LogUtils.json("pay"+paymentBean.getCode());
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="payment">代付款订单</string>
+    <string name="awaitpayment">代付款订单</string>
+    <string name="payment">收银台</string>
     <string name="shipment">代发货订单</string>
     <string name="orderinfo">订单详细页面</string>
 

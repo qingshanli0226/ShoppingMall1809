@@ -14,6 +14,15 @@ public class ShipmentBean {
     private String message;
     private List<ResultBean> result;
 
+    @Override
+    public String toString() {
+        return "ShipmentBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     public String getCode() {
         return code;
     }
@@ -54,6 +63,18 @@ public class ShipmentBean {
         private String time;
         private Object status;
         private String tradeNo;
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "subject='" + subject + '\'' +
+                    ", body='" + body + '\'' +
+                    ", totalPrice='" + totalPrice + '\'' +
+                    ", time='" + time + '\'' +
+                    ", status=" + status +
+                    ", tradeNo='" + tradeNo + '\'' +
+                    '}';
+        }
 
         public String getSubject() {
             return subject;
