@@ -20,9 +20,11 @@ import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
 import com.example.shoppingcar.orderForm.adapter.OrderFormAdapter;
 
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.util.ArrayList;
 
-@Route(path = "/orderForm/OrdeFormActivity")
+@Route(path = "/orderForm/OrderFormActivity")
 public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implements IOrderFormView {
 
     private TextView orderName;
@@ -41,14 +43,18 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
     @Override
     protected void initData() {
         float money = getIntent().getFloatExtra("money", 0.00f);
-        orderMoney.setText(money + "");
-        productPrice.setText(money + "");
-        LoginBean.ResultBean result = ShopeUserManager.getInstance().getLoginBean().getResult();
-        orderAddress.setText((String) result.getAddress());
-        orderName.setText((String) result.getName());
-        orderPhone.setText((String) result.getPhone());
 
-        ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean = ShoppingCarManager.getInstance().getDeleteBean();
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        Float aFloat = Float.valueOf(decimalFormat.format(money));
+
+        orderMoney.setText("￥"+aFloat + "");
+        productPrice.setText("￥"+aFloat + "");
+        LoginBean.ResultBean result = ShopeUserManager.getInstance().getLoginBean().getResult();
+        orderAddress.setText(getResources().getString(R.string.userName)+(String) result.getAddress());
+        orderName.setText(getResources().getString(R.string.phone)+(String) result.getName());
+        orderPhone.setText(getResources().getString(R.string.address)+(String) result.getPhone());
+
+        ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean = ShoppingCarManager.getInstance().addDeleteBean();
 
         OrderFormAdapter orderFormAdapter = new OrderFormAdapter(deleteBean);
         orderRv.setAdapter(orderFormAdapter);
@@ -85,17 +91,18 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
     public void onOrderInfo(OrderinfoBean orderinfoBean) {
         if (orderinfoBean.getCode().equals("200")) {
             Toast.makeText(OrderFormActivity.this, getResources().getString(R.string.placeAnOrderSuccessfully), Toast.LENGTH_SHORT).show();
+            ShoppingCarManager.getInstance().deletePartResult();
         }
     }
 
     @Override
     public void showLoading() {
-        loadingPage.showSucessView();
+        loadingPage.showLoadingView();
     }
 
     @Override
     public void hideLoading() {
-        loadingPage.showLoadingView();
+        loadingPage.showSucessView();
     }
 
     @Override

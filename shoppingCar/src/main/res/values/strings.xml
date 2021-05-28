@@ -66,6 +66,11 @@
     <string name="theOrderDetails">订单详情</string>
     <string name="noAddressPhone">没有地址和电话是否现在去设置</string>
     <string name="hint">提示</string>
+    <string name="userName">用户名</string>
+    <string name="phone">用户名</string>
+    <string name="address">地址</string>
+    <string name="count">数量:</string>
+    <string name="submitOrder">提交订单</string>
 
 
     <string name="app_name">XXX购物车</string>

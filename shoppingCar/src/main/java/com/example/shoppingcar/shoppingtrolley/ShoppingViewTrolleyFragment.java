@@ -1,6 +1,7 @@
 package com.example.shoppingcar.shoppingtrolley;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -24,8 +25,10 @@ import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.R;
+import com.example.shoppingcar.orderForm.OrderFormActivity;
 import com.example.shoppingcar.shoppingtrolley.adapter.ShoppingCarAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +89,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             this.result =resultManager;
             shoppingCarAdapter.updateDate(this.result);
             selectAll();
+            totalPrice();
         }
 
         if (result.size() <= 0) {
@@ -93,9 +97,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
         } else {
             vain.setVisibility(View.GONE);
         }
-
-
-
 
 
         shoppingCarAdapter.setShopItemListener((position, view) -> {
@@ -236,7 +237,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 }
             }
             //删除管理类
-            ShoppingCarManager.getInstance().deletePartResult(false, delete);
+            ShoppingCarManager.getInstance().deletePartResult();
             //删除成功后隐藏
             toolbar.setRightTitle(getResources().getString(R.string.compile));
             shopDeletLayout.setVisibility(View.GONE);
@@ -260,17 +261,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             if (ishttp) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.understock), Toast.LENGTH_SHORT).show();
             } else {
-                ArrayList<ShoppingTrolleyBean.ResultBean> resultBeans = new ArrayList<>();
-                for (int i = this.result.size() - 1; i >= 0; i--) {
-                    ShoppingTrolleyBean.ResultBean resultBean = this.result.get(i);
-                    if (resultBean.isProductSelected()) {
-                        resultBeans.add(resultBean);
-                    }
-                }
-                ShoppingCarManager.getInstance().deletePartResult(true, resultBeans);
-                ShoppingCarManager.getInstance().setDeleteBean(resultBeans);
-
-
                 LoginBean.ResultBean login = ShopeUserManager.getInstance().getLoginBean().getResult();
                 if ((String)login.getAddress()!=null&&(String)login.getPhone()!=null){
                     ARouter.getInstance().build(ShopConstants.ORDER_PATH).withFloat("money",money).navigation();
@@ -328,8 +318,10 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 price += Float.valueOf((String) resultBean.getProductPrice()) * Float.valueOf(Integer.parseInt(resultBean.getProductNum()));
             }
         }
-        this.price.setText("￥" + price);
-        money = price;
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        Float aFloat = Float.valueOf(decimalFormat.format(price));
+        this.price.setText("￥" + aFloat);
+        money = aFloat;
     }
     //选择
     public void selectAll() {
@@ -406,5 +398,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
     public void onShoppingCarAdapter(List<ShoppingTrolleyBean.ResultBean> result) {
         this.result = result;
         shoppingCarAdapter.updateDate(this.result);
+        totalPrice();
+        selectAll();
     }
 }
