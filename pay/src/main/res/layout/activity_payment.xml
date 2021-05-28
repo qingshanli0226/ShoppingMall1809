@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.pay.payment.PaymentActivity">
+    tools:context=".payment.PaymentActivity">
+
     <com.example.framework.view.ToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,10 +17,84 @@
         app:app_text="@string/payment"
         app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
 
-    <androidx.recyclerview.widget.RecyclerView
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/paymentRv"
-        ></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:text="￥323.00"
+        android:textColor="@color/red"
+        android:textSize="@dimen/dm_dp_50"
+        android:textStyle="bold"
+        android:gravity="center"
+        ></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_dp_50"
+            >
+            <ImageView
+                android:layout_width="@dimen/dm_dp_50"
+                android:layout_height="@dimen/dm_dp_50"
+                android:src="@drawable/weix"
+                ></ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="微信支付"
+                android:textSize="@dimen/dm_dp_25"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dm_dp_50"
+                ></TextView>
+            <CheckBox
+                android:id="@+id/weiCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                ></CheckBox>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dm_dp_50"
+            >
+            <ImageView
+                android:layout_width="@dimen/dm_dp_50"
+                android:layout_height="@dimen/dm_dp_50"
+                android:src="@drawable/zfb"
+                ></ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="支付宝支付"
+                android:textSize="@dimen/dm_dp_25"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dm_dp_50"
+                ></TextView>
+            <CheckBox
+                android:id="@+id/zfbCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                ></CheckBox>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="立即支付"
+        android:textColor="@color/white"
+        android:background="@drawable/pay_back"
+        android:layout_margin="@dimen/dm_dp_30"
+        ></Button>
 
 </LinearLayout>

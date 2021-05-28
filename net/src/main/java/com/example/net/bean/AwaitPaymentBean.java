@@ -2,7 +2,7 @@ package com.example.net.bean;
 
 import java.util.List;
 
-public class PaymentBean {
+public class AwaitPaymentBean {
     /**
      * code : 200
      * message : 请求成功
@@ -12,6 +12,15 @@ public class PaymentBean {
     private String code;
     private String message;
     private List<ResultBean> result;
+
+    @Override
+    public String toString() {
+        return "AwaitPaymentBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
 
     public String getCode() {
         return code;
@@ -38,6 +47,19 @@ public class PaymentBean {
     }
 
     public static class ResultBean {
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "subject='" + subject + '\'' +
+                    ", body='" + body + '\'' +
+                    ", totalPrice='" + totalPrice + '\'' +
+                    ", time='" + time + '\'' +
+                    ", status=" + status +
+                    ", tradeNo='" + tradeNo + '\'' +
+                    ", orderInfo=" + orderInfo +
+                    '}';
+        }
+
         /**
          * subject : buy
          * body : 测试数据

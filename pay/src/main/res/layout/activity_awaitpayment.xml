@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.pay.awaitpayment.AwaitPaymentActivity">
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:app_back_color_toob="@color/white"
+        app:app_left_isshow="true"
+        app:app_left_src="@drawable/top_bar_left_back"
+        app:app_text="@string/awaitpayment"
+        app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/paymentRv"
+        ></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

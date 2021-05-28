@@ -1,12 +1,8 @@
-package com.example.pay.payment;
+package com.example.pay.awaitpayment;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitManager;
-import com.example.net.bean.LoginBean;
-import com.example.net.bean.PaymentBean;
-import com.example.net.bean.RegisterBean;
-
-import java.util.concurrent.TimeUnit;
+import com.example.net.bean.AwaitPaymentBean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,15 +12,15 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class PaymentPresenter extends BasePresenter<IPaymentView> {
+public class AwaitPaymentPresenter extends BasePresenter<IAwaitPaymentView> {
 
-    public PaymentPresenter(IPaymentView iPaymentView) {
-        attchView(iPaymentView);
+    public AwaitPaymentPresenter(IAwaitPaymentView iAwaitPaymentView) {
+        attchView(iAwaitPaymentView);
     }
 
     public void getpay(){
         RetrofitManager.getHttpApiService()
-                .getPayment()
+                .getAwaitPayment()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -45,16 +41,16 @@ public class PaymentPresenter extends BasePresenter<IPaymentView> {
 
                     }
                 })
-                .subscribe(new Observer<PaymentBean>() {
+                .subscribe(new Observer<AwaitPaymentBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext( PaymentBean paymentBean) {
+                    public void onNext( AwaitPaymentBean paymentBean) {
                         if (mView != null) {
-                            mView.onPayment(paymentBean);
+                            mView.onAwaitPayment(paymentBean);
                         }
                     }
 

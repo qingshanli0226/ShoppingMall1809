@@ -67,7 +67,6 @@ public class LabelFragment extends BaseFragment<LabelPresenter> implements ILabe
 
     @Override
     public void onILabel(LabelBean labelBean) {
-        LogUtils.json(labelBean+"zzy");
         List<LabelBean.ResultBean> result = labelBean.getResult();
         list.addAll(result);
         labelAdapter.getData().addAll(list);

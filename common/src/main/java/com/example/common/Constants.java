@@ -31,7 +31,7 @@ public class Constants {
     public static final String USERREGISTER = "register";//注册
     public static final String AUTOLOGIN = "autoLogin";//自动登录
     //代付款
-    public static final String PAYMENT = "findForPay";
+    public static final String AWAITPAYMENT = "findForPay";
     //代发货
     public static final String SHIPMENT = "findForSend";
     //主页Fragment路径

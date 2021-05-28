@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_100"
+        android:orientation="vertical"
+        android:background="@drawable/broder_big"
+        android:padding="@dimen/dm_dp_20"
+        >
+        <TextView
+            android:id="@+id/payment_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2021年5月28日09:11:12"
+            ></TextView>
+        <TextView
+            android:id="@+id/payment_tradeNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dm_dp_25"
+            android:text="178415152"
+            android:layout_marginTop="@dimen/dm_dp_20"
+            ></TextView>
+        <TextView
+            android:id="@+id/payment_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0.0"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            ></TextView>
+    </RelativeLayout>
+
+</LinearLayout>
