@@ -115,7 +115,6 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements IClas
         loadingPage.showSuccessView();
         if (mBoolean){
             for (int i = 0; i <strings.length ; i++) {
-
                 if (url.equals(strings[i])){
                     if (url == strings[0]){
                         list.get(i).setaBoolean(true);

@@ -34,7 +34,9 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                     @Override
                     public void run() throws Exception {
                         if (!mBoolean){
-                            iView.hideLoading();
+                            if (iView!=null){
+                                iView.hideLoading();
+                            }
                         }
                     }
                 })

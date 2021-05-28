@@ -47,7 +47,22 @@ public class ShoppingCarAdapter extends BaseRvAdapter<GetShortcartProductsBean.R
         textView.setText(itemData.getProductName());
         price.setText("￥" + itemData.getProductPrice().toString());
         num.setText(itemData.getProductNum());
-
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (iItemChildClick !=null ){
+                    iItemChildClick.onItemChildClick(position,view);
+                }
+            }
+        });
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (iItemChildClick !=null ){
+                    iItemChildClick.onItemChildClick(position,view);
+                }
+            }
+        });
         shoppingTrolleyCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
