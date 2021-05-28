@@ -103,5 +103,17 @@ public class ShoppingTrolleyBean implements Serializable {
         public void setProductSelected(boolean productSelected) {
             this.productSelected = productSelected;
         }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "productId='" + productId + '\'' +
+                    ", productName='" + productName + '\'' +
+                    ", productNum='" + productNum + '\'' +
+                    ", url='" + url + '\'' +
+                    ", productPrice=" + productPrice +
+                    ", productSelected=" + productSelected +
+                    '}';
+        }
     }
 }

@@ -11,6 +11,7 @@
     <com.example.framework.view.ToolBar
         android:layout_width="match_parent"
         app:wp_leftImId="@drawable/back"
+        android:id="@+id/toolbar"
         app:wp_istoolbarLeftImg="true"
         app:wp_CenterTitle="@string/theOrderDetails"
         android:layout_height="@dimen/dp_45"></com.example.framework.view.ToolBar>

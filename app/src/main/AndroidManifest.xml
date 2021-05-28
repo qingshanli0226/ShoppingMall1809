@@ -2,21 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shoppingmall1809">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         android:name=".app.App"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ShoppingMall1809">
-
+        android:theme="@style/Theme.ShoppingMall1809"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".main.message.MessageActivity"></activity>
         <activity android:name=".welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,8 @@
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".main.particulars.ParticularsActivity"></activity>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".main.particulars.ParticularsActivity" />
 
         <meta-data
             android:name="design_width_in_dp"
@@ -37,7 +36,6 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="731" />
-
     </application>
 
 </manifest>

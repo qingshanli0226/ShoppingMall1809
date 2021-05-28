@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.commom.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.manager.ShoppingCarManager;
@@ -22,7 +23,7 @@ import com.example.shoppingcar.orderForm.adapter.OrderFormAdapter;
 
 import java.util.ArrayList;
 
-@Route(path = "/orderForm/OrdeFormActivity")
+@Route(path = "/orderForm/OrderFormActivity")
 public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implements IOrderFormView {
 
     private TextView orderName;
@@ -41,14 +42,15 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
     @Override
     protected void initData() {
         float money = getIntent().getFloatExtra("money", 0.00f);
-        orderMoney.setText(money + "");
-        productPrice.setText(money + "");
+        orderMoney.setText("￥"+money );
+        productPrice.setText("￥"+money);
         LoginBean.ResultBean result = ShopeUserManager.getInstance().getLoginBean().getResult();
         orderAddress.setText((String) result.getAddress());
         orderName.setText((String) result.getName());
         orderPhone.setText((String) result.getPhone());
 
         ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean = ShoppingCarManager.getInstance().getDeleteBean();
+        LogUtils.d(deleteBean.toString());
 
         OrderFormAdapter orderFormAdapter = new OrderFormAdapter(deleteBean);
         orderRv.setAdapter(orderFormAdapter);
