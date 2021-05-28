@@ -3,12 +3,7 @@ package com.example.myapplication.shoppingCart;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-<<<<<<< HEAD
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-=======
->>>>>>> xsp
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
@@ -18,18 +13,13 @@ import android.widget.Toast;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
-<<<<<<< HEAD
-import com.example.myapplication.home.homeadapter.HomeAdapter;
 import com.example.myapplication.payorder.OrderActivity;
-=======
->>>>>>> xsp
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Cache;
 
 public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> implements  IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
