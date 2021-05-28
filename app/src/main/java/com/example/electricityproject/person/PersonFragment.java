@@ -40,7 +40,7 @@ public class PersonFragment extends BaseFragment {
                 }
             }
         });
-
+        //代付款
         orderPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +54,7 @@ public class PersonFragment extends BaseFragment {
                 }
             }
         });
-
+        //待收货
         orderShipment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

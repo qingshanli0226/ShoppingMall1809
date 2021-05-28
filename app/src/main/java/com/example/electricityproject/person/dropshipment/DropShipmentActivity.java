@@ -1,7 +1,5 @@
 package com.example.electricityproject.person.dropshipment;
 
-import android.util.Log;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,7 +74,6 @@ public class DropShipmentActivity extends BaseActivity<DropShipmentPresenter> im
 
     @Override
     public void onDropShipmentBean(FindForSendBean findForSendBean) {
-        Log.i("zx", "onDropShipmentBean: "+findForSendBean.toString());
         if (findForSendBean.getCode().equals("200")){
             dropShipmentAdapter.updateData(findForSendBean.getResult());
             dropShipmentAdapter.notifyDataSetChanged();
