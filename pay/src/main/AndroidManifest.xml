@@ -4,7 +4,7 @@
 
     <application>
 
-        <activity android:name=".orderinfo.PayActivity"></activity>
+        <activity android:name=".orderinfo.OrderInfoActivity"></activity>
         <activity android:name=".payment.PaymentActivity" />
         <activity android:name=".shipments.ShipmentsActivity" />
     </application>
