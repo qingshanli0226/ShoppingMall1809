@@ -1,9 +1,9 @@
 package com.example.net.model;
 
 
+import java.io.Serializable;
 
-
-public class OrderinfoBean {
+public class OrderinfoBean implements Serializable {
 
 
     public String getCode() {
@@ -42,7 +42,7 @@ public class OrderinfoBean {
     private ResultBean result;
 
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable{
         public String getOrderInfo() {
             return orderInfo;
         }
