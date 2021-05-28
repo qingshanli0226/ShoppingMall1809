@@ -30,7 +30,6 @@ public class MessageManager {
         }
         return msgManager;
     }
-
     private MessageManager() {
 
     }
@@ -96,6 +95,8 @@ public class MessageManager {
         });
 
     }
+
+
     public void updateMessage(@NonNull final MessageBean messageBean, final IMessageListener messageListener){
         executorService.execute(new Runnable() {
             @Override
