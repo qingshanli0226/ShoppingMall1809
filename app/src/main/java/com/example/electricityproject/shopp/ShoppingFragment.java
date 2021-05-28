@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
