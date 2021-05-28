@@ -3,6 +3,9 @@ package com.example.user.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +36,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     private SharedPreferences sharedPreferences;
     private android.widget.TextView registName;
     private ImageView passwordImg;
+    private boolean isHideFirst = true;
 
     @Override
     protected void initPresenter() {
@@ -71,6 +75,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         passwordImg = findViewById(R.id.password_img);
         registName = findViewById(R.id.regist_name);
 
+        passwordImg.setImageResource(R.drawable.new_password_drawable_invisible);
+
         registName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,9 +88,27 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         passwordImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                etLoginPwd.setInputType(Integer.parseInt("0x00000001"));
+                if (isHideFirst == true) {
+                    passwordImg.setImageResource(R.drawable.new_password_drawable_visible);
+                    //密文
+                    HideReturnsTransformationMethod method1 = HideReturnsTransformationMethod.getInstance();
+                    etLoginPwd.setTransformationMethod(method1);
+                    isHideFirst = false;
+                } else {
+                    passwordImg.setImageResource(R.drawable.new_password_drawable_invisible);
+                    //密文
+                    TransformationMethod method = PasswordTransformationMethod.getInstance();
+                    etLoginPwd.setTransformationMethod(method);
+                    isHideFirst = true;
+
+                }
+                // 光标的位置
+                int index = etLoginPwd.getText().toString().length();
+                etLoginPwd.setSelection(index);
             }
         });
+
+
     }
 
     @Override

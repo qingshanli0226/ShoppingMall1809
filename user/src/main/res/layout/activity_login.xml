@@ -87,7 +87,7 @@
             android:textColor="@color/colorThree"
             android:textSize="@dimen/sp_14" />
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -102,17 +102,16 @@
                 android:text="111"
                 android:singleLine="true"
                 android:textColor="@color/colorFive"
-                android:layout_gravity="center"
+                android:layout_centerVertical="true"
                 android:textSize="@dimen/sp_14" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/select_password"
                 android:layout_gravity="center"
-                android:layout_marginLeft="110dp"
+                android:layout_alignParentRight="true"
                 android:id="@+id/password_img"
                 ></ImageView>
-        </FrameLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

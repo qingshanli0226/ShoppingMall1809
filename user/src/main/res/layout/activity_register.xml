@@ -86,17 +86,31 @@
             android:textColor="@color/colorThree"
             android:textSize="@dimen/sp_14" />
 
-        <EditText
-            android:id="@+id/et_regist_pwd"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/inputPassword"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/colorFive"
-            android:textSize="@dimen/sp_14" />
+            >
+            <EditText
+                android:id="@+id/et_regist_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/inputPassword"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorFive"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_alignParentRight="true"
+                android:id="@+id/registerImg"
+                ></ImageView>
+        </RelativeLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="400dp"
@@ -111,21 +125,34 @@
             android:layout_width="@dimen/dp_95"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/password"
+            android:text="确认密码"
             android:textColor="@color/colorThree"
             android:textSize="@dimen/sp_14" />
 
-        <EditText
-            android:id="@+id/et_regist_again"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="请再次输入密码"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/colorFive"
-            android:textSize="@dimen/sp_14" />
+            >
+            <EditText
+                android:id="@+id/et_regist_again"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorFive"
+                android:textSize="@dimen/sp_14" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_alignParentRight="true"
+                android:id="@+id/registerImgAgain"
+                ></ImageView>
+        </RelativeLayout>
     </LinearLayout>
 
     <View
