@@ -20,7 +20,7 @@ import com.example.net.bean.LoginBean;
 import retrofit2.http.HEAD;
 
 
-public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, UserManager.IUserChange {
+public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, UserManager.IUserChange {
     protected P mPresenter;
     protected ToolBar toolBar;
     protected LoadPage loadPage;
@@ -102,6 +102,22 @@ public abstract class BaseActivity<P extends  BasePresenter> extends AppCompatAc
 
     @Override
     public void onUserChange(LoginBean loginBean) {
+
+    }
+
+
+    @Override
+    public void onClickCenter() {
+
+    }
+
+    @Override
+    public void onClickLeft() {
+
+    }
+
+    @Override
+    public void onClickRight() {
 
     }
 }

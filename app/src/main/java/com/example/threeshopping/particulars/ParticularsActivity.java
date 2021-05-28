@@ -83,13 +83,12 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     public void initView() {
         rootview = findViewById(R.id.particulars);
 
-        toolbar = (ToolBar) findViewById(R.id.toolbar);
         paricularsImg = (ImageView) findViewById(R.id.pariculars_img);
         paricularsName = (TextView) findViewById(R.id.pariculars_name);
         paricularsPrice = (TextView) findViewById(R.id.pariculars_price);
         shopcar = (ImageView) findViewById(R.id.shopcar);
         particularsJoin = (Button) findViewById(R.id.particulars_join);
-        toolbar.setToolbarOnClickLisenter(this);
+
 
         view = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.pop_layout, null);
         popPic = (ImageView) view.findViewById(R.id.pop_pic);

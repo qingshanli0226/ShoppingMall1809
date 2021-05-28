@@ -5,6 +5,7 @@ import com.example.common.module.CommonArouter;
 import com.example.threeshopping.MainActivity;
 
 
+import com.example.threeshopping.bind.BindInfoActivity;
 import com.example.threeshopping.particulars.ParticularsActivity;
 
 
@@ -12,5 +13,6 @@ public class AppModule {
     public static void init() {
         CommonArouter.getInstance().registerPath(Constants.PATH_MAIN, MainActivity.class);
         CommonArouter.getInstance().registerPath(Constants.PATH_PARTICULARS, ParticularsActivity.class);
+        CommonArouter.getInstance().registerPath(Constants.PATH_PARTICULARS, BindInfoActivity.class);
     }
 }

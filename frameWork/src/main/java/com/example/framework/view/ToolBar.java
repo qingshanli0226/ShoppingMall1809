@@ -156,7 +156,7 @@ public class ToolBar extends RelativeLayout {
             }
         }
     }
-        public static interface IToolbarOnClickLisenter {
+        public interface IToolbarOnClickLisenter {
             void onClickCenter();
 
             void onClickLeft();
