@@ -1,7 +1,6 @@
 package com.shoppingmall.detail;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,18 +19,18 @@ import com.finance.detail.R;
 import com.shoppingmall.detail.bean.ProductGoodBean;
 import com.shoppingmall.detail.greendao.GoodsTable;
 import com.shoppingmall.detail.greendao.TableManager;
+import com.shoppingmall.detail.messagedao.DaoSession;
 import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.glide.ShopMallGlide;
 import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
-import com.shoppingmall.net.bean.AddProductBean;
-import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.SelectBean;
 import com.shoppingmall.net.bean.ShopCarBean;
-import com.yoho.greendao.gen.DaoSession;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

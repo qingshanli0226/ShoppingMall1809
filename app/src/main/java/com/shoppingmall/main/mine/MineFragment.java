@@ -8,13 +8,17 @@ import android.widget.TextView;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
+import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.unpaid.PayDealActivity;
 
 
 public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {
 
     private TextView textname;
     private ImageView isLogin;
+    private ImageView message;
+    private TextView pay;
 
     @Override
     public int getLayoutId() {
@@ -25,6 +29,8 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
     public void initView() {
         textname = mView.findViewById(R.id.textname);
         isLogin = (ImageView) mView.findViewById(R.id.isLogin);
+        message = mView.findViewById(R.id.message);
+        pay = mView.findViewById(R.id.pay);
     }
 
     @Override
@@ -43,10 +49,26 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
         isLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),ExitUserActivity.class);
+                Intent intent = new Intent(getContext(), ExitUserActivity.class);
                 startActivity(intent);
             }
         });
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PayDealActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

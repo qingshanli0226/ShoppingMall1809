@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/new_message_icon"
+            android:id="@+id/message"
             android:layout_marginLeft="@dimen/dp_350"></ImageView>
         <TextView
             android:layout_width="match_parent"
@@ -77,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dfk"
+            android:id="@+id/pay"
             android:drawableTop="@drawable/new_order_status_fahuo"
             ></TextView>
         <TextView

@@ -8,7 +8,7 @@ import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.net.TokenInterceptor;
 import com.shoppingmall.net.TokenInterceptorContext;
-import com.yoho.greendao.gen.DaoSession;
+
 
 public class App extends Application {
 

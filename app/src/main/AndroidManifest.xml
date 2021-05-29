@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingMall"
         android:usesCleartextTraffic="true">
-        <activity android:name=".main.mine.ExitUserActivity"></activity>
+        <activity android:name=".unpaid.PayDealActivity"></activity>
+        <activity android:name=".main.message.MessageActivity" />
+        <activity android:name=".main.mine.ExitUserActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"
             android:launchMode="singleTask">
