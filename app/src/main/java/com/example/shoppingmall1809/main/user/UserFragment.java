@@ -14,7 +14,7 @@ import com.example.net.model.FindForBean;
 import com.example.net.model.LoginBean;
 import com.example.shoppingmall1809.R;
 
-public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUserManager.IUserLoginChanged, IUserView, ShoppingCarManager.IFindForBean {
+public class UserFragment extends BaseFragment implements ShopeUserManager.IUserLoginChanged, IUserView {
 
 
     private LinearLayout fragUserFukuan;
@@ -30,14 +30,12 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
     @Override
     protected void initData() {
 
-        ShoppingCarManager.getInstance().registerFindForBean(this::onFindForBean);
 
         ShopeUserManager.getInstance().register(this::onLoginChange);
 
 
         if (ShopeUserManager.getInstance().getLoginBean() != null) {
-            httpPresenter.getFindForPayData();
-            httpPresenter.getFindForSendData();
+
         }
 
         fragUserFukuan.setOnClickListener(view -> {
@@ -66,7 +64,7 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
 
     @Override
     protected void initPresenter() {
-        httpPresenter = new UserPresenter(this);
+
     }
 
     @Override
@@ -80,22 +78,6 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
 
     @Override
     public void onLoginChange(LoginBean loginBean) {
-        httpPresenter.getFindForPayData();
-        httpPresenter.getFindForSendData();
-    }
-
-    @Override
-    public void onFindForPayData(FindForBean findForBean) {
-        if (findForBean.getCode().equals("200")) {
-            ShoppingCarManager.getInstance().setFindForPayBean(findForBean);
-        }
-    }
-
-    @Override
-    public void onFindForSendData(FindForBean findForBean) {
-        if (findForBean.getCode().equals("200")) {
-            ShoppingCarManager.getInstance().setFindForSendBean(findForBean);
-        }
     }
 
 
@@ -118,13 +100,7 @@ public class UserFragment extends BaseFragment<UserPresenter> implements ShopeUs
     public void destroy() {
         super.destroy();
         ShopeUserManager.getInstance().unregister(this::onLoginChange);
-        ShoppingCarManager.getInstance().unRegisterFindForBean();
     }
 
-    @Override
-    public void onFindForBean() {
-        httpPresenter.getFindForPayData();
-        httpPresenter.getFindForSendData();
-    }
 
 }

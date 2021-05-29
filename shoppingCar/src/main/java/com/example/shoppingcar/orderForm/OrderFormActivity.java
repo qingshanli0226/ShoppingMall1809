@@ -55,9 +55,9 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
         orderMoney.setText("￥"+aFloat + "");
         productPrice.setText("￥"+aFloat + "");
         LoginBean.ResultBean result = ShopeUserManager.getInstance().getLoginBean().getResult();
-        orderAddress.setText(getResources().getString(R.string.userName)+(String) result.getAddress());
-        orderName.setText(getResources().getString(R.string.phone)+(String) result.getName());
-        orderPhone.setText(getResources().getString(R.string.address)+(String) result.getPhone());
+        orderAddress.setText(getResources().getString(R.string.address)+(String) result.getAddress());
+        orderName.setText(getResources().getString(R.string.userName)+(String) result.getName());
+        orderPhone.setText(getResources().getString(R.string.phone)+(String) result.getPhone());
 
         ArrayList<ShoppingTrolleyBean.ResultBean> deleteBean = ShoppingCarManager.getInstance().addDeleteBean();
 
@@ -98,6 +98,7 @@ public class OrderFormActivity extends BaseActivity<OrderFormPresenter> implemen
             Toast.makeText(OrderFormActivity.this, getResources().getString(R.string.placeAnOrderSuccessfully), Toast.LENGTH_SHORT).show();
             ShoppingCarManager.getInstance().deletePartResult();
             ARouter.getInstance().build(ShopConstants.PAY_PATH).withSerializable("orderinfoBean",orderinfoBean).withFloat("money",aFloat).navigation();
+            finish();
         }
     }
 

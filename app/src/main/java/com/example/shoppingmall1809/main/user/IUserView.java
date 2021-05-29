@@ -4,7 +4,7 @@ import com.example.framework.IBaseView;
 import com.example.net.model.FindForBean;
 
 public interface IUserView extends IBaseView {
-    void onFindForPayData(FindForBean findForBean);
-    void onFindForSendData(FindForBean findForBean);
+//    void onFindForPayData(FindForBean findForBean);
+//    void onFindForSendData(FindForBean findForBean);
 
 }

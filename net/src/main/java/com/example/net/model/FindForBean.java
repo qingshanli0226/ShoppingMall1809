@@ -119,6 +119,9 @@ public class FindForBean {
             this.orderInfo = orderInfo;
         }
 
+        public ResultBean() {
+        }
+
         /**
          * subject : buy
          * body : 测试数据
@@ -128,6 +131,7 @@ public class FindForBean {
          * tradeNo : 121110474516759
          * orderInfo : null
          */
+
 
 
         private String subject;
