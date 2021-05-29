@@ -1,0 +1,60 @@
+com/shoppingmall/detail/DaoMaster.java
+ com.shoppingmall.detail.DaoMaster
+ com.shoppingmall.detail.DaoMaster$DevOpenHelper
+ com.shoppingmall.detail.DaoMaster$OpenHelper
+com/shoppingmall/detail/bean/ProductGoodBean.java
+ com.shoppingmall.detail.bean.ProductGoodBean
+com/shoppingmall/detail/messagedao/MessageBean.java
+ com.shoppingmall.detail.messagedao.MessageBean
+com/shoppingmall/detail/DaoSession.java
+ com.shoppingmall.detail.DaoSession
+com/shoppingmall/detail/DetailPresenter.java
+ com.shoppingmall.detail.DetailPresenter
+ com.shoppingmall.detail.DetailPresenter$1
+ com.shoppingmall.detail.DetailPresenter$2
+com/shoppingmall/detail/greendao/GoodsTable.java
+ com.shoppingmall.detail.greendao.GoodsTable
+com/shoppingmall/detail/GoodsTableDao.java
+ com.shoppingmall.detail.GoodsTableDao
+ com.shoppingmall.detail.GoodsTableDao$Properties
+com/shoppingmall/detail/IDetailView.java
+ com.shoppingmall.detail.IDetailView
+com/shoppingmall/detail/messagedao/DaoSession.java
+ com.shoppingmall.detail.messagedao.DaoSession
+com/shoppingmall/detail/DetailActivity.java
+ com.shoppingmall.detail.DetailActivity
+ com.shoppingmall.detail.DetailActivity$1
+ com.shoppingmall.detail.DetailActivity$2
+ com.shoppingmall.detail.DetailActivity$3
+ com.shoppingmall.detail.DetailActivity$4
+ com.shoppingmall.detail.DetailActivity$5
+ com.shoppingmall.detail.DetailActivity$6
+com/shoppingmall/detail/messagedao/GoodsTableDao.java
+ com.shoppingmall.detail.messagedao.GoodsTableDao
+ com.shoppingmall.detail.messagedao.GoodsTableDao$Properties
+com/shoppingmall/detail/MessageBeanDao.java
+ com.shoppingmall.detail.MessageBeanDao
+ com.shoppingmall.detail.MessageBeanDao$Properties
+com/shoppingmall/detail/messagedao/DaoMaster.java
+ com.shoppingmall.detail.messagedao.DaoMaster
+ com.shoppingmall.detail.messagedao.DaoMaster$DevOpenHelper
+ com.shoppingmall.detail.messagedao.DaoMaster$OpenHelper
+com/shoppingmall/detail/messagedao/MessageManager.java
+ com.shoppingmall.detail.messagedao.MessageManager
+ com.shoppingmall.detail.messagedao.MessageManager$1
+ com.shoppingmall.detail.messagedao.MessageManager$2
+ com.shoppingmall.detail.messagedao.MessageManager$2$1
+ com.shoppingmall.detail.messagedao.MessageManager$3
+ com.shoppingmall.detail.messagedao.MessageManager$3$1
+ com.shoppingmall.detail.messagedao.MessageManager$4
+ com.shoppingmall.detail.messagedao.MessageManager$4$1
+ com.shoppingmall.detail.messagedao.MessageManager$5
+ com.shoppingmall.detail.messagedao.MessageManager$5$1
+ com.shoppingmall.detail.messagedao.MessageManager$IMessageListener
+com/shoppingmall/detail/messagedao/MessageBeanDao.java
+ com.shoppingmall.detail.messagedao.MessageBeanDao
+ com.shoppingmall.detail.messagedao.MessageBeanDao$Properties
+com/shoppingmall/detail/greendao/TableManager.java
+ com.shoppingmall.detail.greendao.TableManager
+com/finance/detail/BuildConfig.java
+ com.finance.detail.BuildConfig
