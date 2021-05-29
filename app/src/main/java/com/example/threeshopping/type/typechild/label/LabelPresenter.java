@@ -31,13 +31,17 @@ public class LabelPresenter extends BasePresenter<ILabelView> {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         add(disposable);
-                        mView.showLoading();
+                        if (mView != null) {
+                            mView.showLoading();
+                        }
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-                        mView.hideLoading();
+                        if (mView != null) {
+                            mView.hideLoading();
+                        }
                     }
                 })
                 .subscribe(new Observer<LabelBean>() {

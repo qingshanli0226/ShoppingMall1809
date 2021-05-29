@@ -93,6 +93,7 @@ public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompat
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){
+            finish();
             Bundle bundle = new Bundle();
             bundle.putInt("page",0);
             CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
@@ -108,16 +109,18 @@ public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompat
 
     @Override
     public void onClickCenter() {
+        finish();
 
     }
 
     @Override
     public void onClickLeft() {
-
+        finish();
     }
 
     @Override
     public void onClickRight() {
+        finish();
 
     }
 }

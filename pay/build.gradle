@@ -29,8 +29,12 @@ android {
 }
 
 dependencies {
-    //支付宝
-//    implementation files('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
+
+    // 支付宝 SDK AAR 包所需的配置
+//    implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
+    implementation fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
+    implementation fileTree(dir: 'libs', include: ['*.aar','*.jar'])
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation project(path: ':net')

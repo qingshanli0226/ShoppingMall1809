@@ -367,6 +367,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onOrder(OrderBean orderBean) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", (Serializable) payBean);
+        bundle.putString("orderInfo", orderBean.getResult().getOrderInfo());
         CommonArouter.getInstance().build(Constants.PATH_ORDERINFOACTIVITY).with(bundle).navigation();
         getActivity().finish();
 

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.example.common.Constants;
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
@@ -73,7 +74,25 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
             mPresenter.detachView();
         }
     }
+    @Override
+    public void onClickCenter() {
+        getActivity().finish();
 
+    }
+
+    @Override
+    public void onClickLeft() {
+        LogUtil.d("zybonclickleft");
+        getActivity().finish();
+
+    }
+
+    @Override
+    public void onClickRight() {
+        getActivity().finish();
+
+
+    }
 
 
 

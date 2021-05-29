@@ -1,6 +1,10 @@
 package com.example.message;
 
 
+import android.os.Bundle;
+
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 
@@ -37,7 +41,8 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     public void onClickLeft() {
-        finish();
+        super.onClickLeft();
+        CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
     }
 
     @Override

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,11 +82,21 @@ public class OrderInfoActivity extends BaseActivity {
         //数据源
         Bundle bundle = CommonArouter.getInstance().getBundle();
         PayBean payBean = (PayBean) bundle.getSerializable("data");
+        String orderInfo = (String) bundle.getString("orderInfo");
         orderRv.setAdapter(orderAdapter);
         orderAdapter.updata(payBean.getBody());
         allMoney.setText(payBean.getTotalPrice());
 
-
+        orderPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("totalPrice",payBean.getTotalPrice());
+                bundle.putString("orderInfo",orderInfo);
+                CommonArouter.getInstance().build(Constants.PATH_PAYMENT).with(bundle).navigation();
+                finish();
+            }
+        });
 
     }
 
@@ -101,7 +112,6 @@ public class OrderInfoActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("page",3);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
-        finish();
 
 
 
