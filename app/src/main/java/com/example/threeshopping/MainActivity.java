@@ -136,6 +136,7 @@ public class MainActivity extends BaseActivity{
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
             CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
+            finish();
         }
     }
 

@@ -208,15 +208,25 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                     });
                     popupWindow.showAsDropDown(particularsJoin, 0, 200);
                 } else {
-//                    CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle).navigation();
+
                     Intent intent = new Intent(ParticularsActivity.this, UserActivity.class);
                     startActivityForResult(intent,101);
-//                    Bundle bundle1 = new Bundle();
-//                    bundle1.putString("name","Particulars");
-//                    CommonArouter.getInstance().build(Constants.PATH_USER).with(bundle1).startActivityForResult();
+
                 }
             }
         });
+
+        shopcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (loginBean != null) {
+                    finish();
+                    CommonArouter.getInstance().build(Constants.PATH_SHOPACTIVITY).navigation();
+                }
+            }
+        });
+
+
 
     }
 

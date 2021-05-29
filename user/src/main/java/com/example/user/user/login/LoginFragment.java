@@ -13,12 +13,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-
 import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
@@ -28,8 +26,6 @@ import com.example.user.user.IUserView;
 import com.example.user.user.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
-
-import retrofit2.http.HEAD;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +43,7 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     private ImageView qq;
     private ImageView weixin;
     private int page;
+    private ToolBar toolbar;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +61,7 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
         weibo = (ImageView) findViewById(R.id.weibo);
         qq = (ImageView) findViewById(R.id.qq);
         weixin = (ImageView) findViewById(R.id.weixin);
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
     }
 
     @Override
@@ -131,6 +129,7 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
     @Override
     public void onClickLeft() {
+        super.onClickLeft();
         Bundle bundle = new Bundle();
         bundle.putInt("page", 0);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
@@ -154,15 +153,11 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
 
-//            Bundle bundle1 = CommonArouter.getInstance().getBundle();
-//            String name = bundle1.getString("name");
-//            if (name.equals("Particulars")){
-                getActivity().finish();
-//            }else {
-                Bundle bundle = new Bundle();
-                bundle.putInt("page", page);
-                CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
-//            }
+            getActivity().finish();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("page", page);
+            CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
 
 
         } else {
@@ -189,4 +184,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     public void showError(String error) {
         Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
     }
+
+
 }

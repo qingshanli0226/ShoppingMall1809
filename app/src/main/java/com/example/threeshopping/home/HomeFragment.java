@@ -73,6 +73,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
+                getActivity().finish();
             }
         });
     }

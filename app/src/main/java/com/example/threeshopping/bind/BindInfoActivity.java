@@ -98,6 +98,7 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
     @Override
     public void onPhone(SelectBean selectBean) {
         twoFlag = true;
+        Toast.makeText(this, "电话成功", Toast.LENGTH_SHORT).show();
         if(oneFlag && twoFlag){
             finish();
             Bundle bundle = new Bundle();
@@ -109,6 +110,7 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
     @Override
     public void onAddr(SelectBean selectBean) {
         oneFlag = true;
+        Toast.makeText(this, "地址成功", Toast.LENGTH_SHORT).show();
         if(oneFlag && twoFlag){
             finish();
             Bundle bundle = new Bundle();

@@ -36,18 +36,21 @@ public class PersonalFragment extends BaseFragment {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getActivity().finish();
                 CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
             }
         });
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonArouter.getInstance().build(Constants.PATH_PAYMENT).navigation();
+                getActivity().finish();
+                CommonArouter.getInstance().build(Constants.PATH_AWAITPAYMENT).navigation();
             }
         });
         shipments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getActivity().finish();
                 CommonArouter.getInstance().build(Constants.PATH_SHIPMENTS).navigation();
             }
         });

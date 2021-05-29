@@ -231,7 +231,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                     }
                 }
                 LoginBean.ResultBean result = UserManager.getInstance().getLoginBean().getResult();
-
+                LogUtil.d("zyb"+result.getPhone()+"   "+result.getAddress());
                 if (body.size() >= 1) {
                     //选中一个
                     //判断是否绑定信息
@@ -240,9 +240,10 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                         mPresenter.getOrder(payBean);
 
                     } else{
-                        getActivity().finish();
                         //跳转绑定页面
                         CommonArouter.getInstance().build(Constants.PATH_BIND).navigation();
+                        getActivity().finish();
+
                     }
                 } else {
                     Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
@@ -367,6 +368,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onOrder(OrderBean orderBean) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", (Serializable) payBean);
+        bundle.putString("orderInfo", orderBean.getResult().getOrderInfo());
         CommonArouter.getInstance().build(Constants.PATH_ORDERINFOACTIVITY).with(bundle).navigation();
         getActivity().finish();
 

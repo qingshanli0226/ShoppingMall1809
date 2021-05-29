@@ -144,21 +144,7 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
         typeList.add(typeBean.getResult().get(0).getChild());
         classAdapter.updata(typeList);
 
-//        classAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
-//            @Override
-//            public void onItemClick(int position, View view) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("pic", Constants.BASE_URl_IMAGE +typeBean.getResult().get(0).getHot_product_list().get(position).getFigure());
-//                bundle.putString("title",typeBean.getResult().get(0).getHot_product_list().get(position).getName());
-//                bundle.putString("price",typeBean.getResult().get(0).getHot_product_list().get(position).getCover_price());
-//                CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
-//            }
-//
-//            @Override
-//            public boolean onLongItemClick(int position, View view) {
-//                return false;
-//            }
-//        });
+
     }
 
     @Override

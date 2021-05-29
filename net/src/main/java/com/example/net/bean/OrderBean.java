@@ -1,6 +1,8 @@
 package com.example.net.bean;
 
-public class OrderBean {
+import java.io.Serializable;
+
+public class OrderBean implements Serializable {
 
     /**
      * code : 200

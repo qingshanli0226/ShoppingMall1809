@@ -24,6 +24,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -103,10 +104,12 @@ public interface IHttpApiService {
     @POST(Constants.GETORDER)
     Observable<OrderBean> getOrder(@Body RequestBody requestBody);
     //设置电话
+    @FormUrlEncoded
     @POST(Constants.UPDATEPHONE)
-    Observable<SelectBean> setPhone(@Field("phone")String phone);
+    Observable<SelectBean> setPhone(@Field("phone") String phone);
 
     //设置地址
+    @FormUrlEncoded
     @POST(Constants.UPDATEADDRESS)
-    Observable<SelectBean> setAddr(@Field("address")String address);
+    Observable<SelectBean> setAddr(@Field("address") String address);
 }
