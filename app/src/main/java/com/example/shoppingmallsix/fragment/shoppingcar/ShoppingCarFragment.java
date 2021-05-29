@@ -3,10 +3,10 @@ package com.example.shoppingmallsix.fragment.shoppingcar;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
-
+import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.CheckOneInventoryBean;
-
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
-
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.business.RemoveManyProductBean;
 import com.example.net.bean.business.RemoveOneProductBean;
@@ -33,6 +31,8 @@ import com.example.net.bean.business.UpdateProductSelectedBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.pay.order.GetOrderActivity;
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.fragment.home.HomeFragment;
+import com.example.shoppingmallsix.main.MainActivity;
 import com.example.user.login.LoginActivity;
 
 import java.util.ArrayList;
@@ -40,8 +40,8 @@ import java.util.List;
 
 
 /**
- *        田伟泽&赵于赞
- *
+ * 田伟泽&赵于赞
+ * <p>
  * A simple {@link Fragment} subclass.
  */
 
@@ -63,6 +63,10 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     private CheckBox shopCheck;
     private float price = 0;
     private List<GetShortcartProductsBean.ResultBean> listDelete = new ArrayList<>();
+    private ToolBar toolbar;
+    private RecyclerView shopcarRv;
+    private LinearLayout shoppingGuideLinear;
+    private TextView shoppingGuideText;
 
     @Override
     protected void initPresenter() {
@@ -102,7 +106,14 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 DeleteServeData();
             }
         });
-
+        //指引页面
+        shoppingGuideText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
+                MainActivity.mainCommon.setCurrentTab(0);
+            }
+        });
     }
 
     //子线程获取数据 实时刷新
@@ -116,9 +127,14 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
                 if (result != null) {
-                    resultBeans.addAll(result);
-                    AllProductBeanAndProductSelect();
-                    shoppingCarAdapter.notifyDataSetChanged();
+                    if (result.size()==0){
+                        shoppingGuideLinear.setVisibility(View.VISIBLE);
+                    }else {
+                        shoppingGuideLinear.setVisibility(View.GONE);
+                        resultBeans.addAll(result);
+                        AllProductBeanAndProductSelect();
+                        shoppingCarAdapter.notifyDataSetChanged();
+                    }
                 }
             } else {
                 handler.sendEmptyMessageDelayed(1, 1000);
@@ -138,6 +154,9 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shouCangBt = mBaseView.findViewById(R.id.shouCangBt);
         recyclerView = mBaseView.findViewById(R.id.shopcarRv);
         shopCheck = mBaseView.findViewById(R.id.shopCheck);
+        shoppingGuideLinear = (LinearLayout) mBaseView.findViewById(R.id.shoppingGuideLinear);
+        shoppingGuideText = (TextView) mBaseView.findViewById(R.id.shoppingGuideText);
+
         shoppingCarAdapter = new ShoppingCarAdapter(resultBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(shoppingCarAdapter);
@@ -173,22 +192,22 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shoppingCarAdapter.setItemListener(new ShoppingCarAdapter.IItemChildClick() {
             @Override
             public void onItemChildClick(int position, View view) {
-                        GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
-                        switch (view.getId()) {
-                            case R.id.shoppingTrolley_CheckBox:
-                                httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
-
-                                break;
-                            case R.id.shoppingTrolley_sub:
-                                httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) - 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, true);
-                                break;
-                            case R.id.shoppingTrolley_add:
-                                httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
-                                break;
-                        }
+                GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
+                switch (view.getId()) {
+                    case R.id.shoppingTrolley_CheckBox:
+                        httpPresenter.getUpProductSelect(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), (String) resultBean.getProductPrice(), position);
+                        break;
+                    case R.id.shoppingTrolley_sub:
+                        httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) - 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, true);
+                        break;
+                    case R.id.shoppingTrolley_add:
+                        httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
+                        break;
                 }
+            }
         });
-     }
+
+    }
 
     @Override
     protected int getLayoutId() {
@@ -234,6 +253,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
+
     @Override
     public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
         if (getOrderInfoBean.getCode().equals("200")) {
@@ -249,7 +269,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             intent.putExtra("key", "main");
             startActivity(intent);
         } else {
-            Toast.makeText(getContext(), ""+getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "" + getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -273,8 +293,8 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     //删除一个物品的回调
     @Override
-    public void onRemoveOneProductBean(RemoveOneProductBean removeOneProductBean,int position) {
-        if (removeOneProductBean.getCode().equals("200")){
+    public void onRemoveOneProductBean(RemoveOneProductBean removeOneProductBean, int position) {
+        if (removeOneProductBean.getCode().equals("200")) {
             //服务端删除后删除缓存
             resultBeans.remove(position);
         }
@@ -282,6 +302,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         //通知缓存改变
         SoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
+
     //检查库存的回调
     @Override
     public void onCheckInventory(CheckOneInventoryBean bean, int position) {
@@ -290,7 +311,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
             GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
             //修改
-            httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum())+1) + "", resultBean.getProductName(), resultBean.getUrl(), ""+price,position,false);
+            httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) + 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, false);
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(getActivity(), "检查库存没有", Toast.LENGTH_SHORT).show();
@@ -300,18 +321,18 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     //修改更新的回调
     @Override
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolena) {
-        if (updateProductNumBean.getCode().equals("200")){
+        if (updateProductNumBean.getCode().equals("200")) {
             //修改内存数据
-            if (mBoolena){
+            if (mBoolena) {
                 //减少
-                if ((Integer.parseInt(resultBeans.get(position).getProductNum())>1)){
-                    resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum())-1)+"");
-                }else {
-                    httpPresenter.removeOneProductBean(resultBeans.get(position),position);
+                if ((Integer.parseInt(resultBeans.get(position).getProductNum()) > 1)) {
+                    resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum()) - 1) + "");
+                } else {
+                    httpPresenter.removeOneProductBean(resultBeans.get(position), position);
                 }
-            }else {
+            } else {
                 //增加
-                resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum())+1)+"");
+                resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum()) + 1) + "");
             }
             allPrice();
             SoppingCartMemoryDataManager.setResultBean(resultBeans);
