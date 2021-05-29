@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_margin="@dimen/dm_dp_5"
     android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dm_dp_100"
+        android:layout_height="@dimen/dm_dp_120"
         android:orientation="vertical"
-        android:background="@drawable/broder_big"
+        android:background="@drawable/awaitpay_back"
         android:padding="@dimen/dm_dp_20"
         >
         <TextView

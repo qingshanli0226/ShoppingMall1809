@@ -1,7 +1,9 @@
 package com.example.pay.awaitpayment;
 
+import android.content.DialogInterface;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,9 +55,23 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
         paymentAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
             @Override
             public void onItemClick(int position, View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AwaitPaymentActivity.this);
+                builder.setTitle("确认支付该订单");
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.show();
             }
-
             @Override
             public boolean onLongItemClick(int position, View view) {
                 return false;
