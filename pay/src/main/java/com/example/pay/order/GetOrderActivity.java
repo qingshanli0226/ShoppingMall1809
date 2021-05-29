@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
@@ -83,7 +84,7 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         llGoodsRoot = (RelativeLayout) findViewById(R.id.ll_goods_root);
         pricePay = (TextView) findViewById(R.id.price_pay);
         buyOrder = (Button) findViewById(R.id.buy_order);
-
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         buyOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
