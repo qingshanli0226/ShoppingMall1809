@@ -52,6 +52,6 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
 
     @Override
     public void initData() {
-
+           mPresenter.getOrder();
     }
 }
