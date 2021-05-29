@@ -217,12 +217,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             public void onClick(View v) {
 
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
-//                    float price = 0;
-//                    RequestOrderInfo requestOrderInfo = new RequestOrderInfo();
-//                    requestOrderInfo.setSubject("buy");
-//                    ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-//                    List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-
 
                     if (selectList.size() > 0){
                         List<OrderBean> orderBeanList = new ArrayList<>();
@@ -243,7 +237,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 }else {
                     Intent intent = new Intent(getContext(), BindUserInfoActivity.class);
                     startActivity(intent);
-                    Log.i("xxx", "onClick: "+"sss");
                 }
             }
         });
@@ -315,7 +308,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("orderInfo", orderInfo);
             if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
-//                deleteShopmall();
+                deleteShopmall();
             }
 
         }else {
@@ -430,7 +423,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
-
         }
     }
 

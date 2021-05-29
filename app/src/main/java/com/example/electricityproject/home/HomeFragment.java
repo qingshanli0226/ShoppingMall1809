@@ -1,5 +1,9 @@
 package com.example.electricityproject.home;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,25 +12,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.BusinessNetManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData{
+public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData {
     private RecyclerView mainRe;
     private HomeAdapter homeAdapter;
     private List<Object> objectList;
+    private ImageView imgSearch;
+    private EditText editMessage;
+    private ImageView btnMessage;
+
     @Override
     protected void initData() {
         httpPresenter.getHomeBannerData();
+
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     protected void initPresenter() {
-        httpPresenter=new HomePresenter(this);
+        httpPresenter = new HomePresenter(this);
     }
 
     @Override
@@ -36,11 +53,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         mainRe = mView.findViewById(R.id.main_re);
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        if (BusinessNetManager.getInstance().getNetConnect()){
-
-        }else {
-
-        }
+        imgSearch = (ImageView) findViewById(R.id.img_search);
+        editMessage = (EditText) findViewById(R.id.edit_message);
+        btnMessage = (ImageView) findViewById(R.id.btn_message);
     }
 
     @Override
@@ -74,7 +89,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     @Override
     public void onHomeBanner(HomeBean homeBean) {
 
-        objectList=new ArrayList<>();
+        objectList = new ArrayList<>();
         objectList.add(homeBean.getResult().getBanner_info());
         objectList.add(homeBean.getResult().getChannel_info());
         objectList.add(homeBean.getResult().getAct_info());
@@ -83,7 +98,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         objectList.add(homeBean.getResult().getHot_info());
         homeAdapter.updateData(objectList);
         mainRe.setAdapter(homeAdapter);
-
 
     }
 
