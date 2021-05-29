@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.shoppingmall1809.R;
 
+@Route(path = "/main/home/MessageActivity")
 public class MessageActivity extends BaseActivity {
 
 

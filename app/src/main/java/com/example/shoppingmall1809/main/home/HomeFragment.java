@@ -1,10 +1,14 @@
 package com.example.shoppingmall1809.main.home;
 
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
@@ -14,7 +18,7 @@ import java.util.ArrayList;
 
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
-
+    private LinearLayout homeMessage;
     private RecyclerView fragHomeRv;
 
     @Override
@@ -25,6 +29,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     protected void initData() {
         httpPresenter.getHomeData();
+
+        homeMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ARouter.getInstance().build(ShopConstants.MAIN_HOME_MESSAGE).navigation();
+            }
+        });
     }
 
     @Override
@@ -36,6 +47,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initView() {
         fragHomeRv = (RecyclerView) findViewById(R.id.frag_home_rv);
         fragHomeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        homeMessage = (LinearLayout) findViewById(R.id.home_message);
     }
 
     @Override

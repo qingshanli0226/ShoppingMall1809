@@ -12,6 +12,7 @@ public class ShopConstants {
     public final static String SHOP_ADDRESS="/address/ShoppingAddressActivity";
     public final static String ORDER_PATH="/orderForm/OrderFormActivity";
     public final static String PAY_PATH="/pay/PayActivity";
+    public final static String MAIN_HOME_MESSAGE="/main/home/MessageActivity";
 
 
     //跳转逻辑
