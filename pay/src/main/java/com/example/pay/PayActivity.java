@@ -1,29 +1,29 @@
 package com.example.pay;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
+import com.example.framework.IBaseView;
+import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.model.FindForBean;
 import com.example.net.model.OrderinfoBean;
 
-import java.io.Serializable;
 import java.util.Map;
 
 @Route(path = "/pay/PayActivity")
-public class PayActivity extends BaseActivity<PayPresenter> implements IPayView {
+public class PayActivity extends BaseActivity implements IBaseView {
 
     private OrderinfoBean orderinfoBean;
     private float money;
@@ -40,14 +40,26 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
                     String resultStatus = result.get("resultStatus");
                     if (resultStatus.equals("9000")){
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        finish();
                     }else {
                         if (resultStatus.equals("8000")) {
                             Toast.makeText(PayActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
+                            finish();
                         } else if (resultStatus.equals("6001")) { //用户中途取消
                             Toast.makeText(PayActivity.this, "取消支付", Toast.LENGTH_SHORT).show();
+                            FindForBean.ResultBean resultBean = new FindForBean.ResultBean();
+                            resultBean.setTotalPrice(money+"");
+                            resultBean.setTime(System.currentTimeMillis()+"");
+                            resultBean.setTradeNo(orderinfoBean.getResult().getOutTradeNo());
+                            ShoppingCarManager.getInstance().addForPay(resultBean);
                         } else {
                             // 其他值就可以判断为支付失败
                             Toast.makeText(PayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                            FindForBean.ResultBean resultBean = new FindForBean.ResultBean();
+                            resultBean.setTotalPrice(money+"");
+                            resultBean.setTime(System.currentTimeMillis()+"");
+                            resultBean.setTradeNo(orderinfoBean.getResult().getOutTradeNo());
+                            ShoppingCarManager.getInstance().addForPay(resultBean);
                         }
                     }
                     break;
@@ -89,14 +101,14 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
 
     @Override
     protected void initPresenter() {
-        httpPresenter = new PayPresenter(this);
     }
 
     @Override
     protected void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         payBut = (TextView) findViewById(R.id.pay_but);
+
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
     }
 
     @Override

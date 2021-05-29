@@ -27,6 +27,9 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     @Override
     public void onLoginChange(LoginBean loginBean) {
         getShoppingData();
+        getFindForPayData();
+        getFindForSendData();
+
     }
     //注册登录的方法
     public void initLogin() {
@@ -38,41 +41,86 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //待发货
     List<FindForBean.ResultBean> forSend = new ArrayList<>();
 
-    //待付款
-    private FindForBean findForPayBean;
-    //待发货
-    private FindForBean findForSendBean;
-
-    public FindForBean getFindForPayBean() {
-        return findForPayBean;
+    public List<FindForBean.ResultBean> getForPay() {
+        return forPay;
     }
 
-    public void setFindForPayBean(FindForBean findForPayBean) {
-        this.findForPayBean = findForPayBean;
+    public void addForPay(FindForBean.ResultBean bean) {
+        forPay.add(bean);
     }
 
-    public FindForBean getFindForSendBean() {
-        return findForSendBean;
+    public void setForPay(List<FindForBean.ResultBean> forPay) {
+        this.forPay = forPay;
     }
 
-    public void setFindForSendBean(FindForBean findForSendBean) {
-        this.findForSendBean = findForSendBean;
+    public List<FindForBean.ResultBean> getForSend() {
+        return forSend;
     }
 
-    private IFindForBean iFindForBean;
-
-
-    public interface IFindForBean {
-        void onFindForBean();
+    public void setForSend(List<FindForBean.ResultBean> forSend) {
+        this.forSend = forSend;
     }
 
-    public void unRegisterFindForBean() {
-        iFindForBean = null;
+    public void addForSend(FindForBean.ResultBean bean) {
+        forSend.add(bean);
     }
 
-    public void registerFindForBean(IFindForBean iFindForBean) {
-        this.iFindForBean = iFindForBean;
+    public void getFindForPayData() {
+        RetrofitCreator.getShopApiService().getFindForPayData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FindForBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull FindForBean findForBean) {
+                        setForPay(findForBean.getResult());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
+
+    public void getFindForSendData() {
+        RetrofitCreator.getShopApiService().getFindForSendData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FindForBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull FindForBean findForBean) {
+                        setForSend(findForBean.getResult());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
 
 
     //购物车集合

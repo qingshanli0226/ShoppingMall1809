@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.ShoppingCarManager;
+import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.FindForBean;
 import com.example.shoppingcar.R;
 import com.example.shoppingcar.user.findforpay.adapter.FindForPayAdapter;
@@ -28,13 +32,31 @@ public class FindForPayActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-        FindForBean findForBean = ShoppingCarManager.getInstance().getFindForPayBean();
-        LogUtils.json(findForBean);
-        if (findForBean!=null){
-            List<FindForBean.ResultBean> result = findForBean.getResult();
-            LogUtils.json(result);
-            FindForPayAdapter findForPayAdapter = new FindForPayAdapter(result);
+        List<FindForBean.ResultBean> forPay = ShoppingCarManager.getInstance().getForPay();
+        if (forPay!=null){
+            FindForPayAdapter findForPayAdapter = new FindForPayAdapter(forPay);
             shopActPayRv.setAdapter(findForPayAdapter);
+
+
+            findForPayAdapter.setRecyclerItemClickListener(new BaseRVAdapter.IRecyclerItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FindForPayActivity.this);
+                    builder.setTitle(getResources().getString(R.string.hint));
+                    builder.setMessage(getResources().getString(R.string.areYouSureYouWantToContinuePaying));
+                    builder.setPositiveButton(getResources().getString(R.string.confirm),(dialogInterface, i) -> {
+
+                    });
+                    builder.setNegativeButton(getResources().getString(R.string.cancel),(dialogInterface, i) -> {
+                    });
+                    builder.show();
+                }
+
+                @Override
+                public void onItemLongClick(int position) {
+
+                }
+            });
         }
     }
 
@@ -46,6 +68,9 @@ public class FindForPayActivity extends BaseActivity{
     @Override
     protected void initView() {
         shopActPayRv = (RecyclerView) findViewById(R.id.shop_act_pay_rv);
-        shopActPayRv.setLayoutManager(new LinearLayoutManager(FindForPayActivity.this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FindForPayActivity.this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        shopActPayRv.setLayoutManager(linearLayoutManager);
     }
 }
