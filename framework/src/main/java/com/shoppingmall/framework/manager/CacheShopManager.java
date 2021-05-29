@@ -1,7 +1,5 @@
 package com.shoppingmall.framework.manager;
 
-import android.os.UserManager;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.ShopCarBean;
@@ -50,8 +48,6 @@ public class CacheShopManager {
     public List<ShopCarBean.ResultBean> getCartsPrice() {
         return cartsPrice;
     }
-
-
 
     public synchronized void registerCart(ICartChange iCartChange) {
         cartChanges.add(iCartChange);
@@ -117,7 +113,7 @@ public class CacheShopManager {
             if (cart.getProductId().equals(resultBean.getProductId())) {
                 int cartNum = Integer.parseInt(cart.getProductNum());
                 int resultNum = Integer.parseInt(resultBean.getProductNum());
-                cart.setProductNum(cartNum+"");
+                cart.setProductNum(resultNum+cartNum+"");
                 position = i;
             } else{
                 count++;
@@ -174,7 +170,7 @@ public class CacheShopManager {
                 }
             }
         }
-        LogUtils.d("removeManyaaa");
+        LogUtils.d("removeAll");
     }
 
 

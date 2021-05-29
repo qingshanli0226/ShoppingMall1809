@@ -282,6 +282,11 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopCarAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
     public void destroy() {
         CacheShopManager.getInstance().unRegisterCart(this);
         CacheShopManager.getInstance().destroy();

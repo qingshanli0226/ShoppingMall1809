@@ -62,10 +62,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
 
     @Override
     public void initData() {
-        if (ShopMallUserManager.getInstance().getLoginBean()==null){
-            Intent intent = new Intent(this, AutoService.class);
-            startService(intent);
-        }
+
 
         Intent intent = getIntent();
         int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);

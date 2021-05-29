@@ -87,22 +87,24 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         httpPresenter = new DetailPresenter(this);
     }
 
-    @Subscribe
-    public void getEvenBus(String str){
-        if (str.equals("startAutoService")){
-            startAutoService();
-        }
-    }
+//    @Subscribe
+//    public void getEvenBus(String str){
+//        if (str.equals("startAutoService")){
+//            startAutoService();
+//        }
+//    }
 
     @Override
     public void initData() {
-        startAutoService();
+        loginBean = ShopMallUserManager.getInstance().getLoginBean();
+
+//        startAutoService();
 
         daoSession = TableManager.getInstance().getDaoSession();
 
-        if (!EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().register(this);
-        }
+//        if (!EventBus.getDefault().isRegistered(this)){
+//            EventBus.getDefault().register(this);
+//        }
         //退出当前页面
         detailBack.setOnClickListener(v->{
             backActivity();
@@ -147,7 +149,6 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         //加入购物车
         addShopMallCar.setOnClickListener(v->{
             if (loginBean==null){
-                startAutoService();
                 ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("addDetail",1).navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
@@ -243,6 +244,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             resultBean.setProductPrice(productGoodBean.getCover_price());
             resultBean.setUrl(productGoodBean.getFigure());
             resultBean.setProductName(productGoodBean.getName());
+
             CacheShopManager.getInstance().addData(resultBean);
 
             Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
@@ -259,11 +261,10 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     }
 
 
-    private void startAutoService() {
-        Intent intent1 = new Intent(DetailActivity.this, AutoService.class);
-        startService(intent1);
-        loginBean = ShopMallUserManager.getInstance().getLoginBean();
-    }
+//    private void startAutoService() {
+//        Intent intent1 = new Intent(DetailActivity.this, AutoService.class);
+//        startService(intent1);
+//    }
 
     private void setUI(ProductGoodBean productGoodBean) {
         //加载数据
@@ -300,9 +301,9 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().unregister(this);
-        }
+//        if (EventBus.getDefault().isRegistered(this)){
+//            EventBus.getDefault().unregister(this);
+//        }
     }
 
 }

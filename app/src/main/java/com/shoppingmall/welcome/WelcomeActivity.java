@@ -44,6 +44,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void initData() {
+        if (ShopMallUserManager.getInstance().getLoginBean()==null){
+            Intent intent = new Intent(this, AutoService.class);
+            startService(intent);
+        }
         httpPresenter.getHomeData();
     }
 
