@@ -39,12 +39,11 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, SoppingCartMemoryDataManager.ISoppingDateChange {
 
     private FrameLayout mainFram;
-    private CommonTabLayout mainCommon;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private List<Fragment> list = new ArrayList<>();
     private android.widget.TextView sign;
     private List<GetShortcartProductsBean.ResultBean> resultBeans = new ArrayList<>();
-
+    public static CommonTabLayout mainCommon;
     @Override
     protected void initPresenter() {
 

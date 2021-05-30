@@ -73,7 +73,7 @@ public class GoodsPresenter extends BasePresenter<IGoodsView> {
 
     public void checkInventory(String productId, String productNum) {
         RetrofitCreator.getFiannceApiService()
-                .getInventory(productId, productNum)
+                .getCheckOneInventory(productId, productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CheckOneInventoryBean>() {

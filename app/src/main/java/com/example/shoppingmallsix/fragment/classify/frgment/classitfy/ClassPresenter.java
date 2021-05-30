@@ -12,11 +12,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ClassPresenter extends BasePresenter<IClassView> {
-
     public ClassPresenter(IClassView view) {
         attachView(view);
     }
-
     public void getClassData(String url, boolean mBoolean) {
         RetrofitCreator.getFiannceApiService()
                 .getClassData(url)
@@ -34,9 +32,17 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
+
                         if (!mBoolean) {
                             if (iView != null) {
                                 iView.hideLoading();
+
+                                if (!mBoolean) {
+                                    if (iView != null) {
+                                        iView.hideLoading();
+                                    }
+
+                                }
                             }
                         }
                      }
@@ -66,5 +72,4 @@ public class ClassPresenter extends BasePresenter<IClassView> {
                         }
                     });
                 }
-    }
-
+}

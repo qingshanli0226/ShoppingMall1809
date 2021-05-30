@@ -1,5 +1,6 @@
 package com.example.net.bean.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GetShortcartProductsBean {
@@ -38,7 +39,7 @@ public class GetShortcartProductsBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable {
         /**
          * productId : 9356
          * productName : 现货【一方尘寰】剑侠情缘三剑三七秀 干将莫邪 90橙武仿烧蓝复古对簪

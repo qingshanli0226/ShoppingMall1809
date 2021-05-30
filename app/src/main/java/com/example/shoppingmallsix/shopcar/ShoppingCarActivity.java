@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
@@ -172,7 +173,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
                         httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) - 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, true);
                         break;
                     case R.id.shoppingTrolley_add:
-                        httpPresenter.checkInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
+                        httpPresenter.checkOneInventory(resultBeans.get(position).getProductId(), resultBeans.get(position).getProductNum(), position);
                         break;
                 }
             }
@@ -247,7 +248,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onCheckInventory(CheckOneInventoryBean bean, int position) {
+    public void onCheckOneInventory(CheckOneInventoryBean bean, int position) {
         if (bean.getCode().equals("200")) {
             Toast.makeText(ShoppingCarActivity.this, "检查库存有", Toast.LENGTH_SHORT).show();
 
@@ -259,6 +260,12 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
             Toast.makeText(ShoppingCarActivity.this, "检查库存没有", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onCheckInventory(CheckInventoryBean bean, List<GetShortcartProductsBean.ResultBean> resultBeans) {
+
+    }
+
 
     @Override
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolean) {
