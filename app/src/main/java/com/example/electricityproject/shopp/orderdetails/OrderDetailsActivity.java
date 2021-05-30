@@ -72,7 +72,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         userAddress.setText("地址:"+address);
 
         list = ShopCacheManger.getInstance().getList();
-
+        LogUtils.i(list.toString());
 
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
@@ -91,6 +91,23 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
             orderDetailsAdapter.updateData(list);
             orderRv.setAdapter(orderDetailsAdapter);
         }
+
+        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
+            @Override
+            public void onLeftClick() {
+                list.clear();
+            }
+
+            @Override
+            public void onRightImgClick() {
+
+            }
+
+            @Override
+            public void onRightTvClick() {
+
+            }
+        });
 
     }
 
@@ -217,7 +234,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     public void onConfirmServerPayResultOk(ConfirmServerPayResultBean bean) {
         if (bean.getCode().equals("200")){
-
             finish();
         }
     }
