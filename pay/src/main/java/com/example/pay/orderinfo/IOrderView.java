@@ -1,4 +1,14 @@
 package com.example.pay.orderinfo;
 
-public interface IOrderView {
+import com.example.framework.IBaseView;
+import com.example.net.bean.CartBean;
+import com.example.net.bean.OrderBean;
+
+import java.util.List;
+
+public interface IOrderView extends IBaseView {
+    //支付订单
+    void onOrder(OrderBean orderBean);
+
+
 }

@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.fiannce.sql.SqlBean;
+import com.fiannce.sql.bean.SqlBean;
 
 import com.fiannce.sql.SqlBeanDao;
 

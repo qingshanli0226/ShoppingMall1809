@@ -13,10 +13,12 @@ import android.widget.Toast;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.OrderBean;
 import com.example.net.bean.PayBean;
 import com.example.pay.R;
 import com.example.pay.orderinfo.adapter.OrderAdapter;
@@ -29,7 +31,7 @@ import java.util.List;
  * 订单信息
  * 赵岩博
  */
-public class OrderInfoActivity extends BaseActivity {
+public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements IOrderView {
 
 
     private TextView username;
@@ -64,11 +66,11 @@ public class OrderInfoActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
-
+        mPresenter = new OrderPresenter(this);
 
 
     }
-
+    private PayBean payBean;
     @Override
     public void initData() {
         //用户信息
@@ -81,8 +83,8 @@ public class OrderInfoActivity extends BaseActivity {
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         //数据源
         Bundle bundle = CommonArouter.getInstance().getBundle();
-        PayBean payBean = (PayBean) bundle.getSerializable("data");
-        String orderInfo = (String) bundle.getString("orderInfo");
+        payBean = (PayBean) bundle.getSerializable("data");
+
         orderRv.setAdapter(orderAdapter);
         orderAdapter.updata(payBean.getBody());
         allMoney.setText(payBean.getTotalPrice());
@@ -90,11 +92,7 @@ public class OrderInfoActivity extends BaseActivity {
         orderPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("totalPrice",payBean.getTotalPrice());
-                bundle.putString("orderInfo",orderInfo);
-                CommonArouter.getInstance().build(Constants.PATH_PAYMENT).with(bundle).navigation();
-                finish();
+                mPresenter.getOrder(payBean);
             }
         });
 
@@ -124,4 +122,27 @@ public class OrderInfoActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onOrder(OrderBean orderBean) {
+        Bundle bundle = new Bundle();
+        bundle.putString("totalPrice",payBean.getTotalPrice());
+        bundle.putString("orderInfo",orderBean.getResult().getOrderInfo());
+        bundle.putString("outTradeNo",orderBean.getResult().getOutTradeNo());
+        CommonArouter.getInstance().build(Constants.PATH_PAYMENT).with(bundle).navigation();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
 }

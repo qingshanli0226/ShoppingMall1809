@@ -10,11 +10,9 @@ import com.example.message.module.MessageModule;
 import com.example.net.module.NetModule;
 import com.example.pay.module.PayModule;
 
-import com.example.threeshopping.exception.ShopmallCrashHandler;
-
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
-import com.fiannce.sql.UtileSql;
+import com.fiannce.sql.manager.SqlManager;
 
 public class App extends Application {
     @Override
@@ -27,7 +25,7 @@ public class App extends Application {
         UserModule.init();
         NetModule.context = this;
 
-        UtileSql.getInstance().setContext(this);
+        SqlManager.getInstance().setContext(this);
 
         CacheShopManager.getInstance().init();
 

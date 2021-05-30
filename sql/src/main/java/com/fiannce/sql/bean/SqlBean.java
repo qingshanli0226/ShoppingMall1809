@@ -1,4 +1,4 @@
-package com.fiannce.sql;
+package com.fiannce.sql.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

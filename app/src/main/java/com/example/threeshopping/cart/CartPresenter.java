@@ -7,6 +7,7 @@ import com.example.framework.BasePresenter;
 import com.example.framework.manager.CacheShopManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.OrderBean;
 import com.example.net.bean.PayBean;
 ;
@@ -242,10 +243,7 @@ public class CartPresenter extends BasePresenter<ICartView> {
                     public void onNext(@NonNull SelectBean selectBean) {
                         LogUtil.d("zyb"+selectBean);
                         if (selectBean.getCode().equals("200")) {
-                            CacheShopManager.getInstance().removeProduct(resultBean);
-                            if (mView != null) {
-                                mView.removeProduct(position);
-                            }
+                            CacheShopManager.getInstance().removeMany(true,position);
                         }
                     }
 
@@ -284,10 +282,7 @@ public class CartPresenter extends BasePresenter<ICartView> {
                     @Override
                     public void onNext(@NonNull SelectBean selectBean) {
                         if (selectBean.getCode().equals("200")) {
-                            CacheShopManager.getInstance().removeMany(resultBeans);
-                            if (mView != null) {
-                                mView.removeMany(resultBeans);
-                            }
+                            CacheShopManager.getInstance().removeMany(false,-1);
                         }
                     }
 
@@ -303,13 +298,14 @@ public class CartPresenter extends BasePresenter<ICartView> {
                 });
     }
 
-    //下订单
-    public void getOrder(PayBean payBean){
+
+    //查询全部数量
+    public void checkNumAll(List<PayBean.BodyBean> payBean){
         String s = new Gson().toJson(payBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitManager.getHttpApiService()
-                .getOrder(requestBody)
+                .inventoryAll(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -318,18 +314,17 @@ public class CartPresenter extends BasePresenter<ICartView> {
                         add(disposable);
                     }
                 })
-                .subscribe(new Observer<OrderBean>() {
+                .subscribe(new Observer<CheckNumAll>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull OrderBean orderBean) {
-                        if (orderBean.getCode().equals("200")) {
-                            CacheShopManager.getInstance().removeMany();
+                    public void onNext(@NonNull CheckNumAll checkNumAll) {
+                        if (checkNumAll.getCode().equals("200")) {
                             if (mView != null) {
-                                mView.onOrder(orderBean);
+                                mView.onCheckNumAll(checkNumAll);
                             }
                         }
                     }

@@ -18,12 +18,14 @@ import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.PayCheckBean;
 import com.example.net.bean.PayResult;
+import com.example.net.bean.SelectBean;
 import com.example.pay.R;
 
 import java.util.Map;
 
-public class PaymentActivity extends BaseActivity {
+public class PaymentActivity extends BaseActivity<PayMentPresenter> implements IPaymentView {
 
     private com.example.framework.view.ToolBar toolbar;
     private android.widget.CheckBox weiCheck;
@@ -43,11 +45,21 @@ public class PaymentActivity extends BaseActivity {
                     Bundle bundle = new Bundle();
                     bundle.putInt("page",4);
                     CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
+                    PayCheckBean payCheckBean = new PayCheckBean();
+                    payCheckBean.setOutTradeNo(outTradeNo);
+                    payCheckBean.setResult(orderInfo);
+                    payCheckBean.setClientPayResult(true);
+                    mPresenter.checkNumAll(payCheckBean);
                 } else{
                     if(TextUtils.equals(resultStatus,"8000")){
                         Toast.makeText(PaymentActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
                     } else{
                         Toast.makeText(PaymentActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                        PayCheckBean payCheckBean = new PayCheckBean();
+                        payCheckBean.setOutTradeNo(outTradeNo);
+                        payCheckBean.setResult(orderInfo);
+                        payCheckBean.setClientPayResult(false);
+                        mPresenter.checkNumAll(payCheckBean);
                     }
                 }
             }
@@ -73,14 +85,19 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
+        mPresenter = new PayMentPresenter(this);
 
     }
+    private String totalPrice;
+    private String orderInfo;
+    private String outTradeNo;
 
     @Override
     public void initData() {
         Bundle bundle = CommonArouter.getInstance().getBundle();
-        String totalPrice = bundle.getString("totalPrice");
-        String orderInfo = bundle.getString("orderInfo");
+        totalPrice = bundle.getString("totalPrice");
+        orderInfo = bundle.getString("orderInfo");
+        outTradeNo = bundle.getString("outTradeNo");
         payPrice.setText(totalPrice);
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
 
@@ -133,6 +150,26 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     public void onClickRight() {
+
+    }
+
+    @Override
+    public void onConfigPay(SelectBean selectBean) {
+        Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String error) {
 
     }
 }
