@@ -218,6 +218,13 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             }
         });
 
+        shopcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override

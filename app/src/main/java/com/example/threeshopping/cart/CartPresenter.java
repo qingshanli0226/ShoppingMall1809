@@ -32,11 +32,6 @@ public class CartPresenter extends BasePresenter<ICartView> {
     public CartPresenter(ICartView iCarView) {
         attchView(iCarView);
     }
-
-
-
-
-
     //单选
     public synchronized void updateProductSelect(int position,CartBean.ResultBean resultBean) {
         String s = new Gson().toJson(resultBean);
