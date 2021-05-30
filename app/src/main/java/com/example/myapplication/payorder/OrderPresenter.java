@@ -1,9 +1,7 @@
 package com.example.myapplication.payorder;
 
-import com.example.net.RetrofitManager;
 import com.example.net.bean.OrderinfoBean;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.example.net.retrogit.RetrofitManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
