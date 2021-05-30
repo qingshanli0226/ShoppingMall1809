@@ -263,7 +263,6 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
             } else {
                 LoginBean.ResultBean login = ShopeUserManager.getInstance().getLoginBean().getResult();
                 if ((String)login.getAddress()!=null&&(String)login.getPhone()!=null){
-                    LogUtils.e(money);
                     ARouter.getInstance().build(ShopConstants.ORDER_PATH).withFloat("money",money).navigation();
                 }else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

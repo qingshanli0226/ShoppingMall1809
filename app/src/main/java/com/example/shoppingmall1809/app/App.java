@@ -3,6 +3,7 @@ package com.example.shoppingmall1809.app;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.framework.manager.GreenManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ShopmallCrashHandler;
 import com.example.framework.manager.ShopManager;
@@ -23,5 +24,7 @@ public class App extends Application {
 //        ShopmallCrashHandler.getInstance().init(this);
 
         ShoppingCarManager.getInstance().initLogin();
+
+        GreenManager.getInstance().init(this);
     }
 }

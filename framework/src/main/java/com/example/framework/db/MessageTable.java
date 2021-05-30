@@ -1,8 +1,8 @@
-package com.example.commom.db;
+package com.example.framework.db;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class MessageTable {
@@ -13,7 +13,6 @@ public class MessageTable {
     private String message;
     private String time;
     private boolean isRead;
-    
     @Generated(hash = 1519840136)
     public MessageTable(Long messageId, String message, String time,
             boolean isRead) {
@@ -49,4 +48,6 @@ public class MessageTable {
     public void setIsRead(boolean isRead) {
         this.isRead = isRead;
     }
+ 
+
 }

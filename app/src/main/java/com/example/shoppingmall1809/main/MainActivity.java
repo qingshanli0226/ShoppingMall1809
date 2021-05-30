@@ -22,6 +22,7 @@ import com.example.net.model.LoginBean;
 import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.shoppingtrolley.ShoppingViewTrolleyFragment;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.main.db.DaoMaster;
 import com.example.shoppingmall1809.main.discover.DiscoverFragment;
 import com.example.shoppingmall1809.main.home.HomeFragment;
 import com.example.shoppingmall1809.main.type.TypeFragment;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
         ShoppingCarManager.getInstance().register(this);
         List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
         if (result != null) {
