@@ -2,12 +2,12 @@ package com.example.electricityproject.db;
 
 import android.content.Context;
 
-public class MessageManger {
+public class DBManger {
 
-    private static MessageManger messageManger;
-    public static MessageManger getInstance() {
+    private static DBManger messageManger;
+    public static DBManger getInstance() {
         if(messageManger==null){
-            messageManger = new MessageManger();
+            messageManger = new DBManger();
         }
         return messageManger;
     }

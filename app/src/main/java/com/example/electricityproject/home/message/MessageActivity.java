@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.common.LogUtils;
 import com.example.electricityproject.R;
 import com.example.electricityproject.db.DaoMaster;
-import com.example.electricityproject.db.MessageManger;
+import com.example.electricityproject.db.DBManger;
 import com.example.electricityproject.db.MessageTable;
 import com.example.framework.BaseActivity;
 import com.example.view.ToolBar;
@@ -23,7 +23,7 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        daoMaster = MessageManger.getInstance().getDaoMaster(MessageActivity.this);
+        daoMaster = DBManger.getInstance().getDaoMaster(MessageActivity.this);
         if (daoMaster!=null){
             List<MessageTable> messageTables = this.daoMaster.newSession().loadAll(MessageTable.class);
             LogUtils.i(messageTables.toString());
@@ -31,7 +31,6 @@ public class MessageActivity extends BaseActivity {
             adapter = new MessageAdapter();
             adapter.updateData(messageTables);
             messageRv.setAdapter(adapter);
-
         }
 
 
