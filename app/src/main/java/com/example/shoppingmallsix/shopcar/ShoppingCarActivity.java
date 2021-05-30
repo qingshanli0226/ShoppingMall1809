@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
@@ -244,9 +245,15 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
     }
 
     @Override
-    public void onCheckInventory(CheckOneInventoryBean bean, int position) {
+    public void onCheckOneInventory(CheckOneInventoryBean checkOneInventoryBean, int position) {
 
     }
+
+    @Override
+    public void onCheckInventory(CheckInventoryBean bean, List<GetShortcartProductsBean.ResultBean> resultBeans) {
+
+    }
+
 
     @Override
     public void onUpdateProductNum(UpdateProductNumBean updateProductNumBean, int position, boolean mBoolean) {

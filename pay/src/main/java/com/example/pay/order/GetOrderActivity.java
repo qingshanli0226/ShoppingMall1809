@@ -2,6 +2,7 @@ package com.example.pay.order;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.GetOrderInfoBean;
+import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.pay.R;
 import com.example.pay.demo.AuthResult;
 import com.example.pay.demo.PayDemoActivity;
@@ -26,6 +28,7 @@ import com.example.pay.demo.PayResult;
 import com.example.pay.demo.util.OrderInfoUtil2_0;
 
 
+import java.util.List;
 import java.util.Map;
 
 public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implements IGetorder {
@@ -46,6 +49,8 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     public static final String RSA_PRIVATE = "";
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
+    private float price = 0;
+    private  List<GetShortcartProductsBean.ResultBean> resultBeans;
 
     @Override
     protected void initPresenter() {
@@ -69,12 +74,19 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         pricePay = (TextView) findViewById(R.id.price_pay);
         buyOrder = (Button) findViewById(R.id.buy_order);
 
+        //获取价格
+        Intent intent = getIntent();
+        if (intent!=null){
+            price = intent.getFloatExtra("price",price);
+            pricePay.setText(""+price);
+            resultBeans = (List<GetShortcartProductsBean.ResultBean>)intent.getSerializableExtra("list");
+        }
+
 
         buyOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 payV2(buyOrder);
-
                 //startActivity(new Intent(GetOrderActivity.this, PayDemoActivity.class));
             }
         });

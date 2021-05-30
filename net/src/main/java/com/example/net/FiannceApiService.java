@@ -125,7 +125,7 @@ public interface FiannceApiService {
 
     //检查服务端多个产品是否库存充足
     @POST(Constants.BUSINESS_CHECKINVENTORY)
-    Observable<CheckInventoryBean> getCheckInventory(@Body ResponseBody body);
+    Observable<CheckInventoryBean> getCheckInventory(@Body RequestBody body);
 
     //向服务端下订单接口
     @POST(Constants.BUSINESS_GETORDERINFO)
@@ -142,6 +142,6 @@ public interface FiannceApiService {
 
     @FormUrlEncoded
     @POST(Constants.BUSINESS_CHECKONEPRODUCTINVENTORY)
-    Observable<CheckOneInventoryBean> getInventory(@Field("productId")String productId, @Field("productNum")String productNum);
+    Observable<CheckOneInventoryBean> getCheckOneInventory(@Field("productId")String productId, @Field("productNum")String productNum);
 
 }

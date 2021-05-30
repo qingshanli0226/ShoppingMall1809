@@ -5,6 +5,7 @@ import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 
 import com.example.net.bean.Orbean;
+import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
 
 import com.example.net.bean.business.ConfirmServerPayResultBean;
@@ -363,9 +364,9 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                 });
     }
 
-    public void checkInventory(String productId, String productNum, int position) {
+    public void checkOneInventory(String productId, String productNum, int position) {
         RetrofitCreator.getFiannceApiService()
-                .getInventory(productId, productNum)
+                .getCheckOneInventory(productId, productNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CheckOneInventoryBean>() {
@@ -377,7 +378,40 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                     @Override
                     public void onNext(CheckOneInventoryBean checkOneInventoryBean) {
                         if (iView != null) {
-                            iView.onCheckInventory(checkOneInventoryBean, position);
+                            iView.onCheckOneInventory(checkOneInventoryBean, position);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (iView != null) {
+                            iView.showToast(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void checkInventory(List<GetShortcartProductsBean.ResultBean> resultBeans) {
+        String s = new Gson().toJson(resultBeans);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
+        RetrofitCreator.getFiannceApiService()
+                .getCheckInventory(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CheckInventoryBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(CheckInventoryBean checkInventoryBean) {
+                        if (iView != null) {
+                            iView.onCheckInventory(checkInventoryBean,resultBeans);
                         }
                     }
 
