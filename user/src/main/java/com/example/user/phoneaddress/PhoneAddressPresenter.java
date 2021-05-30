@@ -15,6 +15,7 @@ import mvp.presenter.BasePresenter;
 
 public class PhoneAddressPresenter extends BasePresenter<IPhoneAndAddressView> {
     public PhoneAddressPresenter(IPhoneAndAddressView iPhoneAndAddressView) {
+        attView(iPhoneAndAddressView);
     }
     public void onPhone(String phone){
         RetrofitManager.getApi()
@@ -25,13 +26,17 @@ public class PhoneAddressPresenter extends BasePresenter<IPhoneAndAddressView> {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
                         add(disposable);
-                        mView.showLoading();
+                        if (mView!=null){
+                            mView.showLoading();
+                        }
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-                        mView.hideLoading();
+                        if (mView!=null){
+                            mView.hideLoading();
+                        }
                     }
                 })
                 .subscribe(new Observer<UpdatePhone>() {
