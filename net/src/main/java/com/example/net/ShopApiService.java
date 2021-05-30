@@ -85,6 +85,9 @@ public interface ShopApiService {
     @POST("getOrderInfo")
     Observable<OrderinfoBean> getOrderInfo(@Body RequestBody requestBody);
 
+    //向服务端下订单接口
+    @POST("confirmServerPayResult")
+    Observable<RegisterBean> getConfirmServerPayResult(@Body RequestBody requestBody);
 
     //待支付
     @GET("findForPay")

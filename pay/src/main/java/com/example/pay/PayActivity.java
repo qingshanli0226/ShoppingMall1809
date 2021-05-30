@@ -19,11 +19,12 @@ import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.FindForBean;
 import com.example.net.model.OrderinfoBean;
+import com.example.net.model.RegisterBean;
 
 import java.util.Map;
 
 @Route(path = "/pay/PayActivity")
-public class PayActivity extends BaseActivity implements IBaseView {
+public class PayActivity extends BaseActivity<PayPresenter> implements IPayView {
 
     private OrderinfoBean orderinfoBean;
     private float money;
@@ -36,10 +37,12 @@ public class PayActivity extends BaseActivity implements IBaseView {
             super.handleMessage(msg);
             switch (msg.what){
                 case SDK_PAY_FLAG:
+                    boolean isSucceed = false;
                     Map<String, String> result = (Map<String, String>) msg.obj;
                     String resultStatus = result.get("resultStatus");
                     if (resultStatus.equals("9000")){
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        isSucceed = true;
                         finish();
                     }else {
                         if (resultStatus.equals("8000")) {
@@ -62,6 +65,8 @@ public class PayActivity extends BaseActivity implements IBaseView {
                             ShoppingCarManager.getInstance().addForPay(resultBean);
                         }
                     }
+                    OrderinfoBean.ResultBean orderinfoBeanResult = orderinfoBean.getResult();
+                    httpPresenter.getConfirmServerPayResult(orderinfoBeanResult.getOutTradeNo(),orderinfoBeanResult.getOrderInfo(),isSucceed);
                     break;
             }
 
@@ -101,6 +106,7 @@ public class PayActivity extends BaseActivity implements IBaseView {
 
     @Override
     protected void initPresenter() {
+        httpPresenter = new PayPresenter(this);
     }
 
     @Override
@@ -132,4 +138,10 @@ public class PayActivity extends BaseActivity implements IBaseView {
         ARouter.getInstance().build(ShopConstants.SHOP_PAY).navigation();
     }
 
+    @Override
+    public void getConfirmServerPayResult(RegisterBean registerBean) {
+        if (registerBean.getCode().equals("200")){
+            Toast.makeText(this, "请求服务端成功", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

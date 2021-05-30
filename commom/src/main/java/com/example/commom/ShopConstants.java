@@ -6,7 +6,7 @@ public class ShopConstants {
     public final static String LOGIN_PATH = "/user/LoginActivity";
     public final static String USER_PATH = "/user/UserActivity";
     public final static String MAIN_PATH = "/main/MainActivity";
-    public final static String SP_FIANNCE = "shopSp";
+
     public final static String SHOP_PAY = "/shoppingCar/FindForPayActivity";
     public final static String SHOP_CAR="/shoppingCar/ShoppingCarActivity";
     public final static String SHOP_ADDRESS="/address/ShoppingAddressActivity";
@@ -21,4 +21,9 @@ public class ShopConstants {
     public final static String AROUT_PARTICULARS = "particulars";
 
 
+    //名字
+    public final static String SP_FIANNCE = "shopSp";
+    public final static String SQ_MANAGE = "manage";
+    public final static String SP_MANAGE = "manageCount";
+    public final static String SP_MANAGE_NAME = "count";
 }

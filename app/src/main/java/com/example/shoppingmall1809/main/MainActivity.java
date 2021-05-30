@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
         ShoppingCarManager.getInstance().register(this);
         List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
         if (result != null) {
