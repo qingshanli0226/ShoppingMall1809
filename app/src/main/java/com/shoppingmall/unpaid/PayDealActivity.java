@@ -5,12 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.shoppingmall.R;
+import com.shoppingmall.framework.mvp.BaseActivity;
 
-public class PayDealActivity extends AppCompatActivity {
+public class PayDealActivity extends BaseActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_deal);
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }
