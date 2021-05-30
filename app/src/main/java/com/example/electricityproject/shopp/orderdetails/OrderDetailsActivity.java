@@ -19,12 +19,11 @@ import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.SelectOrderBean;
+import com.example.common.db.DaoMaster;
+import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
-import com.example.electricityproject.db.DaoMaster;
-import com.example.electricityproject.db.DBManger;
-import com.example.electricityproject.db.MessageTable;
+import com.example.electricityproject.db.MessageManger;
 import com.example.framework.BaseActivity;
-import com.example.manager.MessageManger;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.alipay.sdk.pay.demo.PayResult;
 import com.example.pay.alipay.sdk.pay.demo.util.OrderInfoUtil2_0;
@@ -132,7 +131,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
 
-            daoMaster = DBManger.getInstance().getDaoMaster(OrderDetailsActivity.this);
+            daoMaster = MessageManger.getInstance().getDaoMaster();
 
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
@@ -153,12 +152,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
                         paySussList.add(resultBean);
 
-                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
 
 
                     } else {
 
-                        MessageManger.getInstance().addMes(new MessageManger.IMessageListener() {
+                        com.example.manager.MessageManger.getInstance().addMes(new com.example.manager.MessageManger.IMessageListener() {
                             @Override
                             public void onResult(boolean isSuccess) {
                                 LogUtils.i(""+isSuccess);
@@ -177,7 +175,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
 
-                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
 
                     }
                     break;

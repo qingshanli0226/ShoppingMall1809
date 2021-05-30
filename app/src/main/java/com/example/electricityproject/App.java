@@ -7,6 +7,7 @@ import com.example.common.NetModel;
 import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
 import com.example.manager.BusinessNetManager;
+import com.example.manager.MessageManger;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
@@ -29,6 +30,7 @@ public class App extends Application {
 
         startService(new Intent(this, AutoService.class));
         BusinessNetManager.getInstance().init(this);
+        MessageManger.getInstance().init(this);
 
     }
 }
