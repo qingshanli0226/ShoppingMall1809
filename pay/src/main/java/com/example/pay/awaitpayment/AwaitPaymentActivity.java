@@ -7,14 +7,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.common.LogUtil;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.AwaitPaymentBean;
 import com.example.pay.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,7 +29,6 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     private com.example.framework.view.ToolBar toolbar;
     private androidx.recyclerview.widget.RecyclerView paymentRv;
     AwaitPaymentAdapter paymentAdapter;
-    List<AwaitPaymentBean.ResultBean> list = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_awaitpayment;
@@ -44,13 +46,17 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     public void initPresenter() {
         mPresenter = new AwaitPaymentPresenter(this);
         mPresenter.getpay();
+
     }
 
     @Override
     public void initData() {
         paymentAdapter = new AwaitPaymentAdapter();
         paymentRv.setAdapter(paymentAdapter);
-        paymentRv.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        paymentRv.setLayoutManager(linearLayoutManager);
 
         paymentAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
             @Override
@@ -112,10 +118,8 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
     @Override
     public void onAwaitPayment(AwaitPaymentBean paymentBean) {
-        LogUtil.i("payyyyyyyy"+paymentBean.getResult().toString());
-        List<AwaitPaymentBean.ResultBean> result = paymentBean.getResult();
-        list.addAll(result);
-        paymentAdapter.getData().addAll(list);
+        List<AwaitPaymentBean.ResultBean> awaitPayment = CacheAwaitPaymentManager.getInstance().getAwaitPayment();
+        paymentAdapter.getData().addAll(awaitPayment);
         paymentAdapter.notifyDataSetChanged();
     }
 }

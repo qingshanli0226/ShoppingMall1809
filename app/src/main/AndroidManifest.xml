@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".shopcart.ShopCartActivity"></activity>
+
         <activity android:name=".bind.BindInfoActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
         <activity android:name=".welcome.WelActivity">

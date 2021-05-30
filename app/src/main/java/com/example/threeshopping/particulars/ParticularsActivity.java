@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -163,7 +164,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
                             CartBean.ResultBean result = new CartBean.ResultBean();
                             result.setProductId(id);
-                            result.setProductNum(""+num);
+                            result.setProductNum("" + num);
                             mPresenter.inventory(result);
 
 
@@ -171,8 +172,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                             List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
                             LogUtil.i(sqlBeans.toString());
 
-                            for (int i = 0; i <sqlBeans.size() ; i++) {
-                                if (id.equals(sqlBeans.get(i).getProductId())){
+                            for (int i = 0; i < sqlBeans.size(); i++) {
+                                if (id.equals(sqlBeans.get(i).getProductId())) {
                                     Long autoincrementid = sqlBeans.get(i).getId();
                                     SqlBean sqlBean = new SqlBean();
                                     sqlBean.setId(autoincrementid);
@@ -182,11 +183,11 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                     sqlBean.setUrl(pic);
                                     sqlBean.setProductPrice(price);
                                     UtileSql.getInstance().getDaoSession().update(sqlBean);
-                                }else {
+                                } else {
                                     count++;
                                 }
                             }
-                            if (count == sqlBeans.size()){
+                            if (count == sqlBeans.size()) {
                                 SqlBean sqlBean = new SqlBean();
                                 sqlBean.setProductId(id);
                                 sqlBean.setProductName(title);
@@ -210,7 +211,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                 } else {
 
                     Intent intent = new Intent(ParticularsActivity.this, UserActivity.class);
-                    startActivityForResult(intent,101);
+                    startActivityForResult(intent, 101);
 
                 }
             }
@@ -227,8 +228,24 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         });
 
 
+    }
+
+
+    @Override
+    public void showLoading() {
 
     }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
 
     @Override
     public void onClickCenter() {
@@ -252,11 +269,11 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             //添加数据
             CartBean.ResultBean resultBean = new CartBean.ResultBean();
             resultBean.setProductId(productBean.getProductId());
-            resultBean.setProductNum(productBean.getProductNum()+"");
+            resultBean.setProductNum(productBean.getProductNum() + "");
             resultBean.setProductPrice(productBean.getProductPrice());
             resultBean.setUrl(productBean.getUrl());
             resultBean.setProductName(productBean.getProductName());
-            LogUtils.json("resultBean"+resultBean.getProductPrice());
+            LogUtils.json("resultBean" + resultBean.getProductPrice());
 
             CacheShopManager.getInstance().addData(resultBean);
             //再次更新小远点
@@ -264,7 +281,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             showAnima();
             //这个页面的小数点
             detailCircle.setVisibility(View.VISIBLE);
-            detailCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+            detailCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
 
         }
     }
@@ -272,33 +289,19 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onInventory(SelectBean selectBean) {
-        if (selectBean.getCode().equals("200")){
+        if (selectBean.getCode().equals("200")) {
             productBean = new ProductBean();
             productBean.setProductId(id);
             productBean.setProductName(title);
             productBean.setProductNum(num);
             productBean.setUrl(pic);
             productBean.setProductPrice(price);
-            LogUtils.json("priceaa"+productBean.getProductPrice());
+            LogUtils.json("priceaa" + productBean.getProductPrice());
             mPresenter.addProduct(productBean);
 
         }
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showError(String error) {
-
-    }
 
     @Override
     public void onUserChange(LoginBean loginBean) {
@@ -307,7 +310,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     }
 
 
-    private void showBezierAnim(){
+    private void showBezierAnim() {
         ImageView imageView = new ImageView(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
         imageView.setLayoutParams(layoutParams);
@@ -325,30 +328,33 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         controlLoacation[0] = 0;
         controlLoacation[1] = 500;
         Path path = new Path();
-        path.moveTo(startLoacation[0],startLoacation[1]);
+        path.moveTo(startLoacation[0], startLoacation[1]);
 
-        path.quadTo(controlLoacation[0],controlLoacation[1],endLoacation[0],endLoacation[1]);
+        path.quadTo(controlLoacation[0], controlLoacation[1], endLoacation[0], endLoacation[1]);
         PathMeasure pathMeasure = new PathMeasure(path, false);
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
-        valueAnimator.setDuration(2*1000);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                float[] nextLocation = new float[2];
-                pathMeasure.getPosTan(value,nextLocation,null);
-                imageView.setTranslationX(nextLocation[0]);
-                imageView.setTranslationY(nextLocation[1]);
-                float percent = value/pathMeasure.getLength();
-                imageView.setAlpha(1-percent);
-            }
-        });
-        valueAnimator.start();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+            valueAnimator.setDuration(2 * 1000);
+            valueAnimator.setInterpolator(new LinearInterpolator());
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    float[] nextLocation = new float[2];
+                    pathMeasure.getPosTan(value, nextLocation, null);
+                    imageView.setTranslationX(nextLocation[0]);
+                    imageView.setTranslationY(nextLocation[1]);
+                    float percent = value / pathMeasure.getLength();
+                    imageView.setAlpha(1 - percent);
+                }
+            });
+            valueAnimator.start();
+        }
+
     }
 
-    private void showAnima(){
+    private void showAnima() {
         ImageView imageView = new ImageView(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
         imageView.setLayoutParams(layoutParams);
@@ -362,41 +368,43 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         int[] endLoacation = new int[2];
         shopcar.getLocationInWindow(endLoacation);
         //控制点
-        int[]  constrod = new int[2];
+        int[] constrod = new int[2];
         constrod[0] = Math.abs(startLoacation[0] - endLoacation[0]);
         constrod[1] = Math.abs(startLoacation[1] - endLoacation[1]);
 
-        int[]  constrod1 = new int[2];
-        constrod1[0] =  constrod[0];
-        constrod1[1] = constrod[1]-100;
+        int[] constrod1 = new int[2];
+        constrod1[0] = constrod[0];
+        constrod1[1] = constrod[1] - 100;
         Path path = new Path();
-        path.moveTo(startLoacation[0],startLoacation[1]);
+        path.moveTo(startLoacation[0], startLoacation[1]);
         //两个转折点
-        path.cubicTo(constrod[0],constrod[1],constrod1[0],constrod1[1],endLoacation[0],endLoacation[1]);
+        path.cubicTo(constrod[0], constrod[1], constrod1[0], constrod1[1], endLoacation[0], endLoacation[1]);
         //一个转折点
 //        path.quadTo(constrod[0],constrod[1],endLoacation[0],endLoacation[1]);
         PathMeasure pathMeasure = new PathMeasure(path, false);
         //属性动画
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
-        valueAnimator.setDuration(2000);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float animatedValue = (float) animation.getAnimatedValue();
-                float[] floats = new float[2];
-                pathMeasure.getPosTan(animatedValue, floats, null);
-                imageView.setTranslationX(floats[0]);
-                imageView.setTranslationY(floats[1]);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+            valueAnimator.setDuration(2000);
+            valueAnimator.setInterpolator(new LinearInterpolator());
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float animatedValue = (float) animation.getAnimatedValue();
+                    float[] floats = new float[2];
+                    pathMeasure.getPosTan(animatedValue, floats, null);
+                    imageView.setTranslationX(floats[0]);
+                    imageView.setTranslationY(floats[1]);
 
-                float percent = animatedValue / pathMeasure.getLength();
-                imageView.setAlpha(1-percent);
+                    float percent = animatedValue / pathMeasure.getLength();
+                    imageView.setAlpha(1 - percent);
 
 
-            }
-        });
+                }
+            });
 
-        valueAnimator.start();
+            valueAnimator.start();
+        }
 
 
     }
