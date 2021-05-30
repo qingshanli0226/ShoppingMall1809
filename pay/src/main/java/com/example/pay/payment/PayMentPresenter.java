@@ -1,11 +1,11 @@
-package com.example.pay.orderinfo;
+package com.example.pay.payment;
 
 import com.example.framework.BasePresenter;
-import com.example.framework.manager.CacheShopManager;
 import com.example.net.RetrofitManager;
-import com.example.net.bean.CartBean;
-import com.example.net.bean.OrderBean;
+import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.PayBean;
+import com.example.net.bean.PayCheckBean;
+import com.example.net.bean.PayResult;
 import com.example.net.bean.SelectBean;
 import com.google.gson.Gson;
 
@@ -20,18 +20,18 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class OrderPresenter extends BasePresenter<IOrderView> {
-    public OrderPresenter(IOrderView orderView) {
-        attchView(orderView);
+public class PayMentPresenter extends BasePresenter<IPaymentView> {
+    public PayMentPresenter(IPaymentView paymentView) {
+        attchView(paymentView);
     }
 
-    //下订单
-    public void getOrder(PayBean payBean){
-        String s = new Gson().toJson(payBean);
+    //查询全部数量
+    public void checkNumAll(PayCheckBean payCheckBean){
+        String s = new Gson().toJson(payCheckBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, s);
         RetrofitManager.getHttpApiService()
-                .getOrder(requestBody)
+                .configPayCheck(requestBody)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -40,18 +40,17 @@ public class OrderPresenter extends BasePresenter<IOrderView> {
                         add(disposable);
                     }
                 })
-                .subscribe(new Observer<OrderBean>() {
+                .subscribe(new Observer<SelectBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull OrderBean orderBean) {
-                        if (orderBean.getCode().equals("200")) {
-                            CacheShopManager.getInstance().removeMany(false,-1);
+                    public void onNext(@NonNull SelectBean selectBean) {
+                        if (selectBean.getCode().equals("200")) {
                             if (mView != null) {
-                                mView.onOrder(orderBean);
+                                mView.onConfigPay(selectBean);
                             }
                         }
                     }
@@ -67,5 +66,4 @@ public class OrderPresenter extends BasePresenter<IOrderView> {
                     }
                 });
     }
-
 }

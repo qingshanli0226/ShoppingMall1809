@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.common.Constants;
 
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
@@ -159,7 +160,7 @@ public class MainActivity extends BaseActivity{
         Bundle bundle = CommonArouter.getInstance().getBundle();
         int page = bundle.getInt("page");
 
-
+        LogUtil.d("page"+page);
         showFragment(page);
 
         switch (page) {
@@ -174,6 +175,9 @@ public class MainActivity extends BaseActivity{
         if(CacheShopManager.getInstance().getCarts().size() > 0){
             mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
             mainCircle.setVisibility(View.VISIBLE);
+        } else{
+            mainCircle.setVisibility(View.GONE);
+
         }
     }
 

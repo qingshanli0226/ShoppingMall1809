@@ -6,13 +6,11 @@ import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,25 +28,20 @@ import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.CircleView;
-import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
-import com.example.net.bean.InventoryBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
-import com.example.threeshopping.MainActivity;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
 import com.example.user.user.UserActivity;
-import com.fiannce.sql.SqlBean;
-import com.fiannce.sql.UtileSql;
+import com.fiannce.sql.bean.SqlBean;
+import com.fiannce.sql.manager.SqlManager;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
-
-import retrofit2.http.HEAD;
 
 
 public class ParticularsActivity extends BaseActivity<DetailPresenter> implements IDetailView {
@@ -169,7 +162,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
 
                             //数据库
-                            List<SqlBean> sqlBeans = UtileSql.getInstance().getDaoSession().loadAll(SqlBean.class);
+                            List<SqlBean> sqlBeans = SqlManager.getInstance().getDaoSession().loadAll(SqlBean.class);
                             LogUtil.i(sqlBeans.toString());
 
                             for (int i = 0; i < sqlBeans.size(); i++) {
@@ -182,8 +175,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                     sqlBean.setProductNum(num);
                                     sqlBean.setUrl(pic);
                                     sqlBean.setProductPrice(price);
-                                    UtileSql.getInstance().getDaoSession().update(sqlBean);
-                                } else {
+                                    SqlManager.getInstance().getDaoSession().update(sqlBean);
+                                }else {
                                     count++;
                                 }
                             }
@@ -194,7 +187,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                                 sqlBean.setProductNum(num);
                                 sqlBean.setUrl(pic);
                                 sqlBean.setProductPrice(price);
-                                UtileSql.getInstance().getDaoSession().insert(sqlBean);
+                                SqlManager.getInstance().getDaoSession().insert(sqlBean);
                             }
                             LogUtils.json(sqlBeans);
                         }

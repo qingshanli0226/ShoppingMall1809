@@ -4,6 +4,7 @@ package com.example.net;
 import com.example.common.Constants;
 import com.example.net.bean.AwaitPaymentBean;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderBean;
@@ -77,7 +78,11 @@ public interface IHttpApiService {
     @FormUrlEncoded
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
-    
+
+
+    //    检查服务端一个产品库存情况的接口
+    @POST(Constants.CHECKINVENTORY)
+    Observable<CheckNumAll> inventoryAll(@Body RequestBody requestBody);
     //选中一个\
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
@@ -112,4 +117,8 @@ public interface IHttpApiService {
     @FormUrlEncoded
     @POST(Constants.UPDATEADDRESS)
     Observable<SelectBean> setAddr(@Field("address") String address);
+
+    //判断是否支付成功
+    @POST(Constants.CONFIRMSERVER)
+    Observable<SelectBean> configPayCheck(@Body RequestBody requestBody);
 }

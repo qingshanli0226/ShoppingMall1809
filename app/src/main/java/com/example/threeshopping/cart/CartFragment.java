@@ -22,6 +22,7 @@ import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderBean;
 import com.example.net.bean.PayBean;
@@ -167,6 +168,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 } else {
                     isAll = true;
                 }
+
                 mPresenter.selectAll(isAll);
             }
         });
@@ -183,24 +185,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         cartdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = -1;
-                ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
-                for (int i = 0; i < cartAdapter.getData().size(); i++) {
-                    if (cartAdapter.getData().get(i).isProductSelected()) {
-                        resultBeans.add(cartAdapter.getData().get(i));
-                        position = i;
-                    }
-                }
-
-                if (resultBeans.size() == 1) {
-                    //选中一个
-                    mPresenter.removeOneProduct(position, resultBeans.get(0));
-                } else if (resultBeans.size() > 1) {
-                    //选中多个
-                    mPresenter.removeMany(resultBeans);
-                } else {
-                    Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
-                }
+                delectProduct();
             }
         });
 
@@ -237,7 +222,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                     //判断是否绑定信息
                     if(result.getPhone() != null && result.getAddress() !=null ){
 
-                        mPresenter.getOrder(payBean);
+                        mPresenter.checkNumAll(body);
 
                     } else{
                         //跳转绑定页面
@@ -252,6 +237,28 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             }
         });
 
+    }
+
+    private void delectProduct() {
+        int position = -1;
+        ArrayList<CartBean.ResultBean> resultBeans = new ArrayList<>();
+        for (int i = 0; i < cartAdapter.getData().size(); i++) {
+            if (cartAdapter.getData().get(i).isProductSelected()) {
+                resultBeans.add(cartAdapter.getData().get(i));
+                position = i;
+            }
+        }
+
+        if (resultBeans.size() == 1) {
+            Toast.makeText(getActivity(), "shanc", Toast.LENGTH_SHORT).show();
+            //选中一个
+            mPresenter.removeOneProduct(position, resultBeans.get(0));
+        } else if (resultBeans.size() > 1) {
+            //选中多个
+            mPresenter.removeMany(resultBeans);
+        } else {
+            Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -283,6 +290,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         this.carts = carts;
         cartAdapter.updata(carts);
         EventBus.getDefault().post("");
+        //判断是否全选
+        isCheck();
     }
 
     //单选
@@ -305,12 +314,13 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             }
         }
         if (count == cartAdapter.getData().size() && count != 0) {
-            checkpayment.setChecked(true);
             isAll = true;
         } else {
-            checkpayment.setChecked(false);
             isAll = false;
+            paymentprice.setText("0");
         }
+        checkpayment.setChecked(isAll);
+
     }
 
     //更改价格
@@ -328,7 +338,10 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     @Override
     public void onCheckAll(boolean isChcekAll) {
         this.isAll = isChcekAll;
+        checkpayment.setChecked(isAll);
+
         cartAdapter.notifyDataSetChanged();
+
         //更改价格
         priceCount();
     }
@@ -337,7 +350,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     @Override
     public void onNum(int position) {
         cartAdapter.notifyItemChanged(position);
-        LogUtil.d("zybprice");
+
         //更改价格
         priceCount();
 
@@ -345,33 +358,19 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
     //删除一个
     @Override
-    public void removeProduct(int position) {
+    public void onRemoveProduct(int position) {
         cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
+        //再次更新小远点
+        EventBus.getDefault().post("");
+        //判断是否全选
+        isCheck();
     }
-
     @Override
-    public void removeMany(List<CartBean.ResultBean> resultBeans) {
-        for (int i = cartAdapter.getData().size() - 1; i >= 0; i--) {
-            CartBean.ResultBean bean = cartAdapter.getData().get(i);
-            for (int i1 = resultBeans.size() - 1; i1 >= 0; i1--) {
-                if (bean.getProductId().equals(resultBeans.get(i1).getProductId())) {
-                    cartAdapter.getData().remove(i);
-                    resultBeans.remove(i1);
-                }
-            }
-        }
-        cartAdapter.notifyDataSetChanged();
-    }
-    //支付
-    @Override
-    public void onOrder(OrderBean orderBean) {
+    public void onCheckNumAll(CheckNumAll checkNumAll) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", (Serializable) payBean);
-        bundle.putString("orderInfo", orderBean.getResult().getOrderInfo());
         CommonArouter.getInstance().build(Constants.PATH_ORDERINFOACTIVITY).with(bundle).navigation();
-        getActivity().finish();
-
     }
 
     //添加数据
@@ -384,7 +383,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
             cartAdapter.notifyItemChanged(position);
         }
-        LogUtil.d("zyb" + CacheShopManager.getInstance().getCarts());
+
     }
 
     @Override

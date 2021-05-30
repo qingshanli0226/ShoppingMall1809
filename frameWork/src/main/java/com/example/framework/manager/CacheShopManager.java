@@ -183,40 +183,55 @@ public class CacheShopManager {
 
     }
 
-    public synchronized void removeProduct(CartBean.ResultBean resultBean) {
-        for (int i = carts.size()-1; i >= 0; i--) {
-            CartBean.ResultBean bean = carts.get(i);
-            if(bean.getProductId().equals(resultBean.getProductId())){
-                carts.remove(i);
-            }
-        }
-    }
+//    public synchronized void removeProduct(CartBean.ResultBean resultBean) {
+//        for (int i = carts.size()-1; i >= 0; i--) {
+//            CartBean.ResultBean bean = carts.get(i);
+//            if(bean.getProductId().equals(resultBean.getProductId())){
+//                carts.remove(i);
+//            }
+//        }
+//    }
+//
+//    public void removeMany(List<CartBean.ResultBean> resultBeans) {
+//        for (int i = carts.size()-1; i >= 0; i--) {
+//            CartBean.ResultBean bean = carts.get(i);
+//            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
+//                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
+//                    carts.remove(i);
+//                    resultBeans.remove(i1);
+//                }
+//            }
+//        }
+//        LogUtil.d("removeManyaaa");
+//    }
 
-    public void removeMany(List<CartBean.ResultBean> resultBeans) {
-        for (int i = carts.size()-1; i >= 0; i--) {
-            CartBean.ResultBean bean = carts.get(i);
-            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
-                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
+    public void removeMany(boolean isOne,int position) {
+        if(isOne){
+            carts.remove(position);
+            notifyRemoveProduct(position);
+        } else{
+            for (int i = carts.size()-1; i >= 0; i--) {
+                CartBean.ResultBean bean = carts.get(i);
+                if(bean.isProductSelected()){
                     carts.remove(i);
-                    resultBeans.remove(i1);
                 }
             }
+            notifyCar(carts);
         }
-        LogUtil.d("removeManyaaa");
-    }
 
-    public void removeMany() {
-        for (int i = carts.size()-1; i >= 0; i--) {
-            CartBean.ResultBean bean = carts.get(i);
-            if(bean.isProductSelected()){
-                carts.remove(i);
-            }
+
+    }
+    //通知页面
+    public void notifyRemoveProduct(int position){
+        for (ICartChange cartChange : cartChanges) {
+            cartChange.onRemoveProduct(position);
         }
     }
-
     public interface ICartChange {
         void onShowCart(List<CartBean.ResultBean> carts);
         void onAddCart(int position);
+        //删除一个
+        void onRemoveProduct(int position);
     }
     public void destory(){
         UserManager.getInstance().unregisterLogin(iUserChange);
