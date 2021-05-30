@@ -9,7 +9,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="payV2"
+        android:id="@+id/btn"
         android:text="支付"></Button>
 
 </LinearLayout>

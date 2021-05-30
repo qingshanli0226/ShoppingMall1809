@@ -1,7 +1,9 @@
 package com.example.myapplication.payorder;
 
+import com.example.framework.manager.CaCheMannager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.OrderinfoBean;
+import com.example.net.bean.ShoppingCartBean;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -24,24 +26,25 @@ public class OrderPresenter extends BasePresenter<IOrderView> {
     public OrderPresenter(IOrderView iOrderView) {
         attView(iOrderView);
     }
-    public void getOrder(String subject, String totalPrice, List<OrderinfoBean.BodyBean> list){
+    public void getOrderInfo(List<ShoppingCartBean.ResultBean> list){
+        JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < list.size(); i++) {
-            OrderinfoBean.BodyBean bodyBean = list.get(i);
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("productId",bodyBean.getProductId());
-                jsonObject.put("productNum",bodyBean.getProductNum());
-                jsonObject.put("productName",bodyBean.getProductName());
-            } catch (JSONException e) {
-                e.printStackTrace();
+        try {
+            jsonObject.put("subject","buy");
+            jsonObject.put("totalPrice", CaCheMannager.getInstance().getShoppingPrice());
+            for (ShoppingCartBean.ResultBean resultBean:list) {
+                JSONObject object = new JSONObject();
+                object.put("productName",resultBean.getProductName());
+                object.put("productId",resultBean.getProductId());
+                jsonArray.put(object);
             }
-            jsonArray.put(jsonObject);
+            jsonObject.put("body",jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        RequestBody body = RequestBody.create(MediaType.get("application/json;charset=utf-8"), jsonArray.toString());
-        RetrofitManager.getApi()
-                .getOrderInfo(subject,totalPrice,body)
-                .subscribeOn(Schedulers.io())
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+        RetrofitManager.getApi().getOrderInfo(requestBody)
+        .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<OrderinfoBean>() {
                     @Override
@@ -51,14 +54,14 @@ public class OrderPresenter extends BasePresenter<IOrderView> {
 
                     @Override
                     public void onNext(@NonNull OrderinfoBean orderinfoBean) {
-                     if (mView!=null){
-                         mView.onOrder(orderinfoBean);
-                     }
+                        mView.showLoading();
+                        mView.onOrder(orderinfoBean);
+
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                         mView.showToast(e.getMessage());
                     }
 
                     @Override
@@ -66,6 +69,6 @@ public class OrderPresenter extends BasePresenter<IOrderView> {
 
                     }
                 });
-
     }
+
 }
