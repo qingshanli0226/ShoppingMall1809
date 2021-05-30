@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/dp_20"
+        android:id="@+id/message"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_50"
         android:textColor="@color/black"
