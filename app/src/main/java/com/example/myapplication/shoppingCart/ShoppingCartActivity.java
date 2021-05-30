@@ -4,10 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-<<<<<<< HEAD
-=======
 import android.os.Bundle;
->>>>>>> xsp
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;

@@ -97,12 +97,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.updatateAllSelect(false);
             }
         });
-<<<<<<< HEAD
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), OrderActivity.class);
-=======
+
         //去结算
         priceBtn.setOnClickListener(v -> {
             if (delList.size() == 0) {
@@ -111,7 +106,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 CaCheMannager.getInstance().setCheckList(delList);
                 Intent intent = new Intent(getActivity(), OrderActivity.class);
                 intent.putExtra("shoppingPrice", shoppingCartPrice.getText().toString() + "");
->>>>>>> xsp
                 startActivity(intent);
             }
         });
@@ -179,16 +173,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     list) {
                 be.setCheck(nowIsChe);
             }
-<<<<<<< HEAD
-
-            if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
-                delList.addAll(list);
-            }else {
-=======
             if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
                 delList.addAll(list);
             } else {
->>>>>>> xsp
                 delList.clear();
             }
             getTotalPrice();//总价
@@ -279,11 +266,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     //删除多个
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
-<<<<<<< HEAD
-        if (registerBean.getCode().endsWith("200")){
-=======
         if (registerBean.getCode().endsWith("200")) {
->>>>>>> xsp
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
@@ -330,11 +313,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             if (!getData) {
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
-<<<<<<< HEAD
-                getData=true;
-=======
                 getData = true;
->>>>>>> xsp
             }
         } else {
             loadingPage.showErrorView();
