@@ -2,11 +2,18 @@ package com.example.myapplication.payorder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
 import com.example.net.bean.OrderinfoBean;
+import com.example.net.bean.ShoppingCartBean;
+import com.example.pay.PayActivity;
+
+import java.util.List;
 
 public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrderView {
 
@@ -20,6 +27,7 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
     private android.widget.RelativeLayout llGoodsRoot;
     private android.widget.TextView pricePay;
     private android.widget.Button buyOrder;
+    private Intent intent;
 
     @Override
     protected int bandLayout() {
@@ -29,6 +37,14 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
     @Override
     public void onOrder(OrderinfoBean orderinfoBean) {
 
+        buyOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(OrderActivity.this, PayActivity.class);
+                intent.putExtra("bean",orderinfoBean);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -48,6 +64,8 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
     @Override
     public void initPresenter() {
           mPresenter=new OrderPresenter(this);
+        List<ShoppingCartBean.ResultBean> shoppingCartBeanList = CaCheMannager.getInstance().getShoppingCartBeanList();
+        mPresenter.getOrderInfo(shoppingCartBeanList);
     }
 
     @Override

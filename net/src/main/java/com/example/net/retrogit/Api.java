@@ -106,8 +106,7 @@ public interface Api {
     Observable<UpdateAddress> getupdataAddress(@Field("address")String address);
 
     //向服务端下订单
-        @POST("getOrderInfo")
-    @FormUrlEncoded
-    Observable<OrderinfoBean> getOrderInfo(@Field("subject")String subject,@Field("totalPrice")String totalprice,@Body RequestBody body);
+    @POST("getOrderInfo")
+    Observable<OrderinfoBean> getOrderInfo(@Body RequestBody body);
 
 }

@@ -3,14 +3,10 @@ package com.example.myapplication.particulars;
 import android.util.Log;
 
 import com.example.framework.manager.CaCheMannager;
-<<<<<<< HEAD
 
 import com.example.common.log.LogUtil;
 
-import com.example.net.RetrofitManager;
-=======
 import com.example.net.retrogit.RetrofitManager;
->>>>>>> xsp
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.AddShoppingCartBean;
 import com.example.net.bean.ShoppingCartBean;

@@ -22,6 +22,8 @@ import com.example.net.bean.ShoppingCartBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
 public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
@@ -94,7 +96,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.updatateAllSelect(false);
             }
         });
-<<<<<<< HEAD
         //价格
         getTotalPrice();
 
@@ -107,9 +108,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             }
         });
 
-=======
         getTotalPrice();//价格
->>>>>>> xsp
         //点击编辑
         shoppingCartCompile.setOnClickListener(v -> {
             if (shoppingCartCompile.getText().toString().equals(getString(R.string.myShoppingCartCompile))) {
@@ -173,7 +172,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     list) {
                 be.setCheck(nowIsChe);
             }
-<<<<<<< HEAD
 
 
             if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
@@ -181,15 +179,13 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 delList.addAll(list);
             } else {
                 Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
-=======
             if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
                 delList.addAll(list);
             }else {
->>>>>>> xsp
                 delList.clear();
             }
             getTotalPrice();//总价
-        } else {
+        } else  {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartUpdataAllError), Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
@@ -276,29 +272,16 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     //删除多个
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
-<<<<<<< HEAD
-        if (registerBean.getCode().endsWith("200")) {
-
-            Toast.makeText(getActivity(), "删除多个成功", Toast.LENGTH_SHORT).show();
-=======
         if (registerBean.getCode().endsWith("200")){
->>>>>>> xsp
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
             delList.clear();//将删除集合里面的数据清空
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
-<<<<<<< HEAD
-            //修改多选按钮
-            shoppingCartCheck.setChecked(false);
-        } else {
-            Toast.makeText(getActivity(), "删除多个失败", Toast.LENGTH_SHORT).show();
-=======
             shoppingCartCheck.setChecked(false); //修改多选按钮
         }else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
->>>>>>> xsp
         }
     }
 
@@ -336,12 +319,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             if (!getData) {
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
-<<<<<<< HEAD
-
-                getData = true;
-=======
                 getData=true;
->>>>>>> xsp
             }
         } else {
             loadingPage.showErrorView();
