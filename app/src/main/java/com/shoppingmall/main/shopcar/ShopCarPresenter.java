@@ -263,4 +263,5 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                     }
                 });
     }
+
 }

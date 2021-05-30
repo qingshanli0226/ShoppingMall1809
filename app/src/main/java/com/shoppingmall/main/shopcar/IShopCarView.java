@@ -12,7 +12,6 @@ public interface IShopCarView extends IBaseView {
     void onCheck(int position,boolean isCheck);
     void onCheckAll(boolean isChcekAll);
     void onNum(int position);
-
     //删除一个
     void removeProduct(int position);
 

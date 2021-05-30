@@ -3,6 +3,7 @@ package com.shoppingmall.net.model;
 import com.shoppingmall.net.bean.AddProductBean;
 import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.ConfirmServerPayResultBean;
+import com.shoppingmall.net.bean.OrderBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.BuyBean;
 import com.shoppingmall.net.bean.GoodsBean;
@@ -97,6 +98,9 @@ public interface ShoppingMallApiService {
     @POST("removeManyProduct")
     Observable<SelectBean> removeMany(@Body RequestBody requestBody);
 
+    //向服务端下订单接口
+    @POST("getOrderInfo")
+    Observable<OrderBean> OrderInfo(@Body RequestBody requestBody);
 
     //请求服务端，是否支付成功
     @POST("confirmServerPayResult")

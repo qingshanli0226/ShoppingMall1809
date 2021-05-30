@@ -1,5 +1,6 @@
 package com.shoppingmall.net.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ShopCarBean {
@@ -47,7 +48,7 @@ public class ShopCarBean {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class ResultBean implements Serializable {
         private String productId;
         private String productName;
         private String productNum;

@@ -1,5 +1,6 @@
 package com.shoppingmall.main.shopcar;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,9 +21,12 @@ import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
 import com.shoppingmall.net.bean.ShopCarBean;
+import com.shoppingmall.order.OrderActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +51,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     private ImageView itemImageView;
     private boolean isAll = false;
     private List<ShopCarBean.ResultBean> carts;
+    private List<ShopCarBean.ResultBean> orderList = new ArrayList<>();
     private RelativeLayout NullCar;
     private TextView goHomeFragment;
     private LinearLayout notNullCar;
@@ -82,6 +87,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
 
     @Override
     public void initData() {
+        EventBus.getDefault().register(this);
         //判断是否点击编辑
         checkcompileOnClick();
         //注册
@@ -90,7 +96,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         LogUtils.json(carts);
         //获取数据
         shopCarAdapter = new ShopCarAdapter();
-        if (carts != null) {
+        if (carts.size()!=0) {
             notNullCar.setVisibility(View.VISIBLE);
             NullCar.setVisibility(View.GONE);
             shopCarAdapter.updateData(carts);
@@ -160,6 +166,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 httpPresenter.selectAll(isAll);
             }
         });
+
         //编辑全选
         checkdelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,26 +179,33 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         cartdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = -1;
-                ArrayList<ShopCarBean.ResultBean> resultBeans = new ArrayList<>();
-                for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
-                    if (shopCarAdapter.getData().get(i).isProductSelected()) {
-                        resultBeans.add(shopCarAdapter.getData().get(i));
-                        position = i;
-                    }
-                }
-                if (resultBeans.size() == 1) {
-                    //选中一个
-                    httpPresenter.removeOneProduct(position, resultBeans.get(0));
-                } else if (resultBeans.size() > 1) {
-                    //选中多个
-                    httpPresenter.removeMany(resultBeans);
-                } else {
-                    Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
-                }
+                delCarProduct();
             }
         });
         isCheck();
+
+        //支付
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
+                    if (shopCarAdapter.getData().get(i).isProductSelected()) {
+                        orderList.add(shopCarAdapter.getData().get(i));
+                    }
+                }
+                Log.i("hqy", "onClick: "+orderList.toString());
+
+                if (orderList.size()==0){
+                    Toast.makeText(getContext(), "请至少选中一个", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(getContext(), OrderActivity.class);
+                    intent.putExtra("orderList", (Serializable) orderList);
+                    intent.putExtra("orderPrice",paymentprice.getText().toString());
+                    startActivity(intent);
+                }
+
+            }
+        });
     }
 
     private void checkcompileOnClick() {
@@ -277,12 +291,40 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopCarAdapter.notifyItemChanged(position);
         priceCount();
     }
+    //删除
+    public void delCarProduct(){
+        int position = -1;
+        ArrayList<ShopCarBean.ResultBean> resultBeans = new ArrayList<>();
+        for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
+            if (shopCarAdapter.getData().get(i).isProductSelected()) {
+                resultBeans.add(shopCarAdapter.getData().get(i));
+                position = i;
+            }
+        }
+        if (resultBeans.size() == 1) {
+            //选中一个
+            httpPresenter.removeOneProduct(position, resultBeans.get(0));
+        } else if (resultBeans.size() > 1) {
+            //选中多个
+            httpPresenter.removeMany(resultBeans);
+        } else {
+            Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //删除一个
     @Override
     public void removeProduct(int position) {
         shopCarAdapter.getData().remove(position);
         shopCarAdapter.notifyItemRemoved(position);
+        if (shopCarAdapter.getData().size()!=0) {
+            notNullCar.setVisibility(View.VISIBLE);
+            NullCar.setVisibility(View.GONE);
+            shopCarAdapter.updateData(carts);
+        }else {
+            notNullCar.setVisibility(View.GONE);
+            NullCar.setVisibility(View.VISIBLE);
+        }
     }
 
     //删除多个
@@ -298,11 +340,29 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             }
         }
         shopCarAdapter.notifyDataSetChanged();
+        if (shopCarAdapter.getData().size()!=0) {
+            notNullCar.setVisibility(View.VISIBLE);
+            NullCar.setVisibility(View.GONE);
+            shopCarAdapter.updateData(carts);
+        }else {
+            notNullCar.setVisibility(View.GONE);
+            NullCar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Subscribe
+    public void delCarProductEvenBus(String msg){
+        if (msg.equals("delCar")){
+            delCarProduct();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     public void destroy() {

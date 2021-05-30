@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.shoppingmall.detail.greendao.TableManager;
+import com.shoppingmall.framework.log.ShopCrashHandler;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.net.TokenInterceptor;
@@ -22,5 +23,6 @@ public class App extends Application {
         TokenInterceptorContext.init(this);
 
         CacheShopManager.getInstance().init();
+//        ShopCrashHandler.getInstance().init(this);
     }
 }
