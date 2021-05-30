@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricityProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".person.dropshipment.DropShipmentActivity"></activity>
+        <activity android:name=".details.PlayVideoActivity"></activity>
+        <activity android:name=".person.dropshipment.DropShipmentActivity" />
         <activity android:name=".shopp.orderdetails.OrderDetailsActivity" />
         <activity android:name=".shopp.userinfo.BindUserInfoActivity" />
         <activity android:name=".person.findforpay.FindForPayActivity" />

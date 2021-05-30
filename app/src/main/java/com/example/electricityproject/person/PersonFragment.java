@@ -26,7 +26,7 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        //登录则吐司已登录,未登录跳转到登录页面
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,9 +44,8 @@ public class PersonFragment extends BaseFragment {
         orderPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
 
-                if (isLog!=null){
+                if (BusinessUserManager.getInstance().getIsLog()!=null){
                     Intent intent = new Intent(getContext(), FindForPayActivity.class);
                     startActivity(intent);
                 }else {
@@ -58,9 +57,8 @@ public class PersonFragment extends BaseFragment {
         orderShipment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
 
-                if (isLog!=null){
+                if (BusinessUserManager.getInstance().getIsLog()!=null){
                     startActivity(new Intent(getActivity(), DropShipmentActivity.class));
                 }else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);

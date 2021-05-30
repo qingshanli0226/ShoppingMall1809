@@ -35,12 +35,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/unreadMessage"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_weight="@dimen/weight_7"
                 android:id="@+id/btn_message"
-                android:src="@mipmap/message"></ImageView>
+                android:src="@drawable/community_message_icon"></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_weight="@dimen/weight_3"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:id="@+id/unreadMessageNum"
+                android:text="消息"></TextView>
+
         </LinearLayout>
     </LinearLayout>
 

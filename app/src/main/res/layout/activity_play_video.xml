@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".details.PlayVideoActivity">
+
+    <com.example.view.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:id="@+id/toolbar"></com.example.view.ToolBar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/re"
+        android:layout_height="350dp">
+
+        <com.example.electricityproject.view.VideoView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/playVideo"></com.example.electricityproject.view.VideoView>
+
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="17sp"
+                android:textColor="#fff"
+                android:id="@+id/tv_start"
+                android:text="   播放/暂停   "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+
+
+
+            <TextView
+                android:textSize="17sp"
+                android:textColor="#fff"
+                android:id="@+id/tv_full"
+                android:text="   全屏   "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="17sp"
+                android:textColor="#fff"
+                android:text="00:00"
+                android:id="@+id/tv_current"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"></TextView>
+
+            <SeekBar
+                android:id="@+id/bar"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"></SeekBar>
+
+            <TextView
+                android:textSize="17sp"
+                android:textColor="#fff"
+                android:text="00:00"
+                android:id="@+id/tv_duration"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"></TextView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

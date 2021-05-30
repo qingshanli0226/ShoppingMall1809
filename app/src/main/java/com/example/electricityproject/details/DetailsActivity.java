@@ -96,6 +96,13 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 }
             });
         }
+        detailsWeb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(DetailsActivity.this,PlayVideoActivity.class));
+                return true;
+            }
+        });
         if (name!=null){
             detailsName.setText(name+"");
         }

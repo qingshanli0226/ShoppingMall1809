@@ -1,5 +1,7 @@
 package com.example.electricityproject.home;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,12 +18,18 @@ import java.util.List;
 
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData{
+
     private RecyclerView mainRe;
     private HomeAdapter homeAdapter;
     private List<Object> objectList;
+    private LinearLayout unreadMessage;
+    private TextView unreadMessageNum;
+
+
     @Override
     protected void initData() {
         httpPresenter.getHomeBannerData();
+
     }
 
     @Override
@@ -31,10 +39,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     protected void initView() {
-        homeAdapter = new HomeAdapter();
+
+        unreadMessage = mView.findViewById(R.id.unreadMessage);
+        unreadMessageNum = mView.findViewById(R.id.unreadMessageNum);
 
         mainRe = mView.findViewById(R.id.main_re);
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        homeAdapter = new HomeAdapter();
 
         if (BusinessNetManager.getInstance().getNetConnect()){
 
