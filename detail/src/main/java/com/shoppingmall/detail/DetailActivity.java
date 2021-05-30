@@ -86,24 +86,12 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         httpPresenter = new DetailPresenter(this);
     }
 
-//    @Subscribe
-//    public void getEvenBus(String str){
-//        if (str.equals("startAutoService")){
-//            startAutoService();
-//        }
-//    }
-
     @Override
     public void initData() {
         loginBean = ShopMallUserManager.getInstance().getLoginBean();
 
-//        startAutoService();
-
         daoSession = TableManager.getInstance().getDaoSession();
 
-//        if (!EventBus.getDefault().isRegistered(this)){
-//            EventBus.getDefault().register(this);
-//        }
         //退出当前页面
         detailBack.setOnClickListener(v->{
             backActivity();
@@ -255,15 +243,9 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     public void checkProduct(SelectBean selectBean) {
         if (selectBean.getCode().equals("200")){
-            httpPresenter.addProduct(productBean);
+//            httpPresenter.addProduct(productBean);
         }
     }
-
-
-//    private void startAutoService() {
-//        Intent intent1 = new Intent(DetailActivity.this, AutoService.class);
-//        startService(intent1);
-//    }
 
     private void setUI(ProductGoodBean productGoodBean) {
         //加载数据
@@ -300,9 +282,6 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if (EventBus.getDefault().isRegistered(this)){
-//            EventBus.getDefault().unregister(this);
-//        }
     }
 
 }

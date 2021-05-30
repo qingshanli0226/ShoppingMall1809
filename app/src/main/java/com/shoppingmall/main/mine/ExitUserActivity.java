@@ -1,11 +1,9 @@
 package com.shoppingmall.main.mine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.shoppingmall.R;
+import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.sp.SpUtil;
@@ -34,6 +32,7 @@ public class ExitUserActivity extends BaseActivity {
         exitUser.setOnClickListener(v->{
             SpUtil.putString(this,"token","");
             ShopMallUserManager.getInstance().setLoginBean(null);
+            CacheShopManager.getInstance().destroy();
             finish();
         });
     }

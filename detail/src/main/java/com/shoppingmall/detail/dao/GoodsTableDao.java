@@ -1,4 +1,4 @@
-package com.shoppingmall.detail;
+package com.shoppingmall.detail.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;

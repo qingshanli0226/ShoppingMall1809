@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,14 +16,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
-import com.shoppingmall.framework.adapter.BaseRvAdapter;
-import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
-import com.shoppingmall.net.bean.AddProductBean;
-import com.shoppingmall.net.bean.CheckProductBean;
-import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements CacheShopManager.ICartChange,IShopCarView {
+public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements CacheShopManager.ICartChange, IShopCarView {
 
     private ShopCarAdapter shopCarAdapter;
 
@@ -51,6 +47,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     private ImageView itemImageView;
     private boolean isAll = false;
     private List<ShopCarBean.ResultBean> carts;
+    private RelativeLayout NullCar;
+    private TextView goHomeFragment;
+    private LinearLayout notNullCar;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop_car;
@@ -61,15 +61,18 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         viewPager = getActivity().findViewById(R.id.mainVp);
         shopMallCarRv = (RecyclerView) mView.findViewById(R.id.shopMallCarRv);
 
-        checkcompile = (CheckBox)  mView.findViewById(R.id.checkcompile);
-        cartLLfinish = (LinearLayout)  mView.findViewById(R.id.cartLLfinish);
-        checkdelete = (CheckBox)  mView.findViewById(R.id.checkdelete);
-        cartdelete = (Button)  mView.findViewById(R.id.cartdelete);
-        cartcollect = (Button)  mView.findViewById(R.id.cartcollect);
-        cartLLpayment = (LinearLayout)  mView.findViewById(R.id.cartLLpayment);
-        checkpayment = (CheckBox)  mView.findViewById(R.id.checkpayment);
-        paymentprice = (TextView)  mView.findViewById(R.id.paymentprice);
-        payment = (Button)  mView.findViewById(R.id.payment);
+        checkcompile = (CheckBox) mView.findViewById(R.id.checkcompile);
+        cartLLfinish = (LinearLayout) mView.findViewById(R.id.cartLLfinish);
+        checkdelete = (CheckBox) mView.findViewById(R.id.checkdelete);
+        cartdelete = (Button) mView.findViewById(R.id.cartdelete);
+        cartcollect = (Button) mView.findViewById(R.id.cartcollect);
+        cartLLpayment = (LinearLayout) mView.findViewById(R.id.cartLLpayment);
+        checkpayment = (CheckBox) mView.findViewById(R.id.checkpayment);
+        paymentprice = (TextView) mView.findViewById(R.id.paymentprice);
+        payment = (Button) mView.findViewById(R.id.payment);
+        NullCar = (RelativeLayout) mView.findViewById(R.id.NullCar);
+        goHomeFragment = (TextView) mView.findViewById(R.id.goHomeFragment);
+        notNullCar = (LinearLayout) mView.findViewById(R.id.notNullCar);
     }
 
     @Override
@@ -88,7 +91,12 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         //获取数据
         shopCarAdapter = new ShopCarAdapter();
         if (carts != null) {
+            notNullCar.setVisibility(View.VISIBLE);
+            NullCar.setVisibility(View.GONE);
             shopCarAdapter.updateData(carts);
+        }else {
+            notNullCar.setVisibility(View.GONE);
+            NullCar.setVisibility(View.VISIBLE);
         }
 
         //数据
@@ -106,6 +114,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 result.setProductPrice(resultBean.getProductPrice());
                 httpPresenter.upDateNum(position, result);
             }
+
             @Override
             public void onShopCarRemoveNumItemClick(int position, View v) {
                 ShopCarBean.ResultBean resultBean = shopCarAdapter.getData().get(position);
@@ -117,6 +126,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                     httpPresenter.upDateNum(position, result);
                 }
             }
+
             @Override
             public void onIsSelectItemClick(int position, View view) {
                 ShopCarBean.ResultBean resultBean = shopCarAdapter.getData().get(position);
@@ -133,6 +143,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 }
                 httpPresenter.updateProductSelect(position, result);
             }
+        });
+        //去主页
+        goHomeFragment.setOnClickListener(v->{
+            viewPager.setCurrentItem(0);
         });
         //全选
         checkpayment.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +171,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         //删除
         cartdelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 int position = -1;
                 ArrayList<ShopCarBean.ResultBean> resultBeans = new ArrayList<>();
                 for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
@@ -181,12 +195,12 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     }
 
     private void checkcompileOnClick() {
-        checkcompile.setOnClickListener(v->{
-            if (isOpenDel){
+        checkcompile.setOnClickListener(v -> {
+            if (isOpenDel) {
                 cartLLpayment.setVisibility(View.VISIBLE);
                 cartLLfinish.setVisibility(View.GONE);
                 isOpenDel = false;
-            }else {
+            } else {
                 cartLLpayment.setVisibility(View.GONE);
                 cartLLfinish.setVisibility(View.VISIBLE);
                 isOpenDel = true;
@@ -200,6 +214,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopCarAdapter.updateData(carts);
         EventBus.getDefault().post("");
     }
+
     //添加
     @Override
     public void onAddCart(int position) {
@@ -242,11 +257,11 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     private void priceCount() {
         int priceCount = 0;
         for (ShopCarBean.ResultBean datum : shopCarAdapter.getData()) {
-            if(datum.isProductSelected()){
-                priceCount += Integer.parseInt(datum.getProductNum()) * Float.parseFloat(datum.getProductPrice()+"");
+            if (datum.isProductSelected()) {
+                priceCount += Integer.parseInt(datum.getProductNum()) * Float.parseFloat(datum.getProductPrice() + "");
             }
         }
-        paymentprice.setText(priceCount+"");
+        paymentprice.setText(priceCount + "");
     }
 
     @Override
@@ -255,18 +270,21 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopCarAdapter.notifyDataSetChanged();
         priceCount();
     }
+
     //
     @Override
     public void onNum(int position) {
         shopCarAdapter.notifyItemChanged(position);
         priceCount();
     }
+
     //删除一个
     @Override
     public void removeProduct(int position) {
         shopCarAdapter.getData().remove(position);
         shopCarAdapter.notifyItemRemoved(position);
     }
+
     //删除多个
     @Override
     public void removeMany(List<ShopCarBean.ResultBean> resultBeans) {
