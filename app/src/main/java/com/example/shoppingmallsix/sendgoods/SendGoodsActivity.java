@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.find.FindForPayBean;
+import com.example.net.bean.find.FindForSendbean;
 import com.example.shoppingmallsix.R;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class SendGoodsActivity extends BaseActivity<SendgooodsrPresneter> implem
     private ToolBar toolbar;
     private  SendgooodsrPresneter sendgooodsrPresneter;
     private RecyclerView rv;
-    private List<FindForPayBean.ResultBean> list = new ArrayList<>();
+    private List<FindForSendbean.ResultBean> list = new ArrayList<>();
     private SendgoodsAdapter sendgoodsAdapter;
     @Override
     protected void initPresenter() {
@@ -53,16 +54,6 @@ public class SendGoodsActivity extends BaseActivity<SendgooodsrPresneter> implem
         return R.layout.activity_send_goods;
     }
 
-    @Override
-    public void onfindForpay(FindForPayBean findForPayBean) {
-
-        if (findForPayBean.getCode().equals("200")){
-
-            list.addAll(findForPayBean.getResult());
-            sendgoodsAdapter.notifyDataSetChanged();
-        }
-
-    }
 
     @Override
     public void showLoading() {
@@ -77,5 +68,14 @@ public class SendGoodsActivity extends BaseActivity<SendgooodsrPresneter> implem
     @Override
     public void showToast(String msg) {
 
+    }
+
+    @Override
+    public void onfindForSend(FindForSendbean findForSendbean) {
+        if (findForSendbean.getCode().equals("200")){
+
+            list.addAll(findForSendbean.getResult());
+            sendgoodsAdapter.notifyDataSetChanged();
+        }
     }
 }

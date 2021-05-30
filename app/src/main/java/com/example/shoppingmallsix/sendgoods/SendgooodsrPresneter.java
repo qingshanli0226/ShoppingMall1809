@@ -3,6 +3,7 @@ package com.example.shoppingmallsix.sendgoods;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.find.FindForPayBean;
+import com.example.net.bean.find.FindForSendbean;
 import com.example.shoppingmallsix.sendgoods.Isendgoods;
 
 import io.reactivex.Observer;
@@ -20,7 +21,7 @@ public class SendgooodsrPresneter extends BasePresenter<Isendgoods> {
 
     public void getFindForPay(){
 
-        RetrofitCreator.getFiannceApiService().getFindforpay()
+        RetrofitCreator.getFiannceApiService().getFindforsend()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(new Action() {
@@ -39,28 +40,24 @@ public class SendgooodsrPresneter extends BasePresenter<Isendgoods> {
                         }
                     }
                 })
-                .subscribe(new Observer<FindForPayBean>() {
+                .subscribe(new Observer<FindForSendbean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(FindForPayBean findForPayBean) {
-
-                        if (iView != null){
-                            iView.onfindForpay(findForPayBean);
-                        }
-
+                    public void onNext(FindForSendbean findForSendbean) {
+                            if (iView != null){
+                                iView.onfindForSend(findForSendbean);
+                            }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                         if (iView != null){
                             iView.showToast(e.getMessage());
                         }
-
                     }
 
                     @Override

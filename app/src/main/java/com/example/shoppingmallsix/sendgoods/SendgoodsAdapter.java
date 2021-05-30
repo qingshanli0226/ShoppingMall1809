@@ -9,9 +9,9 @@ import com.example.shoppingmallsix.R;
 
 import java.util.List;
 
-public class SendgoodsAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> {
+public class SendgoodsAdapter extends BaseRvAdapter<FindForSendbean.ResultBean> {
 
-    public SendgoodsAdapter(List<FindForPayBean.ResultBean> resultBeans){
+    public SendgoodsAdapter(List<FindForSendbean.ResultBean> resultBeans){
         setDataList(resultBeans);
     }
 
@@ -21,7 +21,7 @@ public class SendgoodsAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> {
     }
 
     @Override
-    public void displayViewHolder(BaseViewHolder holder, int position, FindForPayBean.ResultBean itemData) {
+    public void displayViewHolder(BaseViewHolder holder, int position, FindForSendbean.ResultBean itemData) {
         TextView time = holder.getView(R.id.time);
         TextView money = holder.getView(R.id.money);
         TextView ordernum = holder.getView(R.id.ordernum);

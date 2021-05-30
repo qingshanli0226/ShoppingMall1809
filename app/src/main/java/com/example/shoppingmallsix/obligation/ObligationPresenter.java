@@ -2,6 +2,7 @@ package com.example.shoppingmallsix.obligation;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
+import com.example.net.bean.find.FindForPayBean;
 import com.example.net.bean.find.FindForSendbean;
 
 import io.reactivex.Observer;
@@ -20,7 +21,7 @@ public class ObligationPresenter extends BasePresenter<Iobligation> {
     public void findForSend(){
 
         RetrofitCreator.getFiannceApiService()
-                .getFindforsend()
+                .getFindforpay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -39,23 +40,22 @@ public class ObligationPresenter extends BasePresenter<Iobligation> {
                         }
                     }
                 })
-                .subscribe(new Observer<FindForSendbean>() {
+                .subscribe(new Observer<FindForPayBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(FindForSendbean findForSendbean) {
-                        if (iView!=null){
-                            iView.onfindForSend(findForSendbean);
-                        }
+                    public void onNext(FindForPayBean findForPayBean) {
+                            if (iView != null){
+                                iView.onfindForpay(findForPayBean);
+                            }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
-                        if (iView!=null){
+                        if (iView != null){
                             iView.showToast(e.getMessage());
                         }
                     }

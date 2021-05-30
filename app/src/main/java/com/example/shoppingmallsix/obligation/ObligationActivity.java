@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.find.FindForPayBean;
 import com.example.net.bean.find.FindForSendbean;
 import com.example.shoppingcar.BuildConfig;
 import com.example.shoppingmallsix.R;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class ObligationActivity extends BaseActivity<ObligationPresenter> implements Iobligation {
     private ToolBar toolbar;
-    private  List<FindForSendbean.ResultBean> list = new ArrayList<>();
+    private  List<FindForPayBean.ResultBean> list = new ArrayList<>();
     ObligationPresenter obligationPresenter;
     private RecyclerView rv;
     private  ObligationAdapter obligationAdapter;
@@ -65,17 +66,6 @@ public class ObligationActivity extends BaseActivity<ObligationPresenter> implem
     }
 
     @Override
-    public void onfindForSend(FindForSendbean findForSendbean) {
-        if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForSendbean);
-        Toast.makeText(this, ""+findForSendbean, Toast.LENGTH_SHORT).show();
-        if (findForSendbean.getCode().equals("200")){
-            if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForSendbean.getResult());
-            list.addAll(findForSendbean.getResult());
-            obligationAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
     public void showLoading() {
 
     }
@@ -88,5 +78,16 @@ public class ObligationActivity extends BaseActivity<ObligationPresenter> implem
     @Override
     public void showToast(String msg) {
 
+    }
+
+    @Override
+    public void onfindForpay(FindForPayBean findForPayBean) {
+        if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForPayBean);
+        Toast.makeText(this, ""+findForPayBean, Toast.LENGTH_SHORT).show();
+        if (findForPayBean.getCode().equals("200")){
+            if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForPayBean.getResult());
+            list.addAll(findForPayBean.getResult());
+            obligationAdapter.notifyDataSetChanged();
+        }
     }
 }
