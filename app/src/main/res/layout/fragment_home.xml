@@ -52,7 +52,6 @@
                 android:gravity="center"
                 android:id="@+id/unreadMessageNum"
                 android:text="消息"></TextView>
-
         </LinearLayout>
     </LinearLayout>
 

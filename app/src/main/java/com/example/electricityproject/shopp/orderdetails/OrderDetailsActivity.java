@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,13 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.db.DaoMaster;
+import com.example.electricityproject.db.DBManger;
+import com.example.electricityproject.db.MessageTable;
 import com.example.framework.BaseActivity;
+import com.example.manager.MessageManger;
 import com.example.manager.ShopCacheManger;
-import com.example.pay.alipay.sdk.pay.demo.AuthResult;
 import com.example.pay.alipay.sdk.pay.demo.PayResult;
 import com.example.pay.alipay.sdk.pay.demo.util.OrderInfoUtil2_0;
 import com.example.view.ToolBar;
@@ -53,6 +56,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private OrderDetailsAdapter orderDetailsAdapter;
     private List<SelectOrderBean> list = new ArrayList<>();
     private android.widget.Button goBuy;
+    private DaoMaster daoMaster;
 
     @Override
     protected void initData() {
@@ -68,6 +72,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         userAddress.setText("地址:"+address);
 
         list = ShopCacheManger.getInstance().getList();
+
 
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
@@ -90,24 +95,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     }
 
     public void payV2(View v) {
-        if (TextUtils.isEmpty(APPID) || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))) {
-            Toast.makeText(OrderDetailsActivity.this, "1352132123123", Toast.LENGTH_SHORT).show();
-
-            return;
-        }
-        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
-        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, rsa2);
-        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
-        String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
         final Runnable payRunnable = new Runnable() {
-
             @Override
             public void run() {
                 PayTask alipay = new PayTask(OrderDetailsActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                Log.i("msp", result.toString());
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -122,6 +114,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
+
+            daoMaster = DBManger.getInstance().getDaoMaster(OrderDetailsActivity.this);
+
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
@@ -137,10 +132,22 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setOrderInfo(orderInfo);
                         resultBean.setTradeNo(outTradeNo);
                         resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
                         paySussList.add(resultBean);
 
+                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+
+
                     } else {
+
+                        MessageManger.getInstance().addMes(new MessageManger.IMessageListener() {
+                            @Override
+                            public void onResult(boolean isSuccess) {
+                                LogUtils.i(""+isSuccess);
+                            }
+                        });
+
                         payMsg="支付失败";
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
                         Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
@@ -149,17 +156,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setOrderInfo(orderInfo);
                         resultBean.setTradeNo(outTradeNo);
                         resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
-                    }
-                    break;
-                }
-                case SDK_AUTH_FLAG: {
-                    AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
-                    String resultStatus = authResult.getResultStatus();
-                    if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
 
-                    } else {
+                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
 
                     }
                     break;
@@ -189,6 +190,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         moneyValue = "999";
         OrderInfoUtil2_0.setmoney(moneyValue);
+
     }
 
     @Override
@@ -215,6 +217,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     public void onConfirmServerPayResultOk(ConfirmServerPayResultBean bean) {
         if (bean.getCode().equals("200")){
+
             finish();
         }
     }

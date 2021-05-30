@@ -39,6 +39,8 @@ public class ShopCacheManger {
 
     private List<FindForPayBean.ResultBean> payFailList = new ArrayList<>();
 
+    private List<FindForPayBean.ResultBean> messageList = new ArrayList<>();
+
 
     public synchronized static ShopCacheManger getInstance() {
         if (cacheManger==null){
@@ -97,6 +99,14 @@ public class ShopCacheManger {
                 }
             }
         }
+    }
+
+    public List<FindForPayBean.ResultBean> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<FindForPayBean.ResultBean> messageList) {
+        this.messageList = messageList;
     }
 
     public List<ShortcartProductBean.ResultBean> getSelectList() {
