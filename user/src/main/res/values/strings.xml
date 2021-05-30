@@ -17,5 +17,23 @@
     <string name="loginYes">登陆成功</string>
     <string name="notNull">不能为空</string>
 
+    <string name="phone">电话</string>
+    <string name="addPhoneSuccess">添加手机号成功</string>
+    <string name="addPhoneError">添加手机号错误</string>
+    <string name="notPhone">手机号未绑定</string>
+    <string name="sureBindingPhone">确认绑定电话</string>
+    <string name="phoneEdHit">请输入电话号(如已绑定可不填)</string>
+    <string name="binddingPhone">绑定联系方式</string>
+
+    <string name="address">地址</string>
+    <string name="addAddressSuccess">添加收货地址成功</string>
+    <string name="addAddressError">添加收货地址错误</string>
+    <string name="notAddress">收货地址未绑定</string>
+    <string name="sureBindingAddress">确认绑定地址</string>
+    <string name="addressEdHit">请输入地址(如已绑定可不填)</string>
+
+    <string name="confirm">完成</string>
+    <string name="conset">点击确认，表示同意《尚硅谷用户协议》</string>
+
 
 </resources>

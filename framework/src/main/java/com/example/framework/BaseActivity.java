@@ -30,7 +30,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             }
         };
         setContentView(loadingPage);
-//        CaCheMannager.getInstance().registerIShoppingCart(this);//购物车注册接口
         initView();
         initPresenter();
         initData();

@@ -2,6 +2,7 @@ package com.example.myapplication.shoppingCart;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,8 +22,6 @@ import com.example.net.bean.ShoppingCartBean;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.http.HEAD;
 
 public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
@@ -45,7 +44,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private TextView shoppingCartCompileCollect;
 
     private boolean getData = false;
-    private Button btn;
+    private Button priceBtn;
 
     @Override
     protected int bandLayout() {
@@ -54,6 +53,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void initView() {
+        priceBtn = (Button) findViewById(R.id.priceBtn);
         shoppingCartCompile = (TextView) findViewById(R.id.shoppingCartCompile);
         shoppingCartRec = (RecyclerView) findViewById(R.id.shoppingCartRec);
         shoppingCartCheck = (CheckBox) findViewById(R.id.shoppingCartCheck);
@@ -68,7 +68,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
-        btn = findViewById(R.id.btn);
     }
 
     @Override
@@ -96,13 +95,17 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.updatateAllSelect(false);
             }
         });
-        getTotalPrice();
-        btn.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), OrderActivity.class);
-            startActivity(intent);
+        //去结算
+        priceBtn.setOnClickListener(v -> {
+            if (delList.size() == 0) {
+                Toast.makeText(getActivity(), getString(R.string.myShoppingCartSelectShopping), Toast.LENGTH_SHORT).show();
+            } else {
+                CaCheMannager.getInstance().setCheckList(delList);
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("shoppingPrice", shoppingCartPrice.getText().toString() + "");
+                startActivity(intent);
+            }
         });
-
-        getTotalPrice();//价格
         //点击编辑
         shoppingCartCompile.setOnClickListener(v -> {
             if (shoppingCartCompile.getText().toString().equals(getString(R.string.myShoppingCartCompile))) {
@@ -126,6 +129,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.RemoveManvProduct(delList);
             }
         });
+        getTotalPrice();//价格
     }
 
     /**

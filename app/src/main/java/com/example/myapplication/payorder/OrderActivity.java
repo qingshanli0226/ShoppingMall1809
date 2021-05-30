@@ -1,14 +1,25 @@
 package com.example.myapplication.payorder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CaCheLoginUserMannager;
+import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
+import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
+import com.example.net.bean.ShoppingCartBean;
 
-public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrderView {
+import java.util.List;
+
+public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrderView,CaCheLoginUserMannager.UserPhoneAndAddress {
 
 
     private com.example.framework.view.MyToorbar toolbar;
@@ -20,6 +31,7 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
     private android.widget.RelativeLayout llGoodsRoot;
     private android.widget.TextView pricePay;
     private android.widget.Button buyOrder;
+    private OrderRecAdapter adapter;
 
     @Override
     protected int bandLayout() {
@@ -33,7 +45,6 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
 
     @Override
     public void initView() {
-
         toolbar = findViewById(R.id.toolbar);
         nameOrder = findViewById(R.id.name_order);
         phoneOrder = findViewById(R.id.phone_order);
@@ -43,15 +54,59 @@ public class OrderActivity extends BaseActivity<OrderPresenter>implements IOrder
         llGoodsRoot = findViewById(R.id.ll_goods_root);
         pricePay = findViewById(R.id.price_pay);
         buyOrder = findViewById(R.id.buy_order);
+        adapter = new OrderRecAdapter();
+        CaCheLoginUserMannager.getInstance().registerAddLoginUser(this);//注册
     }
 
     @Override
     public void initPresenter() {
-          mPresenter=new OrderPresenter(this);
+        mPresenter = new OrderPresenter(this);
     }
 
     @Override
     public void initData() {
+        //获取传过来的价格
+        Intent intent = getIntent();
+        String price = intent.getStringExtra("shoppingPrice");
+        pricePay.setText(price);//价格
+        priceOrder.setText(price);//总价
+        //获取选中集合
+        List<ShoppingCartBean.ResultBean> checkList = CaCheMannager.getInstance().getCheckList();
+        adapter.updataData(checkList);
+        rvOrder.setLayoutManager(new LinearLayoutManager(this));
+        rvOrder.setAdapter(adapter);
 
+        //用户名
+        LoginBean bean = CaCheLoginUserMannager.getInstance().getBean();
+        nameOrder.setText(bean.getResult().getName());
+        phoneOrder.setText(bean.getResult().getPhone()+"");
+        adressOrder.setText(bean.getResult().getAddress()+"");
+
+        //提交订单的时候判断是否绑定手机号与地址
+        buyOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bean.getResult().getPhone()==null||bean.getResult().getAddress()==null){
+                    Toast.makeText(OrderActivity.this, "请绑定手机号与地址", Toast.LENGTH_SHORT).show();
+                    CaCheArote.getInstance().getUserInterface().openPhoneAddressActivity(OrderActivity.this,null);
+                }else {
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setPhoneOrAddress(LoginBean loginBean) {
+        LoginBean.ResultBean result = loginBean.getResult();
+        phoneOrder.setText(result.getPhone()+"");
+        adressOrder.setText(result.getAddress()+"");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        destroy();
+        CaCheLoginUserMannager.getInstance().unRegisterAddLoginUser(this);//注册
     }
 }

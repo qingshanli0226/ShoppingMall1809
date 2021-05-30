@@ -43,13 +43,11 @@
     <string name="index">1</string>
     <string name="popCencelTv">取消</string>
     <string name="popConfirmTv">确定</string>
-
     <string name="addShoppingSucceed">添加购物车成功</string>
     <string name="addShoppingeError">添加购物车失败</string>
     <string name="inventoryNot">库存不够</string>
     <string name="notLessThanOne">不能少于一个</string>
     <string name="welcomeNotExit">稍后退出</string>
-
     <string name="personOrder">我的订单</string>
     <string name="personLookAllOrder">查看全部订单</string>
     <string name="personAwaitPay">待付款</string>
@@ -57,7 +55,6 @@
     <string name="personAwaitDeliverDelivery">待收货</string>
     <string name="personOffTheStokcks">已完成</string>
     <string name="personSalesReturnOrRefund">退货/退款</string>
-
     <string name="personShippingAddress">收货地址</string>
     <string name="personMyCollect">我的收藏</string>
     <string name="personMyDiscountCoupon">我的优惠券</string>
@@ -67,7 +64,6 @@
     <string name="personPassionShare">激情分享</string>
     <string name="personServiceCenter">客服中心</string>
     <string name="personServiceFeedback">服务反馈</string>
-
     <string name="title_msg">消息</string>
 
     <!--    分类页面-->
@@ -82,15 +78,35 @@
     <string name="myShoppingCartTotal">合计:</string>
     <string name="myShoppingCartFlag">￥</string>
     <string name="myShoppingCartToCloseAnAccount">去结算</string>
-
     <string name="myShoppingCartDelete">删除</string>
     <string name="myShoppingCartCollet">收藏</string>
     <string name="myShoppingCartFinish">完成</string>
-
     <string name="myShoppingCartSelectShopping">请选择商品</string>
     <string name="myShoppingCartUpdataAllError">全选失败</string>
     <string name="myShoppingCartUpdataError">选择商品失败</string>
     <string name="myShoppingCartUnderstock">库存不足</string>
     <string name="myShoppingCartRemoveError">删除失败</string>
     <string name="myShoppingCartUpdataNumError">更改数量错误</string>
+
+<!--    订单-->
+    <string name="orderDetails">订单详情</string>
+    <string name="orderUserName">用户名:</string>
+    <string name="orderPhone">手机号:</string>
+    <string name="orderLocation">地址:</string>
+    <string name="orderShoppingPrice">商品价格</string>
+    <string name="orderShoppingFlag">￥</string>
+    <string name="orderReturnAll">退换无忧</string>
+    <string name="orderFreight">运费</string>
+    <string name="orderImmediately">立减</string>
+    <string name="orderDiscount">优惠券</string>
+    <string name="orderNutUsable">无可用</string>
+    <string name="orderSiliconBean">硅豆</string>
+    <string name="orderFullOneHundredUse">共999，满1000可用</string>
+    <string name="orderGiftCard">礼品卡</string>
+    <string name="orderInvoice">发票</string>
+    <string name="orderOrdinaryVATInvoice">普票(商品明细-个人)</string>
+    <string name="orderModeOfPayMent">支付方式</string>
+    <string name="orderOnlinePayment">在线支付</string>
+    <string name="orderSubmitOrder">提交订单</string>
+
 </resources>

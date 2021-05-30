@@ -79,7 +79,7 @@ public class CaCheArote {
     ////在框架里约定好熬User要实现的接口，其他页面可以调用此接口
     public interface IUserInterface {
         void openLoginActivity(Context context, Bundle bundle);
-        void openGettureActivity(Context context, Bundle bundle);
+        void openPhoneAddressActivity(Context context, Bundle bundle);
 //        void openUserMessageActivity(Context context, Bundle bundle);
     }
 //
