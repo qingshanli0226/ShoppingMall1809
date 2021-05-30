@@ -101,7 +101,7 @@ public interface Api {
     @FormUrlEncoded
     Observable<UpdatePhone> getUpdatephone(@Field("phone")String phone);
 
-    @POST("updataAddress")
+    @POST("updateAddress")
     @FormUrlEncoded
     Observable<UpdateAddress> getupdataAddress(@Field("address")String address);
 

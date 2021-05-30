@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.framework.manager.CaCheArote;
 import com.example.user.UserActivity;
+import com.example.user.phoneaddress.PhoneAddressMainActivity;
 
 
 public class UserModule implements CaCheArote.IUserInterface {
@@ -28,15 +29,20 @@ public class UserModule implements CaCheArote.IUserInterface {
     }
 
     @Override
-    public void openGettureActivity(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, UserActivity.class);
+    public void openPhoneAddressActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, PhoneAddressMainActivity.class);
         if (context instanceof Activity){
-            intent.putExtra("param",bundle);
+            if (bundle!=null){
+                intent.putExtras(bundle);
+            }
             ((Activity) context).startActivityForResult(intent,100);
         }else {
-            intent.putExtra("param",bundle);
+            if (bundle!=null){
+                intent.putExtras(bundle);
+            }
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             ((Activity) context).startActivityForResult(intent,100);
         }
     }
+
 }

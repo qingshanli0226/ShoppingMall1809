@@ -1,5 +1,7 @@
 package com.example.framework.manager;
 
+import android.content.Intent;
+
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
@@ -22,7 +24,12 @@ public class PaySendCacheManager {
 
     //获取数量
     public int getOneIndex() {
-        return findForPayBean.getResult().size();
+        int size = findForPayBean.getResult().size();
+        return size;
+    }
+    private int a=1;
+    public void  setonIndex(int p){
+        this.a=p;
     }
 
     //获取数量

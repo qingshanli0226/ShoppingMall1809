@@ -2,6 +2,7 @@ package com.example.myapplication.shoppingCart;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -45,7 +46,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private TextView shoppingCartCompileCollect;
 
     private boolean getData = false;
-    private Button btn;
+    private Button priceBtn;
 
     @Override
     protected int bandLayout() {
@@ -54,6 +55,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void initView() {
+        priceBtn = (Button) findViewById(R.id.priceBtn);
         shoppingCartCompile = (TextView) findViewById(R.id.shoppingCartCompile);
         shoppingCartRec = (RecyclerView) findViewById(R.id.shoppingCartRec);
         shoppingCartCheck = (CheckBox) findViewById(R.id.shoppingCartCheck);
@@ -68,7 +70,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
-        btn = findViewById(R.id.btn);
     }
 
     @Override
@@ -96,19 +97,17 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.updatateAllSelect(false);
             }
         });
-        //价格
-        getTotalPrice();
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), OrderActivity.class);
+        //去结算
+        priceBtn.setOnClickListener(v -> {
+            if (delList.size() == 0) {
+                Toast.makeText(getActivity(), getString(R.string.myShoppingCartSelectShopping), Toast.LENGTH_SHORT).show();
+            } else {
+                CaCheMannager.getInstance().setCheckList(delList);
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                intent.putExtra("shoppingPrice", shoppingCartPrice.getText().toString() + "");
                 startActivity(intent);
             }
         });
-
-        getTotalPrice();//价格
         //点击编辑
         shoppingCartCompile.setOnClickListener(v -> {
             if (shoppingCartCompile.getText().toString().equals(getString(R.string.myShoppingCartCompile))) {
@@ -132,6 +131,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 mPresenter.RemoveManvProduct(delList);
             }
         });
+        getTotalPrice();//价格
     }
 
     /**
@@ -172,12 +172,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     list) {
                 be.setCheck(nowIsChe);
             }
-
-
-            if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
-                Toast.makeText(getActivity(), "全进了", Toast.LENGTH_SHORT).show();
-                delList.addAll(list);
-            } else {
                 Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
             if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
                 delList.addAll(list);
@@ -272,7 +266,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     //删除多个
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
-        if (registerBean.getCode().endsWith("200")){
+        if (registerBean.getCode().endsWith("200")) {
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
@@ -280,7 +274,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
             shoppingCartCheck.setChecked(false); //修改多选按钮
-        }else {
+        } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
     }
@@ -319,7 +313,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             if (!getData) {
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
-                getData=true;
+                getData = true;
             }
         } else {
             loadingPage.showErrorView();

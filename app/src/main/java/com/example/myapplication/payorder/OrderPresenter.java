@@ -1,18 +1,14 @@
 package com.example.myapplication.payorder;
 
 import com.example.framework.manager.CaCheMannager;
-import com.example.net.RetrofitManager;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.ShoppingCartBean;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.example.net.retrogit.RetrofitManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
