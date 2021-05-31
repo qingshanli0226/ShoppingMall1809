@@ -8,7 +8,6 @@ import android.os.Message;
 
 import android.graphics.Path;
 import android.graphics.PathMeasure;
-import android.util.Log;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,7 +25,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.ShopmallGlide;

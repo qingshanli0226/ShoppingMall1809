@@ -1,11 +1,8 @@
 package com.example.shoppingmallsix.fragment.classify.frgment.classitfy.adapter;
 
-import android.content.Intent;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.classify.ClassBean;

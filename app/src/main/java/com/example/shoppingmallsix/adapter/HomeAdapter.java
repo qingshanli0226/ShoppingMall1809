@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.HomeBean;

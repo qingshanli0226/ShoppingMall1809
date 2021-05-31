@@ -157,8 +157,12 @@ public interface FiannceApiService {
     Observable<CheckOneInventoryBean> getCheckOneInventory(@Field("productId")String productId, @Field("productNum")String productNum);
 
 
+
     @POST("crash")
     @FormUrlEncoded
     Observable<CrashBean> crashReport(@FieldMap HashMap<String,String> params);
+
+
+
 
 }

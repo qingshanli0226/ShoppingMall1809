@@ -5,7 +5,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.business.GetShortcartProductsBean;
