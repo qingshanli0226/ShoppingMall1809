@@ -44,9 +44,11 @@ public class CacheManager {
     }
 
     //多线程去实例化该实例
-    public  static synchronized CacheManager getInstance() {
-        if (instance==null){
-            instance = new CacheManager();
+    public  static CacheManager getInstance() {
+        synchronized (CacheManager.class) {
+            if (instance == null) {
+                instance = new CacheManager();
+            }
         }
         return instance;
     }

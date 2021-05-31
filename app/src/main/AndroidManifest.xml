@@ -23,6 +23,7 @@
         <activity android:name=".beisaier.BeisaierActivity" />
         <activity android:name=".exception.ExceptionActivity" />
         <activity android:name=".mvvm.MVVMActivity" />
+        <activity android:name=".lock.LockActivity"></activity>
     </application>
 
 </manifest>

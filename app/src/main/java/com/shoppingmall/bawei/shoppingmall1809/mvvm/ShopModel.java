@@ -5,6 +5,7 @@ import com.fiannce.bawei.net.mode.FocusBean;
 import com.fiannce.bawei.net.mode.VersionBean;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
