@@ -1,9 +1,8 @@
-package com.example.shoppingmallsix.obligation;
+package com.example.pay.obligation;
 
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.find.FindForPayBean;
-import com.example.net.bean.find.FindForSendbean;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

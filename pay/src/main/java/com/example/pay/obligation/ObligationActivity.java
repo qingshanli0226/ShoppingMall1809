@@ -1,55 +1,39 @@
-package com.example.pay.order;
+package com.example.pay.obligation;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
+import com.example.framework.BaseRvAdapter;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.business.ConfirmServerPayResultBean;
-import com.example.net.bean.business.GetOrderInfoBean;
-
 import com.example.net.bean.find.FindForPayBean;
-import com.example.net.bean.find.FindForSendbean;
-
-import com.example.net.bean.business.GetShortcartProductsBean;
+import com.example.pay.BuildConfig;
 import com.example.pay.R;
 import com.example.pay.demo.AuthResult;
 import com.example.pay.demo.PayResult;
 import com.example.pay.demo.util.OrderInfoUtil2_0;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implements IGetorder {
-
+public class ObligationActivity extends BaseActivity<ObligationPresenter> implements Iobligation {
     private ToolBar toolbar;
-    private TextView nameOrder;
-    private TextView phoneOrder;
-    private TextView adressOrder;
-    private RecyclerView rvOrder;
-    private TextView priceOrder;
-    private RelativeLayout llGoodsRoot;
-    private TextView pricePay;
-
-    private Button buyOrder;
-    GetOrderPPresenter getOrderPPresenter;
+    private  List<FindForPayBean.ResultBean> list = new ArrayList<>();
+    ObligationPresenter obligationPresenter;
+    private RecyclerView rv;
+    private  ObligationAdapter obligationAdapter;
     public static final String APPID = "2021000117602508";
     public static final String PID = "2088912429840735";
     public static final String TARGET_ID = "123456";
@@ -57,104 +41,104 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     public static final String RSA_PRIVATE = "";
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
-
-    String orderInfos;
-    String key;
-    String outTradeNos;
-
-    private float price = 0;
-    private  List<GetShortcartProductsBean.ResultBean> resultBeans;
-
-
     @Override
     protected void initPresenter() {
-        getOrderPPresenter = new GetOrderPPresenter(this);
+       obligationPresenter = new ObligationPresenter(this);
+
     }
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        orderInfos = String.valueOf(intent.getStringArrayExtra("orderInfo"));
-        outTradeNos = String.valueOf(intent.getStringArrayExtra("outTradeNo"));
-        key = String.valueOf(intent.getStringArrayExtra("key"));
-
-
-
-
+        obligationPresenter.findForSend();
     }
 
     @Override
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
-        nameOrder = (TextView) findViewById(R.id.name_order);
-        phoneOrder = (TextView) findViewById(R.id.phone_order);
-        adressOrder = (TextView) findViewById(R.id.adress_order);
-        rvOrder = (RecyclerView) findViewById(R.id.rv_order);
-        priceOrder = (TextView) findViewById(R.id.price_order);
-        llGoodsRoot = (RelativeLayout) findViewById(R.id.ll_goods_root);
-        pricePay = (TextView) findViewById(R.id.price_pay);
-        buyOrder = (Button) findViewById(R.id.buy_order);
-
-        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-        buyOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                payV2();
-
-            }
-        });
-
-            //获取价格
-        Intent intent = getIntent();
-        if (intent!=null){
-            price = intent.getFloatExtra("price",price);
-            pricePay.setText(""+price+"  元");
-            priceOrder.setText(""+price+"  元");
-            resultBeans = (List<GetShortcartProductsBean.ResultBean>)intent.getSerializableExtra("list");
-        }
-
-
-        buyOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                payV2();
-
-                //startActivity(new Intent(GetOrderActivity.this, PayDemoActivity.class));
-            }
-        });
+        rv = (RecyclerView) findViewById(R.id.rv);
+        obligationAdapter = new ObligationAdapter(list);
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rv.setAdapter(obligationAdapter);
 
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_get_order;
+        return R.layout.activity_obligation;
     }
 
     @Override
-    public void onOrderinfo(GetOrderInfoBean getOrderInfoBean) {
+    public void onLeftClick() {
+        super.onLeftClick();
+        finish();
+    }
+
+    @Override
+    public void showLoading() {
 
     }
 
     @Override
-    public void onfindForSend(FindForSendbean findForSendbean) {
+    public void hideLoading() {
 
     }
 
     @Override
-    public void onfindForPay(FindForPayBean findForPayBean) {
+    public void showToast(String msg) {
 
     }
 
-
     @Override
-    public void onConfirmServerPayResult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-
-        if(confirmServerPayResultBean.getCode().equals("200")){
-
-            ARouter.getInstance().build("/main/MainActivity").withString("position","0").navigation();
+    public void onfindForpay(FindForPayBean findForPayBean) {
+        if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForPayBean);
+        Toast.makeText(this, ""+findForPayBean, Toast.LENGTH_SHORT).show();
+        if (findForPayBean.getCode().equals("200")){
+            if (BuildConfig.DEBUG) Log.d("ObligationActivity", "findForSendbean:" + findForPayBean.getResult());
+            list.addAll(findForPayBean.getResult());
+            obligationAdapter.notifyDataSetChanged();
         }
 
+
+        obligationAdapter.setiRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(ObligationActivity.this, "aaaa", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ObligationActivity.this);
+                builder.setIcon(R.drawable.msp_icon);
+                builder.setMessage("确认支付该订单?");
+                builder.setTitle("请选择");
+
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        payV2();
+
+                    }
+                });
+
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+
+            @Override
+            public void onItwmLongClick(int position) {
+
+            }
+        });
+
+
+
     }
+
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -172,14 +156,14 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     // 判断resultStatus 为9000则代表支付成功
                     String payMsg="";
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,true);
+
                         payMsg = "支付成功";
-                        Toast.makeText(GetOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ObligationActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 
                     } else {
                         payMsg = "支付失败";
-                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
-                        Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(ObligationActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -234,7 +218,7 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
 
             @Override
             public void run() {
-                PayTask alipay = new PayTask(GetOrderActivity.this);
+                PayTask alipay = new PayTask(ObligationActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
                 Log.i("msp", result.toString());
 
@@ -250,19 +234,4 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         payThread.start();
     }
 
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-
-    }
 }

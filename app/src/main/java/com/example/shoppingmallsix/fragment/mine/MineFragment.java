@@ -12,7 +12,7 @@ import com.example.framework.BaseFragment;
 import com.example.framework.view.ToolBar;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.message.MessageActivity;
-import com.example.shoppingmallsix.obligation.ObligationActivity;
+import com.example.pay.obligation.ObligationActivity;
 import com.example.shoppingmallsix.sendgoods.SendGoodsActivity;
 
 /**
