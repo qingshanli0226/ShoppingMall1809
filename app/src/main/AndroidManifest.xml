@@ -14,18 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".shopcart.ShopCartActivity"></activity>
-
+        <activity android:name=".shopcart.ShopCartActivity"/>
         <activity android:name=".bind.BindInfoActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
-        <activity android:name=".welcome.WelActivity">
+
+        <activity android:name=".welcome.WelActivity" android:theme="@style/welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
@@ -37,6 +37,7 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="731" />
+
     </application>
 
 </manifest>

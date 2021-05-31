@@ -1,6 +1,7 @@
 package com.example.pay.awaitpayment;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.Constants;
 import com.example.common.LogUtil;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheAwaitPaymentManager;
@@ -29,6 +32,9 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     private com.example.framework.view.ToolBar toolbar;
     private androidx.recyclerview.widget.RecyclerView paymentRv;
     AwaitPaymentAdapter paymentAdapter;
+    List<AwaitPaymentBean.ResultBean> awaitPayment;
+
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_awaitpayment;
@@ -72,7 +78,14 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String totalPrice = awaitPayment.get(position).getTotalPrice();
+                        String orderInfo = (String) awaitPayment.get(position).getOrderInfo();
 
+                        Bundle bundle = new Bundle();
+                        bundle.putString("totalPrice",totalPrice);
+                        bundle.putString("orderInfo",orderInfo);
+                        CommonArouter.getInstance().build(Constants.PATH_PAYMENT).with(bundle).navigation();
+                        finish();
                     }
                 });
 
@@ -93,7 +106,9 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
     @Override
     public void onClickLeft() {
-        finish();
+        Bundle bundle = new Bundle();
+        bundle.putInt("page",4);
+        CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
     }
 
     @Override
@@ -118,7 +133,7 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
     @Override
     public void onAwaitPayment(AwaitPaymentBean paymentBean) {
-        List<AwaitPaymentBean.ResultBean> awaitPayment = CacheAwaitPaymentManager.getInstance().getAwaitPayment();
+       awaitPayment = CacheAwaitPaymentManager.getInstance().getAwaitPayment();
         paymentAdapter.getData().addAll(awaitPayment);
         paymentAdapter.notifyDataSetChanged();
     }

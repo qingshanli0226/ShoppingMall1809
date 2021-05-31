@@ -15,8 +15,6 @@ public class LogUtil {
         }
     }
 
-
-
     public static void d(String message){
         if(BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());

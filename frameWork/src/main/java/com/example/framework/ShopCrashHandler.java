@@ -13,11 +13,13 @@ import com.example.framework.manager.ActManager;
 import java.util.List;
 
 public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
+
     private static ShopCrashHandler instance;
     private Context context;
     private Thread.UncaughtExceptionHandler defaultUncaughtExceptionHandler;
 
     private ShopCrashHandler() {
+
     }
 
     public static ShopCrashHandler getInstance() {

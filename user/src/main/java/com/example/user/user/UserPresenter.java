@@ -1,6 +1,7 @@
 package com.example.user.user;
 
 import com.example.framework.BasePresenter;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;

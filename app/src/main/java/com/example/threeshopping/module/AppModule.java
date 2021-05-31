@@ -12,9 +12,9 @@ import com.example.threeshopping.shopcart.ShopCartActivity;
 
 public class AppModule {
     public static void init() {
-        CommonArouter.getInstance().registerPath(Constants.PATH_MAIN, MainActivity.class);
-        CommonArouter.getInstance().registerPath(Constants.PATH_PARTICULARS, ParticularsActivity.class);
-        CommonArouter.getInstance().registerPath(Constants.PATH_BIND, BindInfoActivity.class);
-        CommonArouter.getInstance().registerPath(Constants.PATH_SHOPACTIVITY, ShopCartActivity.class);
+        CommonArouter.getInstance().registerPath(Constants.PATH_MAIN, MainActivity.class);//主页面
+        CommonArouter.getInstance().registerPath(Constants.PATH_PARTICULARS, ParticularsActivity.class);//详细页面
+        CommonArouter.getInstance().registerPath(Constants.PATH_BIND, BindInfoActivity.class);//绑定地址
+        CommonArouter.getInstance().registerPath(Constants.PATH_SHOPACTIVITY, ShopCartActivity.class);//购物车页面
     }
 }

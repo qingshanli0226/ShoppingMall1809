@@ -1,12 +1,15 @@
 package com.example.threeshopping;
 
 
+import android.app.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -15,8 +18,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.common.Constants;
 
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.ActManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.CircleView;
@@ -156,15 +161,31 @@ public class MainActivity extends BaseActivity{
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+
         Bundle bundle = CommonArouter.getInstance().getBundle();
         int page = bundle.getInt("page");
 
-
         showFragment(page);
-
         switch (page) {
             case 0:
+                showFragment(0);
                 btv.setSelectedItemId(R.id.mainOne);
+                break;
+            case 1:
+                showFragment(1);
+                btv.setSelectedItemId(R.id.mainTwo);
+                break;
+            case 2:
+                showFragment(2);
+                btv.setSelectedItemId(R.id.mainThree);
+                break;
+            case 3:
+                showFragment(3);
+                btv.setSelectedItemId(R.id.mainFour);
+                break;
+            case 4:
+                showFragment(4);
+                btv.setSelectedItemId(R.id.mainFive);
                 break;
         }
     }
@@ -200,6 +221,20 @@ public class MainActivity extends BaseActivity{
             mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
             mainCircle.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+//            List<Activity> activities = ActManager.getActManager().getActivities();
+//            for (Activity activity : activities) {
+//                activity.finish();
+//            }
+//            System.exit(0);
+        }
+        return true;
+
     }
 
     @Override

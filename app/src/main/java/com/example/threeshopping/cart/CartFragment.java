@@ -214,7 +214,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //判断是否选中
+
                 payBean = new PayBean();
                 payBean.setBody(new ArrayList<>());
                 payBean.setSubject("购买");
@@ -232,18 +232,16 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 }
                 LoginBean.ResultBean result = UserManager.getInstance().getLoginBean().getResult();
                 LogUtil.d("zyb"+result.getPhone()+"   "+result.getAddress());
+                //判断是否选中
                 if (body.size() >= 1) {
                     //选中一个
                     //判断是否绑定信息
                     if(result.getPhone() != null && result.getAddress() !=null ){
-
                         mPresenter.getOrder(payBean);
-
                     } else{
                         //跳转绑定页面
                         CommonArouter.getInstance().build(Constants.PATH_BIND).navigation();
                         getActivity().finish();
-
                     }
                 } else {
                     Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
@@ -371,7 +369,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         bundle.putString("orderInfo", orderBean.getResult().getOrderInfo());
         CommonArouter.getInstance().build(Constants.PATH_ORDERINFOACTIVITY).with(bundle).navigation();
         getActivity().finish();
-
     }
 
     //添加数据

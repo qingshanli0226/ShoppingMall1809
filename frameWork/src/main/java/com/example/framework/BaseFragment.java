@@ -18,13 +18,14 @@ import androidx.fragment.app.Fragment;
 import com.example.common.Constants;
 import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements ToolBar.IToolbarOnClickLisenter{
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements ToolBar.IToolbarOnClickLisenter, CacheConnectManager.IConnect {
     protected P mPresenter;
     protected View rootView;
     protected ToolBar toolBar;
@@ -41,6 +42,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         };
         toolBar = findViewById(R.id.toolbar);
         toolBar.setToolbarOnClickLisenter(this);
+
+        CacheConnectManager.getInstance().registerConnectListener(this);
+
         initView();
         initPrensenter();
         initData();
@@ -73,6 +77,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+        CacheConnectManager.getInstance().unregisterConnectListener(this);
+
     }
     @Override
     public void onClickCenter() {
@@ -90,10 +96,15 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onClickRight() {
         getActivity().finish();
+    }
 
+    @Override
+    public void onConect() {
 
     }
 
+    @Override
+    public void onDisConnect() {
 
-
+    }
 }

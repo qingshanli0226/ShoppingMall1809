@@ -1,6 +1,7 @@
 package com.example.pay.shipments;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.common.Constants;
+import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.view.ToolBar;
@@ -90,7 +93,9 @@ public class ShipmentsActivity extends BaseActivity<ShipmentPresenter> implement
 
     @Override
     public void onClickLeft() {
-        finish();
+        Bundle bundle = new Bundle();
+        bundle.putInt("page",4);
+        CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
     }
 
     @Override
