@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pay.com.example.message.MessageActivity">
+    tools:context="com.example.message.MessageActivity">
     <com.example.framework.view.ToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -14,6 +15,9 @@
         app:app_left_src="@drawable/top_bar_left_back"
         app:app_text="@string/message"
         app:app_text_color="@color/black"></com.example.framework.view.ToolBar>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messageRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

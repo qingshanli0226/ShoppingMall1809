@@ -26,7 +26,7 @@ import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
@@ -118,7 +118,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         paricularsName.setText("" + title);
         paricularsPrice.setText("￥" + price);
 
-        loginBean = UserManager.getInstance().getLoginBean();
+        loginBean = CacheUserManager.getInstance().getLoginBean();
 
 
         particularsJoin.setOnClickListener(new View.OnClickListener() {

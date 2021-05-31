@@ -17,8 +17,9 @@ import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.CacheConnectManager;
-import com.example.framework.manager.UserManager;
+
+import com.example.framework.manager.CacheUserManager;
+
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
@@ -151,7 +152,8 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
         if (loginBean.getCode().equals("200")) {
 
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
-            UserManager.getInstance().setLoginBean(loginBean);
+
+            CacheUserManager.getInstance().setLoginBean(loginBean);
             getActivity().finish();
 
 

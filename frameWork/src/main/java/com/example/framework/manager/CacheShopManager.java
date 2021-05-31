@@ -1,38 +1,20 @@
 package com.example.framework.manager;
 
 import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.MainThread;
-
-import com.example.common.LogUtil;
-import com.example.net.BuildConfig;
 import com.example.net.RetrofitManager;
-import com.example.net.bean.AwaitPaymentBean;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
-import com.example.net.bean.PayBean;
-import com.example.net.bean.ProductBean;
-import com.example.net.bean.SelectBean;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class CacheShopManager {
     private static CacheShopManager cacheShopManager;
@@ -49,15 +31,15 @@ public class CacheShopManager {
     }
 
     public void init(){
-        iUserChange = new UserManager.IUserChange() {
+        iUserChange = new CacheUserManager.IUserChange() {
             @Override
             public void onUserChange(LoginBean loginBean) {
                 getShowCart();
             }
         };
-        UserManager.getInstance().registerLogin(iUserChange);
+        CacheUserManager.getInstance().registerLogin(iUserChange);
     }
-    private UserManager.IUserChange iUserChange;
+    private CacheUserManager.IUserChange iUserChange;
 
     //购物车数据源
     private List<CartBean.ResultBean> carts = new ArrayList<>();
@@ -234,7 +216,7 @@ public class CacheShopManager {
         void onRemoveProduct(int position);
     }
     public void destory(){
-        UserManager.getInstance().unregisterLogin(iUserChange);
+        CacheUserManager.getInstance().unregisterLogin(iUserChange);
     }
 
 }

@@ -23,17 +23,15 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.ActManager;
 import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
 import com.example.threeshopping.home.HomeFragment;
-import com.example.threeshopping.particulars.ParticularsActivity;
 import com.example.threeshopping.personal.PersonalFragment;
 import com.example.threeshopping.type.TypeFragment;
-import com.example.threeshopping.welcome.WelActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -126,7 +124,7 @@ public class MainActivity extends BaseActivity{
             }
         });
 
-        loginBean = UserManager.getInstance().getLoginBean();
+        loginBean = CacheUserManager.getInstance().getLoginBean();
         if(loginBean != null){
             if(CacheShopManager.getInstance().getCarts().size() > 0){
                 mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");

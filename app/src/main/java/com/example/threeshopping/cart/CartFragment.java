@@ -1,7 +1,6 @@
 package com.example.threeshopping.cart;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,12 +18,11 @@ import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.LoginBean;
-import com.example.net.bean.OrderBean;
 import com.example.net.bean.PayBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.cart.adapter.CartAdapter;
@@ -215,7 +213,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                                 cartAdapter.getData().get(i).getProductPrice()+""));
                     }
                 }
-                LoginBean.ResultBean result = UserManager.getInstance().getLoginBean().getResult();
+                LoginBean.ResultBean result = CacheUserManager.getInstance().getLoginBean().getResult();
                 LogUtil.d("zyb"+result.getPhone()+"   "+result.getAddress());
                 //判断是否选中
                 if (body.size() >= 1) {

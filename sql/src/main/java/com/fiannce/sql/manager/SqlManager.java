@@ -21,7 +21,7 @@ public class SqlManager {
      private DaoMaster daoMaster;
      private DaoSession daoSession;
 
-    public void setContext(Context mContext) {
+    public void init(Context mContext) {
         this.mContext = mContext;
     }
 

@@ -27,7 +27,8 @@ public class App extends Application {
         NetModule.context = this;
 
 
-        SqlManager.getInstance().setContext(this);//数据库
+        SqlManager.getInstance().init(this);
+
 
 
         CacheShopManager.getInstance().init();//缓存购物车
