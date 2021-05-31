@@ -1,14 +1,20 @@
 package com.example.myapplication.particulars;
 
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -24,10 +30,15 @@ import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.ShopmallGlide;
+import com.example.framework.view.MessageNumView;
 import com.example.myapplication.R;
 import com.example.myapplication.shoppingCart.ShoppingCartActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.AddShoppingCartBean;
+import com.example.net.bean.ShoppingCartBean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 
 public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> implements IAddShoppingCartView {
@@ -54,6 +65,10 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     private String price;
     private String name;
     private String id;
+    private android.widget.RelativeLayout rootview;
+    private com.example.framework.view.MessageNumView numView;
+    private RelativeLayout rootView;
+    private MessageNumView view;
 
     @Override
     public int bandLayout() {
@@ -62,6 +77,8 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void initView() {
+        rootview = (RelativeLayout) findViewById(R.id.rootView);
+        numView = (MessageNumView) findViewById(R.id.image);
         particularsCommodityImage = (ImageView) findViewById(R.id.particularsCommodityImage);
         particularsCommodityName = (TextView) findViewById(R.id.particularsCommodityName);
         particularsCommodityPresenter = (TextView) findViewById(R.id.particularsCommodityPrice);
@@ -89,6 +106,10 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         popNum = inflate.findViewById(R.id.popNum);
         popCencel = inflate.findViewById(R.id.popCencel);
         popConfirm = inflate.findViewById(R.id.popConfirm);
+        //注册Eventbus
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
@@ -99,6 +120,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     @Override
     public void initData() {
         mPresenter.getShoppingCart();//刷新缓存类数据
+        numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
         //获取传过来的值
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -208,6 +230,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             mPresenter.getShoppingCart();
 
             CaCheMannager.getInstance().showShoppingData();
+            showBezierAnim();//贝塞尔曲线动画
         } else {
             Toast.makeText(this, getString(R.string.addShoppingeError), Toast.LENGTH_SHORT).show();
         }
@@ -222,6 +245,64 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             Toast.makeText(this, getString(R.string.inventoryNot), Toast.LENGTH_SHORT).show();
         }
     }
+    //刷新红点数据
+    @Override
+    public void onGetShopping(ShoppingCartBean shoppingCartBean) {
+        numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
+    }
+
+    private void showBezierAnim(){
+        int[] location=new int[2];//获取开始控件位置
+        particularsCommodityImage.getLocationOnScreen(location);
+
+        int[] location1=new int[2];//获取结束控件位置
+        particularsCommodityShoppingCart.getLocationOnScreen(location1);
+
+        ImageView imageView = new ImageView(this);//创建图片
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
+        imageView.setLayoutParams(layoutParams);//设置长宽
+        Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" +pic).into(imageView);
+        rootview.addView(imageView);//加入当前布局
+
+        int[] startLoacation = new int[2];//开始
+        startLoacation[0] = location[0]+300;
+        startLoacation[1] = location[1]+300;
+        int[] endLoacation = new int[2];//结束
+        endLoacation[0] = location1[0];
+        endLoacation[1] = location1[1];
+        int[] controlLoacation = new int[2];//过程
+        controlLoacation[0] = 0;
+        controlLoacation[1] = 0;
+        Path path = new Path();
+        path.moveTo(startLoacation[0],startLoacation[1]);//开始位置
+
+        path.quadTo(controlLoacation[0],controlLoacation[1],endLoacation[0],endLoacation[1]);//过程和结束位置
+        PathMeasure pathMeasure = new PathMeasure(path, false);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+        valueAnimator.setDuration(2*1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();//获取动画进度
+                float[] nextLocation = new float[2];
+                pathMeasure.getPosTan(value,nextLocation,null);
+                imageView.setTranslationX(nextLocation[0]);
+                imageView.setTranslationY(nextLocation[1]);
+                float percent = value/pathMeasure.getLength();
+                imageView.setAlpha(1-percent);//渐显
+            }
+        });
+        valueAnimator.start();
+    }
+    //如果数据删除或者下订单则将红点数据刷新
+    @Subscribe
+    public void invalidate(String flag){
+        if (flag.equals("1")){
+            numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
+        }
+    }
 
     @Override
     public void showLoading() {
@@ -234,5 +315,14 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
 
     @Override
     public void showToast(String msg) {
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+        destroy();
     }
 }

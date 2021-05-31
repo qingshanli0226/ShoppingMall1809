@@ -20,6 +20,8 @@ import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -258,6 +260,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             list.remove(itemPosition);
             adapter.notifyDataSetChanged();
             CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
+            EventBus.getDefault().post("1");//发送Evenbus
         } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -274,6 +277,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
             shoppingCartCheck.setChecked(false); //修改多选按钮
+            EventBus.getDefault().post("1");//发送Evenbus
         } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -287,9 +291,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             list.clear();
             list.addAll(shoppingCartBeanList);
             adapter.notifyDataSetChanged();
+            EventBus.getDefault().post("1");//发送广播
         }
     }
-
 
     public void getTotalPrice() {
         //遍历集合
@@ -314,6 +318,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 loadingPage.showSuccessView();
                 mPresenter.getShoppingCart();//获取购物车数据
                 getData = true;
+
             }
         } else {
             loadingPage.showErrorView();
@@ -327,6 +332,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
             list.clear();
             list.addAll(shoppingCartBean);
             adapter.notifyDataSetChanged();
+            EventBus.getDefault().post("1");//发送Evenbus
         }
     }
 

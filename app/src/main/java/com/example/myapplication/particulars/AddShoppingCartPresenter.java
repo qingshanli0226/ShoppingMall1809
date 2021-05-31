@@ -137,12 +137,13 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
                         //购物车数据
                         CaCheMannager.getInstance().setShoppingCartBeanList(shoppingCartBean.getResult());
                        CaCheMannager.getInstance().showShoppingData();
-                        Log.d("ShoppingCartActivity", "123123");
+                       if (mView!=null){
+                           mView.onGetShopping(shoppingCartBean);
+                       }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("ShoppingCartActivity", "1231234");
                     }
 
                     @Override

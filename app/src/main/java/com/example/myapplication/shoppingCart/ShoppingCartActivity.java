@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
@@ -19,11 +20,13 @@ import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.pay.PayActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> implements  IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
+public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> implements IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();
@@ -68,6 +71,8 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
+
+
     }
 
     @Override
@@ -106,17 +111,17 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         getTotalPrice();//价格
         //结算
         priceBtn.setOnClickListener(v -> {//点击结算的时候将选中集合保存到缓存类
-           if (delList.size()==0){
-             Toast.makeText(this, getString(R.string.myShoppingCartSelectShopping), Toast.LENGTH_SHORT).show();
-           }else {
-               CaCheMannager.getInstance().setCheckList(delList);
-               Intent intent = new Intent(this, OrderActivity.class);
-               Bundle bundle = new Bundle();
-               bundle.putString("shoppingPrice",shoppingCartPrice.getText().toString()+"");
-               intent.putExtras(bundle);
-               intent.putExtra("shoppingPrice",shoppingCartPrice.getText().toString()+"");
-               startActivity(intent);
-           }
+            if (delList.size() == 0) {
+                Toast.makeText(this, getString(R.string.myShoppingCartSelectShopping), Toast.LENGTH_SHORT).show();
+            } else {
+                CaCheMannager.getInstance().setCheckList(delList);
+                Intent intent = new Intent(this, OrderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("shoppingPrice", shoppingCartPrice.getText().toString() + "");
+                intent.putExtras(bundle);
+                intent.putExtra("shoppingPrice", shoppingCartPrice.getText().toString() + "");
+                startActivity(intent);
+            }
         });
         //点击编辑
         shoppingCartCompile.setOnClickListener(v -> {
@@ -150,6 +155,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
                 Intent intent = new Intent(this, OrderActivity.class);
                 intent.putExtra("shoppingPrice", shoppingCartPrice.getText().toString() + "");
                 startActivity(intent);
+                EventBus.getDefault().post("1"); //发送广播
             }
         });
         getTotalPrice();//价格
@@ -280,6 +286,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);//更新缓存类
             CaCheMannager.getInstance().removeShoppingData(itemPosition);
             CaCheMannager.getInstance().showShoppingData();
+            EventBus.getDefault().post("1"); //发送广播
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -296,7 +303,8 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
             shoppingCartCheck.setChecked(false);//修改多选按钮
-             delList.clear();//将选中集合里面的数据清空
+            delList.clear();//将选中集合里面的数据清空
+            EventBus.getDefault().post("1");//发送广播
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -320,5 +328,4 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartPrice.setText(money + "");
         CaCheMannager.getInstance().setShoppingPrice(money);
     }
-
 }

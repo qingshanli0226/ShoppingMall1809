@@ -72,4 +72,5 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
 
     }
+
 }

@@ -12,12 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"></FrameLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1">
 
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/mainComm"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></com.flyco.tablayout.CommonTabLayout>
+        android:layout_height="match_parent"></com.flyco.tablayout.CommonTabLayout>
+
+    <com.example.framework.view.MessageNumView
+        android:layout_width="@dimen/dp_30"
+        android:id="@+id/numView"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_250"></com.example.framework.view.MessageNumView>
+</RelativeLayout>
 
 
 </LinearLayout>
