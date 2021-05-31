@@ -1,5 +1,6 @@
 package com.example.electricityproject.shopp;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         shop_product_num.setText(itemData.getProductNum() + "");
         selectImg.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
 //        ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).init((ImageView) baseViewHolder.getView(R.id.shop_image));
-
+        Log.i("zx", "displayViewHolder: "+Constants.BASE_URl_IMAGE + itemData.getUrl());
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + itemData.getUrl()).init((ImageView) baseViewHolder.getView(R.id.shop_image));
 
         ImageView img = baseViewHolder.getView(R.id.is_select);

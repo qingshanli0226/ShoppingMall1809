@@ -13,30 +13,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.LogBean;
+import com.example.common.db.MessageDataBase;
+import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.BusinessNetManager;
+import com.example.manager.SPMessageManger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.http.HEAD;
-
-
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData{
 
     private RecyclerView mainRe;
     private HomeAdapter homeAdapter;
     private List<Object> objectList;
+    private ImageView imgSearch;
+    private EditText editMessage;
     private LinearLayout unreadMessage;
     private TextView unreadMessageNum;
-    private ImageView imgSearch;
-
 
     @Override
     protected void initData() {
+
         httpPresenter.getHomeBannerData();
 
         unreadMessage.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +48,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -59,18 +60,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
         unreadMessage = mView.findViewById(R.id.unreadMessage);
         unreadMessageNum = mView.findViewById(R.id.unreadMessageNum);
-
+        imgSearch = mView.findViewById(R.id.img_search);
+        editMessage = mView.findViewById(R.id.edit_message);
         mainRe = mView.findViewById(R.id.main_re);
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
 
         homeAdapter = new HomeAdapter();
 
-        if (BusinessNetManager.getInstance().getNetConnect()){
+        SPMessageManger.getInstance().init(getContext());
+        unreadMessageNum.setText(SPMessageManger.getInstance().queryMessageNum(getContext())+"");
+        EventBus.getDefault().register(this);
 
-        }else {
-
-        }
-        imgSearch = (ImageView) findViewById(R.id.img_search);
     }
 
     @Override
@@ -125,8 +125,25 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     }
 
+
     @Override
     public void DisConnect() {
         Toast.makeText(getContext(), "已断开网络", Toast.LENGTH_SHORT).show();
     }
+    @Subscribe
+    public void changeText(String num){
+        List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class);
+        unreadMessageNum.setText(messageTables.size()+"");
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+
+    }
+
 }

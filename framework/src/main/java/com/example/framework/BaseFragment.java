@@ -16,7 +16,7 @@ import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract   class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener {
+public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener{
 
     protected T httpPresenter;
     protected View mView;
@@ -64,6 +64,7 @@ public abstract   class BaseFragment <T extends BasePresenter> extends Fragment 
         if (httpPresenter!=null){
             httpPresenter.detachView();
         }
+
     }
 
     protected abstract void initData();
@@ -89,4 +90,6 @@ public abstract   class BaseFragment <T extends BasePresenter> extends Fragment 
     public void DisConnect() {
 
     }
+
+
 }

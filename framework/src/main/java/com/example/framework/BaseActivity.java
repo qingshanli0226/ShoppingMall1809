@@ -10,7 +10,7 @@ import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener{
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -80,4 +80,5 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     public void DisConnect() {
 
     }
+
 }

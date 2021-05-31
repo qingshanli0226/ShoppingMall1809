@@ -84,7 +84,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         map.put("productPrice",price);
         map.put("productName",name);
 
-
         if (img!=null){
             detailsWeb.loadUrl(Constants.BASE_URl_IMAGE+img);
             //在webView加载数据

@@ -13,12 +13,15 @@ public class MessageTable {
     private String isSucceed;
     @NotNull
     private Long messageTime;
-    @Generated(hash = 275714443)
+    @NotNull
+    private boolean isShow;
+    @Generated(hash = 702435893)
     public MessageTable(Long id, @NotNull String isSucceed,
-            @NotNull Long messageTime) {
+            @NotNull Long messageTime, boolean isShow) {
         this.id = id;
         this.isSucceed = isSucceed;
         this.messageTime = messageTime;
+        this.isShow = isShow;
     }
     @Generated(hash = 1805713138)
     public MessageTable() {
@@ -41,6 +44,12 @@ public class MessageTable {
     public void setMessageTime(Long messageTime) {
         this.messageTime = messageTime;
     }
+    public boolean getIsShow() {
+        return this.isShow;
+    }
+    public void setIsShow(boolean isShow) {
+        this.isShow = isShow;
+    }
 
     @Override
     public String toString() {
@@ -48,6 +57,7 @@ public class MessageTable {
                 "id=" + id +
                 ", isSucceed='" + isSucceed + '\'' +
                 ", messageTime=" + messageTime +
+                ", isShow=" + isShow +
                 '}';
     }
 }

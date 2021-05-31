@@ -15,25 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.db.DaoMaster;
+import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
-import com.example.electricityproject.db.MessageManger;
 import com.example.framework.BaseActivity;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.alipay.sdk.pay.demo.PayResult;
 import com.example.pay.alipay.sdk.pay.demo.util.OrderInfoUtil2_0;
 import com.example.view.ToolBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
-public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener{
+public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener,MessageDataBase.IMessageListener{
 
     public static final String APPID = "2088232582727574";
     public static final String RSA2_PRIVATE = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0P+VZj+vq6UqPxxymnztSALgfEaUz7aTc7EmKR743Oo8ag0MmueXc/zpKt7/HVDtUOB1BYiJjOOcZ0NKIkvVmaYtuTsyq+GMThjssW+GPTJdfViFE0jebRf9d0mJIZ7azMeQfrjK0sSG2thExyxcBPjaM8Q1A+J4q/dz7azvZrUF6ieVXgkLvPa1MoM5vuI/Q5cQ8cIDOV0ImgKlUCorhFsliH8iI6IsbYCZgsSP4mMVAZJ7IUPjX2j+f+ZC9H1H+fANZ92rCLZWTXVrOYtUllzyi7JzvY6SNciDJLGqSp0kzuB7nkFlx8C6cMb/xDakxuQsLXzx6GZqDi0jw06T3AgMBAAECggEAPSxaSDUiGg2m8nje7mWoGkKIOnMgoCkNBLVkl/uVQOUs4BCgX6pDqucr/2OxQJMDt6d7tk754LbVJ9vJN/S4OFOlsIAp0fSOm3e46WsdeCbEUOTIUbUOjjIJYuwd0vjv9oz+IQpbxxs+l+XenAmS+ycEGH1OxDgcZfbWYrWYEF28jYXhCURDDfeNjOoi46G72qQve66X8b3S6Qbh5r/NkyLEYxDSNguRJRtvt1HP8Yrf/lH2letqiU4CNB3KeLYi8EqK5GX0dhmTErZ6KlxAmLJuRgSe5msH2AFXB8VvPPqMfGkbJygYnTcE9RgksceA4z0VaaJZNWByePjTnGrwUQKBgQDjANAXjl7OBCbqN+nQlKjh0z1X4VJcvdJwp12CrdXKSt0odY/NKJp49MY3nrz1IGVrwqRQeMP9VN6hp3ezGGx8eQhHgNgmEb79iHX5vQfrlentZm7h0h8vNSdi9io7xKQOcU+fK0AFMUePNt9zDXgPhrTdJ2k5wf7yNybV45Y0CwKBgQDLRjQCDMFAdEc5QfmLFUU6nNxDA7BRr3K9kzCPh8cVZyVyLGGysZD/eWVS1ng7PIiBDEncLmz1Awi+bUMnZGADji61KWGljf6RRYRFIq8bUYkWsfjxnNG/xy+0ZX/VsQKu56KsnuFmlYNIcyS/RhsJZW29P2uVp+cA3HTg7ruaRQKBgQC4hFWhgClRvpA/PDnDQMNR5JntUArZtbZTucdJzLGF4HqKQ50i/0ko3pYsacxgV/f4sttLSg7NYeohbnXezxCH0P3I2VNZBn2/qedzm5LPjSj7vpKM3nZYshUU3NGRiZJs5u/4inhcgCURpWHWLHGV9UIYrctblnP8QJZBr9/M5wKBgChomEYgCvqpIs97EgRYAh8Yt6CKxy411nVhITInJ6hVjNgZgoJnUg+3LjE9eUEtU2Vz7+rZP8elBsP0LHlUNtH+HcLdqw+iHoz6aMTllDG2D653SqmdJwUcr5sI4lS0j3f9jBUMsHoYFrT8Tr3HTfCcPSh1xwlFC2LccE+WpayRAoGANkF+rM6bnRgvx9bKvVThXB8SHZPujTJRxs3by6ucfVCXpHaTvzOeugyqtYkUCVlnmsNjOS7jRPVzFQD9ZsnR8vQc9Sfwni/MOtWuEGQj4csb4ljCZb4WZR4rdjrRrcAt+zS56ye5UZj45SMHhENxj4HPy0HCUrEwVtJjUknp7Sg=";
@@ -55,7 +57,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private OrderDetailsAdapter orderDetailsAdapter;
     private List<SelectOrderBean> list = new ArrayList<>();
     private android.widget.Button goBuy;
-    private DaoMaster daoMaster;
+    private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
+
 
     @Override
     protected void initData() {
@@ -114,7 +117,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
 
-            daoMaster = MessageManger.getInstance().getDaoMaster();
+            daoMaster = MessageDataBase.getInstance().getDaoMaster();
 
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
@@ -135,17 +138,14 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
                         paySussList.add(resultBean);
 
-                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis()));
-
+                        //添加到数据库
+                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+//                        MessageManager.getInstance().add(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        EventBus.getDefault().post("num");
 
                     } else {
 
-                        com.example.manager.MessageManger.getInstance().addMes(new com.example.manager.MessageManger.IMessageListener() {
-                            @Override
-                            public void onResult(boolean isSuccess) {
-                                LogUtils.i(""+isSuccess);
-                            }
-                        });
+
 
                         payMsg="支付失败";
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
@@ -159,7 +159,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
 
-                        daoMaster.newSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis()));
+                        //添加到数据库
+                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        EventBus.getDefault().post("num");
 
                     }
                     break;
@@ -189,6 +191,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         moneyValue = "999";
         OrderInfoUtil2_0.setmoney(moneyValue);
+        MessageDataBase.getInstance().register(this);
 
     }
 
@@ -219,5 +222,16 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
             finish();
         }
+    }
+
+    @Override
+    public void onMessageNumListener() {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MessageDataBase.getInstance().unregister(this);
     }
 }

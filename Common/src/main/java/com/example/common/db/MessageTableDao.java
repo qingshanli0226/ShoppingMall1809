@@ -25,6 +25,7 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property IsSucceed = new Property(1, String.class, "isSucceed", false, "IS_SUCCEED");
         public final static Property MessageTime = new Property(2, Long.class, "messageTime", false, "MESSAGE_TIME");
+        public final static Property IsShow = new Property(3, boolean.class, "isShow", false, "IS_SHOW");
     }
 
 
@@ -42,7 +43,8 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"MESSAGE_TABLE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"IS_SUCCEED\" TEXT NOT NULL ," + // 1: isSucceed
-                "\"MESSAGE_TIME\" INTEGER NOT NULL );"); // 2: messageTime
+                "\"MESSAGE_TIME\" INTEGER NOT NULL ," + // 2: messageTime
+                "\"IS_SHOW\" INTEGER NOT NULL );"); // 3: isShow
     }
 
     /** Drops the underlying database table. */
@@ -61,6 +63,7 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         }
         stmt.bindString(2, entity.getIsSucceed());
         stmt.bindLong(3, entity.getMessageTime());
+        stmt.bindLong(4, entity.getIsShow() ? 1L: 0L);
     }
 
     @Override
@@ -73,6 +76,7 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         }
         stmt.bindString(2, entity.getIsSucceed());
         stmt.bindLong(3, entity.getMessageTime());
+        stmt.bindLong(4, entity.getIsShow() ? 1L: 0L);
     }
 
     @Override
@@ -85,7 +89,8 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         MessageTable entity = new MessageTable( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // isSucceed
-            cursor.getLong(offset + 2) // messageTime
+            cursor.getLong(offset + 2), // messageTime
+            cursor.getShort(offset + 3) != 0 // isShow
         );
         return entity;
     }
@@ -95,6 +100,7 @@ public class MessageTableDao extends AbstractDao<MessageTable, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setIsSucceed(cursor.getString(offset + 1));
         entity.setMessageTime(cursor.getLong(offset + 2));
+        entity.setIsShow(cursor.getShort(offset + 3) != 0);
      }
     
     @Override
