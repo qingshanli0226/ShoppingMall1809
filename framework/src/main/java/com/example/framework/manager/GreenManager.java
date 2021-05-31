@@ -21,6 +21,15 @@ public class GreenManager {
         this.context = context;
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, ShopConstants.SQ_MANAGE);
         daoSession = new DaoMaster(devOpenHelper.getWritableDatabase()).newSession();
+
+        //初始化SP
+        SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
+        int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
+        if (count==-1){
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putInt(ShopConstants.SP_MANAGE_NAME,0);
+            edit.commit();
+        }
     }
 
     //获取所有
@@ -40,6 +49,9 @@ public class GreenManager {
             SharedPreferences.Editor edit = sharedPreferences.edit();
             edit.putInt(ShopConstants.SP_MANAGE_NAME,count);
             edit.commit();
+            if (message != null) {
+                message.onMessage(count);
+            }
             return true;
         }
         return false;
@@ -53,9 +65,26 @@ public class GreenManager {
             SharedPreferences.Editor edit = sharedPreferences.edit();
             edit.putInt(ShopConstants.SP_MANAGE_NAME,count);
             edit.commit();
+            if (message != null) {
+                message.onMessage(count);
+            }
             return true;
         }
         return false;
+    }
+
+    public interface IMessage{
+
+        void onMessage(int count);
+    }
+    private IMessage message;
+
+    public void register(IMessage message){
+        this.message = message;
+    }
+
+    public void unregister(IMessage message){
+        this.message = null;
     }
 
     private static GreenManager greenManager;

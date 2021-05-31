@@ -5,7 +5,6 @@
     <application>
         <activity android:name=".orderForm.OrderFormActivity"></activity>
         <activity android:name=".shoppingtrolley.ShoppingCarActivity" />
-        <activity android:name=".user.findforpay.FindForPayActivity" />
     </application>
 
 </manifest>

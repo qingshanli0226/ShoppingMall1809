@@ -48,7 +48,7 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
 
         fragUserFahuo.setOnClickListener(view -> {
             if (ShopeUserManager.getInstance().getLoginBean() != null) {
-                ARouter.getInstance().build(ShopConstants.SHOP_PAY).navigation();
+                ARouter.getInstance().build(ShopConstants.SHOP_SEND).navigation();
             } else {
                 Toast.makeText(getActivity(), "" + getResources().getString(R.string.loginFirst), Toast.LENGTH_SHORT).show();
             }

@@ -7,7 +7,8 @@ public class ShopConstants {
     public final static String USER_PATH = "/user/UserActivity";
     public final static String MAIN_PATH = "/main/MainActivity";
 
-    public final static String SHOP_PAY = "/shoppingCar/FindForPayActivity";
+    public final static String SHOP_PAY = "/pay/FindForPayActivity";
+    public final static String SHOP_SEND = "/pay/FindForSendActivity";
     public final static String SHOP_CAR="/shoppingCar/ShoppingCarActivity";
     public final static String SHOP_ADDRESS="/address/ShoppingAddressActivity";
     public final static String ORDER_PATH="/orderForm/OrderFormActivity";

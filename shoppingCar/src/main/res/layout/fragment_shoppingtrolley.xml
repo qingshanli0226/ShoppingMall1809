@@ -103,12 +103,8 @@
         android:layout_height="match_parent"
         android:id="@+id/vain"
         android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_50"
         android:background="@color/white">
-        <com.example.framework.view.ToolBar
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            app:wp_CenterTitle="@string/shoppingTrolley"></com.example.framework.view.ToolBar>
-
 
         <ImageView
             android:layout_width="@dimen/dp_150"

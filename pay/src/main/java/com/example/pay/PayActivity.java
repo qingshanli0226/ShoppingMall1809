@@ -2,6 +2,7 @@ package com.example.pay;
 
 import androidx.annotation.NonNull;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,8 @@ import com.alipay.sdk.app.PayTask;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.IBaseView;
+import com.example.framework.db.MessageTable;
+import com.example.framework.manager.GreenManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.FindForBean;
@@ -32,6 +35,7 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
     private TextView payBut;
     private static final int SDK_PAY_FLAG = 1;
     private Handler handler = new Handler(){
+        @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -43,6 +47,11 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
                     if (resultStatus.equals("9000")){
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                         isSucceed = true;
+                        FindForBean.ResultBean resultBean = new FindForBean.ResultBean();
+                        resultBean.setTotalPrice(money+"");
+                        resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setTradeNo(orderinfoBean.getResult().getOutTradeNo());
+                        ShoppingCarManager.getInstance().addForSend(resultBean);
                         finish();
                     }else {
                         if (resultStatus.equals("8000")) {
@@ -67,6 +76,13 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
                     }
                     OrderinfoBean.ResultBean orderinfoBeanResult = orderinfoBean.getResult();
                     httpPresenter.getConfirmServerPayResult(orderinfoBeanResult.getOutTradeNo(),orderinfoBeanResult.getOrderInfo(),isSucceed);
+                    String message = "支付失败";
+                    if (isSucceed) {
+                        message = "支付成功";
+                    }
+                    MessageTable messageTable = new MessageTable(null,message,System.currentTimeMillis()+"",true);
+                    GreenManager.getInstance().setMessage(messageTable);
+                    GreenManager.getInstance().addCount();
                     break;
             }
 

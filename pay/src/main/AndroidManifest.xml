@@ -4,6 +4,8 @@
 
     <application>
         <activity android:name=".PayActivity"></activity>
+        <activity android:name="com.example.pay.user.findforsend.FindForSendActivity"></activity>
+        <activity android:name="com.example.pay.user.findforpay.FindForPayActivity" />
     </application>
 
 </manifest>

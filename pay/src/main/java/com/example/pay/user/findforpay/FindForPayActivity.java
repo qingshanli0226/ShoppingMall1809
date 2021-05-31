@@ -1,26 +1,22 @@
-package com.example.shoppingcar.user.findforpay;
+package com.example.pay.user.findforpay;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
-import com.example.commom.ShopConstants;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.FindForBean;
-import com.example.shoppingcar.R;
-import com.example.shoppingcar.user.findforpay.adapter.FindForPayAdapter;
+import com.example.pay.R;
+import com.example.pay.user.adapter.FindForAdapter;
 
 import java.util.List;
 
-@Route(path = "/shoppingCar/FindForPayActivity")
+@Route(path = "/pay/FindForPayActivity")
 public class FindForPayActivity extends BaseActivity{
 
     private RecyclerView shopActPayRv;
@@ -33,8 +29,9 @@ public class FindForPayActivity extends BaseActivity{
     @Override
     protected void initData() {
         List<FindForBean.ResultBean> forPay = ShoppingCarManager.getInstance().getForPay();
+        LogUtils.json(forPay);
         if (forPay!=null){
-            FindForPayAdapter findForPayAdapter = new FindForPayAdapter(forPay);
+            FindForAdapter findForPayAdapter = new FindForAdapter(forPay);
             shopActPayRv.setAdapter(findForPayAdapter);
 
 

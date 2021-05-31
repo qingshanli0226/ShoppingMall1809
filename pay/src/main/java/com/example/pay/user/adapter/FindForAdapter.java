@@ -1,18 +1,17 @@
-package com.example.shoppingcar.user.findforpay.adapter;
+package com.example.pay.user.adapter;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.FindForBean;
-import com.example.shoppingcar.R;
+import com.example.pay.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class FindForPayAdapter extends BaseRVAdapter<FindForBean.ResultBean> {
-    public FindForPayAdapter(List<FindForBean.ResultBean> datalist) {
+public class FindForAdapter extends BaseRVAdapter<FindForBean.ResultBean> {
+    public FindForAdapter(List<FindForBean.ResultBean> datalist) {
         super(datalist);
     }
 

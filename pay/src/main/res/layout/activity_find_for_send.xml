@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".user.findforpay.FindForPayActivity">
+    tools:context="com.example.pay.user.findforpay.FindForPayActivity">
     <com.example.framework.view.ToolBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
         android:id="@+id/toolbar"
         app:wp_istoolbarLeftImg="true"
         app:wp_leftImId="@drawable/back"
-        app:wp_CenterTitle="@string/orderPendingPayment"></com.example.framework.view.ToolBar>
+        app:wp_CenterTitle="@string/sendObligation"></com.example.framework.view.ToolBar>
 
     <View
         android:layout_width="@dimen/dp_400"
