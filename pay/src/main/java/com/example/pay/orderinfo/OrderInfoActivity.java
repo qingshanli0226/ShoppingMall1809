@@ -111,14 +111,11 @@ public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements I
         bundle.putInt("page",3);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
 
-
-
     }
 
     @Override
     public void onClickRight() {
         super.onClickRight();
-
     }
 
 

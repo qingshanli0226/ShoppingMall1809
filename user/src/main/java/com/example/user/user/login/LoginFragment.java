@@ -17,6 +17,7 @@ import com.example.common.Constants;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
@@ -83,7 +84,6 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
                     mPresenter.getLogin(name, pass);
                 } else {
                     Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -152,8 +152,8 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
             UserManager.getInstance().setLoginBean(loginBean);
-
             getActivity().finish();
+
 
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
@@ -185,5 +185,13 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
         Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onDisConnect() {
 
+    }
+
+    @Override
+    public void onConect() {
+
+    }
 }

@@ -15,6 +15,7 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
     private static ShopmallCrashHandler instance;
     private Thread.UncaughtExceptionHandler systemDefaultHandler;
     private Context applicationContext;
+
     private ShopmallCrashHandler(){
 
     }

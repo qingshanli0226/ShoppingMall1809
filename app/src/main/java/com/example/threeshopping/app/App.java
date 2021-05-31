@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.example.framework.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.message.module.MessageModule;
 import com.example.net.module.NetModule;
@@ -25,12 +26,15 @@ public class App extends Application {
         UserModule.init();
         NetModule.context = this;
 
-        SqlManager.getInstance().setContext(this);
 
-        CacheShopManager.getInstance().init();
+        SqlManager.getInstance().setContext(this);//数据库
 
-        ShopCrashHandler.getInstance().init(this);
 
+        CacheShopManager.getInstance().init();//缓存购物车
+
+        CacheConnectManager.getInstance().init(this);//网络
+
+        ShopCrashHandler.getInstance().init(this);//错误上报
 //        ShopmallCrashHandler.getInstance().init(this);
  }
 }
