@@ -11,7 +11,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         app:leftIsShow="true"
-        app:leftImg="@drawable/back"
+        app:leftImg="@drawable/backs"
         android:id="@+id/toolbar"
         app:titleText="绑定联系方式"
         app:titleTextColor="#000000"

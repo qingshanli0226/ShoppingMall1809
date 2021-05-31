@@ -306,7 +306,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("orderInfo", orderInfo);
             if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
-//                deleteShopmall();
+                deleteShopmall();
             }
 
         }else {

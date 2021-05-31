@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.electricityproject.advert.AdvertActivity;
 import com.example.manager.BusinessARouter;
 
 public class MainModel implements BusinessARouter.iAppManager {
@@ -25,9 +26,20 @@ public class MainModel implements BusinessARouter.iAppManager {
         Intent intent = new Intent(context, MainActivity.class);
 
         if (context instanceof Activity) {
+            context.startActivity(intent);
+        } else {
 
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
+        }
+    }
+
+    @Override
+    public void OpenAdvertActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, AdvertActivity.class);
+        if (context instanceof Activity) {
+            context.startActivity(intent);
         } else {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

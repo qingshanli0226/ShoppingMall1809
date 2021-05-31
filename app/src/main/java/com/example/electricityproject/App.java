@@ -23,6 +23,9 @@ public class App extends Application {
         MainModel.init();
         PayModel.init();
 
+        //错误框架
+//        ShopmallCrashHandler.getInstance().init(this);
+
         ShopCacheManger.getInstance().init(this);
         ShopCacheManger.getInstance().registerUserManger();
         ShopCacheManger.getInstance().registerBuyCarManger();

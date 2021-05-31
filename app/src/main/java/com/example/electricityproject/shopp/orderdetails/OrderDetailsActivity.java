@@ -15,14 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.db.DaoMaster;
-import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
-import com.example.electricityproject.db.MessageManger;
 import com.example.framework.BaseActivity;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.alipay.sdk.pay.demo.PayResult;
@@ -71,7 +68,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         userAddress.setText("地址:"+address);
 
         list = ShopCacheManger.getInstance().getList();
-        LogUtils.i(list.toString());
 
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
@@ -131,7 +127,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
 
-            daoMaster = MessageManger.getInstance().getDaoMaster();
+//            daoMaster = MessageManger.getInstance().getDaoMaster();
 
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
@@ -152,16 +148,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
                         paySussList.add(resultBean);
 
-
-
                     } else {
 
-                        com.example.manager.MessageManger.getInstance().addMes(new com.example.manager.MessageManger.IMessageListener() {
-                            @Override
-                            public void onResult(boolean isSuccess) {
-                                LogUtils.i(""+isSuccess);
-                            }
-                        });
 
                         payMsg="支付失败";
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
@@ -174,7 +162,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
-
 
                     }
                     break;

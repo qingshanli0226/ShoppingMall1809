@@ -27,9 +27,11 @@ import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
+import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
@@ -39,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView{
+public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,BusinessBuyCarManger.iShopBeanChange{
     private ToolBar toolbar;
     private WebView detailsWeb;
     private TextView detailsName;
@@ -64,7 +66,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private int prod_num = 1;
     private RelativeLayout liner;
     private RelativeLayout relitive;
-
+    private com.example.electricityproject.view.CircleView detailsBuyCarNum;
 
 
     @Override
@@ -84,6 +86,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         map.put("productPrice",price);
         map.put("productName",name);
 
+        detailsWeb.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(DetailsActivity.this,PlayVideoActivity.class));
+                return true;
+            }
+        });
+
 
         if (img!=null){
             detailsWeb.loadUrl(Constants.BASE_URl_IMAGE+img);
@@ -96,13 +106,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 }
             });
         }
-        detailsWeb.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startActivity(new Intent(DetailsActivity.this,PlayVideoActivity.class));
-                return true;
-            }
-        });
+
         if (name!=null){
             detailsName.setText(name+"");
         }
@@ -207,6 +211,17 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             }
         });
+
+        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
+            @Override
+            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
+                if (shortcartProductBean!=null){
+                    detailsBuyCarNum.setVisibility(View.VISIBLE);
+                    detailsBuyCarNum.setCurrentNum(""+shortcartProductBean.getResult().size());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -225,6 +240,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         buyCar = (ImageView) findViewById(R.id.buy_car);
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
         relitive = (RelativeLayout) findViewById(R.id.relitive);
+        detailsBuyCarNum = (CircleView) findViewById(R.id.details_buyCarNum);
     }
 
     @Override
@@ -253,9 +269,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         if (addOneProductBean.getCode().equals("200")){
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
-
-            ShopCacheManger.getInstance().requestShortProductData();
-            ShopCacheManger.getInstance().requestShortProductData();
             ShopCacheManger.getInstance().requestShortProductData();
 
 
@@ -329,9 +342,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         });
 
         valueAnimator.start();
-
-
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        BusinessBuyCarManger.getInstance().UnRegister(this);
+    }
 
+    @Override
+    public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
+
+    }
 }

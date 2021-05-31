@@ -47,12 +47,11 @@ public class BusinessARouter {
 
     public interface iUserManager{
         void OpenLogActivity(Context context,Bundle bundle);
-
     }
 
     public interface iAppManager{
         void OpenMainActivity(Context context,Bundle bundle);
-
+        void OpenAdvertActivity(Context context,Bundle bundle);
     }
 
     public interface iPayManager{

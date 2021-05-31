@@ -63,12 +63,12 @@ public class ShopCacheManger {
         if (select != null) {
             if (!selectList.contains(select)) {
                 if (select.isAll()){
-                    com.example.common.LogUtils.i("添加");
+                    com.example.common.LogUtils.i("ShopCacheManger",66,"添加");
                     selectList.add(select);
                 }
             }else {
                 if (!select.isAll()){
-                    com.example.common.LogUtils.i("删除");
+                    com.example.common.LogUtils.i("ShopCacheManger",71,"删除");
                     selectList.remove(select);
                 }
             }
@@ -88,12 +88,12 @@ public class ShopCacheManger {
             for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
                 if (!selectList.contains(bean)){
                     if (bean.isAll()){
-                        com.example.common.LogUtils.i("setSelectList: 添加");
+                        com.example.common.LogUtils.i("ShopCacheManger",91,"添加");
                         selectList.add(bean);
                     }
                 }else {
                     if (!bean.isAll()){
-                        com.example.common.LogUtils.i("setSelectList: 删除");
+                        com.example.common.LogUtils.i("ShopCacheManger",96,"删除");
                         selectList.remove(bean);
                     }
                 }
@@ -147,10 +147,8 @@ public class ShopCacheManger {
             @Override
             public void onLoginChange(LogBean isLog) {
                 if (isLog!=null){
-                    Log.i("zrf", "onLoginChange: "+"sss");
                     requestShortProductData();
                 }else {
-                    Log.i("zrf", "onLoginChange: "+"aaa");
                 }
             }
         });
@@ -161,15 +159,16 @@ public class ShopCacheManger {
             @Override
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
                 if (shortcartProductBean!=null){
-                    com.example.common.LogUtils.i("setSelectList: 获得数据");
+                    com.example.common.LogUtils.i("ShopCacheManger",162,"获得数据");
                 }else{
-                    com.example.common.LogUtils.i("setSelectList: 没有数据");
+                    com.example.common.LogUtils.i("ShopCacheManger",164,"没有数据");
+
                 }
             }
         });
     }
 
-    public void requestShortProductData(){
+    public synchronized void requestShortProductData(){
         RetrofitCreate.getFiannceApiService()
                 .getShortProductData()
                 .subscribeOn(Schedulers.io())
