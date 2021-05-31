@@ -79,14 +79,14 @@ public  abstract class BaseFragment<P extends BasePresenter> extends Fragment im
     public void onDestroy() {
         super.onDestroy();
         destroy();
-        CacheUserManager.getInstance().unregisterLogin(this);
-        CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
     public void destroy() {
         if (mPresenter != null) {
             mPresenter.destroy();
         }
+        CacheUserManager.getInstance().unregisterLogin(this);
+        CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
 

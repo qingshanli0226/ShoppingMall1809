@@ -37,7 +37,7 @@ public abstract class LoadingPage extends FrameLayout {
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addView(error,layoutParams);
          success = inflate.inflate(getSuccessLayoutId(), null);
-        addView(success,layoutParams);
+            addView(success,layoutParams);
          loadingview = inflate.inflate(R.layout.view_loading, null);
         addView(loadingview,layoutParams);
         showSuccessView();

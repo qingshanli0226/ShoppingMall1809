@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.common.log.LogUtil;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.view.MessageNumView;
 import com.example.myapplication.type.TypefyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
@@ -28,6 +32,9 @@ import java.util.List;
 import com.example.framework.BaseActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class MainActivity extends BaseActivity {
 
     private com.flyco.tablayout.CommonTabLayout mainComm;
@@ -35,6 +42,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
     private boolean isLogin;//判断是否登陆
+    private com.example.framework.view.MessageNumView numView;
 
     @Override
     public int bandLayout() {
@@ -44,9 +52,14 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
+        numView = (MessageNumView) findViewById(R.id.numView);
         //自动登录
         Intent intent1 = new Intent(this, AutoService.class);
         startService(intent1);
+        //注册Eventbus
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
@@ -101,7 +114,6 @@ public class MainActivity extends BaseActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("falg","2");
                         CaCheArote.getInstance().getUserInterface().openLoginActivity(MainActivity.this,bundle);
-
                     }
                 }
             }
@@ -111,5 +123,20 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    //如果数据删除或者下订单则将红点数据刷新
+    @Subscribe
+    public void invalidate(String flag){
+        if (flag.equals("1")){
+            numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+        destroy();
+    }
 }

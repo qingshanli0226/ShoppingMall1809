@@ -63,13 +63,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onDestroy() {
         super.onDestroy();
         destroy();
-        CacheUserManager.getInstance().unregisterLogin(this);
     }
 
     public void destroy() {
         if (mPresenter != null) {
             mPresenter.destroy();
         }
+        CacheUserManager.getInstance().unregisterLogin(this);
     }
 
 }

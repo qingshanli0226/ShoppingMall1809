@@ -19,6 +19,5 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/welcomeimage</item>
         <item name="android:windowFullscreen">true</item>
-
     </style>
 </resources>
