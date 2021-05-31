@@ -30,8 +30,9 @@ public class App extends Application {
         ShopCacheManger.getInstance().registerUserManger();
         ShopCacheManger.getInstance().registerBuyCarManger();
 
-
+        //自动登录
         startService(new Intent(this, AutoService.class));
+        //网络连接初始化
         BusinessNetManager.getInstance().init(this);
         MessageManger.getInstance().init(this);
 

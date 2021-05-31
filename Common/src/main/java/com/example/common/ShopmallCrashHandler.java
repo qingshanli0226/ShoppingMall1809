@@ -1,5 +1,6 @@
 package com.example.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
             }
         }).start();
 
-        LogUtils.json(e);
+        LogUtils.json(e+"aaa");
 
         try {
             Thread.sleep(3 * 1000);
@@ -52,10 +53,14 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
             interruptedException.printStackTrace();
         }
 
-//        for (Activity activity: ActivityManger.getInstance().getActivity()) {
-//            activity.finish();
-//        }
-//        System.exit(0);
+        for (Activity activity: ActivityManger.getInstance().getActivity()) {
+            activity.finish();
+            LogUtils.json(e+"bbb");
+
+        }
+        LogUtils.json(e+"eee");
+
+        System.exit(1);
 
     }
 }

@@ -10,7 +10,7 @@ public class ActivityManger {
     private static ActivityManger activityManger;
     private List<Activity> activityList = new ArrayList<>();
 
-    public static ActivityManger getInstance() {
+    public static synchronized ActivityManger getInstance() {
         if (activityManger==null){
             activityManger = new ActivityManger();
         }
