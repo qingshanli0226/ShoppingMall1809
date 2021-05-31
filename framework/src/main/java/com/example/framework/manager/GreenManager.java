@@ -8,6 +8,7 @@ import com.example.commom.ShopConstants;
 import com.example.framework.db.DaoMaster;
 import com.example.framework.db.DaoSession;
 import com.example.framework.db.MessageTable;
+import com.example.framework.db.MessageTableDao;
 
 import java.util.List;
 
@@ -71,6 +72,16 @@ public class GreenManager {
             return true;
         }
         return false;
+    }
+
+    public int getCount(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
+        int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
+        return count;
+    }
+
+    public void upDataMessage(MessageTable messageTable){
+        daoSession.update(messageTable);
     }
 
     public interface IMessage{

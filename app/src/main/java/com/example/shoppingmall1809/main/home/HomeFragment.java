@@ -2,6 +2,7 @@ package com.example.shoppingmall1809.main.home;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.GreenManager;
+import com.example.framework.view.ToolBar;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.home.adapter.HomeAdapter;
@@ -17,9 +20,11 @@ import com.example.shoppingmall1809.main.home.adapter.HomeAdapter;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, GreenManager.IMessage {
     private LinearLayout homeMessage;
     private RecyclerView fragHomeRv;
+    private ToolBar toolbar;
+    private TextView homeMessageNum;
 
     @Override
     protected int getLayoutId() {
@@ -28,6 +33,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData() {
+        GreenManager.getInstance().register(this::onMessage);
+
         httpPresenter.getHomeData();
 
         homeMessage.setOnClickListener(new View.OnClickListener() {
@@ -48,11 +55,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         fragHomeRv = (RecyclerView) findViewById(R.id.frag_home_rv);
         fragHomeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeMessage = (LinearLayout) findViewById(R.id.home_message);
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
+        homeMessageNum = (TextView) findViewById(R.id.home_message_num);
     }
 
     @Override
     public void onHomeData(HoemBean hoemBean) {
         HoemBean.ResultBean result = hoemBean.getResult();
+
+        int count = GreenManager.getInstance().getCount();
+        setCount(count);
 
         ArrayList<Object> objects = new ArrayList<>();
 
@@ -65,7 +77,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         HomeAdapter homeAdapter = new HomeAdapter(objects);
         fragHomeRv.setAdapter(homeAdapter);
     }
-
 
 
     @Override
@@ -81,5 +92,24 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void Error(String error) {
         Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onMessage(int count) {
+       setCount(count);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GreenManager.getInstance().unregister(this::onMessage);
+    }
+
+    public void setCount(int count){
+        if (count<=0){
+            homeMessageNum.setText("消息");
+        }else {
+            homeMessageNum.setText(count+"");
+        }
     }
 }

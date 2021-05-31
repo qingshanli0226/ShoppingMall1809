@@ -1,12 +1,25 @@
 package com.example.shoppingmall1809.main.message;
 
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
+import com.example.framework.db.MessageTable;
+import com.example.framework.manager.GreenManager;
+import com.example.framework.view.BaseRVAdapter;
+import com.example.framework.view.ToolBar;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.adapter.MessageAdapter;
+
+import java.util.List;
 
 @Route(path = "/main/home/MessageActivity")
-public class MessageActivity extends BaseActivity {
-
+public class MessageActivity extends BaseActivity  {
+    private ToolBar toolbar;
+    private RecyclerView messageRv;
 
     @Override
     protected int getLayoutId() {
@@ -15,7 +28,36 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        List<MessageTable> message = GreenManager.getInstance().getMessage();
 
+        MessageAdapter messageAdapter = new MessageAdapter();
+        messageAdapter.updateDate(message);
+
+        messageRv.setAdapter(messageAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        messageRv.setLayoutManager(linearLayoutManager);
+
+        messageAdapter.setRecyclerItemClickListener(new BaseRVAdapter.IRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
+
+                MessageTable messageTable = message.get(position);
+                messageTable.setIsRead(false);
+
+                GreenManager.getInstance().subCount();
+                GreenManager.getInstance().upDataMessage(messageTable);
+
+                messageAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+
+            }
+        });
     }
 
     @Override
@@ -25,6 +67,12 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
+        messageRv = (RecyclerView) findViewById(R.id.message_rv);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
