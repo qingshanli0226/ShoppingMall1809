@@ -10,7 +10,7 @@ import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.LoginBean;
-import com.shoppingmall.unpaid.PayDealActivity;
+import com.shoppingmall.pay.unpaid.PayDealActivity;
 
 
 public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {

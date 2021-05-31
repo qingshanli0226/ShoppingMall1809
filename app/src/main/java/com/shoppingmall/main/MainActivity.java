@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -19,8 +20,10 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.Constants;
+import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
+import com.shoppingmall.framework.view.CircleView;
 import com.shoppingmall.main.bean.CustomBean;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
@@ -34,6 +37,9 @@ import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LoginBean;
 
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 
 @Route(path = Constants.TO_MAIN_ACTIVITY)
@@ -43,6 +49,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     private ComAdapter commonAdapter;
     private ViewPager mainVp;
     private CommonTabLayout mainCommon;
+    private com.shoppingmall.framework.view.CircleView mainCircle;
 
     @Override
     public int getLayoutId() {
@@ -53,6 +60,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     public void initView() {
         mainVp = (ViewPager) findViewById(R.id.mainVp);
         mainCommon = (CommonTabLayout) findViewById(R.id.mainCommon);
+        mainCircle = (CircleView) findViewById(R.id.mainCircle);
     }
 
     @Override
@@ -62,7 +70,15 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
 
     @Override
     public void initData() {
+        LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
+        if(loginBean != null){
+            if(CacheShopManager.getInstance().getCarts().size() > 0){
+                mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+                mainCircle.setVisibility(View.VISIBLE);
+            }
+        }
 
+        EventBus.getDefault().register(this);
 
         Intent intent = getIntent();
         int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);
@@ -132,6 +148,20 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
             mainVp.setCurrentItem(shopMallPosition);
         }
     }
+
+    @Subscribe
+    public void ShopCarNum(String string){
+        if (string.equals("ShopCarNum")){
+            Log.i("hqy", "updateCircle: ");
+            if(CacheShopManager.getInstance().getCarts().size() > 0){
+                Log.i("hqy", "updateCircle: "+CacheShopManager.getInstance().getCarts().size());
+                mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+                mainCircle.setVisibility(View.VISIBLE);
+            }
+        }
+
+    }
+
     //双击退出
     private long i;
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -156,5 +186,8 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     protected void onDestroy() {
         super.onDestroy();
         finish();
+        if(EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

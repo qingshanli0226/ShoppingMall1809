@@ -1,4 +1,4 @@
-package com.shoppingmall.order.adapter;
+package com.shoppingmall.pay.order.adapter;
 
 import android.widget.ImageView;
 import android.widget.TextView;

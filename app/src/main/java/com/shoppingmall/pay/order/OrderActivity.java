@@ -1,4 +1,4 @@
-package com.shoppingmall.order;
+package com.shoppingmall.pay.order;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,20 +8,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.EnvUtils;
 import com.shoppingmall.R;
+import com.shoppingmall.framework.manager.PaymentManager;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.net.bean.FindForPayBean;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.ShopCarBean;
-import com.shoppingmall.order.adapter.OrderAdapter;
-
-import org.greenrobot.eventbus.EventBus;
+import com.shoppingmall.pay.order.adapter.OrderAdapter;
+import com.shoppingmall.pay.payment.PaymentActivity;
 
 import java.util.List;
 
 public class OrderActivity extends BaseActivity {
-
-
     private android.widget.ImageView detailBack;
     private android.widget.ImageView detailMenu;
     private android.widget.TextView username;
@@ -33,7 +33,7 @@ public class OrderActivity extends BaseActivity {
     private android.widget.TextView allMoney;
     private android.widget.Button orderPay;
     private OrderAdapter orderAdapter;
-
+    private String tradeNo="";
     @Override
     public int getLayoutId() {
         return R.layout.activity_order;
@@ -52,6 +52,7 @@ public class OrderActivity extends BaseActivity {
         orderPrice = (TextView) findViewById(R.id.order_price);
         allMoney = (TextView) findViewById(R.id.allMoney);
         orderPay = (Button) findViewById(R.id.orderPay);
+
     }
 
     @Override
@@ -76,8 +77,17 @@ public class OrderActivity extends BaseActivity {
         orderAdapter.updateData(orderList);
 
         orderPay.setOnClickListener(v->{
-            EventBus.getDefault().post("delCar");
+//            EventBus.getDefault().post("delCar");
+            Intent intent1 = new Intent(OrderActivity.this, PaymentActivity.class);
+            FindForPayBean.ResultBean findForPayBean = new FindForPayBean.ResultBean();
+            findForPayBean.setTotalPrice(""+orderPrice);
+            for (ShopCarBean.ResultBean resultBean : orderList) {
+                tradeNo = resultBean.getProductId()+tradeNo;
+            }
+            findForPayBean.setOrderInfo(tradeNo);
 
+            PaymentManager.getInstance().setList(findForPayBean);
+            startActivity(intent1);
         });
     }
 

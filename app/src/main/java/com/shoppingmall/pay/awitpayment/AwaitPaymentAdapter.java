@@ -1,4 +1,4 @@
-package com.shoppingmall.unpaid;
+package com.shoppingmall.pay.awitpayment;
 
 import android.widget.TextView;
 
@@ -7,7 +7,7 @@ import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.net.bean.FindForPayBean;
 
-public class PayDealAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> {
+public class AwaitPaymentAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> {
 
     @Override
     public int getLayoutId(int viewType) {

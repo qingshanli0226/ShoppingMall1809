@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import java.util.HashMap;
 
-public class ShopMallArouter {
+public class  ShopMallArouter {
 
     public Class<?> dispalyActivityClass;
     private Context context;

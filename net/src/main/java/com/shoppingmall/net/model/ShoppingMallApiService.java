@@ -3,6 +3,7 @@ package com.shoppingmall.net.model;
 import com.shoppingmall.net.bean.AddProductBean;
 import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.ConfirmServerPayResultBean;
+import com.shoppingmall.net.bean.FindForSendBean;
 import com.shoppingmall.net.bean.OrderBean;
 import com.shoppingmall.net.bean.FindForPayBean;
 import com.shoppingmall.net.bean.ProductBean;
@@ -107,7 +108,12 @@ public interface ShoppingMallApiService {
     @POST("confirmServerPayResult")
     Observable<ConfirmServerPayResultBean> confirmServerPayResult(@Body RequestBody body);
 
+    //待支付
     @GET("findForPay")
     Observable<FindForPayBean> findForPay();
+
+    //代发货
+    @GET("findForSend")
+    Observable<FindForSendBean> findForSend();
 
 }

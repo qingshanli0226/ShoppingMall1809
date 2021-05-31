@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+
+    implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
+
     implementation('com.alibaba:arouter-api:1.4.1') //ARouter依赖
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
     //轮播图

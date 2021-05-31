@@ -21,7 +21,7 @@ import com.shoppingmall.framework.manager.CacheShopManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
 import com.shoppingmall.net.bean.ShopCarBean;
-import com.shoppingmall.order.OrderActivity;
+import com.shoppingmall.pay.order.OrderActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -226,7 +226,8 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void onShowCart(List<ShopCarBean.ResultBean> carts) {
         this.carts = carts;
         shopCarAdapter.updateData(carts);
-        EventBus.getDefault().post("");
+        EventBus.getDefault().post("ShopCarNum");
+        Log.i("hqy", "onShowCart: ");
     }
 
     //添加
@@ -310,6 +311,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         } else {
             Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
         }
+        EventBus.getDefault().post("ShopCarNum");
     }
 
     //删除一个
@@ -325,6 +327,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
+        EventBus.getDefault().post("ShopCarNum");
     }
 
     //删除多个
@@ -348,6 +351,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
+        EventBus.getDefault().post("ShopCarNum");
     }
 
     @Subscribe

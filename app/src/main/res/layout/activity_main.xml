@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".main.MainActivity">
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +24,14 @@
                 app:tl_textUnselectColor="@color/black"
                 android:id="@+id/mainCommon"></com.flyco.tablayout.CommonTabLayout>
         </LinearLayout>
+        <com.shoppingmall.framework.view.CircleView
+            android:id="@+id/mainCircle"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_70"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"></com.shoppingmall.framework.view.CircleView>
 
-
-</LinearLayout>
+</RelativeLayout>
