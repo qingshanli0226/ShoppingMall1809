@@ -37,6 +37,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+
     greendao {
         // 指定数据库schema版本号，迁移等操作会用到
         schemaVersion 1

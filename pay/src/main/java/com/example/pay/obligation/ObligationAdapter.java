@@ -1,14 +1,12 @@
-package com.example.shoppingmallsix.obligation;
+package com.example.pay.obligation;
 
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.find.FindForPayBean;
-import com.example.net.bean.find.FindForSendbean;
-import com.example.shoppingmallsix.R;
-import com.example.shoppingmallsix.fragment.shoppingcar.ShoppingCarAdapter;
+import com.example.pay.R;
+
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -18,19 +16,13 @@ import java.util.Locale;
 
 public class ObligationAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> {
 
-    private ItemOnClickLister itemOnClickLister;
+
+
 
     public ObligationAdapter(List<FindForPayBean.ResultBean> resultBeans){
         setDataList(resultBeans);
     }
 
-    public void setItemOnClickLister(ItemOnClickLister itemOnClickLister) {
-        this.itemOnClickLister = itemOnClickLister;
-    }
-
-    public interface ItemOnClickLister{
-        void onItemChildClick(int position, View view);
-    }
 
 
 
@@ -60,14 +52,9 @@ public class ObligationAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> 
         ordernum.setText(itemData.getTradeNo());
 
 
-        ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (itemOnClickLister != null){
-                    itemOnClickLister.onItemChildClick(position,view);
-                }
-            }
-        });
+
+
+
 
     }
 

@@ -16,7 +16,7 @@
         <activity android:name=".message.MessageActivity" />
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
-        <activity android:name=".obligation.ObligationActivity" />
+        <activity android:name="com.example.pay.obligation.ObligationActivity" />
         <activity android:name="com.example.pay.demo.PayDemoActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"
