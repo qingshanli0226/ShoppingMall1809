@@ -1,5 +1,6 @@
 package com.shoppingmall.bawei.shoppingmall1809.mvvm;
 
+//主要来解决页面加载，错误，数据显示的问题
 public class ViewModeBean<T> {
     T data;
     private int status;//loading hideloading, error

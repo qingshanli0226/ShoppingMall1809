@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
+import com.fiannce.bawei.net.mode.FocusBean;
 import com.fiannce.bawei.net.mode.VersionBean;
 import com.shoppingmall.bawei.shoppingmall1809.R;
 import com.shoppingmall.bawei.shoppingmall1809.ShpmallApplication;
@@ -59,26 +60,33 @@ public class MVVMActivity extends AppCompatActivity {
 
     private void initData() {
         shopModel = new ViewModelProvider(this).get(ShopModel.class);
-        shopModel.getLiveData().observe(this, new Observer<MVVMBean>() {
+        shopModel.getLiveData().observe(this, new Observer<ViewModeBean<MVVMBean>>() {
             @Override
-            public void onChanged(MVVMBean mvvmBean) {
-                if (mvvmBean.getStatus()==0) {
-                    if (mvvmBean.getType() == 1) {
-                        activityMvvmBinding.setVersion(mvvmBean.getVersionBean());
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mvvmBean.getVersionBean().getResult().setVersion("2.9");
-                            }
-                        },2000);
-                    } else {
-                        Toast.makeText(MVVMActivity.this, mvvmBean.getFocusBean().getResult().get(1).getCoverImg(), Toast.LENGTH_SHORT).show();
+            public void onChanged(ViewModeBean<MVVMBean> viewModeBean) {
+                viewModeBean.handle(new ViewModeBean.IHanleCallback<MVVMBean>() {
+                    @Override
+                    public void onLoading() {
+                        Toast.makeText(MVVMActivity.this, "加载",Toast.LENGTH_SHORT).show();
                     }
-                } else if (mvvmBean.getStatus()==1) {
-                    //加载
-                } else {
-                    //错误
-                }
+                    @Override
+                    public void onSuccess(MVVMBean mvvmBean) {
+                        mvvmBean.getData(new MVVMBean.IBeanCallBack() {
+                            @Override
+                            public void onVersion(VersionBean versionBean) {
+                                activityMvvmBinding.setVersion(mvvmBean.getVersionBean());
+                            }
+                            @Override
+                            public void onFocus(FocusBean focusBean) {
+                                Toast.makeText(MVVMActivity.this, mvvmBean.getFocusBean().getResult().get(1).getCoverImg(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MVVMActivity.this, "错误",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

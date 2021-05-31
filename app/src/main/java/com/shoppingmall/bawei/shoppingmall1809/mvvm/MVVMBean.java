@@ -7,7 +7,6 @@ public class MVVMBean {
     private int type;//当type为1时，数据类型为versionBean，为2时，类型为focusBean
     private VersionBean versionBean;
     private FocusBean focusBean;
-    private int status;//当status为0的时候代表着数据正确返回，为1的时候代表着当前正在网络请求，为2的时候代表着错误
 
     public MVVMBean(int type) {
         this.setType(type);
@@ -38,11 +37,17 @@ public class MVVMBean {
         this.type = type;
     }
 
-    public int getStatus() {
-        return status;
+    public void getData(IBeanCallBack iBeanCallBack) {
+        if (type == 1) {
+            iBeanCallBack.onVersion(versionBean);
+        } else if (type == 2) {
+            iBeanCallBack.onFocus(focusBean);
+        }
+
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public interface IBeanCallBack {
+        void onVersion(VersionBean versionBean);
+        void onFocus(FocusBean focusBean);
     }
 }
