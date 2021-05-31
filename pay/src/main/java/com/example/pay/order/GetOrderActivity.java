@@ -20,6 +20,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
+import com.example.framework.greendao.CacheMessage;
+import com.example.framework.greendao.CacheMessageDao;
+import com.example.framework.manager.CacheManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
@@ -77,10 +81,6 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         orderInfos = String.valueOf(intent.getStringArrayExtra("orderInfo"));
         outTradeNos = String.valueOf(intent.getStringArrayExtra("outTradeNo"));
         key = String.valueOf(intent.getStringArrayExtra("key"));
-
-
-
-
     }
 
     @Override
@@ -181,9 +181,9 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                         getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
                         Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
-
-
-
+                    CacheMessage cacheMessage = new CacheMessage(null,payMsg,System.currentTimeMillis()+"",true);
+                    MessageManager.getInstance().setMessage(cacheMessage);
+                    MessageManager.getInstance().addCount();
                     break;
                 }
                 case SDK_AUTH_FLAG: {

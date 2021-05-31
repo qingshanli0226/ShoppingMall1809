@@ -58,7 +58,8 @@ dependencies {
     // 支付宝 SDK AAR 包所需的配置
     implementation  fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
 
-    // 支付宝 SDK AAR 包所需的配置
-    //compile (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
+
+
+
 
 }

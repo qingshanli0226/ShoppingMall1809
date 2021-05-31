@@ -9,6 +9,8 @@ import com.example.framework.BaseRvAdapter;
 import com.example.framework.greendao.CacheMessage;
 import com.example.shoppingmallsix.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MessageAdapter extends BaseRvAdapter<CacheMessage> {
@@ -25,16 +27,16 @@ public class MessageAdapter extends BaseRvAdapter<CacheMessage> {
     public void displayViewHolder(BaseViewHolder holder, int position, CacheMessage itemData) {
         TextView titleItemMessage = holder.getView(R.id.title_item_message);
         TextView isnewItemMessage = holder.getView(R.id.isnew_item_message);
-        TextView msgItemMessage = holder.getView(R.id.msg_item_message);
         TextView timeItemMessage = holder.getView(R.id.time_item_message);
-        titleItemMessage.setText(itemData.getTitle());
-        if (itemData.getIsNew()) {
+        titleItemMessage.setText(itemData.getMessage());
+        if (itemData.getIsRead()) {
             isnewItemMessage.setVisibility(View.VISIBLE);
         } else {
             isnewItemMessage.setVisibility(View.GONE);
         }
-        msgItemMessage.setText(itemData.getMsg());
-        timeItemMessage.setText(TimeUtil.stampToDate(itemData.getTime()));
+        timeItemMessage.setText(itemData.getTime());
+        String format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date(Long.parseLong(itemData.getTime())));
+        timeItemMessage.setText(format);
     }
 
     @Override

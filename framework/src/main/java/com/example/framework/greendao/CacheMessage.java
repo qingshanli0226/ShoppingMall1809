@@ -8,69 +8,44 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class CacheMessage {
     @Id(autoincrement = true)
-    private Long id;
+    private Long messageId;
 
-    @NotNull
-    private String title;
-    private String msg;
-    private boolean isNew;
-    private long time;
-    private String reserveOne;
-    private String reserveTwo;
-    @Generated(hash = 613402271)
-    public CacheMessage(Long id, @NotNull String title, String msg, boolean isNew,
-            long time, String reserveOne, String reserveTwo) {
-        this.id = id;
-        this.title = title;
-        this.msg = msg;
-        this.isNew = isNew;
+    private String message;
+    private String time;
+    private boolean isRead;
+    @Generated(hash = 172547459)
+    public CacheMessage(Long messageId, String message, String time,
+            boolean isRead) {
+        this.messageId = messageId;
+        this.message = message;
         this.time = time;
-        this.reserveOne = reserveOne;
-        this.reserveTwo = reserveTwo;
+        this.isRead = isRead;
     }
     @Generated(hash = 1110904812)
     public CacheMessage() {
     }
-    public Long getId() {
-        return this.id;
+    public Long getMessageId() {
+        return this.messageId;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setMessageId(Long messageId) {
+        this.messageId = messageId;
     }
-    public String getTitle() {
-        return this.title;
+    public String getMessage() {
+        return this.message;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMessage(String message) {
+        this.message = message;
     }
-    public String getMsg() {
-        return this.msg;
-    }
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-    public boolean getIsNew() {
-        return this.isNew;
-    }
-    public void setIsNew(boolean isNew) {
-        this.isNew = isNew;
-    }
-    public long getTime() {
+    public String getTime() {
         return this.time;
     }
-    public void setTime(long time) {
+    public void setTime(String time) {
         this.time = time;
     }
-    public String getReserveOne() {
-        return this.reserveOne;
+    public boolean getIsRead() {
+        return this.isRead;
     }
-    public void setReserveOne(String reserveOne) {
-        this.reserveOne = reserveOne;
-    }
-    public String getReserveTwo() {
-        return this.reserveTwo;
-    }
-    public void setReserveTwo(String reserveTwo) {
-        this.reserveTwo = reserveTwo;
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
     }
 }
