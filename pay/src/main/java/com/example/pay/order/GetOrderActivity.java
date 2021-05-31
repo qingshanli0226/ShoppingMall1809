@@ -171,9 +171,6 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
                     String payMsg="";
-                    CacheMessage cacheMessage = new CacheMessage();
-                    Log.d("order","11");
-                    cacheMessage.setIsNew(true);
                     if (TextUtils.equals(resultStatus, "9000")) {
                         getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,true);
                         payMsg = "支付成功";
@@ -183,21 +180,10 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                         payMsg = "支付失败";
                         getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
                         Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
                     }
-                    cacheMessage.setMsg("支付消息");
-                    Log.d("order","mESSAGE");
-                    cacheMessage.setMsg(payMsg);
-                    Log.d("order","2222");
-                    cacheMessage.setTime(System.currentTimeMillis());
-                    Log.d("order", "time ");
-                    MessageManager.getInstance().addMessage(cacheMessage, new MessageManager.IMessageListener() {
-                        @Override
-                        public void onResult(boolean isSuccess, List<CacheMessage> messageBeanList) {
-                            Log.d("order", "manager ");
-                            EventBus.getDefault().post("payBack");
-                        }
-                    });
+                    CacheMessage cacheMessage = new CacheMessage(null,payMsg,System.currentTimeMillis()+"",true);
+                    MessageManager.getInstance().setMessage(cacheMessage);
+                    MessageManager.getInstance().addCount();
                     break;
                 }
                 case SDK_AUTH_FLAG: {

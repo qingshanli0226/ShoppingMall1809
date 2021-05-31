@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView,MessageManager.IMessage {
     private ToolBar toolbar;
     private EditText edtname;
     private RecyclerView rv;
@@ -53,16 +53,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData() {
+
+        MessageManager.getInstance().register(this::onMessage);
+
         homePresenter.getHomeDData();
-        int i = MessageManager.getInstance().getMessageCount();
-        if(i>0){
-            messageTv.setText(i+"");
-        }
+
     }
 
     @Override
     protected void initView() {
-        EventBus.getDefault().register(this);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         edtname = (EditText) mBaseView.findViewById(R.id.edtname);
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
@@ -91,6 +90,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void getHomeData(HomeBean homeBean) {
         HomeBean.ResultBean result = homeBean.getResult();
 
+        int count = MessageManager.getInstance().getCount();
+        setCount(count);
+
         if (BuildConfig.DEBUG) Log.d("HomeFragment", "homeBean:" + homeBean);
         list.add(result.getBanner_info());
         list.add(result.getChannel_info());
@@ -102,14 +104,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         loadingPage.showSuccessView();
 
         homeAdapter.notifyDataSetChanged();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void payBack(String back) {
-        Log.d("order","HomeFragmentMessage");
-        if (back.equals("payBack")) {
-            messageTv.setText(MessageManager.getInstance().getMessageCount() + "");
-        }
     }
 
     @Override
@@ -127,8 +121,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    public void onMessage(int count) {
+        setCount(count);
+    }
+
+    public void setCount(int count){
+        if (count<=0){
+            messageTv.setText("消息");
+        }else {
+            messageTv.setText(count+"");
+        }
     }
 }
