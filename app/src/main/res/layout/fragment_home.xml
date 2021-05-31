@@ -54,6 +54,7 @@
                 android:src="@drawable/community_message_icon" />
 
             <TextView
+                android:id="@+id/homeNum"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_dp_0"
                 android:layout_weight="2"

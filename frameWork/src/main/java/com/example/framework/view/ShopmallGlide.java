@@ -1,4 +1,4 @@
-package com.example.framework.manager;
+package com.example.framework.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

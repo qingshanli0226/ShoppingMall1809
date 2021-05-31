@@ -25,7 +25,7 @@ public class App extends Application {
         UserModule.init();
         NetModule.context = this;
 
-        SqlManager.getInstance().setContext(this);
+        SqlManager.getInstance().init(this);
 
         CacheShopManager.getInstance().init();
 

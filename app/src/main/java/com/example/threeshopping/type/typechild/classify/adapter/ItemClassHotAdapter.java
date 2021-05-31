@@ -1,14 +1,11 @@
 package com.example.threeshopping.type.typechild.classify.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.framework.BaseRvAdapter;
-import com.example.framework.manager.ShopmallGlide;
-import com.example.net.bean.HomeBean;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.bean.TypeBean;
 import com.example.threeshopping.R;
 

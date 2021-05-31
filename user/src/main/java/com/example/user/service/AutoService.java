@@ -8,8 +8,7 @@ import android.widget.Toast;
 
 
 import com.example.common.SpUtil;
-import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.LoginBean;
 
@@ -52,7 +51,7 @@ public class AutoService extends Service {
                             if(loginBean.getCode().equals("200")){
                                 Toast.makeText(AutoService.this, "自动登录成功", Toast.LENGTH_SHORT).show();
                                 SpUtil.putString(AutoService.this,loginBean.getResult().getToken());
-                                UserManager.getInstance().setLoginBean(loginBean);
+                                CacheUserManager.getInstance().setLoginBean(loginBean);
 
                             }
                         }

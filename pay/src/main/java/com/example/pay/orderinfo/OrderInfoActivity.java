@@ -1,6 +1,5 @@
 package com.example.pay.orderinfo;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,24 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
-import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
-import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderBean;
 import com.example.net.bean.PayBean;
 import com.example.pay.R;
 import com.example.pay.orderinfo.adapter.OrderAdapter;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 订单信息
@@ -74,7 +66,7 @@ public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements I
     @Override
     public void initData() {
         //用户信息
-        LoginBean loginBean = UserManager.getInstance().getLoginBean();
+        LoginBean loginBean = CacheUserManager.getInstance().getLoginBean();
         username.setText(loginBean.getResult().getName());
         userPhone.setText(loginBean.getResult().getPhone()+"");
         userAddress.setText(loginBean.getResult().getAddress()+"");

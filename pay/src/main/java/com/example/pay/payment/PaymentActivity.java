@@ -17,12 +17,18 @@ import com.alipay.sdk.app.PayTask;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheMessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.PayCheckBean;
 import com.example.net.bean.PayResult;
 import com.example.net.bean.SelectBean;
 import com.example.pay.R;
+import com.fiannce.sql.bean.MessageBean;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class PaymentActivity extends BaseActivity<PayMentPresenter> implements IPaymentView {
@@ -50,6 +56,17 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     payCheckBean.setResult(orderInfo);
                     payCheckBean.setClientPayResult(true);
                     mPresenter.checkNumAll(payCheckBean);
+
+                    //信息
+                    MessageBean messageBean = new MessageBean();
+                    messageBean.setId(null);
+                    messageBean.setType(0);
+                    messageBean.setMessage("支付成功");
+                    messageBean.setMessageTime(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(System.currentTimeMillis()));
+                    messageBean.setIsRead(true);
+                    CacheMessageManager.getInstance().addMessage(messageBean);
+                    EventBus.getDefault().post("num");
+
                 } else{
                     if(TextUtils.equals(resultStatus,"8000")){
                         Toast.makeText(PaymentActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
@@ -60,6 +77,14 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                         payCheckBean.setResult(orderInfo);
                         payCheckBean.setClientPayResult(false);
                         mPresenter.checkNumAll(payCheckBean);
+                        //信息
+                        MessageBean messageBean = new MessageBean();
+                        messageBean.setId(null);
+                        messageBean.setType(0);
+                        messageBean.setMessage("支付失败");
+                        messageBean.setMessageTime(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(System.currentTimeMillis()));
+                        messageBean.setIsRead(true);
+                        CacheMessageManager.getInstance().addMessage(messageBean);
                     }
                 }
             }

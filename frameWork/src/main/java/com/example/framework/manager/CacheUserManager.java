@@ -2,21 +2,20 @@ package com.example.framework.manager;
 
 import com.example.net.bean.LoginBean;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserManager {
+public class CacheUserManager {
 
-    private static UserManager userManager;
+    private static CacheUserManager userManager;
 
-    private UserManager(){
+    private CacheUserManager(){
 
     }
 
-    public synchronized static UserManager getInstance(){
+    public synchronized static CacheUserManager getInstance(){
         if (userManager ==  null){
-            userManager = new UserManager();
+            userManager = new CacheUserManager();
         }
         return userManager;
     }

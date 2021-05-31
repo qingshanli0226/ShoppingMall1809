@@ -12,15 +12,13 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.manager.ActManager;
 
 import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.UserManager;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.LoadPage;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 
-import retrofit2.http.HEAD;
 
-
-public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, UserManager.IUserChange {
+public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarOnClickLisenter, CacheUserManager.IUserChange {
     protected P mPresenter;
     protected ToolBar toolBar;
     protected LoadPage loadPage;
@@ -38,7 +36,7 @@ public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompat
         toolBar = findViewById(R.id.toolbar);
         toolBar.setToolbarOnClickLisenter(this);
 
-        UserManager.getInstance().registerLogin(this);
+        CacheUserManager.getInstance().registerLogin(this);
 
         ActManager.getActManager().register(this);
 
@@ -83,7 +81,7 @@ public abstract   class BaseActivity<P extends  BasePresenter> extends AppCompat
         if (mPresenter != null) {
             mPresenter.detachView();
         }
-        UserManager.getInstance().unregisterLogin(this);
+        CacheUserManager.getInstance().unregisterLogin(this);
         ActManager.getActManager().unRegister(this);
 
         CacheShopManager.getInstance().removeActivity(this);

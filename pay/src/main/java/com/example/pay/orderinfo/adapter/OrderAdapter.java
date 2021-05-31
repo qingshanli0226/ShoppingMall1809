@@ -1,12 +1,10 @@
 package com.example.pay.orderinfo.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.framework.BaseRvAdapter;
-import com.example.framework.manager.ShopmallGlide;
-import com.example.net.bean.CartBean;
+import com.example.framework.view.ShopmallGlide;
 import com.example.net.bean.PayBean;
 import com.example.pay.R;
 
