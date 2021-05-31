@@ -34,8 +34,8 @@ public class CaCheMannager {
 
     private List<IShoppingCartInterface> list = new ArrayList<>();
     private ShoppingCartBean shoppingCartBean;//购物车请求返回
-    private List<ShoppingCartBean.ResultBean> shoppingCartBeanList;//购物车数据
-    private List<ShoppingCartBean.ResultBean> CheckList;//选中集合
+    private List<ShoppingCartBean.ResultBean> shoppingCartBeanList=new ArrayList<>();//购物车数据
+    private List<ShoppingCartBean.ResultBean> CheckList=new ArrayList<>();//选中集合
 
     public List<ShoppingCartBean.ResultBean> getCheckList() {
         return CheckList;
