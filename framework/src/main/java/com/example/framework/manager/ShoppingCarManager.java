@@ -41,6 +41,10 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //待发货
     List<FindForBean.ResultBean> forSend = new ArrayList<>();
 
+    public void deleteForPayLast(FindForBean.ResultBean bean){
+        forPay.remove(bean);
+    }
+
     public List<FindForBean.ResultBean> getForPay() {
         return forPay;
     }

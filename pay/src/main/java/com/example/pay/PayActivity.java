@@ -63,6 +63,7 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
                             resultBean.setTotalPrice(money+"");
                             resultBean.setTime(System.currentTimeMillis()+"");
                             resultBean.setTradeNo(orderinfoBean.getResult().getOutTradeNo());
+                            resultBean.setOrderInfo(orderinfoBean.getResult().getOrderInfo());
                             ShoppingCarManager.getInstance().addForPay(resultBean);
                         } else {
                             // 其他值就可以判断为支付失败
@@ -71,6 +72,7 @@ public class PayActivity extends BaseActivity<PayPresenter> implements IPayView 
                             resultBean.setTotalPrice(money+"");
                             resultBean.setTime(System.currentTimeMillis()+"");
                             resultBean.setTradeNo(orderinfoBean.getResult().getOutTradeNo());
+                            resultBean.setOrderInfo(orderinfoBean.getResult().getOrderInfo());
                             ShoppingCarManager.getInstance().addForPay(resultBean);
                         }
                     }

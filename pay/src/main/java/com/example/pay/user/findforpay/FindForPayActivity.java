@@ -11,6 +11,7 @@ import android.os.Message;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
@@ -52,6 +53,7 @@ public class FindForPayActivity extends BaseActivity<PayPresenter> implements IP
                         resultBean.setTime(System.currentTimeMillis() + "");
                         resultBean.setTradeNo(findForBean.getTradeNo());
                         ShoppingCarManager.getInstance().addForSend(resultBean);
+                        ShoppingCarManager.getInstance().deleteForPayLast(findForBean);
                         finish();
                     } else {
                         if (resultStatus.equals("8000")) {
@@ -139,6 +141,7 @@ public class FindForPayActivity extends BaseActivity<PayPresenter> implements IP
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
         shopActPayRv.setLayoutManager(linearLayoutManager);
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
     }
 
     @Override
