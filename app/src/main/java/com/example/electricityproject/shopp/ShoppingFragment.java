@@ -86,7 +86,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
                     result = shortcartProductBean.getResult();
                     buyCarRv.setVisibility(View.VISIBLE);
-                    String s = result.toString();
                     shoppingAdapter.updateData(shortcartProductBean.getResult());
                     buyCarRv.setAdapter(shoppingAdapter);
                     shoppingAdapter.notifyDataSetChanged();
@@ -217,7 +216,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             public void onClick(View v) {
 
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
-
                     if (selectList.size() > 0){
                         List<OrderBean> orderBeanList = new ArrayList<>();
                         for (ShortcartProductBean.ResultBean resultBean : selectList) {
@@ -308,7 +306,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("orderInfo", orderInfo);
             if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
-//                deleteShopmall();
+                deleteShopmall();
             }
 
         }else {
@@ -321,7 +319,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         if(checkInventoryBean.getCode().equals("200")){
             loadingPage.showSuccessView();
             List<CheckInventoryBean.ResultBean> result = checkInventoryBean.getResult();
-            int i = result.size();
+
             boolean isEnough=true;
 
             for (int j = 0; j < result.size(); j++) {

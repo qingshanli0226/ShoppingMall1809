@@ -75,7 +75,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
         list = ShopCacheManger.getInstance().getList();
 
-
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
             float productPrice=Float.parseFloat(selectOrderBean.getMoney()+"");
@@ -93,6 +92,23 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
             orderDetailsAdapter.updateData(list);
             orderRv.setAdapter(orderDetailsAdapter);
         }
+
+        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
+            @Override
+            public void onLeftClick() {
+                list.clear();
+            }
+
+            @Override
+            public void onRightImgClick() {
+
+            }
+
+            @Override
+            public void onRightTvClick() {
+
+            }
+        });
 
     }
 
@@ -118,6 +134,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         public void handleMessage(Message msg) {
 
             daoMaster = MessageDataBase.getInstance().getDaoMaster();
+//            daoMaster = MessageManger.getInstance().getDaoMaster();
 
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
@@ -144,7 +161,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         EventBus.getDefault().post("num");
 
                     } else {
-
 
 
                         payMsg="支付失败";
@@ -219,7 +235,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     public void onConfirmServerPayResultOk(ConfirmServerPayResultBean bean) {
         if (bean.getCode().equals("200")){
-
             finish();
         }
     }

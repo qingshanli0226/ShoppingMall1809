@@ -271,6 +271,17 @@
 
     </LinearLayout>
 
+    <com.example.electricityproject.view.CircleView
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/details_buyCarNum"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_220"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"></com.example.electricityproject.view.CircleView>
+
 </RelativeLayout>
 
 

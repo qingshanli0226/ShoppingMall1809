@@ -16,6 +16,7 @@ import com.example.electricityproject.main.MainActivity;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
+import com.example.view.ToolBar;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,9 +36,13 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
         }
     };
+    private android.widget.RelativeLayout aaaaa;
+    private com.example.view.ToolBar toolbar;
 
     @Override
     protected void initData() {
+
+
         //判断是否已经登录(已经登录获取购物车页面数据,没有登录发送一个handler)
         if (BusinessUserManager.getInstance().getIsLog()!=null){
             httpPresenter.getShortProductsData();
@@ -57,16 +62,14 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     protected void initPresenter() {
-
         httpPresenter = new WelcomePresenter(this);
-
     }
 
     @Override
     protected void initView() {
 
         skip = (TextView) findViewById(R.id.skip);
-
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
     }
 
     @Override

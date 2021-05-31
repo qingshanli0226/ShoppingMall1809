@@ -64,8 +64,8 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
     //工具类
     api 'com.blankj:utilcodex:1.26.0'
+    api 'org.greenrobot:greendao:3.3.0' // 2.add library
 
     api 'com.jakewharton:disklrucache:2.0.2'
     api 'org.greenrobot:eventbus:3.1.1'// EventBus依赖
-    api 'org.greenrobot:greendao:3.3.0' // 2.add library
 }

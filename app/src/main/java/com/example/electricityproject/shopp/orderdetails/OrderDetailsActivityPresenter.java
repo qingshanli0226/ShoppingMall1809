@@ -44,7 +44,7 @@ public class OrderDetailsActivityPresenter extends BasePresenter<OrderDetailsAct
                     @Override
                     public void onNext(ConfirmServerPayResultBean bean) {
                         IView.onConfirmServerPayResultOk(bean);
-                        LogUtils.i(bean.getCode());
+                        com.example.common.LogUtils.i("OrderDetailsActivityPresenter",47,""+bean.getCode());
                     }
 
                     @Override

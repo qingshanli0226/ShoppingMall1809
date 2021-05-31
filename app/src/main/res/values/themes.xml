@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SplashTheme" parent="Theme.ElectricityProject">
+        <!--去掉windowTitle-->
+        <item name="windowNoTitle">true</item>
+        <!--设置全屏状态-->
+        <item name="android:windowFullscreen">true</item>
+        <!--设置背景图片-->
+        <item name="android:windowBackground">@drawable/splash</item>
+        <!--设置内容覆盖-->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>

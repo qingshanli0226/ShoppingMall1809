@@ -19,8 +19,12 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
+
 
 public class MessageActivity extends BaseActivity {
+
 
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
     private List<MessageTable> messageTables;
@@ -93,6 +97,16 @@ public class MessageActivity extends BaseActivity {
                 builder.show();
             }
         });
+//        daoMaster = DBManger.getInstance().getDaoMaster(MessageActivity.this);
+//        if (daoMaster!=null){
+//            List<MessageTable> messageTables = daoMaster.newSession().loadAll(MessageTable.class);
+//            LogUtils.i(messageTables.toString());
+//
+//            adapter = new MessageAdapter();
+//            adapter.updateData(messageTables);
+//            messageRv.setAdapter(adapter);
+//        }
+//        daoMaster = MessageManger.getInstance().getDaoMaster();
 
 
     }

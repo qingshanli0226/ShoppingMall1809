@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity {
     private RadioButton btnPerson;
     private CircleView buyCarNum;
 
+
     private List<ShortcartProductBean.ResultBean> resultBeanList = new ArrayList<>();
 
 
@@ -126,6 +127,8 @@ public class MainActivity extends BaseActivity {
                 if (isLog!=null){
                     buyCarNum.setVisibility(View.VISIBLE);
                     buyCarNum.setCurrentNum(""+resultBeanList.size());
+                }else {
+                    buyCarNum.setVisibility(View.GONE);
                 }
             }
         });
@@ -196,5 +199,8 @@ public class MainActivity extends BaseActivity {
     public void showError(String error) {
         Log.i("zx", "showError: "+error);
     }
+
+
+
 
 }

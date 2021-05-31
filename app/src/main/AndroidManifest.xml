@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricityProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".details.PlayVideoActivity"></activity>
-        <activity android:name=".home.message.MessageActivity"></activity>
+        <activity android:name=".advert.AdvertActivity"></activity>
+        <activity android:name=".details.PlayVideoActivity" />
+        <activity android:name=".home.message.MessageActivity" />
         <activity android:name=".person.dropshipment.DropShipmentActivity" />
         <activity android:name=".shopp.orderdetails.OrderDetailsActivity" />
         <activity android:name=".shopp.userinfo.BindUserInfoActivity" />
@@ -25,13 +26,18 @@
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".welcome.WelcomeActivity">
+        <activity
+            android:name=".welcome.WelcomeActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+
     </application>
 
 </manifest>

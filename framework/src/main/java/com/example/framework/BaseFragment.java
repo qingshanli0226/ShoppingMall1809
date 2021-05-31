@@ -18,6 +18,7 @@ import com.example.view.ToolBar;
 
 public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener{
 
+
     protected T httpPresenter;
     protected View mView;
     protected LoadingPage loadingPage;

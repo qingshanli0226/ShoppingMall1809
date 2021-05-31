@@ -18,4 +18,16 @@ public class SpUtils {
         edit.commit();
     }
 
+    public static void putTime(Context context,String time){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = info.edit();
+        edit.putString("time",time);
+        edit.commit();
+    }
+
+    public static String getTime(Context context){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        String time = info.getString("time", "");
+        return time;
+    }
 }
