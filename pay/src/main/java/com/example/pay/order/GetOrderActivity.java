@@ -20,6 +20,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
+import com.example.framework.greendao.CacheMessage;
+import com.example.framework.greendao.CacheMessageDao;
+import com.example.framework.manager.CacheManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
 import com.example.net.bean.business.GetOrderInfoBean;
@@ -33,6 +37,7 @@ import com.example.pay.demo.AuthResult;
 import com.example.pay.demo.PayResult;
 import com.example.pay.demo.util.OrderInfoUtil2_0;
 
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Map;
@@ -77,10 +82,6 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         orderInfos = String.valueOf(intent.getStringArrayExtra("orderInfo"));
         outTradeNos = String.valueOf(intent.getStringArrayExtra("outTradeNo"));
         key = String.valueOf(intent.getStringArrayExtra("key"));
-
-
-
-
     }
 
     @Override
@@ -170,6 +171,9 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
                     String payMsg="";
+                    CacheMessage cacheMessage = new CacheMessage();
+                    Log.d("order","11");
+                    cacheMessage.setIsNew(true);
                     if (TextUtils.equals(resultStatus, "9000")) {
                         getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,true);
                         payMsg = "支付成功";
@@ -179,10 +183,21 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                         payMsg = "支付失败";
                         getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
                         Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+
                     }
-
-
-
+                    cacheMessage.setMsg("支付消息");
+                    Log.d("order","mESSAGE");
+                    cacheMessage.setMsg(payMsg);
+                    Log.d("order","2222");
+                    cacheMessage.setTime(System.currentTimeMillis());
+                    Log.d("order", "time ");
+                    MessageManager.getInstance().addMessage(cacheMessage, new MessageManager.IMessageListener() {
+                        @Override
+                        public void onResult(boolean isSuccess, List<CacheMessage> messageBeanList) {
+                            Log.d("order", "manager ");
+                            EventBus.getDefault().post("payBack");
+                        }
+                    });
                     break;
                 }
                 case SDK_AUTH_FLAG: {

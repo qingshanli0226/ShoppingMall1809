@@ -1,24 +1,30 @@
 package com.example.shoppingmallsix.fragment.home;
 
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.LogUtil;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.HomeBean;
 import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.adapter.HomeAdapter;
-import com.example.shoppingmallsix.main.MainActivity;
 import com.example.shoppingmallsix.message.MessageActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +40,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private HomePresenter homePresenter;
     private List<Object> list = new ArrayList<>();
     private LinearLayout homeMessage;
+    private TextView messageTv;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -47,14 +54,20 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     protected void initData() {
         homePresenter.getHomeDData();
+        int i = MessageManager.getInstance().getMessageCount();
+        if(i>0){
+            messageTv.setText(i+"");
+        }
     }
 
     @Override
     protected void initView() {
+        EventBus.getDefault().register(this);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         edtname = (EditText) mBaseView.findViewById(R.id.edtname);
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
         homeMessage = mBaseView.findViewById(R.id.homeMessage);
+        messageTv = mBaseView.findViewById(R.id.messageTv);
 
         homeAdapter = new HomeAdapter(list, getActivity());
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -67,7 +80,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 startActivity(intent);
             }
         });
-    }
+}
 
     @Override
     protected int getLayoutId() {
@@ -91,6 +104,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         homeAdapter.notifyDataSetChanged();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void payBack(String back) {
+        Log.d("order","HomeFragmentMessage");
+        if (back.equals("payBack")) {
+            messageTv.setText(MessageManager.getInstance().getMessageCount() + "");
+        }
+    }
+
     @Override
     public void showLoading() {
         loadingPage.showTransparentLoadingView();
@@ -103,5 +124,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void showToast(String msg) {
         loadingPage.showError(msg);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -9,17 +9,16 @@ import org.greenrobot.greendao.annotation.Generated;
 public class CacheMessage {
     @Id(autoincrement = true)
     private Long id;
-
-    @NotNull
+    
     private String title;
     private String msg;
     private boolean isNew;
     private long time;
     private String reserveOne;
     private String reserveTwo;
-    @Generated(hash = 613402271)
-    public CacheMessage(Long id, @NotNull String title, String msg, boolean isNew,
-            long time, String reserveOne, String reserveTwo) {
+    @Generated(hash = 1104119030)
+    public CacheMessage(Long id, String title, String msg, boolean isNew, long time,
+            String reserveOne, String reserveTwo) {
         this.id = id;
         this.title = title;
         this.msg = msg;
@@ -73,4 +72,5 @@ public class CacheMessage {
     public void setReserveTwo(String reserveTwo) {
         this.reserveTwo = reserveTwo;
     }
+
 }

@@ -1,19 +1,17 @@
 package com.example.shoppingmallsix.message;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.greendao.CacheMessage;
-import com.example.framework.manager.MSGManager;
+import com.example.framework.manager.MessageManager;
 import com.example.shoppingmallsix.R;
 
 import java.util.List;
@@ -40,7 +38,7 @@ public class MessageActivity extends BaseActivity {
                 CacheMessage messageBean = messageBeans.get(position);
                 if (messageBean.getIsNew()) {
                     messageBean.setIsNew(false);
-                    MSGManager.getInstance().updateMessage(messageBean, new MSGManager.IMessageListener() {
+                    MessageManager.getInstance().updateMessage(messageBean, new MessageManager.IMessageListener() {
                         @Override
                         public void onResult(boolean isSuccess, List<CacheMessage> messageBeanList) {
                             if (isSuccess) {
@@ -61,7 +59,7 @@ public class MessageActivity extends BaseActivity {
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MSGManager.getInstance().deleteMessage(messageBeans.get(position), new MSGManager.IMessageListener() {
+                        MessageManager.getInstance().deleteMessage(messageBeans.get(position), new MessageManager.IMessageListener() {
                             @Override
                             public void onResult(boolean isSuccess, List<CacheMessage> messageBeanList) {
                                 adapter.updateData(messageBeans);
@@ -82,7 +80,7 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        messageBeans = MSGManager.getInstance().getMessageBeanList();
+        messageBeans = MessageManager.getInstance().getMessageBeanList();
         adapter.updateData(messageBeans);
     }
 

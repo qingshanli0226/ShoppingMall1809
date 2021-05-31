@@ -45,7 +45,7 @@ public class CacheMessageDao extends AbstractDao<CacheMessage, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CACHE_MESSAGE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"TITLE\" TEXT NOT NULL ," + // 1: title
+                "\"TITLE\" TEXT," + // 1: title
                 "\"MSG\" TEXT," + // 2: msg
                 "\"IS_NEW\" INTEGER NOT NULL ," + // 3: isNew
                 "\"TIME\" INTEGER NOT NULL ," + // 4: time
@@ -67,7 +67,11 @@ public class CacheMessageDao extends AbstractDao<CacheMessage, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getTitle());
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(2, title);
+        }
  
         String msg = entity.getMsg();
         if (msg != null) {
@@ -95,7 +99,11 @@ public class CacheMessageDao extends AbstractDao<CacheMessage, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getTitle());
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(2, title);
+        }
  
         String msg = entity.getMsg();
         if (msg != null) {
@@ -124,7 +132,7 @@ public class CacheMessageDao extends AbstractDao<CacheMessage, Long> {
     public CacheMessage readEntity(Cursor cursor, int offset) {
         CacheMessage entity = new CacheMessage( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1), // title
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // msg
             cursor.getShort(offset + 3) != 0, // isNew
             cursor.getLong(offset + 4), // time
@@ -137,7 +145,7 @@ public class CacheMessageDao extends AbstractDao<CacheMessage, Long> {
     @Override
     public void readEntity(Cursor cursor, CacheMessage entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setTitle(cursor.getString(offset + 1));
+        entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setMsg(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setIsNew(cursor.getShort(offset + 3) != 0);
         entity.setTime(cursor.getLong(offset + 4));
