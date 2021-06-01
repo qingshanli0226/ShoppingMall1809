@@ -3,6 +3,7 @@ package com.example.pay.obligation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.find.FindForPayBean;
 import com.example.pay.R;
@@ -38,6 +39,8 @@ public class ObligationAdapter extends BaseRvAdapter<FindForPayBean.ResultBean> 
         TextView money = holder.getView(R.id.money);
         TextView ordernum = holder.getView(R.id.ordernum);
         String timeData = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date(Long.parseLong(itemData.getTime())));
+        LogUtils.json(itemData.getTime());
+        LogUtils.json(timeData);
         time.setText(timeData);
 
         //金钱转换

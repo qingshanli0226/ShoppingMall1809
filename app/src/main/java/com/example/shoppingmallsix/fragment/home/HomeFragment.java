@@ -104,4 +104,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void showToast(String msg) {
         loadingPage.showError(msg);
     }
+
+
 }

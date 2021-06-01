@@ -277,10 +277,18 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             String outTradeNo = getOrderInfoBean.getResult().getOutTradeNo();
 
             Intent intent = new Intent(getContext(), GetOrderActivity.class);
+            ArrayList<GetShortcartProductsBean.ResultBean> objects = new ArrayList<>();
+            for (int i = 0; i <resultBeans.size() ; i++) {
+                objects.add(resultBeans.get(i));
+            }
+            intent.putExtra("price",price);
+            intent.putExtra("list",objects);
             intent.putExtra("orderInfo", orderInfo);
             intent.putExtra("outTradeNo", outTradeNo);
             intent.putExtra("key", "main");
+
             startActivity(intent);
+            DeleteMemoryData();
         } else {
             Toast.makeText(getContext(), "" + getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -340,14 +348,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     @Override
     public void onCheckInventory(CheckInventoryBean checkInventoryBean,List<GetShortcartProductsBean.ResultBean> resultBeans) {
         if (checkInventoryBean.getCode().equals("200")){
-            Intent intent = new Intent(getContext(), GetOrderActivity.class);
-            ArrayList<GetShortcartProductsBean.ResultBean> objects = new ArrayList<>();
-            for (int i = 0; i <resultBeans.size() ; i++) {
-                objects.add(resultBeans.get(i));
-            }
-            intent.putExtra("price",price);
-            intent.putExtra("list",objects);
-            startActivity(intent);
+            httpPresenter.getOrderinfo("购买",price+"",resultBeans);
         }else {
             String name = "";
             List<CheckInventoryBean.ResultBean> result = checkInventoryBean.getResult();

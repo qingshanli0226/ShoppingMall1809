@@ -389,6 +389,10 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
 
     }
 
+    @Override
+    public void onDisconnected() {
+        loadingPage.showError("网络错误");
+    }
 
     @Override
     protected void onDestroy() {

@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -102,13 +103,15 @@ public class ShoppingPresenter extends BasePresenter<IShopping> {
                 });
     }
 
-    public void getOrderinfo(String subject, String totalPrice, String productName, String productId) {
+    public void getOrderinfo(String subject, String totalPrice, List<GetShortcartProductsBean.ResultBean> resultBeans) {
         Orbean orbean = new Orbean();
-        List<Orbean.BodyBean> body = new Orbean().getBody();
-        Orbean.BodyBean bodyBean = new Orbean.BodyBean();
-        bodyBean.setProductId(productId);
-        bodyBean.setProductName(productName);
-        body.add(bodyBean);
+        List<Orbean.BodyBean> body = new ArrayList<>();
+        for (int i = 0; i < resultBeans.size(); i++) {
+            Orbean.BodyBean bodyBean = new Orbean.BodyBean();
+            bodyBean.setProductId(resultBeans.get(i).getProductId());
+            bodyBean.setProductName(resultBeans.get(i).getProductName());
+            body.add(bodyBean);
+        }
         orbean.setSubject(subject);
         orbean.setTotalPrice(totalPrice);
         orbean.setBody(body);

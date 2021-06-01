@@ -5,10 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.framework.manager.NetworkConnectionsManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener, NetworkConnectionsManager.IConnectListener {
 
     protected T httpPresenter;
     protected boolean isUseLoading = true;
@@ -25,6 +26,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             }
         };
         setContentView(loadingPage);
+        NetworkConnectionsManager.getInstance().registerConnectListener(this);
         initView();
         toolBar = findViewById(R.id.toolbar);
         toolBar.setToolbarListener(this);
@@ -54,6 +56,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (httpPresenter != null) {
             httpPresenter.detachView();
         }
+        NetworkConnectionsManager.getInstance().unRegisterConnectListener(this);
     }
 
     @Override
@@ -67,6 +70,15 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     @Override
     public void onRightTvClick() {
+
+    }
+    @Override
+    public void onConnected() {
+
+    }
+
+    @Override
+    public void onDisconnected() {
 
     }
 }
