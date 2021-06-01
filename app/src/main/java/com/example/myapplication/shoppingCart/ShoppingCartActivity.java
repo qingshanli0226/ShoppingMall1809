@@ -18,7 +18,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
-import com.example.pay.PayActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
