@@ -13,7 +13,6 @@ import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.pay.awitpayment.AwaitPaymentActivity;
 import com.shoppingmall.pay.dropshipping.DropShippingActivity;
 
-
 public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {
 
     private TextView textname;
@@ -69,6 +68,8 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AwaitPaymentActivity.class);
                 startActivity(intent);
+//                Intent intent = new Intent(getActivity(), PayDealActivity.class);
+//                startActivity(intent);
             }
         });
         toDropShipping.setOnClickListener(view -> {
