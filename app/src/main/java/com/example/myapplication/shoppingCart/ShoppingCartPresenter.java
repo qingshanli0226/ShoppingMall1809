@@ -264,37 +264,4 @@ public class ShoppingCartPresenter extends BasePresenter<IShoppingCartView> {
                     }
                 });
     }
-
-
-    //获取购物车数据
-    public synchronized void getShoppingCart() {
-        RetrofitManager.getApi().getShoppingCart()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ShoppingCartBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull ShoppingCartBean shoppingCartBean) {
-                        //购物车数据
-                        CaCheMannager.getInstance().setShoppingCartBeanList(shoppingCartBean.getResult());
-                        CaCheMannager.getInstance().showShoppingData();
-                        if (mView!=null){
-                            mView.onShoppingData(shoppingCartBean);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 }

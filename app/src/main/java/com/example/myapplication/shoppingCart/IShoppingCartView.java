@@ -11,5 +11,4 @@ public interface IShoppingCartView {
     void onDeleteOneShopping(RegisterBean registerBean);//删除单个
     void onRemoveManvProduct(RegisterBean registerBean);//删除多个
 
-    void onShoppingData(ShoppingCartBean shoppingCartBean);//删除多个
 }

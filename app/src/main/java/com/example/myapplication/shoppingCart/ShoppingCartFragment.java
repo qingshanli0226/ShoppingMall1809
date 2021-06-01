@@ -174,14 +174,14 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                     list) {
                 be.setCheck(nowIsChe);
             }
-                Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
-            if (nowIsChe){//如果是全部变成true则全部加入到删除集合  反则清除
+            Toast.makeText(getActivity(), "每圈进", Toast.LENGTH_SHORT).show();
+            if (nowIsChe) {//如果是全部变成true则全部加入到删除集合  反则清除
                 delList.addAll(list);
-            }else {
+            } else {
                 delList.clear();
             }
             getTotalPrice();//总价
-        } else  {
+        } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartUpdataAllError), Toast.LENGTH_SHORT).show();
         }
         adapter.notifyDataSetChanged();
@@ -256,11 +256,21 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     @Override
     public void onDeleteOneShopping(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            delList.clear();//清空编辑里面的集合
-            list.remove(itemPosition);
-            adapter.notifyDataSetChanged();
-            CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
-            EventBus.getDefault().post("1");//发送Evenbus
+            if (list.size()==1){//如果只剩下一个数据 点击全选的时候 删除所有数据
+                shoppingCartCheck.setChecked(false);
+                shoppingCartCompileCheck.setChecked(false);
+                delList.clear();//清空编辑里面的集合
+                list.clear();
+                adapter.notifyItemRemoved(0);
+                CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
+                EventBus.getDefault().post("1");//发送Evenbus
+            }else {
+                delList.clear();//清空编辑里面的集合
+                list.remove(itemPosition);
+                adapter.notifyItemRemoved(itemPosition);
+                CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
+                EventBus.getDefault().post("1");//发送Evenbus
+            }
         } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -270,28 +280,17 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
         if (registerBean.getCode().endsWith("200")) {
+            shoppingCartCheck.setChecked(false); //修改多选按钮
+            shoppingCartCompileCheck.setChecked(false);
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
             delList.clear();//将删除集合里面的数据清空
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
-            shoppingCartCheck.setChecked(false); //修改多选按钮
             EventBus.getDefault().post("1");//发送Evenbus
         } else {
             Toast.makeText(getActivity(), getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onShoppingData(ShoppingCartBean shoppingCartBean) {
-        if (shoppingCartBean.getCode().endsWith("200")) {
-            //数据
-            List<ShoppingCartBean.ResultBean> shoppingCartBeanList = CaCheMannager.getInstance().getShoppingCartBeanList();
-            list.clear();
-            list.addAll(shoppingCartBeanList);
-            adapter.notifyDataSetChanged();
-            EventBus.getDefault().post("1");//发送广播
         }
     }
 
@@ -308,23 +307,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         }
         shoppingCartPrice.setText(money + "");
     }
-
-
-    @Override
-    public void onLoginChange(boolean loginBean) {
-        super.onLoginChange(loginBean);
-        if (loginBean) {
-            if (!getData) {
-                loadingPage.showSuccessView();
-                mPresenter.getShoppingCart();//获取购物车数据
-                getData = true;
-
-            }
-        } else {
-            loadingPage.showErrorView();
-        }
-    }
-
 
     @Override
     public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {

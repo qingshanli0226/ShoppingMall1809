@@ -18,7 +18,6 @@ import com.example.myapplication.R;
 import com.example.myapplication.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
-import com.example.pay.PayActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -71,8 +70,6 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
-
-
     }
 
     @Override
@@ -280,13 +277,21 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
     @Override
     public void onDeleteOneShopping(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            delList.clear();//清空编辑里面的集合
-            list.remove(itemPosition);
-            adapter.notifyDataSetChanged();
-            CaCheMannager.getInstance().setShoppingCartBeanList(list);//更新缓存类
-            CaCheMannager.getInstance().removeShoppingData(itemPosition);
-            CaCheMannager.getInstance().showShoppingData();
-            EventBus.getDefault().post("1"); //发送广播
+            if (list.size()==1){//如果只剩下一个数据 点击全选的时候 删除所有数据
+                shoppingCartCheck.setChecked(false);
+                shoppingCartCompileCheck.setChecked(false);
+                delList.clear();//清空编辑里面的集合
+                list.clear();
+                adapter.notifyItemRemoved(0);
+                CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
+                EventBus.getDefault().post("1");//发送Evenbus
+            }else {
+                delList.clear();//清空编辑里面的集合
+                list.remove(itemPosition);
+                adapter.notifyItemRemoved(itemPosition);
+                CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
+                EventBus.getDefault().post("1");//发送Evenbus
+            }
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
@@ -296,22 +301,19 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
     @Override
     public void onRemoveManvProduct(RegisterBean registerBean) {
         if (registerBean.getCode().endsWith("200")) {
+            shoppingCartCheck.setChecked(false);//修改多选按钮
+            shoppingCartCompileCheck.setChecked(false);
             for (int i = 0; i < delList.size(); i++) {
                 list.remove(delList.get(i));
             }
             CaCheMannager.getInstance().removeShoppingData(delList);//将选中集合同步
             CaCheMannager.getInstance().setShoppingCartBeanList(list);
             adapter.notifyDataSetChanged();
-            shoppingCartCheck.setChecked(false);//修改多选按钮
             delList.clear();//将选中集合里面的数据清空
             EventBus.getDefault().post("1");//发送广播
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartRemoveError), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onShoppingData(ShoppingCartBean shoppingCartBean) {
     }
 
     public void getTotalPrice() {

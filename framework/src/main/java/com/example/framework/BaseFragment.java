@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -19,7 +20,7 @@ import java.util.List;
 import mvp.presenter.BasePresenter;
 import mvp.view.IFragment;
 
-public  abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange,CaCheMannager.IShoppingCartInterface {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, CacheUserManager.IloginChange,CaCheMannager.IShoppingCartInterface, CacheConnectManager.IConnect {
     protected P mPresenter;
     protected View rootView;
     protected LoadingPage loadingPage;
@@ -76,6 +77,29 @@ public  abstract class BaseFragment<P extends BasePresenter> extends Fragment im
     }
 
     @Override
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+    }
+
+    @Override
+    public void onShoppingCartRemove(int position) {
+    }
+
+    @Override
+    public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+    }
+
+    //网络连接
+    @Override
+    public void onConnect() {
+        loadingPage.showSuccessView();
+    }
+
+    //网络无连接
+    @Override
+    public void onDisConnect() {
+        loadingPage.showError("网络无连接");
+    }
+    @Override
     public void onDestroy() {
         super.onDestroy();
         destroy();
@@ -89,20 +113,4 @@ public  abstract class BaseFragment<P extends BasePresenter> extends Fragment im
         CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
-
-    @Override
-    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
-
-    }
-
-
-    @Override
-    public void onShoppingCartRemove(int position) {
-
-    }
-
-    @Override
-    public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
-
-    }
 }
