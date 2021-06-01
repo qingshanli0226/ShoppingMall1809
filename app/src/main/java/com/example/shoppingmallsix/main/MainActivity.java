@@ -1,7 +1,9 @@
 package com.example.shoppingmallsix.main;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 
@@ -65,7 +68,11 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         mainFram = findViewById(R.id.mainFram);
         mainCommon = findViewById(R.id.mainCommon);
         sign = (TextView) findViewById(R.id.mainSign);
-
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mTabEntities.add(new MainBean(getString(R.string.homepage), R.drawable.main_home_press, R.drawable.main_home));

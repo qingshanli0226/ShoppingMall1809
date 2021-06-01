@@ -20,6 +20,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/share"
                 android:src="@drawable/comm_share"></ImageView>
 
             <TextView

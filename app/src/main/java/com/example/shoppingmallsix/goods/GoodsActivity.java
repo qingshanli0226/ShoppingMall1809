@@ -44,8 +44,14 @@ import com.example.net.constants.Constants;
 
 import com.example.shoppingmallsix.R;
 
+import com.example.shoppingmallsix.main.MainActivity;
 import com.example.shoppingmallsix.shopcar.ShoppingCarActivity;
 import com.example.user.login.LoginActivity;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -224,6 +230,39 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         popupWindow.setFocusable(true);
 
         View inflate = LayoutInflater.from(this).inflate(R.layout.item_pop, null);
+        ImageView share = inflate.findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UMImage image = new UMImage(GoodsActivity.this, goodAdapterBean.getFigure());//网络图片
+
+                new ShareAction(GoodsActivity.this)
+                        .withExtra(image)
+                        .withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                Toast.makeText(GoodsActivity.this, "throwable:" + throwable, Toast.LENGTH_SHORT).show() ;
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        }).open();
+            }
+        });
         popupWindow.setContentView(inflate);
 
         LinearLayout viewById = inflate.findViewById(R.id.toMain);
