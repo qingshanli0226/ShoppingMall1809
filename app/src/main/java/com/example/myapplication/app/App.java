@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.example.UserModule;
 import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.AppModule;
 import com.example.myapplication.MsgMoudel;
 import com.example.myapplication.particulars.ParticularsModule;
@@ -22,6 +23,7 @@ public class App extends Application {
         AppModule.init();
         ParticularsModule.init();
         MsgMoudel.init();
+        CaCheMannager.getInstance().init();
 
         CaCheArote.getInstance().init(this);
     }

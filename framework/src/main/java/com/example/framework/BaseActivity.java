@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -16,7 +17,7 @@ import java.util.List;
 import mvp.presenter.BasePresenter;
 import mvp.view.IActivity;
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity, CacheUserManager.IloginChange  {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity, CacheUserManager.IloginChange, CacheConnectManager.IConnect,CaCheMannager.IShoppingCartInterface {
     protected P mPresenter;
     protected LoadingPage loadingPage;
 
@@ -56,7 +57,19 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public void showToast(String msg) {
-        Toast.makeText(this, "msg", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg+"", Toast.LENGTH_SHORT).show();
+    }
+
+    //网络连接
+    @Override
+    public void onConnect() {
+        loadingPage.showSuccessView();
+    }
+
+    //网络无连接
+    @Override
+    public void onDisConnect() {
+        loadingPage.showError("网络无连接");
     }
 
     @Override
@@ -72,4 +85,18 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         CacheUserManager.getInstance().unregisterLogin(this);
     }
 
+    @Override
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+
+    }
+
+    @Override
+    public void onShoppingCartRemove(int position) {
+
+    }
+
+    @Override
+    public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+
+    }
 }

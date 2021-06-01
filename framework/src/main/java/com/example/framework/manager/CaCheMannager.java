@@ -1,13 +1,24 @@
 package com.example.framework.manager;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.net.AppMoudel;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.ShoppingCartBean;
+import com.example.net.retrogit.RetrofitManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 //缓存类
-public class CaCheMannager {
+public class CaCheMannager implements CacheUserManager.IloginChange{
     private static CaCheMannager mannager;
     public static CaCheMannager getInstance() {
         if (mannager == null) {
@@ -23,7 +34,18 @@ public class CaCheMannager {
         this.homeBean = homeBean;
     }
 
+    public void init(){
+        CacheUserManager.getInstance().registerLogin(this);
+    }
 
+    //登陆状态
+    @Override
+    public void onLoginChange(boolean loginBean) {
+        if (loginBean){
+            Log.d("CaCheMannager", "登陆了");
+            getShoppingData();
+        }
+    }
 
     //购物车存接口
     public interface IShoppingCartInterface {
@@ -33,7 +55,6 @@ public class CaCheMannager {
     }
 
     private List<IShoppingCartInterface> list = new ArrayList<>();
-    private ShoppingCartBean shoppingCartBean;//购物车请求返回
     private List<ShoppingCartBean.ResultBean> shoppingCartBeanList=new ArrayList<>();//购物车数据
     private List<ShoppingCartBean.ResultBean> CheckList=new ArrayList<>();//选中集合
 
@@ -44,11 +65,11 @@ public class CaCheMannager {
         CheckList = checkList;
     }
 
-    public ShoppingCartBean getShoppingCartBean() {
-        return shoppingCartBean;
+    public List<ShoppingCartBean.ResultBean> getShoppingCartBeanList() {
+        return shoppingCartBeanList;
     }
-    public void setShoppingCartBean(ShoppingCartBean shoppingCartBean) {
-        this.shoppingCartBean = shoppingCartBean;
+    public void setShoppingCartBeanList(List<ShoppingCartBean.ResultBean> shoppingCartBeanList) {
+        this.shoppingCartBeanList = shoppingCartBeanList;
     }
 
     private float price=-1l;
@@ -58,15 +79,6 @@ public class CaCheMannager {
     public float getShoppingPrice(){
         return price;
     }
-
-
-    public List<ShoppingCartBean.ResultBean> getShoppingCartBeanList() {
-        return shoppingCartBeanList;
-    }
-    public void setShoppingCartBeanList(List<ShoppingCartBean.ResultBean> shoppingCartBeanList) {
-        this.shoppingCartBeanList = shoppingCartBeanList;
-    }
-
     //注册
     public void registerIShoppingCart(IShoppingCartInterface iShoppingCartInterface) {
         if (!list.contains(iShoppingCartInterface)) {
@@ -81,7 +93,7 @@ public class CaCheMannager {
 
     //显示
     public void showShoppingData() {
-        this.shoppingCartBean = getShoppingCartBean();
+        this.shoppingCartBeanList = getShoppingCartBeanList();
         for (IShoppingCartInterface iShoppingCartInterface : list) {
             iShoppingCartInterface.onShoppinCartgData(CaCheMannager.getInstance().getShoppingCartBeanList());
         }
@@ -89,17 +101,48 @@ public class CaCheMannager {
 
     //删除单个商品
     public void removeShoppingData(int position) {
-        this.shoppingCartBean = getShoppingCartBean();
+        this.shoppingCartBeanList = getShoppingCartBeanList();
         for (IShoppingCartInterface iShoppingCartInterface : list) {
             iShoppingCartInterface.onShoppingCartRemove(position);
         }
-    } //删除单个商品
+    }
+
+    //删除单个商品
     public void removeShoppingData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
-        this.shoppingCartBean = getShoppingCartBean();
+        this.shoppingCartBeanList = getShoppingCartBeanList();
         for (IShoppingCartInterface iShoppingCartInterface : list) {
             iShoppingCartInterface.onShoppingCartRemove(shoppingCartBean);
         }
     }
 
+    //获取购物车数据
+    public void getShoppingData(){
+        RetrofitManager.getApi().getShoppingCart()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ShoppingCartBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ShoppingCartBean shoppingCartBean) {
+                        //获取数据成功   给缓存类赋值
+                        CaCheMannager.getInstance().setShoppingCartBeanList(shoppingCartBean.getResult());
+                        showShoppingData();
+                        Log.d("CaCheMannager", "获取了数据");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 }
