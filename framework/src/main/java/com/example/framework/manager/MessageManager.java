@@ -28,7 +28,7 @@ public class MessageManager {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, FiannceContants.SQ_MANAGE);
         daoSession = new DaoMaster(devOpenHelper.getWritableDatabase()).newSession();
 
-        //初始化SP
+
         SharedPreferences sharedPreferences = context.getSharedPreferences(FiannceContants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(FiannceContants.SP_MANAGE_NAME, -1);
         if (count==-1){
@@ -38,11 +38,11 @@ public class MessageManager {
         }
     }
 
-    //获取所有
+
     public List<CacheMessage>  getMessage() {
         return  daoSession.loadAll(CacheMessage.class);
     }
-    //添加一个
+
     public void setMessage(CacheMessage message) {
         daoSession.insert(message);
     }
@@ -114,6 +114,4 @@ public class MessageManager {
         }
         return messageManager;
     }
-
-
 }
