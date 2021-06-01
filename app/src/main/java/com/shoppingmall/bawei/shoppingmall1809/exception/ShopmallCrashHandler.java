@@ -121,6 +121,8 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
             }
         }).start();
 
+
+
         //将错误异常上报到服务端
         HashMap<String,String> param = new HashMap<>();
         StringWriter stringWriter = new StringWriter();
@@ -163,6 +165,9 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
         for(Activity activity:CacheManager.getInstance().getActivityList()) {
             activity.finish();
         }
+
+        systemDefaultHandler.uncaughtException(t,e);
+
         System.exit(1);//该方法可以杀掉进程
 
 
