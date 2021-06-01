@@ -10,12 +10,13 @@ import com.example.framework.manager.NetworkConnectionsManager;
 import com.example.framework.manager.ShopmallCrashHandler;
 import com.example.net.module.NetModule;
 import com.example.user.service.AutoService;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        CrashReport.initCrashReport(getApplicationContext(), "58e695ca1b", true);
         ARouter.init(this);
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);

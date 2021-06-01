@@ -31,6 +31,7 @@ import com.example.user.login.LoginActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
                         break;
                     case 1:
+//                        CrashReport.testJavaCrash();
                         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
                         if (loginBean1 != null) {
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
