@@ -10,7 +10,7 @@ import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.LoginBean;
-import com.shoppingmall.pay.unpaid.PayDealActivity;
+
 
 
 public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {
@@ -64,8 +64,8 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PayDealActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), PayDealActivity.class);
+//                startActivity(intent);
             }
         });
 

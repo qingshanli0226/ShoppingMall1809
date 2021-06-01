@@ -1,13 +1,18 @@
 package com.shoppingmall.detail;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +66,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     private Button no;
     private Button yes;
     private int GoodsNum=1;
+    private RelativeLayout relat;
 
     @Override
     public int getLayoutId() {
@@ -79,6 +85,54 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         tvGoodInfoCollection = (TextView) findViewById(R.id.tv_good_info_collection);
         toShopMallCarFragment = (TextView) findViewById(R.id.toShopMallCarFragment);
         addShopMallCar = (Button) findViewById(R.id.addShopMallCar);
+        relat = findViewById(R.id.relat);
+    }
+    private void showBezier(){
+        int [] location=new int[2];//获取起点控件位置
+        detailImg.getLocationOnScreen(location);
+
+
+        int [] location1=new int[2];//获取终点控件位置
+        toShopMallCarFragment.getLocationOnScreen(location1);
+
+        ImageView imageView = new ImageView(this);//创建图片
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
+        imageView.setLayoutParams(layoutParams);//设置图片长宽
+        ShopMallGlide.with(this).load(Constants.IMG_HTTPS+productGoodBean.getFigure()).into(imageView);
+        relat.addView(imageView);//加入当前布局
+
+        int[] startLoacation = new int[2];//开始
+        startLoacation[0] =location[0]+300;
+        startLoacation[1] =location[1]+300;
+        int[] endLoacation = new int[2];//结束
+        endLoacation[0] =location1[0];
+        endLoacation[1] =location1[1];
+        int[] controlLoacation = new int[2];//过程
+        controlLoacation[0]=0;
+        controlLoacation[1]=0;
+        Path path = new Path();
+        path.moveTo(startLoacation[0],startLoacation[1]);//开始位置
+
+        path.quadTo(controlLoacation[0],controlLoacation[1],endLoacation[0],endLoacation[1]);//过程和结束位置
+        PathMeasure pathMeasure = new PathMeasure(path, false);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
+        valueAnimator.setDuration(2*1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float)animation.getAnimatedValue();//获取动画进度
+                float[] nextLocation = new float[2];
+                pathMeasure.getPosTan(value,nextLocation,null);
+                imageView.setTranslationX(nextLocation[0]);
+                imageView.setTranslationY(nextLocation[1]);
+                float percent=value/pathMeasure.getLength();
+                imageView.setAlpha(1-percent);//渐显
+            }
+        });
+        valueAnimator.start();
+
     }
 
     @Override
@@ -177,6 +231,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 result.setProductId(productGoodBean.getProduct_id());
                 result.setProductNum(""+productGoodBean.getNumber());
                 httpPresenter.checkProduct(result);
+                showBezier();
 
                 //数据库存储
                 List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
