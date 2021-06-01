@@ -66,6 +66,7 @@
                     android:text="消息"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/dp_20"
+                    android:id="@+id/messageTv"
                     ></TextView>
 
             </LinearLayout>

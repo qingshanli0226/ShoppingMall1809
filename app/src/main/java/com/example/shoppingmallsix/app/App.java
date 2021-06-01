@@ -5,7 +5,9 @@ import android.content.Intent;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.framework.manager.CacheConnectManager;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.CacheUserManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShopmallCrashHandler;
 import com.example.net.module.NetModule;
 import com.example.user.service.AutoService;
@@ -22,6 +24,7 @@ public class App extends Application {
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
+<<<<<<< HEAD
         ShopmallCrashHandler.getInstance().init(this);
 
 
@@ -55,5 +58,10 @@ public class App extends Application {
       //  PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
 
 
+=======
+//        ShopmallCrashHandler.getInstance().init(this);
+        CacheManager.getInstance().init(this);
+        MessageManager.getInstance().init(this);
+>>>>>>> 9fca91114679a87e3fbf53e6d508b16469bd6caa
     }
 }

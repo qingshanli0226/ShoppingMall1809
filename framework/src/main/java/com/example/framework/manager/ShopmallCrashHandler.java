@@ -26,10 +26,6 @@ import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * liqingshan 2021 5月26日
- */
-
 //定义一个电商应用闪退的处理类，通过该类可以捕获到应用程序未处理的异常信息，捕获到之后，给用户提示，出现了什么错误，提升用户体验
 //并且，将错误信息推送到服务端，便于开发人员获取这些信息，优化我们的应用.
 public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{

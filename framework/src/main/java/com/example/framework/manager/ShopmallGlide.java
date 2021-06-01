@@ -306,7 +306,6 @@ public class ShopmallGlide {
             bitmap = shopmallGlide.getFromMem(picUrl);
             if (bitmap!=null) {
                 imageView.setImageBitmap(bitmap);
-                Log.d("LQS", "内存中命中 效率最高。。。。");
                 return;
             }
             //从内存中没有获取到Bitmap，下面从本地获取bitmap
@@ -314,11 +313,9 @@ public class ShopmallGlide {
                 @Override
                 public void onBitmap(String url,Bitmap bitmap) {
                     if (bitmap!=null) {
-                        Log.d("LQS", "本地中命中 效率中间。。。。");
                         if (imageView.getTag().equals(picUrl)) {//只有和imageVIew绑定的图片才能显示出来
                             imageView.setImageBitmap(bitmap);
                         } else {
-                            Log.d("LQS", "因为没有绑定，不显示。。。。");
                         }
                         return;
                     }
@@ -327,11 +324,9 @@ public class ShopmallGlide {
                         @Override
                         public void onBitmap(String url, Bitmap bitmap) {
                             if (bitmap!=null) {
-                                Log.d("LQS", "服务端命中 效率最低。。。。");
                                 if (imageView.getTag().equals(picUrl)) {
                                     imageView.setImageBitmap(bitmap);
                                 } else {
-                                    Log.d("LQS", "因为没有绑定，不显示。。。。");
                                 }
                             }
                         }

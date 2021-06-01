@@ -25,13 +25,12 @@ public class CacheManager {
     private List<Activity> activityList = new LinkedList<>();
 
 
-    private CacheManager() {
+    public CacheManager() {
     }
 
     public void init(Context context) {
 
             for(int i = 0; i < 50; i++) {
-                Log.d("LQS", " i = " + i);
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {

@@ -123,8 +123,15 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GoodsActivity.this, ShoppingCarActivity.class);
-                startActivity(intent);
+                LoginBean loginBean2 = CacheUserManager.getInstance().getLoginBean();
+                if (loginBean2 != null){
+                    Intent intent = new Intent(GoodsActivity.this, ShoppingCarActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(GoodsActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
