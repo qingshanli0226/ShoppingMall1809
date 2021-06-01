@@ -24,7 +24,7 @@ public class App extends Application {
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
-<<<<<<< HEAD
+
         ShopmallCrashHandler.getInstance().init(this);
 
 
@@ -58,10 +58,10 @@ public class App extends Application {
       //  PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
 
 
-=======
+
 //        ShopmallCrashHandler.getInstance().init(this);
         CacheManager.getInstance().init(this);
         MessageManager.getInstance().init(this);
->>>>>>> 9fca91114679a87e3fbf53e6d508b16469bd6caa
+
     }
 }
