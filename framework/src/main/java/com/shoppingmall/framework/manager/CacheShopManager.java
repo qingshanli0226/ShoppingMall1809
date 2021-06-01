@@ -38,6 +38,7 @@ public class CacheShopManager {
         };
         ShopMallUserManager.getInstance().registerUserLoginChanged(iUserChange);
     }
+
     private ShopMallUserManager.IUserLoginChanged iUserChange;
 
     //购物车数据源

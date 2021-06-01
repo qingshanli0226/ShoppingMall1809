@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingMall"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pay.awitpayment.AwaitPaymentActivity"></activity>
+        <activity android:name=".pay.dropshipping.DropShippingActivity"></activity>
+        <activity android:name=".pay.awitpayment.AwaitPaymentActivity" />
         <activity android:name=".pay.payment.PaymentActivity" />
         <activity android:name=".pay.order.OrderActivity" />
         <activity android:name=".pay.unpaid.PayDealActivity" />

@@ -10,7 +10,8 @@ import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.LoginBean;
-import com.shoppingmall.pay.unpaid.PayDealActivity;
+import com.shoppingmall.pay.awitpayment.AwaitPaymentActivity;
+import com.shoppingmall.pay.dropshipping.DropShippingActivity;
 
 
 public class MineFragment extends BaseFragment implements ShopMallUserManager.IUserLoginChanged {
@@ -19,6 +20,7 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
     private ImageView isLogin;
     private ImageView message;
     private TextView pay;
+    private TextView toDropShipping;
 
     @Override
     public int getLayoutId() {
@@ -31,6 +33,7 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
         isLogin = (ImageView) mView.findViewById(R.id.isLogin);
         message = mView.findViewById(R.id.message);
         pay = mView.findViewById(R.id.pay);
+        toDropShipping = (TextView) mView.findViewById(R.id.toDropShipping);
     }
 
     @Override
@@ -64,10 +67,15 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PayDealActivity.class);
+                Intent intent = new Intent(getActivity(), AwaitPaymentActivity.class);
                 startActivity(intent);
             }
         });
+        toDropShipping.setOnClickListener(view -> {
+            Intent intent = new Intent(getContext(), DropShippingActivity.class);
+            startActivity(intent);
+        });
+
 
     }
 

@@ -75,6 +75,8 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
             if(CacheShopManager.getInstance().getCarts().size() > 0){
                 mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
                 mainCircle.setVisibility(View.VISIBLE);
+            }else {
+                mainCircle.setVisibility(View.GONE);
             }
         }
 
@@ -152,9 +154,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     @Subscribe
     public void ShopCarNum(String string){
         if (string.equals("ShopCarNum")){
-            Log.i("hqy", "updateCircle: ");
             if(CacheShopManager.getInstance().getCarts().size() > 0){
-                Log.i("hqy", "updateCircle: "+CacheShopManager.getInstance().getCarts().size());
                 mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
                 mainCircle.setVisibility(View.VISIBLE);
             }

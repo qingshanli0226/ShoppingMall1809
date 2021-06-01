@@ -8,7 +8,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
 import com.shoppingmall.framework.mvp.BaseActivity;
@@ -41,7 +43,11 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     @Override
     public void initData() {
         httpPresenter.getFindForPay();
+    }
 
+    @Override
+    public void onAwaitPayment(FindForPayBean findForPayBean) {
+        LogUtils.json(findForPayBean);
         AwaitPaymentAdapter awaitPaymentAdapter = new AwaitPaymentAdapter();
         paymentRv.setLayoutManager(new LinearLayoutManager(this));
         paymentRv.setAdapter(awaitPaymentAdapter);
@@ -54,7 +60,9 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
                 builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Toast.makeText(AwaitPaymentActivity.this, "付款成功", Toast.LENGTH_SHORT).show();
+//                        awaitPaymentAdapter.getData().remove(position);
+//                        awaitPaymentAdapter.notifyDataSetChanged();
                     }
                 });
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
@@ -72,11 +80,5 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
             }
         });
-
-    }
-
-    @Override
-    public void onAwaitPayment(FindForPayBean findForPayBean) {
-
     }
 }

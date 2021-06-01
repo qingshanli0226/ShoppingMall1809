@@ -105,6 +105,7 @@
     <string name="payment_inst_hk">Payer: HK</string>
     <string name="payment_inst_cn">Payer: CN</string>
     <string name="PayToolbar">支付详情</string>
-    <string name="aWaitPaymentToolbar">待付款</string>s
+    <string name="aWaitPaymentToolbar">待付款</string>
+    <string name="DropShippingToolbar">代发货</string>s
 
 </resources>

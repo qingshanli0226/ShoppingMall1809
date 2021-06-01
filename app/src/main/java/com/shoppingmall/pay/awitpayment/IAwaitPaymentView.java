@@ -4,6 +4,6 @@ import com.shoppingmall.framework.mvp.IBaseView;
 import com.shoppingmall.net.bean.FindForPayBean;
 
 public interface IAwaitPaymentView extends IBaseView {
-    public void onAwaitPayment(FindForPayBean findForPayBean);
+    void onAwaitPayment(FindForPayBean findForPayBean);
 
 }

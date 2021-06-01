@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:text="@string/dfh"
             android:layout_marginLeft="@dimen/dp_30"
+            android:id="@+id/toDropShipping"
             android:drawableTop="@drawable/new_order_status_fahuo"
             ></TextView>
         <TextView

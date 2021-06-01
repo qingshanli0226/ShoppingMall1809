@@ -311,7 +311,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         } else {
             Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
         }
-        EventBus.getDefault().post("ShopCarNum");
     }
 
     //删除一个
@@ -327,7 +326,8 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
-        EventBus.getDefault().post("ShopCarNum");
+//        EventBus.getDefault().post("ShopCarNum");
+
     }
 
     //删除多个
@@ -351,7 +351,8 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
-        EventBus.getDefault().post("ShopCarNum");
+//        EventBus.getDefault().post("ShopCarNum");
+
     }
 
     @Subscribe

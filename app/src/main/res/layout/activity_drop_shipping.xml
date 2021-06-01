@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pay.dropshipping.DropShippingActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+        <ImageView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/back11"
+            android:id="@+id/detailBack"></ImageView>
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:textSize="@dimen/dp_20"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/DropShippingToolbar"></TextView>
+        <ImageView
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu"
+            android:id="@+id/detailMenu"></ImageView>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dropRv"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
