@@ -57,9 +57,4 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
     // 支付宝 SDK AAR 包所需的配置
     implementation  fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
-
-
-
-
-
 }
