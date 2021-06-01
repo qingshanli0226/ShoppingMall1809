@@ -24,8 +24,7 @@ import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.manager.ShopCacheManger;
-import com.example.pay.alipay.sdk.pay.demo.PayResult;
-import com.example.pay.alipay.sdk.pay.demo.util.OrderInfoUtil2_0;
+import com.example.pay.PayResult;
 import com.example.view.ToolBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,7 +32,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener,MessageDataBase.IMessageListener{
 
@@ -60,14 +58,102 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
 
 
+
+    public void payV2(View v) {
+        final Runnable payRunnable = new Runnable() {
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(OrderDetailsActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo, true);
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @Override
+    public void onLeftClick() {
+        super.onLeftClick();
+        Toast.makeText(OrderDetailsActivity.this, "返回", Toast.LENGTH_SHORT).show();
+        Toast.makeText(OrderDetailsActivity.this, ""+list.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @SuppressWarnings("unused")
+        public void handleMessage(Message msg) {
+
+            daoMaster = MessageDataBase.getInstance().getDaoMaster();
+
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    String resultInfo = payResult.getResult();
+                    String resultStatus = payResult.getResultStatus();
+                    String payMsg="";
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        httpPresenter.confirmServerPayResult(outTradeNo,payResult,true);
+                        payMsg="支付成功";
+                        Toast.makeText(OrderDetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+
+                        FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
+                        resultBean.setOrderInfo(orderInfo);
+                        resultBean.setTradeNo(outTradeNo);
+                        resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setStatus(payMsg);
+                        List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
+                        //添加到支付成功缓存
+                        paySussList.add(resultBean);
+
+                        //添加到消息缓存
+                        ShopCacheManger.getInstance().setMessageList(paySussList);
+
+                        //添加到数据库
+                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        EventBus.getDefault().post("num");
+
+                    } else {
+                        payMsg="支付失败";
+                        httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
+                        Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+
+                        FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
+                        resultBean.setOrderInfo(orderInfo);
+                        resultBean.setTradeNo(outTradeNo);
+                        resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setStatus(payMsg);
+                        List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
+                        //添加到支付成功缓存
+                        payFailList.add(resultBean);
+
+                        //添加到消息缓存
+                        ShopCacheManger.getInstance().setMessageList(payFailList);
+
+                        //添加到数据库
+                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        EventBus.getDefault().post("num");
+
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        };
+    };
+
     @Override
     protected void initData() {
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
         String address = intent.getStringExtra("address");
         String phone = intent.getStringExtra("phone");
-         orderInfo = intent.getStringExtra("orderInfo");
-         outTradeNo = intent.getStringExtra("outTradeNo");
+        orderInfo = intent.getStringExtra("orderInfo");
+        outTradeNo = intent.getStringExtra("outTradeNo");
 
         username.setText("用户名:"+name);
         userPhone.setText("手机号:"+phone);
@@ -93,100 +179,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
             orderRv.setAdapter(orderDetailsAdapter);
         }
 
-        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
-            @Override
-            public void onLeftClick() {
-                list.clear();
-            }
-
-            @Override
-            public void onRightImgClick() {
-
-            }
-
-            @Override
-            public void onRightTvClick() {
-
-            }
-        });
-
     }
-
-    public void payV2(View v) {
-        final Runnable payRunnable = new Runnable() {
-            @Override
-            public void run() {
-                PayTask alipay = new PayTask(OrderDetailsActivity.this);
-                Map<String, String> result = alipay.payV2(orderInfo, true);
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
-    }
-
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
-        public void handleMessage(Message msg) {
-
-            daoMaster = MessageDataBase.getInstance().getDaoMaster();
-//            daoMaster = MessageManger.getInstance().getDaoMaster();
-
-            switch (msg.what) {
-                case SDK_PAY_FLAG: {
-                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-                    String resultInfo = payResult.getResult();
-                    String resultStatus = payResult.getResultStatus();
-                    String payMsg="";
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        httpPresenter.confirmServerPayResult(outTradeNo,payResult,true);
-                        payMsg="支付成功";
-                        Toast.makeText(OrderDetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-
-                        FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
-                        resultBean.setOrderInfo(orderInfo);
-                        resultBean.setTradeNo(outTradeNo);
-                        resultBean.setTime(System.currentTimeMillis()+"");
-                        resultBean.setStatus(payMsg);
-                        List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
-                        paySussList.add(resultBean);
-
-                        //添加到数据库
-                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-//                        MessageManager.getInstance().add(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                        EventBus.getDefault().post("num");
-
-                    } else {
-
-
-                        payMsg="支付失败";
-                        httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
-                        Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
-                        FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
-                        resultBean.setOrderInfo(orderInfo);
-                        resultBean.setTradeNo(outTradeNo);
-                        resultBean.setTime(System.currentTimeMillis()+"");
-                        resultBean.setStatus(payMsg);
-                        List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
-                        payFailList.add(resultBean);
-
-                        //添加到数据库
-                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                        EventBus.getDefault().post("num");
-
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
-        };
-    };
 
     @Override
     protected void initPresenter() {
@@ -205,8 +198,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         goBuy = (Button) findViewById(R.id.go_buy);
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-        moneyValue = "999";
-        OrderInfoUtil2_0.setmoney(moneyValue);
         MessageDataBase.getInstance().register(this);
 
     }

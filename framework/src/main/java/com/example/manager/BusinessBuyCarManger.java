@@ -59,8 +59,6 @@ public class BusinessBuyCarManger {
     }
 
     public interface iShopBeanChange{
-
         void OnShopBeanChange(ShortcartProductBean shortcartProductBean);
-
     }
 }

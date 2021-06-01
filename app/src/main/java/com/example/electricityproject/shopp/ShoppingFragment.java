@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
@@ -40,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView ,ShopCacheManger.iSelectShop{
+public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView {
 
     private ImageView all;
     private ToolBar toolbar;
@@ -79,6 +80,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     protected void initData() {
 
+
+        //检测购物车商品是否发生改变,如果改变了刷新购物车页面
         BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
             @Override
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
@@ -93,6 +96,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         });
 
+        //检测购用户登录状态是否发生改变,如果改变了重新请求数据
         BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
             @Override
             public void onLoginChange(LogBean isLog) {
@@ -305,6 +309,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("outTradeNo", outTradeNo);
             intent.putExtra("orderInfo", orderInfo);
             if (ShopCacheManger.getInstance().getList()!=null){
+                LogUtils.i("ShoppingFragment",309,""+isSelect);
                 startActivity(intent);
                 deleteShopmall();
             }
@@ -412,9 +417,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
-
         } else {
-
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
             BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
@@ -543,12 +546,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         } else {
             httpPresenter.postSelectAllProductData(isSelect);
         }
-    }
-
-
-    @Override
-    public void onSelectBean(List<ShortcartProductBean.ResultBean> selectShopList) {
-        Log.i("zx", "onSelectBean: "+selectShopList.toString());
     }
 
     @Override

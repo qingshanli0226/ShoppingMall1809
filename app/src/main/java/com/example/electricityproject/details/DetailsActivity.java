@@ -1,9 +1,11 @@
 package com.example.electricityproject.details;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
@@ -35,13 +39,18 @@ import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,BusinessBuyCarManger.iShopBeanChange{
+public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,BusinessBuyCarManger.iShopBeanChange,ToolBar.IToolbarListener{
     private ToolBar toolbar;
     private WebView detailsWeb;
     private TextView detailsName;
@@ -115,27 +124,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             detailsPrice.setText("￥"+price);
         }
 
-        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
-            @Override
-            public void onLeftClick() {
-                finish();
-            }
-
-            @Override
-            public void onRightImgClick() {
-                PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
-                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                popupWindow.setHeight(200);
-                View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.item_more,null);
-                popupWindow.setContentView(inflate);
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.showAsDropDown(toolbar,0,0);
-            }
-            @Override
-            public void onRightTvClick() {
-
-            }
-        });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +211,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
 
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
+
     }
 
     @Override
@@ -255,6 +249,56 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     }
 
     @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    public void onRightImgClick() {
+        super.onRightImgClick();
+        Toast.makeText(this, "132132", Toast.LENGTH_SHORT).show();
+        PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
+        popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(200);
+        View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.item_more,null);
+        ImageView viewById = inflate.findViewById(R.id.more_share);
+        viewById.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                UMImage image = new UMImage(DetailsActivity.this, Constants.BASE_URl_IMAGE+img);//网络图片
+                new ShareAction(DetailsActivity.this).withMedia(image).withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                Toast.makeText(DetailsActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        }).open();
+
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.setContentView(inflate);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(toolbar,0,0);
+    }
+
+    @Override
     public void hideLoading() {
 
     }
@@ -271,8 +315,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
             ShopCacheManger.getInstance().requestShortProductData();
-
-
 
         }
     }

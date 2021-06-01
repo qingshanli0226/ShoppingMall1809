@@ -18,7 +18,7 @@ import com.example.common.bean.FindForPayBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.manager.ShopCacheManger;
-import com.example.pay.alipay.sdk.pay.demo.PayResult;
+import com.example.pay.PayResult;
 
 import java.util.List;
 import java.util.Map;
