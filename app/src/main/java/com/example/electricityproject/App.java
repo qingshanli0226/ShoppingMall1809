@@ -19,8 +19,6 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
 
-import retrofit2.http.HEAD;
-
 
 
 public class App extends Application {
@@ -55,7 +53,7 @@ public class App extends Application {
         SPMessageNum.getInstance().init(this);
 
 
-        UMConfigure.init(this, "60b6d467f9248230bbc40432", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "57c70318fff23a7b1121c428b9c6a502");
+        UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
         PushAgent mPushAgent = PushAgent.getInstance(this);
         //注册推送服务，每次调用register方法都会回调该接口
@@ -72,8 +70,8 @@ public class App extends Application {
                 Log.e("zx","注册失败：-------->  " + "s:" + s + ",s1:" + s1);
             }
         });
-        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
-                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+//        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
+//                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 // 微信设置
         PlatformConfig.setWeixin("wxdc1e388c3822c80b","3baf1193c85774b3fd9d18447d76cab0");
 //        PlatformConfig.setWXFileProvider("com.tencent.sample2.fileprovider");

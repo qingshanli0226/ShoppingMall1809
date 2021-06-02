@@ -137,8 +137,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     //支付成功或支付失败 重新把查询数据库
     @Subscribe
     public void changeText(String num){
-        List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class);
-        unreadMessageNum.setText(messageTables.size()+"");
+        if (num.equals("num")) {
+            List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class);
+            unreadMessageNum.setText(messageTables.size() + "");
+        }
     }
 
 

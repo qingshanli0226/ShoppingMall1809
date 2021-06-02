@@ -1,6 +1,7 @@
 package com.example.manager;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.FindForPayBean;
@@ -47,22 +48,8 @@ public class ShopCacheManger {
         return cacheManger;
     }
 
-    //当前选中的购物车商品集合
-    public void setSelect(ShortcartProductBean.ResultBean select) {
-        if (select != null) {
-            if (!selectList.contains(select)) {
-                if (select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",54,"添加");
-                    selectList.add(select);
-                }
-            }else {
-                if (!select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",59,"删除");
-                    selectList.remove(select);
-                }
-            }
-        }
-    }
+
+
 
     public List<SelectOrderBean> getList() {
         return list;
@@ -72,7 +59,25 @@ public class ShopCacheManger {
         this.list = list;
     }
 
+    //当前选中的购物车商品集合
+    public void setSelect(ShortcartProductBean.ResultBean select) {
+        if (select != null) {
+            if (!selectList.contains(select)) {
+                if (select.isAll()){
+                    Log.i("zx", "setSelect: 添加");
+                    selectList.add(select);
+                }
+            }else {
+                if (!select.isAll()){
+                    Log.i("zx", "setSelect: 删除");
+                    selectList.remove(select);
+                }
+            }
+        }
+        Log.i("zx", "setSelect: "+selectList.toString());
+    }
 
+    //返回选中的集合
     public List<ShortcartProductBean.ResultBean> getSelectList() {
         return selectList;
     }

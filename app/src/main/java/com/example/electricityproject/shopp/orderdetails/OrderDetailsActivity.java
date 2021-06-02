@@ -113,8 +113,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                        EventBus.getDefault().post("num");
+
                         EventBus.getDefault().post("del");
+                        EventBus.getDefault().post("num");
+
+
 
                     } else {
                         payMsg="支付失败";
@@ -135,8 +138,10 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+
+                        EventBus.getDefault().postSticky("del");
+
                         EventBus.getDefault().post("num");
-                        EventBus.getDefault().post("del");
 
 
                     }
@@ -240,7 +245,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
         MessageDataBase.getInstance().unregister(this);
         list.clear();
     }

@@ -20,7 +20,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 
-
 public class MessageActivity extends BaseActivity {
 
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
