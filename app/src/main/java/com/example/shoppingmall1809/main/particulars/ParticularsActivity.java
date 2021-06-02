@@ -38,6 +38,12 @@ import com.example.net.model.ShoppingTrolleyBean;
 import com.example.shoppingcar.addOneProduct.AddOnrProductPresenter;
 import com.example.shoppingcar.addOneProduct.IAddOneProduct;
 import com.example.shoppingmall1809.R;
+import com.example.shoppingmall1809.main.MainActivity;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.List;
 
@@ -214,6 +220,43 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
 
         View inflate = LayoutInflater.from(this).inflate(R.layout.item_pop, null);
         popupWindow.setContentView(inflate);
+
+        LinearLayout viewById1 = inflate.findViewById(R.id.share);
+
+        viewById1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UMImage image = new UMImage(ParticularsActivity.this, url);//网络图片
+
+                new ShareAction(ParticularsActivity.this)
+                        .withText("hello")
+                        .withMedia(image)
+                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        }).open();
+
+                popupWindow.dismiss();
+            }
+        });
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

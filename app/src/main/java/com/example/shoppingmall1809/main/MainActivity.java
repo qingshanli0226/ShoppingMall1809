@@ -1,6 +1,8 @@
 package com.example.shoppingmall1809.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements ShoppingCarManage
         List<ShoppingTrolleyBean.ResultBean> result = ShoppingCarManager.getInstance().getResult();
         if (result != null) {
             showLabel(result);
+        }
+
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
 
         HomeFragment homeFragment = new HomeFragment();

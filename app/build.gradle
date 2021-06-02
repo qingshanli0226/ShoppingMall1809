@@ -6,6 +6,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.shoppingmall1809"
         minSdkVersion 24
@@ -36,6 +42,11 @@ android {
 }
 
 dependencies {
+    implementation  'com.tencent.tauth:qqopensdk:3.51.2'//QQ官方SDK依赖库
+
+    implementation  'com.umeng.umsdk:common:9.3.8'//必选
+    implementation  'com.umeng.umsdk:asms:1.2.2'//必选
+
 
 //PushSDK必须依赖基础组件库，所以需要加入对应依赖
     implementation 'com.umeng.umsdk:common:2.1.0'
@@ -66,7 +77,11 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 
     implementation ('com.alibaba:arouter-api:1.4.1')
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'//ARouter依赖
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation files('libs\\umeng-share-core-7.1.4.jar')
+    implementation files('libs\\umeng-sharetool-7.1.4.jar')
+    implementation files('libs\\umeng-share-QQ-full-7.1.4.jar')
+    implementation files('libs\\umeng-shareboard-widget-7.1.4.jar')//ARouter依赖
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
 
     //工具类
