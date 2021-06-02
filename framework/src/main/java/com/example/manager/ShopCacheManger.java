@@ -38,6 +38,11 @@ public class ShopCacheManger {
     //消息缓存
     private List<FindForPayBean.ResultBean> messageList = new ArrayList<>();
 
+    private BusinessUserManager.IUserLoginChanged iUserLoginChanged;
+
+    private List<ICartChange> cartChangeList = new ArrayList<>();
+
+
     public static ShopCacheManger getInstance() {
         synchronized (ShopCacheManger.class){
             if (cacheManger==null){
@@ -52,12 +57,12 @@ public class ShopCacheManger {
         if (select != null) {
             if (!selectList.contains(select)) {
                 if (select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",54,"添加");
+                    com.example.common.LogUtils.i("添加");
                     selectList.add(select);
                 }
             }else {
                 if (!select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",59,"删除");
+                    com.example.common.LogUtils.i("删除");
                     selectList.remove(select);
                 }
             }
@@ -93,32 +98,39 @@ public class ShopCacheManger {
 
     public void init(Context application){
         context = application;
-    }
-
-    public void registerUserManger(){
-        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
+        iUserLoginChanged = new BusinessUserManager.IUserLoginChanged() {
             @Override
             public void onLoginChange(LogBean isLog) {
-                if (isLog!=null){
-                    requestShortProductData();
-                }
+                requestShortProductData();
             }
-        });
+        };
     }
 
-    public void registerBuyCarManger(){
-        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
-            @Override
-            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-                if (shortcartProductBean!=null){
-                    com.example.common.LogUtils.i("ShopCacheManger",113,"获得数据");
-                }else{
-                    com.example.common.LogUtils.i("ShopCacheManger",115,"没有数据");
-                }
-            }
-        });
-    }
+//    public void registerUserManger(){
+//        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
+//            @Override
+//            public void onLoginChange(LogBean isLog) {
+//                if (isLog!=null){
+//                    requestShortProductData();
+//                }
+//            }
+//        });
+//    }
 
+//    public void registerBuyCarManger(){
+//        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
+//            @Override
+//            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
+//                if (shortcartProductBean!=null){
+//                    com.example.common.LogUtils.i("获得数据");
+//                }else{
+//                    com.example.common.LogUtils.i("没有数据");
+//                }
+//            }
+//        });
+//    }
+
+    //请求购物车所有数据
     public synchronized void requestShortProductData(){
         RetrofitCreate.getFiannceApiService()
                 .getShortProductData()
@@ -133,8 +145,8 @@ public class ShopCacheManger {
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
                         LogUtils.json(shortcartProductBean);
                         List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-                        shortBeanList.addAll(result);
-                        BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+                        setShortBeanList(result);
+                        notifyCar(shortBeanList);
                     }
 
                     @Override
@@ -147,6 +159,38 @@ public class ShopCacheManger {
 
                     }
                 });
+    }
+
+    //注册缓存监听
+    public synchronized void registerCart(ICartChange iCartChange) {
+        cartChangeList.add(iCartChange);
+    }
+    //取消注册
+    public synchronized void unRegisterCart(ICartChange iCartChange) {
+        cartChangeList.remove(iCartChange);
+    }
+
+    //添加购物车数据
+    public synchronized void addData(ShortcartProductBean.ResultBean resultBean){
+        int count = 0;
+        int position = -1;
+        for (int i = 0; i < shortBeanList.size(); i++) {
+            ShortcartProductBean.ResultBean cart = shortBeanList.get(i);
+            if (cart.getProductId().equals(resultBean.getProductId())) {
+                int cartNum = Integer.parseInt(cart.getProductNum());
+                int resultNum = Integer.parseInt(resultBean.getProductNum());
+                cart.setProductNum(cartNum+resultNum+"");
+                position = i;
+            } else{
+                count++;
+            }
+        }
+        if(count == shortBeanList.size()){
+            shortBeanList.add(resultBean);
+            position = shortBeanList.size();
+        }
+        //通知商品添加了
+        notifyAdd(position);
     }
 
     public List<FindForPayBean.ResultBean> getMessageList() {
@@ -181,6 +225,37 @@ public class ShopCacheManger {
         this.productNum = productNum;
     }
 
+    public List<ShortcartProductBean.ResultBean> getShortBeanList() {
+        return shortBeanList;
+    }
+
+    public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBeanList) {
+        this.shortBeanList = shortBeanList;
+    }
+
+    //通知商品发生改变
+    public synchronized void notifyCar(List<ShortcartProductBean.ResultBean> shortBeanList){
+        for (ICartChange iCartChange : cartChangeList) {
+            iCartChange.onShowCart(shortBeanList);
+        }
+    }
+    //通知商品增加了
+    public synchronized void notifyAdd(int position){
+        for (ICartChange cartChange : cartChangeList) {
+            cartChange.onAddCart(position);
+        }
+    }
+
+    public interface ICartChange {
+        void onShowCart(List<ShortcartProductBean.ResultBean> carts);
+        void onAddCart(int position);
+        //删除一个
+        void onRemoveProduct(int position);
+    }
+
+    public void destory(){
+        BusinessUserManager.getInstance().UnRegister(iUserLoginChanged);
+    }
 
 
 }

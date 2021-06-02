@@ -497,11 +497,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                         for (ShortcartProductBean.ResultBean bean : result) {
                             ShopCacheManger.getInstance().setSelect(bean);
                         }
-
                     }
-
                 }
-
 
     @Override
     public void postSelectOneProductData(SelectAllProductBean selectAllProductBean) {

@@ -19,8 +19,6 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
 
-import retrofit2.http.HEAD;
-
 
 
 public class App extends Application {
@@ -40,8 +38,8 @@ public class App extends Application {
 
         //获得缓存类的下标
         ShopCacheManger.getInstance().init(this);
-        ShopCacheManger.getInstance().registerUserManger();
-        ShopCacheManger.getInstance().registerBuyCarManger();
+//        ShopCacheManger.getInstance().registerUserManger();
+//        ShopCacheManger.getInstance().registerBuyCarManger();
 
         //自动登录
         startService(new Intent(this, AutoService.class));

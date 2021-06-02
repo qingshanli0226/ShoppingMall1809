@@ -111,7 +111,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         String time = SpUtils.getTime(FrameModel.context);
         long newTime = Long.parseLong(time);
         if (System.currentTimeMillis() - newTime > 5 * 1000){
-            LogUtils.i("BaseActivity",109,"当前时间超过5秒，弹出广告业");
+            LogUtils.i("当前时间超过5秒，弹出广告业");
             String times = System.currentTimeMillis() + "";
             SpUtils.putTime(FrameModel.context,times);
 
