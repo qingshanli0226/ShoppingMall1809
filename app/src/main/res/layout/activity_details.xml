@@ -18,10 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:gravity="center"
+            app:rightImage="@drawable/back"
             app:leftImg="@drawable/back"
             app:leftIsShow="true"
-            app:rightImage="@mipmap/icon_more"
             app:rightIsShow="true"
+            app:rightText="***"
             app:titleText="@string/shop_car"
             app:titleTextColor="#000000"></com.example.view.ToolBar>
 

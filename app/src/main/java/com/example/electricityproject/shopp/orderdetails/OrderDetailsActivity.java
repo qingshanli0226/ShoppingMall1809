@@ -24,8 +24,7 @@ import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
 import com.example.manager.ShopCacheManger;
-import com.example.pay.alipay.sdk.pay.demo.PayResult;
-import com.example.pay.alipay.sdk.pay.demo.util.OrderInfoUtil2_0;
+import com.example.pay.PayResult;
 import com.example.view.ToolBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,57 +57,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
 
 
-    @Override
-    protected void initData() {
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("username");
-        String address = intent.getStringExtra("address");
-        String phone = intent.getStringExtra("phone");
-         orderInfo = intent.getStringExtra("orderInfo");
-         outTradeNo = intent.getStringExtra("outTradeNo");
-
-        username.setText("用户名:"+name);
-        userPhone.setText("手机号:"+phone);
-        userAddress.setText("地址:"+address);
-
-        list = ShopCacheManger.getInstance().getList();
-
-        float sumPrice=0;
-        for (SelectOrderBean selectOrderBean : list) {
-            float productPrice=Float.parseFloat(selectOrderBean.getMoney()+"");
-            int productNum=Integer.parseInt(selectOrderBean.getNum());
-            sumPrice=sumPrice+productPrice*productNum;
-        }
-
-        if (sumPrice!=0){
-            allMoney.setText("￥"+sumPrice);
-            productPrice.setText("￥"+sumPrice);
-        }
-
-        if (list!=null){
-            orderDetailsAdapter = new OrderDetailsAdapter();
-            orderDetailsAdapter.updateData(list);
-            orderRv.setAdapter(orderDetailsAdapter);
-        }
-
-        toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
-            @Override
-            public void onLeftClick() {
-                list.clear();
-            }
-
-            @Override
-            public void onRightImgClick() {
-
-            }
-
-            @Override
-            public void onRightTvClick() {
-
-            }
-        });
-
-    }
 
     public void payV2(View v) {
         final Runnable payRunnable = new Runnable() {
@@ -124,6 +72,13 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         };
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+    @Override
+    public void onLeftClick() {
+        super.onLeftClick();
+        Toast.makeText(OrderDetailsActivity.this, "返回", Toast.LENGTH_SHORT).show();
+        Toast.makeText(OrderDetailsActivity.this, ""+list.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint("HandlerLeak")
@@ -150,7 +105,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setTime(System.currentTimeMillis()+"");
                         resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
+                        //添加到支付成功缓存
                         paySussList.add(resultBean);
+
+                        //添加到消息缓存
+                        ShopCacheManger.getInstance().setMessageList(paySussList);
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
@@ -158,8 +117,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         EventBus.getDefault().post("del");
 
                     } else {
-
-
                         payMsg="支付失败";
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
                         Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
@@ -170,7 +127,11 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setTime(System.currentTimeMillis()+"");
                         resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
+                        //添加到支付成功缓存
                         payFailList.add(resultBean);
+
+                        //添加到消息缓存
+                        ShopCacheManger.getInstance().setMessageList(payFailList);
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
@@ -186,6 +147,41 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
             }
         };
     };
+
+    @Override
+    protected void initData() {
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("username");
+        String address = intent.getStringExtra("address");
+        String phone = intent.getStringExtra("phone");
+        orderInfo = intent.getStringExtra("orderInfo");
+        outTradeNo = intent.getStringExtra("outTradeNo");
+
+        username.setText("用户名:"+name);
+        userPhone.setText("手机号:"+phone);
+        userAddress.setText("地址:"+address);
+
+        list = ShopCacheManger.getInstance().getList();
+
+        float sumPrice=0;
+        for (SelectOrderBean selectOrderBean : list) {
+            float productPrice=Float.parseFloat(selectOrderBean.getMoney()+"");
+            int productNum=Integer.parseInt(selectOrderBean.getNum());
+            sumPrice=sumPrice+productPrice*productNum;
+        }
+
+        if (sumPrice!=0){
+            allMoney.setText("￥"+sumPrice);
+            productPrice.setText("￥"+sumPrice);
+        }
+
+        if (list!=null){
+            orderDetailsAdapter = new OrderDetailsAdapter();
+            orderDetailsAdapter.updateData(list);
+            orderRv.setAdapter(orderDetailsAdapter);
+        }
+
+    }
 
     @Override
     protected void initPresenter() {
@@ -204,8 +200,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         goBuy = (Button) findViewById(R.id.go_buy);
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-        moneyValue = "999";
-        OrderInfoUtil2_0.setmoney(moneyValue);
         MessageDataBase.getInstance().register(this);
 
     }

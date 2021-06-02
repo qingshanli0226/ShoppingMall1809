@@ -1,12 +1,10 @@
 package com.example.manager;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.LogBean;
-import com.example.common.bean.RegBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.net.RetrofitCreate;
@@ -24,49 +22,42 @@ public class ShopCacheManger {
 
     private static ShopCacheManger cacheManger;
     private Context context;
-
+    //商品数量
     private String productNum;
 
-    private List<iSelectShop> onSelectShopList=new ArrayList<>();
-
+    //购物车所有数据缓存
     private List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
-
-    private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>(); //选中的集合
-
+    //选中商品缓存
+    private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>();
+    //提交订单缓存
     private List<SelectOrderBean> list = new ArrayList<>();
-
+    //支付成功缓存
     private List<FindForPayBean.ResultBean> paySussList = new ArrayList<>();
-
+    //支付失败缓存
     private List<FindForPayBean.ResultBean> payFailList = new ArrayList<>();
-
+    //消息缓存
     private List<FindForPayBean.ResultBean> messageList = new ArrayList<>();
 
-
-    public synchronized static ShopCacheManger getInstance() {
-        if (cacheManger==null){
-            cacheManger = new ShopCacheManger();
+    public static ShopCacheManger getInstance() {
+        synchronized (ShopCacheManger.class){
+            if (cacheManger==null){
+                cacheManger = new ShopCacheManger();
+            }
         }
         return cacheManger;
     }
 
-
-    public void RegisterSelectShop(iSelectShop iSelectShop){
-        onSelectShopList.add(iSelectShop);
-    }
-
-    public void unRegisterSelectShop(iSelectShop iSelectShop){
-        onSelectShopList.remove(iSelectShop);
-    }
-
+    //当前选中的购物车商品集合
     public void setSelect(ShortcartProductBean.ResultBean select) {
-
         if (select != null) {
-            if (!selectList.contains(select)) {     //判断是否包含
-                if (select.isAll()){                //选中
+            if (!selectList.contains(select)) {
+                if (select.isAll()){
+                    com.example.common.LogUtils.i("ShopCacheManger",54,"添加");
                     selectList.add(select);
                 }
             }else {
-                if (!select.isAll()){               //没选中
+                if (!select.isAll()){
+                    com.example.common.LogUtils.i("ShopCacheManger",59,"删除");
                     selectList.remove(select);
                 }
             }
@@ -82,29 +73,10 @@ public class ShopCacheManger {
     }
 
 
-    public List<FindForPayBean.ResultBean> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<FindForPayBean.ResultBean> messageList) {
-        this.messageList = messageList;
-    }
-
     public List<ShortcartProductBean.ResultBean> getSelectList() {
         return selectList;
     }
 
-    public List<ShortcartProductBean.ResultBean> getShortBeanList() {
-        return shortBeanList;
-    }
-
-
-    public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBean) {
-        if (shortBean!=null) {
-            shortBean.clear();
-            shortBeanList.addAll(shortBean);
-        }
-    }
 
     public String getMoneyValue() {
         float sumPrice=0;
@@ -129,7 +101,6 @@ public class ShopCacheManger {
             public void onLoginChange(LogBean isLog) {
                 if (isLog!=null){
                     requestShortProductData();
-                }else {
                 }
             }
         });
@@ -140,10 +111,9 @@ public class ShopCacheManger {
             @Override
             public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
                 if (shortcartProductBean!=null){
-                    com.example.common.LogUtils.i("ShopCacheManger",162,"获得数据");
+                    com.example.common.LogUtils.i("ShopCacheManger",113,"获得数据");
                 }else{
-                    com.example.common.LogUtils.i("ShopCacheManger",164,"没有数据");
-
+                    com.example.common.LogUtils.i("ShopCacheManger",115,"没有数据");
                 }
             }
         });
@@ -162,7 +132,6 @@ public class ShopCacheManger {
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
                         LogUtils.json(shortcartProductBean);
-                        Log.i("xxxxx", "onNext: "+shortcartProductBean.getResult().toString());
                         List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                         shortBeanList.addAll(result);
                         BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
@@ -180,40 +149,12 @@ public class ShopCacheManger {
                 });
     }
 
-    public ShortcartProductBean getShortData(){
-        ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-        return shortcartProductBean;
+    public List<FindForPayBean.ResultBean> getMessageList() {
+        return messageList;
     }
 
-    //检查库存
-    public void getCheckShopData(String productId,String productNum){
-
-        RetrofitCreate.getFiannceApiService()
-                .checkOneProductInventory(productId,productNum)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RegBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull RegBean regBean) {
-                        setProductNum(regBean.getResult());
-                        Log.i("kucunkucun", "onNext: "+regBean.getResult());
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+    public void setMessageList(List<FindForPayBean.ResultBean> messageList) {
+        this.messageList = messageList;
     }
 
     public List<FindForPayBean.ResultBean> getPayFailList() {
@@ -239,9 +180,7 @@ public class ShopCacheManger {
     public void setProductNum(String productNum) {
         this.productNum = productNum;
     }
-    public interface iSelectShop {
-        void onSelectBean(List<ShortcartProductBean.ResultBean> selectShopList);
-    }
+
 
 
 }

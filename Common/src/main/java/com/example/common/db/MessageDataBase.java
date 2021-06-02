@@ -58,7 +58,7 @@ public class MessageDataBase {
         }
     }
     //取消注册
-    public  void unregister(IMessageListener iMessageListener){
+    public void unregister(IMessageListener iMessageListener){
         synchronized (MessageDataBase.class) {
             list.remove(iMessageListener);
         }

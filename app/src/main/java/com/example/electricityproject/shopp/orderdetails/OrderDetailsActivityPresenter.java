@@ -1,10 +1,9 @@
 package com.example.electricityproject.shopp.orderdetails;
 
-import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
-import com.example.pay.alipay.sdk.pay.demo.PayResult;
+import com.example.pay.PayResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;

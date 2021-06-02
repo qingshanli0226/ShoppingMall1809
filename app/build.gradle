@@ -40,6 +40,19 @@ dependencies {
     implementation project(path: ':pay')
     implementation project(path: ':User')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation files('libs\\umeng-share-core-6.9.6.jar')
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs\\umeng-sharetool-6.9.6.jar')
+    implementation files('libs\\umeng-share-core-6.9.6.jar')
+    implementation files('libs\\umeng-common-2.1.0.jar')
+    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs\\umeng-sharetool-6.9.6.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -54,7 +67,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
 
-
+//    implementation  'com.umeng.umsdk:common:9.3.8'//必选
+//    implementation  'com.umeng.umsdk:asms:1.2.2'//必选
+//    implementation  'com.tencent.tauth:qqopensdk:3.51.2'//QQ官方SDK依赖库
 
 
 }

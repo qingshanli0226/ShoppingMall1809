@@ -41,7 +41,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         };
         setContentView(loadingPage);
         initView();
-        setStatusBar();
+//        setStatusBar();
         toolBar = findViewById(R.id.toolbar);
         initPresenter();
         initData();
