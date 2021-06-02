@@ -47,6 +47,7 @@ import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.main.MainActivity;
 import com.example.shoppingmallsix.shopcar.ShoppingCarActivity;
 import com.example.user.login.LoginActivity;
+import com.umeng.message.PushAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -119,6 +120,8 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         rootView = findViewById(R.id.rootView);
         textView = findViewById(R.id.centerTv);
         imageView = findViewById(R.id.shopCar);
+
+        PushAgent.getInstance(this).onAppStart();
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,10 +245,12 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             @Override
             public void onClick(View view) {
 
-                UMImage image = new UMImage(GoodsActivity.this, goodAdapterBean.getFigure());//网络图片
+
+
+                UMImage image = new UMImage(GoodsActivity.this,Constants.BASE_URl_IMAGE +figure );//网络图片
 
                 new ShareAction(GoodsActivity.this)
-                        .withExtra(image)
+                        .withMedia(image)
                         .withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
                         .setCallback(new UMShareListener() {
                             @Override

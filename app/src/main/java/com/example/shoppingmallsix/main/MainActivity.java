@@ -34,6 +34,7 @@ import com.example.user.login.LoginActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,9 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
             ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
+
+        PushAgent.getInstance(this).onAppStart();
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mTabEntities.add(new MainBean(getString(R.string.homepage), R.drawable.main_home_press, R.drawable.main_home));

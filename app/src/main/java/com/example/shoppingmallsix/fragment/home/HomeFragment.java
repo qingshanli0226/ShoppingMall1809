@@ -21,6 +21,7 @@ import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.adapter.HomeAdapter;
 import com.example.shoppingmallsix.message.MessageActivity;
+import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -67,7 +68,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rv = (RecyclerView) mBaseView.findViewById(R.id.rv);
         homeMessage = mBaseView.findViewById(R.id.homeMessage);
         messageTv = mBaseView.findViewById(R.id.messageTv);
-
+        PushAgent.getInstance(getContext()).onAppStart();
         homeAdapter = new HomeAdapter(list, getActivity());
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(homeAdapter);

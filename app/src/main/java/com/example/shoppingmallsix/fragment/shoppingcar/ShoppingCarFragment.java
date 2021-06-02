@@ -38,6 +38,7 @@ import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.home.HomeFragment;
 import com.example.shoppingmallsix.main.MainActivity;
 import com.example.user.login.LoginActivity;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +170,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         shopCheck = mBaseView.findViewById(R.id.shopCheck);
         shoppingGuideLinear = (LinearLayout) mBaseView.findViewById(R.id.shoppingGuideLinear);
         shoppingGuideText = (TextView) mBaseView.findViewById(R.id.shoppingGuideText);
-
+        PushAgent.getInstance(getContext()).onAppStart();
         shoppingCarAdapter = new ShoppingCarAdapter(resultBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(shoppingCarAdapter);

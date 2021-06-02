@@ -15,6 +15,7 @@ import com.example.commened.SpUtil;
 import com.example.framework.BaseActivity;
 import com.example.shoppingmallsix.R;
 import com.example.user.service.AutoService;
+import com.umeng.message.PushAgent;
 
 
 public class WelcomeActivity extends BaseActivity {
@@ -42,6 +43,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initView() {
         coundDownTv = findViewById(R.id.countDownTv);
+        PushAgent.getInstance(this).onAppStart();
         setTheme(R.style.AppTheme);
         handler.sendEmptyMessageDelayed(DELAY_INDEX, DELAY);
         coundDownTv.setText(countDown + getString(R.string.miao));

@@ -13,6 +13,7 @@ import com.example.framework.BaseRvAdapter;
 import com.example.framework.greendao.CacheMessage;
 import com.example.framework.manager.MessageManager;
 import com.example.shoppingmallsix.R;
+import com.umeng.message.PushAgent;
 
 import java.util.List;
 
@@ -68,6 +69,7 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void initView() {
         messageRv = (RecyclerView) findViewById(R.id.rv_message);
+        PushAgent.getInstance(this).onAppStart();
     }
 
     @Override

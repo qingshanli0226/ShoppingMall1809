@@ -14,6 +14,7 @@ import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.message.MessageActivity;
 import com.example.pay.obligation.ObligationActivity;
 import com.example.shoppingmallsix.sendgoods.SendGoodsActivity;
+import com.umeng.message.PushAgent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +48,7 @@ public class MineFragment extends BaseFragment {
         obligation = (LinearLayout) mBaseView.findViewById(R.id.obligation);
         sendgoods = (LinearLayout) mBaseView.findViewById(R.id.sendgoods);
         messageImg = mBaseView.findViewById(R.id.messageImg);
-
+        PushAgent.getInstance(getContext()).onAppStart();
         messageImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -12,6 +12,7 @@ import com.example.framework.view.ToolBar;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.fragment.classify.frgment.classitfy.ClassFragment;
 import com.example.shoppingmallsix.fragment.classify.frgment.lab.LabelFragment;
+import com.umeng.message.PushAgent;
 
 import static com.example.shoppingmallsix.R.drawable.select_left;
 import static com.example.shoppingmallsix.R.drawable.select_left_show;
@@ -80,7 +81,7 @@ public class ClassifyFragment extends BaseFragment {
         radioGroup = mBaseView.findViewById(R.id.radioGroup);
         toolbar = (ToolBar) mBaseView.findViewById(R.id.toolbar);
         inits();
-
+        PushAgent.getInstance(getContext()).onAppStart();
     }
 
 

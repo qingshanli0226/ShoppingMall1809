@@ -31,6 +31,7 @@ import com.example.shoppingmallsix.fragment.shoppingcar.IShopping;
 import com.example.shoppingmallsix.fragment.shoppingcar.ShoppingCarAdapter;
 import com.example.shoppingmallsix.fragment.shoppingcar.ShoppingPresenter;
 import com.example.user.login.LoginActivity;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +133,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         shoppingCarAdapter = new ShoppingCarAdapter(resultBeans);
         shopRv.setLayoutManager(new LinearLayoutManager(this));
         shopRv.setAdapter(shoppingCarAdapter);
-
+        PushAgent.getInstance(this).onAppStart();
         shopcarText.setText(bianji);
         shopcarText.setTag(false);
         shopcarText.setOnClickListener(new View.OnClickListener() {

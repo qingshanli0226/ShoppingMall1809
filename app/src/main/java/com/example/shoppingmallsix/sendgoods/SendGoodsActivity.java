@@ -10,6 +10,7 @@ import com.example.framework.view.ToolBar;
 import com.example.net.bean.find.FindForPayBean;
 import com.example.net.bean.find.FindForSendbean;
 import com.example.shoppingmallsix.R;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SendGoodsActivity extends BaseActivity<SendgooodsrPresneter> implem
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         rv = (RecyclerView) findViewById(R.id.rv);
-
+        PushAgent.getInstance(this).onAppStart();
         sendgoodsAdapter = new SendgoodsAdapter(list);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv.setAdapter(sendgoodsAdapter);
