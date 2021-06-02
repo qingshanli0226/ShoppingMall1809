@@ -1,7 +1,8 @@
-package com.example.net.retrogit;
+package com.example.net.retrofit;
 
 import com.example.net.Constants;
 import com.example.net.bean.CheckInventoryBean;
+import com.example.net.bean.ConfirmServerPayResultBean;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.HomeBean;
@@ -109,4 +110,7 @@ public interface Api {
     @POST("getOrderInfo")
     Observable<OrderinfoBean> getOrderInfo(@Body RequestBody body);
 
+    //判断是否支付成功
+    @POST("confirmServerPayResult")
+    Observable<ConfirmServerPayResultBean> getConfirmserver(@Body RequestBody body);
 }

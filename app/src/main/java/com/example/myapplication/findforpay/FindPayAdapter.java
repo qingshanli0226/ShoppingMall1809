@@ -9,12 +9,19 @@ import com.example.myapplication.R;
 import com.example.net.bean.FindForPayBean;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FindPayAdapter extends BaseRecyclerViewAdapter<FindForPayBean.ResultBean> {
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_findpay;
+    }
+
+    public FindPayAdapter(List<FindForPayBean.ResultBean> list) {
+        dataList=list;
+
     }
 
     @Override

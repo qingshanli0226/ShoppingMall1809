@@ -1,3 +1,5 @@
+include ':umeng'
+include ':umeng'
 include ':pay'
 include ':common'
 //include ':particulars'

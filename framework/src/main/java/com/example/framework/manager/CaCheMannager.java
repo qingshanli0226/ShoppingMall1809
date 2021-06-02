@@ -51,6 +51,9 @@ public class CaCheMannager {
         this.shoppingCartBean = shoppingCartBean;
     }
 
+
+
+
     private float price=-1l;
     public void setShoppingPrice(float p){
         this.price=p;

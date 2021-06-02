@@ -30,11 +30,12 @@ public class PayActivity extends AppCompatActivity {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            Log.i("AAA", "handleMessage: ");
+
             switch (msg.what) {
                 case a:
                     Map<String,String> result= (Map<String, String>) msg.obj;
                     String resultStatus= result.get("resultStatus");
+                    Toast.makeText(PayActivity.this, resultStatus, Toast.LENGTH_SHORT).show();
                     if (resultStatus.equals("9000")) {
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                         finish();
@@ -63,14 +64,12 @@ public class PayActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("CCC", "handleMessage: ");
 
                 if (bean!=null){
                     String orderInfo = bean.getResult().getOrderInfo();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.i("BBB", "handleMessage: ");
 
                             PayTask payTask = new PayTask(PayActivity.this);
                             Map<String, String> result = payTask.payV2(orderInfo, false);

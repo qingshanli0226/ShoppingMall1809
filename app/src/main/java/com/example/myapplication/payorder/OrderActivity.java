@@ -10,6 +10,7 @@ import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheLoginUserMannager;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
+import com.example.myapplication.findforpay.FindPayMainActivity;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.ShoppingCartBean;
@@ -47,7 +48,11 @@ public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrde
             public void onClick(View v) {
                 intent = new Intent(OrderActivity.this, PayActivity.class);
                 intent.putExtra("bean",orderinfoBean);
-                startActivity(intent);
+                startActivity(OrderActivity.this.intent);
+
+                Intent intent1 = new Intent(OrderActivity.this, FindPayMainActivity.class);
+                intent1.putExtra("order",orderinfoBean);
+                startActivity(intent1);
             }
         });
     }

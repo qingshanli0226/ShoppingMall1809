@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
-import com.example.common.log.LogUtil;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
@@ -35,6 +35,8 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Fragment> fragments=new ArrayList<>();
     private List<String> strings=new ArrayList<>();
     private boolean isLogin;//判断是否登陆
+    private android.widget.Button btn;
+    private android.widget.FrameLayout mainFra;
 
     @Override
     public int bandLayout() {
@@ -47,6 +49,15 @@ public class MainActivity extends BaseActivity {
         //自动登录
         Intent intent1 = new Intent(this, AutoService.class);
         startService(intent1);
+        btn = findViewById(R.id.btn);
+        mainFra = findViewById(R.id.mainFra);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UmengActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

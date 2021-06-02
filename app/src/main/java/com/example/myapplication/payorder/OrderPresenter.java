@@ -3,7 +3,7 @@ package com.example.myapplication.payorder;
 import com.example.framework.manager.CaCheMannager;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.ShoppingCartBean;
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
