@@ -34,15 +34,16 @@ public class GreenManager {
     }
 
     //获取所有
-    public List<MessageTable>  getMessage() {
+    public synchronized List<MessageTable>  getMessage() {
         return  daoSession.loadAll(MessageTable.class);
     }
     //添加一个
-    public void setMessage(MessageTable message) {
+    public synchronized void setMessage(MessageTable message) {
         daoSession.insert(message);
     }
 
-    public boolean addCount(){
+    //添加个数
+    public synchronized boolean addCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
         if (count!=-1){
@@ -58,7 +59,7 @@ public class GreenManager {
         return false;
     }
 
-    public boolean subCount(){
+    public synchronized boolean subCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
         if (count!=-1){
@@ -74,18 +75,17 @@ public class GreenManager {
         return false;
     }
 
-    public int getCount(){
+    public synchronized int getCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
         return count;
     }
 
-    public void upDataMessage(MessageTable messageTable){
+    public synchronized void upDataMessage(MessageTable messageTable){
         daoSession.update(messageTable);
     }
 
     public interface IMessage{
-
         void onMessage(int count);
     }
     private IMessage message;

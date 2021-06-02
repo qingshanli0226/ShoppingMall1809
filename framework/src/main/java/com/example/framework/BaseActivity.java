@@ -10,6 +10,7 @@ import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
+import com.umeng.message.PushAgent;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements ToolBar.IToolbarListener , ShopManager.IConnectListener {
 
@@ -35,6 +36,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         ShopManager.getInstance().registerConnectListener(this);
         //注册Activity管理
         CacheManager.getInstance().addActivityList(this);
+
+        PushAgent.getInstance(this).onAppStart();
     }
 
     protected abstract int getLayoutId();
