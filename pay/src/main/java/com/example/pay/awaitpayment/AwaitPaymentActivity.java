@@ -1,8 +1,10 @@
 package com.example.pay.awaitpayment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheAwaitPaymentManager;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.AwaitPaymentBean;
 import com.example.pay.R;
@@ -24,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *代付款
+ * 代付款
  * 赵子裕
  */
 public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> implements IAwaitPaymentView {
@@ -51,8 +54,11 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     @Override
     public void initPresenter() {
         mPresenter = new AwaitPaymentPresenter(this);
-        mPresenter.getpay();
-
+        if (CacheConnectManager.getInstance().isConnect()) {
+            mPresenter.getpay();
+        } else {
+            Toast.makeText(this, "网络走丢了", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -83,9 +89,9 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
                         String totalPrice1 = awaitPayment.get(position).getTotalPrice();
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("totalPrice",totalPrice);
-                        bundle.putString("orderInfo",orderInfo);
-                        bundle.putString("totalPrice",totalPrice1);
+                        bundle.putString("totalPrice", totalPrice);
+                        bundle.putString("orderInfo", orderInfo);
+                        bundle.putString("totalPrice", totalPrice1);
                         CommonArouter.getInstance().build(Constants.PATH_PAYMENT).with(bundle).navigation();
                         finish();
                     }
@@ -93,6 +99,7 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
                 builder.show();
             }
+
             @Override
             public boolean onLongItemClick(int position, View view) {
                 return false;
@@ -109,7 +116,7 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     @Override
     public void onClickLeft() {
         Bundle bundle = new Bundle();
-        bundle.putInt("page",4);
+        bundle.putInt("page", 4);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
     }
 
@@ -135,8 +142,20 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
 
     @Override
     public void onAwaitPayment(AwaitPaymentBean paymentBean) {
-       awaitPayment = CacheAwaitPaymentManager.getInstance().getAwaitPayment();
+        awaitPayment = CacheAwaitPaymentManager.getInstance().getAwaitPayment();
         paymentAdapter.getData().addAll(awaitPayment);
         paymentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+        mPresenter.getpay();
+        Toast.makeText(this, "正在缓冲...", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.ToolBar;
@@ -92,7 +94,11 @@ public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements I
         orderPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getOrder(payBean);
+                if (CacheConnectManager.getInstance().isConnect()) {
+                    mPresenter.getOrder(payBean);
+                } else {
+                    Toast.makeText(OrderInfoActivity.this, "网络走丢了", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -110,7 +116,6 @@ public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements I
         Bundle bundle = new Bundle();
         bundle.putInt("page",3);
         CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
-
     }
 
     @Override
@@ -141,5 +146,12 @@ public class OrderInfoActivity extends BaseActivity<OrderPresenter> implements I
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+        mPresenter.getOrder(payBean);
+        Toast.makeText(this, "正在缓冲...", Toast.LENGTH_SHORT).show();
     }
 }

@@ -35,6 +35,7 @@ import com.example.threeshopping.personal.PersonalFragment;
 import com.example.threeshopping.type.TypeFragment;
 import com.example.threeshopping.welcome.WelActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,13 +43,12 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     private LoginBean loginBean;
     private com.example.framework.view.ToolBar toolbar;
     private com.google.android.material.bottomnavigation.BottomNavigationView btv;
     private CircleView mainCircle;
-
 
     @Override
     public int getLayoutId() {
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity{
 
         //注册
 
-        if(!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
 
@@ -101,11 +101,12 @@ public class MainActivity extends BaseActivity{
         btv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.mainOne:
                         showFragment(0);
                         break;
                     case R.id.mainTwo:
+//                        CrashReport.testJavaCrash();
                         showFragment(1);
                         skip(1);
                         break;
@@ -127,9 +128,9 @@ public class MainActivity extends BaseActivity{
         });
 
         loginBean = UserManager.getInstance().getLoginBean();
-        if(loginBean != null){
-            if(CacheShopManager.getInstance().getCarts().size() > 0){
-                mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+        if (loginBean != null) {
+            if (CacheShopManager.getInstance().getCarts().size() > 0) {
+                mainCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
                 mainCircle.setVisibility(View.VISIBLE);
             }
         }
@@ -165,7 +166,7 @@ public class MainActivity extends BaseActivity{
         Bundle bundle = CommonArouter.getInstance().getBundle();
         int page = bundle.getInt("page");
 
-        LogUtil.d("page"+page);
+        LogUtil.d("page" + page);
 
         showFragment(page);
         switch (page) {
@@ -193,11 +194,11 @@ public class MainActivity extends BaseActivity{
     }
 
     @Subscribe
-    public void updateCircle(String string){
-        if(CacheShopManager.getInstance().getCarts().size() > 0){
-            mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+    public void updateCircle(String string) {
+        if (CacheShopManager.getInstance().getCarts().size() > 0) {
+            mainCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
             mainCircle.setVisibility(View.VISIBLE);
-        } else{
+        } else {
             mainCircle.setVisibility(View.GONE);
 
         }
@@ -222,8 +223,8 @@ public class MainActivity extends BaseActivity{
     public void onUserChange(LoginBean loginBean) {
         super.onUserChange(loginBean);
         this.loginBean = loginBean;
-        if(CacheShopManager.getInstance().getCarts().size() > 0){
-            mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
+        if (CacheShopManager.getInstance().getCarts().size() > 0) {
+            mainCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
             mainCircle.setVisibility(View.VISIBLE);
         }
     }
@@ -245,7 +246,7 @@ public class MainActivity extends BaseActivity{
     @Override
     public void destroy() {
         super.destroy();
-        if(EventBus.getDefault().isRegistered(this)){
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
     }

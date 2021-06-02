@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.example.framework.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
+import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.message.module.MessageModule;
@@ -14,6 +15,7 @@ import com.example.pay.module.PayModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
 import com.fiannce.sql.manager.SqlManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class App extends Application {
     @Override
@@ -26,11 +28,12 @@ public class App extends Application {
         UserModule.init();
         NetModule.context = this;
 
+        CrashReport.initCrashReport(getApplicationContext(),"c6461cb8bf",true);//bugly
 
         SqlManager.getInstance().setContext(this);//数据库
 
-
         CacheShopManager.getInstance().init();//缓存购物车
+        CacheAwaitPaymentManager.getInstance().init();
 
         CacheConnectManager.getInstance().init(this);//网络
 

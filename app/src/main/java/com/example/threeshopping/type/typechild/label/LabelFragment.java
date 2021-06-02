@@ -1,6 +1,9 @@
 package com.example.threeshopping.type.typechild.label;
 
 
+import android.content.Intent;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LabelBean;
 import com.example.threeshopping.R;
+import com.example.user.service.AutoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +44,16 @@ public class LabelFragment extends BaseFragment<LabelPresenter> implements ILabe
     @Override
     protected void initPrensenter() {
         mPresenter = new LabelPresenter(this);
+        if (CacheConnectManager.getInstance().isConnect()) {
+            mPresenter.getLabel();
+        } else {
+            Toast.makeText(getActivity(), "网络走丢了", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     protected void initData() {
-        mPresenter.getLabel();
         labelAdapter = new LabelAdapter();
-
         LabelRv.setAdapter(labelAdapter);
         LabelRv.setLayoutManager(new GridLayoutManager(getActivity(),3));
     }
@@ -68,8 +76,7 @@ public class LabelFragment extends BaseFragment<LabelPresenter> implements ILabe
     @Override
     public void onILabel(LabelBean labelBean) {
         List<LabelBean.ResultBean> result = labelBean.getResult();
-        list.addAll(result);
-        labelAdapter.getData().addAll(list);
+        labelAdapter.getData().addAll(result);
         labelAdapter.notifyDataSetChanged();
     }
 
@@ -86,5 +93,17 @@ public class LabelFragment extends BaseFragment<LabelPresenter> implements ILabe
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+        mPresenter.getLabel();
+        Toast.makeText(getActivity(), "正在缓冲...", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
     }
 }

@@ -172,4 +172,16 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
     public void showError(String error) {
 
     }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+
+    }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
+
+    }
 }

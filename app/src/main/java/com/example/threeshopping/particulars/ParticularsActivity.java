@@ -25,6 +25,7 @@ import com.example.common.Constants;
 import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.UserManager;
 import com.example.framework.view.CircleView;
@@ -35,6 +36,7 @@ import com.example.net.bean.SelectBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
+import com.example.user.service.AutoService;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.bean.SqlBean;
 import com.fiannce.sql.manager.SqlManager;
@@ -67,7 +69,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     int num = 1;//购买数量
     int count = 0;
     private CircleView detailCircle;
-
+    CartBean.ResultBean result;
     @Override
     public int getLayoutId() {
         return R.layout.activity_particulars;
@@ -155,10 +157,16 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                         public void onClick(View v) {
                             popupWindow.dismiss();
 
-                            CartBean.ResultBean result = new CartBean.ResultBean();
+                            result = new CartBean.ResultBean();
                             result.setProductId(id);
                             result.setProductNum("" + num);
-                            mPresenter.inventory(result);
+
+                            if (CacheConnectManager.getInstance().isConnect()) {
+                                mPresenter.inventory(result);
+                            } else {
+                                Toast.makeText(ParticularsActivity.this, "网络走丢了", Toast.LENGTH_SHORT).show();
+                            }
+
 
 
                             //数据库
@@ -290,11 +298,22 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             productBean.setUrl(pic);
             productBean.setProductPrice(price);
             LogUtils.json("priceaa" + productBean.getProductPrice());
-            mPresenter.addProduct(productBean);
 
+            if (CacheConnectManager.getInstance().isConnect()) {
+                mPresenter.addProduct(productBean);
+            } else {
+                Toast.makeText(this, "网络走丢了", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
+    @Override
+    public void onConect() {
+        super.onConect();
+        mPresenter.inventory(result);
+        mPresenter.addProduct(productBean);
+        Toast.makeText(this, "正在缓冲...", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onUserChange(LoginBean loginBean) {

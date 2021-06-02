@@ -1,8 +1,10 @@
 package com.example.pay.shipments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.AwaitPaymentBean;
 import com.example.net.bean.ShipmentBean;
@@ -46,7 +49,12 @@ public class ShipmentsActivity extends BaseActivity<ShipmentPresenter> implement
     @Override
     public void initPresenter() {
         mPresenter = new ShipmentPresenter(this);
-        mPresenter.getpay();
+        if (CacheConnectManager.getInstance().isConnect()) {
+            mPresenter.getpay();
+        } else {
+            Toast.makeText(this, "网络走丢了", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -125,5 +133,12 @@ public class ShipmentsActivity extends BaseActivity<ShipmentPresenter> implement
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+        mPresenter.getpay();
+        Toast.makeText(this, "正在缓冲...", Toast.LENGTH_SHORT).show();
     }
 }

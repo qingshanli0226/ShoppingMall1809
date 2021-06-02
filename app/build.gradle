@@ -5,7 +5,9 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
     defaultConfig {
         applicationId "com.example.threeshopping"
         minSdkVersion 24
@@ -52,4 +54,7 @@ dependencies {
 
     implementation 'me.jessyan:autosize:1.2.1'
     implementation project(path: ':sql')
+
+    compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    implementation project(path: ':live')
 }

@@ -61,8 +61,7 @@ public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
         for (Activity activity : activities) {
             activity.finish();
         }
+
         System.exit(1);
-
-
     }
 }

@@ -57,6 +57,7 @@ public class CacheShopManager {
         };
         UserManager.getInstance().registerLogin(iUserChange);
     }
+
     private UserManager.IUserChange iUserChange;
 
     //购物车数据源
@@ -96,7 +97,6 @@ public class CacheShopManager {
     public void setCarts(List<CartBean.ResultBean> carts) {
         this.carts.addAll(carts);
         cartsPrice.addAll(carts);
-
     }
 
     public synchronized void getShowCart() {
@@ -170,7 +170,7 @@ public class CacheShopManager {
     public synchronized void setCheck(int position,boolean isCheck){
         carts.get(position).setProductSelected(isCheck);
     }
-    
+
     //全选
     public synchronized void setChackAll(boolean isCheckAll){
         for (CartBean.ResultBean cart : carts) {
