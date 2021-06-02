@@ -4,7 +4,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
-
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 30
@@ -63,4 +65,5 @@ dependencies {
     api 'org.greenrobot:greendao:3.3.0' // 2.add library
     //工具类
     api 'com.blankj:utilcodex:1.26.0'
+
 }

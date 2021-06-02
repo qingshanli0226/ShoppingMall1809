@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
 
-
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
 
     <application
@@ -48,13 +48,6 @@
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTask" />
-
-
-
-
-
-
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -81,11 +74,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths"/>
         </provider>
-
-
-
-
-
 
         <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start-->
         <service
@@ -232,15 +220,6 @@
         </provider>
         <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end-->
 
-
-
-
-
-
-
-
     </application>
-
-
 
 </manifest>

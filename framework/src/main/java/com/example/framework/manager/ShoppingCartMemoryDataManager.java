@@ -1,6 +1,5 @@
 package com.example.framework.manager;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.net.RetrofitCreator;
 import com.example.net.bean.business.GetShortcartProductsBean;
 
@@ -13,17 +12,17 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class SoppingCartMemoryDataManager {
+public class ShoppingCartMemoryDataManager {
 
     private static GetShortcartProductsBean resultBean;
-    private static SoppingCartMemoryDataManager hoppingCartMemoryDataManager;
-    private static List<ISoppingDateChange> iSoppingDateChangeArrayList = new ArrayList<>();
+    private static ShoppingCartMemoryDataManager shoppingCartMemoryDataManager;
+    private static List<IShoppingDateChange> iSoppingDateChangeArrayList = new ArrayList<>();
     //单例
-    public synchronized static SoppingCartMemoryDataManager getInstance(){
-       if (hoppingCartMemoryDataManager == null){
-           hoppingCartMemoryDataManager = new SoppingCartMemoryDataManager();
+    public synchronized static ShoppingCartMemoryDataManager getInstance(){
+       if (shoppingCartMemoryDataManager == null){
+           shoppingCartMemoryDataManager = new ShoppingCartMemoryDataManager();
        }
-       return hoppingCartMemoryDataManager;
+       return shoppingCartMemoryDataManager;
     }
     //获取Bean类
     public synchronized static GetShortcartProductsBean getResultBean() {
@@ -44,7 +43,7 @@ public class SoppingCartMemoryDataManager {
                     @Override
                     public void onNext(@NonNull GetShortcartProductsBean shoppingCarBean) {
                         List<GetShortcartProductsBean.ResultBean> result = shoppingCarBean.getResult();
-                        SoppingCartMemoryDataManager.setResultBean(result);
+                        ShoppingCartMemoryDataManager.setResultBean(result);
                     }
 
                     @Override
@@ -63,22 +62,22 @@ public class SoppingCartMemoryDataManager {
     public synchronized static void setResultBean(List<GetShortcartProductsBean.ResultBean> resultBean) {
         GetShortcartProductsBean getShortcartProductsBean = new GetShortcartProductsBean();
         getShortcartProductsBean.setResult(resultBean);
-        SoppingCartMemoryDataManager.resultBean = getShortcartProductsBean;
+        ShoppingCartMemoryDataManager.resultBean = getShortcartProductsBean;
         for (int i = 0; i <iSoppingDateChangeArrayList.size() ; i++) {
-            iSoppingDateChangeArrayList.get(i).onSoppingDataChange(SoppingCartMemoryDataManager.resultBean.getResult());
+            iSoppingDateChangeArrayList.get(i).onShoppingDataChange(ShoppingCartMemoryDataManager.resultBean.getResult());
         }
     }
 
     //注册
-    public synchronized void registerHoppingCartMemory(SoppingCartMemoryDataManager.ISoppingDateChange iHoppingDateChange) {
+    public synchronized void registerHoppingCartMemory(ShoppingCartMemoryDataManager.IShoppingDateChange iHoppingDateChange) {
         iSoppingDateChangeArrayList.add(iHoppingDateChange);
     }
     //删除注册
-    public synchronized void unHoppingCartMemory(SoppingCartMemoryDataManager.ISoppingDateChange iHoppingDateChange) {
+    public synchronized void unHoppingCartMemory(ShoppingCartMemoryDataManager.IShoppingDateChange iHoppingDateChange) {
         iSoppingDateChangeArrayList.remove(iHoppingDateChange);
     }
     //接口回调
-    public interface ISoppingDateChange{
-       void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList);
+    public interface IShoppingDateChange{
+       void onShoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList);
    }
 }

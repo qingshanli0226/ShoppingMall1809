@@ -1,7 +1,8 @@
 package com.example.shoppingmallsix.main;
 
+
 import android.Manifest;
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
@@ -20,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.MainBean;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/main/MainActivity")
-public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, SoppingCartMemoryDataManager.ISoppingDateChange {
+public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, ShoppingCartMemoryDataManager.IShoppingDateChange {
 
     private FrameLayout mainFram;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         //handler实时监听子线程更新数据
         handler.sendEmptyMessageDelayed(1, 1000);
         //注册接口
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
 
@@ -100,6 +101,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
                         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
                         break;
                     case 1:
+//                        CrashReport.testJavaCrash();
                         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
                         if (loginBean1 != null) {
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new ClassifyFragment()).commitAllowingStateLoss();
@@ -167,7 +169,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     protected void onDestroy() {
         super.onDestroy();
         CacheUserManager.getInstance().unRegisterLogin(this);
-        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 
     //子线程获取数据 实时刷新
@@ -175,7 +177,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            GetShortcartProductsBean resultBean = ShoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
@@ -192,7 +194,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     };
 
     @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+    public void onShoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
         if (resultBeanList.size() != 0) {
             sign.setVisibility(View.VISIBLE);
             sign.setText(resultBeanList.size() + "");

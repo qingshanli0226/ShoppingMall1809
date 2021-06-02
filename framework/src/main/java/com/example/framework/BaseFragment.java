@@ -10,10 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.framework.manager.NetworkConnectionsManager;
 import com.example.framework.view.LoadingPage;
 import com.example.framework.view.ToolBar;
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements ToolBar.IToolbarListener {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements ToolBar.IToolbarListener, NetworkConnectionsManager.IConnectListener {
 
     protected T httpPresenter;
     protected View mBaseView;
@@ -28,6 +29,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         initView();
         toolBar = mBaseView.findViewById(R.id.toolbar);
         toolBar.setToolbarListener(this);
+        NetworkConnectionsManager.getInstance().registerConnectListener(this);
         initPresenter();
         initData();
     }
@@ -65,6 +67,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         if (httpPresenter != null) {
             httpPresenter.detachView();
         }
+        NetworkConnectionsManager.getInstance().unRegisterConnectListener(this);
     }
 
     @Override
@@ -80,5 +83,14 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     @Override
     public void onRightTvClick() {
 
+    }
+    @Override
+    public void onConnected() {
+
+    }
+
+    @Override
+    public void onDisconnected() {
+        loadingPage.showError("网络错误");
     }
 }

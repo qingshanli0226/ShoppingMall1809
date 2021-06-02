@@ -1,7 +1,6 @@
 package com.example.shoppingmallsix.fragment.shoppingcar;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -16,11 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheUserManager;
-import com.example.framework.manager.LogUtil;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
@@ -50,7 +47,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 
-public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping, SoppingCartMemoryDataManager.ISoppingDateChange {
+public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> implements IShopping, ShoppingCartMemoryDataManager.IShoppingDateChange {
     private TextView shopText;
     private String bianji = "编辑";
     private String wancheng = "完成";
@@ -82,7 +79,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
 
     @Override
     protected void initData() {
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
@@ -135,7 +132,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            GetShortcartProductsBean resultBean = ShoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
@@ -248,7 +245,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                     }
                 }
                 //通知个个页面数据刷新
-                SoppingCartMemoryDataManager.setResultBean(resultBeans);
+                ShoppingCartMemoryDataManager.setResultBean(resultBeans);
             }
             //刷新金额
             allPrice();
@@ -264,7 +261,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             //刷新多选
             AllProductBeanAndProductSelect();
             //通知内存数据刷新
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
 
@@ -278,10 +275,18 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             String outTradeNo = getOrderInfoBean.getResult().getOutTradeNo();
 
             Intent intent = new Intent(getContext(), GetOrderActivity.class);
+            ArrayList<GetShortcartProductsBean.ResultBean> objects = new ArrayList<>();
+            for (int i = 0; i <resultBeans.size() ; i++) {
+                objects.add(resultBeans.get(i));
+            }
+            intent.putExtra("price",price);
+            intent.putExtra("list",objects);
             intent.putExtra("orderInfo", orderInfo);
             intent.putExtra("outTradeNo", outTradeNo);
             intent.putExtra("key", "main");
+
             startActivity(intent);
+            DeleteMemoryData();
         } else {
             Toast.makeText(getContext(), "" + getOrderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -320,7 +325,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         }
         allPrice();
         //通知缓存改变
-        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        ShoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
 
     //检查库存的回调
@@ -332,7 +337,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
             GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
             //修改
             httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum()) + 1) + "", resultBean.getProductName(), resultBean.getUrl(), "" + price, position, false);
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(getActivity(), "检查库存没有", Toast.LENGTH_SHORT).show();
         }
@@ -341,14 +346,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     @Override
     public void onCheckInventory(CheckInventoryBean checkInventoryBean,List<GetShortcartProductsBean.ResultBean> resultBeans) {
         if (checkInventoryBean.getCode().equals("200")){
-            Intent intent = new Intent(getContext(), GetOrderActivity.class);
-            ArrayList<GetShortcartProductsBean.ResultBean> objects = new ArrayList<>();
-            for (int i = 0; i <resultBeans.size() ; i++) {
-                objects.add(resultBeans.get(i));
-            }
-            intent.putExtra("price",price);
-            intent.putExtra("list",objects);
-            startActivity(intent);
+            httpPresenter.getOrderinfo("购买",price+"",resultBeans);
         }else {
             String name = "";
             List<CheckInventoryBean.ResultBean> result = checkInventoryBean.getResult();
@@ -381,7 +379,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
                 resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum()) + 1) + "");
             }
             allPrice();
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
 
@@ -448,7 +446,7 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
         }
         allPrice();
         AllProductBeanAndProductSelect();
-        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        ShoppingCartMemoryDataManager.setResultBean(resultBeans);
 
     }
 
@@ -471,11 +469,11 @@ public class ShoppingCarFragment extends BaseFragment<ShoppingPresenter> impleme
     @Override
     public void onDestroy() {
         super.onDestroy();
-        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 
     @Override
-    public void onSoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
+    public void onShoppingDataChange(List<GetShortcartProductsBean.ResultBean> resultBeanList) {
         if (resultBeanList != null) {
             shoppingCarAdapter.notifyDataSetChanged();
         }
