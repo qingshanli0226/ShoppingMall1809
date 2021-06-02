@@ -14,7 +14,20 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        //激光推送
+//        ndk {
+//            //选择要添加的对应 cpu 类型的 .so 库。
+//            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+//        }
+//
+//        manifestPlaceholders = [
+//                JPUSH_PKGNAME : applicationId,
+//                JPUSH_APPKEY : "946d10a9db068683a4461e27", //JPush 上注册的包名对应的 Appkey.
+//                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+//                XIAOMI_APPID:"MI-小米的APPID",
+//                XIAOMI_APPKEY:"MI-小米的APPKEY",
+//        ]
     }
 
     buildTypes {
@@ -33,6 +46,16 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'//eventbus
     implementation 'com.github.bumptech.glide:glide:4.11.0'  //glide
     implementation 'com.youth.banner:banner:1.4.10'//banner
+    //激光推送
+//    compile 'cn.jiguang.sdk:jpush:4.0.6'  // 此处以JPush 4.0.6 版本为例。
+//    compile 'cn.jiguang.sdk:jcore:2.8.2'  // 此处以JCore 2.8.2 版本为例。
+    //友盟推送
+    implementation 'com.umeng.umsdk:common:1.5.4'
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+//    implementation 'com.umeng.umsdk:utdid:1.1.5.3'
+    //PushSDK
+    implementation 'com.umeng.umsdk:push:6.0.1'
+
 
 
 

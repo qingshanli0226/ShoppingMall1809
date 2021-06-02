@@ -14,11 +14,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
+
     }
 
     buildTypes {
@@ -34,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation 'org.greenrobot:eventbus:3.1.1'//eventbus
     implementation 'com.jakewharton:disklrucache:2.0.2'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
@@ -44,7 +41,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation ('com.alibaba:arouter-api:1.4.1') //ARouter依赖
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
+
 
 }

@@ -165,27 +165,7 @@ public class CacheShopManager {
 
     }
 
-//    public synchronized void removeProduct(CartBean.ResultBean resultBean) {
-//        for (int i = carts.size()-1; i >= 0; i--) {
-//            CartBean.ResultBean bean = carts.get(i);
-//            if(bean.getProductId().equals(resultBean.getProductId())){
-//                carts.remove(i);
-//            }
-//        }
-//    }
-//
-//    public void removeMany(List<CartBean.ResultBean> resultBeans) {
-//        for (int i = carts.size()-1; i >= 0; i--) {
-//            CartBean.ResultBean bean = carts.get(i);
-//            for (int i1 = resultBeans.size()-1; i1 >= 0; i1--) {
-//                if(bean.getProductId().equals(resultBeans.get(i1).getProductId())){
-//                    carts.remove(i);
-//                    resultBeans.remove(i1);
-//                }
-//            }
-//        }
-//        LogUtil.d("removeManyaaa");
-//    }
+
 
     public void removeMany(boolean isOne,int position) {
         if(isOne){

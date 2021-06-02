@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
+import com.example.common.LogUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.HomeBean;
@@ -111,7 +113,7 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 break;
             case 2:
                 ViewPager itemViewpage = holder.getView(R.id.itemViewpage);
-                List<View> views=new ArrayList<>();
+                List<View> views = new ArrayList<>();
                 List<HomeBean.ResultBean.ActInfoBean> actInfoBeans = (List<HomeBean.ResultBean.ActInfoBean>) itemView;
 
                 for (HomeBean.ResultBean.ActInfoBean actInfoBean : actInfoBeans) {
@@ -127,33 +129,51 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
 
                 ImageView sekright = holder.getView(R.id.itemSeckilRight);
                 sekright.setImageBitmap(BitmapFactory.decodeResource(holder.itemView.getResources(), R.drawable.home_arrow_right));
+
+                HomeBean.ResultBean.SeckillInfoBean seckillInfoBeans = (HomeBean.ResultBean.SeckillInfoBean) itemView;
+
                 //倒计时
                 TextView countDown = holder.getView(R.id.itemseckilCountDown);
-                HomeBean.ResultBean.SeckillInfoBean seckillInfoBeans = (HomeBean.ResultBean.SeckillInfoBean) itemView;
-                String format = new SimpleDateFormat("HH:mm:ss").format(Long.parseLong(seckillInfoBeans.getStart_time()));
+                String format = new SimpleDateFormat("HH:mm:ss").format(Long.parseLong(seckillInfoBeans.getEnd_time()));
                 countDown.setText(format);
+//                new CountDownTimer(Long.parseLong(seckillInfoBeans.getEnd_time()),1000){
+//
+//                    @Override
+//                    public void onTick(long millisUntilFinished) {
+//                        LogUtil.d("zybddd"+Long.parseLong(seckillInfoBeans.getStart_time()));
+//                        LogUtil.d("zybddd"+millisUntilFinished);
+//                        String format = new SimpleDateFormat("HH:mm:ss").format(millisUntilFinished/1000);
+//                        countDown.setText(format);
+//                        LogUtil.d("zybCount"+format);
+//                    }
+//
+//                    @Override
+//                    public void onFinish() {
+//
+//                    }
+//                }.start();
 
 
                 RecyclerView sekllRv = holder.getView(R.id.itemSeckil);
 
-                sekllRv.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(),RecyclerView.HORIZONTAL,false));
+                sekllRv.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(), RecyclerView.HORIZONTAL, false));
                 SekillAdapter sekillAdapter = new SekillAdapter();
                 sekillAdapter.getData().addAll(seckillInfoBeans.getList());
                 sekllRv.setAdapter(sekillAdapter);
                 //点击跳转
                 sekillAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
-                    public void onItemClick(int position,View view) {
+                    public void onItemClick(int position, View view) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("pic",Constants.BASE_URl_IMAGE +seckillInfoBeans.getList().get(position).getFigure());
-                        bundle.putString("title",seckillInfoBeans.getList().get(position).getName());
-                        bundle.putString("price",seckillInfoBeans.getList().get(position).getCover_price());
-                        bundle.putString("id",seckillInfoBeans.getList().get(position).getProduct_id());
+                        bundle.putString("pic", Constants.BASE_URl_IMAGE + seckillInfoBeans.getList().get(position).getFigure());
+                        bundle.putString("title", seckillInfoBeans.getList().get(position).getName());
+                        bundle.putString("price", seckillInfoBeans.getList().get(position).getCover_price());
+                        bundle.putString("id", seckillInfoBeans.getList().get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override
-                    public boolean onLongItemClick(int position,View view) {
+                    public boolean onLongItemClick(int position, View view) {
                         Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
 
                         return true;
@@ -177,17 +197,17 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 //点击跳转
                 reCommendAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
-                    public void onItemClick(int position,View view) {
+                    public void onItemClick(int position, View view) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("pic",Constants.BASE_URl_IMAGE +recommendInfoBeans.get(position).getFigure());
-                        bundle.putString("title",recommendInfoBeans.get(position).getName());
-                        bundle.putString("price",recommendInfoBeans.get(position).getCover_price());
-                        bundle.putString("id",recommendInfoBeans.get(position).getProduct_id());
+                        bundle.putString("pic", Constants.BASE_URl_IMAGE + recommendInfoBeans.get(position).getFigure());
+                        bundle.putString("title", recommendInfoBeans.get(position).getName());
+                        bundle.putString("price", recommendInfoBeans.get(position).getCover_price());
+                        bundle.putString("id", recommendInfoBeans.get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override
-                    public boolean onLongItemClick(int position,View view) {
+                    public boolean onLongItemClick(int position, View view) {
                         Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
 
                         return true;
@@ -213,17 +233,17 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
                 //点击跳转
                 hotAdapter.setRvItemOnClickListener(new IRvItemOnClickListener() {
                     @Override
-                    public void onItemClick(int position,View view) {
+                    public void onItemClick(int position, View view) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("pic",Constants.BASE_URl_IMAGE +hotInfoBeans.get(position).getFigure());
-                        bundle.putString("title",hotInfoBeans.get(position).getName());
-                        bundle.putString("price",hotInfoBeans.get(position).getCover_price());
-                        bundle.putString("id",hotInfoBeans.get(position).getProduct_id());
+                        bundle.putString("pic", Constants.BASE_URl_IMAGE + hotInfoBeans.get(position).getFigure());
+                        bundle.putString("title", hotInfoBeans.get(position).getName());
+                        bundle.putString("price", hotInfoBeans.get(position).getCover_price());
+                        bundle.putString("id", hotInfoBeans.get(position).getProduct_id());
                         CommonArouter.getInstance().build(Constants.PATH_PARTICULARS).with(bundle).navigation();
                     }
 
                     @Override
-                    public boolean onLongItemClick(int position,View view) {
+                    public boolean onLongItemClick(int position, View view) {
                         Toast.makeText(holder.itemView.getContext(), "长", Toast.LENGTH_SHORT).show();
 
                         return true;

@@ -82,17 +82,10 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
                 CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
             }
         });
-
-        //更改
-        CacheMessageManager.getInstance().register(this);
-        CacheMessageManager.getInstance().searchMessage();
-        setHomeNum("");
-
     }
     @Subscribe
     public void setHomeNum(String num){
         List<MessageBean> messageBeans = CacheMessageManager.getInstance().getMessageBeans();
-        LogUtil.d("zyba"+messageBeans);
         int count = 0;
         for (MessageBean messageBean : messageBeans) {
             if(messageBean.getIsRead()){
