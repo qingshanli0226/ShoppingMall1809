@@ -8,10 +8,10 @@ import com.example.net.bean.OrderBean;
 import java.util.List;
 
 public interface ICartView extends IBaseView {
+
     void onCheck(int position,boolean isCheck);
     void onCheckAll(boolean isChcekAll);
     void onNum(int position);
-
 
 
 

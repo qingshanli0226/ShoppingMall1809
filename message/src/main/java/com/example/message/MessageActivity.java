@@ -18,6 +18,8 @@ import com.example.framework.view.ToolBar;
 import com.example.message.adapter.MessageAdapter;
 import com.fiannce.sql.bean.MessageBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 public class MessageActivity extends BaseActivity implements CacheMessageManager.IMessageListener {

@@ -17,5 +17,16 @@ public class SpUtil {
         edit.putString(Constants.SP_TOKEN, token);
         edit.commit();
     }
+    public static int getInt(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("readnum", Context.MODE_PRIVATE);
+        int num = sharedPreferences.getInt(Constants.SP_READ_NUM,-1);
+        return num;
+    }
 
+    public static void putInt(Context context,int num){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("readnum", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt(Constants.SP_READ_NUM, num);
+        edit.commit();
+    }
 }

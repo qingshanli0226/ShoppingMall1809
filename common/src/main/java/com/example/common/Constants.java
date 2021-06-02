@@ -100,6 +100,7 @@ public class Constants {
     public static final String PATH_USER = "/user/UserActivity";
 
     public static final String SP_TOKEN = "token";
+    public static final String SP_READ_NUM = "num";
     //判断home页面的布局
     public static final int HOME_BANNER = 0;
     public static final int HOME_CHANNEL = 1;

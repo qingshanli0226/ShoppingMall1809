@@ -4,7 +4,7 @@
     package="com.example.threeshopping">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
+
 <!--    Bugly   五个都是报红能用-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -12,10 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
-=======
+
     <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -26,7 +25,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
->>>>>>> cde35d28877f86b0df2ea43cc43ae7c365dbdd8d
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -37,6 +36,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeShopping"
         android:usesCleartextTraffic="true">
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity android:name=".shopcart.ShopCartActivity"/>
         <activity android:name=".bind.BindInfoActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
@@ -61,7 +61,7 @@
             android:name="design_height_in_dp"
             android:value="731" />
 
-
+<!--  分享  -->
 
 
 

@@ -1,9 +1,11 @@
 package com.example.threeshopping;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.KeyEvent;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -70,7 +73,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
         //注册
 
         if (!EventBus.getDefault().isRegistered(this)) {

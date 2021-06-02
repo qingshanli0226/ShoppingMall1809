@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.common.Constants;
@@ -65,7 +66,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     messageBean.setMessageTime(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(System.currentTimeMillis()));
                     messageBean.setIsRead(true);
                     CacheMessageManager.getInstance().addMessage(messageBean);
-                    EventBus.getDefault().post("num");
+
 
                 } else{
                     if(TextUtils.equals(resultStatus,"8000")){

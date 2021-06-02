@@ -33,6 +33,7 @@ import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
+import com.example.threeshopping.MainActivity;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
@@ -40,6 +41,8 @@ import com.example.user.service.AutoService;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.bean.SqlBean;
 import com.fiannce.sql.manager.SqlManager;
+
+
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -255,12 +258,38 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onClickLeft() {
-        finish();
+        super.onClickLeft();
     }
 
     @Override
     public void onClickRight() {
-
+//        UMImage image = new UMImage(this, pic);//网络图片
+//        new ShareAction(this)
+//                .withText("hello")
+//                .withMedia(image)
+//                .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+//                .setCallback(new UMShareListener() {
+//                    @Override
+//                    public void onStart(SHARE_MEDIA share_media) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onResult(SHARE_MEDIA share_media) {
+//                        Toast.makeText(ParticularsActivity.this, "成功", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+//                        Toast.makeText(ParticularsActivity.this, ""+throwable, Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onCancel(SHARE_MEDIA share_media) {
+//
+//                    }
+//                }).open();
     }
 
     @Override
@@ -420,6 +449,5 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
 
     }
-
 
 }

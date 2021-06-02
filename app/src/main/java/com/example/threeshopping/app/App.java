@@ -1,6 +1,8 @@
 package com.example.threeshopping.app;
 
 import android.app.Application;
+import android.app.Notification;
+import android.content.Context;
 
 
 import com.example.common.LogUtil;
@@ -17,15 +19,20 @@ import com.example.pay.module.PayModule;
 
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
+import com.fiannce.sql.bean.MessageBean;
 import com.fiannce.sql.manager.SqlManager;
-<<<<<<< HEAD
 import com.tencent.bugly.crashreport.CrashReport;
-=======
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.UmengMessageHandler;
+import com.umeng.message.entity.UMessage;
 
->>>>>>> cde35d28877f86b0df2ea43cc43ae7c365dbdd8d
+
+
+import java.text.SimpleDateFormat;
+import java.util.Map;
+
 
 public class App extends Application {
     @Override
@@ -44,12 +51,12 @@ public class App extends Application {
 
 
         CacheShopManager.getInstance().init();//缓存购物车
-<<<<<<< HEAD
+
         CacheAwaitPaymentManager.getInstance().init();
 
-=======
-        CacheMessageManager.getInstance().init();
->>>>>>> cde35d28877f86b0df2ea43cc43ae7c365dbdd8d
+
+        CacheMessageManager.getInstance().init(this);
+
         CacheConnectManager.getInstance().init(this);//网络
 
         ShopCrashHandler.getInstance().init(this);//错误上报
@@ -73,5 +80,24 @@ public class App extends Application {
             public void onFailure(String s,String s1) {
             }
         });
+
+        UmengMessageHandler messageHandler = new UmengMessageHandler() {
+            @Override
+            public Notification getNotification(Context context, UMessage msg) {
+                for (Map.Entry entry : msg.extra.entrySet()) {
+                    MessageBean messageBean = new MessageBean();
+                    messageBean.setId(null);
+                    messageBean.setType(1);
+                    messageBean.setMessage(entry.getValue()+"");
+                    messageBean.setMessageTime(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(System.currentTimeMillis()));
+                    messageBean.setIsRead(true);
+                    CacheMessageManager.getInstance().addMessage(messageBean);
+                }
+                return super.getNotification(context, msg);
+            }
+        };
+        pushAgent.setMessageHandler(messageHandler);
+        //qq分享
+//        PlatformConfig.setQQZone("101830139","5d63ae8858f1caab67715ccd6c18d7a5");
  }
 }

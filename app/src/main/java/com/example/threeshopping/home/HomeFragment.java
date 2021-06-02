@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.Constants;
 import com.example.common.LogUtil;
+import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheHomeManager;
@@ -58,6 +59,7 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
 
     @Override
     protected void initData() {
+
         if(!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
@@ -82,21 +84,21 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
                 CommonArouter.getInstance().build(Constants.PATH_MESSAGE).navigation();
             }
         });
+        if(SpUtil.getInt(getActivity()) != 0){
+            homeNum.setText(SpUtil.getInt(getActivity())+"");
+            homeNum.setVisibility(View.VISIBLE);
+        } else{
+            homeNum.setText(SpUtil.getInt(getActivity())+"");
+            homeNum.setVisibility(View.GONE);
+        }
     }
     @Subscribe
     public void setHomeNum(String num){
-        List<MessageBean> messageBeans = CacheMessageManager.getInstance().getMessageBeans();
-        int count = 0;
-        for (MessageBean messageBean : messageBeans) {
-            if(messageBean.getIsRead()){
-                count++;
-            }
-        }
-        if(count >0){
-            homeNum.setText(count+"");
+        if(!num.equals("0")){
+            homeNum.setText(num);
             homeNum.setVisibility(View.VISIBLE);
         } else{
-            homeNum.setText(count+"");
+            homeNum.setText(num);
             homeNum.setVisibility(View.GONE);
         }
     }

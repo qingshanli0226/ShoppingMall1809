@@ -1,6 +1,11 @@
 package com.example.framework.manager;
 
+import android.content.Context;
+import android.view.View;
+
+import com.blankj.utilcode.util.SPUtils;
 import com.example.common.LogUtil;
+import com.example.common.SpUtil;
 import com.example.net.bean.LoginBean;
 import com.fiannce.sql.DaoSession;
 import com.fiannce.sql.MessageBeanDao;
@@ -14,6 +19,7 @@ import java.util.List;
 
 public class CacheMessageManager {
     private static CacheMessageManager cacheMessageManager;
+    private Context mContext;
 
     private CacheMessageManager() {
     }
@@ -37,15 +43,24 @@ public class CacheMessageManager {
     public List<MessageBean> getMessageBeans() {
         return messageBeans;
     }
-    public void init(){
+    public void init(Context context){
+        this.mContext = context;
         //更改
-        CacheUserManager.getInstance().registerLogin(new CacheUserManager.IUserChange() {
-            @Override
-            public void onUserChange(LoginBean loginBean) {
-                searchMessage();
-                EventBus.getDefault().post("num");
+        searchMessage();
+        if (SpUtil.getInt(mContext) == -1) {
+            SpUtil.putInt(mContext,0);
+        }
+    }
+
+
+    public int count(){
+        int count = 0;
+        for (MessageBean messageBean : messageBeans) {
+            if(messageBean.getIsRead()){
+                count++;
             }
-        });
+        }
+        return count;
     }
     //注册
     public synchronized void register(IMessageListener messageListener){
@@ -56,33 +71,47 @@ public class CacheMessageManager {
         messageListeners.remove(messageListener);
     }
 
+
+
     //添加
-    public void addMessage(MessageBean messageBean){
+    public synchronized void addMessage(MessageBean messageBean){
         //数据库
         DaoSession daoSession = SqlManager.getInstance().getDaoSession();
         daoSession.insert(messageBean);
         //缓存
         messageBeans.add(messageBean);
+        //通知
         freshAdd(messageBeans.size()-1);
-        LogUtil.d("zyb"+messageBeans);
+        AddAndSub(true);
+        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
     }
 
-    //已读未读
-    public void setRead(int position,MessageBean messageBean){
+    private void AddAndSub(boolean isAddAndSub) {
+        if(isAddAndSub){
+            SpUtil.putInt(mContext,SpUtil.getInt(mContext)+1);
+        } else{
+            if(SpUtil.getInt(mContext) > 0){
+                SpUtil.putInt(mContext,SpUtil.getInt(mContext)-1);
+            }
+        }
+
+    }
+
+    //设置已读
+    public synchronized void setRead(int position,MessageBean messageBean){
         //数据库
         DaoSession daoSession = SqlManager.getInstance().getDaoSession();
         daoSession.update(messageBean);
         //缓存
-        messageBeans.remove(position);
-        messageBeans.add(position,messageBean);
+        messageBeans.get(position).setIsRead(messageBean.getIsRead());
         freshAdd(position);
-        LogUtil.d("zyb"+messageBeans);
+        AddAndSub(false);
+        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
 
     }
 
     //查询数据库
-    public void searchMessage(){
-
+    public synchronized void searchMessage(){
         MessageBeanDao messageBeanDao = SqlManager.getInstance().getDaoSession().getMessageBeanDao();
         LogUtil.d("zyb"+messageBeanDao);
 
@@ -91,6 +120,7 @@ public class CacheMessageManager {
         this.messageBeans.clear();
         this.messageBeans.addAll(messageBeans);
         freshAll();
+//        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
     }
 
     //刷新一个
