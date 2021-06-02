@@ -1,6 +1,7 @@
 package com.example.user.user.register;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,10 +17,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
+import com.example.user.service.AutoService;
 import com.example.user.user.IUserView;
 import com.example.user.user.UserPresenter;
 
@@ -37,6 +40,7 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
     private EditText registerPasswordAgain;
     private CheckBox passwordInvisibleAgain;
     private Button register;
+    String name, pass, again;
 
     @Override
     protected int getLayoutId() {
@@ -61,25 +65,30 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
 
     @Override
     protected void initData() {
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = registerUsername.getText().toString().trim();
-                String pass = registerPassword.getText().toString().trim();
-                String again = registerPasswordAgain.getText().toString().trim();
+        if (CacheConnectManager.getInstance().isConnect()) {
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name = registerUsername.getText().toString().trim();
+                    pass = registerPassword.getText().toString().trim();
+                    again = registerPasswordAgain.getText().toString().trim();
 
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(again)){
-                    if (pass.equals(again)){
-                        mPresenter.getRegister(name,pass);
-                    }else {
-                        Toast.makeText(getActivity(), "两次密码不一致", Toast.LENGTH_SHORT).show();
+                    if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(again)) {
+                        if (pass.equals(again)) {
+                            mPresenter.getRegister(name, pass);
+                        } else {
+                            Toast.makeText(getActivity(), "两次密码不一致", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
+
                     }
-                }else {
-                    Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
-
                 }
-            }
-        });
+            });
+        } else {
+            Toast.makeText(getActivity(), "网络走丢了", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -104,11 +113,11 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
 
     @Override
     public void onRegister(RegisterBean registerBean) {
-        if(registerBean.getCode().equals("200")){
-            Toast.makeText(getActivity(), ""+registerBean.getResult(), Toast.LENGTH_SHORT).show();
+        if (registerBean.getCode().equals("200")) {
+            Toast.makeText(getActivity(), "" + registerBean.getResult(), Toast.LENGTH_SHORT).show();
             EventBus.getDefault().postSticky(0);
-        } else{
-            Toast.makeText(getActivity(), ""+registerBean.getResult(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "" + registerBean.getResult(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -132,4 +141,18 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
     public void showError(String error) {
 
     }
+
+    @Override
+    public void onConect() {
+        super.onConect();
+
+        mPresenter.getRegister(name, pass);
+        Toast.makeText(getActivity(), "正在缓冲...", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
+    }
 }
+

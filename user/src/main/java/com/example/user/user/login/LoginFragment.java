@@ -2,6 +2,7 @@ package com.example.user.user.login;
 
 
 import android.os.Bundle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,12 @@ import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 
+
 import com.example.framework.manager.CacheUserManager;
+
+
+import com.example.framework.manager.CacheAwaitPaymentManager;
+import com.example.framework.manager.CacheConnectManager;
 
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.LoginBean;
@@ -28,6 +34,8 @@ import com.example.user.user.IUserView;
 import com.example.user.user.UserPresenter;
 
 import org.greenrobot.eventbus.EventBus;
+
+import retrofit2.http.HEAD;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +54,7 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
     private ImageView weixin;
     private int page;
     private ToolBar toolbar;
+    String name, pass;
 
     @Override
     protected int getLayoutId() {
@@ -73,21 +82,27 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
     @Override
     protected void initData() {
+        if (CacheConnectManager.getInstance().isConnect()) {
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name = loginUsername.getText().toString().trim();
+                    pass = loginPassword.getText().toString().trim();
+                    if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)) {
+                        mPresenter.getLogin(name, pass);
+                    } else {
+                        Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(getActivity(), "网络走丢了", Toast.LENGTH_SHORT).show();
+        }
+
+
         Bundle bundle = CommonArouter.getInstance().getBundle();
         page = bundle.getInt("page");
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = loginUsername.getText().toString().trim();
-                String pass = loginPassword.getText().toString().trim();
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)) {
-                    mPresenter.getLogin(name, pass);
-                } else {
-                    Toast.makeText(getActivity(), "用户名和密码不能为空", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         loginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,15 +168,19 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
 
+
             CacheUserManager.getInstance().setLoginBean(loginBean);
             getActivity().finish();
 
+            CacheUserManager.getInstance().setLoginBean(loginBean);
+
+
+            getActivity().finish();
 
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
-
-
+            CacheAwaitPaymentManager.getInstance().getAwaitPay();
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -189,11 +208,13 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
     @Override
     public void onDisConnect() {
-
+        super.onDisConnect();
     }
 
     @Override
     public void onConect() {
-
+        super.onConect();
+        mPresenter.getLogin(name, pass);
+        Toast.makeText(getActivity(), "正在缓冲...", Toast.LENGTH_SHORT).show();
     }
 }

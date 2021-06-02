@@ -13,11 +13,11 @@ import java.util.List;
 public class CacheConnectManager {
     private  static CacheConnectManager cacheConnectManager;
 
-    public   CacheConnectManager() {
+    private   CacheConnectManager() {
 
     }
 
-    public static CacheConnectManager getInstance(){
+    public synchronized static CacheConnectManager getInstance(){
         if (cacheConnectManager == null){
             cacheConnectManager = new CacheConnectManager();
         }
@@ -74,15 +74,11 @@ public class CacheConnectManager {
     }
 
     public synchronized void registerConnectListener(IConnect iConnect){
-        if (list.contains(iConnect)){
             list.add(iConnect);
-        }
     }
 
     public synchronized void unregisterConnectListener(IConnect iConnect){
-        if (list.contains(iConnect)){
             list.remove(iConnect);
-        }
     }
 
     public interface IConnect{

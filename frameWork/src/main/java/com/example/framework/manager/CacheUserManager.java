@@ -23,7 +23,9 @@ public class CacheUserManager {
 
 
     private LoginBean loginBean;
+
     private List<IUserChange> userChangeslist = new LinkedList<>();
+
     public void registerLogin(IUserChange iUserChange){
         userChangeslist.add(iUserChange);
     }
@@ -46,8 +48,5 @@ public class CacheUserManager {
     public interface IUserChange{
         void onUserChange(LoginBean loginBean);
     }
-
-
-
 
 }
