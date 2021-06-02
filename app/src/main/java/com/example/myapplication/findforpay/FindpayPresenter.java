@@ -1,10 +1,8 @@
 package com.example.myapplication.findforpay;
 
-import android.util.Log;
-
 import com.example.common.log.LogUtil;
 import com.example.framework.manager.PaySendCacheManager;
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
@@ -21,53 +19,7 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
     public FindpayPresenter(IFindPayView iFindPayView) {
         attView(iFindPayView);
     }
-    public void getFindPay(){
-        RetrofitManager.getApi()
-                .getForPay()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        add(disposable);
-                        mView.showLoading();
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.hideLoading();
-                    }
-                })
-                .subscribe(new Observer<FindForPayBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
 
-                    }
-
-                    @Override
-                    public void onNext(@NonNull FindForPayBean findForPayBean) {
-                        if (mView!=null){
-                            mView.onFindPay(findForPayBean);
-                            PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
-                            LogUtil.d(findForPayBean.toString());
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                          if (mView!=null){
-                              mView.showToast(e.getMessage());
-                          }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
     public void getFindSend(){
         RetrofitManager.getApi()
                 .getForSend()

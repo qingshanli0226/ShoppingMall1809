@@ -1,8 +1,5 @@
-package com.example.net.retrogit;
+package com.example.net.retrofit;
 
-
-
-import android.util.Log;
 
 
 import com.example.net.AppMoudel;

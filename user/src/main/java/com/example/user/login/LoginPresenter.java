@@ -1,6 +1,6 @@
 package com.example.user.login;
 
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.LoginBean;
 
 import io.reactivex.Observer;

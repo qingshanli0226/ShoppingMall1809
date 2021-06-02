@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.example.net.AppMoudel;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.ShoppingCartBean;
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +71,9 @@ public class CaCheMannager implements CacheUserManager.IloginChange{
     public void setShoppingCartBeanList(List<ShoppingCartBean.ResultBean> shoppingCartBeanList) {
         this.shoppingCartBeanList = shoppingCartBeanList;
     }
+
+
+
 
     private float price=-1l;
     public void setShoppingPrice(float p){

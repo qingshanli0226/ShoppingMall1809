@@ -1,6 +1,6 @@
 package com.example.user.register;
 
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.RegisterBean;
 
 import io.reactivex.Observer;

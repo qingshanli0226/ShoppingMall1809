@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.R;
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 import com.jakewharton.disklrucache.DiskLruCache;
 
 import java.io.ByteArrayOutputStream;

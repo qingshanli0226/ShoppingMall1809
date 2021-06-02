@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.view.View;
 
-import com.example.common.log.LogUtil;
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
@@ -35,6 +33,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+
 public class MainActivity extends BaseActivity {
 
     private com.flyco.tablayout.CommonTabLayout mainComm;
@@ -43,6 +42,8 @@ public class MainActivity extends BaseActivity {
     private List<String> strings = new ArrayList<>();
     private boolean isLogin;//判断是否登陆
     private com.example.framework.view.MessageNumView numView;
+    private android.widget.Button btn;
+    private android.widget.FrameLayout mainFra;
 
     @Override
     public int bandLayout() {
@@ -62,6 +63,15 @@ public class MainActivity extends BaseActivity {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+        btn = findViewById(R.id.btn);
+        mainFra = findViewById(R.id.mainFra);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UmengActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

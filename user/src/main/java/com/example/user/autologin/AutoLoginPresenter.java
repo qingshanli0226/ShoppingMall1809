@@ -1,6 +1,6 @@
 package com.example.user.autologin;
 
-import com.example.net.retrogit.RetrofitManager;
+import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.LoginBean;
 import com.example.user.login.ILoginView;
 
