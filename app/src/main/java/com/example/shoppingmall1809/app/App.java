@@ -9,6 +9,7 @@ import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.ShopmallCrashHandler;
 import com.example.framework.manager.ShopManager;
 import com.example.net.NetModule;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -35,6 +36,7 @@ public class App extends Application {
 
 
 
+        //友盟
         UMConfigure.init(this, "5fe2b40a842ba953b8948087", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "65eb88f36b08564266888ebe598de6ee");
         UMConfigure.setLogEnabled(true);
 //获取消息推送代理示例
@@ -77,5 +79,8 @@ public class App extends Application {
         PlatformConfig.setVKontakte("5764965","5My6SNliAaLxEm3Lyd9J");
         PlatformConfig.setDropbox("oz8v5apet3arcdy","h7p2pjbzkkxt02a");
 //        PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
+        //bugly
+        CrashReport.initCrashReport(getApplicationContext(), "87da9e07da", false);
+
     }
 }
