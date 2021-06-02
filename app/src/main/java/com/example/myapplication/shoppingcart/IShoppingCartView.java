@@ -1,7 +1,6 @@
-package com.example.myapplication.shoppingCart;
+package com.example.myapplication.shoppingcart;
 
 import com.example.net.bean.RegisterBean;
-import com.example.net.bean.ShoppingCartBean;
 
 public interface IShoppingCartView {
     void onupdateCheck(RegisterBean bean);//全选或者全不选

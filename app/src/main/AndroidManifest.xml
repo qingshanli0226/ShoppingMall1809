@@ -4,6 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+<!--    腾讯bugly-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -15,7 +21,7 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".shoppingCart.ShoppingCartActivity"></activity>
+        <activity android:name=".shoppingcart.ShoppingCartActivity"></activity>
         <activity android:name=".findforsend.FindsendMainActivity"></activity>
 
         <activity android:name=".payorder.OrderActivity"></activity>

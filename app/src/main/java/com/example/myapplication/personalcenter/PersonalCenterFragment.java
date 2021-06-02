@@ -1,4 +1,4 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.personalcenter;
 
 import android.content.Intent;
 import android.view.View;

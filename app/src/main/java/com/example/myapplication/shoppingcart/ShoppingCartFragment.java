@@ -1,8 +1,8 @@
-package com.example.myapplication.shoppingCart;
+package com.example.myapplication.shoppingcart;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,8 +24,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.http.HEAD;
 
 public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
@@ -161,8 +159,25 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     public void onItemSubClick(int position, View view) {
         AddorSub = false;
         itemPosition = position;
-        ShoppingCartBean.ResultBean resultBean = list.get(position);
-        mPresenter.updateShoppingNum(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
+        if (Integer.parseInt(list.get(position).getProductNum()) <= 1) {//点击 - 的时候判断数量小于1的时候弹出对话框是否删除
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("确定要删除吗？");
+            builder.setTitle("数量小于1");
+            builder.setNegativeButton("取消", (dialog, which) -> {
+
+            });
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                ShoppingCartBean.ResultBean resultBean = list.get(position);
+                delList.add(resultBean);
+                mPresenter.deleteOneShopping(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        } else {
+
+            ShoppingCartBean.ResultBean resultBean = list.get(position);
+            mPresenter.updateShoppingNum(resultBean.getProductId(), resultBean.getProductNum(), resultBean.getProductName(), resultBean.getUrl(), resultBean.getProductPrice() + "");
+        }
     }
 
     //全选返回值
@@ -256,7 +271,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     @Override
     public void onDeleteOneShopping(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            if (list.size()==1){//如果只剩下一个数据 点击全选的时候 删除所有数据
+            if (list.size() == 1) {//如果只剩下一个数据 点击全选的时候 删除所有数据
                 shoppingCartCheck.setChecked(false);
                 shoppingCartCompileCheck.setChecked(false);
                 delList.clear();//清空编辑里面的集合
@@ -264,7 +279,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
                 adapter.notifyItemRemoved(0);
                 CaCheMannager.getInstance().setShoppingCartBeanList(list); //更新缓存类
                 EventBus.getDefault().post("1");//发送Evenbus
-            }else {
+            } else {
                 delList.clear();//清空编辑里面的集合
                 list.remove(itemPosition);
                 adapter.notifyItemRemoved(itemPosition);

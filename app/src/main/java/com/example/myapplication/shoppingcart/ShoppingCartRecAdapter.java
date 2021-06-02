@@ -1,4 +1,4 @@
-package com.example.myapplication.shoppingCart;
+package com.example.myapplication.shoppingcart;
 
 import android.view.View;
 import android.widget.CheckBox;

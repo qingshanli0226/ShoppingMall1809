@@ -1,18 +1,16 @@
 package com.example.myapplication.discover;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.framework.BaseFragment;
 import com.example.myapplication.R;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 public class DiscoverFragment extends BaseFragment {
+
+    private Button errorBtn;
 
     @Override
     public int bandLayout() {
@@ -21,12 +19,18 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        errorBtn = (Button) findViewById(R.id.errorBtn);
     }
 
     @Override
     public void initPresenter() {
 
+        errorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrashReport.testJavaCrash();
+            }
+        });
     }
 
     @Override
