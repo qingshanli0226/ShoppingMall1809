@@ -66,6 +66,8 @@ dependencies {
 
     implementation 'com.youth.banner:banner:1.4.10'//轮播图
 
+    implementation 'me.jessyan:autosize:1.1.2'//屏幕适配
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
