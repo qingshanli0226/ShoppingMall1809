@@ -19,12 +19,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import retrofit2.http.HEAD;
-
 
 
 public class MessageActivity extends BaseActivity {
-
 
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
     private List<MessageTable> messageTables;
@@ -43,6 +40,7 @@ public class MessageActivity extends BaseActivity {
         toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
             @Override
             public void onLeftClick() {
+                //返回
                 finish();
             }
 
@@ -57,36 +55,40 @@ public class MessageActivity extends BaseActivity {
             }
         });
 
-
+        //adapter 点击
         messageAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
+            //点击
             @Override
             public void OnItemClick(int position) {
+                //更改数据库
                 MessageDataBase.getInstance().getDaoSession().update(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
-                MessageActivity.this.messageTables.get(position).setIsShow(true);
+                messageTables.get(position).setIsShow(true);
                 messageAdapter.notifyItemChanged(position);
                 Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
             }
-
+            //长按
             @Override
             public void OnItemLongClick(int position) {
+                //长按 弹出AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
                 builder.setTitle("是否删除?");
+                //点击是
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        //把当前点击的数据，从数据库中删除
                         MessageDataBase.getInstance().getDaoSession().delete(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
                         messageTables.remove(position);
 
                         messageAdapter.updateData(MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class));
                         messageAdapter.notifyDataSetChanged();
+                        //删除后发送EventBus
                         EventBus.getDefault().post("num");
 
                         dialog.dismiss();
 
                     }
                 });
-
 
                 builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
@@ -97,16 +99,6 @@ public class MessageActivity extends BaseActivity {
                 builder.show();
             }
         });
-//        daoMaster = DBManger.getInstance().getDaoMaster(MessageActivity.this);
-//        if (daoMaster!=null){
-//            List<MessageTable> messageTables = daoMaster.newSession().loadAll(MessageTable.class);
-//            LogUtils.i(messageTables.toString());
-//
-//            adapter = new MessageAdapter();
-//            adapter.updateData(messageTables);
-//            messageRv.setAdapter(adapter);
-//        }
-//        daoMaster = MessageManger.getInstance().getDaoMaster();
 
 
     }

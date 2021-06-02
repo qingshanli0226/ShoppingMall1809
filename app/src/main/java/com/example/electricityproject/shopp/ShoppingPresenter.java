@@ -138,7 +138,7 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 });
     }
 
-    //单选和全选
+    //全选
     public void postSelectAllProductData(boolean isSelect) {
 
         JSONObject jsonObject = new JSONObject();
@@ -164,6 +164,45 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                         if (IView != null) {
                             IView.postSelectAllProductData(selectAllProductBean);
                             LogUtils.json(selectAllProductBean);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        if (IView != null) {
+                            IView.showError(e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void selectOntProductData(boolean isSelect){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("selected", isSelect);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), jsonObject.toString());
+
+        RetrofitCreate.getFiannceApiService()
+                .SelectAllProduct(requestBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SelectAllProductBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull SelectAllProductBean selectAllProductBean) {
+                        if (IView != null) {
+                            IView.postSelectOneProductData(selectAllProductBean);
                         }
                     }
 

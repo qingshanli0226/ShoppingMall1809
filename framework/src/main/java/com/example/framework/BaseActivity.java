@@ -17,6 +17,7 @@ import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessNetManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
+import com.umeng.message.PushAgent;
 
 
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener{
@@ -47,7 +48,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         toolBar.setToolbarListener(this);
         BusinessNetManager.getInstance().RegisterConnect(this);
         ActivityManger.getInstance().register(this);
-
+        PushAgent.getInstance(this).onAppStart();
     }
 
     protected abstract void initData();

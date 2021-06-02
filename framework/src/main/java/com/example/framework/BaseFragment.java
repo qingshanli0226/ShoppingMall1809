@@ -14,6 +14,7 @@ import com.example.manager.BusinessNetManager;
 import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
+import com.umeng.message.PushAgent;
 
 
 public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener{
@@ -35,6 +36,8 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
             }
         };
         toolBar = mView.findViewById(R.id.toolbar);
+        PushAgent.getInstance(getContext()).onAppStart();
+
         return mView;
     }
 

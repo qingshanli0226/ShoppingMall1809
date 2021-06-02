@@ -18,7 +18,7 @@ import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.SPMessageManger;
+import com.example.manager.SPMessageNum;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,9 +38,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
     @Override
     protected void initData() {
-
+        //获取首页数据
         httpPresenter.getHomeBannerData();
 
+        //跳到信息页面
         unreadMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +68,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
         homeAdapter = new HomeAdapter();
 
-        SPMessageManger.getInstance().init(getContext());
-        unreadMessageNum.setText(SPMessageManger.getInstance().queryMessageNum(getContext())+"");
+        //把数据库的数量写到 unreadMessageNum
+        unreadMessageNum.setText(SPMessageNum.getInstance().queryMessageNum(getContext())+"");
+
+        //注册EventBus
         EventBus.getDefault().register(this);
 
     }
@@ -130,6 +133,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     public void DisConnect() {
         Toast.makeText(getContext(), "已断开网络", Toast.LENGTH_SHORT).show();
     }
+
+    //支付成功或支付失败 重新把查询数据库
     @Subscribe
     public void changeText(String num){
         List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class);
@@ -140,10 +145,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     @Override
     public void onDestroy() {
         super.onDestroy();
+        //判断EventBus是否注册
         if (EventBus.getDefault().isRegistered(this)){
+            //EventBus取消注册
             EventBus.getDefault().unregister(this);
         }
-
     }
 
 }

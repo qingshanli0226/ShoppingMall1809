@@ -40,6 +40,8 @@ public class HomeAdapter extends BaseAdapter<Object> {
     private final int HOT_TYPE=5;
     private List<String> list=new ArrayList<>();
     private Handler handler=new Handler();
+    private Long start_time;
+    private Long end_time;
     private long l;
     @Override
     public int getLayoutId(int viewType) {
@@ -113,29 +115,13 @@ public class HomeAdapter extends BaseAdapter<Object> {
             case 2:
                 List<HomeBean.ResultBean.ActInfoBean> actInfoBeans= (List<HomeBean.ResultBean.ActInfoBean>) itemData;
                 RecyclerView act_re = baseViewHolder.getView(R.id.act_re);
-                TextView time = baseViewHolder.getView(R.id.time);
                 ActAdapter actAdapter = new ActAdapter();
-                l = 24*60*60*1000;
+
 
                 act_re.setLayoutManager(ActLayoutManager);
                 actAdapter.updateData(actInfoBeans);
                 act_re.setAdapter(actAdapter);
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                time.setText(Current(l)+"");
-                            }
-                        });
-                        l-=1000;
-                        if (l<=0){
-                            l=24*60*60*1000;
-                        }
-                    }
-                },0,1000);
+
                 actAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
                     @Override
                     public void OnItemClick(int position) {
@@ -179,7 +165,27 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     }
 
                 });
-
+                TextView time = baseViewHolder.getView(R.id.time);
+                start_time = Long.decode(listBeans.getStart_time());
+                end_time = Long.decode(listBeans.getEnd_time());
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (start_time<=end_time) {
+                                    time.setText(Current(start_time) + "");
+                                }
+                            }
+                        });
+                        start_time-=1000;
+                        if (start_time<=end_time){
+                            start_time=Long.decode(listBeans.getStart_time());
+                        }
+                    }
+                },0,1000);
                 break;
             case 4:
                 List<HomeBean.ResultBean.RecommendInfoBean> recommendInfoBeans= (List<HomeBean.ResultBean.RecommendInfoBean>) itemData;

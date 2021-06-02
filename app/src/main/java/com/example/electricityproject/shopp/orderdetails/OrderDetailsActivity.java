@@ -30,10 +30,8 @@ import com.example.view.ToolBar;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener,MessageDataBase.IMessageListener{
 
@@ -55,7 +53,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private android.widget.TextView allMoney;
     private TextView productPrice;
     private OrderDetailsAdapter orderDetailsAdapter;
-    private List<SelectOrderBean> list = new ArrayList<>();
+    private List<SelectOrderBean> list;
     private android.widget.Button goBuy;
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
 
@@ -134,7 +132,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         public void handleMessage(Message msg) {
 
             daoMaster = MessageDataBase.getInstance().getDaoMaster();
-//            daoMaster = MessageManger.getInstance().getDaoMaster();
 
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
@@ -157,8 +154,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-//                        MessageManager.getInstance().add(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                         EventBus.getDefault().post("num");
+                        EventBus.getDefault().post("del");
 
                     } else {
 
@@ -178,6 +175,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                         EventBus.getDefault().post("num");
+                        EventBus.getDefault().post("del");
+
 
                     }
                     break;
@@ -247,6 +246,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
         MessageDataBase.getInstance().unregister(this);
+        list.clear();
     }
 }

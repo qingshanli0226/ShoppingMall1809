@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
-import com.example.common.bean.LogBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
@@ -95,7 +94,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
 
-
+        //当img为不能null时为WebView添加图片网址
         if (img!=null){
             detailsWeb.loadUrl(Constants.BASE_URl_IMAGE+img);
             //在webView加载数据
@@ -123,13 +122,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             @Override
             public void onRightImgClick() {
+
                 PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
                 popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 popupWindow.setHeight(200);
                 View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.item_more,null);
                 popupWindow.setContentView(inflate);
+                //点击pop外的地方，把pop隐藏
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.showAsDropDown(toolbar,0,0);
+
             }
             @Override
             public void onRightTvClick() {
@@ -140,8 +142,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-                if (isLog!=null){
+
+                if (BusinessUserManager.getInstance().getIsLog()!=null){
                     popupWindow = new PopupWindow();
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                     popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -158,7 +160,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     names.setText(""+name);
                     num.setText("1");
                     price.setText("￥"+productPrice);
-
+                    //数量加一
                     pop_add.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -166,10 +168,11 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             num.setText(""+prod_num);
                         }
                     });
-
+                    //数量减一
                     pop_sub.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //判断数量不能小于0
                             if (prod_num < 0){
                                 Toast.makeText(DetailsActivity.this, "库存不可为0", Toast.LENGTH_SHORT).show();
                             }else {
@@ -268,11 +271,10 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
 
         if (addOneProductBean.getCode().equals("200")){
+
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
             ShopCacheManger.getInstance().requestShortProductData();
-
-
 
         }
     }
@@ -280,10 +282,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Override
     public void checkOneProductInventory(RegBean checkInventoryBean) {
         if (checkInventoryBean.getCode().equals("200")){
+
             String result = checkInventoryBean.getResult();
             if (!result.equals("0")){
                 httpPresenter.postAddOneProduct(map);
             }
+
         }
     }
 

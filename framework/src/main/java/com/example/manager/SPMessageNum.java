@@ -9,19 +9,20 @@ import com.example.common.db.MessageTable;
 
 import java.util.List;
 
-public class SPMessageManger {
+public class SPMessageNum {
 
-    private static SPMessageManger messageManger;
+    private static SPMessageNum messageManger;
     private String MESSAGE_SPName = "commodity";
     private String MESSAGE_EDIT_MESSAGENUM = "messageNum";
 
 
-    public static synchronized SPMessageManger getInstance() {
+    public static synchronized SPMessageNum getInstance() {
         if (messageManger==null){
-            messageManger = new SPMessageManger();
+            messageManger = new SPMessageNum();
         }
         return messageManger;
     }
+
     //初始化
     public void init(Context context){
 
@@ -33,6 +34,7 @@ public class SPMessageManger {
         edit.commit();
 
     }
+
     //查询数据库的数量
     public int queryMessageNum(Context context){
 

@@ -31,7 +31,7 @@ public class ShopCacheManger {
 
     private List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
 
-    private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>();
+    private List<ShortcartProductBean.ResultBean> selectList = new ArrayList<>(); //选中的集合
 
     private List<SelectOrderBean> list = new ArrayList<>();
 
@@ -61,14 +61,12 @@ public class ShopCacheManger {
     public void setSelect(ShortcartProductBean.ResultBean select) {
 
         if (select != null) {
-            if (!selectList.contains(select)) {
-                if (select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",66,"添加");
+            if (!selectList.contains(select)) {     //判断是否包含
+                if (select.isAll()){                //选中
                     selectList.add(select);
                 }
             }else {
-                if (!select.isAll()){
-                    com.example.common.LogUtils.i("ShopCacheManger",71,"删除");
+                if (!select.isAll()){               //没选中
                     selectList.remove(select);
                 }
             }
@@ -83,23 +81,6 @@ public class ShopCacheManger {
         this.list = list;
     }
 
-    public void setSelectList(List<ShortcartProductBean.ResultBean> selectShortBeanList){
-        if (selectShortBeanList!=null){
-            for (ShortcartProductBean.ResultBean bean : selectShortBeanList) {
-                if (!selectList.contains(bean)){
-                    if (bean.isAll()){
-                        com.example.common.LogUtils.i("ShopCacheManger",91,"添加");
-                        selectList.add(bean);
-                    }
-                }else {
-                    if (!bean.isAll()){
-                        com.example.common.LogUtils.i("ShopCacheManger",96,"删除");
-                        selectList.remove(bean);
-                    }
-                }
-            }
-        }
-    }
 
     public List<FindForPayBean.ResultBean> getMessageList() {
         return messageList;
