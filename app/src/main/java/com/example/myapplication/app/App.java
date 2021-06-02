@@ -1,7 +1,6 @@
 package com.example.myapplication.app;
 
 import android.app.Application;
-import android.content.Intent;
 
 import com.example.UserModule;
 import com.example.framework.manager.CaCheArote;
@@ -10,7 +9,7 @@ import com.example.myapplication.AppModule;
 import com.example.myapplication.MsgMoudel;
 import com.example.myapplication.particulars.ParticularsModule;
 import com.example.net.AppMoudel;
-import com.example.user.AutoService;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -47,8 +46,7 @@ public class App extends Application {
         PlatformConfig.setKakao("e4f60e065048eb031e235c806b31c70f");
         PlatformConfig.setVKontakte("5764965","5My6SNliAaLxEm3Lyd9J");
         PlatformConfig.setDropbox("oz8v5apet3arcdy","h7p2pjbzkkxt02a");
-
-
+        CrashReport.initCrashReport(getApplicationContext(),"7fee8d00b8",true);
     }
 
 }

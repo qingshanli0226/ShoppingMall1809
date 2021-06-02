@@ -1,6 +1,5 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.personalcenter;
 
-import com.example.myapplication.findforsend.FindsendMainActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 

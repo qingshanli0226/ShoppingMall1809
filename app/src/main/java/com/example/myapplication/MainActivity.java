@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.common.type.ToLoginType;
 import com.example.common.type.TypeString;
 import com.example.framework.manager.CaCheArote;
@@ -17,8 +16,8 @@ import com.example.framework.view.MessageNumView;
 import com.example.myapplication.type.TypefyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
-import com.example.myapplication.personalCenter.PersonalCenterFragment;
-import com.example.myapplication.shoppingCart.ShoppingCartFragment;
+import com.example.myapplication.personalcenter.PersonalCenterFragment;
+import com.example.myapplication.shoppingcart.ShoppingCartFragment;
 import com.example.user.AutoService;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -65,13 +64,7 @@ public class MainActivity extends BaseActivity {
         }
         btn = findViewById(R.id.btn);
         mainFra = findViewById(R.id.mainFra);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UmengActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override

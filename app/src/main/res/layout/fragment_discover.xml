@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".discover.DiscoverFragment">
 
     <RelativeLayout
@@ -15,8 +16,7 @@
             android:layout_height="@dimen/dp_40"
             app:isleft="true"
             app:leftimg="@drawable/top_bar_left_back"
-            app:titletext="Title"
-            ></com.example.framework.view.MyToorbar>
+            app:titletext="Title"></com.example.framework.view.MyToorbar>
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,6 +26,18 @@
             android:text="右侧"></TextView>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/errorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试腾讯Bugly"></Button>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分享"></Button>
 
 
 </LinearLayout>

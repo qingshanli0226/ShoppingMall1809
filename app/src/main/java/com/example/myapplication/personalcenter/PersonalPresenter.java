@@ -15,8 +15,8 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import mvp.presenter.BasePresenter;
 
-public class PersonalPresenter extends BasePresenter<IPersonalView> {
-    public PersonalPresenter(IPersonalView view) {
+public class PersonalPresenter extends BasePresenter<com.example.myapplication.personalcenter.IPersonalView> {
+    public PersonalPresenter(com.example.myapplication.personalcenter.IPersonalView view) {
         attView(view);
     }
     public void getFindForPay(){

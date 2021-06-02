@@ -1,4 +1,4 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.personalcenter;
 
 import android.content.Intent;
 import android.view.View;
@@ -13,11 +13,12 @@ import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
 import com.example.myapplication.findforpay.FindPayMainActivity;
 import com.example.myapplication.findforsend.FindsendMainActivity;
+import com.example.myapplication.personalCenter.PersonalPresenter;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
 
-public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements IPersonalView {
+public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements com.example.myapplication.personalcenter.IPersonalView {
 
     private MyToorbar toorBar;
     private ImageView userImage;
