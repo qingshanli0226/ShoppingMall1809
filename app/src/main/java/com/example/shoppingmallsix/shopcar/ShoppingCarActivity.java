@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.net.bean.business.CheckInventoryBean;
 import com.example.net.bean.business.CheckOneInventoryBean;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
@@ -35,7 +35,7 @@ import com.example.user.login.LoginActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> implements IShopping, SoppingCartMemoryDataManager.ISoppingDateChange {
+public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> implements IShopping, ShoppingCartMemoryDataManager.ISoppingDateChange {
 
     private String bianji = "编辑";
     private String wancheng = "完成";
@@ -62,7 +62,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
 
     @Override
     protected void initData() {
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
@@ -103,7 +103,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            GetShortcartProductsBean resultBean = ShoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
@@ -220,7 +220,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
                     }
                 }
                 //通知个个页面数据刷新
-                SoppingCartMemoryDataManager.setResultBean(resultBeans);
+                ShoppingCartMemoryDataManager.setResultBean(resultBeans);
             }
             //刷新金额
             allPrice();
@@ -235,7 +235,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
             //刷新多选
             AllProductBeanAndProductSelect();
             //通知内存数据刷新
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
 
@@ -255,7 +255,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
             GetShortcartProductsBean.ResultBean resultBean = resultBeans.get(position);
             //修改
             httpPresenter.updateProduceNum(resultBean.getProductId(), (Integer.parseInt(resultBean.getProductNum())+1) + "", resultBean.getProductName(), resultBean.getUrl(), ""+price,position,false);
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(ShoppingCarActivity.this, "检查库存没有", Toast.LENGTH_SHORT).show();
         }
@@ -283,7 +283,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
                 resultBeans.get(position).setProductNum((Integer.parseInt(resultBeans.get(position).getProductNum())+1)+"");
             }
             allPrice();
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         }
     }
 
@@ -295,7 +295,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         }
         allPrice();
         //通知缓存改变
-        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        ShoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
 
     @Override
@@ -369,7 +369,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
         }
         allPrice();
         AllProductBeanAndProductSelect();
-        SoppingCartMemoryDataManager.setResultBean(resultBeans);
+        ShoppingCartMemoryDataManager.setResultBean(resultBeans);
     }
 
     @Override
@@ -390,7 +390,7 @@ public class ShoppingCarActivity extends BaseActivity<ShoppingPresenter> impleme
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 
 

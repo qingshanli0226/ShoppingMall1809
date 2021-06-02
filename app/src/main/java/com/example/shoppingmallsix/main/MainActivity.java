@@ -1,6 +1,5 @@
 package com.example.shoppingmallsix.main;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.net.bean.business.GetShortcartProductsBean;
 import com.example.net.bean.user.LoginBean;
 import com.example.net.bean.MainBean;
@@ -31,13 +30,12 @@ import com.example.user.login.LoginActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/main/MainActivity")
-public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, SoppingCartMemoryDataManager.ISoppingDateChange {
+public class MainActivity extends BaseActivity implements CacheUserManager.ILoginChange, ShoppingCartMemoryDataManager.ISoppingDateChange {
 
     private FrameLayout mainFram;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -78,7 +76,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         //handler实时监听子线程更新数据
         handler.sendEmptyMessageDelayed(1, 1000);
         //注册接口
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.mainFram, new HomeFragment()).commitAllowingStateLoss();
 
@@ -158,7 +156,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
     protected void onDestroy() {
         super.onDestroy();
         CacheUserManager.getInstance().unRegisterLogin(this);
-        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 
     //子线程获取数据 实时刷新
@@ -166,7 +164,7 @@ public class MainActivity extends BaseActivity implements CacheUserManager.ILogi
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            GetShortcartProductsBean resultBean = ShoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
                 resultBeans.clear();
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();

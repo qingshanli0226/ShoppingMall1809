@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.ShopmallGlide;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 
 import com.example.net.bean.business.AddOneProductBean;
@@ -50,7 +50,7 @@ import com.example.user.login.LoginActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView, SoppingCartMemoryDataManager.ISoppingDateChange {
+public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGoodsView, ShoppingCartMemoryDataManager.ISoppingDateChange {
 
 
     private com.example.framework.view.ToolBar toolbar;
@@ -90,12 +90,12 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         list.add(goodAdapterBean);
         goodsAdapter.notifyDataSetChanged();
         //注册接口
-        SoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().registerHoppingCartMemory(this);
         handler.sendEmptyMessageDelayed(1, 1000);
 
         LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
         if (loginBean1 != null) {
-            List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
+            List<GetShortcartProductsBean.ResultBean> result = ShoppingCartMemoryDataManager.getResultBean().getResult();
             if (result.size() != 0) {
                 goodsSign.setVisibility(View.VISIBLE);
                 goodsSign.setText(result.size() + "");
@@ -132,7 +132,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
 
                 LoginBean loginBean1 = CacheUserManager.getInstance().getLoginBean();
                 if (loginBean1 != null) {
-                    List<GetShortcartProductsBean.ResultBean> result = SoppingCartMemoryDataManager.getResultBean().getResult();
+                    List<GetShortcartProductsBean.ResultBean> result = ShoppingCartMemoryDataManager.getResultBean().getResult();
                     if (result.size() != 0) {
                         goodsSign.setVisibility(View.VISIBLE);
                         goodsSign.setText(result.size() + "");
@@ -264,7 +264,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             resultBean.setProductNum(num + "");
             resultBean.setProductPrice(price);
             resultBeans.add(resultBean);
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(this, getString(R.string.dda), Toast.LENGTH_SHORT).show();
         }
@@ -297,7 +297,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             Toast.makeText(this, "更新", Toast.LENGTH_SHORT).show();
             //更新
             resultBeans.get(index).setProductNum("" + (Integer.parseInt(resultBean.getProductNum()) + num));
-            SoppingCartMemoryDataManager.setResultBean(resultBeans);
+            ShoppingCartMemoryDataManager.setResultBean(resultBeans);
         } else {
             Toast.makeText(this, "没有更新", Toast.LENGTH_SHORT).show();
         }
@@ -309,7 +309,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            GetShortcartProductsBean resultBean = SoppingCartMemoryDataManager.getResultBean();
+            GetShortcartProductsBean resultBean = ShoppingCartMemoryDataManager.getResultBean();
             if (resultBean != null) {
                 List<GetShortcartProductsBean.ResultBean> result = resultBean.getResult();
                 if (result != null && result.size() != 0) {
@@ -398,6 +398,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     protected void onDestroy() {
         super.onDestroy();
         //销毁接口
-        SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
+        ShoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
 }
