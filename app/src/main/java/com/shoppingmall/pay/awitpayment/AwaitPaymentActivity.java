@@ -13,8 +13,11 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.framework.manager.PaymentManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.FindForPayBean;
+
+import java.util.ArrayList;
 
 public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> implements IAwaitPaymentView {
 
@@ -43,14 +46,17 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
     @Override
     public void initData() {
         httpPresenter.getFindForPay();
+
     }
 
     @Override
     public void onAwaitPayment(FindForPayBean findForPayBean) {
         LogUtils.json(findForPayBean);
+
         AwaitPaymentAdapter awaitPaymentAdapter = new AwaitPaymentAdapter();
         paymentRv.setLayoutManager(new LinearLayoutManager(this));
         paymentRv.setAdapter(awaitPaymentAdapter);
+        awaitPaymentAdapter.updateData(findForPayBean.getResult());
 
         awaitPaymentAdapter.setRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
             @Override
@@ -60,15 +66,15 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
                 builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(AwaitPaymentActivity.this, "付款成功", Toast.LENGTH_SHORT).show();
-//                        awaitPaymentAdapter.getData().remove(position);
-//                        awaitPaymentAdapter.notifyDataSetChanged();
+
                     }
                 });
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Toast.makeText(AwaitPaymentActivity.this, "付款成功", Toast.LENGTH_SHORT).show();
+                        awaitPaymentAdapter.getData().remove(position);
+                        awaitPaymentAdapter.notifyDataSetChanged();
                     }
                 });
 

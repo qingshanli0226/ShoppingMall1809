@@ -1,7 +1,6 @@
 package com.shoppingmall.framework.manager;
 
 
-
 import com.shoppingmall.net.bean.LoginBean;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class ShopMallUserManager {
             //退出登录
             iUserLoginChanged.onLoginChanged(loginBean);
         }
+
     }
 
     public void registerUserLoginChanged(IUserLoginChanged iUserLoginChanged){

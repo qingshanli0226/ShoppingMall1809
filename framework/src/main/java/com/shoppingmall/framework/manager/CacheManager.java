@@ -14,7 +14,6 @@ public class CacheManager {
     }
 
     private HomeBean homeBean;
-    private ShopCarBean shopCarBean;
 
 
     public HomeBean getHomeBean() {
@@ -25,12 +24,5 @@ public class CacheManager {
         this.homeBean = homeBean;
     }
 
-    public ShopCarBean getShopCarBean() {
-        return shopCarBean;
-    }
-
-    public void setShopCarBean(ShopCarBean shopCarBean) {
-        this.shopCarBean = shopCarBean;
-    }
 }
 

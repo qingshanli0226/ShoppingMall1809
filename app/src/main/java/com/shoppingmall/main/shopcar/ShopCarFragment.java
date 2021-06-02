@@ -326,8 +326,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
-//        EventBus.getDefault().post("ShopCarNum");
-
     }
 
     //删除多个
@@ -351,8 +349,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
-//        EventBus.getDefault().post("ShopCarNum");
-
     }
 
     @Subscribe

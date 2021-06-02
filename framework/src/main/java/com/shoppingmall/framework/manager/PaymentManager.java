@@ -19,6 +19,10 @@ public class PaymentManager {
         this.list = list;
     }
 
+    public FindForPayBean.ResultBean getList() {
+        return list;
+    }
+
     public FindForPayBean.ResultBean list = new FindForPayBean.ResultBean();
 
     public static PaymentManager getPaymentManager() {

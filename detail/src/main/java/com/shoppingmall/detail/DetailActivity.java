@@ -1,6 +1,7 @@
 package com.shoppingmall.detail;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -142,6 +143,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
 
     @Override
     public void initData() {
+
         loginBean = ShopMallUserManager.getInstance().getLoginBean();
 
         daoSession = TableManager.getInstance().getDaoSession();
@@ -182,7 +184,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("toDetail",1).navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
-                ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
+//                ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
                 finish();
             }
         });
@@ -337,6 +339,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        finish();
     }
 
 }

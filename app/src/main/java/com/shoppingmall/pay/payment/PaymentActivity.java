@@ -29,6 +29,8 @@ import com.shoppingmall.zfb.AuthResult;
 import com.shoppingmall.zfb.PayResult;
 import com.shoppingmall.zfb.util.OrderInfoUtil2_0;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Map;
 
 import io.reactivex.annotations.NonNull;
@@ -83,10 +85,14 @@ public class PaymentActivity extends BaseActivity {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
 
                         showAlert(PaymentActivity.this, getString(R.string.pay_success) + payResult);
+
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
 
                         showAlert(PaymentActivity.this, getString(R.string.pay_failed) + payResult);
+//                        Intent intent = new Intent(PaymentActivity.this,MainActivity.class);
+//                        startActivity(intent);
+//                        Toast.makeText(PaymentActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 }
@@ -292,7 +298,9 @@ public class PaymentActivity extends BaseActivity {
     @Override
     public void initData() {
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-
+        Intent intent = getIntent();
+        String orderPrice = intent.getStringExtra("orderPrice");
+        payPrice.setText(""+orderPrice);
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,7 +309,7 @@ public class PaymentActivity extends BaseActivity {
                 } else if(zfbCheck.isChecked()){
                     //支付宝
                     handleResult(orderInfo);
-
+                    EventBus.getDefault().post("delCar");
                 } else{
                     Toast.makeText(PaymentActivity.this, "没有选中支付方式", Toast.LENGTH_SHORT).show();
                 }

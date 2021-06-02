@@ -2,11 +2,14 @@ package com.shoppingmall.pay.dropshipping;
 
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.FindForSendBean;
+import com.shoppingmall.pay.awitpayment.AwaitPaymentAdapter;
 
 public class DropShippingActivity extends BaseActivity<DropShippingPresenter> implements IDropShippingView {
 
@@ -35,10 +38,15 @@ public class DropShippingActivity extends BaseActivity<DropShippingPresenter> im
     @Override
     public void initData() {
         httpPresenter.getFindForSend();
+
     }
 
     @Override
     public void getFindForSend(FindForSendBean findForSendBean) {
-
+        LogUtils.json(findForSendBean);
+        DropShippingAdapter dropShippingAdapter = new DropShippingAdapter();
+        dropRv.setLayoutManager(new LinearLayoutManager(this));
+        dropRv.setAdapter(dropShippingAdapter);
+        dropShippingAdapter.updateData(findForSendBean.getResult());
     }
 }

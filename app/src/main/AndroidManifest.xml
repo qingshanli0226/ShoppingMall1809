@@ -18,7 +18,6 @@
         <activity android:name=".pay.awitpayment.AwaitPaymentActivity" />
         <activity android:name=".pay.payment.PaymentActivity" />
         <activity android:name=".pay.order.OrderActivity" />
-        <activity android:name=".pay.unpaid.PayDealActivity" />
         <activity android:name=".main.message.MessageActivity" />
         <activity android:name=".main.mine.ExitUserActivity" />
         <activity

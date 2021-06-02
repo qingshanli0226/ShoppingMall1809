@@ -1,10 +1,8 @@
 package com.shoppingmall.main;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -14,18 +12,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.fiance.user.AutoService;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.manager.CacheShopManager;
-import com.shoppingmall.framework.manager.ShopMallArouter;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.view.CircleView;
 import com.shoppingmall.main.bean.CustomBean;
-import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.main.adapter.ComAdapter;
 import com.shoppingmall.main.find.FindFragment;
@@ -33,7 +28,6 @@ import com.shoppingmall.main.home.HomeFragment;
 import com.shoppingmall.main.mine.MineFragment;
 import com.shoppingmall.main.shopcar.ShopCarFragment;
 import com.shoppingmall.main.sort.SortFragment;
-import com.shoppingmall.net.bean.HomeBean;
 import com.shoppingmall.net.bean.LoginBean;
 
 
@@ -67,9 +61,10 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     public void initPresenter() {
 
     }
-
     @Override
     public void initData() {
+        EventBus.getDefault().register(this);
+
         LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
         if(loginBean != null){
             if(CacheShopManager.getInstance().getCarts().size() > 0){
@@ -79,8 +74,6 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
                 mainCircle.setVisibility(View.GONE);
             }
         }
-
-        EventBus.getDefault().register(this);
 
         Intent intent = getIntent();
         int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);
