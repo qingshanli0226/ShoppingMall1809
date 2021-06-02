@@ -24,7 +24,9 @@
         <activity android:name=".exception.ExceptionActivity" />
         <activity android:name=".mvvm.MVVMActivity" />
         <activity android:name=".lock.LockActivity" />
-        <activity android:name=".handler.HandlerActivity"></activity>
+        <activity android:name=".handler.HandlerActivity" />
+        <activity android:name=".handler.HandlerTimeActivity" />
+        <activity android:name=".handler.ShopHandlerActivity"></activity>
     </application>
 
 </manifest>

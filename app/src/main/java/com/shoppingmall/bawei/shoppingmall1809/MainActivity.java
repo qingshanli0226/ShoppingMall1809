@@ -20,6 +20,7 @@ import com.shoppingmall.bawei.shoppingmall1809.exception.ExceptionActivity;
 
 import com.shoppingmall.bawei.shoppingmall1809.glide.GlideActivity;
 import com.shoppingmall.bawei.shoppingmall1809.handler.HandlerActivity;
+import com.shoppingmall.bawei.shoppingmall1809.handler.ShopHandlerActivity;
 import com.shoppingmall.bawei.shoppingmall1809.home.HomeAdapter;
 import com.shoppingmall.bawei.shoppingmall1809.lock.LockActivity;
 import com.shoppingmall.bawei.shoppingmall1809.mvvm.MVVMActivity;
@@ -112,7 +113,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btnHandler).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,HandlerActivity.class);
+                Intent intent = new Intent(MainActivity.this,ShopHandlerActivity.class);
                 startActivity(intent);
             }
         });
