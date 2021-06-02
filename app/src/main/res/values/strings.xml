@@ -108,4 +108,15 @@
     <string name="aWaitPaymentToolbar">待付款</string>
     <string name="DropShippingToolbar">代发货</string>s
 
+
+    <!--  绑定联系方式  -->
+    <string name="bindinfo_toolbar">绑定联系方式</string>
+    <string name="bindinfo_numbertv">电话</string>
+    <string name="bindinfo_numberev">请输入电话</string>
+    <string name="bindinfo_affirm_number">确认绑定电话号</string>
+    <string name="bindinfo_locationtv">地址</string>
+    <string name="bindinfo_locationev">请输入地址</string>
+    <string name="bindinfo_affirm_location">确认绑定地址</string>
+    <string name="bindinfo_affirm">点击确认，表示同意《尚硅谷用户协议》</string>
+    <string name="BindToolbar">绑定电话地址</string>
 </resources>

@@ -14,22 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingMall"
         android:usesCleartextTraffic="true">
-        <activity android:name=".pay.dropshipping.DropShippingActivity"></activity>
+        <activity android:name=".userInfo.BindActivity"></activity>
+        <activity android:name=".pay.dropshipping.DropShippingActivity" />
         <activity android:name=".pay.awitpayment.AwaitPaymentActivity" />
         <activity android:name=".pay.payment.PaymentActivity" />
         <activity android:name=".pay.order.OrderActivity" />
         <activity android:name=".main.message.MessageActivity" />
         <activity android:name=".main.mine.ExitUserActivity" />
         <activity
-            android:name=".welcome.WelcomeActivity"
-            android:launchMode="singleTask">
+            android:name=".welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".main.MainActivity"/>
     </application>
 
 </manifest>

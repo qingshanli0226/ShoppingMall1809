@@ -11,6 +11,15 @@ public class ShopMallUserManager {
     private List<IUserLoginChanged> list=new ArrayList<>();
 
     private LoginBean loginBean;
+    private boolean isBind = false;
+
+    public boolean isBind() {
+        return isBind;
+    }
+
+    public void setBind(boolean bind) {
+        isBind = bind;
+    }
 
     public LoginBean getLoginBean() {
         return loginBean;

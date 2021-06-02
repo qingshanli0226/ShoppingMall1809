@@ -79,6 +79,10 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
         int shopMallPosition = intent.getIntExtra("shopMallPosition", -1);
         VpPosition = intent.getIntExtra("position",-1);
 
+        int intExtra = intent.getIntExtra("4", -1);
+        if (intExtra!=-1){
+            mainVp.setCurrentItem(intExtra);
+        }
         ArrayList<Fragment> list = new ArrayList<>();
         list.add(new HomeFragment());
         list.add(new SortFragment());
@@ -139,7 +143,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
         if (VpPosition!=-1){
             mainVp.setCurrentItem(VpPosition);
         }
-        if (shopMallPosition!=1){
+        if (shopMallPosition!=-1){
             mainVp.setCurrentItem(shopMallPosition);
         }
     }
@@ -150,6 +154,8 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
             if(CacheShopManager.getInstance().getCarts().size() > 0){
                 mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
                 mainCircle.setVisibility(View.VISIBLE);
+            }else {
+                mainCircle.setVisibility(View.GONE);
             }
         }
 

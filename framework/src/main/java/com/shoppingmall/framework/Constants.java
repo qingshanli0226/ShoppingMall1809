@@ -90,4 +90,63 @@ public class Constants {
 
     public static final String SQLDB = "shopcar.db";
 
+    public static Boolean isBackHome = false;
+
+    //客服数据
+    public static final String CALL_CENTER = "http://www6.53kf.com/webCompany.php?arg=10007377&style=1&kflist=off&kf=info@atguigu.com,video@atguigu.com,public@atguigu.com,3069368606@qq.com,215648937@qq.com,sudan@atguigu.com,sszhang@atguigu.com&zdkf_type=1&language=zh-cn&charset=gbk&referer=http%3A%2F%2Fwww.atguigu.com%2Fcontant.shtml&keyword=&tfrom=1&tpl=crystal_blue&timeStamp=1479001706368&ucust_id=";
+
+    public static final String LOGIN = "login";//登录
+    public static final String USERREGISTER = "register";//注册
+    public static final String AUTOLOGIN = "autoLogin";//自动登录
+    //代付款
+    public static final String AWAITPAYMENT = "findForPay";
+    //代发货
+    public static final String SHIPMENT = "findForSend";
+    //主页Fragment路径
+    public static final String HOME_URL = BASE_URL_JSON + "HOME_URL.json";
+    //分类Fragment里面的标签Fragment页面数据
+    public static final String TAG_URL = BASE_URL_JSON + "TAG_URL.json";
+
+
+    public static final String NEW_POST_URL = BASE_URL_JSON + "NEW_POST_URL.json";
+    public static final String HOT_POST_URL = BASE_URL_JSON + "HOT_POST_URL.json";
+
+
+    //页面的具体数据的id
+    public static final String GOODSINFO_URL = BASE_URL_JSON + "GOODSINFO_URL.json";
+
+    //欢迎页面
+    public static final String PATH_WEL = "/app/WelActivity";
+    //主页面
+    public static final String PATH_MAIN = "/app/MainActivity";
+    //详情
+    public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
+    //详情
+    public static final String PATH_SHOPACTIVITY = "/app/ShopActivity";
+    //绑定页面
+    public static final String PATH_BIND = "/app/BindInfoActivity";
+    //信息
+    public static final String PATH_MESSAGE = "/pay/MessageActivity";
+    //待付款
+    public static final String PATH_AWAITPAYMENT = "/pay/Awaitpayment";
+    //自负方式
+    public static final String PATH_PAYMENT = "/pay/PaymentActivity";
+    //待发货
+    public static final String PATH_SHIPMENTS= "/pay/ShipmentsActivity";
+    //订单详细页面
+    public static final String PATH_ORDERINFOACTIVITY= "/pay/OrderInfoActivity";
+    //用户
+    public static final String PATH_USER = "/user/UserActivity";
+
+    //判断home页面的布局
+    public static final int HOME_BANNER = 0;
+    public static final int HOME_CHANNEL = 1;
+    public static final int HOME_ACT = 2;
+    public static final int HOME_SEKILL = 3;
+    public static final int HOME_RECOMMEND = 4;
+    public static final int HOME_HOT = 5;
+
+    //支付宝判断
+    public static final int PAY_SDK_FLAG = 0;
+
 }

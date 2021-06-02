@@ -16,6 +16,8 @@ import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.FindForPayBean;
 import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.net.bean.OrderBean;
+import com.shoppingmall.net.bean.PayBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 import com.shoppingmall.pay.order.adapter.OrderAdapter;
 import com.shoppingmall.pay.payment.PaymentActivity;
@@ -25,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class OrderActivity extends BaseActivity {
+public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrderView {
     private android.widget.ImageView detailBack;
     private android.widget.ImageView detailMenu;
     private android.widget.TextView username;
@@ -61,39 +63,30 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     public void initPresenter() {
+        httpPresenter = new OrderPresenter(this);
 
     }
-    private List<ShopCarBean.ResultBean> orderList;
+    private PayBean payBean;
     @Override
     public void initData() {
         LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
-        orderList = null;
-        username.setText(""+loginBean.getResult().getName());
-        userAddress.setText(""+loginBean.getResult().getAddress());
-        userPhone.setText(""+loginBean.getResult().getPhone());
+        //用户信息
+        username.setText(loginBean.getResult().getName());
+        userPhone.setText(loginBean.getResult().getPhone()+"");
+        userAddress.setText(loginBean.getResult().getAddress()+"");
 
         Intent intent = getIntent();
-        String Price = intent.getStringExtra("orderPrice");
-        orderPrice.setText("￥"+Price);
-        orderList = (List<ShopCarBean.ResultBean>) intent.getSerializableExtra("orderList");
+        payBean = (PayBean) intent.getSerializableExtra("body");
+
+        orderPrice.setText(""+payBean.getTotalPrice());
         orderAdapter = new OrderAdapter();
         orderAdapter.notifyDataSetChanged();
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         orderRv.setAdapter(orderAdapter);
-        orderAdapter.updateData(orderList);
+        orderAdapter.updateData(payBean.getBody());
 
         orderPay.setOnClickListener(v->{
-            Intent intent1 = new Intent(OrderActivity.this, PaymentActivity.class);
-            intent1.putExtra("orderPrice","orderPrice");
-            FindForPayBean.ResultBean findForPayBean = new FindForPayBean.ResultBean();
-            findForPayBean.setTotalPrice(""+orderPrice);
-            for (ShopCarBean.ResultBean resultBean : orderList) {
-                tradeNo = resultBean.getProductId()+"-"+tradeNo;
-            }
-            findForPayBean.setOrderInfo(tradeNo);
-            findForPayBean.setTime(""+getTime());
-            PaymentManager.getInstance().setList(findForPayBean);
-            startActivity(intent1);
+            httpPresenter.getOrder(payBean);
         });
     }
 
@@ -102,5 +95,14 @@ public class OrderActivity extends BaseActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD_hh:mm:ss");
         String format = simpleDateFormat.format(date);
         return format;
+    }
+
+    @Override
+    public void orderInfo(OrderBean orderBean) {
+        Intent intent = new Intent(OrderActivity.this,PaymentActivity.class);
+        intent.putExtra("totalPrice",payBean.getTotalPrice());
+        intent.putExtra("orderInfo",orderBean.getResult().getOrderInfo());
+        intent.putExtra("outTradeNo",orderBean.getResult().getOutTradeNo());
+        startActivity(intent);
     }
 }

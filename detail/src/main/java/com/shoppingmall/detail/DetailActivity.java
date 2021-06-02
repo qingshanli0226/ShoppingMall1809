@@ -184,7 +184,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 ARouter.getInstance().build(Constants.TO_USER_ACTIVITY).withInt("toDetail",1).navigation();
                 Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
             }else {
-//                ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
+                ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
                 finish();
             }
         });

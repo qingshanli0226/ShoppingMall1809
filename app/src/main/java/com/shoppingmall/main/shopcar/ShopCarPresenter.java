@@ -7,6 +7,7 @@ import com.shoppingmall.framework.mvp.BasePresenter;
 import com.shoppingmall.net.bean.AddProductBean;
 import com.shoppingmall.net.bean.CheckProductBean;
 import com.shoppingmall.net.bean.HomeBean;
+import com.shoppingmall.net.bean.PayBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.SelectBean;
 import com.shoppingmall.net.bean.ShopCarBean;
@@ -263,5 +264,4 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
                     }
                 });
     }
-
 }

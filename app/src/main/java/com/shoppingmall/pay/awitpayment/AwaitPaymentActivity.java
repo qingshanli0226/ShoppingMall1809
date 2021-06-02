@@ -75,6 +75,7 @@ public class AwaitPaymentActivity extends BaseActivity<AwaitPaymentPresenter> im
                         Toast.makeText(AwaitPaymentActivity.this, "付款成功", Toast.LENGTH_SHORT).show();
                         awaitPaymentAdapter.getData().remove(position);
                         awaitPaymentAdapter.notifyDataSetChanged();
+
                     }
                 });
 

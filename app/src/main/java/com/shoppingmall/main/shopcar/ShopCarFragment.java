@@ -18,10 +18,15 @@ import androidx.viewpager.widget.ViewPager;
 import com.blankj.utilcode.util.LogUtils;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.CacheShopManager;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
 import com.shoppingmall.main.shopcar.adapter.ShopCarAdapter;
+import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.net.bean.OrderBean;
+import com.shoppingmall.net.bean.PayBean;
 import com.shoppingmall.net.bean.ShopCarBean;
 import com.shoppingmall.pay.order.OrderActivity;
+import com.shoppingmall.userInfo.BindActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,10 +56,11 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     private ImageView itemImageView;
     private boolean isAll = false;
     private List<ShopCarBean.ResultBean> carts;
-    private List<ShopCarBean.ResultBean> orderList = new ArrayList<>();
     private RelativeLayout NullCar;
     private TextView goHomeFragment;
     private LinearLayout notNullCar;
+
+    private PayBean payBean;
 
     @Override
     public int getLayoutId() {
@@ -188,22 +194,36 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                payBean = new PayBean();
+                payBean.setBody(new ArrayList<>());
+                payBean.setSubject("购买");
+                List<PayBean.BodyBean> body = payBean.getBody();
+
+                payBean.setTotalPrice(paymentprice.getText().toString().trim());
                 for (int i = 0; i < shopCarAdapter.getData().size(); i++) {
                     if (shopCarAdapter.getData().get(i).isProductSelected()) {
-                        orderList.add(shopCarAdapter.getData().get(i));
+                        body.add(new PayBean.BodyBean(
+                                shopCarAdapter.getData().get(i).getProductName(),
+                                shopCarAdapter.getData().get(i).getProductId(),
+                                shopCarAdapter.getData().get(i).getProductNum(),
+                                shopCarAdapter.getData().get(i).getUrl(),
+                                shopCarAdapter.getData().get(i).getProductPrice()+""));
                     }
                 }
-                Log.i("hqy", "onClick: "+orderList.toString());
-
-                if (orderList.size()==0){
-                    Toast.makeText(getContext(), "请至少选中一个", Toast.LENGTH_SHORT).show();
+                boolean isBind = ShopMallUserManager.getInstance().isBind();
+//                loginBean.getResult().getPhone().equals("11111111") && loginBean.getResult().getAddress().equals("11111")&&loginBean
+                if (body.size()>=1){
+                    if(isBind){
+                        Intent intent = new Intent(getContext(), BindActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(getContext(),OrderActivity.class);
+                        intent.putExtra("body", (Serializable) payBean);
+                        startActivity(intent);
+                    }
                 }else {
-                    Intent intent = new Intent(getContext(), OrderActivity.class);
-                    intent.putExtra("orderList", (Serializable) orderList);
-                    intent.putExtra("orderPrice",paymentprice.getText().toString());
-                    startActivity(intent);
+                    Toast.makeText(getContext(), "请至少选中一个", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
@@ -318,6 +338,9 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void removeProduct(int position) {
         shopCarAdapter.getData().remove(position);
         shopCarAdapter.notifyItemRemoved(position);
+        EventBus.getDefault().post("ShopCarNum");
+        isCheck();
+
         if (shopCarAdapter.getData().size()!=0) {
             notNullCar.setVisibility(View.VISIBLE);
             NullCar.setVisibility(View.GONE);
@@ -326,6 +349,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
+
     }
 
     //删除多个
@@ -349,6 +373,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
+        EventBus.getDefault().post("ShopCarNum");
     }
 
     @Subscribe

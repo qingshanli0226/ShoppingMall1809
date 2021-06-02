@@ -102,11 +102,21 @@ public interface ShoppingMallApiService {
 
     //向服务端下订单接口
     @POST("getOrderInfo")
-    Observable<OrderBean> OrderInfo(@Body RequestBody requestBody);
+    Observable<OrderBean> orderInfo(@Body RequestBody requestBody);
+
+    //设置电话
+    @FormUrlEncoded
+    @POST("updatePhone")
+    Observable<SelectBean> setPhone(@Field("phone") String phone);
+
+    //设置地址
+    @FormUrlEncoded
+    @POST("updateAddress")
+    Observable<SelectBean> setAddress(@Field("address") String address);
 
     //请求服务端，是否支付成功
     @POST("confirmServerPayResult")
-    Observable<ConfirmServerPayResultBean> confirmServerPayResult(@Body RequestBody body);
+    Observable<SelectBean> confirmServerPayResult(@Body RequestBody body);
 
     //待支付
     @GET("findForPay")
