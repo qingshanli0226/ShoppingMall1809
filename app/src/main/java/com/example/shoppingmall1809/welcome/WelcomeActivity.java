@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
@@ -14,6 +15,7 @@ import com.example.framework.service.ShopService;
 import com.example.shoppingmall1809.main.MainActivity;
 import com.example.shoppingmall1809.R;
 import com.example.shoppingmall1809.main.MainActivity;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,5 +48,9 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+    }
+    //bugly崩溃测试
+    public void collapse(View view) {
+        CrashReport.testJavaCrash();
     }
 }

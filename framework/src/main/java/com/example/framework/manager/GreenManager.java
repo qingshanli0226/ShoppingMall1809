@@ -74,13 +74,13 @@ public class GreenManager {
         }
         return false;
     }
-
+    //数量
     public synchronized int getCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(ShopConstants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(ShopConstants.SP_MANAGE_NAME, -1);
         return count;
     }
-
+    //修改
     public synchronized void upDataMessage(MessageTable messageTable){
         daoSession.update(messageTable);
     }
