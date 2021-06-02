@@ -1,10 +1,13 @@
 package com.example.framework.manager;
 
 import com.example.common.LogUtil;
+import com.example.net.bean.LoginBean;
 import com.fiannce.sql.DaoSession;
 import com.fiannce.sql.MessageBeanDao;
 import com.fiannce.sql.bean.MessageBean;
 import com.fiannce.sql.manager.SqlManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class CacheMessageManager {
         return cacheMessageManager;
     }
 
+
     //信息列表
     private List<MessageBean> messageBeans = new ArrayList<>();
     private List<IMessageListener> messageListeners = new ArrayList<>();
@@ -33,7 +37,16 @@ public class CacheMessageManager {
     public List<MessageBean> getMessageBeans() {
         return messageBeans;
     }
-
+    public void init(){
+        //更改
+        CacheUserManager.getInstance().registerLogin(new CacheUserManager.IUserChange() {
+            @Override
+            public void onUserChange(LoginBean loginBean) {
+                searchMessage();
+                EventBus.getDefault().post("num");
+            }
+        });
+    }
     //注册
     public synchronized void register(IMessageListener messageListener){
         messageListeners.add(messageListener);
@@ -78,7 +91,6 @@ public class CacheMessageManager {
         this.messageBeans.clear();
         this.messageBeans.addAll(messageBeans);
         freshAll();
-        LogUtil.d("zyb"+messageBeans);
     }
 
     //刷新一个

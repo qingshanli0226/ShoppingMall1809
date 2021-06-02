@@ -51,7 +51,6 @@ public class MessageActivity extends BaseActivity implements CacheMessageManager
         linearLayoutManager.setReverseLayout(true);
         messageRv.setLayoutManager(linearLayoutManager);
         messageAdapter.updata(CacheMessageManager.getInstance().getMessageBeans());
-
         messageRv.setAdapter(messageAdapter);
 
 
@@ -90,7 +89,6 @@ public class MessageActivity extends BaseActivity implements CacheMessageManager
 
     @Override
     public void onAddRefresh(int position) {
-
         messageAdapter.notifyItemChanged(position);
     }
 
