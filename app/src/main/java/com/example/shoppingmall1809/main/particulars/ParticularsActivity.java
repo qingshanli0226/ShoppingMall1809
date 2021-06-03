@@ -185,6 +185,10 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
                 popupWindow.showAtLocation(particularsAdd, Gravity.BOTTOM, 0, 0);
             }
         });
+
+        particularsImg.setOnClickListener(view -> {
+            ARouter.getInstance().build(ShopConstants.STREAMING_PATH).navigation();
+        });
     }
 
     @Override
