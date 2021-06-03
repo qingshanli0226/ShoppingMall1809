@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".personalcenter.findforsend.FindsendMainActivity">
+
     <com.example.framework.view.MyToorbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
@@ -12,4 +13,10 @@
         app:leftimg="@drawable/top_bar_left_back"
         app:titletext="@string/sendfor"></com.example.framework.view.MyToorbar>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"></androidx.recyclerview.widget.RecyclerView>
+>>>>>>> zyh
 </LinearLayout>

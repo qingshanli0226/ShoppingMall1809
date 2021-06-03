@@ -25,7 +25,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ShoppingCartFragment extends BaseFragment<com.example.myapplication.shoppingcart.ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, com.example.myapplication.shoppingcart.IShoppingCartView, com.example.myapplication.shoppingcart.ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
+
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheLoginUserMannager;
 import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.PaySendCacheManager;
 import com.example.myapplication.R;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
@@ -46,6 +47,11 @@ public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrde
                 intent.putExtra("bean",orderinfoBean);
                 startActivity(OrderActivity.this.intent);
 
+
+                PaySendCacheManager.getInstance().setOrderBean(orderinfoBean);
+//                Intent intent1 = new Intent(OrderActivity.this, FindPayMainActivity.class);
+//                intent1.putExtra("order",orderinfoBean);
+//                startActivity(intent1);
 
             }
         });

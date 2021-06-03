@@ -15,6 +15,7 @@ import com.example.myapplication.personalcenter.findforpay.FindPayMainActivity;
 import com.example.myapplication.personalcenter.findforsend.FindsendMainActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
+import com.example.net.bean.OrderinfoBean;
 
 
 public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements com.example.myapplication.personalcenter.IPersonalView {
@@ -47,6 +48,8 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FindPayMainActivity.class);
+                OrderinfoBean orderBean = PaySendCacheManager.getInstance().getOrderBean();
+                intent.putExtra("order",orderBean);
                 startActivity(intent);
             }
         });
@@ -64,15 +67,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
 
     }
 
-    @Override
-    public void onLoginChange(boolean loginBean) {
-        super.onLoginChange(loginBean);
-        if (loginBean) {
-            mPresenter.onFindPay();
-        } else {
 
-        }
-    }
 
     @Override
     public void initPresenter() {
@@ -131,5 +126,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
 
         paynum.setText(PaySendCacheManager.getInstance().getOneIndex() + "");
     }
+
+
 
 }

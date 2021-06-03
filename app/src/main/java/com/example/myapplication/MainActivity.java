@@ -18,6 +18,7 @@ import com.example.myapplication.type.TypefyFragment;
 import com.example.myapplication.discover.DiscoverFragment;
 import com.example.myapplication.home.HomeFragment;
 import com.example.myapplication.personalcenter.PersonalCenterFragment;
+
 import com.example.user.AutoService;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
