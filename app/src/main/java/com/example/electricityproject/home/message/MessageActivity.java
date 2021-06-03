@@ -13,12 +13,12 @@ import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.SPMessageNum;
 import com.example.view.ToolBar;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
-
 
 
 public class MessageActivity extends BaseActivity {
@@ -31,6 +31,7 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
         messageTables = MessageDataBase.getInstance().getDaoSession().loadAll(MessageTable.class);
 
         messageRv.setLayoutManager(new LinearLayoutManager(this));
@@ -81,7 +82,10 @@ public class MessageActivity extends BaseActivity {
                         messageTables.remove(position);
 
                         messageAdapter.updateData(MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class));
+
                         messageAdapter.notifyDataSetChanged();
+                        //数据库数量减一
+                        SPMessageNum.getInstance().subShopNum(1);
                         //删除后发送EventBus
                         EventBus.getDefault().post("num");
 

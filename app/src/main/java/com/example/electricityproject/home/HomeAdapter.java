@@ -3,6 +3,7 @@ package com.example.electricityproject.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -166,8 +167,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
 
                 });
                 TextView time = baseViewHolder.getView(R.id.time);
-                start_time = Long.decode(listBeans.getStart_time());
-                end_time = Long.decode(listBeans.getEnd_time());
+                start_time = Long.parseLong(listBeans.getStart_time());
+                end_time = Long.parseLong(listBeans.getEnd_time());
+
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -181,8 +183,8 @@ public class HomeAdapter extends BaseAdapter<Object> {
                             }
                         });
                         start_time-=1000;
-                        if (start_time<=end_time){
-                            start_time=Long.decode(listBeans.getStart_time());
+                        if (start_time>=end_time){
+                            start_time=Long.parseLong(listBeans.getStart_time());
                         }
                     }
                 },0,1000);

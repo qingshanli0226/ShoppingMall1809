@@ -23,6 +23,7 @@ import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.PayResult;
 import com.example.view.ToolBar;
@@ -113,8 +114,12 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                        EventBus.getDefault().post("num");
+                        //数据库数量减一
+                        SPMessageNum.getInstance().addShopNum(1);
                         EventBus.getDefault().post("del");
+                        EventBus.getDefault().post("num");
+
+
 
                     } else {
                         payMsg="支付失败";
@@ -135,8 +140,12 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
+
+                        EventBus.getDefault().postSticky("del");
+
                         EventBus.getDefault().post("num");
-                        EventBus.getDefault().post("del");
 
 
                     }
@@ -240,7 +249,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
         MessageDataBase.getInstance().unregister(this);
         list.clear();
     }

@@ -1,7 +1,5 @@
 package com.example.electricityproject.shopp;
 
-import android.util.Log;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.OrderBean;
@@ -68,11 +66,8 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
                         if (IView != null) {
                             IView.getShortProductData(shortcartProductBean);
-                            LogUtils.json(shortcartProductBean);
                             List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-                            for (int i = 0; i < result.size(); i++) {
-                                Log.i("zrf", "onNext: " + result.get(i).getProductPrice());
-                            }
+
                         }
                     }
 

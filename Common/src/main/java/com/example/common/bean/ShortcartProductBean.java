@@ -48,6 +48,15 @@ class ShortcartProductBean {
         this.result = result;
     }
 
+    @Override
+    public String toString() {
+        return "ShortcartProductBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     public static class ResultBean {
         private String productId;
         private String productName;
@@ -124,5 +133,6 @@ class ShortcartProductBean {
         public void setAll(boolean all) {
             isAll = all;
         }
+
     }
 }

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
@@ -31,7 +30,6 @@ import com.example.electricityproject.shopp.orderdetails.OrderDetailsActivity;
 import com.example.electricityproject.shopp.userinfo.BindUserInfoActivity;
 import com.example.framework.BaseFragment;
 import com.example.manager.AllSelectManager;
-import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
@@ -45,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView {
+public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements IShoppingView ,ShopCacheManger.iShopBeanChangeListener{
 
     private ImageView all;
     private ToolBar toolbar;
@@ -81,19 +79,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
 
         //检测购物车商品是否发生改变,如果改变了刷新购物车页面
-        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
-            @Override
-            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-                if (shortcartProductBean!=null){
+        if (ShopCacheManger.getInstance().getShortBeanList()!=null){
+            result = ShopCacheManger.getInstance().getShortBeanList();
+            buyCarRv.setVisibility(View.VISIBLE);
+            shoppingAdapter.updateData(result);
+            buyCarRv.setAdapter(shoppingAdapter);
+            shoppingAdapter.notifyDataSetChanged();
+        }
 
-                    result = shortcartProductBean.getResult();
-                    buyCarRv.setVisibility(View.VISIBLE);
-                    shoppingAdapter.updateData(shortcartProductBean.getResult());
-                    buyCarRv.setAdapter(shoppingAdapter);
-                    shoppingAdapter.notifyDataSetChanged();
-                }
-            }
-        });
 
         //检测购用户登录状态是否发生改变,如果改变了重新请求数据
         BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
@@ -203,6 +196,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
             }
         });
+
         delShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,22 +238,27 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private void deleteShopmall() {
         delShopNum=0;
         delOne=-1;
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).isAll()){
+        List<ShortcartProductBean.ResultBean> select = ShopCacheManger.getInstance().getSelectList();
+        Log.i("zx", "deleteShopmall: "+select.toString());
+        for (int i = 0; i < select.size(); i++) {
+            if (select.get(i).isAll()){
                 delShopNum++;
                 delOne=i;
-                removeAllShopBean.add(result.get(i));
+                removeAllShopBean.add(select.get(i));
             }
         }
         //删除一个
         if (delShopNum==1){
-            httpPresenter.getRemoveOneShopBean(result.get(delOne).getProductId(),result.get(delOne).getProductName(),result.get(delOne).getProductNum(),result.get(delOne).getUrl(),result.get(delOne).getProductPrice());
+            httpPresenter.getRemoveOneShopBean(select.get(delOne).getProductId(),select.get(delOne).getProductName(),select.get(delOne).getProductNum(),select.get(delOne).getUrl(),select.get(delOne).getProductPrice());
         }
         //删除多个
         if (removeAllShopBean.size()>0){
             Toast.makeText(getContext(), "大于1", Toast.LENGTH_SHORT).show();
             httpPresenter.getRemoveManyShopBean(removeAllShopBean);
         }
+        shoppingAdapter.notifyDataSetChanged();
+
+
     }
     //删除一个 返回值
     @Override
@@ -310,9 +309,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
 
-                if (AllSelectManager.getInstance().isSelect()){
-                    del();
-                }
             }
         }else {
             Toast.makeText(getContext(), ""+orderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -324,12 +320,12 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void checkInventory(CheckInventoryBean checkInventoryBean) {
         if(checkInventoryBean.getCode().equals("200")){
             loadingPage.showSuccessView();
-            List<CheckInventoryBean.ResultBean> result = checkInventoryBean.getResult();
+            List<CheckInventoryBean.ResultBean> checkInventoryBeanResul = checkInventoryBean.getResult();
 
             boolean isEnough=true;
 
-            for (int j = 0; j < result.size(); j++) {
-                if(Integer.parseInt(result.get(j).getProductNum())<Integer.parseInt(selectList.get(j).getProductNum())){
+            for (int j = 0; j < checkInventoryBeanResul.size(); j++) {
+                if(Integer.parseInt(checkInventoryBeanResul.get(j).getProductNum())<Integer.parseInt(selectList.get(j).getProductNum())){
                     isEnough=false;
                     notEnoughList.add(selectList.get(j));
                 }
@@ -371,10 +367,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         collectShop = (TextView) findViewById(R.id.collect_shop);
 
         shoppingAdapter = new ShoppingAdapter();
-        ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
-        if (shortcartProductBean!=null){
-            result = shortcartProductBean.getResult();
-            shoppingAdapter.updateData(shortcartProductBean.getResult());
+        result = ShopCacheManger.getInstance().getShortBeanList();
+        if (result!=null){
+            shoppingAdapter.updateData(result);
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
@@ -386,13 +381,22 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             delAll.setImageResource(R.drawable.checkbox_unselected);
         }
         EventBus.getDefault().register(this);
+        ShopCacheManger.getInstance().registerShopBeanChange(this);
 
     }
+
     //支付成功或者支付失败后发送eventBus，来把选中的数据删除
     @Subscribe
     public void eventDel(String del){
-        deleteShopmall();
+        if (del.equals("del")) {
+            if (AllSelectManager.getInstance().isSelect()){
+                del();
+            }
+            Toast.makeText(getContext(), "删除", Toast.LENGTH_SHORT).show();
+            deleteShopmall();
+        }
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_shopping;
@@ -425,15 +429,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
             result = shortcartProductBean.getResult();
             loadingPage.showSuccessView();
-            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
             buyCarRv.setVisibility(View.VISIBLE);
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
+            ShopCacheManger.getInstance().setShortBeanList(shortcartProductBean.getResult());
             shoppingAdapter.notifyDataSetChanged();
         } else {
             Toast.makeText(getContext(), "加载失败，正在重新加载", Toast.LENGTH_SHORT).show();
             httpPresenter.getShortProductsData();
-            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
@@ -466,13 +469,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }
     }
 
-    // 单选和全选点击请求数据返回的数据
+    // 全选点击请求数据返回的数据
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
             //全选
                 if (selectAllProductBean.getCode().equals("200")) {
-
-
                         if (!AllSelectManager.getInstance().isSelect()) {
                             AllSelectManager.getInstance().setSelect(true);
                             all.setImageResource(R.drawable.checkbox_selected);
@@ -481,9 +482,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                                 bean.setAll(true);
                             }
                             count();
-
+                            shoppingAdapter.notifyDataSetChanged();
                         } else {
-
                             AllSelectManager.getInstance().setSelect(false);
                             all.setImageResource(R.drawable.checkbox_unselected);
                             delAll.setImageResource(R.drawable.checkbox_unselected);
@@ -491,32 +491,32 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                                 bean.setAll(false);
                             }
                             count();
-
+                            shoppingAdapter.notifyDataSetChanged();
                         }
-                        shoppingAdapter.notifyDataSetChanged();
+
                         for (ShortcartProductBean.ResultBean bean : result) {
                             ShopCacheManger.getInstance().setSelect(bean);
                         }
                     }
                 }
 
+    //单选
     @Override
     public void postSelectOneProductData(SelectAllProductBean selectAllProductBean) {
-        //单选
+
         if (selectAllProductBean.getCode().equals("200")) {
             if (result.get(selectPosition).isAll()) {
                 isSelectImg.setImageResource(R.drawable.checkbox_unselected);
                 result.get(selectPosition).setAll(false);
                 count();
-                shoppingAdapter.notifyItemChanged(selectPosition);
                 ShopCacheManger.getInstance().setSelect(result.get(selectPosition));
             } else {
                 isSelectImg.setImageResource(R.drawable.checkbox_selected);
                 result.get(selectPosition).setAll(true);
                 count();
-                shoppingAdapter.notifyItemChanged(selectPosition);
                 ShopCacheManger.getInstance().setSelect(result.get(selectPosition));
             }
+            shoppingAdapter.notifyDataSetChanged();
 
             //反选
 
@@ -570,5 +570,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         if (EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().unregister(this);
         }
+        ShopCacheManger.getInstance().unregisterShopBeanChange(this);
+    }
+
+    @Override
+    public void OnChange() {
+        result = ShopCacheManger.getInstance().getShortBeanList();
+        shoppingAdapter.updateData(result);
+        shoppingAdapter.notifyDataSetChanged();
     }
 }

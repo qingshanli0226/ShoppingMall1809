@@ -14,8 +14,8 @@ import com.example.common.bean.ShortcartProductBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.main.MainActivity;
 import com.example.framework.BaseActivity;
-import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 
 import java.util.Timer;
@@ -101,8 +101,7 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
             Toast.makeText(this, "欢迎页面加载完成数据", Toast.LENGTH_SHORT).show();
 
-            BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
-
+            ShopCacheManger.getInstance().setShortBeanList(shortcartProductBean.getResult());
             handler.sendEmptyMessage(START);
 
         }

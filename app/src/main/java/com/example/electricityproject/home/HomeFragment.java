@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.LogBean;
-import com.example.common.db.MessageDataBase;
-import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
@@ -137,8 +135,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     //支付成功或支付失败 重新把查询数据库
     @Subscribe
     public void changeText(String num){
-        List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class);
-        unreadMessageNum.setText(messageTables.size()+"");
+        if (num.equals("num")) {
+            unreadMessageNum.setText(SPMessageNum.getInstance().getShopNum() + "");
+        }
     }
 
 

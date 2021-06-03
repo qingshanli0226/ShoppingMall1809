@@ -114,11 +114,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             LogUtils.i("当前时间超过5秒，弹出广告业");
             String times = System.currentTimeMillis() + "";
             SpUtils.putTime(FrameModel.context,times);
-
             BusinessARouter.getInstance().getAppManager().OpenAdvertActivity(FrameModel.context,null);
-
-        }else {
-            Toast.makeText(this, "时间未到5秒", Toast.LENGTH_SHORT).show();
         }
 
     }

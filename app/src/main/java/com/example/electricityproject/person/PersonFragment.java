@@ -11,6 +11,7 @@ import com.example.common.bean.LogBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.person.dropshipment.DropShipmentActivity;
 import com.example.electricityproject.person.findforpay.FindForPayActivity;
+import com.example.electricityproject.person.zhibo.SinatvActivity;
 import com.example.framework.BaseFragment;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
@@ -23,6 +24,7 @@ public class PersonFragment extends BaseFragment {
     private LogBean logBean;
     private LinearLayout orderPayment;
     private LinearLayout orderShipment;
+    private TextView zhibo;
 
     @Override
     protected void initData() {
@@ -45,11 +47,11 @@ public class PersonFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                if (BusinessUserManager.getInstance().getIsLog()!=null){
+                if (BusinessUserManager.getInstance().getIsLog() != null) {
                     Intent intent = new Intent(getContext(), FindForPayActivity.class);
                     startActivity(intent);
-                }else {
-                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);
+                } else {
+                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
                 }
             }
         });
@@ -58,11 +60,19 @@ public class PersonFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                if (BusinessUserManager.getInstance().getIsLog()!=null){
+                if (BusinessUserManager.getInstance().getIsLog() != null) {
                     startActivity(new Intent(getActivity(), DropShipmentActivity.class));
-                }else {
-                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(),null);
+                } else {
+                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
                 }
+            }
+        });
+
+        //直播
+        zhibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SinatvActivity.class));
             }
         });
 
@@ -79,6 +89,7 @@ public class PersonFragment extends BaseFragment {
         pleaseLogin = (TextView) findViewById(R.id.please_login);
         orderPayment = (LinearLayout) findViewById(R.id.order_payment);
         orderShipment = (LinearLayout) findViewById(R.id.order_shipment);
+        zhibo = (TextView) findViewById(R.id.zhibo);
     }
 
     @Override
@@ -96,12 +107,12 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     public void showError(String error) {
-        Log.i("zx", "showError: "+error);
+        Log.i("zx", "showError: " + error);
     }
 
     @Override
     public void onLoginChange(LogBean isLog) {
-        if (isLog!=null){
+        if (isLog != null) {
             pleaseLogin.setText("" + isLog.getResult().getName());
         }
     }

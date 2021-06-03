@@ -14,7 +14,7 @@ public class SPMessageNum {
     private static SPMessageNum messageManger;
     private String MESSAGE_SPName = "commodity";
     private String MESSAGE_EDIT_MESSAGENUM = "messageNum";
-
+    private int num;
 
     public static synchronized SPMessageNum getInstance() {
         if (messageManger==null){
@@ -39,9 +39,23 @@ public class SPMessageNum {
     public int queryMessageNum(Context context){
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(MESSAGE_SPName, context.MODE_PRIVATE);
-        int num = sharedPreferences.getInt(MESSAGE_EDIT_MESSAGENUM, 0);
+        num = sharedPreferences.getInt(MESSAGE_EDIT_MESSAGENUM, 0);
+
         return num;
 
+    }
+    //数据库数量加一
+    public void addShopNum(int i){
+        num=num+i;
+    }
+    //数据库数量减一
+    public void subShopNum(int i){
+        num=num-i;
+    }
+
+    //返回数据库的数量
+    public int getShopNum(){
+        return num;
     }
 
 
