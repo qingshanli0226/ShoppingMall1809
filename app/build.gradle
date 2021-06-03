@@ -67,17 +67,18 @@ dependencies {
     implementation 'com.alibaba:arouter-api:1.4.1'
     //ARouter依赖
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
     implementation files('libs/umeng-share-QQ-full-7.1.4.jar')
     implementation files('libs/umeng-shareboard-widget-7.1.4.jar')
     implementation files('libs/umeng-sharetool-7.1.4.jar')
     implementation files('libs/umeng-share-core-7.1.4.jar')
-
-    implementation  'com.umeng.umsdk:common:9.3.8'//必选
-    implementation  'com.umeng.umsdk:asms:1.2.2'//必选
-    implementation  'com.tencent.tauth:qqopensdk:3.51.2'//QQ官方SDK依赖库
-
-    implementation 'org.greenrobot:eventbus:3.1.1' //EventBus依赖
+    implementation 'com.umeng.umsdk:common:9.3.8'
+    //必选
+    implementation 'com.umeng.umsdk:asms:1.2.2'
+    //必选
+    implementation 'com.tencent.tauth:qqopensdk:3.51.2'
+    //QQ官方SDK依赖库
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //EventBus依赖
 
 
 

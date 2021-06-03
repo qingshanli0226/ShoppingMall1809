@@ -21,7 +21,7 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
 
-public class App extends Application {
+public class  App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
