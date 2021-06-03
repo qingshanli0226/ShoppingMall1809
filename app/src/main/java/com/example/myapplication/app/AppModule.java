@@ -1,14 +1,13 @@
-package com.example.myapplication;
+package com.example.myapplication.app;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.common.log.LogUtil;
 import com.example.framework.manager.CaCheArote;
-import com.example.myapplication.msg.MsgMainActivity;
+import com.example.myapplication.MainActivity;
 
 
 public class AppModule implements CaCheArote.IAppInterface {

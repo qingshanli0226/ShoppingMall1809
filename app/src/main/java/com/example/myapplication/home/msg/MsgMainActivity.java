@@ -1,8 +1,4 @@
-package com.example.myapplication.msg;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+package com.example.myapplication.home.msg;
 
 import com.example.framework.BaseActivity;
 import com.example.myapplication.R;

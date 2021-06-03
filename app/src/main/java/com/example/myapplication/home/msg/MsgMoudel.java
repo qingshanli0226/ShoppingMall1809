@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.home.msg;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.framework.manager.CaCheArote;
-import com.example.myapplication.msg.MsgMainActivity;
-
-import retrofit2.http.HEAD;
 
 public class MsgMoudel implements CaCheArote.IMsgInterface {
     public static void init() {

@@ -1,14 +1,11 @@
-package com.example.myapplication.findforpay;
+package com.example.myapplication.personalcenter.findforpay;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,25 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.example.common.log.LogUtil;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRecyclerViewAdapter;
-import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.PaySendCacheManager;
-import com.example.myapplication.BuildConfig;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.payorder.OrderActivity;
-import com.example.myapplication.shoporder.Iorder;
-import com.example.myapplication.shoporder.ShoporederPresenter;
+import com.example.myapplication.personalcenter.shoporder.Iorder;
+import com.example.myapplication.personalcenter.shoporder.ShoporederPresenter;
 import com.example.net.bean.ConfirmServerPayResultBean;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.OrderinfoBean;
-import com.example.pay.PayActivity;
 import com.example.pay.PayResult;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

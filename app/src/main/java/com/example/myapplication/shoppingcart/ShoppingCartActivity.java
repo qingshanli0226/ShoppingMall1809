@@ -4,8 +4,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +16,7 @@ import android.widget.Toast;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
-import com.example.myapplication.payorder.OrderActivity;
+import com.example.myapplication.shoppingcart.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -28,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> implements IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
+public class ShoppingCartActivity extends BaseActivity<com.example.myapplication.shoppingcart.ShoppingCartPresenter> implements com.example.myapplication.shoppingcart.IShoppingCartView, com.example.myapplication.shoppingcart.ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();
@@ -36,7 +34,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
     private androidx.recyclerview.widget.RecyclerView shoppingCartRec;
     private android.widget.CheckBox shoppingCartCheck;
     private android.widget.TextView shoppingCartPrice;
-    private ShoppingCartRecAdapter adapter;
+    private com.example.myapplication.shoppingcart.ShoppingCartRecAdapter adapter;
     private boolean nowIsChe;
     private boolean nowIsSelect;
     private CheckBox itemChe;
@@ -69,15 +67,23 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartCompileCollect = (TextView) findViewById(R.id.shoppingCartCompileCollect);
         priceBtn = (Button) findViewById(R.id.priceBtn);
         //适配器
-        adapter = new ShoppingCartRecAdapter(list);
+        adapter = new com.example.myapplication.shoppingcart.ShoppingCartRecAdapter(list);
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
     }
 
     @Override
+    public void onShoppinCartgData(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
+        super.onShoppinCartgData(shoppingCartBean);
+        list.clear();
+        list.addAll(shoppingCartBean);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void initPresenter() {
-        mPresenter = new ShoppingCartPresenter(this);
+        mPresenter = new com.example.myapplication.shoppingcart.ShoppingCartPresenter(this);
     }
 
     @Override
@@ -222,6 +228,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
                 delList.clear();
             }
             getTotalPrice();//总价
+            CaCheMannager.getInstance().setCheckList(delList);
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartUpdataAllError), Toast.LENGTH_SHORT).show();
         }
@@ -254,6 +261,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
                 shoppingCartCheck.setChecked(false);
             }
             getTotalPrice();//总价
+            CaCheMannager.getInstance().setCheckList(delList);
         } else {
             Toast.makeText(this, getString(R.string.myShoppingCartUpdataError), Toast.LENGTH_SHORT).show();
             if (nowIsSelect) {
@@ -298,6 +306,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
     public void onDeleteOneShopping(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
             if (list.size()==1){//如果只剩下一个数据 点击全选的时候 删除所有数据
+                Toast.makeText(this, "删除了一个", Toast.LENGTH_SHORT).show();
                 shoppingCartCheck.setChecked(false);
                 shoppingCartCompileCheck.setChecked(false);
                 delList.clear();//清空编辑里面的集合
@@ -336,6 +345,7 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         }
     }
 
+
     public void getTotalPrice() {
         int money = 0;
         //遍历集合
@@ -350,4 +360,6 @@ public class ShoppingCartActivity extends BaseActivity<ShoppingCartPresenter> im
         shoppingCartPrice.setText(money + "");
         CaCheMannager.getInstance().setShoppingPrice(money);
     }
+
+
 }

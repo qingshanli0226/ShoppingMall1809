@@ -1,13 +1,9 @@
-package com.example.myapplication.findforsend;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+package com.example.myapplication.personalcenter.findforsend;
 
 import com.example.framework.BaseActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.findforpay.FindpayPresenter;
-import com.example.myapplication.findforpay.IFindPayView;
+import com.example.myapplication.personalcenter.findforpay.FindpayPresenter;
+import com.example.myapplication.personalcenter.findforpay.IFindPayView;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 

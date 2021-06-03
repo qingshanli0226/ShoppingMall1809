@@ -88,7 +88,7 @@
     <string name="myShoppingCartRemoveError">删除失败</string>
     <string name="myShoppingCartUpdataNumError">更改数量错误</string>
 
-<!--    订单-->
+    <!--    订单-->
     <string name="orderDetails">订单详情</string>
     <string name="orderUserName">用户名:</string>
     <string name="orderPhone">手机号:</string>

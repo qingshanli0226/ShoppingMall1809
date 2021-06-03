@@ -1,4 +1,4 @@
-package com.example.myapplication.payorder;
+package com.example.myapplication.shoppingcart.payorder;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -10,15 +10,11 @@ import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheLoginUserMannager;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
-import com.example.myapplication.findforpay.FindPayMainActivity;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.pay.PayActivity;
 import java.util.List;
-
-
-import retrofit2.http.HEAD;
 
 public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrderView,CaCheLoginUserMannager.UserPhoneAndAddress {
 
@@ -50,9 +46,7 @@ public class OrderActivity extends BaseActivity<OrderPresenter> implements IOrde
                 intent.putExtra("bean",orderinfoBean);
                 startActivity(OrderActivity.this.intent);
 
-                Intent intent1 = new Intent(OrderActivity.this, FindPayMainActivity.class);
-                intent1.putExtra("order",orderinfoBean);
-                startActivity(intent1);
+
             }
         });
     }

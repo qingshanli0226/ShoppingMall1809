@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CaCheMannager;
 import com.example.myapplication.R;
-import com.example.myapplication.payorder.OrderActivity;
+import com.example.myapplication.shoppingcart.payorder.OrderActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;
 
@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, IShoppingCartView, ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
+public class ShoppingCartFragment extends BaseFragment<com.example.myapplication.shoppingcart.ShoppingCartPresenter> implements CaCheMannager.IShoppingCartInterface, com.example.myapplication.shoppingcart.IShoppingCartView, com.example.myapplication.shoppingcart.ShoppingCartRecAdapter.IRecyclerItemChildClickListener {
 
     private List<ShoppingCartBean.ResultBean> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> delList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
     private RecyclerView shoppingCartRec;
     private CheckBox shoppingCartCheck;
     private TextView shoppingCartPrice;
-    private ShoppingCartRecAdapter adapter;
+    private com.example.myapplication.shoppingcart.ShoppingCartRecAdapter adapter;
     private boolean nowIsChe;
     private boolean nowIsSelect;
     private CheckBox itemChe;
@@ -66,7 +66,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         shoppingCartCompileDelete = (TextView) findViewById(R.id.shoppingCartCompileDelete);
         shoppingCartCompileCollect = (TextView) findViewById(R.id.shoppingCartCompileCollect);
         //万能适配器
-        adapter = new ShoppingCartRecAdapter(list);
+        adapter = new com.example.myapplication.shoppingcart.ShoppingCartRecAdapter(list);
         shoppingCartRec.setLayoutManager(new LinearLayoutManager(getActivity()));
         shoppingCartRec.setAdapter(adapter);
         adapter.setChildClickListener(this);//注册子控件点击
@@ -74,7 +74,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
 
     @Override
     public void initPresenter() {
-        mPresenter = new ShoppingCartPresenter(this);
+        mPresenter = new com.example.myapplication.shoppingcart.ShoppingCartPresenter(this);
     }
 
     @Override
@@ -348,4 +348,6 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartPresenter> im
         }
         adapter.notifyDataSetChanged();
     }
+
+
 }

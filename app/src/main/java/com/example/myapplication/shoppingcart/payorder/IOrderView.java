@@ -1,4 +1,4 @@
-package com.example.myapplication.payorder;
+package com.example.myapplication.shoppingcart.payorder;
 
 import com.example.net.bean.OrderinfoBean;
 

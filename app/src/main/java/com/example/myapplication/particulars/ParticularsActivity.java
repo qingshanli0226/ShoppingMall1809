@@ -2,6 +2,7 @@ package com.example.myapplication.particulars;
 
 
 import android.animation.ValueAnimator;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -9,10 +10,12 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -29,11 +32,13 @@ import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.framework.view.MessageNumView;
+import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
 import com.example.myapplication.shoppingcart.ShoppingCartActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.AddShoppingCartBean;
 import com.example.net.bean.ShoppingCartBean;
+import com.umeng.commonsdk.debug.W;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -67,6 +72,8 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     private com.example.framework.view.MessageNumView numView;
     private RelativeLayout rootView;
     private MessageNumView view;
+    private MyToorbar toolbar;
+    private MessageNumView image;
 
     @Override
     public int bandLayout() {
@@ -105,9 +112,11 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         popCencel = inflate.findViewById(R.id.popCencel);
         popConfirm = inflate.findViewById(R.id.popConfirm);
         //注册Eventbus
-        if (!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
+        toolbar = (MyToorbar) findViewById(R.id.toolbar);
+        image = (MessageNumView) findViewById(R.id.image);
     }
 
     @Override
@@ -204,6 +213,35 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             //直接调用购物车
             mPresenter.getInventory(id, num + "");
         });
+        //toolbar点击
+        toolbar.setToorbarListener(new MyToorbar.IToorbarListener() {
+            @Override
+            public void onleftClick() {
+                finish();
+            }
+
+            @Override
+            public void onrightClick() {
+                PopupWindow popupWindow = new PopupWindow();
+                popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                View inflate = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.pop, null);
+                popupWindow.setContentView(inflate);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAtLocation(inflate, Gravity.TOP, 0, 200);
+
+                LinearLayout pop3 = inflate.findViewById(R.id.pop3);
+                pop3.setOnClickListener(v -> finish());
+
+                LinearLayout pop1 = inflate.findViewById(R.id.pop1);
+                pop1.setOnClickListener(v -> startActivity(new Intent(ParticularsActivity.this, VideoActivity.class)));
+            }
+
+            @Override
+            public void ontextClick() {
+
+            }
+        });
     }
 
     /**
@@ -243,28 +281,29 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
             Toast.makeText(this, getString(R.string.inventoryNot), Toast.LENGTH_SHORT).show();
         }
     }
+
     //刷新红点数据
     @Override
     public void onGetShopping(ShoppingCartBean shoppingCartBean) {
         numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
     }
 
-    private void showBezierAnim(){
-        int[] location=new int[2];//获取开始控件位置
+    private void showBezierAnim() {
+        int[] location = new int[2];//获取开始控件位置
         particularsCommodityImage.getLocationOnScreen(location);
 
-        int[] location1=new int[2];//获取结束控件位置
+        int[] location1 = new int[2];//获取结束控件位置
         particularsCommodityShoppingCart.getLocationOnScreen(location1);
 
         ImageView imageView = new ImageView(this);//创建图片
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
         imageView.setLayoutParams(layoutParams);//设置长宽
-        Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" +pic).into(imageView);
+        Glide.with(this).load("http://49.233.0.68:8080" + "/atguigu/img" + pic).into(imageView);
         rootview.addView(imageView);//加入当前布局
 
         int[] startLoacation = new int[2];//开始
-        startLoacation[0] = location[0]+300;
-        startLoacation[1] = location[1]+300;
+        startLoacation[0] = location[0] + 300;
+        startLoacation[1] = location[1] + 300;
         int[] endLoacation = new int[2];//结束
         endLoacation[0] = location1[0];
         endLoacation[1] = location1[1];
@@ -272,32 +311,33 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
         controlLoacation[0] = 0;
         controlLoacation[1] = 0;
         Path path = new Path();
-        path.moveTo(startLoacation[0],startLoacation[1]);//开始位置
+        path.moveTo(startLoacation[0], startLoacation[1]);//开始位置
 
-        path.quadTo(controlLoacation[0],controlLoacation[1],endLoacation[0],endLoacation[1]);//过程和结束位置
+        path.quadTo(controlLoacation[0], controlLoacation[1], endLoacation[0], endLoacation[1]);//过程和结束位置
         PathMeasure pathMeasure = new PathMeasure(path, false);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
-        valueAnimator.setDuration(2*1000);
+        valueAnimator.setDuration(2 * 1000);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();//获取动画进度
                 float[] nextLocation = new float[2];
-                pathMeasure.getPosTan(value,nextLocation,null);
+                pathMeasure.getPosTan(value, nextLocation, null);
                 imageView.setTranslationX(nextLocation[0]);
                 imageView.setTranslationY(nextLocation[1]);
-                float percent = value/pathMeasure.getLength();
-                imageView.setAlpha(1-percent);//渐显
+                float percent = value / pathMeasure.getLength();
+                imageView.setAlpha(1 - percent);//渐显
             }
         });
         valueAnimator.start();
     }
+
     //如果数据删除或者下订单则将红点数据刷新
     @Subscribe
-    public void invalidate(String flag){
-        if (flag.equals("1")){
+    public void invalidate(String flag) {
+        if (flag.equals("1")) {
             numView.getNum(CaCheMannager.getInstance().getShoppingCartBeanList().size());
         }
     }
@@ -318,7 +358,7 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)){
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
         destroy();

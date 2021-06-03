@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.example.framework.manager.CaCheMannager;
 import com.example.net.bean.OrderinfoBean;
 
 import java.io.Serializable;
@@ -38,6 +39,7 @@ public class PayActivity extends AppCompatActivity {
                     Toast.makeText(PayActivity.this, resultStatus, Toast.LENGTH_SHORT).show();
                     if (resultStatus.equals("9000")) {
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        CaCheMannager.getInstance().payNotify(1);//通知购物车刷新数据
                         finish();
                     } else {
                         // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -46,6 +48,7 @@ public class PayActivity extends AppCompatActivity {
                         } else {
                             // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
                             Toast.makeText(PayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                            CaCheMannager.getInstance().payNotify(2);//通知购物车刷新数据
                         }
                     }
                     break;

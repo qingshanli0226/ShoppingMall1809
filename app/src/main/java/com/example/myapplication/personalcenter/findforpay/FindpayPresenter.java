@@ -1,9 +1,7 @@
-package com.example.myapplication.findforpay;
+package com.example.myapplication.personalcenter.findforpay;
 
-import com.example.common.log.LogUtil;
 import com.example.framework.manager.PaySendCacheManager;
 import com.example.net.retrofit.RetrofitManager;
-import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 
 import io.reactivex.Observer;

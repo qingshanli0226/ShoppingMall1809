@@ -1,4 +1,4 @@
-package com.example.myapplication.findforpay;
+package com.example.myapplication.personalcenter.findforpay;
 
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;

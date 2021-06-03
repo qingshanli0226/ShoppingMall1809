@@ -1,4 +1,4 @@
-package com.example.myapplication.shoporder;
+package com.example.myapplication.personalcenter.shoporder;
 
 import com.example.net.bean.ConfirmServerPayResultBean;
 import com.example.net.retrofit.RetrofitManager;

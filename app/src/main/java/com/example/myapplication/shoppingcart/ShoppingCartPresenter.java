@@ -27,7 +27,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
     }
 
     //修改全选按钮
-    public void updatateAllSelect(boolean isChe) {
+    public synchronized void updatateAllSelect(boolean isChe) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("selected", isChe);
@@ -65,7 +65,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
     }
 
     //修改单个选择
-    public void updateShoppingSlect(String id, boolean isChe, String name, String url, String price) {
+    public synchronized void updateShoppingSlect(String id, boolean isChe, String name, String url, String price) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId", id);
@@ -107,7 +107,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
     }
 
     //修改数量
-    public void updateShoppingNum(String id, String num, String name, String url, String price) {
+    public synchronized void updateShoppingNum(String id, String num, String name, String url, String price) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId", id);
@@ -149,7 +149,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
     }
 
     //库存
-    public void getInventory(String id, String num) {
+    public synchronized void getInventory(String id, String num) {
         RetrofitManager.getApi().getInventory(id,num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -178,7 +178,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
                 });
     }
     //删除
-    public void deleteOneShopping(String id, String num, String name, String url, String price) {
+    public synchronized void deleteOneShopping(String id, String num, String name, String url, String price) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId", id);
@@ -219,7 +219,7 @@ public class ShoppingCartPresenter extends BasePresenter<com.example.myapplicati
                 });
     }
     //删除多个
-    public void RemoveManvProduct(List<ShoppingCartBean.ResultBean> list) {
+    public synchronized void RemoveManvProduct(List<ShoppingCartBean.ResultBean> list) {
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < list.size(); i++) {
             ShoppingCartBean.ResultBean resultBean = list.get(i);

@@ -1,12 +1,10 @@
-package com.example.myapplication.msg;
+package com.example.myapplication.home.msg;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.framework.db.MessageBean;
-import com.example.framework.db.MessageBeanDao;
-import com.example.framework.manager.CaCheArote;
 import com.example.myapplication.R;
 
 import java.text.SimpleDateFormat;

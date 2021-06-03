@@ -88,6 +88,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
     }
 
+
+
     //网络连接
     @Override
     public void onConnect() {

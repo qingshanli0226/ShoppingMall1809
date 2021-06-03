@@ -35,6 +35,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initPresenter();
         initData();
         CacheUserManager.getInstance().registerLogin(this);
+        CaCheMannager.getInstance().registerIShoppingCart(this);
     }
 
     protected abstract int bandLayout();
@@ -83,6 +84,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             mPresenter.destroy();
         }
         CacheUserManager.getInstance().unregisterLogin(this);
+        CaCheMannager.getInstance().unregisterIShoppingCart(this);
     }
 
     @Override
@@ -99,4 +101,5 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public void onShoppingCartRemove(List<ShoppingCartBean.ResultBean> shoppingCartBean) {
 
     }
+
 }

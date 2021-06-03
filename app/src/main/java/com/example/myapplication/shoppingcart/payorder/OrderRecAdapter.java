@@ -1,6 +1,5 @@
-package com.example.myapplication.payorder;
+package com.example.myapplication.shoppingcart.payorder;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 

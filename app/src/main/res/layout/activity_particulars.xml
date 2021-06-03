@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <com.example.framework.view.MyToorbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             app:isleft="true"

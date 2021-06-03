@@ -11,9 +11,8 @@ import com.example.framework.BaseFragment;
 import com.example.framework.manager.PaySendCacheManager;
 import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
-import com.example.myapplication.findforpay.FindPayMainActivity;
-import com.example.myapplication.findforsend.FindsendMainActivity;
-import com.example.myapplication.personalCenter.PersonalPresenter;
+import com.example.myapplication.personalcenter.findforpay.FindPayMainActivity;
+import com.example.myapplication.personalcenter.findforsend.FindsendMainActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 

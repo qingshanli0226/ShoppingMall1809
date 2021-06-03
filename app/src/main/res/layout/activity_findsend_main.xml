@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".findforsend.FindsendMainActivity">
+    tools:context=".personalcenter.findforsend.FindsendMainActivity">
     <com.example.framework.view.MyToorbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         app:isleft="true"
         app:leftimg="@drawable/top_bar_left_back"
         app:titletext="@string/sendfor"></com.example.framework.view.MyToorbar>
+
 </LinearLayout>

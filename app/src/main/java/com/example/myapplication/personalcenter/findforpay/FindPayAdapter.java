@@ -1,7 +1,5 @@
-package com.example.myapplication.findforpay;
+package com.example.myapplication.personalcenter.findforpay;
 
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.framework.BaseRecyclerViewAdapter;
@@ -9,7 +7,6 @@ import com.example.myapplication.R;
 import com.example.net.bean.FindForPayBean;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

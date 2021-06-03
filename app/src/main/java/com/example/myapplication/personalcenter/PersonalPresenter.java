@@ -1,4 +1,4 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.personalcenter;
 
 import com.example.common.log.LogUtil;
 import com.example.framework.manager.PaySendCacheManager;
