@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -29,6 +30,7 @@ import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
+import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
@@ -37,7 +39,6 @@ import com.example.threeshopping.MainActivity;
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
-import com.example.user.service.AutoService;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.bean.SqlBean;
 import com.fiannce.sql.manager.SqlManager;
@@ -52,7 +53,6 @@ import java.util.List;
 public class ParticularsActivity extends BaseActivity<DetailPresenter> implements IDetailView {
 
     private RelativeLayout rootview;
-    private com.example.framework.view.ToolBar toolbar;
     private android.widget.ImageView paricularsImg;
     private android.widget.TextView paricularsName;
     private android.widget.TextView paricularsPrice;
@@ -67,12 +67,18 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private TextView popPrice;
     private TextView popTitle;
     private ImageView popPic;
-    View view;
+    View popview,popheadview;
     private ProductBean productBean;
     int num = 1;//购买数量
     int count = 0;
     private CircleView detailCircle;
     CartBean.ResultBean result;
+    private RelativeLayout particulars;
+    private com.example.framework.view.ToolBar toolbar;
+    private ImageView popheadShare;
+    private ImageView popheadLive;
+    private ImageView popheadVideo;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_particulars;
@@ -81,7 +87,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     @Override
     public void initView() {
         rootview = findViewById(R.id.particulars);
-
+        toolbar = (ToolBar) findViewById(R.id.toolbar);
         paricularsImg = (ImageView) findViewById(R.id.pariculars_img);
         paricularsName = (TextView) findViewById(R.id.pariculars_name);
         paricularsPrice = (TextView) findViewById(R.id.pariculars_price);
@@ -89,16 +95,25 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         particularsJoin = (Button) findViewById(R.id.particulars_join);
 
 
-        view = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.pop_layout, null);
-        popPic = (ImageView) view.findViewById(R.id.pop_pic);
-        popTitle = (TextView) view.findViewById(R.id.pop_title);
-        popPrice = (TextView) view.findViewById(R.id.pop_price);
-        popSub = (ImageView) view.findViewById(R.id.pop_sub);
-        popNum = (TextView) view.findViewById(R.id.pop_num);
-        popAdd = (ImageView) view.findViewById(R.id.pop_add);
-        popNo = (Button) view.findViewById(R.id.pop_no);
-        popYes = (Button) view.findViewById(R.id.pop_yes);
+        popview = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.pop_layout, null);
+        popPic = (ImageView) popview.findViewById(R.id.pop_pic);
+        popTitle = (TextView) popview.findViewById(R.id.pop_title);
+        popPrice = (TextView) popview.findViewById(R.id.pop_price);
+        popSub = (ImageView) popview.findViewById(R.id.pop_sub);
+        popNum = (TextView) popview.findViewById(R.id.pop_num);
+        popAdd = (ImageView) popview.findViewById(R.id.pop_add);
+        popNo = (Button) popview.findViewById(R.id.pop_no);
+        popYes = (Button) popview.findViewById(R.id.pop_yes);
         detailCircle = (CircleView) findViewById(R.id.detailCircle);
+
+        popheadview = LayoutInflater.from(ParticularsActivity.this).inflate(R.layout.pophead_layout, null);
+        popheadShare = (ImageView) popheadview.findViewById(R.id.pophead_share);
+        popheadLive = (ImageView) popheadview.findViewById(R.id.pophead_live);
+        popheadVideo = (ImageView) popheadview.findViewById(R.id.pophead_video);
+
+        particulars = (RelativeLayout) findViewById(R.id.particulars);
+
+
     }
 
 
@@ -131,7 +146,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             public void onClick(View v) {
                 if (loginBean != null) {
                     PopupWindow popupWindow = new PopupWindow(ParticularsActivity.this);
-                    popupWindow.setContentView(view);
+                    popupWindow.setContentView(popview);
                     popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
                     int height = ScreenUtils.getScreenHeight() * 1 / 3;
                     popupWindow.setHeight(height);
@@ -263,6 +278,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onClickRight() {
+
 //        UMImage image = new UMImage(this, pic);//网络图片
 //        new ShareAction(this)
 //                .withText("hello")
@@ -290,6 +306,32 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 //
 //                    }
 //                }).open();
+
+        PopupWindow popupWindow = new PopupWindow(this);
+        popupWindow.setContentView(popheadview);
+        popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(200);
+
+        popheadShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        popheadLive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        popheadVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.showAsDropDown(toolbar,0,0);
+
     }
 
     @Override

@@ -25,7 +25,11 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -61,9 +65,8 @@
             android:name="design_height_in_dp"
             android:value="731" />
 
+
 <!--  分享  -->
-
-
 
     </application>
 

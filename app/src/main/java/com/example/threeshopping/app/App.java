@@ -34,6 +34,10 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 
+import retrofit2.http.HEAD;
+
+
+
 public class App extends Application {
     @Override
     public void onCreate() {
@@ -55,11 +59,14 @@ public class App extends Application {
         CacheAwaitPaymentManager.getInstance().init();
 
 
+
         CacheMessageManager.getInstance().init(this);
+
+
 
         CacheConnectManager.getInstance().init(this);//网络
 
-        ShopCrashHandler.getInstance().init(this);//错误上报
+//        ShopCrashHandler.getInstance().init(this);//错误上报
         //激光推送
 //        JPushInterface.setDebugMode(true);
 //        JPushInterface.init(this);
