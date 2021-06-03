@@ -48,19 +48,6 @@ dependencies {
     implementation project(path: ':pay')
     implementation project(path: ':User')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation files('libs\\umeng-share-core-6.9.6.jar')
-    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
-    implementation files('libs\\umeng-sharetool-6.9.6.jar')
-    implementation files('libs\\umeng-share-core-6.9.6.jar')
-    implementation files('libs\\umeng-common-2.1.0.jar')
-    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
-    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
-    implementation files('libs\\umeng-sharetool-6.9.6.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.common.NetModel;
+import com.example.common.UMutlis;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
 import com.example.framework.FrameModel;
@@ -14,7 +15,6 @@ import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
-import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -36,6 +36,7 @@ public class App extends Application {
         UserModel.init();
         MainModel.init();
         PayModel.init();
+        //项目开始前把友盟数据信息从数据库中保存到缓存类中
 
 
 
@@ -44,8 +45,7 @@ public class App extends Application {
 
 
         ShopCacheManger.getInstance().init(this);
-//        ShopCacheManger.getInstance().registerUserManger();
-//        ShopCacheManger.getInstance().registerBuyCarManger();
+
 
         //自动登录
         startService(new Intent(this, AutoService.class));
@@ -58,12 +58,13 @@ public class App extends Application {
         //查询数据库 把数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);
 
-
-        UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
-        //获取消息推送代理示例
         PushAgent mPushAgent = PushAgent.getInstance(this);
+
+        UMConfigure.init(this, "60b8aa4085c1f6195c4739a1", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "22702403bca24d3c80567a517d3b5966");
+        //获取消息推送代理示例
         //注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
+
+        UMutlis.getInstance().getPushAgent().register(new IUmengRegisterCallback() {
 
             @Override
             public void onSuccess(String deviceToken) {
@@ -76,6 +77,7 @@ public class App extends Application {
                 Log.e("zx","注册失败：-------->  " + "s:" + s + ",s1:" + s1);
             }
         });
+
 //        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
 //                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 // 微信设置

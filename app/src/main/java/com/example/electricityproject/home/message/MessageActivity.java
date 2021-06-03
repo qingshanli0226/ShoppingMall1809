@@ -16,12 +16,10 @@ import com.example.framework.BaseActivity;
 import com.example.manager.SPMessageNum;
 import com.example.view.ToolBar;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 
-public class MessageActivity extends BaseActivity {
+public class MessageActivity extends BaseActivity implements MessageDataBase.iMessageListener {
 
     private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
     private List<MessageTable> messageTables;
@@ -32,8 +30,7 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        messageTables = MessageDataBase.getInstance().getDaoSession().loadAll(MessageTable.class);
-
+        messageTables=MessageDataBase.getInstance().payLoadAll();
         messageRv.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter();
         messageAdapter.updateData(messageTables);
@@ -62,7 +59,7 @@ public class MessageActivity extends BaseActivity {
             @Override
             public void OnItemClick(int position) {
                 //更改数据库
-                MessageDataBase.getInstance().getDaoSession().update(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
+                MessageDataBase.getInstance().payUpdate(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
                 messageTables.get(position).setIsShow(true);
                 messageAdapter.notifyItemChanged(position);
                 Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
@@ -77,17 +74,10 @@ public class MessageActivity extends BaseActivity {
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //把当前点击的数据，从数据库中删除
-                        MessageDataBase.getInstance().getDaoSession().delete(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
-                        messageTables.remove(position);
-
-                        messageAdapter.updateData(MessageDataBase.getInstance().getDaoMaster().newSession().loadAll(MessageTable.class));
-
-                        messageAdapter.notifyDataSetChanged();
                         //数据库数量减一
                         SPMessageNum.getInstance().subShopNum(1);
-                        //删除后发送EventBus
-                        EventBus.getDefault().post("num");
+                        //把当前点击的数据，从数据库中删除
+                        MessageDataBase.getInstance().payRemove(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
 
                         dialog.dismiss();
 
@@ -117,7 +107,7 @@ public class MessageActivity extends BaseActivity {
 
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         messageRv = (RecyclerView) findViewById(R.id.message_rv);
-
+        MessageDataBase.getInstance().register(this);
     }
 
     @Override
@@ -137,6 +127,20 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     public void showError(String error) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MessageDataBase.getInstance().unregister(this);
+    }
+
+    @Override
+    public void onMessageNumListener() {
+
+        messageAdapter.updateData(MessageDataBase.getInstance().payLoadAll());
+        messageAdapter.notifyDataSetChanged();
 
     }
 }

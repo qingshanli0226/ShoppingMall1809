@@ -63,8 +63,5 @@ public class DropShipmentPresenter extends BasePresenter<IDropShipmentView> {
 
                     }
                 });
-
-
-
     }
 }

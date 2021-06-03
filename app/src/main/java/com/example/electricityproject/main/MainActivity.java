@@ -104,10 +104,12 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
 
         if (BusinessUserManager.getInstance().getIsLog()!=null && ShopCacheManger.getInstance().getShortBeanList()!=null){
             List<ShortcartProductBean.ResultBean> shortcartProductBean = ShopCacheManger.getInstance().getShortBeanList();
-            buyCarNum.setVisibility(View.VISIBLE);
-            buyCarNum.setCurrentNum(""+shortcartProductBean.size());
-        }else {
-            buyCarNum.setVisibility(View.GONE);
+            if (shortcartProductBean.size()>0){
+                buyCarNum.setVisibility(View.VISIBLE);
+                buyCarNum.setCurrentNum(""+shortcartProductBean.size());
+            }else {
+                buyCarNum.setVisibility(View.GONE);
+            }
         }
 
     }
@@ -185,11 +187,15 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
     }
 
     @Override
-    public void OnChange() {
-        Toast.makeText(this, "改变", Toast.LENGTH_SHORT).show();
+    public void OnShopBeanChange() {
         if (BusinessUserManager.getInstance().getIsLog()!=null&&ShopCacheManger.getInstance().getShortBeanList()!=null){
-            buyCarNum.setVisibility(View.VISIBLE);
-            buyCarNum.setCurrentNum(ShopCacheManger.getInstance().getShortBeanList().size()+"");
+            if (ShopCacheManger.getInstance().getShortBeanList().size()>0){
+                buyCarNum.setVisibility(View.VISIBLE);
+                buyCarNum.setCurrentNum(ShopCacheManger.getInstance().getShortBeanList().size()+"");
+            }else {
+                buyCarNum.setVisibility(View.GONE);
+            }
+
         }
     }
 }

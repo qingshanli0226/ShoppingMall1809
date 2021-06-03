@@ -383,12 +383,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     //支付成功或者支付失败后发送eventBus，来把选中的数据删除
     @Subscribe
     public void eventDel(String del){
+        Toast.makeText(getContext(), "删除", Toast.LENGTH_SHORT).show();
+        deleteShopmall();
         if (del.equals("del")) {
             if (AllSelectManager.getInstance().isSelect()){
                 del();
             }
-            Toast.makeText(getContext(), "删除", Toast.LENGTH_SHORT).show();
-            deleteShopmall();
+
         }
     }
 
@@ -573,7 +574,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     }
 
     @Override
-    public void OnChange() {
+    public void OnShopBeanChange() {
         result = ShopCacheManger.getInstance().getShortBeanList();
         shoppingAdapter.updateData(result);
         shoppingAdapter.notifyDataSetChanged();

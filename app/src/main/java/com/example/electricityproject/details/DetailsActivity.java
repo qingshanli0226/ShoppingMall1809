@@ -29,12 +29,15 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
+import com.example.common.db.MessageDataBase;
+import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 import com.umeng.socialize.ShareAction;
@@ -226,8 +229,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
         if (ShopCacheManger.getInstance().getShortBeanList()!=null){
-            detailsBuyCarNum.setVisibility(View.VISIBLE);
-            detailsBuyCarNum.setCurrentNum(""+ShopCacheManger.getInstance().getShortBeanList().size());
+            if (ShopCacheManger.getInstance().getShortBeanList().size()>0) {
+                detailsBuyCarNum.setVisibility(View.VISIBLE);
+                detailsBuyCarNum.setCurrentNum("" + ShopCacheManger.getInstance().getShortBeanList().size());
+            }else {
+                detailsBuyCarNum.setVisibility(View.GONE);
+            }
         }
 
 
@@ -274,11 +281,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(DetailsActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
+        //数据库数量加一
+        SPMessageNum.getInstance().addShopNum(1);
+
+        MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享成功",System.currentTimeMillis(),false));
+
     }
     @Override
     public void onRightImgClick() {
-        super.onRightImgClick();
-        Toast.makeText(this, "132132", Toast.LENGTH_SHORT).show();
+
         PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(200);
@@ -293,11 +305,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
+                                Toast.makeText(DetailsActivity.this, "开始", Toast.LENGTH_SHORT).show();
 
                             }
 
                             @Override
                             public void onResult(SHARE_MEDIA share_media) {
+
+
 
                             }
 
@@ -318,6 +333,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         popupWindow.setContentView(inflate);
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(toolbar,0,0);
+
     }
 
     @Override
@@ -419,10 +435,15 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     }
     //购物车数量发生改成时
     @Override
-    public void OnChange() {
+    public void OnShopBeanChange() {
         if (ShopCacheManger.getInstance().getShortBeanList()!=null){
-            detailsBuyCarNum.setVisibility(View.VISIBLE);
-            detailsBuyCarNum.setCurrentNum(""+ShopCacheManger.getInstance().getShortBeanList().size());
+            if (ShopCacheManger.getInstance().getShortBeanList().size()>0) {
+                detailsBuyCarNum.setVisibility(View.VISIBLE);
+                detailsBuyCarNum.setCurrentNum("" + ShopCacheManger.getInstance().getShortBeanList().size());
+            }else {
+                detailsBuyCarNum.setVisibility(View.GONE);
+            }
         }
     }
+
 }

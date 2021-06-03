@@ -8,8 +8,7 @@ import java.util.List;
 public class MessageDataBase {
 
     private static MessageDataBase messageManger;
-    private IMessageListener iMessageListener;
-    private List<IMessageListener> list=new ArrayList<>();
+    private List<iMessageListener> messageListeners =new ArrayList<>();
 
     public static synchronized MessageDataBase getInstance() {
         if(messageManger==null){
@@ -19,8 +18,9 @@ public class MessageDataBase {
     }
 
     private DaoMaster daoMaster;
-    private DaoSession daoSession;
+    private MessageTableDao messageTableDao;
     private Context mContext;
+
 
     public void init(Context context){
         this.mContext=context;
@@ -35,38 +35,62 @@ public class MessageDataBase {
         return daoMaster;
 
     }
-
-    public DaoSession getDaoSession() {
-        synchronized (MessageDataBase.class) {
-            if (daoSession == null) {
-                daoSession = daoMaster.newSession();
+    //支付信息的数据库
+    public synchronized MessageTableDao getMessageTableDao() {
+            if (messageTableDao == null) {
+                messageTableDao = daoMaster.newSession().getMessageTableDao();
             }
 
-            for (IMessageListener messageListener : list) {
-                messageListener.onMessageNumListener();
-            }
-        }
-
-        return daoSession;
-
+        return messageTableDao;
     }
 
+    //添加支付信息后遍历注册接口发送通知
+    public void payInsert(MessageTable messageTable){
+        getMessageTableDao().insert(messageTable);
+        MessageNotify();
+    }
+       //删除支付信息后遍历注册接口发送通知
+    public void payRemove(MessageTable messageTable){
+        getMessageTableDao().delete(messageTable);
+        MessageNotify();
+    }
+    //修改支付信息后遍历注册接口发送通知
+    public void payUpdate(MessageTable messageTable){
+        getMessageTableDao().update(new MessageTable(Long.decode(messageTable.getId()+""),messageTable.getIsSucceed(),messageTable.getMessageTime(),true));
+        MessageNotify();
+    }
+    //查询所有支付的信息
+    public List<MessageTable> payLoadAll(){
+        List<MessageTable> messageTables = getMessageTableDao().loadAll();
+        return messageTables;
+    }
+
+
     //注册
-    public synchronized void register(IMessageListener iMessageListener){
+    public synchronized void register(MessageDataBase.iMessageListener iMessageListener){
         synchronized (MessageDataBase.class) {
-            list.add(iMessageListener);
+            messageListeners.add(iMessageListener);
         }
     }
     //取消注册
-    public void unregister(IMessageListener iMessageListener){
+    public void unregister(MessageDataBase.iMessageListener iMessageListener){
         synchronized (MessageDataBase.class) {
-            list.remove(iMessageListener);
+            messageListeners.remove(iMessageListener);
         }
     }
 
 
-    public interface IMessageListener{
+    //支付信息接口刷新
+    public void MessageNotify(){
+        for (MessageDataBase.iMessageListener messageListener : messageListeners) {
+            messageListener.onMessageNumListener();
+        }
+    }
+
+
+    public interface iMessageListener {
         void onMessageNumListener();
     }
+
 
 }
