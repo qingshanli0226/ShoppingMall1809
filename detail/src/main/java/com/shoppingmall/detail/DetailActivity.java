@@ -300,6 +300,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             resultBean.setProductName(productGoodBean.getName());
 
             CacheShopManager.getInstance().addData(resultBean);
+            EventBus.getDefault().post("main");
 
             Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
         }else {

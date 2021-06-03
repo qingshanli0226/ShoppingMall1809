@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
         mainCircle = (CircleView) findViewById(R.id.mainCircle);
     }
 
+
     @Override
     public void initPresenter() {
 

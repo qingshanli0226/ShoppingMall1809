@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
-                android:id="@+id/message"
+                android:id="@+id/message1"
                 android:src="@drawable/community_message_icon"
                 android:text="xxx"></ImageView>
             <TextView
@@ -47,6 +47,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:text="@string/message"
+                android:id="@+id/textmessage"
                 android:gravity="center"
                 android:textSize="20dp"
                 android:textColor="#fff"></TextView>

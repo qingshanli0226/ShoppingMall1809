@@ -91,6 +91,15 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         httpPresenter = new ShopCarPresenter(this);
     }
 
+    @Subscribe
+    public void getEvenBus(String msg){
+        if (msg.equals("main")){
+            shopCarAdapter.notifyDataSetChanged();
+            EventBus.getDefault().post("ShopCarNum");
+//            initData();
+        }
+    }
+
     @Override
     public void initData() {
 
@@ -102,7 +111,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         carts = CacheShopManager.getInstance().getCarts();
         LogUtils.json(carts);
         //获取数据
-        shopCarAdapter = new ShopCarAdapter();
+        if (shopCarAdapter==null){
+            shopCarAdapter = new ShopCarAdapter();
+        }
+
         if (carts.size()!=0) {
             notNullCar.setVisibility(View.VISIBLE);
             NullCar.setVisibility(View.GONE);
@@ -220,7 +232,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                     }
                 }
                 boolean isBind = ShopMallUserManager.getInstance().isBind();
-//                loginBean.getResult().getPhone().equals("11111111") && loginBean.getResult().getAddress().equals("11111")&&loginBean
                 if (body.size()>=1){
                     if(isBind){
                         Intent intent = new Intent(getContext(), BindActivity.class);
@@ -255,7 +266,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void onShowCart(List<ShopCarBean.ResultBean> carts) {
         this.carts = carts;
         shopCarAdapter.updateData(carts);
-//        EventBus.getDefault().post("ShopCarNum");
+        EventBus.getDefault().post("ShopCarNum");
     }
 
     //添加

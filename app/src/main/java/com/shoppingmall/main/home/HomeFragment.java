@@ -4,16 +4,26 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shoppingmall.R;
+import com.shoppingmall.detail.messagedao.MessageManager;
 import com.shoppingmall.framework.manager.CacheManager;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
+import com.shoppingmall.main.MainActivity;
 import com.shoppingmall.main.home.adapter.HomeAdapter;
 import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.HomeBean;
+import com.shoppingmall.net.bean.LoginBean;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +35,9 @@ public class HomeFragment extends BaseFragment {
     private EditText homeFragmentSearch;
     private RecyclerView homeRv;
     private HomeAdapter homeAdapter;
-    private ImageView message;
+    private ImageView message1;
+    private TextView textmessage;
+    private LoginBean loginBean;
 
     @Override
     public int getLayoutId() {
@@ -36,7 +48,18 @@ public class HomeFragment extends BaseFragment {
     public void initView() {
         homeFragmentSearch = (EditText) mView.findViewById(R.id.homeFragmentSearch);
         homeRv = (RecyclerView) mView.findViewById(R.id.homeRv);
-        message =mView.findViewById(R.id.message);
+        message1 = mView.findViewById(R.id.message1);
+        textmessage = mView.findViewById(R.id.textmessage);
+         loginBean = ShopMallUserManager.getInstance().getLoginBean();
+        int messageCount = MessageManager.getInstance().getMessageCount();
+        if (loginBean!=null){
+            if (messageCount>0){
+                textmessage.setText(messageCount+"");
+            }else {
+                textmessage.setText("消息");
+            }
+        }
+
     }
 
     @Override
@@ -64,15 +87,34 @@ public class HomeFragment extends BaseFragment {
             homeAdapter.updateData(objects);
         }
 
-        message.setOnClickListener(new View.OnClickListener() {
+        message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MessageActivity.class);
-                startActivity(intent);
+
+                if (loginBean==null){
+                    Toast.makeText(getContext(), "用户未登录", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getActivity(), MessageActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
 
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void ispay(String m){
+        if (m.equals("payback")){
+            textmessage.setText(MessageManager.getInstance().getMessageCount()+"");
+        }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+    }
 }

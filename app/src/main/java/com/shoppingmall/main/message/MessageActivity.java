@@ -2,6 +2,8 @@ package com.shoppingmall.main.message;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +18,12 @@ import com.shoppingmall.R;
 import com.shoppingmall.detail.messagedao.MessageBean;
 import com.shoppingmall.detail.messagedao.MessageManager;
 import com.shoppingmall.framework.adapter.BaseRvAdapter;
+import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseActivity;
+import com.shoppingmall.main.MainActivity;
+import com.shoppingmall.net.bean.LoginBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +40,11 @@ public class MessageActivity extends BaseActivity {
         return R.layout.activity_message;
     }
     @Override
+    public void initData() {
+        list = MessageManager.getInstance().getMessageBeanList();
+
+    }
+    @Override
     public void initView() {
         bar = findViewById(R.id.bar);
         back = findViewById(R.id.back);
@@ -40,7 +52,7 @@ public class MessageActivity extends BaseActivity {
          messageAdapter = new MessageAdapter();
          rv.setAdapter(messageAdapter);
          rv.setLayoutManager(new LinearLayoutManager(this));
-
+         messageAdapter.updateData(MessageManager.getInstance().getMessageBeanList());
          messageAdapter.setRecyclerItemClickListener(new BaseRvAdapter.IRecyclerItemClickListener() {
              @Override
              public void onItemClick(int position) {
@@ -53,6 +65,10 @@ public class MessageActivity extends BaseActivity {
                              if (isSuccess){
                                  Toast.makeText(MessageActivity.this, "确认消息", Toast.LENGTH_SHORT).show();
                                  messageAdapter.updateData(list);
+                                 SharedPreferences msg = getSharedPreferences("msg", MODE_PRIVATE);
+                                 int msgCount = msg.getInt("msgCount", 1);
+                                 MessageManager.getInstance().updateMessageCount(msgCount-1);
+                                 EventBus.getDefault().post("payback");
                              }
                          }
                      });
@@ -88,6 +104,8 @@ public class MessageActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 MessageActivity.this.finish();
+                Intent intent = new Intent(MessageActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -98,8 +116,5 @@ public class MessageActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void initData() {
-       list = MessageManager.getInstance().getMessageBeanList();
-    }
+
 }

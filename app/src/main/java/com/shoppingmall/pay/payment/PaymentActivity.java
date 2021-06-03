@@ -1,5 +1,6 @@
 package com.shoppingmall.pay.payment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,8 @@ import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.shoppingmall.R;
 
+import com.shoppingmall.detail.messagedao.MessageBean;
+import com.shoppingmall.detail.messagedao.MessageManager;
 import com.shoppingmall.framework.Constants;
 import com.shoppingmall.framework.mvp.BaseActivity;
 import com.shoppingmall.net.bean.PayCheckBean;
@@ -23,12 +26,15 @@ import com.shoppingmall.zfb.PayResult;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.annotations.NonNull;
 
 public class PaymentActivity extends BaseActivity<PayMentPresenter> implements IPaymentView {
+
     private Handler handler = new Handler(){
+        @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -36,9 +42,14 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                 PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                 String result = payResult.getResult();
                 String resultStatus = payResult.getResultStatus();
+                String paymessage="";
+                MessageBean messageBean = new MessageBean();
+                messageBean.setIsNew(true);
+
                 if(TextUtils.equals(resultStatus,"9000")){
                     EventBus.getDefault().post("delCar");
                     Toast.makeText(PaymentActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    paymessage="支付成功";
                     ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
 
                     PayCheckBean payCheckBean = new PayCheckBean();
@@ -54,6 +65,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     } else{
                         EventBus.getDefault().post("delCar");
                         ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("shopMallPosition",3).navigation();
+                        paymessage="支付失败";
                         Toast.makeText(PaymentActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
 
                         PayCheckBean payCheckBean = new PayCheckBean();
@@ -62,11 +74,18 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                         payCheckBean.setClientPayResult(false);
                         httpPresenter.checkNumAll(payCheckBean);
 
-
-
-
                     }
                 }
+                messageBean.setTitle("支付消息:");
+                messageBean.setMsg(paymessage);
+                messageBean.setTime(System.currentTimeMillis());
+                MessageManager.getInstance().addMessage(messageBean, new MessageManager.IMessageListener() {
+                    @Override
+                    public void onResult(boolean isSuccess, List<MessageBean> messageBeanList) {
+                        EventBus.getDefault().post("payback");
+                    }
+                });
+
             }
 
         }
