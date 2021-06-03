@@ -52,6 +52,7 @@ class TypeAdapter extends BaseAdapter<Object> {
                     public void OnItemClick(int position) {
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",hotProductListBeans.get(position).getFigure());
+                        intent.putExtra("url",hotProductListBeans.get(position).getFigure());
                         intent.putExtra("name",hotProductListBeans.get(position).getName()+"");
                         intent.putExtra("price",hotProductListBeans.get(position).getCover_price());
                         intent.putExtra("productId",hotProductListBeans.get(position).getProduct_id());

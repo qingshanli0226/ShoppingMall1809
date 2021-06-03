@@ -5,11 +5,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.common.LogUtils;
+import com.example.common.bean.LogBean;
 import com.example.common.bean.UpdateAddress;
 import com.example.common.bean.UpdatePhoneBean;
 import com.example.electricityproject.R;
+import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
+import com.example.electricityproject.shopp.userinfo.infodb.UserInfoTable;
+import com.example.electricityproject.shopp.userinfo.infodb.UserInfoTableManger;
 import com.example.framework.BaseActivity;
+import com.example.manager.BusinessUserManager;
 import com.example.view.ToolBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> implements IBindUserInfoView {
 
@@ -18,11 +26,18 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     private android.widget.Button confirmPhone;
     private android.widget.EditText editAddress;
     private android.widget.Button confirmAddress;
+    private DaoMaster daoMaster;
+    private String name;
+    private String phone;
+    private String address;
+    private boolean isBindPhone;
+    private boolean isBindAddress;
 
     @Override
     public void updatePhone(UpdatePhoneBean updatePhoneBean) {
         if (updatePhoneBean.getCode().equals("200")){
             Toast.makeText(this, "电话绑定成功", Toast.LENGTH_SHORT).show();
+            isBindPhone = true;
         }
     }
 
@@ -30,26 +45,56 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     public void updateAddress(UpdateAddress updateAddress) {
         if (updateAddress.getCode().equals("200")){
             Toast.makeText(this, "地址绑定成功", Toast.LENGTH_SHORT).show();
+            isBindAddress = true;
+
+            if (isBindAddress && isBindPhone){
+                long insert = daoMaster.newSession().insert(new UserInfoTable(null, name, address, phone,false));
+                LogUtils.i(insert+"");
+                if (insert!=0){
+                    EventBus.getDefault().post("bindinfo");
+                    finish();
+                }
+            }
+
         }
     }
 
+
     @Override
     protected void initData() {
+
+
+        daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
+
+        LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+        if (isLog!=null){
+            name = isLog.getResult().getName();
+        }
+
+
+
         confirmPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = editPhone.getText().toString().trim();
-                httpPresenter.postUpdatePhoneData(phone);
+                 phone = editPhone.getText().toString().trim();
+                if (phone.length() == 11){
+                    httpPresenter.postUpdatePhoneData(phone);
+                }else {
+                    Toast.makeText(BindUserInfoActivity.this, "电话格式不对", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         confirmAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String address = editAddress.getText().toString().trim();
-                httpPresenter.postUpdateAddressData(address);
+                address = editAddress.getText().toString().trim();
+                if (!address.equals("")){
+                    httpPresenter.postUpdateAddressData(address);
+                }
             }
         });
+
 
     }
 

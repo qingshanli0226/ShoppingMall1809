@@ -77,6 +77,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private RelativeLayout liner;
     private RelativeLayout relitive;
     private com.example.electricityproject.view.CircleView detailsBuyCarNum;
+    private boolean isSend=false;
 
 
     @Override
@@ -281,11 +282,11 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(DetailsActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
-        //数据库数量加一
-        SPMessageNum.getInstance().addShopNum(1);
-
-        MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享成功",System.currentTimeMillis(),false));
+        if (!isSend) {
+            //数据库数量加一
+            SPMessageNum.getInstance().addShopNum(1);
+            MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享成功", System.currentTimeMillis(), false));
+        }
 
     }
     @Override
@@ -319,11 +320,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
                                 Toast.makeText(DetailsActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
                             public void onCancel(SHARE_MEDIA share_media) {
+                                isSend=true;
+                                //数据库数量加一
+                                SPMessageNum.getInstance().addShopNum(1);
 
+                                MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败",System.currentTimeMillis(),false));
                             }
                         }).open();
 

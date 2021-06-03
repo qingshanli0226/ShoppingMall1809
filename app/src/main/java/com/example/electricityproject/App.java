@@ -8,6 +8,8 @@ import com.example.common.NetModel;
 import com.example.common.UMutlis;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
+import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
+import com.example.electricityproject.shopp.userinfo.infodb.UserInfoTableManger;
 import com.example.framework.FrameModel;
 import com.example.manager.BusinessNetManager;
 import com.example.manager.SPMessageNum;
@@ -20,16 +22,10 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
 
-
-
 public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
-        String licenceKey = "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
-//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
         NetModel.init(this);
         FrameModel.init(this);
@@ -38,6 +34,8 @@ public class App extends Application {
         PayModel.init();
         //项目开始前把友盟数据信息从数据库中保存到缓存类中
 
+        //创建数据库
+        DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
 
 
         //错误框架
@@ -61,6 +59,13 @@ public class App extends Application {
         PushAgent mPushAgent = PushAgent.getInstance(this);
 
         UMConfigure.init(this, "60b8aa4085c1f6195c4739a1", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "22702403bca24d3c80567a517d3b5966");
+        String licenceURL =
+                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey =
+                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+
+        UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
         //注册推送服务，每次调用register方法都会回调该接口
 

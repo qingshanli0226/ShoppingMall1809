@@ -30,6 +30,7 @@ public class AutoService extends Service implements BusinessUserManager.IUserLog
                         if (logBean.getCode().equals("200")) {
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
+                            BusinessUserManager.getInstance().setIsLog(logBean);
                             BusinessUserManager.getInstance().setLogList(logBean.getResult());
                         } else {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();

@@ -40,28 +40,28 @@ public class BusinessUserManager {
     }
 
     public boolean isBindAddress() {
-        if (logList.getAddress()!=null && logList!=null){
+        if (isLog.getResult().getAddress()!=null && isLog!=null){
             return true;
         }
         return false;
     }
 
     public void setBindAddress(String address) {
-        if (logList!=null){
-            logList.setAddress(address);
+        if (isLog!=null){
+            isLog.getResult().setAddress(address);
         }
     }
 
     public boolean isBindTel() {
-        if (!logList.getPhone().equals("") && logList!=null){
+        if (isLog.getResult().getPhone()!=null && isLog!=null){
             return true;
         }
         return false;
     }
 
     public void setBindTel(String bindTel) {
-        if (logList!=null){
-            logList.setAddress(bindTel);
+        if (isLog!=null){
+            isLog.getResult().setAddress(bindTel);
         }
     }
 
