@@ -270,14 +270,12 @@ public class ShopGlide {
             bitmap=shopGlide.getFromMen(picUrl);
             if (bitmap!=null){
                 imageView.setImageBitmap(bitmap);
-                Log.i("zx", "init: 本地中命中 效率中间。。。。");
                 return;
             }
             shopGlide.getBitmapFromDisk(picUrl, new IBitmapReceivedListener() {
                 @Override
                 public void onBitmap(String url, Bitmap bitmap) {
                     if (bitmap!=null){
-                        Log.i("zx", "onBitmap: 本地中命中 效率中间。。。。");
                         if (imageView.getTag().equals(picUrl)){
                             imageView.setImageBitmap(bitmap);
                         }else {
@@ -289,7 +287,6 @@ public class ShopGlide {
                         @Override
                         public void onBitmap(String url, Bitmap bitmap) {
                             if (bitmap!=null){
-                                Log.i("zx", "onBitmap: 服务端命中 效率最低。。。。");
                                 if (imageView.getTag().equals(picUrl)){
                                     imageView.setImageBitmap(bitmap);
                                 }else {

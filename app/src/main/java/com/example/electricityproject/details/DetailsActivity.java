@@ -337,7 +337,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
-            ShopCacheManger.getInstance().requestShortProductData();
+            //ShopCacheManger.getInstance().requestShortProductData();
 
         }
     }

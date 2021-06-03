@@ -29,7 +29,7 @@ public class App extends Application {
 
         String licenceURL = "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
         String licenceKey = "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
-        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
         NetModel.init(this);
         FrameModel.init(this);
@@ -43,7 +43,6 @@ public class App extends Application {
 //        ShopmallCrashHandler.getInstance().init(this);
 
 
-        //获得缓存类的下标
         ShopCacheManger.getInstance().init(this);
 //        ShopCacheManger.getInstance().registerUserManger();
 //        ShopCacheManger.getInstance().registerBuyCarManger();
