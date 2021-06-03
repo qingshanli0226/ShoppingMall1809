@@ -38,8 +38,7 @@ public class App extends Application {
 
         //获得缓存类的下标
         ShopCacheManger.getInstance().init(this);
-        ShopCacheManger.getInstance().registerUserManger();
-        ShopCacheManger.getInstance().registerBuyCarManger();
+//        ShopCacheManger.getInstance().registerUserManger();
 
         //自动登录
         startService(new Intent(this, AutoService.class));

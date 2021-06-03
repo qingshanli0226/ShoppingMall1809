@@ -3,9 +3,7 @@ package com.example.manager;
 import android.content.Context;
 import android.util.Log;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.FindForPayBean;
-import com.example.common.bean.LogBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.net.RetrofitCreate;
@@ -19,7 +17,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ShopCacheManger {
+public class ShopCacheManger{
 
     private static ShopCacheManger cacheManger;
     private Context context;
@@ -38,7 +36,15 @@ public class ShopCacheManger {
     private List<FindForPayBean.ResultBean> payFailList = new ArrayList<>();
     //消息缓存
     private List<FindForPayBean.ResultBean> messageList = new ArrayList<>();
+    //购物车数据发生改变时
+    private List<iShopBeanChangeListener> shopBeanChangeListeners = new ArrayList<>();
 
+    public void registerShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
+        shopBeanChangeListeners.add(iShopBeanChangeListener);
+    }
+    public void unregisterShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
+        shopBeanChangeListeners.remove(iShopBeanChangeListener);
+    }
     public static ShopCacheManger getInstance() {
         synchronized (ShopCacheManger.class){
             if (cacheManger==null){
@@ -49,7 +55,25 @@ public class ShopCacheManger {
     }
 
 
+    public List<ShortcartProductBean.ResultBean> getShortBeanList() {
+        return shortBeanList;
+    }
 
+    public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBeanList) {
+
+        this.shortBeanList = shortBeanList;
+        for (iShopBeanChangeListener shopBeanChangeListener : shopBeanChangeListeners) {
+            shopBeanChangeListener.OnChange();
+        }
+    }
+
+//    @Override
+//    public void onLoginChange(LogBean isLog) {
+//        //判断是否登录?登录请求购物车数据
+//        if (isLog!=null){
+//            requestShortProductData();
+//        }
+//    }
 
     public List<SelectOrderBean> getList() {
         return list;
@@ -98,30 +122,19 @@ public class ShopCacheManger {
 
     public void init(Context application){
         context = application;
+        //BusinessUserManager.getInstance().Register(this);
     }
-
-    public void registerUserManger(){
-        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
-            @Override
-            public void onLoginChange(LogBean isLog) {
-                if (isLog!=null){
-                    requestShortProductData();
-                }
+    //详情页面添加数据
+    public void addShopMessageNum(String productId,String productName,String productNum,String url,String productPrice,boolean isAll){
+        ShortcartProductBean.ResultBean bean = new ShortcartProductBean.ResultBean(productId, productName, productNum, url, productPrice, false);
+        if (!shortBeanList.contains(bean)){
+            shortBeanList.add(bean);
+            for (iShopBeanChangeListener shopBeanChangeListener : shopBeanChangeListeners) {
+                shopBeanChangeListener.OnChange();
             }
-        });
-    }
+        }
+        shortBeanList.add(bean);
 
-    public void registerBuyCarManger(){
-        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
-            @Override
-            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-                if (shortcartProductBean!=null){
-                    com.example.common.LogUtils.i("ShopCacheManger",113,"获得数据");
-                }else{
-                    com.example.common.LogUtils.i("ShopCacheManger",115,"没有数据");
-                }
-            }
-        });
     }
 
     public synchronized void requestShortProductData(){
@@ -136,10 +149,9 @@ public class ShopCacheManger {
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        LogUtils.json(shortcartProductBean);
+                        Log.i("zx", "onNext: "+shortcartProductBean);
                         List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-                        shortBeanList.addAll(result);
-                        BusinessBuyCarManger.getInstance().setShortcartProductBean(shortcartProductBean);
+                        ShopCacheManger.getInstance().setShortBeanList(result);
                     }
 
                     @Override
@@ -184,6 +196,9 @@ public class ShopCacheManger {
 
     public void setProductNum(String productNum) {
         this.productNum = productNum;
+    }
+    public  interface iShopBeanChangeListener{
+        void OnChange();
     }
 
 

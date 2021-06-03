@@ -7,7 +7,6 @@ import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
 import com.example.manager.BusinessARouter;
-import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
@@ -50,7 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,BusinessBuyCarManger.iShopBeanChange,ToolBar.IToolbarListener{
+public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,ToolBar.IToolbarListener,ShopCacheManger.iShopBeanChangeListener{
     private ToolBar toolbar;
     private WebView detailsWeb;
     private TextView detailsName;
@@ -176,6 +174,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         public void onClick(View v) {
                             prod_num = prod_num+1;
                             num.setText(""+prod_num);
+
                         }
                     });
                     //数量减一
@@ -199,6 +198,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
                             httpPresenter.checkOneProductInventory(productId, String.valueOf(prod_num));
+                            ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",url,productPrice,false);
                         }
                     });
 
@@ -225,16 +225,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             }
         });
+        if (ShopCacheManger.getInstance().getShortBeanList()!=null){
+            detailsBuyCarNum.setVisibility(View.VISIBLE);
+            detailsBuyCarNum.setCurrentNum(""+ShopCacheManger.getInstance().getShortBeanList().size());
+        }
 
-        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
-            @Override
-            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-                if (shortcartProductBean!=null){
-                    detailsBuyCarNum.setVisibility(View.VISIBLE);
-                    detailsBuyCarNum.setCurrentNum(""+shortcartProductBean.getResult().size());
-                }
-            }
-        });
+
 
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList =new String[]{
@@ -261,6 +257,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         linLin = (LinearLayout) findViewById(R.id.lin_lin);
         relitive = (RelativeLayout) findViewById(R.id.relitive);
         detailsBuyCarNum = (CircleView) findViewById(R.id.details_buyCarNum);
+        ShopCacheManger.getInstance().registerShopBeanChange(this);
     }
 
     @Override
@@ -418,11 +415,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     @Override
     public void destroy() {
         super.destroy();
-        BusinessBuyCarManger.getInstance().UnRegister(this);
+        ShopCacheManger.getInstance().unregisterShopBeanChange(this);
     }
-
+    //购物车数量发生改成时
     @Override
-    public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-
+    public void OnChange() {
+        if (ShopCacheManger.getInstance().getShortBeanList()!=null){
+            detailsBuyCarNum.setVisibility(View.VISIBLE);
+            detailsBuyCarNum.setCurrentNum(""+ShopCacheManger.getInstance().getShortBeanList().size());
+        }
     }
 }

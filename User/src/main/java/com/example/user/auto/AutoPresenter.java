@@ -51,7 +51,6 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
                         if (IView!=null) {
                             IView.onAutoData(logBean);
                         }
-                        LogUtils.json(logBean);
                     }
 
                     @Override

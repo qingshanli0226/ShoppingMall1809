@@ -23,6 +23,7 @@ import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.PayResult;
 import com.example.view.ToolBar;
@@ -113,7 +114,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-
+                        //数据库数量减一
+                        SPMessageNum.getInstance().addShopNum(1);
                         EventBus.getDefault().post("del");
                         EventBus.getDefault().post("num");
 
@@ -138,6 +140,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
                         //添加到数据库
                         MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
 
                         EventBus.getDefault().postSticky("del");
 

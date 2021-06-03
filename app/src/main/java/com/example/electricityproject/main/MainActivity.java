@@ -23,15 +23,14 @@ import com.example.electricityproject.shopp.ShoppingFragment;
 import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessARouter;
-import com.example.manager.BusinessBuyCarManger;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ShopCacheManger.iShopBeanChangeListener{
 
     private HomeFragment homeFragment;
     private ClassifyFragment classifyFragment;
@@ -50,7 +49,6 @@ public class MainActivity extends BaseActivity {
     private CircleView buyCarNum;
 
 
-    private List<ShortcartProductBean.ResultBean> resultBeanList = new ArrayList<>();
 
 
     @Override
@@ -104,34 +102,13 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        if (BusinessUserManager.getInstance().getIsLog()!=null && BusinessBuyCarManger.getInstance().getShortcartProductBean()!=null){
-            ShortcartProductBean shortcartProductBean = BusinessBuyCarManger.getInstance().getShortcartProductBean();
+        if (BusinessUserManager.getInstance().getIsLog()!=null && ShopCacheManger.getInstance().getShortBeanList()!=null){
+            List<ShortcartProductBean.ResultBean> shortcartProductBean = ShopCacheManger.getInstance().getShortBeanList();
             buyCarNum.setVisibility(View.VISIBLE);
-            buyCarNum.setCurrentNum(""+shortcartProductBean.getResult().size());
+            buyCarNum.setCurrentNum(""+shortcartProductBean.size());
         }else {
             buyCarNum.setVisibility(View.GONE);
         }
-
-        BusinessBuyCarManger.getInstance().Register(new BusinessBuyCarManger.iShopBeanChange() {
-            @Override
-            public void OnShopBeanChange(ShortcartProductBean shortcartProductBean) {
-                resultBeanList = shortcartProductBean.getResult();
-                buyCarNum.setVisibility(View.VISIBLE);
-                buyCarNum.setCurrentNum(""+resultBeanList.size());
-            }
-        });
-        //判断是否登录
-        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
-            @Override
-            public void onLoginChange(LogBean isLog) {
-                if (isLog!=null){
-                    buyCarNum.setVisibility(View.VISIBLE);
-                    buyCarNum.setCurrentNum(""+resultBeanList.size());
-                }else {
-                    buyCarNum.setVisibility(View.GONE);
-                }
-            }
-        });
 
     }
 
@@ -151,6 +128,7 @@ public class MainActivity extends BaseActivity {
         btnFind = (RadioButton) findViewById(R.id.btn_find);
         btnPerson = (RadioButton) findViewById(R.id.btn_person);
         buyCarNum = (CircleView) findViewById(R.id.buy_car_num);
+        ShopCacheManger.getInstance().registerShopBeanChange(this);
     }
 
     @Override
@@ -200,7 +178,18 @@ public class MainActivity extends BaseActivity {
         Log.i("zx", "showError: "+error);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShopCacheManger.getInstance().unregisterShopBeanChange(this);
+    }
 
-
-
+    @Override
+    public void OnChange() {
+        Toast.makeText(this, "改变", Toast.LENGTH_SHORT).show();
+        if (BusinessUserManager.getInstance().getIsLog()!=null&&ShopCacheManger.getInstance().getShortBeanList()!=null){
+            buyCarNum.setVisibility(View.VISIBLE);
+            buyCarNum.setCurrentNum(ShopCacheManger.getInstance().getShortBeanList().size()+"");
+        }
+    }
 }
