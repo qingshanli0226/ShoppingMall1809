@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.framework.BaseActivity;
 import com.example.framework.db.MessageTable;
-import com.example.framework.manager.GreenManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.framework.view.ToolBar;
 import com.example.shoppingmall1809.R;
@@ -28,7 +28,7 @@ public class MessageActivity extends BaseActivity  {
 
     @Override
     protected void initData() {
-        List<MessageTable> message = GreenManager.getInstance().getMessage();
+        List<MessageTable> message = MessageManager.getInstance().getMessage();
 
         MessageAdapter messageAdapter = new MessageAdapter();
         messageAdapter.updateDate(message);
@@ -42,13 +42,13 @@ public class MessageActivity extends BaseActivity  {
         messageAdapter.setRecyclerItemClickListener(new BaseRVAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MessageActivity.this, getResources().getString(R.string.confirmedMessage), Toast.LENGTH_SHORT).show();
 
                 MessageTable messageTable = message.get(position);
                 messageTable.setIsRead(false);
 
-                GreenManager.getInstance().subCount();
-                GreenManager.getInstance().upDataMessage(messageTable);
+                MessageManager.getInstance().subCount();
+                MessageManager.getInstance().upDataMessage(messageTable);
 
                 messageAdapter.notifyItemChanged(position);
             }

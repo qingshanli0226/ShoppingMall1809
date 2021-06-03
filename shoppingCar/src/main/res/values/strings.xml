@@ -72,7 +72,16 @@
     <string name="count">数量:</string>
     <string name="submitOrder">提交订单</string>
     <string name="areYouSureYouWantToContinuePaying">确定要继续付款吗</string>
-
+    <string name="commodityPrices">商品价格</string>
+    <string name="returnAll">退换无忧</string>
+    <string name="freight">运费</string>
+    <string name="standBy">立减</string>
+    <string name="coupons">优惠卷</string>
+    <string name="noUse">无可用</string>
+    <string name="bean">桂豆</string>
+    <string name="giftCard">礼品卡</string>
+    <string name="modeOfPayment">支付方式</string>
+    <string name="onlinePayment">在线支付</string>
 
     <string name="app_name">XXX购物车</string>
     <!-- TODO: Remove or change this placeholder text -->

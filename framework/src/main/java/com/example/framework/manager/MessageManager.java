@@ -2,18 +2,16 @@ package com.example.framework.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.renderscript.ScriptC;
 
 import com.example.commom.ShopConstants;
 import com.example.framework.db.DaoMaster;
 import com.example.framework.db.DaoSession;
 import com.example.framework.db.MessageTable;
-import com.example.framework.db.MessageTableDao;
 
 import java.util.List;
 
 
-public class GreenManager {
+public class MessageManager {
 
     private Context context;
     private DaoSession daoSession;
@@ -98,14 +96,18 @@ public class GreenManager {
         this.message = null;
     }
 
-    private static GreenManager greenManager;
+    private static MessageManager greenManager;
 
-    private GreenManager() {
+    private MessageManager() {
     }
 
-    public static GreenManager getInstance() {
+    public static MessageManager getInstance() {
         if (greenManager == null) {
-            greenManager = new GreenManager();
+            synchronized (MessageManager.class){
+                if (greenManager == null) {
+                    greenManager = new MessageManager();
+                }
+            }
         }
         return greenManager;
     }

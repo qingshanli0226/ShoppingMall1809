@@ -1,20 +1,18 @@
 package com.example.framework.service;
 
-import android.app.Application;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.commom.ShopConstants;
 import com.example.commom.SpUtil;
 import com.example.framework.db.MessageTable;
-import com.example.framework.manager.GreenManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.LoginBean;
@@ -92,8 +90,8 @@ public class ShopService extends Service {
                     Object key = entry.getKey();
                     Object value = entry.getValue();
                     MessageTable messageTable = new MessageTable(null, (String) value, System.currentTimeMillis() + "", true);
-                    GreenManager.getInstance().setMessage(messageTable);
-                    GreenManager.getInstance().addCount();
+                    MessageManager.getInstance().setMessage(messageTable);
+                    MessageManager.getInstance().addCount();
                 }
                 return super.getNotification(context, msg);
             }

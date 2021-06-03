@@ -289,13 +289,13 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     @Override
     public void onAddOneProduct(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            Toast.makeText(this, "添加购物车成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.successfullyAdded), Toast.LENGTH_SHORT).show();
 
             ShoppingCarManager.getInstance().insertResultBean(upDate());
 
             path();
         } else {
-            Toast.makeText(this, "添加购物车失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.failToAdd), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -380,7 +380,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
             if (Integer.parseInt(registerBean.getResult()) >= num) {
                 httpPresenter.AddOneProduct(productId, num + "", productName, url, productPrice);
             } else {
-                Toast.makeText(this, "该商品库存不足", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.understock), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -389,7 +389,7 @@ public class ParticularsActivity extends BaseActivity<AddOnrProductPresenter> im
     @Override
     public void onUpDateProductNum(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            Toast.makeText(this, "商品数量修改成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.modification), Toast.LENGTH_SHORT).show();
 
             ShoppingCarManager.getInstance().upDataResultBean(upDate());
 

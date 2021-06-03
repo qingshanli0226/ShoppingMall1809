@@ -85,7 +85,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="商品价格"></TextView>
+                        android:text="@string/commodityPrices"></TextView>
 
                     <TextView
                         android:id="@+id/product_price"
@@ -111,7 +111,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="退换无忧"></TextView>
+                        android:text="@string/returnAll"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
@@ -136,7 +136,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="运费"></TextView>
+                        android:text="@string/freight"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
@@ -161,7 +161,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="立减"></TextView>
+                        android:text="@string/standBy"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
@@ -186,14 +186,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="优惠卷"></TextView>
+                        android:text="@string/coupons"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="无可用"
+                        android:text="@string/noUse"
                         android:textColor="@color/black"></TextView>
 
                 </LinearLayout>
@@ -211,7 +211,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="桂豆"></TextView>
+                        android:text="@string/bean"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
@@ -236,14 +236,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="礼品卡"></TextView>
+                        android:text="@string/giftCard"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="无可用"
+                        android:text="@string/noUse"
                         android:textColor="@color/black"></TextView>
 
                 </LinearLayout>
@@ -264,7 +264,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_40"
-                        android:text="礼品卡"></TextView>
+                        android:text="@string/giftCard"></TextView>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -288,14 +288,14 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="支付方式"></TextView>
+                        android:text="@string/modeOfPayment"></TextView>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="在线支付"
+                        android:text="@string/onlinePayment"
                         android:textColor="@color/black"></TextView>
 
                 </LinearLayout>

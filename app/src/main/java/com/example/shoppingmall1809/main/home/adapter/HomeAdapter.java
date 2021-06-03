@@ -92,10 +92,6 @@ public class HomeAdapter extends BaseRVAdapter<Object> {
                 GridView gridView = holder.itemView.findViewById(R.id.frag_home_rv_gv);
                 gridView.setAdapter(hoemHandAdapter);
 
-                gridView.setOnItemClickListener((adapterView, view, i, l) -> {
-                    Toast.makeText(holder.itemView.getContext(), "点击"+i, Toast.LENGTH_SHORT).show();
-                });
-
                 break;
             case ACT_INFO:
                 List<HoemBean.ResultBean.ActInfoBean> act_info = (List<HoemBean.ResultBean.ActInfoBean>) itemData;

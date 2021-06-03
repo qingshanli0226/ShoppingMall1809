@@ -4,9 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.example.framework.manager.GreenManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShoppingCarManager;
-import com.example.framework.view.ShopmallCrashHandler;
 import com.example.framework.manager.ShopManager;
 import com.example.net.NetModule;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -32,7 +31,7 @@ public class App extends Application {
 
         ShoppingCarManager.getInstance().initLogin();
 
-        GreenManager.getInstance().init(this);
+        MessageManager.getInstance().init(this);
 
 
 

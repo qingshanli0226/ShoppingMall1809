@@ -16,14 +16,13 @@ import com.alipay.sdk.app.PayTask;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.db.MessageTable;
-import com.example.framework.manager.GreenManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.view.BaseRVAdapter;
 import com.example.net.model.FindForBean;
 import com.example.net.model.OrderinfoBean;
 import com.example.net.model.RegisterBean;
 import com.example.pay.IPayView;
-import com.example.pay.PayActivity;
 import com.example.pay.PayPresenter;
 import com.example.pay.R;
 import com.example.pay.user.adapter.FindForAdapter;
@@ -47,7 +46,7 @@ public class FindForPayActivity extends BaseActivity<PayPresenter> implements IP
                     Map<String, String> result = (Map<String, String>) msg.obj;
                     String resultStatus = result.get("resultStatus");
                     if (resultStatus.equals("9000")) {
-                        Toast.makeText(FindForPayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FindForPayActivity.this, getResources().getString(R.string.paySuccess), Toast.LENGTH_SHORT).show();
                         isSucceed = true;
                         FindForBean.ResultBean resultBean = new FindForBean.ResultBean();
                         resultBean.setTime(System.currentTimeMillis() + "");
@@ -57,26 +56,26 @@ public class FindForPayActivity extends BaseActivity<PayPresenter> implements IP
                         finish();
                     } else {
                         if (resultStatus.equals("8000")) {
-                            Toast.makeText(FindForPayActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindForPayActivity.this, getResources().getString(R.string.inTheConfirmation), Toast.LENGTH_SHORT).show();
                             finish();
                         } else if (resultStatus.equals("6001")) { //用户中途取消
-                            Toast.makeText(FindForPayActivity.this, "取消支付", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindForPayActivity.this, getResources().getString(R.string.cancelThePayment), Toast.LENGTH_SHORT).show();
 
                         } else {
                             // 其他值就可以判断为支付失败
-                            Toast.makeText(FindForPayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindForPayActivity.this, getResources().getString(R.string.paymentFailed), Toast.LENGTH_SHORT).show();
 
                         }
                     }
                     OrderinfoBean.ResultBean orderinfoBeanResult = new OrderinfoBean.ResultBean(findForBean.getOrderInfo().toString(),findForBean.getTradeNo());
                     httpPresenter.getConfirmServerPayResult(orderinfoBeanResult.getOutTradeNo(), orderinfoBeanResult.getOrderInfo(), isSucceed);
-                    String message = "支付失败";
+                    String message = getResources().getString(R.string.paymentFailed);
                     if (isSucceed) {
-                        message = "支付成功";
+                        message = getResources().getString(R.string.paySuccess);
                     }
                     MessageTable messageTable = new MessageTable(null, message, System.currentTimeMillis() + "", true);
-                    GreenManager.getInstance().setMessage(messageTable);
-                    GreenManager.getInstance().addCount();
+                    MessageManager.getInstance().setMessage(messageTable);
+                    MessageManager.getInstance().addCount();
                     break;
             }
 
@@ -147,7 +146,7 @@ public class FindForPayActivity extends BaseActivity<PayPresenter> implements IP
     @Override
     public void getConfirmServerPayResult(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
-            Toast.makeText(this, "请求服务端成功", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "请求服务端成功", Toast.LENGTH_SHORT).show();
         }
     }
 

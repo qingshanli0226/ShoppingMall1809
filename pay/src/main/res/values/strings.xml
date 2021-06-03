@@ -75,4 +75,9 @@
     <string name="count">数量:</string>
     <string name="submitOrder">提交订单</string>
     <string name="areYouSureYouWantToContinuePaying">确定要继续付款吗</string>
+    <string name="paySuccess">支付成功</string>
+    <string name="inTheConfirmation">支付结果确认中</string>
+    <string name="cancelThePayment">取消支付</string>
+    <string name="paymentFailed">支付失败</string>
+
 </resources>

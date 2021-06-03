@@ -56,6 +56,11 @@
     <string name="confirm">确定</string>
     <string name="loginFirst">请先登录</string>
     <string name="message">消息</string>
+    <string name="confirmedMessage">已确认消息</string>
+    <string name="successfullyAdded">添加成功</string>
+    <string name="failToAdd">添加失败</string>
+    <string name="understock">库存不足</string>
+    <string name="modification">商品数量修改成功</string>
 
     <string name="app_name">XXX购物车</string>
     <!-- TODO: Remove or change this placeholder text -->

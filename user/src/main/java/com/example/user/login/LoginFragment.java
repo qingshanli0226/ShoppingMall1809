@@ -81,28 +81,28 @@ public class LoginFragment extends BaseFragment<LoginPresneter> implements ILogi
         forgetThePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "本功能暂未开放，重新注册一个吧，敬请期待", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.unopen), Toast.LENGTH_SHORT).show();
             }
         });
 
         weibo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.comingSoon), Toast.LENGTH_SHORT).show();
             }
         });
 
         shareQq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.comingSoon), Toast.LENGTH_SHORT).show();
             }
         });
 
         weixin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "本功能暂未开放,合作没谈拢，敬请期待", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.comingSoon), Toast.LENGTH_SHORT).show();
             }
         });
 

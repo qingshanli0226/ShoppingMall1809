@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
-import com.example.framework.manager.GreenManager;
+import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.HoemBean;
 import com.example.shoppingmall1809.R;
@@ -20,7 +20,7 @@ import com.example.shoppingmall1809.main.home.adapter.HomeAdapter;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, GreenManager.IMessage {
+public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView, MessageManager.IMessage {
     private LinearLayout homeMessage;
     private RecyclerView fragHomeRv;
     private ToolBar toolbar;
@@ -33,7 +33,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     protected void initData() {
-        GreenManager.getInstance().register(this::onMessage);
+        MessageManager.getInstance().register(this::onMessage);
 
         httpPresenter.getHomeData();
 
@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void onHomeData(HoemBean hoemBean) {
         HoemBean.ResultBean result = hoemBean.getResult();
 
-        int count = GreenManager.getInstance().getCount();
+        int count = MessageManager.getInstance().getCount();
         setCount(count);
 
         ArrayList<Object> objects = new ArrayList<>();
@@ -102,12 +102,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GreenManager.getInstance().unregister(this::onMessage);
+        MessageManager.getInstance().unregister(this::onMessage);
     }
 
     public void setCount(int count){
         if (count<=0){
-            homeMessageNum.setText("消息");
+            homeMessageNum.setText(getResources().getString(R.string.message));
         }else {
             homeMessageNum.setText(count+"");
         }
