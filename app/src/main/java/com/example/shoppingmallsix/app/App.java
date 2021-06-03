@@ -8,12 +8,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheManager;
-import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.MessageManager;
+import com.example.framework.manager.NetworkConnectionsManager;
 import com.example.framework.manager.ShopmallCrashHandler;
 import com.example.net.module.NetModule;
 import com.example.shoppingcar.BuildConfig;
 import com.example.user.service.AutoService;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 import com.tencent.rtmp.TXLiveBase;
@@ -22,16 +23,21 @@ import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
 
-public class App extends Application {
+public class  App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        CrashReport.initCrashReport(getApplicationContext(), "58e695ca1b", true);
         ARouter.init(this);
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
+<<<<<<< HEAD
         initTengxun();
+=======
+
+
+>>>>>>> 3c79c4f0c1b3e38f58f2624f06758863c6d77d1e
         ShopmallCrashHandler.getInstance().init(this);
 
         UMConfigure.init(this, "604856545fc49d4ed0fb0923", "DEF", UMConfigure.DEVICE_TYPE_PHONE,
@@ -70,12 +76,10 @@ public class App extends Application {
 
 
 
-//        ShopmallCrashHandler.getInstance().init(this);
         CacheManager.getInstance().init(this);
         MessageManager.getInstance().init(this);
 
-
-
+        NetworkConnectionsManager.getInstance().init(this);
 
     }
 

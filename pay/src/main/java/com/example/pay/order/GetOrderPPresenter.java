@@ -30,7 +30,9 @@ public class GetOrderPPresenter  extends BasePresenter<IGetorder> {
         attachView(iGetorder);
     }
 
-    public void getConfiemserverpayresult(String outTradeNo, PayResult result, boolean clientPayResult) {
+
+    public void getConfiemserverpayresult(String outTradeNo, String result, boolean clientPayResult) {
+
 
 
         JSONObject jsonObject = new JSONObject();

@@ -17,13 +17,11 @@ import com.example.commened.FiannceContants;
 import com.example.commened.SpUtil;
 import com.example.framework.BaseActivity;
 import com.example.framework.manager.CacheUserManager;
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+import com.example.framework.manager.ShoppingCartMemoryDataManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.user.LoginBean;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
-
-import java.net.Proxy;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
@@ -120,7 +118,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     public void onLoginData(LoginBean loginBean) {
 
         if (loginBean.getCode().equals("200")) {
-            SoppingCartMemoryDataManager.getShoppingData();
+            ShoppingCartMemoryDataManager.getShoppingData();
             SpUtil.putString(this, FiannceContants.TOKEN_KEY, loginBean.getResult().getToken());
             //跳到主页面返回
             CacheUserManager.getInstance().setLoginBean(loginBean);

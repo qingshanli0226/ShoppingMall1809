@@ -2,7 +2,6 @@ package com.example.pay.order;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -19,10 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.BaseActivity;
 import com.example.framework.greendao.CacheMessage;
-import com.example.framework.greendao.CacheMessageDao;
-import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
@@ -62,9 +60,9 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
 
-    String orderInfos;
-    String key;
-    String outTradeNos;
+    private String orderInfos;
+    private String key;
+    private String outTradeNos;
 
     private float price = 0;
     private  List<GetShortcartProductsBean.ResultBean> resultBeans;
@@ -78,9 +76,15 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
     @Override
     protected void initData() {
         Intent intent = getIntent();
+
         orderInfos = String.valueOf(intent.getStringArrayExtra("orderInfo"));
         outTradeNos = String.valueOf(intent.getStringArrayExtra("outTradeNo"));
         key = String.valueOf(intent.getStringArrayExtra("key"));
+
+        orderInfos = intent.getStringExtra("orderInfo");
+        outTradeNos = intent.getStringExtra("outTradeNo");
+        key = intent.getStringExtra("key");
+
     }
 
     @Override
@@ -118,7 +122,6 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
             @Override
             public void onClick(View view) {
                 payV2();
-
                 //startActivity(new Intent(GetOrderActivity.this, PayDemoActivity.class));
             }
         });
@@ -148,8 +151,8 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
 
     @Override
     public void onConfirmServerPayResult(ConfirmServerPayResultBean confirmServerPayResultBean) {
-
         if(confirmServerPayResultBean.getCode().equals("200")){
+            Toast.makeText(this, ""+confirmServerPayResultBean.isResult(), Toast.LENGTH_SHORT).show();
 
             ARouter.getInstance().build("/main/MainActivity").withString("position","0").navigation();
         }
@@ -172,18 +175,18 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     // 判断resultStatus 为9000则代表支付成功
                     String payMsg="";
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,true);
+                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,resultInfo,true);
                         payMsg = "支付成功";
                         Toast.makeText(GetOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 
                     } else {
                         payMsg = "支付失败";
-                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,payResult,false);
+                        getOrderPPresenter.getConfiemserverpayresult(outTradeNos,resultInfo,false);
                         Toast.makeText(GetOrderActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                     }
                     CacheMessage cacheMessage = new CacheMessage(null,payMsg,System.currentTimeMillis()+"",true);
                     MessageManager.getInstance().setMessage(cacheMessage);
-                    MessageManager.getInstance().addCount();
+                    MessageManager.getInstance().addMessageCount();
                     break;
                 }
                 case SDK_AUTH_FLAG: {
@@ -229,14 +232,13 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
         String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
         String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
         final String orderInfo = orderParam + "&" + sign;
-
         final Runnable payRunnable = new Runnable() {
 
             @Override
             public void run() {
                 PayTask alipay = new PayTask(GetOrderActivity.this);
-                Map<String, String> result = alipay.payV2(orderInfo, true);
-                Log.i("msp", result.toString());
+                Map<String, String> result = alipay.payV2(orderInfos, true);
+//                Log.i("msp", result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
