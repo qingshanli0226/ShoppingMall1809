@@ -22,6 +22,7 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
 import com.example.net.bean.CheckNumAll;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.PayBean;
 import com.example.threeshopping.R;
@@ -288,7 +289,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onShowCart(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         cartAdapter.updata(carts);
-        EventBus.getDefault().post("");
+        EventBean eventBean = new EventBean(1,1,"小红点");
+        EventBus.getDefault().post(eventBean);
         //判断是否全选
         isCheck();
     }
@@ -361,7 +363,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
         //再次更新小远点
-        EventBus.getDefault().post("");
+        EventBean eventBean = new EventBean(1,1,"小红点");
+        EventBus.getDefault().post(eventBean);
         //判断是否全选
         isCheck();
     }

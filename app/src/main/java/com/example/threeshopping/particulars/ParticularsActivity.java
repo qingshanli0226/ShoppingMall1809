@@ -30,6 +30,7 @@ import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
@@ -263,6 +264,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
     @Override
     public void onClickRight() {
+        //分享
 //        UMImage image = new UMImage(this, pic);//网络图片
 //        new ShareAction(this)
 //                .withText("hello")
@@ -290,6 +292,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 //
 //                    }
 //                }).open();
+        //跳转视频
+        CommonArouter.getInstance().build(Constants.PATH_VIDEO).navigation();
     }
 
     @Override
@@ -307,7 +311,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
             CacheShopManager.getInstance().addData(resultBean);
             //再次更新小远点
-            EventBus.getDefault().post("");
+            EventBean eventBean = new EventBean(1,1,"小红点");
+            EventBus.getDefault().post(eventBean);
             showAnima();
             //这个页面的小数点
             detailCircle.setVisibility(View.VISIBLE);

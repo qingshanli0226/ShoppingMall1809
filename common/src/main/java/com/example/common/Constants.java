@@ -99,6 +99,11 @@ public class Constants {
     //用户
     public static final String PATH_USER = "/user/UserActivity";
 
+    //用户
+    public static final String PATH_LIVE = "/live/LiveActivity";
+    //用户
+    public static final String PATH_VIDEO = "/Video/VideoActivity";
+
     public static final String SP_TOKEN = "token";
     public static final String SP_READ_NUM = "num";
     //判断home页面的布局

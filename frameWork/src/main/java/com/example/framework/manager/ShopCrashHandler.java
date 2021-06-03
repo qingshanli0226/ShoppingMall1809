@@ -1,4 +1,4 @@
-package com.example.framework;
+package com.example.framework.manager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.common.LogUtil;
-import com.example.framework.manager.ActManager;
 
 import java.util.List;
 
@@ -57,11 +56,11 @@ public class ShopCrashHandler implements Thread.UncaughtExceptionHandler {
             interruptedException.printStackTrace();
         }
 
-        List<Activity> activities = ActManager.getActManager().getActivities();
-        for (Activity activity : activities) {
-            activity.finish();
-        }
-
-        System.exit(1);
+//        List<Activity> activities = ActManager.getActManager().getActivities();
+//        for (Activity activity : activities) {
+//            activity.finish();
+//        }
+//
+//        System.exit(1);
     }
 }

@@ -59,8 +59,7 @@
                 android:layout_height="@dimen/dm_dp_0"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:visibility="gone" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

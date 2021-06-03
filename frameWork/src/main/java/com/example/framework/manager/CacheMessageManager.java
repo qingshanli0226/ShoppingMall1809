@@ -6,6 +6,7 @@ import android.view.View;
 import com.blankj.utilcode.util.SPUtils;
 import com.example.common.LogUtil;
 import com.example.common.SpUtil;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.fiannce.sql.DaoSession;
 import com.fiannce.sql.MessageBeanDao;
@@ -83,7 +84,8 @@ public class CacheMessageManager {
         //通知
         freshAdd(messageBeans.size()-1);
         AddAndSub(true);
-        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
+        EventBean eventBean = new EventBean(2,SpUtil.getInt(mContext),"信息");
+        EventBus.getDefault().post(eventBean);
     }
 
     private void AddAndSub(boolean isAddAndSub) {
@@ -106,7 +108,8 @@ public class CacheMessageManager {
         messageBeans.get(position).setIsRead(messageBean.getIsRead());
         freshAdd(position);
         AddAndSub(false);
-        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
+        EventBean eventBean = new EventBean(2,SpUtil.getInt(mContext),"信息");
+        EventBus.getDefault().post(eventBean);
 
     }
 
@@ -120,7 +123,6 @@ public class CacheMessageManager {
         this.messageBeans.clear();
         this.messageBeans.addAll(messageBeans);
         freshAll();
-//        EventBus.getDefault().post(""+SpUtil.getInt(mContext));
     }
 
     //刷新一个
