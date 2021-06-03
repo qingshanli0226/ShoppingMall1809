@@ -57,7 +57,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private double allPrice;
     private int num = 0;
     private boolean isShow = false;
-    private int DelPosition = 0;
+    private int AddPosition = -1;
+    private int SubPosition = -1;
     private boolean isChange = false;
     private LinearLayout shoppingSta;
     private LinearLayout shoppingEnd;
@@ -68,6 +69,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     private int delOne;
     private int selectPosition=-1;
     private ImageView isSelectImg;
+    private String a="";
 
     private List<ShortcartProductBean.ResultBean> removeAllShopBean=new ArrayList<>();
     private List<ShortcartProductBean.ResultBean> notEnoughList=new ArrayList<>();
@@ -88,17 +90,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }
 
 
-        //检测购用户登录状态是否发生改变,如果改变了重新请求数据
-        BusinessUserManager.getInstance().Register(new BusinessUserManager.IUserLoginChanged() {
-            @Override
-            public void onLoginChange(LogBean isLog) {
-                if (isLog!=null){
-                    ShopCacheManger.getInstance().requestShortProductData();
-                }else {
-                    Toast.makeText(getContext(), "当前未登录", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +142,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     //数量加
                     case R.id.image_add:
                         //判断当前库存
-                        DelPosition = position;
+                        AddPosition = position;
+                        a="add";
                         httpPresenter.getCheckShopBean(result.get(position).getProductId(), result.get(position).getProductNum());
                         break;
                     //数量减
@@ -161,8 +153,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                             Toast.makeText(getContext(), "商品数量不能小于1", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        result.get(position).setProductNum(lose - 1 + "");
-                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), result.get(position).getProductNum(), result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
+                        SubPosition=position;
+                        a="sub";
+                        httpPresenter.getUpdateProduct(result.get(position).getProductId(), Integer.parseInt(result.get(position).getProductNum())-1+"", result.get(position).getProductName(), result.get(position).getUrl(), result.get(position).getProductPrice());
                         break;
                 }
             }
@@ -253,7 +246,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }
         //删除多个
         if (removeAllShopBean.size()>0){
-            Toast.makeText(getContext(), "大于1", Toast.LENGTH_SHORT).show();
             httpPresenter.getRemoveManyShopBean(removeAllShopBean);
         }
         shoppingAdapter.notifyDataSetChanged();
@@ -265,9 +257,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void removeOneShop(RemoveOneProductBean removeOneProductBean) {
         if (removeOneProductBean.getCode().equals("200")){
             Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
-            result.remove(delOne);
-            ShopCacheManger.getInstance().requestShortProductData();
-            shoppingAdapter.notifyItemChanged(delOne);
+
+            //从缓存数据源中删除然后调用接口刷新
+            ShopCacheManger.getInstance().ShopDelOne(result.get(delOne));
+
         }
 
     }
@@ -276,9 +269,11 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void removeManyShop(RemoveManyProductBean removeManyProductBean) {
         if (removeManyProductBean.getCode().equals("200")){
             Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
-            result.remove(removeAllShopBean);
-            ShopCacheManger.getInstance().requestShortProductData();
-            shoppingAdapter.notifyDataSetChanged();
+            for (ShortcartProductBean.ResultBean bean : removeAllShopBean) {
+                ShopCacheManger.getInstance().ShopDelOne(bean);
+            }
+
+
         }
 
     }
@@ -448,10 +443,16 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void amendProductData(UpdateProductNumBean updateProductNumBean) {
 
-        Log.i("zx", "amendProductData: " + updateProductNumBean.toString());
         if (updateProductNumBean.getCode().equals("200")) {
-            shoppingAdapter.notifyDataSetChanged();
-            count();
+            if (!a.equals("")){
+                if (a.equals("add")){
+                    ShopCacheManger.getInstance().addShopNum(result.get(AddPosition));
+                }else if (a.equals("sub")){
+                    ShopCacheManger.getInstance().subShopNum(result.get(SubPosition));
+                }
+            }
+
+
         }
 
     }
@@ -460,9 +461,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void CheckProductData(RegBean regBean) {
 
         if (regBean.getMessage().equals("请求成功")) {
-            int plus = Integer.parseInt(result.get(DelPosition).getProductNum());
-            result.get(DelPosition).setProductNum(plus + 1 + "");
-            httpPresenter.getUpdateProduct(result.get(DelPosition).getProductId(), result.get(DelPosition).getProductNum(), result.get(DelPosition).getProductName(), result.get(DelPosition).getUrl(), result.get(DelPosition).getProductPrice());
+            httpPresenter.getUpdateProduct(result.get(AddPosition).getProductId(), result.get(AddPosition).getProductNum()+1+"", result.get(AddPosition).getProductName(), result.get(AddPosition).getUrl(), result.get(AddPosition).getProductPrice());
         } else {
             Toast.makeText(getContext(), "库存不够", Toast.LENGTH_SHORT).show();
             return;
@@ -580,5 +579,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         result = ShopCacheManger.getInstance().getShortBeanList();
         shoppingAdapter.updateData(result);
         shoppingAdapter.notifyDataSetChanged();
+        count();
     }
 }

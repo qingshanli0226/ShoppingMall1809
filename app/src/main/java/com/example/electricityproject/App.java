@@ -36,9 +36,7 @@ public class App extends Application {
 //        ShopmallCrashHandler.getInstance().init(this);
 
 
-        //获得缓存类的下标
         ShopCacheManger.getInstance().init(this);
-//        ShopCacheManger.getInstance().registerUserManger();
 
         //自动登录
         startService(new Intent(this, AutoService.class));
