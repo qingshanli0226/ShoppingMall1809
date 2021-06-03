@@ -19,6 +19,7 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
@@ -98,7 +99,9 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
 
     @Override
     public void onClickLeft() {
-        EventBus.getDefault().postSticky(0);
+        EventBean eventBean = new EventBean(0,0,"注册event");
+
+        EventBus.getDefault().post(eventBean);
     }
 
     @Override
@@ -115,7 +118,9 @@ public class RegisterFragment extends BaseFragment<UserPresenter> implements Too
     public void onRegister(RegisterBean registerBean) {
         if (registerBean.getCode().equals("200")) {
             Toast.makeText(getActivity(), "" + registerBean.getResult(), Toast.LENGTH_SHORT).show();
-            EventBus.getDefault().postSticky(0);
+            EventBean eventBean = new EventBean(0,0,"注册event");
+
+            EventBus.getDefault().post(eventBean);
         } else {
             Toast.makeText(getActivity(), "" + registerBean.getResult(), Toast.LENGTH_SHORT).show();
         }

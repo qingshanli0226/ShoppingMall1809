@@ -27,6 +27,7 @@ import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheConnectManager;
 
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 import com.example.user.R;
@@ -107,7 +108,8 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
         loginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().postSticky(1);
+                EventBean eventBean = new EventBean(0,1,"登录event");
+                EventBus.getDefault().post(eventBean);
             }
         });
 

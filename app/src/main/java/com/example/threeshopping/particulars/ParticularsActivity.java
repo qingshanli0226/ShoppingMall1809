@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -32,10 +32,11 @@ import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.CartBean;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.ProductBean;
 import com.example.net.bean.SelectBean;
-import com.example.threeshopping.MainActivity;
+
 import com.example.threeshopping.R;
 import com.example.threeshopping.particulars.detail.DetailPresenter;
 import com.example.threeshopping.particulars.detail.IDetailView;
@@ -279,6 +280,17 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     @Override
     public void onClickRight() {
 
+        PopupWindow popupWindow = new PopupWindow(this);
+        popupWindow.setContentView(popheadview);
+        popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(200);
+        popupWindow.setOutsideTouchable(true);
+
+        popheadShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                //分享
 //        UMImage image = new UMImage(this, pic);//网络图片
 //        new ShareAction(this)
 //                .withText("hello")
@@ -307,30 +319,25 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 //                    }
 //                }).open();
 
-        PopupWindow popupWindow = new PopupWindow(this);
-        popupWindow.setContentView(popheadview);
-        popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
-        popupWindow.setHeight(200);
-
-        popheadShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
             }
         });
         popheadLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+
             }
         });
         popheadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                //跳转视频
+                CommonArouter.getInstance().build(Constants.PATH_VIDEO).navigation();
             }
         });
         popupWindow.showAsDropDown(toolbar,0,0);
+
 
     }
 
@@ -349,7 +356,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
             CacheShopManager.getInstance().addData(resultBean);
             //再次更新小远点
-            EventBus.getDefault().post("");
+            EventBean eventBean = new EventBean(1,1,"小红点");
+            EventBus.getDefault().post(eventBean);
             showAnima();
             //这个页面的小数点
             detailCircle.setVisibility(View.VISIBLE);

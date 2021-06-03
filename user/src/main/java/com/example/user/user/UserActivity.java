@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 
 import com.example.framework.BaseActivity;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.EventBean;
 import com.example.user.R;
 import com.example.user.user.login.LoginFragment;
 import com.example.user.user.register.RegisterFragment;
+import com.fiannce.sql.bean.MessageBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,6 +30,7 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
 
 
     private List<Fragment> fragments = new ArrayList<>();
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_user;
@@ -58,26 +61,31 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
         fragmentTransaction.show(loginFragment);
         fragmentTransaction.hide(registerFragment);
 
-        if (!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
     }
 
     @Subscribe
-    public void getEventBus(Integer i){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        switch (i){
-            case 0:
-                fragmentTransaction.show(fragments.get(0));
-                fragmentTransaction.hide(fragments.get(1));
-                fragmentTransaction.commit();
-                break;
-            case 1:
-                fragmentTransaction.show(fragments.get(1));
-                fragmentTransaction.hide(fragments.get(0));
-                fragmentTransaction.commit();
-                break;
+    public void getEventBus(EventBean eventBean) {
+
+        if(eventBean.getType() == 0){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            switch (eventBean.getFlag()) {
+                case 0:
+                    fragmentTransaction.show(fragments.get(0));
+                    fragmentTransaction.hide(fragments.get(1));
+                    fragmentTransaction.commit();
+                    break;
+                case 1:
+                    fragmentTransaction.show(fragments.get(1));
+                    fragmentTransaction.hide(fragments.get(0));
+                    fragmentTransaction.commit();
+                    break;
+            }
         }
+
+
 
     }
 
@@ -104,7 +112,7 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)){
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
 

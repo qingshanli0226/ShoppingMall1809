@@ -47,14 +47,12 @@ public class CacheShopManager {
 
     //购物车数据源
     private List<CartBean.ResultBean> carts = new ArrayList<>();
-    private List<CartBean.ResultBean> cartsPrice = new ArrayList<>();
+
     private List<ICartChange> cartChanges = new LinkedList<>();
     private List<Activity> activityList = new LinkedList<>();
 
 
-    public List<CartBean.ResultBean> getCartsPrice() {
-        return cartsPrice;
-    }
+
 
     public void addActivity(Activity activity){
         activityList.add(activity);
@@ -81,7 +79,6 @@ public class CacheShopManager {
 
     public void setCarts(List<CartBean.ResultBean> carts) {
         this.carts.addAll(carts);
-        cartsPrice.addAll(carts);
     }
 
     public synchronized void getShowCart() {
@@ -138,7 +135,6 @@ public class CacheShopManager {
         }
         if(count == carts.size()){
             carts.add(resultBean);
-            cartsPrice.add(resultBean);
             position = carts.size();
         }
         //通知

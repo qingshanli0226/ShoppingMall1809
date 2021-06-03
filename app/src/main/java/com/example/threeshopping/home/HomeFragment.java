@@ -15,6 +15,7 @@ import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
 import com.example.framework.manager.CacheHomeManager;
 import com.example.framework.manager.CacheMessageManager;
+import com.example.net.bean.EventBean;
 import com.example.threeshopping.R;
 import com.example.threeshopping.home.adapter.HomeAdapter;
 import com.fiannce.sql.bean.MessageBean;
@@ -93,14 +94,17 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
         }
     }
     @Subscribe
-    public void setHomeNum(String num){
-        if(!num.equals("0")){
-            homeNum.setText(num);
-            homeNum.setVisibility(View.VISIBLE);
-        } else{
-            homeNum.setText(num);
-            homeNum.setVisibility(View.GONE);
+    public void setHomeNum(EventBean eventBean){
+        if(eventBean.getType() == 2){
+            if(eventBean.getFlag() != 0){
+                homeNum.setText(eventBean.getFlag()+"");
+                homeNum.setVisibility(View.VISIBLE);
+            } else{
+                homeNum.setText(eventBean.getFlag()+"");
+                homeNum.setVisibility(View.GONE);
+            }
         }
+
     }
 
     @Override
@@ -135,6 +139,6 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
 
     @Override
     public void onAllRefresh(List<MessageBean> messageBeans) {
-        setHomeNum("");
+
     }
 }

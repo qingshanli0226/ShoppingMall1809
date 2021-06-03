@@ -6,19 +6,19 @@ import android.content.Context;
 
 
 import com.example.common.LogUtil;
-import com.example.framework.ShopCrashHandler;
+import com.example.framework.manager.ShopCrashHandler;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheMessageManager;
 import com.example.framework.manager.CacheShopManager;
-import com.example.framework.manager.CacheUserManager;
 import com.example.message.module.MessageModule;
 import com.example.net.module.NetModule;
 import com.example.pay.module.PayModule;
 
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
+import com.fiannce.live.module.LiveModule;
 import com.fiannce.sql.bean.MessageBean;
 import com.fiannce.sql.manager.SqlManager;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -45,6 +45,7 @@ public class App extends Application {
         CommonArouter.getInstance().init(this);
         AppModule.init();
         PayModule.init();
+        LiveModule.init();
         MessageModule.init();
         UserModule.init();
         NetModule.context = this;

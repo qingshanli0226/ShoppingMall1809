@@ -29,6 +29,7 @@ import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.CircleView;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.EventBean;
 import com.example.net.bean.LoginBean;
 import com.example.threeshopping.cart.CartFragment;
 import com.example.threeshopping.communit.CommunitFragment;
@@ -206,14 +207,16 @@ public class MainActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void updateCircle(String string) {
-        if (CacheShopManager.getInstance().getCarts().size() > 0) {
-            mainCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
-            mainCircle.setVisibility(View.VISIBLE);
-        } else {
-            mainCircle.setVisibility(View.GONE);
-
+    public void updateCircle(EventBean eventBean) {
+        if(eventBean.getType() == 1){
+            if (CacheShopManager.getInstance().getCarts().size() > 0) {
+                mainCircle.setText(CacheShopManager.getInstance().getCarts().size() + "");
+                mainCircle.setVisibility(View.VISIBLE);
+            } else {
+                mainCircle.setVisibility(View.GONE);
+            }
         }
+
     }
 
     @Override

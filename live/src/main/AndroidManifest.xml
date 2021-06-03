@@ -3,7 +3,8 @@
     package="com.fiannce.live">
 
     <application>
-        <activity android:name=".LiveActivity"></activity>
+        <activity android:name=".video.VideoActivity"></activity>
+        <activity android:name=".live.LiveActivity" />
     </application>
 
 </manifest>
