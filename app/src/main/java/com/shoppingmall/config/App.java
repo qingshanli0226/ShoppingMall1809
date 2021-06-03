@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.shoppingmall.detail.greendao.TableManager;
+import com.shoppingmall.detail.messagedao.MessageManager;
 import com.shoppingmall.framework.log.ShopCrashHandler;
 import com.shoppingmall.framework.manager.CacheManager;
 import com.shoppingmall.framework.manager.CacheShopManager;
@@ -24,5 +25,6 @@ public class App extends Application {
 
         CacheShopManager.getInstance().init();
 //        ShopCrashHandler.getInstance().init(this);
+        MessageManager.getInstance().init(this);
     }
 }
