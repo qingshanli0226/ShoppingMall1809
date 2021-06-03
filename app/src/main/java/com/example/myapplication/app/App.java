@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.example.UserModule;
 import com.example.framework.manager.CaCheArote;
 import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.PaySendCacheManager;
 import com.example.myapplication.AppModule;
 import com.example.myapplication.MsgMoudel;
 import com.example.myapplication.particulars.ParticularsModule;
@@ -27,6 +28,7 @@ public class App extends Application {
         MsgMoudel.init();
         CaCheMannager.getInstance().init();
 
+        PaySendCacheManager.getInstance().init();
         CaCheArote.getInstance().init(this);
         UMConfigure.init(this,"5a12384aa40fa3551f0001d1"
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0

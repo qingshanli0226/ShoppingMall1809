@@ -1,8 +1,8 @@
-package com.example.myapplication.personalCenter;
+package com.example.myapplication.personalcenter;
 
-import com.example.myapplication.findforsend.FindsendMainActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
+import com.example.net.bean.OrderinfoBean;
 
 import mvp.view.IBaseVIew;
 
@@ -10,4 +10,5 @@ public interface IPersonalView extends IBaseVIew {
     void onShoppingPay(FindForPayBean findForPayBean);
     void onShoppingSend(FindForSendBean findForSendBean);
     void ondend(FindForPayBean findForPayBean);
+
 }

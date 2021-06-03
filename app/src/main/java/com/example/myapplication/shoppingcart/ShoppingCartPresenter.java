@@ -1,8 +1,7 @@
-package com.example.myapplication.shoppingCart;
+package com.example.myapplication.shoppingcart;
 
 import android.util.Log;
 
-import com.example.framework.manager.CaCheMannager;
 import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.ShoppingCartBean;

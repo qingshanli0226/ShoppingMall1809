@@ -48,12 +48,15 @@ public class FindPayMainActivity extends BaseActivity<ShoporederPresenter> imple
     private final int a=1;
     private OrderinfoBean order;
     private String tradeNo;
+
     public Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case a:
+                    Log.i("SSS","456");
+
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                     String resultStatus = payResult.getResultStatus();
 
@@ -71,7 +74,6 @@ public class FindPayMainActivity extends BaseActivity<ShoporederPresenter> imple
                         resultBean1.setTotalPrice(resultBean.getTotalPrice());
                         resultBean1.setTradeNo(resultBean.getTradeNo());
                         PaySendCacheManager.getInstance().getSendList().add(resultBean1);
-                        Toast.makeText(FindPayMainActivity.this, "PaySendCacheManager.getInstance().getSendList().toArray():" + PaySendCacheManager.getInstance().getSendList().toArray(), Toast.LENGTH_SHORT).show();
 
                         Toast.makeText(FindPayMainActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                         finish();
@@ -110,6 +112,9 @@ public class FindPayMainActivity extends BaseActivity<ShoporederPresenter> imple
 
     @Override
     public void initData() {
+
+        Intent intent = getIntent();
+
         FindForPayBean findForPayBean = PaySendCacheManager.getInstance().getFindForPayBean();
         list.addAll(findForPayBean.getResult());
         rv.setAdapter(findPayAdapter);
@@ -123,20 +128,25 @@ public class FindPayMainActivity extends BaseActivity<ShoporederPresenter> imple
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        Log.i("SSS","123");
                         FindForPayBean.ResultBean resultBean = list.get(position);
                          tradeNo = resultBean.getTradeNo();
 
-                        list.remove(position);
-                        findPayAdapter.notifyDataSetChanged();
+//                        list.remove(position);
+//                        findPayAdapter.notifyDataSetChanged();
                         PaySendCacheManager.getInstance().setonIndex(list.size());
 
 //                        Intent intent = new Intent(FindPayMainActivity.this, PayActivity.class);
 //                        startActivity(intent);
 
-                       Intent intent = getIntent();
                          order = (OrderinfoBean) intent.getSerializableExtra("order");
+                         Log.i("SSS","order"+order);
+
                                 if (order!=null){
                                     String orderInfo = order.getResult().getOrderInfo();
+                                    Log.i("SSS","order"+orderInfo);
+
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {

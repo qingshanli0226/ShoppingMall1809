@@ -16,18 +16,32 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".shoppingCart.ShoppingCartActivity"></activity>
-        <activity android:name=".findforsend.FindsendMainActivity"></activity>
+        <activity android:name=".shoppingcart.ShoppingCartActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".findforsend.FindsendMainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"></activity>
 
-        <activity android:name=".payorder.OrderActivity"></activity>
+        <activity android:name=".payorder.OrderActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"></activity>
 
 
-        <activity android:name=".findforpay.FindPayMainActivity" />
-        <activity android:name=".msg.MsgMainActivity" />
-        <activity android:name=".particulars.ParticularsActivity" />
+        <activity android:name=".findforpay.FindPayMainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".msg.MsgMainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".particulars.ParticularsActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".welcome.WelcomeActivity"
-            android:theme="@style/Theme.MyAppTheme">
+            android:theme="@style/Theme.MyAppTheme"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

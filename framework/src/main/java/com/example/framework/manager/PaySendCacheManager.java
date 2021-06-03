@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
+import com.example.net.bean.OrderinfoBean;
 import com.example.net.retrofit.RetrofitManager;
 
 import java.util.ArrayList;
@@ -66,7 +67,17 @@ public class PaySendCacheManager implements CacheUserManager.IloginChange{
 
 
     }
+    private OrderinfoBean orderinfoBean;
+    public void setOrderBean(OrderinfoBean orderBean){
+        this.orderinfoBean=orderBean;
+    }
+    public OrderinfoBean getOrderBean(){
+        return orderinfoBean;
+    }
 
+    public void init(){
+        CacheUserManager.getInstance().registerLogin(this);
+    }
     @Override
     public void onLoginChange(boolean loginBean) {
         if (loginBean){
