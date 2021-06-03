@@ -15,7 +15,7 @@ import com.example.user.service.AutoService;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
-public class App extends Application {
+public class  App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

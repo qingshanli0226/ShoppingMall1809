@@ -1,13 +1,10 @@
 package com.example.shoppingmallsix.message;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.greendao.CacheMessage;
@@ -46,7 +43,7 @@ public class MessageActivity extends BaseActivity {
                 CacheMessage messageTable = message.get(position);
                 messageTable.setIsRead(false);
 
-                MessageManager.getInstance().subCount();
+                MessageManager.getInstance().subMessageCount();
                 MessageManager.getInstance().upDataMessage(messageTable);
 
                 messageAdapter.notifyItemChanged(position);

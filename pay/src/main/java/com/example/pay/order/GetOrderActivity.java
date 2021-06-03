@@ -2,7 +2,6 @@ package com.example.pay.order;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -21,8 +20,6 @@ import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.framework.BaseActivity;
 import com.example.framework.greendao.CacheMessage;
-import com.example.framework.greendao.CacheMessageDao;
-import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.MessageManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.business.ConfirmServerPayResultBean;
@@ -183,7 +180,7 @@ public class GetOrderActivity extends BaseActivity<GetOrderPPresenter> implement
                     }
                     CacheMessage cacheMessage = new CacheMessage(null,payMsg,System.currentTimeMillis()+"",true);
                     MessageManager.getInstance().setMessage(cacheMessage);
-                    MessageManager.getInstance().addCount();
+                    MessageManager.getInstance().addMessageCount();
                     break;
                 }
                 case SDK_AUTH_FLAG: {

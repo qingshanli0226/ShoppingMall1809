@@ -23,6 +23,7 @@ public class MessageManager {
     private Context context;
     private DaoSession daoSession;
 
+    //初始化
     public void init(Context context) {
         this.context = context;
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, FiannceContants.SQ_MANAGE);
@@ -43,11 +44,13 @@ public class MessageManager {
         return  daoSession.loadAll(CacheMessage.class);
     }
 
+    //添加数据库
     public void setMessage(CacheMessage message) {
         daoSession.insert(message);
     }
 
-    public boolean addCount(){
+    //消息数量
+    public boolean addMessageCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(FiannceContants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(FiannceContants.SP_MANAGE_NAME, -1);
         if (count!=-1){
@@ -63,7 +66,8 @@ public class MessageManager {
         return false;
     }
 
-    public boolean subCount(){
+    //减少消息数量
+    public boolean subMessageCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(FiannceContants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(FiannceContants.SP_MANAGE_NAME, -1);
         if (count!=-1){
@@ -79,6 +83,7 @@ public class MessageManager {
         return false;
     }
 
+    //获取消息数量
     public int getCount(){
         SharedPreferences sharedPreferences = context.getSharedPreferences(FiannceContants.SP_MANAGE, Context.MODE_PRIVATE);
         int count = sharedPreferences.getInt(FiannceContants.SP_MANAGE_NAME, -1);
