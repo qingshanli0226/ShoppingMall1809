@@ -3,6 +3,7 @@
     package="com.example.electricityproject">
 
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,24 +17,15 @@
     <uses-feature android:name="android.hardware.Camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -47,7 +39,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElectricityProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".person.zhibo.SinatvActivity"></activity>
+        <activity android:name=".shopp.userinfo.UserInfoActivity"></activity>
+        <activity android:name=".person.zhibo.SinatvActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -63,7 +56,8 @@
         <activity android:name=".details.DetailsActivity" />
         <activity
             android:name=".main.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="sensor" />
         <activity
             android:name=".welcome.WelcomeActivity"
             android:theme="@style/SplashTheme">

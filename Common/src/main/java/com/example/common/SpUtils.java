@@ -30,4 +30,35 @@ public class SpUtils {
         String time = info.getString("time", "");
         return time;
     }
+
+    public static String getUserAddress(Context context){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        String address = info.getString("address", "");
+        return address;
+    }
+
+    public static String getUserPhone(Context context){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        String phone = info.getString("phone", "");
+        return phone;
+    }
+
+    public static void putAddress(Context context,String address){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = info.edit();
+        edit.putString("address",address);
+        edit.commit();
+    }
+
+    public static void putPhone(Context context,String phone){
+        SharedPreferences info = context.getSharedPreferences("info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = info.edit();
+        edit.putString("phone",phone);
+        edit.commit();
+    }
+
+
+
+
+
 }

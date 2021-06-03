@@ -71,7 +71,6 @@ class LoginPresenter extends BasePresenter<ILoginView> {
 
                     }
                 });
-
     }
 
 }

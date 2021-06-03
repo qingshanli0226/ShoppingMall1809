@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'org.greenrobot.greendao' // 1.apply plugin
 }
 
 android {
@@ -13,6 +14,10 @@ android {
         versionCode 1
         versionName "1.0"
 
+//        ndk {
+//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"
+//        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,17 +29,20 @@ android {
         }
     }
 
-    packagingOptions {
-        pickFirst '**/libc++_shared.so'
-        doNotStrip "*/armeabi/libYTCommon.so"
-        doNotStrip "*/armeabi-v7a/libYTCommon.so"
-        doNotStrip "*/x86/libYTCommon.so"
-        doNotStrip "*/arm64-v8a/libYTCommon.so"
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+greendao {
+    // 指定数据库schema版本号，迁移等操作会用到
+    schemaVersion 1
+    // 设置生成数据库文件的目录，默认是在build中，可以将生成的文件放到我们的java目录中
+    targetGenDir 'src/main/java'
+    // 设置生成的数据库相关文件的包名，默认为entity所在的包名
+    daoPackage 'com.example.electricityproject.shopp.userinfo.infodb'
 }
 
 dependencies {
@@ -79,9 +87,9 @@ dependencies {
 //    implementation  'com.umeng.umsdk:asms:1.2.2'//必选
 //    implementation  'com.tencent.tauth:qqopensdk:3.51.2'//QQ官方SDK依赖库
 
-    implementation fileTree(dir:'libs',include:['*.jar'])
 
+    implementation 'org.greenrobot:greendao:3.3.0' // 2.add library
 
-    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release@aar'
+//    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'  //视频直播
 
 }

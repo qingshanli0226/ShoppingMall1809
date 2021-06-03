@@ -198,7 +198,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
                             httpPresenter.checkOneProductInventory(productId, String.valueOf(prod_num));
-                            ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",url,productPrice,false);
+                            ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",img,productPrice,false);
                         }
                     });
 

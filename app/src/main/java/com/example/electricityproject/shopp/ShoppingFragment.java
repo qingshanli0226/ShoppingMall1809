@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.CheckInventoryBean;
 import com.example.common.bean.LogBean;
@@ -27,7 +28,7 @@ import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
 import com.example.electricityproject.R;
 import com.example.electricityproject.shopp.orderdetails.OrderDetailsActivity;
-import com.example.electricityproject.shopp.userinfo.BindUserInfoActivity;
+import com.example.electricityproject.shopp.userinfo.UserInfoActivity;
 import com.example.framework.BaseFragment;
 import com.example.manager.AllSelectManager;
 import com.example.manager.BusinessUserManager;
@@ -88,7 +89,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
-
 
 
         shoppingSelectAll.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +202,8 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             @Override
             public void onClick(View v) {
 
+                LogUtils.i(BusinessUserManager.getInstance().isBindAddress()+"");
+                LogUtils.i(BusinessUserManager.getInstance().isBindTel()+"");
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){
                     if (selectList.size() > 0){
                         List<OrderBean> orderBeanList = new ArrayList<>();
@@ -220,7 +222,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                         Toast.makeText(getContext(), "未选中商品", Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Intent intent = new Intent(getContext(), BindUserInfoActivity.class);
+                    Intent intent = new Intent(getContext(), UserInfoActivity.class);
                     startActivity(intent);
                 }
             }

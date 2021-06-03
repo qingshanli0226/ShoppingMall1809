@@ -7,6 +7,8 @@ import android.util.Log;
 import com.example.common.NetModel;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
+import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
+import com.example.electricityproject.shopp.userinfo.infodb.UserInfoTableManger;
 import com.example.framework.FrameModel;
 import com.example.manager.BusinessNetManager;
 import com.example.manager.SPMessageNum;
@@ -14,7 +16,6 @@ import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
-import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -27,16 +28,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
-        String licenceKey = "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
-//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
-
         NetModel.init(this);
         FrameModel.init(this);
         UserModel.init();
         MainModel.init();
         PayModel.init();
 
+        //创建数据库
+        DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
 
 
         //错误框架
@@ -58,6 +57,12 @@ public class App extends Application {
         //查询数据库 把数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);
 
+
+        String licenceURL =
+                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey =
+                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
         UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
