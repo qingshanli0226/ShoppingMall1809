@@ -147,10 +147,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             ShopMallUserManager.getInstance().setLoginBean(loginBean);
             Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
             if (toDetail==1){
-//                EventBus.getDefault().post("startAutoService");
+                EventBus.getDefault().post("detail");
                 finish();
             }else if (addDetail==1){
-//                EventBus.getDefault().post("startAutoService");
+                EventBus.getDefault().post("detail");
                 finish();
             }else {
                 ARouter.getInstance().build(Constants.TO_MAIN_ACTIVITY).withInt("position",position).navigation();

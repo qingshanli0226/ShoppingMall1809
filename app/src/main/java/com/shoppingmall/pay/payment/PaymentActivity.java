@@ -62,7 +62,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                         payCheckBean.setClientPayResult(false);
                         httpPresenter.checkNumAll(payCheckBean);
 
-                        
+
 
 
                     }

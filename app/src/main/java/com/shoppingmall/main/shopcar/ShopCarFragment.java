@@ -93,6 +93,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
 
     @Override
     public void initData() {
+
         EventBus.getDefault().register(this);
         //判断是否点击编辑
         checkcompileOnClick();
@@ -169,6 +170,8 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                 } else {
                     isAll = true;
                 }
+
+                checkdelete.setChecked(isAll);
                 httpPresenter.selectAll(isAll);
             }
         });
@@ -177,7 +180,13 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         checkdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (isAll) {
+                    isAll = false;
+                } else {
+                    isAll = true;
+                }
+                checkpayment.setChecked(isAll);
+                httpPresenter.selectAll(isAll);
             }
         });
 
@@ -246,20 +255,13 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     public void onShowCart(List<ShopCarBean.ResultBean> carts) {
         this.carts = carts;
         shopCarAdapter.updateData(carts);
-        EventBus.getDefault().post("ShopCarNum");
-        Log.i("hqy", "onShowCart: ");
+//        EventBus.getDefault().post("ShopCarNum");
     }
 
     //添加
     @Override
     public void onAddCart(int position) {
-        if (position > shopCarAdapter.getData().size()) {
-            shopCarAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position - 1));
-            shopCarAdapter.notifyItemChanged(position - 1);
-        } else {
-            shopCarAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
-            shopCarAdapter.notifyItemChanged(position);
-        }
+
     }
 
     @Override
@@ -281,9 +283,11 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         }
         if (count == shopCarAdapter.getData().size()) {
             checkpayment.setChecked(true);
+            checkdelete.setChecked(true);
             isAll = true;
         } else {
             checkpayment.setChecked(false);
+            checkdelete.setChecked(false);
             isAll = false;
         }
     }
@@ -329,7 +333,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             //选中多个
             httpPresenter.removeMany(resultBeans);
         } else {
-            Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "没有选中", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -365,6 +369,9 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             }
         }
         shopCarAdapter.notifyDataSetChanged();
+
+        EventBus.getDefault().post("ShopCarNum");
+
         if (shopCarAdapter.getData().size()!=0) {
             notNullCar.setVisibility(View.VISIBLE);
             NullCar.setVisibility(View.GONE);
@@ -373,7 +380,6 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
             notNullCar.setVisibility(View.GONE);
             NullCar.setVisibility(View.VISIBLE);
         }
-        EventBus.getDefault().post("ShopCarNum");
     }
 
     @Subscribe
@@ -389,6 +395,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         if (EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().unregister(this);
         }
+        destroy();
     }
 
     public void destroy() {
