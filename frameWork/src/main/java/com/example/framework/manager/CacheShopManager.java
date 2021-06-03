@@ -169,7 +169,6 @@ public class CacheShopManager {
     }
 
 
-
     public void removeMany(boolean isOne,int position) {
         if(isOne){
             carts.remove(position);
@@ -183,8 +182,6 @@ public class CacheShopManager {
             }
             notifyCar(carts);
         }
-
-
     }
     //通知页面
     public void notifyRemoveProduct(int position){

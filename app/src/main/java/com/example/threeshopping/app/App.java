@@ -18,14 +18,13 @@ import com.example.pay.module.PayModule;
 import com.example.threeshopping.module.AppModule;
 import com.example.user.module.UserModule;
 import com.fiannce.sql.manager.SqlManager;
-<<<<<<< HEAD
 import com.tencent.bugly.crashreport.CrashReport;
-=======
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 
->>>>>>> cde35d28877f86b0df2ea43cc43ae7c365dbdd8d
+import retrofit2.http.HEAD;
+
 
 public class App extends Application {
     @Override
@@ -44,15 +43,15 @@ public class App extends Application {
 
 
         CacheShopManager.getInstance().init();//缓存购物车
-<<<<<<< HEAD
+
         CacheAwaitPaymentManager.getInstance().init();
 
-=======
+
         CacheMessageManager.getInstance().init();
->>>>>>> cde35d28877f86b0df2ea43cc43ae7c365dbdd8d
+
         CacheConnectManager.getInstance().init(this);//网络
 
-        ShopCrashHandler.getInstance().init(this);//错误上报
+//        ShopCrashHandler.getInstance().init(this);//错误上报
         //激光推送
 //        JPushInterface.setDebugMode(true);
 //        JPushInterface.init(this);
