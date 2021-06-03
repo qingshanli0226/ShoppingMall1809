@@ -14,9 +14,9 @@ import com.example.framework.manager.ShopmallCrashHandler;
 import com.example.net.module.NetModule;
 import com.example.shoppingcar.BuildConfig;
 import com.example.user.service.AutoService;
+
+
 import com.tencent.bugly.crashreport.CrashReport;
-
-
 import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
@@ -32,12 +32,9 @@ public class  App extends Application {
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
-<<<<<<< HEAD
+
         initTengxun();
-=======
 
-
->>>>>>> 3c79c4f0c1b3e38f58f2624f06758863c6d77d1e
         ShopmallCrashHandler.getInstance().init(this);
 
         UMConfigure.init(this, "604856545fc49d4ed0fb0923", "DEF", UMConfigure.DEVICE_TYPE_PHONE,

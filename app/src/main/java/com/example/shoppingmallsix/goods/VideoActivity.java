@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.framework.manager.SoppingCartMemoryDataManager;
+
 import com.example.shoppingmallsix.R;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePlayer;
@@ -27,7 +27,7 @@ public class VideoActivity extends AppCompatActivity {
 //关键 player 对象与界面 view
         mLivePlayer.setPlayerView(mView);
 
-        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8";
+        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8";
         mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_FLV); //推荐 FLV
 
 

@@ -3,7 +3,7 @@
     package="com.example.shoppingmallsix">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -24,7 +24,7 @@
 
     <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-=======
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -43,7 +43,7 @@
 
     <uses-permission android:name="android.permission.READ_LOGS"/>
 
->>>>>>> 3c79c4f0c1b3e38f58f2624f06758863c6d77d1e
+
 
     <application
         android:name=".app.App"
@@ -102,15 +102,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-<<<<<<< HEAD
+
                 android:resource="@xml/filepaths" />
         </provider> <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start -->
-=======
-                android:resource="@xml/filepaths"/>
-        </provider>
+
 
         <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start-->
->>>>>>> 3c79c4f0c1b3e38f58f2624f06758863c6d77d1e
+
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
@@ -248,11 +246,7 @@
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
-<<<<<<< HEAD
-=======
-        <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end-->
 
->>>>>>> 3c79c4f0c1b3e38f58f2624f06758863c6d77d1e
     </application>
 
 </manifest>
