@@ -1,6 +1,8 @@
 package com.example.shoppingmallsix.goods.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -8,6 +10,8 @@ import com.example.framework.BaseRvAdapter;
 import com.example.net.bean.store.GoodAdapterBean;
 import com.example.net.constants.Constants;
 import com.example.shoppingmallsix.R;
+import com.example.shoppingmallsix.goods.GoodsActivity;
+import com.example.shoppingmallsix.goods.VideoActivity;
 
 import java.util.List;
 
@@ -55,5 +59,6 @@ public class GoodsAdapter extends BaseRvAdapter<GoodAdapterBean> {
     public int getRootViewType(int position) {
         return position;
     }
+
 
 }

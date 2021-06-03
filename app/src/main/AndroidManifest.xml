@@ -3,23 +3,26 @@
     package="com.example.shoppingmallsix">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED"/>
-    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED"/>
-    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL"/>
-    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_ADDED" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_CHANGED" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_INSTALL" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end -->
+    <!-- 腾讯云直播 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-
-
+    <uses-feature android:name="android.hardware.Camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".app.App"
@@ -29,8 +32,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        <activity android:name=".shopcar.ShoppingCarActivity"></activity>
+        <activity android:name=".goods.VideoActivity"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".shopcar.ShoppingCarActivity" />
         <activity android:name=".message.MessageActivity" />
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
@@ -48,46 +56,33 @@
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTask" />
-
-
-
-
-
-
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="tencent100424468"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <provider
-            android:authorities="com.example.shoppingmallsix.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.shoppingmallsix.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
-        </provider>
-
-
-
-
-
-
-        <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start-->
+                android:resource="@xml/filepaths" />
+        </provider> <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start -->
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
@@ -99,7 +94,6 @@
                 <action android:name="com.taobao.accs.intent.action.ELECTION" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.taobao.accs.data.MsgDistributeService"
             android:exported="true">
@@ -119,13 +113,13 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.taobao.accs.ServiceReceiver"
             android:process=":channel">
@@ -141,11 +135,9 @@
             android:name="com.taobao.accs.internal.AccsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":channel" />
-
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
             android:process=":channel" />
-
         <service
             android:name="org.android.agoo.accs.AgooService"
             android:exported="true">
@@ -153,7 +145,6 @@
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.UmengIntentService"
             android:exported="true"
@@ -162,7 +153,6 @@
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.XiaomiIntentService"
             android:exported="true"
@@ -181,6 +171,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -218,7 +209,6 @@
                 <action android:name="com.umeng.message.message.sendmessage.action" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.UmengDownloadResourceService"
             android:exported="false"
@@ -230,17 +220,6 @@
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
-        <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end-->
-
-
-
-
-
-
-
-
     </application>
-
-
 
 </manifest>

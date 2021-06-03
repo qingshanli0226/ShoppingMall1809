@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.framework.BaseActivity;
+import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.CacheUserManager;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.framework.manager.SoppingCartMemoryDataManager;
@@ -44,14 +45,13 @@ import com.example.net.constants.Constants;
 
 import com.example.shoppingmallsix.R;
 
-import com.example.shoppingmallsix.main.MainActivity;
+
 import com.example.shoppingmallsix.shopcar.ShoppingCarActivity;
 import com.example.user.login.LoginActivity;
-import com.umeng.message.PushAgent;
+
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.editorpage.ShareActivity;
 import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
@@ -121,7 +121,6 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         textView = findViewById(R.id.centerTv);
         imageView = findViewById(R.id.shopCar);
 
-        PushAgent.getInstance(this).onAppStart();
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,6 +240,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
 
         View inflate = LayoutInflater.from(this).inflate(R.layout.item_pop, null);
         ImageView share = inflate.findViewById(R.id.share);
+
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -273,6 +273,14 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
 
                             }
                         }).open();
+            }
+        });
+
+        ImageView video = inflate.findViewById(R.id.video);
+        video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GoodsActivity.this,VideoActivity.class));
             }
         });
         popupWindow.setContentView(inflate);
@@ -444,7 +452,10 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         //销毁接口
         SoppingCartMemoryDataManager.getInstance().unHoppingCartMemory(this);
     }
+
+
 }

@@ -42,13 +42,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/video"
                 android:src="@drawable/icon_search_white"></ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="搜索"></TextView>
+                android:text="直播"></TextView>
 
         </LinearLayout>
 

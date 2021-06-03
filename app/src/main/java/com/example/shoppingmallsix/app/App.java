@@ -15,6 +15,8 @@ import com.example.net.module.NetModule;
 import com.example.shoppingcar.BuildConfig;
 import com.example.user.service.AutoService;
 
+
+import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -29,7 +31,7 @@ public class App extends Application {
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
-
+        initTengxun();
         ShopmallCrashHandler.getInstance().init(this);
 
         UMConfigure.init(this, "604856545fc49d4ed0fb0923", "DEF", UMConfigure.DEVICE_TYPE_PHONE,
@@ -75,6 +77,12 @@ public class App extends Application {
 
 
 
+    }
+
+    private void initTengxun(){
+        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/28f36573e9db78430bc69687958ab95e/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey = "bbf386fe768708944d4ac619c19e5a08"; // 获取到的 licence key
+        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
     }
 
 

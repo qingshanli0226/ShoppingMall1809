@@ -23,7 +23,8 @@ allprojects {
         google()
         jcenter()
         maven { url  'https://repo1.maven.org/maven2/'}
-
+//需要添加的部分
+        maven { url "https://maven.google.com"}
         maven { url 'https://jitpack.io' }
         // 支付宝 SDK AAR 包所需的配置
         flatDir {
