@@ -64,7 +64,7 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
         toShoppingAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ARouter.getInstance().build(ShopConstants.SHOP_ADDRESS).navigation();
+                ARouter.getInstance().build(ShopConstants.SHOP_ADDRESSLIST).navigation();
             }
         });
     }

@@ -88,6 +88,12 @@ public class ShoppingAddressActivity extends BaseActivity<AddressPresenter> impl
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(null);
+    }
+
+    @Override
     public void showLoading() {
 
     }
