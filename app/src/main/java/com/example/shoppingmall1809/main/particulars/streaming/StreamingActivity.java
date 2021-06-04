@@ -24,7 +24,7 @@ public class StreamingActivity extends BaseActivity {
     @Override
     protected void initData() {
         String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8";
-        mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_FLV); //推荐 FLV
+        mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_HLS); //推荐 FLV
         // 设置填充模式
         mLivePlayer.setRenderMode(TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION);
 // 设置画面渲染方向
@@ -33,7 +33,6 @@ public class StreamingActivity extends BaseActivity {
 
     @Override
     protected void initPresenter() {
-
     }
 
     @Override
