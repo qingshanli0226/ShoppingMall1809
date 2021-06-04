@@ -63,8 +63,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void onHomeData(HoemBean hoemBean) {
         HoemBean.ResultBean result = hoemBean.getResult();
 
-        int count = MessageManager.getInstance().getCount();
-        setCount(count);
+        MessageManager.getInstance().getCount(count -> {
+            setCount(count);
+        });
 
         ArrayList<Object> objects = new ArrayList<>();
 
