@@ -44,4 +44,5 @@
 <!--        android:layout_height="@dimen/dp_200"-->
 <!--        android:layout_centerInParent="true"-->
 <!--        android:visibility="visible"/>-->
+
 </LinearLayout>

@@ -49,6 +49,27 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         BusinessNetManager.getInstance().RegisterConnect(this);
         ActivityManger.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart();
+//        UmengMessageHandler messageHandler = new UmengMessageHandler() {
+//
+//            @Override
+//            public Notification getNotification(Context context, UMessage msg) {
+//
+//                for (Map.Entry entry : msg.extra.entrySet()) {
+//
+//                    Object key = entry.getKey();
+//                    final Object value = entry.getValue();
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                }
+//                return super.getNotification(context, msg);
+//            }
+//        };
+//        UMutlis.getInstance().getPushAgent().setMessageHandler(messageHandler);
+
     }
 
     protected abstract void initData();

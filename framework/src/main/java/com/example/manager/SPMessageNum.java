@@ -27,7 +27,8 @@ public class SPMessageNum {
     public void init(Context context){
 
         DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
-        List<MessageTable> messageTables = MessageDataBase.getInstance().getDaoSession().loadAll(MessageTable.class);
+        List<MessageTable> messageTables = MessageDataBase.getInstance().payLoadAll();
+        MessageManager.getInstance().setMessageTableList(messageTables);
         SharedPreferences sharedPreferences = context.getSharedPreferences(MESSAGE_SPName, context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt(MESSAGE_EDIT_MESSAGENUM,messageTables.size());

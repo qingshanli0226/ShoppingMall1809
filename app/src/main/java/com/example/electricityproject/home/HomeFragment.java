@@ -13,18 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.common.bean.HomeBean;
 import com.example.common.bean.LogBean;
+import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.R;
 import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.SPMessageNum;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.example.manager.MessageManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData{
+public class HomeFragment extends BaseFragment<HomePresenter> implements CallHomeData, MessageDataBase.iMessageListener{
 
     private RecyclerView mainRe;
     private HomeAdapter homeAdapter;
@@ -65,12 +63,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
 
         homeAdapter = new HomeAdapter();
+        MessageDataBase.getInstance().register(this);
 
         //把数据库的数量写到 unreadMessageNum
-        unreadMessageNum.setText(SPMessageNum.getInstance().queryMessageNum(getContext())+"");
+        unreadMessageNum.setText(MessageManager.getInstance().getMessageTableList().size()+"");
 
-        //注册EventBus
-        EventBus.getDefault().register(this);
 
     }
 
@@ -132,23 +129,20 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         Toast.makeText(getContext(), "已断开网络", Toast.LENGTH_SHORT).show();
     }
 
-    //支付成功或支付失败 重新把查询数据库
-    @Subscribe
-    public void changeText(String num){
-        if (num.equals("num")) {
-            unreadMessageNum.setText(SPMessageNum.getInstance().getShopNum() + "");
-        }
-    }
+
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //判断EventBus是否注册
-        if (EventBus.getDefault().isRegistered(this)){
-            //EventBus取消注册
-            EventBus.getDefault().unregister(this);
-        }
+        MessageDataBase.getInstance().unregister(this);
     }
+
+    @Override
+    public void onMessageNumListener() {
+
+        unreadMessageNum.setText(MessageManager.getInstance().getMessageTableList().size() +1+"");
+    }
+
 
 }

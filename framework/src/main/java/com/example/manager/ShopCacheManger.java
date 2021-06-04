@@ -3,8 +3,8 @@ package com.example.manager;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.common.LogUtils;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
@@ -39,14 +39,19 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     private List<FindForPayBean.ResultBean> messageList = new ArrayList<>();
     //购物车数据发生改变时
     private List<iShopBeanChangeListener> shopBeanChangeListeners = new ArrayList<>();
+    //待收货数据发生改变时
+    private List<iFindShopChangeListener> findShopChangeListeners = new ArrayList<>();
+    //待支付数据发生改变时
+    private List<iFindPayChangeListener> findPayChangeListeners = new ArrayList<>();
+
+    //待发货商品数据缓存
+    private List<FindForSendBean.ResultBean> findShopList = new ArrayList<>();
+    //带支付商品数据缓存
+    private List<FindForPayBean.ResultBean> findPayList = new ArrayList<>();
+
+
     private Context mContext;
 
-    public void registerShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
-        shopBeanChangeListeners.add(iShopBeanChangeListener);
-    }
-    public void unregisterShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
-        shopBeanChangeListeners.remove(iShopBeanChangeListener);
-    }
     public static ShopCacheManger getInstance() {
         synchronized (ShopCacheManger.class){
             if (cacheManger==null){
@@ -58,13 +63,89 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     public void init(Context context){
         this.mContext=context;
         BusinessUserManager.getInstance().Register(this);
+
     }
+
+    public List<FindForSendBean.ResultBean> getFindShopList() {
+        return findShopList;
+    }
+
+    public void setFindShopList(List<FindForSendBean.ResultBean> findShopList) {
+        this.findShopList = findShopList;
+        for (iFindShopChangeListener findShopChangeListener : findShopChangeListeners) {
+            findShopChangeListener.OnFindShopChange();
+        }
+    }
+    //添加代收获的数据 遍历接口刷新
+    public void addFindShop(FindForSendBean.ResultBean resultBean){
+        findShopList.add(resultBean);
+        for (iFindShopChangeListener findShopChangeListener : findShopChangeListeners) {
+            findShopChangeListener.OnFindShopChange();
+        }
+    }
+
+    public List<FindForPayBean.ResultBean> getFindPayList() {
+        return findPayList;
+    }
+
+    public void setFindPayList(List<FindForPayBean.ResultBean> findPayList) {
+        this.findPayList = findPayList;
+        for (iFindShopChangeListener findShopChangeListener : findShopChangeListeners) {
+            findShopChangeListener.OnFindShopChange();
+        }
+    }
+    //添加待支付的数据 遍历接口刷新
+    public void addFindPay(FindForPayBean.ResultBean resultBean){
+        findPayList.add(resultBean);
+        for (iFindShopChangeListener findShopChangeListener : findShopChangeListeners) {
+            findShopChangeListener.OnFindShopChange();
+        }
+    }
+    //删除待支付的数据 遍历接口刷新
+    public void removeFindPay(FindForPayBean.ResultBean resultBean){
+        findPayList.remove(resultBean);
+        for (iFindShopChangeListener findShopChangeListener : findShopChangeListeners) {
+            findShopChangeListener.OnFindShopChange();
+        }
+    }
+
+    //购物车接口注册
+    public void registerShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
+        shopBeanChangeListeners.add(iShopBeanChangeListener);
+    }
+    //购物车接口取消注册
+    public void unregisterShopBeanChange(iShopBeanChangeListener iShopBeanChangeListener){
+        shopBeanChangeListeners.remove(iShopBeanChangeListener);
+    }
+    //代收货接口注册
+    public void registerFindShopChange(iFindShopChangeListener iFindShopChangeListener){
+        findShopChangeListeners.add(iFindShopChangeListener);
+    }
+    //代收获接口取消注册
+    public void unregisterFindShopChange(iFindShopChangeListener iFindShopChangeListener){
+        findShopChangeListeners.add(iFindShopChangeListener);
+    }
+
+    //待支付接口注册
+    public void registerFindPayChange(iFindPayChangeListener iFindPayChangeListener){
+        findPayChangeListeners.add(iFindPayChangeListener);
+    }
+    //待支付接口取消注册
+    public void unregisterFindPayChange(iFindPayChangeListener iFindPayChangeListener){
+        findPayChangeListeners.remove(iFindPayChangeListener);
+    }
+
+
+
+
     //判断当期是否登录
     @Override
     public void onLoginChange(LogBean isLog) {
         //登录后请求购物车数据
         if (isLog!=null){
             requestShortProductData();
+            getDropShipment();
+            getForPayData();
         }
     }
 
@@ -77,7 +158,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBeanList) {
 
         this.shortBeanList = shortBeanList;
-        Notify();
+        ShopBeanNotify();
     }
 
 
@@ -127,7 +208,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
 
     //详情页面添加数据
     public void addShopMessageNum(String productId,String productName,String productNum,String url,String productPrice,boolean isAll){
-        Log.i("zx", "addShopMessageName: "+productName);
         ShortcartProductBean.ResultBean bean = new ShortcartProductBean.ResultBean(productId, productName, productNum, url, productPrice, false);
 
             for (ShortcartProductBean.ResultBean resultBean : shortBeanList) {
@@ -137,13 +217,13 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                     Log.i("zx", "addShopMessageNum: i="+i+"j="+j);
                     i+=j;
                     resultBean.setProductNum(i+"");
-                    Notify();
+                    ShopBeanNotify();
                     return;
                 }
             }
             shortBeanList.add(bean);
 
-        Notify();
+        ShopBeanNotify();
 
     }
 
@@ -151,7 +231,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     public void ShopDelOne(ShortcartProductBean.ResultBean bean){
         shortBeanList.remove(bean);
         //删除完后刷新
-        Notify();
+        ShopBeanNotify();
     }
     //商品数量+1
     public void addShopNum(ShortcartProductBean.ResultBean bean){
@@ -162,7 +242,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
             }
         }
         Log.i("zx", "addShopNum: "+shortBeanList.toString());
-        Notify();
+        ShopBeanNotify();
 
     }
     //商品数量-1
@@ -174,7 +254,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
             }
         }
         Log.i("zx", "subShopNum: "+shortBeanList.toString());
-       Notify();
+       ShopBeanNotify();
 
     }
 
@@ -206,7 +286,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        LogUtils.i(""+shortcartProductBean.getResult().toString());
                         List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                         ShopCacheManger.getInstance().setShortBeanList(result);
                     }
@@ -222,17 +301,88 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                     }
                 });
     }
+    //查找待发货的订单
+    public void getDropShipment(){
+        RetrofitCreate.getFiannceApiService()
+                .getFindSendData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FindForSendBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
 
+                    @Override
+                    public void onNext(@NonNull FindForSendBean findForSendBean) {
+                        if (findForSendBean.getCode().equals("200")){
+                            setFindShopList(findForSendBean.getResult());
+                        }
+                    }
 
-    public  interface iShopBeanChangeListener{
-        void OnChange();
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    //查找待支付的订单
+    public void getForPayData(){
+        RetrofitCreate.getFiannceApiService()
+                .getFindForPayData()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<FindForPayBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull FindForPayBean findForPayBean) {
+                        if (findForPayBean.getCode().equals("200")) {
+                            setFindPayList(findForPayBean.getResult());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
-    public void Notify(){
+
+    //购物车数据发生变化时,调用接口
+   public  interface iShopBeanChangeListener{
+        void OnShopBeanChange();
+    }
+
+
+    public void ShopBeanNotify(){
         for (iShopBeanChangeListener shopBeanChangeListener : shopBeanChangeListeners) {
-            shopBeanChangeListener.OnChange();
+            shopBeanChangeListener.OnShopBeanChange();
         }
+    }
+
+    //代收货数据发生改变时,调用接口
+    public interface iFindShopChangeListener{
+        void OnFindShopChange();
+    }
+    //待支付数据发生改变时,调用接口
+    public interface iFindPayChangeListener{
+        void OnFindPayChange();
     }
 
 

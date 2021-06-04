@@ -14,6 +14,7 @@ public class SinatvActivity extends BaseActivity {
 //    private TXCloudVideoView pusherTxCloudView;
 //    private android.widget.Button la;
 //    private TXLivePusher mLivePusher;
+//    private TXLivePlayer mLivePlayer;
 
     @Override
     protected void initData() {
@@ -69,6 +70,14 @@ public class SinatvActivity extends BaseActivity {
 //                mLivePusher.stopCameraPreview(true); //如果已经启动了摄像头预览，请在结束推流时将其关闭。
 //            }
 //        });
+//         mLivePlayer = new TXLivePlayer(this);
+////关键 player 对象与界面 view
+//        mLivePlayer.setPlayerView(videoView);
+
+
+//        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv9hd.m3u8";
+//        mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_FLV); //推荐 FLV
+
     }
 
     @Override
@@ -108,10 +117,10 @@ public class SinatvActivity extends BaseActivity {
 
 
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 //        mLivePlayer.stopPlay(true); // true 代表清除最后一帧画面
-//        mView.onDestroy();
-//    }
+//        videoView.onDestroy();
+    }
 }

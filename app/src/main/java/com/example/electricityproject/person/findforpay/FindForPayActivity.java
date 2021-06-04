@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,15 +16,19 @@ import com.alipay.sdk.app.PayTask;
 import com.example.adapter.BaseAdapter;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.db.MessageDataBase;
+import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.MessageManager;
+import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.PayResult;
 
 import java.util.List;
 import java.util.Map;
 
-public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implements IFindForPayView {
+public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implements IFindForPayView,ShopCacheManger.iFindPayChangeListener{
     private FindForPayAdapter findForPayAdapter;
     private RecyclerView unpaidRe;
     private String orderInfo;
@@ -31,11 +36,11 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     private static final int SDK_AUTH_FLAG = 2;
     private  String outTradeNo;
     private int ThisPoi;
+    private List<FindForPayBean.ResultBean> list;
 
     @Override
     protected void initData() {
-        httpPresenter = new FindForPayPresenter(this);
-        httpPresenter.getForPayData();
+        httpPresenter=new FindForPayPresenter(this);
         findForPayAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
             @Override
             public void OnItemClick(int position) {
@@ -45,6 +50,7 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         payV2();
                     }
                 });
@@ -73,9 +79,21 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     @Override
     protected void initView() {
         unpaidRe = (RecyclerView) findViewById(R.id.unpaid_re);
-
+        ShopCacheManger.getInstance().registerFindPayChange(this);
         findForPayAdapter=new FindForPayAdapter();
         unpaidRe.setLayoutManager(new LinearLayoutManager(FindForPayActivity.this));
+        if (ShopCacheManger.getInstance().getFindPayList()!=null){
+            list = ShopCacheManger.getInstance().getFindPayList();
+            findForPayAdapter.updateData(list);
+            for (FindForPayBean.ResultBean resultBean : list) {
+                orderInfo= (String) resultBean.getOrderInfo();
+                outTradeNo=resultBean.getTradeNo();
+            }
+        }else {
+            ShopCacheManger.getInstance().getForPayData();
+        }
+        unpaidRe.setAdapter(findForPayAdapter);
+
     }
 
     @Override
@@ -102,7 +120,6 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
     @Override
     public void OnConnect() {
         Toast.makeText(this, "网络重新连接,重新加载数据", Toast.LENGTH_SHORT).show();
-        httpPresenter.getForPayData();
     }
 
     @Override
@@ -110,21 +127,7 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
 
     }
 
-    @Override
-    public void getFindForPayData(FindForPayBean findForPayBean) {
-        if (findForPayBean.getCode().equals("200")){
 
-            List<FindForPayBean.ResultBean> result = findForPayBean.getResult();
-            for (int i = 0; i < result.size(); i++) {
-                 orderInfo = (String) result.get(ThisPoi).getOrderInfo();
-                 outTradeNo = (String) result.get(ThisPoi).getTradeNo();
-            }
-
-            findForPayAdapter.updateData(findForPayBean.getResult());
-            unpaidRe.setAdapter(findForPayAdapter);
-
-        }
-    }
 
     @Override
     public void onConfirmServerPayResultOk(ConfirmServerPayResultBean bean) {
@@ -137,6 +140,7 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
             public void run() {
                 PayTask alipay = new PayTask(FindForPayActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
+                Log.i("zx", "run: "+result);
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -153,13 +157,13 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
         public void handleMessage(Message msg) {
 
 //            daoMaster = MessageManger.getInstance().getDaoMaster();
-
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                     String resultInfo = payResult.getResult();
                     String resultStatus = payResult.getResultStatus();
                     String payMsg="";
+                    Log.i("zx", "handleMessage: "+payResult.getMemo());
                     if (TextUtils.equals(resultStatus, "9000")) {
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,true);
                         payMsg="支付成功";
@@ -172,11 +176,15 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                         resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
                         paySussList.add(resultBean);
-
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
+                        //添加到数据库
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        //缓存数据
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                     } else {
-
-                        payMsg="支付失败";
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
+                        payMsg="支付失败";
                         Toast.makeText(FindForPayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
 
                         FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
@@ -187,6 +195,12 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
 
+
+                        //添加到数据库
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+
+                        //缓存数据
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
                     }
                     break;
                 }
@@ -196,5 +210,20 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
         };
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShopCacheManger.getInstance().unregisterFindPayChange(this);
+    }
 
+    @Override
+    public void OnFindPayChange() {
+        list=ShopCacheManger.getInstance().getFindPayList();
+//        for (FindForPayBean.ResultBean resultBean : list) {
+//            orderInfo= (String) resultBean.getOrderInfo();
+//            outTradeNo=resultBean.getTradeNo();
+//        }
+        findForPayAdapter.updateData(list);
+        findForPayAdapter.notifyDataSetChanged();
+    }
 }

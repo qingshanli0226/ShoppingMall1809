@@ -6,7 +6,6 @@ import com.example.framework.IBaseView;
 
 public
 interface IFindForPayView extends IBaseView {
-    void getFindForPayData(FindForPayBean findForPayBean);
     void onConfirmServerPayResultOk(ConfirmServerPayResultBean bean);
 
 }

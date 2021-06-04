@@ -6,18 +6,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.common.bean.FindForSendBean;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 
-public class DropShipmentActivity extends BaseActivity<DropShipmentPresenter> implements IDropShipmentView{
+import java.util.List;
+
+public class DropShipmentActivity extends BaseActivity implements ShopCacheManger.iFindShopChangeListener{
 
     private ToolBar toolbar;
     private RecyclerView dropRe;
     private DropShipmentAdapter dropShipmentAdapter;
+    private List<FindForSendBean.ResultBean> findShopList;
+
 
     @Override
     protected void initData() {
-        httpPresenter=new DropShipmentPresenter(this);
-        httpPresenter.getDropShipment();
 
         toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
             @Override
@@ -46,9 +49,15 @@ public class DropShipmentActivity extends BaseActivity<DropShipmentPresenter> im
     protected void initView() {
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         dropRe = (RecyclerView) findViewById(R.id.drop_re);
-
+        ShopCacheManger.getInstance().registerFindShopChange(this);
         dropRe.setLayoutManager(new LinearLayoutManager(this));
         dropShipmentAdapter = new DropShipmentAdapter();
+        if (ShopCacheManger.getInstance().getFindShopList()!=null){
+           findShopList = ShopCacheManger.getInstance().getFindShopList();
+           dropShipmentAdapter.updateData(findShopList);
+        }else {
+            ShopCacheManger.getInstance().getDropShipment();
+        }
         dropRe.setAdapter(dropShipmentAdapter);
     }
 
@@ -73,10 +82,15 @@ public class DropShipmentActivity extends BaseActivity<DropShipmentPresenter> im
     }
 
     @Override
-    public void onDropShipmentBean(FindForSendBean findForSendBean) {
-        if (findForSendBean.getCode().equals("200")){
-            dropShipmentAdapter.updateData(findForSendBean.getResult());
-            dropShipmentAdapter.notifyDataSetChanged();
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        ShopCacheManger.getInstance().unregisterFindShopChange(this);
+    }
+
+    @Override
+    public void OnFindShopChange() {
+        findShopList=ShopCacheManger.getInstance().getFindShopList();
+        dropShipmentAdapter.updateData(findShopList);
+        dropShipmentAdapter.notifyDataSetChanged();
     }
 }

@@ -79,7 +79,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     protected void initData() {
 
-
         //检测购物车商品是否发生改变,如果改变了刷新购物车页面
         if (ShopCacheManger.getInstance().getShortBeanList()!=null){
             result = ShopCacheManger.getInstance().getShortBeanList();
@@ -238,13 +237,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         delOne=-1;
         List<ShortcartProductBean.ResultBean> select = ShopCacheManger.getInstance().getSelectList();
         Log.i("zx", "deleteShopmall: "+select.toString());
-        for (int i = 0; i < select.size(); i++) {
+        for (int i = select.size() - 1; i >= 0; i--) {
             if (select.get(i).isAll()){
                 delShopNum++;
                 delOne=i;
                 removeAllShopBean.add(select.get(i));
             }
         }
+
         //删除一个
         if (delShopNum==1){
             httpPresenter.getRemoveOneShopBean(select.get(delOne).getProductId(),select.get(delOne).getProductName(),select.get(delOne).getProductNum(),select.get(delOne).getUrl(),select.get(delOne).getProductPrice());
@@ -377,13 +377,18 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     //支付成功或者支付失败后发送eventBus，来把选中的数据删除
     @Subscribe
     public void eventDel(String del){
+
         if (del.equals("del")) {
 //            if (AllSelectManager.getInstance().isSelect()){
 //                del();
 //            }
             Toast.makeText(getContext(), "删除", Toast.LENGTH_SHORT).show();
             deleteShopmall();
+            if (AllSelectManager.getInstance().isSelect()){
+                del();
+            }
         }
+        deleteShopmall();
     }
 
     @Override
@@ -543,7 +548,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         shoppingMoney.setText("￥" + allPrice + "");
     }
 
-
+    //全选
     public void del () {
         if (AllSelectManager.getInstance().isSelect()) {
             httpPresenter.postSelectAllProductData(AllSelectManager.getInstance().isSelect());
@@ -562,7 +567,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     }
 
     @Override
-    public void OnChange() {
+    public void OnShopBeanChange() {
         result = ShopCacheManger.getInstance().getShortBeanList();
         shoppingAdapter.updateData(result);
         shoppingAdapter.notifyDataSetChanged();

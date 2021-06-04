@@ -34,42 +34,47 @@ public class App extends Application {
         UserModel.init();
         MainModel.init();
         PayModel.init();
+        //项目开始前把友盟数据信息从数据库中保存到缓存类中
 
+        //信息数据库
+        MessageDataBase.getInstance().init(this);
         //创建数据库
         DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
-
 
         //错误框架
         ShopmallCrashHandler.getInstance().init(this);
 
 
         ShopCacheManger.getInstance().init(this);
-//        ShopCacheManger.getInstance().registerUserManger();
-//        ShopCacheManger.getInstance().registerBuyCarManger();
+
 
         //自动登录
         startService(new Intent(this, AutoService.class));
         //网络连接初始化
         BusinessNetManager.getInstance().init(this);
 
-        //数据库
-        MessageDataBase.getInstance().init(this);
+
 
         //查询数据库 把数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);
 
+        PushAgent mPushAgent = PushAgent.getInstance(this);
 
 //        //腾讯云拉流
 //        String licenceURL =
 //                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
 //        String licenceKey =
 //                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
+        UMConfigure.init(this, "60b8aa4085c1f6195c4739a1", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "22702403bca24d3c80567a517d3b5966");
+        String licenceURL =
+                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey =
+                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
 //        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
         //友盟分享以及推送
         UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
-        PushAgent mPushAgent = PushAgent.getInstance(this);
         //注册推送服务，每次调用register方法都会回调该接口
         mPushAgent.register(new IUmengRegisterCallback() {
 
@@ -85,6 +90,9 @@ public class App extends Application {
             }
         });
 
+
+//        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
+//                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 // 微信设置
         PlatformConfig.setWeixin("wxdc1e388c3822c80b","3baf1193c85774b3fd9d18447d76cab0");
 // QQ设置

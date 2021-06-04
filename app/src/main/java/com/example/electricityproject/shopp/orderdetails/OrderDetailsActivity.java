@@ -18,12 +18,14 @@ import com.alipay.sdk.app.PayTask;
 import com.example.common.LogUtils;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.db.DaoMaster;
 import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
+import com.example.manager.MessageManager;
 import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.PayResult;
@@ -34,7 +36,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 import java.util.Map;
 
-public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener,MessageDataBase.IMessageListener{
+public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPresenter> implements OrderDetailsActivityIView,ToolBar.IToolbarListener, MessageDataBase.iMessageListener {
 
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_AUTH_FLAG = 2;
@@ -75,7 +77,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     public void onLeftClick() {
         super.onLeftClick();
         Toast.makeText(OrderDetailsActivity.this, "返回", Toast.LENGTH_SHORT).show();
-        Toast.makeText(OrderDetailsActivity.this, ""+list.toString(), Toast.LENGTH_SHORT).show();
+        list.clear();
+        finish();
     }
 
     @SuppressLint("HandlerLeak")
@@ -95,52 +98,48 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         payMsg="支付成功";
                         Toast.makeText(OrderDetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 
+                        FindForSendBean.ResultBean resultBean = new FindForSendBean.ResultBean();
+                        resultBean.setTradeNo(outTradeNo);
+                        resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setStatus(payMsg);
+                        ShopCacheManger.getInstance().addFindShop(resultBean);
+
+//                        //数据库数量加一
+//                        SPMessageNum.getInstance().addShopNum(1);
+                        //添加到数据库
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        //缓存数据添加
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        EventBus.getDefault().post("del");
+
+                    } else {
+                        payMsg="支付失败";
+                        httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
+                        Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+
                         FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
                         resultBean.setOrderInfo(orderInfo);
                         resultBean.setTradeNo(outTradeNo);
                         resultBean.setTime(System.currentTimeMillis()+"");
                         resultBean.setStatus(payMsg);
-                        List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
+                        List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
+                        ShopCacheManger.getInstance().addFindPay(resultBean);
+
                         //添加到支付成功缓存
-                        paySussList.add(resultBean);
+                        payFailList.add(resultBean);
 
                         //添加到消息缓存
-                        ShopCacheManger.getInstance().setMessageList(paySussList);
+                        ShopCacheManger.getInstance().setMessageList(payFailList);
 
+//                        //数据库数量加一
+//                        SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
-                        MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                        //数据库数量减一
-                        SPMessageNum.getInstance().addShopNum(1);
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+                        //缓存数据添加
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+
                         EventBus.getDefault().post("del");
-                        EventBus.getDefault().post("num");
-
                     }
-                    else {
-                    payMsg="支付失败";
-                    httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
-                    Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
-                    FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
-                    resultBean.setOrderInfo(orderInfo);
-                    resultBean.setTradeNo(outTradeNo);
-                    resultBean.setTime(System.currentTimeMillis()+"");
-                    resultBean.setStatus(payMsg);
-                    List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
-                    //添加到支付成功缓存
-                    payFailList.add(resultBean);
-
-                    //添加到消息缓存
-                    ShopCacheManger.getInstance().setMessageList(payFailList);
-
-                    //添加到数据库
-                    MessageDataBase.getInstance().getDaoSession().insert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-                    //数据库数量加一
-                    SPMessageNum.getInstance().addShopNum(1);
-
-                    EventBus.getDefault().postSticky("del");
-
-                    EventBus.getDefault().post("num");
-                }
                     break;
                 }
                 default:
@@ -151,6 +150,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
     @Override
     protected void initData() {
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
         String address = intent.getStringExtra("address");
@@ -190,6 +190,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
     @Override
     protected void initView() {
+
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         username = (TextView) findViewById(R.id.username);
         userPhone = (TextView) findViewById(R.id.user_phone);
@@ -199,6 +200,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         productPrice = (TextView) findViewById(R.id.product_price);
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         goBuy = (Button) findViewById(R.id.go_buy);
+
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         MessageDataBase.getInstance().register(this);
     }
@@ -240,6 +242,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     protected void onDestroy() {
         super.onDestroy();
         MessageDataBase.getInstance().unregister(this);
-        list.clear();
+        ShopCacheManger.getInstance().setList(null);
+
     }
 }
