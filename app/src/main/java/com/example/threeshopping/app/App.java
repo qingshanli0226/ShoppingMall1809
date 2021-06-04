@@ -54,16 +54,11 @@ public class App extends Application {
 
         SqlManager.getInstance().init(this);
 
-
         CacheShopManager.getInstance().init();//缓存购物车
 
-        CacheAwaitPaymentManager.getInstance().init();
+        CacheAwaitPaymentManager.getInstance().init();//缓存订单
 
-
-
-        CacheMessageManager.getInstance().init(this);
-
-
+        CacheMessageManager.getInstance().init(this);//缓存信息
 
         CacheConnectManager.getInstance().init(this);//网络
 

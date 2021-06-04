@@ -18,11 +18,14 @@ import com.alipay.sdk.app.PayTask;
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheMessageManager;
 import com.example.framework.view.ToolBar;
+import com.example.net.bean.AwaitPaymentBean;
 import com.example.net.bean.PayCheckBean;
 import com.example.net.bean.PayResult;
 import com.example.net.bean.SelectBean;
+import com.example.net.bean.ShipmentBean;
 import com.example.pay.R;
 import com.fiannce.sql.bean.MessageBean;
 
@@ -48,7 +51,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                 String result = payResult.getResult();
                 String resultStatus = payResult.getResultStatus();
                 if(TextUtils.equals(resultStatus,"9000")){
-                    Toast.makeText(PaymentActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+
                     Bundle bundle = new Bundle();
                     bundle.putInt("page",4);
                     CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
@@ -67,7 +70,12 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     messageBean.setIsRead(true);
                     CacheMessageManager.getInstance().addMessage(messageBean);
 
-
+                    //待发货
+                    ShipmentBean.ResultBean resultBean = new ShipmentBean.ResultBean();
+                    resultBean.setTime(System.currentTimeMillis()+"");
+                    resultBean.setTradeNo(outTradeNo);
+                    resultBean.setTotalPrice(totalPrice);
+                    CacheAwaitPaymentManager.getInstance().addShip(resultBean);
                 } else{
                     if(TextUtils.equals(resultStatus,"8000")){
                         Toast.makeText(PaymentActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
@@ -86,6 +94,14 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                         messageBean.setMessageTime(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(System.currentTimeMillis()));
                         messageBean.setIsRead(true);
                         CacheMessageManager.getInstance().addMessage(messageBean);
+
+                        //代支付
+                        AwaitPaymentBean.ResultBean resultBean = new AwaitPaymentBean.ResultBean();
+                        resultBean.setTime(System.currentTimeMillis()+"");
+                        resultBean.setOrderInfo(orderInfo);
+                        resultBean.setTradeNo(outTradeNo);
+                        resultBean.setTotalPrice(totalPrice);
+                        CacheAwaitPaymentManager.getInstance().addPay(resultBean);
                     }
                 }
             }

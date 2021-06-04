@@ -44,6 +44,7 @@ public class CacheMessageManager {
     public List<MessageBean> getMessageBeans() {
         return messageBeans;
     }
+
     public void init(Context context){
         this.mContext = context;
         //更改
@@ -52,7 +53,6 @@ public class CacheMessageManager {
             SpUtil.putInt(mContext,0);
         }
     }
-
 
     public int count(){
         int count = 0;
