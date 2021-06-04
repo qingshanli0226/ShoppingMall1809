@@ -1,0 +1,88 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.umeng"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:4:5-78
+11-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:4:22-76
+12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+12-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:5:5-75
+12-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:5:22-73
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:6:5-66
+13-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:6:22-64
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:7:5-80
+14-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:7:22-78
+15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+15-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:8:5-79
+15-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:8:22-77
+16
+17    <application>
+17-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:9:5-37:19
+18        <activity android:name="com.example.myapplication.UmengActivity" />
+18-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:10:9-85
+18-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:10:19-73
+19        <activity
+19-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:11:9-22:20
+20            android:name="com.tencent.tauth.AuthActivity"
+20-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:13:13-58
+21            android:launchMode="singleTask"
+21-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:14:13-44
+22            android:noHistory="true" >
+22-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:15:13-37
+23            <intent-filter>
+23-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:16:13-21:29
+24                <action android:name="android.intent.action.VIEW" />
+24-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:17:17-68
+24-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:17:25-66
+25
+26                <category android:name="android.intent.category.DEFAULT" />
+26-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:18:17-75
+26-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:18:27-73
+27                <category android:name="android.intent.category.BROWSABLE" />
+27-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:19:17-77
+27-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:19:27-75
+28
+29                <data android:scheme="tencent100424468" />
+29-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:20:17-58
+29-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:20:23-56
+30            </intent-filter>
+31        </activity>
+32        <activity
+32-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:23:9-26:76
+33            android:name="com.tencent.connect.common.AssistActivity"
+33-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:24:13-69
+34            android:configChanges="orientation|keyboardHidden|screenSize"
+34-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:26:13-74
+35            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+35-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:25:13-72
+36
+37        <provider
+37-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:27:9-36:20
+38            android:name="androidx.core.content.FileProvider"
+38-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:29:13-62
+39            android:authorities="${applicationId}.fileprovider"
+39-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:28:13-64
+40            android:exported="false"
+40-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:30:13-37
+41            android:grantUriPermissions="true" >
+41-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:31:13-47
+42            <meta-data
+42-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:33:13-35:52
+43                android:name="android.support.FILE_PROVIDER_PATHS"
+43-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:34:17-67
+44                android:resource="@xml/filepaths" />
+44-->D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:35:17-50
+45        </provider>
+46    </application>
+47
+48</manifest>

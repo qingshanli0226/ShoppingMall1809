@@ -28,42 +28,47 @@ public class PaySendCacheManager implements CacheUserManager.IloginChange{
         return paySendCacheManager;
     }
 
-    private FindForSendBean findForSendBean;
-    private FindForPayBean findForPayBean;
+    private List<FindForSendBean.ResultBean> findForSendBean=new ArrayList<>();
+    private List<FindForPayBean.ResultBean> findForPayBean=new ArrayList<>();
+    private List<FindForSendBean.ResultBean> findForSendList=new ArrayList<>();
+
 
     private int a=0;
     public void  setonIndex(int p){
         this.a=p;
     }
     //获取数量
-    public int getOneIndex() {
-        return findForPayBean.getResult().size();
-    }
-    private List<FindForSendBean.ResultBean> findForSendList=new ArrayList<>();
+
 
     //获取数量
     public int getTwoIndex() {
-        return findForSendBean.getResult().size();
+        return findForSendBean.size();
     }
 
-    public FindForPayBean getFindForPayBean() {
+    public List<FindForPayBean.ResultBean> getFindForPayBean() {
         return findForPayBean;
     }
+    public void setpay(List<FindForPayBean.ResultBean> fid){
+        this.findForPayBean=fid;
+    }
 
-    public FindForSendBean getFindForSendBean() {
+    public List<FindForSendBean.ResultBean> getFindForSendBean() {
         return findForSendBean;
     }
 
-    public void setFindForSendBean(FindForSendBean findForSendBean) {
-        this.findForSendBean = findForSendBean;
+    public void setFindForSendBean(List<FindForSendBean.ResultBean> findForSendBean) {
+        this.findForSendBean=findForSendBean;
 
     }
     public List<FindForSendBean.ResultBean> getSendList(){
         return findForSendList;
     }
+    public void setFindForSendList(List<FindForSendBean.ResultBean> findForSendList){
+        this.findForSendList=findForSendList;
+    }
 
-    public void setFindForPayBean(FindForPayBean findForPayBean) {
-        this.findForPayBean = findForPayBean;
+    public void setFindForPayBean(FindForPayBean.ResultBean bean) {
+        findForPayBean.add(bean);
 
 
     }
@@ -100,7 +105,7 @@ public class PaySendCacheManager implements CacheUserManager.IloginChange{
                     @Override
                     public void onNext(@NonNull FindForPayBean findForPayBean) {
 
-                            PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
+                            PaySendCacheManager.getInstance().setpay(findForPayBean.getResult());
                         }
                     @Override
                     public void onError(@NonNull Throwable e) {

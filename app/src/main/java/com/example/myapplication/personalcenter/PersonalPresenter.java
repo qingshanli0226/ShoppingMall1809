@@ -102,8 +102,9 @@ public class PersonalPresenter extends BasePresenter<com.example.myapplication.p
                     @Override
                     public void onNext(@NonNull FindForPayBean findForPayBean) {
                         if (mView!=null){
-                            PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
+                            PaySendCacheManager.getInstance().setFindForPayBean((FindForPayBean.ResultBean) findForPayBean.getResult());
                             LogUtil.d(findForPayBean.toString());
+                            mView.onShoppingPay(findForPayBean);
                            mView.ondend(findForPayBean);
                         }
                     }
