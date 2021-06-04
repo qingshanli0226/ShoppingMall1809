@@ -23,7 +23,6 @@ import com.example.common.bean.RemoveManyProductBean;
 import com.example.common.bean.RemoveOneProductBean;
 import com.example.common.bean.RequestOrderInfo;
 import com.example.common.bean.SelectAllProductBean;
-import com.example.common.bean.SelectOrderBean;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.common.bean.UpdateProductNumBean;
 import com.example.electricityproject.R;
@@ -197,10 +196,14 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         });
 
+
         //去结算
         goZfb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+
 
                 LogUtils.i(BusinessUserManager.getInstance().isBindAddress()+"");
                 LogUtils.i(BusinessUserManager.getInstance().isBindTel()+"");
@@ -274,10 +277,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             for (ShortcartProductBean.ResultBean bean : removeAllShopBean) {
                 ShopCacheManger.getInstance().ShopDelOne(bean);
             }
-
-
         }
-
     }
 
     //向服务器下订单
@@ -289,13 +289,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             String outTradeNo = orderInfoBean.getResult().getOutTradeNo();
             String orderInfo = orderInfoBean.getResult().getOrderInfo();
 
-            List<SelectOrderBean> list = new ArrayList<>();
-            for (ShortcartProductBean.ResultBean resultBean : selectList) {
-                SelectOrderBean selectOrderBean = new SelectOrderBean(resultBean.getUrl(), resultBean.getProductName(), resultBean.getProductPrice(), resultBean.getProductNum());
-                list.add(selectOrderBean);
-            }
-            ShopCacheManger.getInstance().setList(list);
-
             LogBean.ResultBean result1 = BusinessUserManager.getInstance().getIsLog().getResult();
             Intent intent = new Intent(getContext(), OrderDetailsActivity.class);
             intent.putExtra("username",result1.getName());
@@ -305,7 +298,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             intent.putExtra("orderInfo", orderInfo);
             if (ShopCacheManger.getInstance().getList()!=null){
                 startActivity(intent);
-
             }
         }else {
             Toast.makeText(getContext(), ""+orderInfoBean.getMessage(), Toast.LENGTH_SHORT).show();
@@ -333,7 +325,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }else {
                 String notEnough="";
                 for (ShortcartProductBean.ResultBean resultBean : notEnoughList) {
-                    notEnough+=resultBean.getProductName()+"    ";
+                    notEnough+=resultBean.getProductName()+"  ";
                 }
                 Toast.makeText(getContext(), notEnough+"库存不足", Toast.LENGTH_SHORT).show();
             }
@@ -386,9 +378,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Subscribe
     public void eventDel(String del){
         if (del.equals("del")) {
-            if (AllSelectManager.getInstance().isSelect()){
-                del();
-            }
+//            if (AllSelectManager.getInstance().isSelect()){
+//                del();
+//            }
             Toast.makeText(getContext(), "删除", Toast.LENGTH_SHORT).show();
             deleteShopmall();
         }
@@ -453,10 +445,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                     ShopCacheManger.getInstance().subShopNum(result.get(SubPosition));
                 }
             }
-
-
         }
-
     }
     //检查库存
     @Override
@@ -517,7 +506,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
                 count();
                 ShopCacheManger.getInstance().setSelect(result.get(selectPosition));
             }
-            shoppingAdapter.notifyDataSetChanged();
+            shoppingAdapter.notifyItemChanged(selectPosition);
 
             //反选
 
@@ -568,9 +557,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     public void onDestroy() {
         super.onDestroy();
         BusinessUserManager.getInstance().UnRegister(this);
-        if (EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().unregister(this);
-        }
+        EventBus.getDefault().unregister(this);
         ShopCacheManger.getInstance().unregisterShopBeanChange(this);
     }
 

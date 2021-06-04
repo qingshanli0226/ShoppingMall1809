@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.common.NetModel;
+import com.example.common.ShopmallCrashHandler;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
 import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
@@ -16,11 +17,11 @@ import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.PlatformConfig;
-
 
 
 public class App extends Application {
@@ -39,7 +40,7 @@ public class App extends Application {
 
 
         //错误框架
-//        ShopmallCrashHandler.getInstance().init(this);
+        ShopmallCrashHandler.getInstance().init(this);
 
 
         ShopCacheManger.getInstance().init(this);
@@ -58,12 +59,14 @@ public class App extends Application {
         SPMessageNum.getInstance().init(this);
 
 
-        String licenceURL =
-                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
-        String licenceKey =
-                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
+//        //腾讯云拉流
+//        String licenceURL =
+//                "http://license.vod2.myqcloud.com/license/v1/5f6b6f8c1bb8c3fd3a33817371f486ec/TXLiveSDK.licence"; // 获取到的 licence url
+//        String licenceKey =
+//                "a37f11535e6807594a27d970c72f10b7"; // 获取到的 licence key
 //        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
+        //友盟分享以及推送
         UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
         PushAgent mPushAgent = PushAgent.getInstance(this);
@@ -81,20 +84,14 @@ public class App extends Application {
                 Log.e("zx","注册失败：-------->  " + "s:" + s + ",s1:" + s1);
             }
         });
-//        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
-//                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+
 // 微信设置
         PlatformConfig.setWeixin("wxdc1e388c3822c80b","3baf1193c85774b3fd9d18447d76cab0");
-//        PlatformConfig.setWXFileProvider("com.tencent.sample2.fileprovider");
 // QQ设置
         PlatformConfig.setQQZone("101830139","5d63ae8858f1caab67715ccd6c18d7a5");
-//        PlatformConfig.setQQFileProvider("com.tencent.sample2.fileprovider");
 // 企业微信设置
-//        PlatformConfig.setWXWork("wwac6ffb259ff6f66a","EU1LRsWC5uWn6KUuYOiWUpkoH45eOA0yH-ngL8579zs","1000002","wwauthac6ffb259ff6f66a000002");
-//        PlatformConfig.setWXWorkFileProvider("com.tencent.sample2.fileprovider");
 // 新浪微博设置
         PlatformConfig.setSinaWeibo("3921700954","04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
-//        PlatformConfig.setSinaFileProvider("com.tencent.sample2.fileprovider");
 // 其他平台设置
         PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
         PlatformConfig.setYixin("yxc0614e80c9304c11b0391514d09f13bf");
@@ -105,6 +102,11 @@ public class App extends Application {
         PlatformConfig.setKakao("e4f60e065048eb031e235c806b31c70f");
         PlatformConfig.setVKontakte("5764965","5My6SNliAaLxEm3Lyd9J");
         PlatformConfig.setDropbox("oz8v5apet3arcdy","h7p2pjbzkkxt02a");
-//        PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
+
+        //bugly初始化
+        CrashReport.initCrashReport(getApplicationContext(), "c66d73003a", true);
+
+
+
     }
 }

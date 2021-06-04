@@ -63,15 +63,12 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     protected void initData() {
 
-
         daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
 
         LogBean isLog = BusinessUserManager.getInstance().getIsLog();
         if (isLog!=null){
             name = isLog.getResult().getName();
         }
-
-
 
         confirmPhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +91,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                 }
             }
         });
-
 
     }
 

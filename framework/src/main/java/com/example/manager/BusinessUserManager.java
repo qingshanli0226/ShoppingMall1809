@@ -40,10 +40,7 @@ public class BusinessUserManager {
     }
 
     public boolean isBindAddress() {
-        if (isLog.getResult().getAddress()!=null && isLog!=null){
-            return true;
-        }
-        return false;
+        return isBindAddress;
     }
 
     public void setBindAddress(String address) {
@@ -53,15 +50,20 @@ public class BusinessUserManager {
     }
 
     public boolean isBindTel() {
-        if (isLog.getResult().getPhone()!=null && isLog!=null){
-            return true;
-        }
-        return false;
+        return isBindTel;
+    }
+
+    public void setBindAddress(boolean bindAddress) {
+        isBindAddress = bindAddress;
+    }
+
+    public void setBindTel(boolean bindTel) {
+        isBindTel = bindTel;
     }
 
     public void setBindTel(String bindTel) {
         if (isLog!=null){
-            isLog.getResult().setAddress(bindTel);
+            isLog.getResult().setPhone(bindTel);
         }
     }
 

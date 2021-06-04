@@ -65,10 +65,7 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
                 }else {
                     list.get(position).setIsShow(true);
                 }
-                userInfoAdapter.notifyDataSetChanged();
-
-
-
+                userInfoAdapter.notifyItemChanged(position);
             }
 
             @Override
@@ -86,6 +83,8 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
                         phone = userInfoTable.getPhone();
                     }
                 }
+                LogUtils.i(address+"");
+                LogUtils.i(phone+"");
                 httpPresenter.postUpdateAddressData(address);
             }
         });
@@ -150,7 +149,9 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
     public void updatePhone(UpdatePhoneBean updatePhoneBean) {
         if (updatePhoneBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setBindTel(phone);
-            Toast.makeText(this, "修改地址成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "选择地址成功", Toast.LENGTH_SHORT).show();
+            BusinessUserManager.getInstance().setBindTel(true);
+            BusinessUserManager.getInstance().setBindAddress(true);
             finish();
         }
     }

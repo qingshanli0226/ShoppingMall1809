@@ -26,6 +26,7 @@ import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 
@@ -49,8 +50,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
     private CircleView buyCarNum;
 
 
-
-
     @Override
     protected void initData() {
         btnHome.setChecked(true);
@@ -68,6 +67,8 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
         fragmentTransaction.add(R.id.main_lin, findFragment);
         fragmentTransaction.add(R.id.main_lin, shoppingFragment);
         fragmentTransaction.add(R.id.main_lin, personFragment);
+
+
 
         BeginTransaction(homeFragment, classifyFragment, findFragment, shoppingFragment, personFragment);
 
@@ -87,12 +88,15 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                         BeginTransaction(findFragment, classifyFragment, homeFragment, shoppingFragment, personFragment);
                         break;
                     case R.id.btn_buycar:
+                        //制造崩溃
+                        CrashReport.testJavaCrash();
                         BeginTransaction(shoppingFragment, classifyFragment, findFragment, homeFragment, personFragment);
                         LogBean logBean = BusinessUserManager.getInstance().getIsLog();
                         if (logBean == null) {
                             Toast.makeText(MainActivity.this, "用户未登录，请先登录", Toast.LENGTH_SHORT).show();
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
                         }
+
                         break;
                     case R.id.btn_person:
                         BeginTransaction(personFragment, classifyFragment, findFragment, homeFragment, shoppingFragment);

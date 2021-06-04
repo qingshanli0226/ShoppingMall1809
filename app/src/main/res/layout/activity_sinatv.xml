@@ -10,12 +10,38 @@
     <com.example.view.ToolBar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        app:titleText="推流与拉流"
+        app:leftIsShow="true"
+        app:leftImg="@drawable/back"
         android:id="@+id/toolbar"></com.example.view.ToolBar>
+
+    <Button
+        android:id="@+id/push"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="推流"></Button>
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="结束"></Button>
+
+<!--    <com.tencent.rtmp.ui.TXCloudVideoView-->
+<!--        android:id="@+id/pusher_tx_cloud_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/dp_200" />-->
+
+    <Button
+        android:id="@+id/la"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拉流"></Button>
 
 <!--    <com.tencent.rtmp.ui.TXCloudVideoView-->
 <!--        android:id="@+id/video_view"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
+<!--        android:layout_height="@dimen/dp_200"-->
 <!--        android:layout_centerInParent="true"-->
 <!--        android:visibility="visible"/>-->
 </LinearLayout>
