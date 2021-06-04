@@ -238,6 +238,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
 
+
         View inflate = LayoutInflater.from(this).inflate(R.layout.item_pop, null);
         ImageView share = inflate.findViewById(R.id.share);
 
@@ -245,7 +246,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
             @Override
             public void onClick(View view) {
 
-
+                //分享
 
                 UMImage image = new UMImage(GoodsActivity.this,Constants.BASE_URl_IMAGE +figure );//网络图片
 
@@ -280,6 +281,7 @@ public class GoodsActivity extends BaseActivity<GoodsPresenter> implements IGood
         video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //直播
                 startActivity(new Intent(GoodsActivity.this,VideoActivity.class));
             }
         });
