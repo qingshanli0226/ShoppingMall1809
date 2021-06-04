@@ -26,6 +26,7 @@ public class ShopConstants {
     //名字
     public final static String SP_FIANNCE = "shopSp";
     public final static String SQ_MANAGE = "manage";
+    public final static String SQ_ADDRESS ="address";
     public final static String SP_MANAGE = "manageCount";
     public final static String SP_MANAGE_NAME = "count";
 }

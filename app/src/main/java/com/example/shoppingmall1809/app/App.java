@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.framework.manager.AddressManager;
 import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShoppingCarManager;
 import com.example.framework.manager.ShopManager;
@@ -33,11 +34,12 @@ public class App extends Application {
         ShoppingCarManager.getInstance().initLogin();
 
         MessageManager.getInstance().init(this);
+        AddressManager.getInstance().init(this);
 
 //直播
-        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/cf24891926efa0eabb069bc15cef231d/TXLiveSDK.licence"; // 获取到的 licence url
-        String licenceKey = "da1b21df0938845b6a42cc676b53fb09"; // 获取到的 licence key
-        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+//        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/cf24891926efa0eabb069bc15cef231d/TXLiveSDK.licence"; // 获取到的 licence url
+//        String licenceKey = "da1b21df0938845b6a42cc676b53fb09"; // 获取到的 licence key
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
 
 
         //友盟
