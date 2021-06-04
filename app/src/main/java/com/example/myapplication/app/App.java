@@ -13,6 +13,7 @@ import com.example.framework.manager.PaySendCacheManager;
 import com.example.myapplication.particulars.ParticularsModule;
 import com.example.net.AppMoudel;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -51,6 +52,11 @@ public class App extends Application {
         PlatformConfig.setVKontakte("5764965","5My6SNliAaLxEm3Lyd9J");
         PlatformConfig.setDropbox("oz8v5apet3arcdy","h7p2pjbzkkxt02a");
         CrashReport.initCrashReport(getApplicationContext(),"7fee8d00b8",true);
+
+
+        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/b296bcad7e74aa354db14f649ef5dcb6/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey = "6123f6cff979198c1eebded494e1f87e"; // 获取到的 licence key
+        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
     }
 
 }

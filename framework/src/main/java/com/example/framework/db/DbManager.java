@@ -29,4 +29,5 @@ public class DbManager {
         return daoSession;
 
     }
+
 }

@@ -8,6 +8,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature android:name="android.hardware.Camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".app.App"
@@ -19,24 +32,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".particulars.VideoActivity"></activity>
+        <activity android:name=".live.LiveActivity"></activity>
+        <activity android:name=".particulars.VideoActivity" />
         <activity android:name=".personalcenter.findforsend.FindsendMainActivity" />
         <activity android:name=".shoppingcart.payorder.OrderActivity" />
         <activity android:name=".personalcenter.findforpay.FindPayMainActivity" />
         <activity android:name=".home.msg.MsgMainActivity" />
         <activity android:name=".particulars.ParticularsActivity" />
-        <activity android:name=".shoppingcart.ShoppingCartActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".findforsend.FindsendMainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"></activity>
-
+        <activity
+            android:name=".shoppingcart.ShoppingCartActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".findforsend.FindsendMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".welcome.WelcomeActivity"
-            android:theme="@style/Theme.MyAppTheme"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask">
+            android:theme="@style/Theme.MyAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -34,6 +34,7 @@ import com.example.framework.manager.ShopmallGlide;
 import com.example.framework.view.MessageNumView;
 import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
+import com.example.myapplication.live.LiveActivity;
 import com.example.myapplication.shoppingcart.ShoppingCartActivity;
 import com.example.net.bean.RegisterBean;
 import com.example.net.bean.AddShoppingCartBean;
@@ -233,6 +234,8 @@ public class ParticularsActivity extends BaseActivity<AddShoppingCartPresenter> 
                 LinearLayout pop3 = inflate.findViewById(R.id.pop3);
                 pop3.setOnClickListener(v -> finish());
 
+                LinearLayout pop2 = inflate.findViewById(R.id.pop2);
+                pop2.setOnClickListener(v ->startActivity(new Intent(ParticularsActivity.this, LiveActivity.class)));
                 LinearLayout pop1 = inflate.findViewById(R.id.pop1);
                 pop1.setOnClickListener(v -> startActivity(new Intent(ParticularsActivity.this, VideoActivity.class)));
             }
