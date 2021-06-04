@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.msg.MsgMainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".home.msg.MsgMainActivity">
 
     <com.example.framework.view.MyToorbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70"
-        app:titletext="@string/title_msg"
         app:isleft="true"
-        app:leftimg="@drawable/top_bar_left_back"></com.example.framework.view.MyToorbar>
+        app:leftimg="@drawable/top_bar_left_back"
+        app:titletext="@string/title_msg"></com.example.framework.view.MyToorbar>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

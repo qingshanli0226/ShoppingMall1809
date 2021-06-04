@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.example.common.type.TypeString;
+import com.example.framework.db.DbTable;
 import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.MsgManager;
 import com.example.net.bean.OrderinfoBean;
 
 import java.io.Serializable;
@@ -26,7 +29,7 @@ import java.util.Map;
 public class PayActivity extends AppCompatActivity {
     private Button btn;
     private OrderinfoBean bean;
-    private final int a=1;
+    private final int a = 1;
     public Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -34,13 +37,16 @@ public class PayActivity extends AppCompatActivity {
 
             switch (msg.what) {
                 case a:
-                    Map<String,String> result= (Map<String, String>) msg.obj;
-                    String resultStatus= result.get("resultStatus");
+                    Map<String, String> result = (Map<String, String>) msg.obj;
+                    String resultStatus = result.get("resultStatus");
                     Toast.makeText(PayActivity.this, resultStatus, Toast.LENGTH_SHORT).show();
                     if (resultStatus.equals("9000")) {
                         Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                         CaCheMannager.getInstance().payNotify(1);//通知购物车刷新数据
                         finish();
+                        //发送消息
+                        DbTable table = new DbTable(null, TypeString.MSG_PAY, "支付消息", "支付成功", "2021年6月3日", true);
+                        MsgManager.getInstance().addMsg(table);
                     } else {
                         // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
                         if (TextUtils.equals(resultStatus, "8000")) {
@@ -50,25 +56,30 @@ public class PayActivity extends AppCompatActivity {
                             Toast.makeText(PayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                             CaCheMannager.getInstance().payNotify(2);//通知购物车刷新数据
                         }
+                        //发送消息
+                        DbTable table = new DbTable(null, TypeString.MSG_PAY, "支付消息", "支付失败", "2021年6月3日", true);
+                        MsgManager.getInstance().addMsg(table);
                     }
                     break;
             }
+            MsgManager.getInstance().refreshMsg();
         }
 
 
     };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_main);
         initView();
         Intent intent = getIntent();
-         bean = (OrderinfoBean) intent.getSerializableExtra("bean");
+        bean = (OrderinfoBean) intent.getSerializableExtra("bean");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (bean!=null){
+                if (bean != null) {
                     String orderInfo = bean.getResult().getOrderInfo();
                     new Thread(new Runnable() {
                         @Override
@@ -77,8 +88,8 @@ public class PayActivity extends AppCompatActivity {
                             PayTask payTask = new PayTask(PayActivity.this);
                             Map<String, String> result = payTask.payV2(orderInfo, false);
                             Message message = new Message();
-                            message.what=a;
-                            message.obj=result;
+                            message.what = a;
+                            message.obj = result;
                             handler.sendMessage(message);
                         }
                     }).start();
@@ -87,8 +98,6 @@ public class PayActivity extends AppCompatActivity {
         });
 
     }
-
-
 
 
     private void initView() {

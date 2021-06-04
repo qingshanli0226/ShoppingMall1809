@@ -52,9 +52,10 @@
                 android:src="@drawable/community_message_icon"></ImageView>
 
             <TextView
+                android:id="@+id/msgCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/homeMessageTetview"
+                android:text="0"
                 android:textColor="@color/white"
                 android:textStyle="bold"></TextView>
         </LinearLayout>

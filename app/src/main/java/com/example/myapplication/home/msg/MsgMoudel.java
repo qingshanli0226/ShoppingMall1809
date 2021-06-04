@@ -11,7 +11,6 @@ public class MsgMoudel implements CaCheArote.IMsgInterface {
     public static void init() {
         MsgMoudel msgMoudel = new MsgMoudel();
         CaCheArote.getInstance().registerIMsgInterface(msgMoudel);
-
     }
 
 

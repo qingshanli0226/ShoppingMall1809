@@ -32,24 +32,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".live.LiveActivity"></activity>
-        <activity android:name=".particulars.VideoActivity" />
-        <activity android:name=".personalcenter.findforsend.FindsendMainActivity" />
-        <activity android:name=".shoppingcart.payorder.OrderActivity" />
-        <activity android:name=".personalcenter.findforpay.FindPayMainActivity" />
-        <activity android:name=".home.msg.MsgMainActivity" />
-        <activity android:name=".particulars.ParticularsActivity" />
+
+        <activity
+            android:name=".particulars.VideoActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".shoppingcart.ShoppingCartActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".findforsend.FindsendMainActivity"
-            android:launchMode="singleTask"
+            android:name=".personalcenter.findforsend.FindsendMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".shoppingcart.payorder.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".personalcenter.findforpay.FindPayMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.msg.MsgMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".particulars.ParticularsActivity"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".welcome.WelcomeActivity"
+
             android:launchMode="singleTask"
+
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MyAppTheme">
             <intent-filter>
@@ -60,7 +71,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

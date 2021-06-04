@@ -3,7 +3,7 @@ package com.example.framework.db;
 import android.content.Context;
 
 public class DbManager {
-    public static DbManager dbManager;
+    private static DbManager dbManager;
 
     public static DbManager getDbManager() {
         if (dbManager==null){
@@ -13,21 +13,28 @@ public class DbManager {
     }
     private DaoMaster daoMaster;
     private DaoSession daoSession;
+    private Context context;
 
-    public DaoMaster getDaoMaster(Context context) {
+    public void init(Context context){
+        this.context=context;
+    }
+
+    public DaoMaster getDaoMaster() {
         if (daoMaster==null){
-            DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, "msg.db");
+            DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, "sql.db");
             daoMaster=new DaoMaster(devOpenHelper.getWritableDb());
         }
         return daoMaster;
     }
 
     public DaoSession getDaoSession() {
+        if (daoMaster==null){
+            getDaoMaster();
+        }
         if (daoSession==null){
-           daoSession= daoMaster.newSession();
+            daoSession= daoMaster.newSession();
         }
         return daoSession;
-
     }
 
 }

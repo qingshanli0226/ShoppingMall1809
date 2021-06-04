@@ -2,18 +2,16 @@ package com.example.myapplication.home;
 
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.common.log.LogUtil;
-import com.example.common.type.ToLoginType;
-import com.example.common.type.TypeString;
-
 import com.example.framework.BaseFragment;
-
 import com.example.framework.manager.CaCheArote;
+import com.example.framework.manager.CaCheMannager;
+import com.example.framework.manager.MsgManager;
 import com.example.myapplication.R;
 import com.example.myapplication.home.homeadapter.HomeAdapter;
 import com.example.net.bean.HomeBean;
@@ -21,14 +19,13 @@ import com.example.net.bean.HomeBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.framework.manager.CaCheMannager;
-
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements MsgManager.IMessageListenner{
     private EditText etDevOpsPassWord;
     private RecyclerView homeRec;
     private HomeAdapter homeAdapter;
     private List<Object> objectList = new ArrayList<>();
     private ImageView msg;
+    private TextView msgCount;
 
     @Override
     public int bandLayout() {
@@ -37,8 +34,10 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        MsgManager.getInstance().registerIMsg(this);//注册
         etDevOpsPassWord = (EditText) findViewById(R.id.et_devOps_passWord);
         homeRec = (RecyclerView) findViewById(R.id.homeRec);
+        msgCount = (TextView) findViewById(R.id.msgCount);
         //获取缓存的首页值
         HomeBean homeBean = CaCheMannager.getInstance().getHomeBean();
         HomeBean.ResultBean result = homeBean.getResult();
@@ -59,8 +58,9 @@ public class HomeFragment extends BaseFragment {
 
         msg = (ImageView) findViewById(R.id.msg);
         msg.setOnClickListener(v -> {
-            CaCheArote.getInstance().getMsgInterface().openMsgActivity(getActivity(),null);
+            CaCheArote.getInstance().getMsgInterface().openMsgActivity(getActivity(), null);
         });
+
     }
 
     @Override
@@ -70,7 +70,18 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        msgCount.setText(MsgManager.getInstance().getMsgCount()+"");
     }
 
+    @Override
+    public void onShowMsg(int count) {
+        msgCount.setText(count+"");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MsgManager.getInstance().unregisterIMsg(this);//注册
+        destroy();
+    }
 }
