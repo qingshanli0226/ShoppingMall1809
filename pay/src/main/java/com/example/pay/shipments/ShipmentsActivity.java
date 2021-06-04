@@ -45,6 +45,7 @@ public class ShipmentsActivity extends BaseActivity implements  CacheAwaitPaymen
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         toolbar.setToolbarOnClickLisenter(this);
         shipmentsRv = (RecyclerView) findViewById(R.id.shipmentsRv);
+        CacheAwaitPaymentManager.getInstance().registerShip(this);
     }
 
     @Override

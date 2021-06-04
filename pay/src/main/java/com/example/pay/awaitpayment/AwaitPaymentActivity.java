@@ -46,6 +46,7 @@ public class AwaitPaymentActivity extends BaseActivity implements CacheAwaitPaym
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         toolbar.setToolbarOnClickLisenter(this);
         paymentRv = (RecyclerView) findViewById(R.id.paymentRv);
+        CacheAwaitPaymentManager.getInstance().registerPay(this);
     }
 
     @Override

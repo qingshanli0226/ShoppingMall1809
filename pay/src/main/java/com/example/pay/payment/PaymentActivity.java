@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +40,8 @@ import java.util.Map;
 public class PaymentActivity extends BaseActivity<PayMentPresenter> implements IPaymentView {
 
     private com.example.framework.view.ToolBar toolbar;
-    private android.widget.CheckBox weiCheck;
-    private android.widget.CheckBox zfbCheck;
+    private android.widget.RadioButton weiCheck;
+    private android.widget.RadioButton zfbCheck;
     private android.widget.Button pay;
     private TextView payPrice;
     private Handler handler = new Handler(){
@@ -105,9 +107,9 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     }
                 }
             }
-
         }
     };
+    private android.widget.RadioGroup group;
 
     @Override
     public int getLayoutId() {
@@ -116,13 +118,13 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
 
     @Override
     public void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
-        weiCheck = (CheckBox) findViewById(R.id.weiCheck);
-        zfbCheck = (CheckBox) findViewById(R.id.zfbCheck);
+        weiCheck = (RadioButton) findViewById(R.id.weiCheck);
+        zfbCheck = (RadioButton) findViewById(R.id.zfbCheck);
         pay = (Button) findViewById(R.id.pay);
         toolbar.setToolbarOnClickLisenter(this);
         payPrice = (TextView) findViewById(R.id.payPrice);
+        group = (RadioGroup) findViewById(R.id.group);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.framework.manager;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.example.common.LogUtil;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.AwaitPaymentBean;
 import com.example.net.bean.AwaitPaymentBean.ResultBean;
@@ -87,6 +89,7 @@ public class CacheAwaitPaymentManager {
                     public void onNext(@NonNull AwaitPaymentBean awaitPaymentBean) {
                         if (awaitPaymentBean.getCode().equals("200")) {
                             setAwaitpayment(awaitPaymentBean.getResult());
+                            LogUtil.i("awaitPaymentBean"+awaitPaymentBean.getResult());
                             notifyPay(Awaitpayment);
                         }
                     }

@@ -38,11 +38,12 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dm_dp_100"
         android:orientation="vertical"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_dp_50"
@@ -60,16 +61,10 @@
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dm_dp_50"
                 ></TextView>
-            <CheckBox
-                android:id="@+id/weiCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-                android:layout_alignParentRight="true"
-                android:gravity="center_vertical"
-                ></CheckBox>
+
         </RelativeLayout>
         <RelativeLayout
+            android:layout_marginTop="@dimen/dm_dp_50"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dm_dp_50"
             >
@@ -86,16 +81,34 @@
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dm_dp_50"
                 ></TextView>
-            <CheckBox
-                android:id="@+id/zfbCheck"
+
+        </RelativeLayout>
+        <RadioGroup
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dm_dp_100"
+            android:layout_marginLeft="350dp"
+            >
+            <RadioButton
+                android:id="@+id/weiCheck"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 style="@style/Widget.AppCompat.CompoundButton.RadioButton"
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"
-                ></CheckBox>
-        </RelativeLayout>
-    </LinearLayout>
+                ></RadioButton>
+            <RadioButton
+                android:id="@+id/zfbCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                ></RadioButton>
+        </RadioGroup>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/pay"
