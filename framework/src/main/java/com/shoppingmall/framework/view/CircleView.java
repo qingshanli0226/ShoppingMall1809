@@ -29,7 +29,7 @@ public class CircleView extends View {
         paint = new Paint();
     }
 
-    private String text = "8";
+    private String text = "0";
 
     public void setText(String text) {
         this.text = text;

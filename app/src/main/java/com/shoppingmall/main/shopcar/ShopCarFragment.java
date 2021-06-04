@@ -94,8 +94,18 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     @Subscribe
     public void getEvenBus(String msg){
         if (msg.equals("main")){
+            carts = CacheShopManager.getInstance().getCarts();
+            shopCarAdapter.updateData(carts);
             shopCarAdapter.notifyDataSetChanged();
             EventBus.getDefault().post("ShopCarNum");
+//            initData();
+        }
+    }
+
+    @Subscribe
+    public void getEvenBusBind(String msg){
+        if (msg.equals("bind")){
+            ShopMallUserManager.getInstance().setBind(true);
 //            initData();
         }
     }
@@ -231,19 +241,21 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
                                 shopCarAdapter.getData().get(i).getProductPrice()+""));
                     }
                 }
-                boolean isBind = ShopMallUserManager.getInstance().isBind();
-                if (body.size()>=1){
-                    if(isBind){
-                        Intent intent = new Intent(getContext(), BindActivity.class);
-                        startActivity(intent);
-                    }else {
+                LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
+                boolean bind = ShopMallUserManager.getInstance().isBind();
+//                if (body.size()>=1){
+//                    if(bind){
                         Intent intent = new Intent(getContext(),OrderActivity.class);
                         intent.putExtra("body", (Serializable) payBean);
                         startActivity(intent);
-                    }
-                }else {
-                    Toast.makeText(getContext(), "请至少选中一个", Toast.LENGTH_SHORT).show();
-                }
+//                    }else {
+//                        Intent intent = new Intent(getContext(), BindActivity.class);
+//                        startActivity(intent);
+
+//                    }
+//                }else {
+//                    Toast.makeText(getContext(), "请至少选中一个", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
