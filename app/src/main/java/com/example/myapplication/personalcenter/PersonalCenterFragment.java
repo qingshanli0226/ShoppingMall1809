@@ -122,9 +122,9 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
 
     @Override
     public void ondend(FindForPayBean findForPayBean) {
-        PaySendCacheManager.getInstance().setFindForPayBean(findForPayBean);
+        PaySendCacheManager.getInstance().setFindForPayBean((FindForPayBean.ResultBean) findForPayBean.getResult());
 
-        paynum.setText(PaySendCacheManager.getInstance().getOneIndex() + "");
+
     }
 
 

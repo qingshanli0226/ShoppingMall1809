@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.bumptech.glide.gifdecoder.BuildConfig;
 import com.example.framework.BaseActivity;
 import com.example.framework.BaseRecyclerViewAdapter;
 import com.example.framework.manager.PaySendCacheManager;
@@ -106,8 +107,8 @@ public class FindPayMainActivity extends BaseActivity<ShoporederPresenter> imple
 
         Intent intent = getIntent();
 
-        FindForPayBean findForPayBean = PaySendCacheManager.getInstance().getFindForPayBean();
-        list.addAll(findForPayBean.getResult());
+        List<FindForPayBean.ResultBean> findForPayBean = PaySendCacheManager.getInstance().getFindForPayBean();
+        list.addAll(findForPayBean);
         rv.setAdapter(findPayAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
 

@@ -1,0 +1,113 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+	package
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:3:5-32
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:1-39:12
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:4:5-78
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:4:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:5:5-75
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:5:22-73
+uses-permission#android.permission.INTERNET
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:6:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:8:22-77
+application
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:9:5-37:19
+activity#com.example.myapplication.UmengActivity
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:10:9-85
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:10:19-73
+activity#com.tencent.tauth.AuthActivity
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:11:9-22:20
+	android:launchMode
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:14:13-44
+	android:noHistory
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:13:13-58
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:tencent100424468
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:16:13-21:29
+action#android.intent.action.VIEW
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:17:17-68
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:17:25-66
+category#android.intent.category.DEFAULT
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:18:17-75
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:18:27-73
+category#android.intent.category.BROWSABLE
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:19:27-75
+data
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:20:17-58
+	android:scheme
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:20:23-56
+activity#com.tencent.connect.common.AssistActivity
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:23:9-26:76
+	android:configChanges
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:26:13-74
+	android:theme
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:25:13-72
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:24:13-69
+provider#androidx.core.content.FileProvider
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:27:9-36:20
+	android:grantUriPermissions
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:31:13-47
+	android:authorities
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:28:13-64
+	android:exported
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:29:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:33:13-35:52
+	android:resource
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:35:17-50
+	android:name
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml:34:17-67
+uses-sdk
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		ADDED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml
+		INJECTED from D:\1809A\one\ShoppingMall1809\umeng\src\main\AndroidManifest.xml

@@ -34,7 +34,6 @@ public class FindsendMainActivity extends BaseActivity<FindpayPresenter> impleme
 
     @Override
     public void onFindPay(FindForPayBean findForPayBean) {
-
     }
 
     @Override
@@ -46,6 +45,8 @@ public class FindsendMainActivity extends BaseActivity<FindpayPresenter> impleme
     public void initView() {
 
         rv = findViewById(R.id.rv);
+        mPresenter=new FindpayPresenter(this);
+        mPresenter.getFindSend();
     }
 
     @Override
@@ -56,6 +57,9 @@ public class FindsendMainActivity extends BaseActivity<FindpayPresenter> impleme
     @Override
     public void initData() {
         List<FindForSendBean.ResultBean> sendList = PaySendCacheManager.getInstance().getSendList();
+        for (int i = 0; i < sendList.size(); i++) {
+            Toast.makeText(this, sendList.get(i).getTradeNo(), Toast.LENGTH_SHORT).show();
+        }
         findSendAdapter=new FindSendAdapter();
         findSendAdapter.updataData(sendList);
         rv.setAdapter(findSendAdapter);

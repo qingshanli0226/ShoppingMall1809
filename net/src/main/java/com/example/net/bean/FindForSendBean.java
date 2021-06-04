@@ -4,6 +4,15 @@ import java.util.List;
 
 public class FindForSendBean {
 
+    @Override
+    public String toString() {
+        return "FindForSendBean{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
+
     /**
      * code : 200
      * message : 请求成功

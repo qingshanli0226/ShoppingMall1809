@@ -46,7 +46,7 @@ public class FindpayPresenter extends BasePresenter<IFindPayView> {
                     public void onNext(@NonNull FindForSendBean findForSendBean) {
                           if (mView!=null){
                               mView.onFindSend(findForSendBean);
-                              PaySendCacheManager.getInstance().setFindForSendBean(findForSendBean);
+                              PaySendCacheManager.getInstance().setFindForSendBean(findForSendBean.getResult());
 
                           }
                     }

@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="24"
-8-->E:\MyGitHub\1809Ecommerce\ShoppingMall1809\common\src\main\AndroidManifest.xml
+8-->D:\1809A\one\ShoppingMall1809\common\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->E:\MyGitHub\1809Ecommerce\ShoppingMall1809\common\src\main\AndroidManifest.xml
+9-->D:\1809A\one\ShoppingMall1809\common\src\main\AndroidManifest.xml
 10
 11</manifest>
