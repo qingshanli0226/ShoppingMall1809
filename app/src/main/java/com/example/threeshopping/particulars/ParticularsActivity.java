@@ -43,7 +43,10 @@ import com.example.threeshopping.particulars.detail.IDetailView;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.bean.SqlBean;
 import com.fiannce.sql.manager.SqlManager;
-
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -291,33 +294,33 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             public void onClick(View v) {
                 popupWindow.dismiss();
                 //分享
-//        UMImage image = new UMImage(this, pic);//网络图片
-//        new ShareAction(this)
-//                .withText("hello")
-//                .withMedia(image)
-//                .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
-//                .setCallback(new UMShareListener() {
-//                    @Override
-//                    public void onStart(SHARE_MEDIA share_media) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResult(SHARE_MEDIA share_media) {
-//                        Toast.makeText(ParticularsActivity.this, "成功", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-//                        Toast.makeText(ParticularsActivity.this, ""+throwable, Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancel(SHARE_MEDIA share_media) {
-//
-//                    }
-//                }).open();
+                UMImage image = new UMImage(ParticularsActivity.this, pic);//网络图片
+                new ShareAction(ParticularsActivity.this)
+                        .withText("hello")
+                        .withMedia(image)
+                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+                                Toast.makeText(ParticularsActivity.this, "成功", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                Toast.makeText(ParticularsActivity.this, ""+throwable, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+
+                            }
+                        }).open();
 
             }
         });
@@ -325,6 +328,8 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                CommonArouter.getInstance().build(Constants.PATH_LIVE).navigation();
+
 
             }
         });
@@ -489,8 +494,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
 
                     float percent = animatedValue / pathMeasure.getLength();
                     imageView.setAlpha(1 - percent);
-
-
                 }
             });
 

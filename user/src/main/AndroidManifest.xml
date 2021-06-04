@@ -4,12 +4,10 @@
 
     <application>
         <activity android:name=".user.UserActivity"></activity>
-
         <service
             android:name=".service.AutoService"
             android:enabled="true"
             android:exported="true" />
-
     </application>
 
 </manifest>

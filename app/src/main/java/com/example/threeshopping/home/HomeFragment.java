@@ -13,6 +13,7 @@ import com.example.common.LogUtil;
 import com.example.common.SpUtil;
 import com.example.common.module.CommonArouter;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheAddrManager;
 import com.example.framework.manager.CacheHomeManager;
 import com.example.framework.manager.CacheMessageManager;
 import com.example.net.bean.EventBean;
@@ -67,13 +68,15 @@ public class HomeFragment extends BaseFragment implements CacheMessageManager.IM
         //添加数据
         homeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         ArrayList<Object> objects = new ArrayList<>();
+        if(CacheHomeManager.getInstance().getHomeBean() != null){
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getBanner_info());
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getAct_info());
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getSeckill_info());
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getRecommend_info());
+            objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getHot_info());
 
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getBanner_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getChannel_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getAct_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getSeckill_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getRecommend_info());
-        objects.add(CacheHomeManager.getInstance().getHomeBean().getResult().getHot_info());
+        }
 
         homeAdapter.getData().addAll(objects);
         homeRv.setAdapter(homeAdapter);

@@ -2,6 +2,7 @@ package com.example.threeshopping.personal;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
@@ -17,6 +18,7 @@ public class PersonalFragment extends BaseFragment {
     private ImageView message;
     private ImageView payment;
     private ImageView shipments;
+    private LinearLayout personAddr;
 
     @Override
     protected int getLayoutId() {
@@ -29,6 +31,7 @@ public class PersonalFragment extends BaseFragment {
         message = (ImageView) rootView.findViewById(R.id.message);//消息
         payment = (ImageView) rootView.findViewById(R.id.payment);//待付款
         shipments = (ImageView) rootView.findViewById(R.id.shipments);//待发货
+        personAddr = (LinearLayout) findViewById(R.id.personAddr);
     }
 
     @Override
@@ -51,7 +54,13 @@ public class PersonalFragment extends BaseFragment {
                 CommonArouter.getInstance().build(Constants.PATH_SHIPMENTS).navigation();
             }
         });
-
+        //收获地址管理
+        personAddr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_ADDRMANAGER).navigation();
+            }
+        });
     }
 
     @Override

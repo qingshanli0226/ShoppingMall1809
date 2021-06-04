@@ -54,16 +54,10 @@
         android:layout_marginRight="@dimen/dm_dp_10"
         android:background="@color/gray"></View>
 
-    <Button
-        android:id="@+id/bind_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dm_dp_10"
-        android:background="@color/red"
-        android:text="@string/bindinfo_affirm_number"
-        android:textColor="@color/white"></Button>
 
-    <FrameLayout
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -86,19 +80,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dm_dp_50"
                 android:background="#00FFFFFF"
-                android:hint="@string/bindinfo_locationev"
-                android:password="true"></EditText>
+                android:hint="@string/bindinfo_locationev"></EditText>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dm_dp_10"
+            android:layout_marginRight="@dimen/dm_dp_10"
+            android:background="@color/white">
 
-    </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dm_dp_50"
+                android:padding="@dimen/dm_dp_10"
+                android:text="@string/bindinfo_setDefault_addr"
+                android:textSize="@dimen/dm_dp_20"></TextView>
+            <CheckBox
+                android:id="@+id/setDefault"
+                android:button="@null"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/toggle_off"
+                android:layout_width="@dimen/dm_dp_50"
+                android:layout_height="@dimen/dm_dp_50"/>
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/bind_location"
+        android:id="@+id/bindSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dm_dp_10"
         android:background="@color/red"
-        android:text="@string/bindinfo_affirm_location"
+        android:text="@string/bindinfo_save"
         android:textColor="@color/white"></Button>
 
     <TextView

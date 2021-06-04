@@ -4,11 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".video.VideoActivity">
+    android:orientation="vertical"
+    tools:context=".addrmanager.AddrManagerActivity">
     <com.example.framework.view.ToolBar
-        android:visibility="gone"
         android:id="@+id/toolbar"
+        app:app_text="地址信息"
+        app:app_back_color_toob="@color/white"
+        app:app_right_isshow="true"
+        app:app_right_src="@drawable/my_reward_manage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addrRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

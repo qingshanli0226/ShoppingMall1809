@@ -8,9 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.fiannce.sql.bean.AddrBean;
 import com.fiannce.sql.bean.MessageBean;
 import com.fiannce.sql.bean.SqlBean;
 
+import com.fiannce.sql.AddrBeanDao;
 import com.fiannce.sql.MessageBeanDao;
 import com.fiannce.sql.SqlBeanDao;
 
@@ -23,9 +25,11 @@ import com.fiannce.sql.SqlBeanDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig addrBeanDaoConfig;
     private final DaoConfig messageBeanDaoConfig;
     private final DaoConfig sqlBeanDaoConfig;
 
+    private final AddrBeanDao addrBeanDao;
     private final MessageBeanDao messageBeanDao;
     private final SqlBeanDao sqlBeanDao;
 
@@ -33,22 +37,32 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        addrBeanDaoConfig = daoConfigMap.get(AddrBeanDao.class).clone();
+        addrBeanDaoConfig.initIdentityScope(type);
+
         messageBeanDaoConfig = daoConfigMap.get(MessageBeanDao.class).clone();
         messageBeanDaoConfig.initIdentityScope(type);
 
         sqlBeanDaoConfig = daoConfigMap.get(SqlBeanDao.class).clone();
         sqlBeanDaoConfig.initIdentityScope(type);
 
+        addrBeanDao = new AddrBeanDao(addrBeanDaoConfig, this);
         messageBeanDao = new MessageBeanDao(messageBeanDaoConfig, this);
         sqlBeanDao = new SqlBeanDao(sqlBeanDaoConfig, this);
 
+        registerDao(AddrBean.class, addrBeanDao);
         registerDao(MessageBean.class, messageBeanDao);
         registerDao(SqlBean.class, sqlBeanDao);
     }
     
     public void clear() {
+        addrBeanDaoConfig.clearIdentityScope();
         messageBeanDaoConfig.clearIdentityScope();
         sqlBeanDaoConfig.clearIdentityScope();
+    }
+
+    public AddrBeanDao getAddrBeanDao() {
+        return addrBeanDao;
     }
 
     public MessageBeanDao getMessageBeanDao() {

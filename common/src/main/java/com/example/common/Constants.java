@@ -84,6 +84,8 @@ public class Constants {
     public static final String PATH_PARTICULARS = "/app/ParticularsActivity";
     //详情
     public static final String PATH_SHOPACTIVITY = "/app/ShopActivity";
+    //地址管理页面
+    public static final String PATH_ADDRMANAGER = "/app/AddrManagerActivity";
     //绑定页面
     public static final String PATH_BIND = "/app/BindInfoActivity";
     //信息
@@ -99,10 +101,9 @@ public class Constants {
     //用户
     public static final String PATH_USER = "/user/UserActivity";
 
-    //用户
     public static final String PATH_LIVE = "/live/LiveActivity";
-    //用户
     public static final String PATH_VIDEO = "/Video/VideoActivity";
+    public static final String PATH_PUSH_LIVE = "/Video/PushLiveActivity";
 
     public static final String SP_TOKEN = "token";
     public static final String SP_READ_NUM = "num";
@@ -170,6 +171,11 @@ public class Constants {
 
     //支付宝判断
     public static final int PAY_SDK_FLAG = 0;
+    //默认地址
+    public static final String DEFAULT_ADDR = "defaultAddr";
+    public static final String ADD_ADDR = "addAddr";
+    public static final String PHONE_ADDR = "phoneAddr";
+    public static final String FLAG_ADDR = "flag";
 
 
 }

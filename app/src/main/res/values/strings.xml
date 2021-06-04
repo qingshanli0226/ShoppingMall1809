@@ -44,7 +44,9 @@
     <string name="bindinfo_affirm_number">确认绑定电话号</string>
     <string name="bindinfo_locationtv">地址</string>
     <string name="bindinfo_locationev">请输入地址</string>
-    <string name="bindinfo_affirm_location">确认绑定地址</string>
+    <string name="bindinfo_setDefault_addr">设置默认地址</string>
+    <string name="bindinfo_save">保存</string>
     <string name="bindinfo_affirm">点击确认，表示同意《尚硅谷用户协议》</string>
+    <string name="cart_walk">逛一逛</string>
 
 </resources>

@@ -161,4 +161,10 @@ public class ClassifyFragment extends BaseFragment<ClassPrensenter> implements I
     public void showError(String error) {
         loadPage.showErrorText(error);
     }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
+
+    }
 }

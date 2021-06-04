@@ -48,7 +48,6 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                 String result = payResult.getResult();
                 String resultStatus = payResult.getResultStatus();
                 if(TextUtils.equals(resultStatus,"9000")){
-                    Toast.makeText(PaymentActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
                     bundle.putInt("page",4);
                     CommonArouter.getInstance().build(Constants.PATH_MAIN).with(bundle).navigation();
@@ -56,7 +55,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                     payCheckBean.setOutTradeNo(outTradeNo);
                     payCheckBean.setResult(orderInfo);
                     payCheckBean.setClientPayResult(true);
-                    mPresenter.checkNumAll(payCheckBean);
+                    mPresenter.configPayCheck(payCheckBean);
 
                     //信息
                     MessageBean messageBean = new MessageBean();
@@ -77,7 +76,7 @@ public class PaymentActivity extends BaseActivity<PayMentPresenter> implements I
                         payCheckBean.setOutTradeNo(outTradeNo);
                         payCheckBean.setResult(orderInfo);
                         payCheckBean.setClientPayResult(false);
-                        mPresenter.checkNumAll(payCheckBean);
+                        mPresenter.configPayCheck(payCheckBean);
                         //信息
                         MessageBean messageBean = new MessageBean();
                         messageBean.setId(null);

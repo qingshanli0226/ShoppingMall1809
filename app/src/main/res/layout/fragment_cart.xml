@@ -1,122 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".home.HomeFragment">
-    <com.example.framework.view.ToolBar
-        android:visibility="gone"
-        android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <RelativeLayout
+
+    <LinearLayout
+        android:id="@+id/cartLinear"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.example.framework.view.ToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="购物车"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dm_dp_30"></TextView>
+
+            <CheckBox
+                android:id="@+id/checkcompile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:button="@null"
+                android:gravity="center"
+                android:text="编辑"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dm_dp_15"></CheckBox>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartRv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"></androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkpayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:button="@null"
+                android:drawableLeft="@drawable/cart_select_check"
+                android:text="全选"></CheckBox>
+
+            <LinearLayout
+                android:id="@+id/cartLLfinish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/cartdelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_40"
+                    android:background="@drawable/cartdeletebroder"
+                    android:text="删除"></Button>
+
+                <Button
+                    android:id="@+id/cartcollect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_40"
+                    android:background="@drawable/carcollecttbroder"
+                    android:text="收藏"
+                    android:textColor="@color/red"></Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cartLLpayment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dm_dp_20"
+                    android:text="合计："
+                    android:textColor="@color/black"></TextView>
+
+                <TextView
+                    android:id="@+id/paymentprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dm_dp_100"
+                    android:text="￥0.0"
+                    android:textColor="@color/red"></TextView>
+
+                <Button
+                    android:id="@+id/payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dm_dp_40"
+                    android:background="@color/red"
+                    android:text="去结算"
+                    android:textColor="@color/white"></Button>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/cartError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dm_dp_150"
+            android:layout_height="@dimen/dm_dp_150"
+            android:layout_centerInParent="true"
+            android:src="@drawable/atguigu_logo"></ImageView>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="购物车"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textSize="@dimen/dm_dp_30"
-            ></TextView>
-
-        <CheckBox
-            android:id="@+id/checkcompile"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="编辑"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:button="@null"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/dm_dp_15"
-            ></CheckBox>
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dm_dp_500"
+            android:text="@string/cart_walk"></TextView>
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cartRv"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        ></androidx.recyclerview.widget.RecyclerView>
-    <LinearLayout
-        android:id="@+id/cartLLfinish"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="gone">
-        <CheckBox
-            android:id="@+id/checkdelete"
-            android:layout_width="@dimen/dm_dp_200"
-            android:layout_height="match_parent"
-            android:text="全选"
-            android:button="@null"
-            android:drawableLeft="@drawable/cart_select_check"
-            ></CheckBox>
 
-            <Button
-                android:id="@+id/cartdelete"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_40"
-                android:text="删除"
-                android:background="@drawable/cartdeletebroder"
-                ></Button>
-            <Button
-                android:id="@+id/cartcollect"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dm_dp_40"
-                android:text="收藏"
-                android:textColor="@color/red"
-                android:background="@drawable/carcollecttbroder"
-                ></Button>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/cartLLpayment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-        <CheckBox
-            android:id="@+id/checkpayment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="全选"
-            android:button="@null"
-            android:drawableLeft="@drawable/cart_select_check"
-            ></CheckBox>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="合计："
-            android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/dm_dp_20"
-            ></TextView>
-
-        <TextView
-            android:id="@+id/paymentprice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="￥0.0"
-            android:textColor="@color/red"
-            android:layout_marginRight="@dimen/dm_dp_100"
-            ></TextView>
-
-        <Button
-            android:id="@+id/payment"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dm_dp_40"
-            android:text="去结算"
-            android:textColor="@color/white"
-            android:background="@color/red"
-            ></Button>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

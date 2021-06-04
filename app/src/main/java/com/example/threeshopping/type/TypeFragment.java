@@ -73,6 +73,7 @@ public class TypeFragment extends BaseFragment {
                 }
             }
         });
+
     }
 
     private void showFragment(int position) {

@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     private CheckBox checkcompile;
     private RecyclerView cartRv;
     private LinearLayout cartLLfinish;
-    private CheckBox checkdelete;
     private Button cartdelete;
     private Button cartcollect;
     private LinearLayout cartLLpayment;
@@ -52,6 +52,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     private CartAdapter cartAdapter;
     private boolean isAll = false;
     private PayBean payBean;
+    private RelativeLayout cartError;
+    private LinearLayout cartLinear;
 
     @Override
     protected int getLayoutId() {
@@ -64,13 +66,14 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         checkcompile = (CheckBox) findViewById(R.id.checkcompile);
         cartRv = (RecyclerView) findViewById(R.id.cartRv);
         cartLLfinish = (LinearLayout) findViewById(R.id.cartLLfinish);
-        checkdelete = (CheckBox) findViewById(R.id.checkdelete);
         cartdelete = (Button) findViewById(R.id.cartdelete);
         cartcollect = (Button) findViewById(R.id.cartcollect);
         cartLLpayment = (LinearLayout) findViewById(R.id.cartLLpayment);
         checkpayment = (CheckBox) findViewById(R.id.checkpayment);
         paymentprice = (TextView) findViewById(R.id.paymentprice);
         payment = (Button) findViewById(R.id.payment);
+        cartError = (RelativeLayout) findViewById(R.id.cartError);
+        cartLinear = (LinearLayout) findViewById(R.id.cartLinear);
     }
 
     @Override
@@ -101,7 +104,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         //注册
         CacheShopManager.getInstance().registerCart(this);
         carts = CacheShopManager.getInstance().getCarts();
-
+        isLayoutShow(carts);
         //获取数据
         cartAdapter = new CartAdapter();
         if (carts != null) {
@@ -171,13 +174,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 mPresenter.selectAll(isAll);
             }
         });
-        //编辑全选
-        checkdelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
         //删除
@@ -211,23 +207,20 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                                 cartAdapter.getData().get(i).getProductId(),
                                 cartAdapter.getData().get(i).getProductNum(),
                                 cartAdapter.getData().get(i).getUrl(),
-                                cartAdapter.getData().get(i).getProductPrice()+""));
+                                cartAdapter.getData().get(i).getProductPrice() + ""));
                     }
                 }
                 LoginBean.ResultBean result = CacheUserManager.getInstance().getLoginBean().getResult();
-                LogUtil.d("zyb"+result.getPhone()+"   "+result.getAddress());
+                LogUtil.d("zyb" + result.getPhone() + "   " + result.getAddress());
                 //判断是否选中
                 if (body.size() >= 1) {
                     //选中一个
                     //判断是否绑定信息
-                    if(result.getPhone() != null && result.getAddress() !=null ){
-
+                    if (result.getPhone() != null && result.getAddress() != null) {
                         mPresenter.checkNumAll(body);
-
-
-                    } else{
+                    } else {
                         //跳转绑定页面
-                        CommonArouter.getInstance().build(Constants.PATH_BIND).navigation();
+                        CommonArouter.getInstance().build(Constants.PATH_ADDRMANAGER).navigation();
                         getActivity().finish();
                     }
                 } else {
@@ -289,10 +282,21 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void onShowCart(List<CartBean.ResultBean> carts) {
         this.carts = carts;
         cartAdapter.updata(carts);
-        EventBean eventBean = new EventBean(1,1,"小红点");
+        EventBean eventBean = new EventBean(1, 1, "小红点");
         EventBus.getDefault().post(eventBean);
         //判断是否全选
         isCheck();
+        isLayoutShow(cartAdapter.getData());
+    }
+
+    private void isLayoutShow(List<CartBean.ResultBean> data) {
+        if (data.size() <= 0) {
+            cartError.setVisibility(View.VISIBLE);
+            cartLinear.setVisibility(View.GONE);
+        } else {
+            cartError.setVisibility(View.GONE);
+            cartLinear.setVisibility(View.VISIBLE);
+        }
     }
 
     //单选
@@ -351,7 +355,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     @Override
     public void onNum(int position) {
         cartAdapter.notifyItemChanged(position);
-
         //更改价格
         priceCount();
 
@@ -363,11 +366,14 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
         cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
         //再次更新小远点
-        EventBean eventBean = new EventBean(1,1,"小红点");
+        EventBean eventBean = new EventBean(1, 1, "小红点");
         EventBus.getDefault().post(eventBean);
         //判断是否全选
         isCheck();
+        isLayoutShow(cartAdapter.getData());
+
     }
+
     @Override
     public void onCheckNumAll(CheckNumAll checkNumAll) {
         Bundle bundle = new Bundle();
@@ -387,6 +393,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
             cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
             cartAdapter.notifyItemChanged(position);
         }
+        isLayoutShow(cartAdapter.getData());
+
 
     }
 

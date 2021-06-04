@@ -8,8 +8,6 @@
         <activity android:name=".payment.PaymentActivity" />
         <activity android:name=".awaitpayment.AwaitPaymentActivity" />
         <activity android:name=".shipments.ShipmentsActivity" />
-
-
     </application>
 
 </manifest>

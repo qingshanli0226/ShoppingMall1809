@@ -25,8 +25,8 @@ public class PayMentPresenter extends BasePresenter<IPaymentView> {
         attchView(paymentView);
     }
 
-    //查询全部数量
-    public void checkNumAll(PayCheckBean payCheckBean){
+    //修改
+    public void configPayCheck(PayCheckBean payCheckBean){
         String s = new Gson().toJson(payCheckBean);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, s);

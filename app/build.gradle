@@ -16,6 +16,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //直播
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"
+        }
         //激光推送
 //        ndk {
 //            //选择要添加的对应 cpu 类型的 .so 库。
@@ -55,6 +59,8 @@ dependencies {
 //    implementation 'com.umeng.umsdk:common:1.5.4'
     //PushSDK
     implementation 'com.umeng.umsdk:push:6.0.1'
+    //直播
+    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
 
 
 
@@ -73,6 +79,10 @@ dependencies {
     implementation project(path: ':message')
     implementation project(path: ':sql')
     implementation files('libs\\umeng-common-2.1.0.jar')
+    implementation files('libs\\umeng-share-core-6.9.6.jar')
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs\\umeng-sharetool-6.9.6.jar')
 
 
     testImplementation 'junit:junit:4.+'
@@ -81,7 +91,7 @@ dependencies {
 
     implementation 'me.jessyan:autosize:1.2.1'
 
-
-    compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation project(path: ':live')
 }

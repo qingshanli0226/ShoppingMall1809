@@ -52,7 +52,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
         ActManager.getActManager().register(this);
 
-        CacheShopManager.getInstance().addActivity(this);
+
 
         CacheConnectManager.getInstance().registerConnectListener(this);
 
@@ -96,7 +96,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
         CacheUserManager.getInstance().unregisterLogin(this);
         ActManager.getActManager().unRegister(this);
-        CacheShopManager.getInstance().removeActivity(this);
         CacheConnectManager.getInstance().unregisterConnectListener(this);
     }
 

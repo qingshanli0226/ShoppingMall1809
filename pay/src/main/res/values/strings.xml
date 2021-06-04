@@ -26,4 +26,6 @@
     <string name="order_onlinepayment">在线支付</string>
     <string name="order_commit">提交订单</string>
     <string name="order_symbol">￥</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_failed">支付失败</string>
 </resources>
