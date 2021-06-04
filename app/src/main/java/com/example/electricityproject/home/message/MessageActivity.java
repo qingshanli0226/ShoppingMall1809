@@ -13,7 +13,7 @@ import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
-import com.example.manager.SPMessageNum;
+import com.example.manager.MessageManager;
 import com.example.view.ToolBar;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
     @Override
     protected void initData() {
 
-        messageTables=MessageDataBase.getInstance().payLoadAll();
+        messageTables= MessageManager.getInstance().getMessageTableList();
         messageRv.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter();
         messageAdapter.updateData(messageTables);
@@ -60,6 +60,8 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
             public void OnItemClick(int position) {
                 //更改数据库
                 MessageDataBase.getInstance().payUpdate(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
+                //缓存数据修改
+                MessageManager.getInstance().UpdateMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
                 messageTables.get(position).setIsShow(true);
                 messageAdapter.notifyItemChanged(position);
                 Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
@@ -74,10 +76,12 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
                 builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //数据库数量减一
-                        SPMessageNum.getInstance().subShopNum(1);
+//                        //数据库数量减一
+//                        SPMessageNum.getInstance().subShopNum(1);
                         //把当前点击的数据，从数据库中删除
                         MessageDataBase.getInstance().payRemove(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
+                        //缓存数据删除
+                        MessageManager.getInstance().removeMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
 
                         dialog.dismiss();
 
@@ -139,7 +143,7 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
     @Override
     public void onMessageNumListener() {
 
-        messageAdapter.updateData(MessageDataBase.getInstance().payLoadAll());
+        messageAdapter.updateData(MessageManager.getInstance().getMessageTableList());
         messageAdapter.notifyDataSetChanged();
 
     }

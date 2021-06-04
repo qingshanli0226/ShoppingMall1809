@@ -283,6 +283,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         if (!isSend) {
+            isSend=true;
             //数据库数量加一
             SPMessageNum.getInstance().addShopNum(1);
             MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享成功", System.currentTimeMillis(), false));
@@ -300,13 +301,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                isSend=false;
                 UMImage image = new UMImage(DetailsActivity.this, Constants.BASE_URl_IMAGE+img);//网络图片
                 new ShareAction(DetailsActivity.this).withMedia(image).withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
-                                Toast.makeText(DetailsActivity.this, "开始", Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -320,16 +320,24 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
                                 Toast.makeText(DetailsActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (!isSend){
+                                    isSend=true;
+                                    SPMessageNum.getInstance().addShopNum(1);
+                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
 
+                                }
                             }
 
                             @Override
                             public void onCancel(SHARE_MEDIA share_media) {
-                                isSend=true;
-                                //数据库数量加一
-                                SPMessageNum.getInstance().addShopNum(1);
+                                if (!isSend){
+                                    isSend=true;
+                                    //数据库数量加一
+                                    SPMessageNum.getInstance().addShopNum(1);
 
-                                MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败",System.currentTimeMillis(),false));
+                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 用户已取消",System.currentTimeMillis(),false));
+                                }
+
                             }
                         }).open();
 

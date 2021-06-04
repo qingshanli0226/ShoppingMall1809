@@ -3,7 +3,6 @@ package com.example.manager;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.common.LogUtils;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.LogBean;
@@ -146,6 +145,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         if (isLog!=null){
             requestShortProductData();
             getDropShipment();
+            getForPayData();
         }
     }
 
@@ -286,7 +286,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        LogUtils.i(""+shortcartProductBean.getResult().toString());
                         List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                         ShopCacheManger.getInstance().setShortBeanList(result);
                     }
@@ -317,7 +316,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                     @Override
                     public void onNext(@NonNull FindForSendBean findForSendBean) {
                         if (findForSendBean.getCode().equals("200")){
-                            Log.i("zx", "onNext: "+findForSendBean.toString());
                             setFindShopList(findForSendBean.getResult());
                         }
                     }

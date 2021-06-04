@@ -9,16 +9,17 @@ public class SinatvActivity extends BaseActivity {
 
     private com.example.view.ToolBar toolbar;
 //    private com.tencent.rtmp.ui.TXCloudVideoView videoView;
+//    private TXLivePlayer mLivePlayer;
 
     @Override
     protected void initData() {
 
-//        TXLivePlayer mLivePlayer = new TXLivePlayer(this);
-//关键 player 对象与界面 view
+//         mLivePlayer = new TXLivePlayer(this);
+////关键 player 对象与界面 view
 //        mLivePlayer.setPlayerView(videoView);
 
 
-        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv9hd.m3u8";
+//        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv9hd.m3u8";
 //        mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_FLV); //推荐 FLV
 
     }
@@ -56,10 +57,10 @@ public class SinatvActivity extends BaseActivity {
 
 
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 //        mLivePlayer.stopPlay(true); // true 代表清除最后一帧画面
-//        mView.onDestroy();
-//    }
+//        videoView.onDestroy();
+    }
 }

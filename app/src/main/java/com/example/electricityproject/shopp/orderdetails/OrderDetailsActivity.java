@@ -17,13 +17,14 @@ import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.example.common.bean.ConfirmServerPayResultBean;
 import com.example.common.bean.FindForPayBean;
+import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.SelectOrderBean;
 import com.example.common.db.DaoMaster;
 import com.example.common.db.MessageDataBase;
 import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.framework.BaseActivity;
-import com.example.manager.SPMessageNum;
+import com.example.manager.MessageManager;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.PayResult;
 import com.example.view.ToolBar;
@@ -74,7 +75,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     public void onLeftClick() {
         super.onLeftClick();
         Toast.makeText(OrderDetailsActivity.this, "返回", Toast.LENGTH_SHORT).show();
-        Toast.makeText(OrderDetailsActivity.this, ""+list.toString(), Toast.LENGTH_SHORT).show();
+        list.clear();
+        finish();
     }
 
     @SuppressLint("HandlerLeak")
@@ -93,25 +95,21 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         payMsg="支付成功";
                         Toast.makeText(OrderDetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 
-                        FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
-                        resultBean.setOrderInfo(orderInfo);
+                        FindForSendBean.ResultBean resultBean = new FindForSendBean.ResultBean();
                         resultBean.setTradeNo(outTradeNo);
                         resultBean.setTime(System.currentTimeMillis()+"");
                         resultBean.setStatus(payMsg);
-                        List<FindForPayBean.ResultBean> paySussList = ShopCacheManger.getInstance().getPaySussList();
-                        ShopCacheManger.getInstance().addFindPay(resultBean);
-                        //添加到支付成功缓存
-                        paySussList.add(resultBean);
+                        ShopCacheManger.getInstance().addFindShop(resultBean);
 
-                        //添加到消息缓存
-                        ShopCacheManger.getInstance().setMessageList(paySussList);
-
-                        //数据库数量加一
-                        SPMessageNum.getInstance().addShopNum(1);
+//                        //数据库数量加一
+//                        SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
                         MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
-
+                        //缓存数据添加
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                         EventBus.getDefault().post("del");
+
+
 
                     } else {
                         payMsg="支付失败";
@@ -124,7 +122,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setTime(System.currentTimeMillis()+"");
                         resultBean.setStatus(payMsg);
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
-
+                        ShopCacheManger.getInstance().addFindPay(resultBean);
 
                         //添加到支付成功缓存
                         payFailList.add(resultBean);
@@ -132,15 +130,14 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         //添加到消息缓存
                         ShopCacheManger.getInstance().setMessageList(payFailList);
 
-                        //数据库数量加一
-                        SPMessageNum.getInstance().addShopNum(1);
+//                        //数据库数量加一
+//                        SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
-                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+                        //缓存数据添加
+                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
 
-
-                        EventBus.getDefault().postSticky("del");
-
-
+                        EventBus.getDefault().post("del");
 
                     }
                     break;
@@ -153,6 +150,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
     @Override
     protected void initData() {
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
         String address = intent.getStringExtra("address");
@@ -164,7 +162,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         userPhone.setText("手机号:"+phone);
         userAddress.setText("地址:"+address);
 
-        list = ShopCacheManger.getInstance().getList();
+
 
         float sumPrice=0;
         for (SelectOrderBean selectOrderBean : list) {
@@ -193,6 +191,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
 
     @Override
     protected void initView() {
+
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         username = (TextView) findViewById(R.id.username);
         userPhone = (TextView) findViewById(R.id.user_phone);
@@ -202,6 +201,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         productPrice = (TextView) findViewById(R.id.product_price);
         orderRv.setLayoutManager(new LinearLayoutManager(this));
         goBuy = (Button) findViewById(R.id.go_buy);
+
+        list = ShopCacheManger.getInstance().getList();
+
         EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         MessageDataBase.getInstance().register(this);
 
@@ -244,6 +246,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     protected void onDestroy() {
         super.onDestroy();
         MessageDataBase.getInstance().unregister(this);
-        list.clear();
+        ShopCacheManger.getInstance().setList(null);
+
     }
 }

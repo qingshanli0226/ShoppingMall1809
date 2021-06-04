@@ -61,7 +61,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 //                    runOnUiThread(new Runnable() {
 //                        @Override
 //                        public void run() {
-//                            Toast.makeText(BaseActivity.this, ""+value, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
 //                        }
 //                    });
 //                }
@@ -69,6 +69,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 //            }
 //        };
 //        UMutlis.getInstance().getPushAgent().setMessageHandler(messageHandler);
+
     }
 
     protected abstract void initData();

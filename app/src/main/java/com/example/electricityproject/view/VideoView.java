@@ -12,7 +12,6 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MediaPlayer mediaPlayer;
 
-
     //播放地址
     public void setData(String path){
         if (mediaPlayer!=null){
@@ -83,7 +82,7 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback {
 
             String current="";
             if (minute<10){
-                current +="0"+minute+"";
+                current +="0"+minute+":";
             }else {
                 current +=minute+"";
             }
@@ -108,7 +107,7 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback {
 
            String duration="";
            if (minute<10){
-               duration +="0"+minute+"";
+               duration +="0"+minute+":";
            }else {
                duration +=minute+"";
            }

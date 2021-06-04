@@ -17,7 +17,7 @@ import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.R;
 import com.example.electricityproject.home.message.MessageActivity;
 import com.example.framework.BaseFragment;
-import com.example.manager.SPMessageNum;
+import com.example.manager.MessageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +64,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
 
         homeAdapter = new HomeAdapter();
         MessageDataBase.getInstance().register(this);
+
         //把数据库的数量写到 unreadMessageNum
-        unreadMessageNum.setText(SPMessageNum.getInstance().queryMessageNum(getContext())+"");
+        unreadMessageNum.setText(MessageManager.getInstance().getMessageTableList().size()+"");
 
 
     }
@@ -140,8 +141,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
     @Override
     public void onMessageNumListener() {
 
-        unreadMessageNum.setText( SPMessageNum.getInstance().getShopNum()+"");
-
+        unreadMessageNum.setText(MessageManager.getInstance().getMessageTableList().size() +1+"");
     }
 
 

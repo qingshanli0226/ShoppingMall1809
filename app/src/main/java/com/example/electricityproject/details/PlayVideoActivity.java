@@ -1,6 +1,8 @@
 package com.example.electricityproject.details;
 
+import android.content.pm.ActivityInfo;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class PlayVideoActivity extends BaseActivity {
     private TextView tvCurrent;
     private SeekBar bar;
     private TextView tvDuration;
+
 
     @Override
     protected void initData() {
@@ -67,7 +70,28 @@ public class PlayVideoActivity extends BaseActivity {
 
              }
          });
+         tvFull.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 int width = getWindow().getDecorView().getWidth();
+                 int height = getWindow().getDecorView().getHeight();
+                 if (height>width){//竖屏切换成横屏
+                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                     //修改相对布局高度
+                     ViewGroup.LayoutParams layoutParams = re.getLayoutParams();
+                     layoutParams.height=ViewGroup.LayoutParams.MATCH_PARENT;
+                     re.setLayoutParams(layoutParams);
+                 }else {
+                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                     //修改相对布局高度
+                     ViewGroup.LayoutParams layoutParams = re.getLayoutParams();
+                     layoutParams.height=700;
+                     re.setLayoutParams(layoutParams);
+                 }
+             }
+         });
     }
+
 
     @Override
     protected void initPresenter() {
@@ -103,5 +127,11 @@ public class PlayVideoActivity extends BaseActivity {
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
     }
 }

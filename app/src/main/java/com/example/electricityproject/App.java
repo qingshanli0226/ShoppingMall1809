@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.common.NetModel;
-import com.example.common.UMutlis;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
 import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
@@ -34,9 +33,10 @@ public class App extends Application {
         PayModel.init();
         //项目开始前把友盟数据信息从数据库中保存到缓存类中
 
+        //信息数据库
+        MessageDataBase.getInstance().init(this);
         //创建数据库
         DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
-
 
         //错误框架
 //        ShopmallCrashHandler.getInstance().init(this);
@@ -50,8 +50,7 @@ public class App extends Application {
         //网络连接初始化
         BusinessNetManager.getInstance().init(this);
 
-        //数据库
-        MessageDataBase.getInstance().init(this);
+
 
         //查询数据库 把数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);
@@ -68,8 +67,7 @@ public class App extends Application {
         UMConfigure.init(this, "60b75be07825f22147696d55", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "55e79a9aed800a28bc2d246014ac345b");
         //获取消息推送代理示例
         //注册推送服务，每次调用register方法都会回调该接口
-
-        UMutlis.getInstance().getPushAgent().register(new IUmengRegisterCallback() {
+        mPushAgent.register(new IUmengRegisterCallback() {
 
             @Override
             public void onSuccess(String deviceToken) {
@@ -82,6 +80,7 @@ public class App extends Application {
                 Log.e("zx","注册失败：-------->  " + "s:" + s + ",s1:" + s1);
             }
         });
+
 
 //        UMConfigure.init(this,"60b622d96c421a3d97d78a5b"
 //                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"469add7072c102fc925c742f7277e61d");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0

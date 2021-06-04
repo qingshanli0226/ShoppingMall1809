@@ -22,8 +22,6 @@ public class DropShipmentActivity extends BaseActivity implements ShopCacheMange
     @Override
     protected void initData() {
 
-
-
         toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
             @Override
             public void onLeftClick() {

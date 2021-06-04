@@ -47,7 +47,7 @@
             android:required="false" />
 
         <activity android:name=".advert.AdvertActivity" />
-        <activity android:name=".details.PlayVideoActivity" />
+        <activity android:name=".details.PlayVideoActivity" android:configChanges="orientation|screenSize|keyboard"/>
         <activity android:name=".home.message.MessageActivity" />
         <activity android:name=".person.dropshipment.DropShipmentActivity" />
         <activity android:name=".shopp.orderdetails.OrderDetailsActivity" />
