@@ -45,4 +45,10 @@ public class StreamingActivity extends BaseActivity {
 //关键 player 对象与界面 view
         mLivePlayer.setPlayerView(mView);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLivePlayer.stopPlay(true);
+    }
 }

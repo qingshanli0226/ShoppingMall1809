@@ -42,15 +42,20 @@ public class MessageActivity extends BaseActivity  {
         messageAdapter.setRecyclerItemClickListener(new BaseRVAdapter.IRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(MessageActivity.this, getResources().getString(R.string.confirmedMessage), Toast.LENGTH_SHORT).show();
-
                 MessageTable messageTable = message.get(position);
-                messageTable.setIsRead(false);
 
-                MessageManager.getInstance().subCount();
-                MessageManager.getInstance().upDataMessage(messageTable);
+                if (messageTable.getIsRead()){
+                    messageTable.setIsRead(false);
 
-                messageAdapter.notifyItemChanged(position);
+                    MessageManager.getInstance().subCount();
+                    MessageManager.getInstance().upDataMessage(messageTable);
+
+                    messageAdapter.notifyItemChanged(position);
+
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.confirmedMessage), Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
             }
 
             @Override
