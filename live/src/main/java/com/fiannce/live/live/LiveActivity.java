@@ -56,6 +56,7 @@ public class LiveActivity extends BaseActivity {
         pushLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 CommonArouter.getInstance().build(Constants.PATH_PUSH_LIVE).navigation();
             }
         });

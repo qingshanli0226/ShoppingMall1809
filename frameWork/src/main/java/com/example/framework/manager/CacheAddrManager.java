@@ -72,7 +72,22 @@ public class CacheAddrManager {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
+                int mPosition = -1;
+                for (int i = 0; i < addrBeans.size(); i++) {
+                    if(addrBeans.get(i).getIsDefault()){
+                        mPosition = i;
+                    }
+                }
+                //修改数据库
                 AddrBeanDao addrBeanDao = SqlManager.getInstance().getDaoSession().getAddrBeanDao();
+                //把默认去掉
+                if(mPosition != -1){
+                    AddrBean addrBean = addrBeans.get(mPosition);
+                    addrBean.setIsDefault(false);
+                    addrBeanDao.update(addrBean);
+                }
+
+
                 addrBeanDao.insert(addrBean);
                 //添加缓存
                 addrBeans.add(addrBean);
@@ -123,7 +138,6 @@ public class CacheAddrManager {
                         AddrBean addrBean = addrBeans.get(mPosition);
                         addrBean.setIsDefault(false);
                         addrBeanDao.update(addrBean);
-
                     }
 
                     //添加新默认

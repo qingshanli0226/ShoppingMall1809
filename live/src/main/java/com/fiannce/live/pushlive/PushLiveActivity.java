@@ -30,4 +30,9 @@ public class PushLiveActivity extends BaseActivity {
     public void initData() {
 
     }
+
+    @Override
+    public void onClickLeft() {
+        super.onClickLeft();
+    }
 }
