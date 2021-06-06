@@ -16,6 +16,7 @@ import com.example.common.Constants;
 import com.example.common.module.CommonArouter;
 import com.example.framework.manager.ActManager;
 
+import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheShopManager;
 import com.example.framework.manager.CacheUserManager;
@@ -145,6 +146,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public void onDisConnect() {
-
+        Toast.makeText(this, "网络开了会儿小差", Toast.LENGTH_SHORT).show();
     }
 }

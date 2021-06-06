@@ -26,6 +26,7 @@ public class ShipmentAdapter extends BaseRvAdapter<ShipmentBean.ResultBean> {
         TextView date = holder.getView(R.id.payment_date);
         TextView price = holder.getView(R.id.payment_price);
         TextView tradeNo = holder.getView(R.id.payment_tradeNo);
+
         String format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Long.parseLong(itemView.getTime()));
         date.setText(format);
         price.setText("￥"+itemView.getTotalPrice());

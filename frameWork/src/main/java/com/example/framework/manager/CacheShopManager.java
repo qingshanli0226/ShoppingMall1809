@@ -48,8 +48,21 @@ public class CacheShopManager {
 
     //购物车数据源
     private List<CartBean.ResultBean> carts = new ArrayList<>();
-
     private List<ICartChange> cartChanges = new LinkedList<>();
+
+
+    private List<Activity> activityList = new LinkedList<>();
+
+    public void addActivity(Activity activity){
+        activityList.add(activity);
+    }
+    public void removeActivity(Activity activity){
+        activityList.remove(activity);
+    }
+    public List<Activity> getActivityList(){
+        return activityList;
+    }
+
 
     public synchronized void registerCart(ICartChange iCartChange) {
         cartChanges.add(iCartChange);
@@ -149,12 +162,13 @@ public class CacheShopManager {
     //修改库存
     public synchronized void setNum(int position, String num) {
         carts.get(position).setProductNum(num);
-
     }
 
 
-    public void removeMany(boolean isOne, int position) {
-        if (isOne) {
+
+
+    public void removeMany(boolean isOne,int position) {
+        if(isOne){
             carts.remove(position);
             notifyRemoveProduct(position);
         } else {
@@ -182,8 +196,6 @@ public class CacheShopManager {
         void onRemoveProduct(int position);
     }
 
-    public void destory() {
-        CacheUserManager.getInstance().unregisterLogin(iUserChange);
-    }
+
 
 }

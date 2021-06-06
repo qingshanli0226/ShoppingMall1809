@@ -342,8 +342,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
             }
         });
         popupWindow.showAsDropDown(toolbar,0,0);
-
-
     }
 
     @Override
@@ -403,51 +401,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     public void onUserChange(LoginBean loginBean) {
         super.onUserChange(loginBean);
         this.loginBean = loginBean;
-    }
-
-
-    private void showBezierAnim() {
-        ImageView imageView = new ImageView(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
-        imageView.setLayoutParams(layoutParams);
-//        imageView.setImageResource(R.drawable.main_cart);
-        Glide.with(this).load(pic).into(imageView);
-        rootview.addView(imageView);
-
-        int[] startLoacation = new int[2];
-        startLoacation[0] = 300;
-        startLoacation[1] = 300;
-        int[] endLoacation = new int[2];
-        endLoacation[0] = 800;
-        endLoacation[1] = 1800;
-        int[] controlLoacation = new int[2];
-        controlLoacation[0] = 0;
-        controlLoacation[1] = 500;
-        Path path = new Path();
-        path.moveTo(startLoacation[0], startLoacation[1]);
-
-        path.quadTo(controlLoacation[0], controlLoacation[1], endLoacation[0], endLoacation[1]);
-        PathMeasure pathMeasure = new PathMeasure(path, false);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, pathMeasure.getLength());
-            valueAnimator.setDuration(2 * 1000);
-            valueAnimator.setInterpolator(new LinearInterpolator());
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    float value = (float) animation.getAnimatedValue();
-                    float[] nextLocation = new float[2];
-                    pathMeasure.getPosTan(value, nextLocation, null);
-                    imageView.setTranslationX(nextLocation[0]);
-                    imageView.setTranslationY(nextLocation[1]);
-                    float percent = value / pathMeasure.getLength();
-                    imageView.setAlpha(1 - percent);
-                }
-            });
-            valueAnimator.start();
-        }
-
     }
 
     private void showAnima() {
