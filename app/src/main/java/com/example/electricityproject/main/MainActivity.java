@@ -26,7 +26,6 @@ import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 
@@ -89,7 +88,7 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                         break;
                     case R.id.btn_buycar:
                         //制造崩溃
-                        CrashReport.testJavaCrash();
+//                        CrashReport.testJavaCrash();
                         BeginTransaction(shoppingFragment, classifyFragment, findFragment, homeFragment, personFragment);
                         LogBean logBean = BusinessUserManager.getInstance().getIsLog();
                         if (logBean == null) {

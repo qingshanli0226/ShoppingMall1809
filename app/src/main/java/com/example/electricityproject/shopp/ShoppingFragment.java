@@ -203,7 +203,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
 
-
                 LogUtils.i(BusinessUserManager.getInstance().isBindAddress()+"");
                 LogUtils.i(BusinessUserManager.getInstance().isBindTel()+"");
                 if (BusinessUserManager.getInstance().isBindAddress() && BusinessUserManager.getInstance().isBindTel()){

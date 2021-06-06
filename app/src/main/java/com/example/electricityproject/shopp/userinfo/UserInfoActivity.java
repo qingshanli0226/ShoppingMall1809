@@ -85,7 +85,11 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
                 }
                 LogUtils.i(address+"");
                 LogUtils.i(phone+"");
-                httpPresenter.postUpdateAddressData(address);
+                if (address==null){
+                    Toast.makeText(UserInfoActivity.this, "发生了未知的问题,请重新尝试", Toast.LENGTH_SHORT).show();
+                }else {
+                    httpPresenter.postUpdateAddressData(address);
+                }
             }
         });
 

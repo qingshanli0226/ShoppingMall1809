@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.ShopCacheManger;
 
 public class AutoService extends Service implements BusinessUserManager.IUserLoginChanged{
 
@@ -32,6 +33,8 @@ public class AutoService extends Service implements BusinessUserManager.IUserLog
                             TokenSPUtility.putString(AutoService.this, logBean.getResult().getToken());
                             BusinessUserManager.getInstance().setIsLog(logBean);
                             BusinessUserManager.getInstance().setLogList(logBean.getResult());
+                            ShopCacheManger.getInstance().requestShortProductData();
+                            ShopCacheManger.getInstance().isBind(logBean);
                         } else {
                             Toast.makeText(AutoService.this, "" + logBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
