@@ -11,6 +11,13 @@ android {
     }
 
     defaultConfig {
+
+
+            ndk {
+                abiFilters "armeabi", "armeabi-v7a", "arm64-v8a","x86"
+            }
+
+
         applicationId "com.example.shoppingmallsix"
         minSdkVersion 22
         targetSdkVersion 30
@@ -22,11 +29,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-        ndk {
-            //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'arm64-v8a'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-        }
+
 
     }
     buildTypes {
@@ -35,11 +38,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
+
 
 
 dependencies {
@@ -81,11 +87,6 @@ dependencies {
     //QQ官方SDK依赖库
     implementation 'org.greenrobot:eventbus:3.1.1'
     //EventBus依赖
-
-
-
-
-
     //友盟Push相关依赖（必须）
     api 'com.umeng.umsdk:push:6.3.3'
     implementation 'com.umeng.umsdk:alicloud-httpdns:1.3.2.3'
@@ -95,14 +96,9 @@ dependencies {
     implementation 'com.umeng.umsdk:agoo_aranger:1.0.6'
     implementation 'com.umeng.umsdk:agoo_networksdk:3.5.8'
     implementation 'com.umeng.umsdk:agoo_tnet4android:3.1.14.10'
-
     //腾讯云直播
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
-
-
-
-    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
-    implementation 'com.tencent.bugly:crashreport:latest.release'
-
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
 
 }

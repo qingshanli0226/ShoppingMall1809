@@ -33,9 +33,9 @@ public class  App extends Application {
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
 
-        initTengxun();
+//        initTengxun();
 
-        ShopmallCrashHandler.getInstance().init(this);
+//        ShopmallCrashHandler.getInstance().init(this);
 
         UMConfigure.init(this, "604856545fc49d4ed0fb0923", "DEF", UMConfigure.DEVICE_TYPE_PHONE,
                 "f2646d397f5c26a26c21a35684039292");
@@ -72,7 +72,9 @@ public class  App extends Application {
       //  PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
 
 
-
+        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/28f36573e9db78430bc69687958ab95e/TXLiveSDK.licence"; // 获取到的 licence url
+        String licenceKey = "bbf386fe768708944d4ac619c19e5a08"; // 获取到的 licence key
+        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
         CacheManager.getInstance().init(this);
         MessageManager.getInstance().init(this);
 
@@ -80,11 +82,11 @@ public class  App extends Application {
 
     }
 
-    private void initTengxun(){
-        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/28f36573e9db78430bc69687958ab95e/TXLiveSDK.licence"; // 获取到的 licence url
-        String licenceKey = "bbf386fe768708944d4ac619c19e5a08"; // 获取到的 licence key
-        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
-    }
+//    private void initTengxun(){
+//        String licenceURL = "http://license.vod2.myqcloud.com/license/v1/28f36573e9db78430bc69687958ab95e/TXLiveSDK.licence"; // 获取到的 licence url
+//        String licenceKey = "bbf386fe768708944d4ac619c19e5a08"; // 获取到的 licence key
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+//    }
 
 
     /**
