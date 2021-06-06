@@ -2,7 +2,9 @@ package com.example.manager;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.common.LogUtils;
 import com.example.common.bean.FindForPayBean;
 import com.example.common.bean.FindForSendBean;
 import com.example.common.bean.LogBean;
@@ -156,7 +158,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     }
 
     public void setShortBeanList(List<ShortcartProductBean.ResultBean> shortBeanList) {
-
         this.shortBeanList = shortBeanList;
         ShopBeanNotify();
     }
@@ -286,8 +287,13 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
 
                     @Override
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
-                        List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-                        ShopCacheManger.getInstance().setShortBeanList(result);
+                        if (shortcartProductBean.getCode().equals("200")){
+                            List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
+                            ShopCacheManger.getInstance().setShortBeanList(result);
+                            LogUtils.i(shortcartProductBean.getResult().toString());
+                        }else {
+                            Toast.makeText(mContext, "没有拿到购物车数据", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -360,7 +366,16 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
 
                     }
                 });
+    }
 
+    //判断登录成功后的收货地址
+    public void isBind(LogBean logBean){
+        if (logBean!=null){
+            if (logBean.getResult().getAddress()!=null && logBean.getResult().getPhone()!=null){
+                BusinessUserManager.getInstance().setBindTel(true);
+                BusinessUserManager.getInstance().setBindAddress(true);
+            }
+        }
     }
 
 

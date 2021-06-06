@@ -46,7 +46,6 @@ public class App extends Application {
 
         ShopCacheManger.getInstance().init(this);
 
-
         //自动登录
         startService(new Intent(this, AutoService.class));
         //网络连接初始化

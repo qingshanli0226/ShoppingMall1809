@@ -8,12 +8,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.common.LogUtils;
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.framework.BaseActivity;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.ShopCacheManger;
 import com.example.user.R;
 import com.example.user.register.RegisterActivity;
 import com.example.view.ToolBar;
@@ -87,17 +87,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     public void onLoginData(LogBean logBean) {
         if (logBean.getCode().equals("200")){
+            //如果手动登录成功把当前token存入sp
+            TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
+
+            ShopCacheManger.getInstance().requestShortProductData();
             BusinessUserManager.getInstance().setLogList(logBean.getResult());
             BusinessUserManager.getInstance().setIsLog(logBean);
-            TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
-            if (logBean!=null){
-                LogUtils.i(logBean.getResult().getAddress()+"");
-                LogUtils.i(logBean.getResult().getPhone()+"");
-                if (logBean.getResult().getAddress()!=null && logBean.getResult().getPhone()!=null){
-                    BusinessUserManager.getInstance().setBindTel(true);
-                    BusinessUserManager.getInstance().setBindAddress(true);
-                }
-            }
+            ShopCacheManger.getInstance().isBind(logBean);
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
 
         }
