@@ -195,6 +195,8 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                         List<FindForPayBean.ResultBean> payFailList = ShopCacheManger.getInstance().getPayFailList();
                         payFailList.add(resultBean);
 
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
 
                         //添加到数据库
                         MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));

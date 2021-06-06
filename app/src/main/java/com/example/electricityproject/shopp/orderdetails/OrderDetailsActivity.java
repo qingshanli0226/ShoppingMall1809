@@ -104,8 +104,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         resultBean.setStatus(payMsg);
                         ShopCacheManger.getInstance().addFindShop(resultBean);
 
-//                        //数据库数量加一
-//                        SPMessageNum.getInstance().addShopNum(1);
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
                         MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                         //缓存数据添加
@@ -131,8 +131,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         //添加到消息缓存
                         ShopCacheManger.getInstance().setMessageList(payFailList);
 
-//                        //数据库数量加一
-//                        SPMessageNum.getInstance().addShopNum(1);
+                        //数据库数量加一
+                        SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
                         MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
                         //缓存数据添加

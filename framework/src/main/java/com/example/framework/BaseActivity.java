@@ -13,14 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.common.ActivityManger;
 import com.example.common.LogUtils;
 import com.example.common.SpUtils;
+import com.example.common.bean.LogBean;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessNetManager;
+import com.example.manager.BusinessUserManager;
 import com.example.view.LoadingPage;
 import com.example.view.ToolBar;
 import com.umeng.message.PushAgent;
 
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView, ToolBar.IToolbarListener, BusinessNetManager.NetConnectListener, BusinessUserManager.IUserLoginChanged {
 
     protected T httpPresenter;
     protected ToolBar toolBar;
@@ -49,6 +51,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         BusinessNetManager.getInstance().RegisterConnect(this);
         ActivityManger.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart();
+        BusinessUserManager.getInstance().Register(this);
 //        UmengMessageHandler messageHandler = new UmengMessageHandler() {
 //
 //            @Override
@@ -110,6 +113,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         destroy();
         BusinessNetManager.getInstance().UnRegisterConnect(this);
         ActivityManger.getInstance().unregister(this);
+        BusinessUserManager.getInstance().UnRegister(this);
     }
 
     public void destroy(){
@@ -165,4 +169,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     }
 
+    @Override
+    public void onLoginChange(LogBean isLog) {
+
+    }
 }

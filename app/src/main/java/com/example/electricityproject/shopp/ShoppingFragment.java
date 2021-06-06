@@ -398,6 +398,9 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     @Override
     public void onLoginChange(LogBean isLog) {
+        if (isLog!=null){
+            ShopCacheManger.getInstance().requestShortProductData();
+        }
 
     }
 
@@ -568,9 +571,13 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     @Override
     public void OnShopBeanChange() {
-        result = ShopCacheManger.getInstance().getShortBeanList();
-        shoppingAdapter.updateData(result);
-        shoppingAdapter.notifyDataSetChanged();
-        count();
+            if (result.size()!=ShopCacheManger.getInstance().getShortBeanList().size()) {
+                result = ShopCacheManger.getInstance().getShortBeanList();
+                shoppingAdapter.updateData(result);
+                del();
+                shoppingAdapter.notifyDataSetChanged();
+                count();
+            }
+
     }
 }

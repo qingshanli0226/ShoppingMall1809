@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.common.NetModel;
-import com.example.common.ShopmallCrashHandler;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;
 import com.example.electricityproject.shopp.userinfo.infodb.DaoMaster;
@@ -42,7 +41,7 @@ public class App extends Application {
         DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
 
         //错误框架
-        ShopmallCrashHandler.getInstance().init(this);
+//        ShopmallCrashHandler.getInstance().init(this);
 
 
         ShopCacheManger.getInstance().init(this);
@@ -55,7 +54,7 @@ public class App extends Application {
 
 
 
-        //查询数据库 把数据库的数量存储到SP
+        //查询数据库 把信息数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);
 
         PushAgent mPushAgent = PushAgent.getInstance(this);

@@ -22,6 +22,7 @@ import com.example.common.bean.KindSkirtBean;
 import com.example.common.bean.KindStationeryBean;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.OrderInfoBean;
+import com.example.common.bean.OutLogBean;
 import com.example.common.bean.RecommendBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.RemoveManyProductBean;
@@ -128,6 +129,9 @@ public interface BusinessApi {
     @FormUrlEncoded
     @POST("autoLogin")
     Observable<LogBean> postAutoLogin(@Field("token") String token);
+
+    @POST("logout")
+    Observable<OutLogBean> outLogin();
 
     //更新用户绑定的电话
     @FormUrlEncoded
