@@ -2,7 +2,6 @@ package com.shoppingmall.detail;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
@@ -25,7 +24,6 @@ import androidx.core.app.ActivityCompat;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
-import com.fiance.user.AutoService;
 import com.finance.detail.R;
 import com.shoppingmall.detail.bean.ProductGoodBean;
 import com.shoppingmall.detail.greendao.GoodsTable;
@@ -96,11 +94,19 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         toShopMallCarFragment = (TextView) findViewById(R.id.toShopMallCarFragment);
         addShopMallCar = (Button) findViewById(R.id.addShopMallCar);
         relat = findViewById(R.id.relat);
+
+        detailImg.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ARouter.getInstance().build("/Live/LiveActivity").withInt("",1).navigation();
+                return false;
+            }
+        });
+
     }
     private void showBezier(){
         int [] location=new int[2];//获取起点控件位置
         detailImg.getLocationOnScreen(location);
-
 
         int [] location1=new int[2];//获取终点控件位置
         toShopMallCarFragment.getLocationOnScreen(location1);

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -17,7 +18,7 @@ import com.shoppingmall.net.bean.RegisterBean;
 public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegisterView {
 
 
-    private android.widget.Toolbar bar;
+    private LinearLayout bar;
     private android.widget.ImageView back;
     private android.widget.ImageView tx;
     private android.widget.EditText username;

@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.EventBus;
 @Route(path = Constants.TO_USER_ACTIVITY)
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginView {
 
-    private android.widget.Toolbar bar;
+    private android.widget.LinearLayout bar;
     private android.widget.ImageView back;
     private android.widget.ImageView tx;
     private android.widget.EditText username;
@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     public void initView() {
-        bar = findViewById(R.id.bar);
+        bar = findViewById(R.id.logbar);
         back = findViewById(R.id.back);
         tx = findViewById(R.id.tx);
         username = findViewById(R.id.username);
