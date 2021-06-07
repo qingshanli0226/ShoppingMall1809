@@ -101,6 +101,9 @@ public class Constants {
     //用户
     public static final String PATH_USER = "/user/UserActivity";
 
+    //地图
+    public static final String PATH_MAP = "/map/ChecklogActivity";
+
     public static final String PATH_LIVE = "/live/LiveActivity";
     public static final String PATH_VIDEO = "/Video/VideoActivity";
     public static final String PATH_PUSH_LIVE = "/Video/PushLiveActivity";

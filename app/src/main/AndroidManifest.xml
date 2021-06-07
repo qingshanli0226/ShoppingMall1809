@@ -71,7 +71,8 @@
             android:value="411" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="731" /> <!-- 分享 -->
+            android:value="731" />
+        <!-- 分享 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -99,6 +100,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
+<!--        地图-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="rvbGb1PDgrcOKqMkz98j0iO43jvk0fHt" />
     </application>
 
 </manifest>

@@ -5,6 +5,8 @@ import android.app.Notification;
 import android.content.Context;
 
 
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.example.common.LogUtil;
 import com.example.framework.manager.CacheAddrManager;
 import com.example.framework.manager.ShopCrashHandler;
@@ -13,6 +15,7 @@ import com.example.framework.manager.CacheAwaitPaymentManager;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheMessageManager;
 import com.example.framework.manager.CacheShopManager;
+import com.example.map.module.MapModule;
 import com.example.message.module.MessageModule;
 import com.example.net.module.NetModule;
 import com.example.pay.module.PayModule;
@@ -48,6 +51,7 @@ public class App extends Application {
         CommonArouter.getInstance().init(this);
         AppModule.init();
         PayModule.init();
+        MapModule.init();
         LiveModule.init();
         MessageModule.init();
         UserModule.init();
@@ -91,5 +95,10 @@ public class App extends Application {
         String licenceURL = "http://license.vod2.myqcloud.com/license/v1/74ca08e91d17f282d34a8d69f1d4dd37/TXLiveSDK.licence"; // 获取到的 licence url
         String licenceKey = "6e2da709f07cabf154638fbc8855725d"; // 获取到的 licence key
         TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+        //地图
+        SDKInitializer.initialize(this);
+        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
+        SDKInitializer.setCoordType(CoordType.BD09LL);
  }
 }

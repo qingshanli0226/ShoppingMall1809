@@ -11,18 +11,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
-
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:id="@+id/pusher_tx_cloud_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <Button
         android:id="@+id/pushLiveStart"
         android:text="@string/push_start"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:background="@drawable/live_btn"
         android:layout_width="@dimen/dm_dp_100"
         android:layout_height="@dimen/dm_dp_100"/>
     <Button
         android:id="@+id/pushLiveEnd"
         android:text="@string/push_end"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:background="@drawable/live_btn"
         android:layout_marginLeft="@dimen/dm_dp_120"
         android:layout_width="@dimen/dm_dp_100"
