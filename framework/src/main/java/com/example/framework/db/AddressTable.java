@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class AddressTable {
-    //id    @Id(autoincrement = true)
+    @Id(autoincrement = true)
     private Long addressId;
     //用户名
     private String name;

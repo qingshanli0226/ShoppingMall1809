@@ -13,7 +13,6 @@
         app:wp_CenterTitle="@string/addressList"
         app:wp_istoolbarLeftImg="true"
         app:wp_leftImId="@drawable/back"
-        app:wp_RightTitle="@string/add"
         android:id="@+id/toolbar"></com.example.framework.view.ToolBar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_alignParentBottom="true"
-        android:text="@string/defaultl"
+        android:text="@string/add"
         android:gravity="center"
         android:textColor="@color/white"
         android:layout_marginRight="@dimen/dp_10"
@@ -35,6 +34,6 @@
         android:textSize="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_5"
         android:background="@drawable/defaultl"
-        android:id="@+id/defaultl"></TextView>
+        android:id="@+id/addAddress"></TextView>
 
 </RelativeLayout>
