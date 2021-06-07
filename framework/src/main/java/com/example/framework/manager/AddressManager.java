@@ -36,10 +36,10 @@ public class AddressManager {
             addressList = addressTables;
             handler.post(() -> {
                 if (listener != null) {
-                    listener.IAddressTableData(addressTables);
+                    listener.IAddressTableData(addressList);
                 }
             });
-            addressInterface();
+//            addressInterface();
         });
     }
     //获取数据接口回调
@@ -51,7 +51,7 @@ public class AddressManager {
         cachedThreadPool.execute(() -> {
             addressDao.insert(addressTable);
             addressList.add(addressTable);
-            addressInterface();
+            addressInterface(addressList.size());
         });
     }
     //删除
@@ -59,7 +59,7 @@ public class AddressManager {
         cachedThreadPool.execute(() -> {
             addressDao.delete(addressTable);
             addressList.remove(position);
-            addressInterface();
+            addressInterface(position);
         });
     }
 
@@ -70,24 +70,39 @@ public class AddressManager {
             addressList.get(position).setName(addressTable.getName());
             addressList.get(position).setPhone(addressTable.getPhone());
             addressList.get(position).setAddress(addressTable.getAddress());
-            addressInterface();
+            addressInterface(position);
         });
     }
 
     //接口回调
-    public void addressInterface(){
+    public void addressInterface(int position){
         handler.post(() -> {
             if (iAddressListener!=null){
-                iAddressListener.IAddressListData(addressList);
+                iAddressListener.IAddressListData(addressList,position);
             }
         });
     }
 
+    //互斥
+    public synchronized void updateSelect(AddressTable addressTable,int position){
+        cachedThreadPool.execute(() -> {
+            for (AddressTable table : addressList) {
+                if (table.getIsDefault()) {
+                    table.setIsDefault(false);
+                    addressDao.update(table);
+                }
+            }
+            addressTable.setIsDefault(true);
+            addressDao.update(addressTable);
+            addressList.get(position).setIsDefault(true);
 
+            addressInterface(-1);
+        });
+    }
 
     //接口回调
     public interface IAddressListener{
-        void IAddressListData(List<AddressTable> list);
+        void IAddressListData(List<AddressTable> list,int position);
     }
     private IAddressListener iAddressListener;
     public void unregister() {
