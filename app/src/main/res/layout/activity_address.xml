@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         app:leftIsShow="true"
         app:leftImg="@drawable/back"
-        app:wp_CenterTitle="地址"
+        app:wp_CenterTitle="新增收货地址"
         android:id="@+id/toolbar"></com.example.framework.view.ToolBar>
 
     <LinearLayout
