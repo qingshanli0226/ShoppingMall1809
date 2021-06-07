@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.shoppingmall.R;
 import com.shoppingmall.framework.manager.ShopMallUserManager;
 import com.shoppingmall.framework.mvp.BaseFragment;
+import com.shoppingmall.main.address.AddressActivity;
 import com.shoppingmall.main.message.MessageActivity;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.pay.awitpayment.AwaitPaymentActivity;
@@ -20,6 +21,7 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
     private ImageView message;
     private TextView pay;
     private TextView toDropShipping;
+    private TextView mineAddress;
 
     @Override
     public int getLayoutId() {
@@ -33,6 +35,7 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
         message = mView.findViewById(R.id.message);
         pay = mView.findViewById(R.id.pay);
         toDropShipping = (TextView) mView.findViewById(R.id.toDropShipping);
+        mineAddress = (TextView) mView.findViewById(R.id.mineAddress);
     }
 
     @Override
@@ -72,11 +75,19 @@ public class MineFragment extends BaseFragment implements ShopMallUserManager.IU
 //                startActivity(intent);
             }
         });
+
         toDropShipping.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), DropShippingActivity.class);
             startActivity(intent);
         });
 
+        mineAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddressActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -1,0 +1,2 @@
+com/example/shoppingcar/BuildConfig.java
+ com.example.shoppingcar.BuildConfig

@@ -1,0 +1,51 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+	package
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:3:5-30
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:1-11:12
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:5:5-9:19
+activity#com.example.pay.PayActivity
+ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:6:9-58
+	android:name
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:6:19-46
+activity#com.example.pay.user.findforsend.FindForSendActivity
+ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:7:9-98
+	android:name
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:7:19-86
+activity#com.example.pay.user.findforpay.FindForPayActivity
+ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:8:9-87
+	android:name
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml:8:19-84
+uses-sdk
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		ADDED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml
+		INJECTED from D:\ptOne\ShoppingMall1809\pay\src\main\AndroidManifest.xml

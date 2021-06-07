@@ -37,9 +37,18 @@ android {
 
 dependencies {
 
+    implementation  'com.umeng.umsdk:analytics:8.0.0'
+
     implementation (name: 'alipaysdk-15.8.01.210112203525', ext: 'aar')
 
-    implementation('com.alibaba:arouter-api:1.4.1') //ARouter依赖
+    implementation('com.alibaba:arouter-api:1.4.1')
+    implementation files('libs\\umeng-common-2.1.0.jar')
+    implementation files('libs\\umeng-share-core-6.9.6.jar')
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-sina-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
+    implementation files('libs\\umeng-sharetool-6.9.6.jar') //ARouter依赖
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
     //轮播图
     implementation 'com.youth.banner:banner:1.4.10'

@@ -60,8 +60,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         if (homeBean==null){
             handler.sendEmptyMessageDelayed(GET_DATA_NO,1000);
         }
-
-
     }
 
 

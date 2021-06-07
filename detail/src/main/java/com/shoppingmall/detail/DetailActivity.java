@@ -1,10 +1,12 @@
 package com.shoppingmall.detail;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -37,6 +41,10 @@ import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.ProductBean;
 import com.shoppingmall.net.bean.SelectBean;
 import com.shoppingmall.net.bean.ShopCarBean;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -322,6 +330,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         detailPrice.setText(""+productGoodBean.getCover_price());
     }
 
+    private TextView share;
     //打开popWindow
     private void openPopWindow() {
         detailMenu.setOnClickListener(new View.OnClickListener() {
@@ -334,9 +343,51 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 popupWindow2.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
                 popupWindow2.setOutsideTouchable(true);
                 popupWindow2.showAtLocation(inflate,Gravity.TOP,0,190);
+                share = inflate.findViewById(R.id.share);
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sharePic();
+                    }
+                });
             }
         });
     }
+
+    //分享
+    public void sharePic(){
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
+
+        UMImage image = new UMImage(DetailActivity.this, Constants.IMG_HTTPS+productGoodBean.getFigure());//网络图片
+
+        new ShareAction(DetailActivity.this).withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                .withMedia(image).setCallback(new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media) {
+
+            }
+        }).open();
+    }
+
     //退出当前Activity
     private void backActivity(){
         detailBack.setOnClickListener(new View.OnClickListener() {
@@ -356,4 +407,8 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
         finish();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],int[] grantResults){
+
+    }
 }
