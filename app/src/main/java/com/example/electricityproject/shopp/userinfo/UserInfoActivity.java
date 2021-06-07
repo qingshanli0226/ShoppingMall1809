@@ -1,6 +1,7 @@
 package com.example.electricityproject.shopp.userinfo;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,14 +24,13 @@ import com.example.view.ToolBar;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implements ToolBar.IToolbarListener,IBindUserInfoView{
 
     private com.example.view.ToolBar toolbar;
     private UserInfoAdapter userInfoAdapter;
-    private List<UserInfoTable> list = new ArrayList<>();
+    private List<UserInfoTable> list;
     private androidx.recyclerview.widget.RecyclerView bindAddress;
     private android.widget.Button conAddInfo;
     private DaoMaster daoMaster;
@@ -46,6 +46,7 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
         DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
 
         list = daoMaster.newSession().loadAll(UserInfoTable.class);
+        Log.i("zx", "initData: "+list.toString());
         if (list !=null){
             userInfoAdapter = new UserInfoAdapter();
             userInfoAdapter.updateData(this.list);

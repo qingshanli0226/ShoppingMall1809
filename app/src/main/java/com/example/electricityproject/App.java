@@ -16,6 +16,9 @@ import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
@@ -27,6 +30,14 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        EMOptions options = new EMOptions();
+        //EaseUI初始化
+        if (EaseUI.getInstance().init(getApplicationContext(), options)) {
+            //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
+            EMClient.getInstance().setDebugMode(true);
+            //EaseUI初始化成功之后再去调用注册消息监听的代码
+        }
 
         NetModel.init(this);
         FrameModel.init(this);

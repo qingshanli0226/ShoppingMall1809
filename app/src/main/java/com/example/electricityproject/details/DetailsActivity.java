@@ -35,6 +35,7 @@ import com.example.electricityproject.R;
 import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
 import com.example.glide.ShopGlide;
+import com.example.manager.AllSelectManager;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.manager.SPMessageNum;
@@ -202,7 +203,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             linLin.setVisibility(View.VISIBLE);
                             map.put("productNum", String.valueOf(prod_num));
                             httpPresenter.checkOneProductInventory(productId, String.valueOf(prod_num));
-                            ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",url,productPrice,false);
+                            ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",url,productPrice,AllSelectManager.getInstance().isSelect());
+
                         }
                     });
 

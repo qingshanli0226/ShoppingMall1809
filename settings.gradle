@@ -1,3 +1,4 @@
+include ':easeui111'
 include ':User'
 include ':pay'
 include ':net'
