@@ -3,7 +3,8 @@
     package="com.finance.detail">
 
     <application>
-        <activity android:name="com.shoppingmall.detail.DetailActivity"></activity>
+        <activity android:name="com.shoppingmall.tencentluping.LiveActivity"></activity>
+        <activity android:name="com.shoppingmall.detail.DetailActivity" />
     </application>
 
 </manifest>

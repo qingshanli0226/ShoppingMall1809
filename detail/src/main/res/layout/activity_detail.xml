@@ -49,14 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
             android:background="@color/gray"></View>
-        <ImageView
-            android:id="@+id/detailImg"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:layout_height="@dimen/dp_300"
-            android:src="@drawable/icon_share_qq"></ImageView>
-        <TextView
+
+            <ImageView
+                android:id="@+id/detailImg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_300"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:src="@drawable/icon_share_qq"></ImageView>
+
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"

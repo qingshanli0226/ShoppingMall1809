@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/new_login_background"
     tools:context=".registers.RegisterActivity">
-    <Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
         android:background="#ffffff"
@@ -23,7 +23,7 @@
             android:text="@string/regbar"
             android:textSize="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_110"></TextView>
-    </Toolbar>
+    </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
