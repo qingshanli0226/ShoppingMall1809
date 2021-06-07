@@ -14,6 +14,7 @@ import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import com.shoppingmall.bawei.shoppingmall1809.anr.AnrActivity;
 import com.shoppingmall.bawei.shoppingmall1809.beisaier.BeisaierActivity;
 
 import com.shoppingmall.bawei.shoppingmall1809.exception.ExceptionActivity;
@@ -114,6 +115,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ShopHandlerActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.btnAnr).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AnrActivity.class);
                 startActivity(intent);
             }
         });
