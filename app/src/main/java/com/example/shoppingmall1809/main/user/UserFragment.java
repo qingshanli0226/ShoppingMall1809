@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commom.ShopConstants;
 import com.example.framework.BaseFragment;
+import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.ShopeUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.model.LoginBean;
@@ -21,6 +22,9 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
     private ToolBar toolbar;
     private LinearLayout toShoppingAddress;
     private ImageView userMessage;
+    private ImageView fragUserHand;
+
+
 
     @Override
     protected int getLayoutId() {
@@ -31,7 +35,7 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
     protected void initData() {
 
 
-        ShopeUserManager.getInstance().register(this::onLoginChange);
+        ShopeUserManager.getInstance().register(this);
 
 
         if (ShopeUserManager.getInstance().getLoginBean() != null) {
@@ -67,6 +71,15 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
                 ARouter.getInstance().build(ShopConstants.SHOP_ADDRESSLIST).navigation();
             }
         });
+
+        fragUserHand.setOnClickListener(view -> {
+            if (ShopeUserManager.getInstance().getLoginBean() != null) {
+                ARouter.getInstance().build(ShopConstants.REMOVE_PATH).navigation();
+            } else {
+                CacheManager.getInstance().decideARoutPage = ShopConstants.AROUT_USER_HAND;
+                ARouter.getInstance().build(ShopConstants.LOGIN_PATH).navigation();
+            }
+        });
     }
 
     @Override
@@ -82,6 +95,8 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         toShoppingAddress = (LinearLayout) findViewById(R.id.toShoppingAddress);
         userMessage = (ImageView) findViewById(R.id.user_message);
+        fragUserHand = (ImageView) findViewById(R.id.frag_user_hand);
+
     }
 
     @Override
@@ -107,7 +122,7 @@ public class UserFragment extends BaseFragment implements ShopeUserManager.IUser
     @Override
     public void destroy() {
         super.destroy();
-        ShopeUserManager.getInstance().unregister(this::onLoginChange);
+        ShopeUserManager.getInstance().unregister(this);
     }
 
 

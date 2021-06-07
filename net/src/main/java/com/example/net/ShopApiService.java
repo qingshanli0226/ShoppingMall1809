@@ -39,11 +39,14 @@ public interface ShopApiService {
     @FormUrlEncoded
     @POST("register")
     Observable<RegisterBean> getRegisterData(@Field("name") String username, @Field("password") String password);
+    //退出登录
+    @POST("logout")
+    Observable<RegisterBean> getLogout();
     //登录
     @FormUrlEncoded
     @POST("login")
     Observable<LoginBean> getLoginData(@Field("name") String username, @Field("password") String password);
-    //退出登录
+    //自动登录
     @FormUrlEncoded
     @POST("autoLogin")
     Observable<LoginBean> getAutoLoginData(@Field("token") String token);

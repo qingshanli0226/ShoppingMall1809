@@ -26,9 +26,13 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //监听登录
     @Override
     public void onLoginChange(LoginBean loginBean) {
-        getShoppingData();
-        getFindForPayData();
-        getFindForSendData();
+       if (loginBean!=null){
+           getShoppingData();
+           getFindForPayData();
+           getFindForSendData();
+       }else {
+           result.clear();
+       }
 
     }
     //注册登录的方法
@@ -238,7 +242,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
     //刷新接口回调
     public synchronized void refreshData() {
         for (IShoppingCar iShoppingCar : list) {
-            iShoppingCar.onShoppingCarAdapter(result);
+//            iShoppingCar.onShoppingCarAdapter(result);
             iShoppingCar.onShoppingCar(result);
         }
     }

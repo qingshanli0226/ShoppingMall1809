@@ -44,6 +44,14 @@
                     android:id="@+id/user_message"
                     android:src="@drawable/new_message_icon"></ImageView>
 
+
+                <ImageView
+                    android:id="@+id/frag_user_hand"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="@drawable/community_default_user_icon"
+                    android:layout_centerInParent="true"></ImageView>
+
             </RelativeLayout>
 
             <RelativeLayout
