@@ -9,6 +9,7 @@ import android.util.Log;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.greendao.CacheMessage;
+import com.example.framework.manager.AddressManager;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.MessageManager;
@@ -39,6 +40,7 @@ public class  App extends Application {
         NetModule.init(this);
         CacheConnectManager.getInstance().init(this);
         startService(new Intent(this, AutoService.class));
+        AddressManager.getInstance().init(this);
 
 //        initTengxun();
 

@@ -21,11 +21,13 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
+        CacheAddressDao.createTable(db, ifNotExists);
         CacheMessageDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
+        CacheAddressDao.dropTable(db, ifExists);
         CacheMessageDao.dropTable(db, ifExists);
     }
 
@@ -45,6 +47,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(CacheAddressDao.class);
         registerDaoClass(CacheMessageDao.class);
     }
 

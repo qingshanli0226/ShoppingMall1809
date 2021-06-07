@@ -8,4 +8,5 @@ public class FiannceContants {
     public final static String SQ_MANAGE = "manage";
     public final static String SP_MANAGE = "manageCount";
     public final static String SP_MANAGE_NAME = "count";
+    public final static String SQ_ADDRESS ="address";
 }
