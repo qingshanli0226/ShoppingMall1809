@@ -65,6 +65,7 @@
         <activity android:name=".goods.GoodsActivity" />
         <activity android:name=".sendgoods.SendGoodsActivity" />
         <activity android:name="com.example.pay.obligation.ObligationActivity" />
+        <activity android:name=".address.AddressActivity" />
         <activity
             android:name=".welcome.WelcomeActivity"
             android:screenOrientation="portrait"

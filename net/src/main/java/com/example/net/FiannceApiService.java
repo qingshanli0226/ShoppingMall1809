@@ -90,12 +90,12 @@ public interface FiannceApiService {
     //更新用户绑定的电话
     @POST(Constants.USER_UPDATEPHONE)
     @FormUrlEncoded
-    Observable<UpdatePhoneBean> getUpdatePhone(@FieldMap HashMap<String,String> map);
+    Observable<UpdatePhoneBean> getUpDataPhone(@Field("phone")String phone);
 
     //更新地址的接口
     @POST(Constants.USER_UPDATEADDRESS)
     @FormUrlEncoded
-    Observable<UpdateAddressBean> getUpdateAddress(@FieldMap HashMap<String,String> map);
+    Observable<UpdateAddressBean> getUpdateAddress(@Field("address")String address);
 
     /**
      * 业务

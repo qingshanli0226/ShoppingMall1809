@@ -19,26 +19,26 @@ public class AddressPresenter extends BasePresenter<IAddress> {
 
     public void getUpDataPhone(String phone){
         RetrofitCreator.getFiannceApiService()
-                .getUpdatePhone(phone)
+                .getUpDataPhone(phone)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UpdatePhoneBean>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull UpdatePhoneBean updatePhoneBean) {
+                    public void onNext(UpdatePhoneBean updatePhoneBean) {
                         if (iView!=null){
                             iView.onUpDataPhone(updatePhoneBean);
                         }
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(Throwable e) {
                         if (iView!=null){
-                            iView.(e.getMessage());
+                            iView.showToast(e.getMessage());
                         }
                     }
 
@@ -50,27 +50,27 @@ public class AddressPresenter extends BasePresenter<IAddress> {
     }
 
     public void getUpDataAddress(String address){
-        RetrofitCreator.getShopApiService()
-                .getUpDataAddress(address)
+        RetrofitCreator.getFiannceApiService()
+                .getUpdateAddress(address)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RegisterBean>() {
+                .subscribe(new Observer<UpdateAddressBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(@NonNull RegisterBean registerBean) {
+                    public void onNext(@NonNull UpdateAddressBean updateAddressBean) {
                         if (iView!=null){
-                            iView.onUpDataAddress(registerBean);
+                            iView.onUpDataAddress(updateAddressBean);
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (iView!=null){
-                            iView.Error(e.getMessage());
+                            iView.showToast(e.getMessage());
                         }
                     }
 
