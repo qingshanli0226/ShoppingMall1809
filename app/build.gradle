@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.umeng.umsdk:agoo_networksdk:3.5.8'
     implementation 'com.umeng.umsdk:agoo_tnet4android:3.1.14.10'
     //腾讯云直播
-    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
+//    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
     compile 'com.tencent.bugly:crashreport:latest.release'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
 

@@ -18,7 +18,6 @@ import com.example.framework.BaseRvAdapter;
 import com.example.framework.manager.ShopmallGlide;
 import com.example.net.bean.HomeBean;
 import com.example.net.constants.Constants;
-import com.example.shoppingmallsix.BuildConfig;
 import com.example.shoppingmallsix.R;
 import com.example.shoppingmallsix.goods.GoodsActivity;
 import com.youth.banner.Banner;
@@ -80,8 +79,6 @@ public class HomeAdapter extends BaseRvAdapter<Object> {
         switch (position) {
             case 0:
                 List<HomeBean.ResultBean.BannerInfoBean> bannerInfoBeans = (List<HomeBean.ResultBean.BannerInfoBean>) itemData;
-                if (BuildConfig.DEBUG)
-                    Log.d("HomeAdapter", "bannerInfoBeans:" + bannerInfoBeans.toString());
                 Banner banner = holder.getView(R.id.banner);
                 banner.setImages(bannerInfoBeans);
                 banner.setImageLoader(new ImageLoader() {

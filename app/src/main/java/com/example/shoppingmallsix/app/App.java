@@ -1,11 +1,14 @@
 package com.example.shoppingmallsix.app;
 
 import android.app.Application;
+import android.app.Notification;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.framework.greendao.CacheMessage;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.framework.manager.CacheManager;
 import com.example.framework.manager.MessageManager;
@@ -17,11 +20,15 @@ import com.example.user.service.AutoService;
 
 
 import com.tencent.bugly.crashreport.CrashReport;
-import com.tencent.rtmp.TXLiveBase;
+//import com.tencent.rtmp.TXLiveBase;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.UmengMessageHandler;
+import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.PlatformConfig;
+
+import java.util.Map;
 
 public class  App extends Application {
     @Override
@@ -74,11 +81,27 @@ public class  App extends Application {
 
         String licenceURL = "http://license.vod2.myqcloud.com/license/v1/28f36573e9db78430bc69687958ab95e/TXLiveSDK.licence"; // 获取到的 licence url
         String licenceKey = "bbf386fe768708944d4ac619c19e5a08"; // 获取到的 licence key
-        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
+//        TXLiveBase.getInstance().setLicence(this, licenceURL, licenceKey);
         CacheManager.getInstance().init(this);
         MessageManager.getInstance().init(this);
 
         NetworkConnectionsManager.getInstance().init(this);
+
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        UmengMessageHandler messageHandler = new UmengMessageHandler() {
+            @Override
+            public Notification getNotification(Context context, UMessage msg) {
+                for (Map.Entry entry : msg.extra.entrySet()) {
+                    Object key = entry.getKey();
+                    Object value = entry.getValue();
+                    CacheMessage cacheMessage = new CacheMessage(null, (String) value, System.currentTimeMillis() + "", true);
+                    MessageManager.getInstance().setMessage(cacheMessage);
+                    MessageManager.getInstance().addMessageCount();
+                }
+                return super.getNotification(context, msg);
+            }
+        };
+        mPushAgent.setMessageHandler(messageHandler);
 
     }
 
