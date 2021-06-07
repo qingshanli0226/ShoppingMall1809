@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.framework.BaseActivity;
+import com.example.framework.manager.CacheUserManager;
 import com.example.framework.view.ToolBar;
 import com.example.net.bean.user.UpdateAddressBean;
 import com.example.net.bean.user.UpdatePhoneBean;
@@ -31,7 +32,7 @@ public class AddressActivity extends BaseActivity<AddressPresenter> implements I
             super.handleMessage(msg);
 
             if (isPhone&&isAddress){
-                ShopeUserManager.getInstance().addPhoneAddress(phone.getText().toString().trim(),detailedAddress.getText().toString().trim());
+                CacheUserManager.getInstance().addPhoneAddress(phone.getText().toString().trim(),detailedAddress.getText().toString().trim());
                 finish();
             }
         }

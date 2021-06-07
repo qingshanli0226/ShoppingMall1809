@@ -41,6 +41,12 @@ public class CacheUserManager {
         }
     }
 
+    public void addPhoneAddress(String phone,String address){
+        LoginBean.ResultBean result = loginBean.getResult();
+        result.setPhone(phone);
+        result.setAddress(address);
+    }
+
     public interface ILoginChange {
         void onLoginChange(LoginBean loginBean);
     }
