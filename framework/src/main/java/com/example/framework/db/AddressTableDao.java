@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "ADDRESS_TABLE".
 */
-public class AddressTableDao extends AbstractDao<AddressTable, Void> {
+public class AddressTableDao extends AbstractDao<AddressTable, Long> {
 
     public static final String TABLENAME = "ADDRESS_TABLE";
 
@@ -22,7 +22,7 @@ public class AddressTableDao extends AbstractDao<AddressTable, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AddressId = new Property(0, Long.class, "addressId", false, "ADDRESS_ID");
+        public final static Property AddressId = new Property(0, Long.class, "addressId", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Phone = new Property(2, String.class, "phone", false, "PHONE");
         public final static Property Address = new Property(3, String.class, "address", false, "ADDRESS");
@@ -42,7 +42,7 @@ public class AddressTableDao extends AbstractDao<AddressTable, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"ADDRESS_TABLE\" (" + //
-                "\"ADDRESS_ID\" INTEGER," + // 0: addressId
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: addressId
                 "\"NAME\" TEXT," + // 1: name
                 "\"PHONE\" TEXT," + // 2: phone
                 "\"ADDRESS\" TEXT," + // 3: address
@@ -108,8 +108,8 @@ public class AddressTableDao extends AbstractDao<AddressTable, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
@@ -134,20 +134,23 @@ public class AddressTableDao extends AbstractDao<AddressTable, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(AddressTable entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(AddressTable entity, long rowId) {
+        entity.setAddressId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(AddressTable entity) {
-        return null;
+    public Long getKey(AddressTable entity) {
+        if(entity != null) {
+            return entity.getAddressId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(AddressTable entity) {
-        // TODO
-        return false;
+        return entity.getAddressId() != null;
     }
 
     @Override

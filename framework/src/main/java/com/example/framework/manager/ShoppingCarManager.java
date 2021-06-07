@@ -32,6 +32,7 @@ public class ShoppingCarManager implements ShopeUserManager.IUserLoginChanged {
            getFindForSendData();
        }else {
            result.clear();
+           refreshData();
        }
 
     }
