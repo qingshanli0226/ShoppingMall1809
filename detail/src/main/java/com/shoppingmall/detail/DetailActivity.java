@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -139,6 +140,14 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
 
     }
 
+    @Subscribe
+    public void getEvenBus(String msg){
+        if (msg.equals("detail")){
+            loginBean = ShopMallUserManager.getInstance().getLoginBean();
+        }
+    }
+
+
     @Override
     public void initPresenter() {
         httpPresenter = new DetailPresenter(this);
@@ -146,6 +155,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
 
     @Override
     public void initData() {
+        EventBus.getDefault().register(this);
 
         loginBean = ShopMallUserManager.getInstance().getLoginBean();
 
@@ -238,7 +248,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
                 httpPresenter.checkProduct(result);
                 showBezier();
 
-                //数据库存储
+//                数据库存储
                 List<GoodsTable> goodsTables = daoSession.loadAll(GoodsTable.class);
                 for (GoodsTable goodsTable : goodsTables) {
                     if ( goodsTable.getGoodName()==productGoodBean.getName()){
@@ -293,6 +303,7 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
             resultBean.setProductName(productGoodBean.getName());
 
             CacheShopManager.getInstance().addData(resultBean);
+            EventBus.getDefault().post("main");
 
             Toast.makeText(this, ""+selectBean.getResult(), Toast.LENGTH_SHORT).show();
         }else {
@@ -342,6 +353,9 @@ public class DetailActivity extends BaseActivity<DetailPresenter> implements IDe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
         finish();
     }
 

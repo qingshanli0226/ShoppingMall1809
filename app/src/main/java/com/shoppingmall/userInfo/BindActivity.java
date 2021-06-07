@@ -18,6 +18,8 @@ import com.shoppingmall.framework.mvp.IBaseView;
 import com.shoppingmall.net.bean.LoginBean;
 import com.shoppingmall.net.bean.SelectBean;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class BindActivity extends BaseActivity<BindPresenter> implements IBindView {
 
     private android.widget.ImageView detailBack;
@@ -85,7 +87,7 @@ public class BindActivity extends BaseActivity<BindPresenter> implements IBindVi
         twoFlag = true;
         Toast.makeText(this, "电话成功", Toast.LENGTH_SHORT).show();
         if(oneFlag && twoFlag){
-            ShopMallUserManager.getInstance().setBind(true);
+            EventBus.getDefault().post("bind");
             finish();
         }
     }
@@ -95,7 +97,7 @@ public class BindActivity extends BaseActivity<BindPresenter> implements IBindVi
         oneFlag = true;
         Toast.makeText(this, "地址成功", Toast.LENGTH_SHORT).show();
         if(oneFlag && twoFlag){
-            ShopMallUserManager.getInstance().setBind(true);
+            EventBus.getDefault().post("bind");
             finish();
         }
     }

@@ -3,6 +3,7 @@ package com.shoppingmall.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -29,12 +31,14 @@ import com.shoppingmall.main.mine.MineFragment;
 import com.shoppingmall.main.shopcar.ShopCarFragment;
 import com.shoppingmall.main.sort.SortFragment;
 import com.shoppingmall.net.bean.LoginBean;
+import com.shoppingmall.net.bean.ShopCarBean;
 
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Route(path = Constants.TO_MAIN_ACTIVITY)
 public class MainActivity extends BaseActivity implements ShopMallUserManager.IUserLoginChanged  {
@@ -44,7 +48,7 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
     private ViewPager mainVp;
     private CommonTabLayout mainCommon;
     private com.shoppingmall.framework.view.CircleView mainCircle;
-
+    private LoginBean loginBean;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -57,15 +61,19 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
         mainCircle = (CircleView) findViewById(R.id.mainCircle);
     }
 
+
     @Override
     public void initPresenter() {
 
     }
+
     @Override
     public void initData() {
         EventBus.getDefault().register(this);
 
-        LoginBean loginBean = ShopMallUserManager.getInstance().getLoginBean();
+
+        loginBean = ShopMallUserManager.getInstance().getLoginBean();
+        LogUtils.json(loginBean);
         if(loginBean != null){
             if(CacheShopManager.getInstance().getCarts().size() > 0){
                 mainCircle.setText(CacheShopManager.getInstance().getCarts().size()+"");
@@ -73,6 +81,8 @@ public class MainActivity extends BaseActivity implements ShopMallUserManager.IU
             }else {
                 mainCircle.setVisibility(View.GONE);
             }
+        }else {
+            mainCircle.setVisibility(View.GONE);
         }
 
         Intent intent = getIntent();

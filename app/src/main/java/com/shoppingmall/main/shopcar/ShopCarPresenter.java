@@ -208,7 +208,6 @@ public class ShopCarPresenter extends BasePresenter<IShopCarView> {
 
                     @Override
                     public void onNext(@NonNull SelectBean selectBean) {
-                        LogUtils.d("hqy"+selectBean);
                         if (selectBean.getCode().equals("200")) {
                             CacheShopManager.getInstance().removeProduct(resultBean);
                             if (iView != null) {
