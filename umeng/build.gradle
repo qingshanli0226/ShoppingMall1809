@@ -30,7 +30,6 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation files('libs\\umeng-common-2.1.0.jar')
     implementation files('libs\\umeng-share-core-6.9.6.jar')

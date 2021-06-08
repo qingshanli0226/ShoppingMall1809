@@ -54,7 +54,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation project(path: ':common')
     implementation project(path: ':pay')
-    implementation project(path: ':umeng')
     implementation files('libs\\umeng-common-2.1.0.jar')
     implementation files('libs\\umeng-share-core-6.9.6.jar')
     implementation files('libs\\umeng-share-QQ-simplify-6.9.6.jar')

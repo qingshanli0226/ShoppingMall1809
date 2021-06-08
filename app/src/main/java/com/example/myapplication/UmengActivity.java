@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -23,7 +24,7 @@ public class UmengActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.umeng.R.layout.activity_umeng);
+        setContentView(R.layout.activity_umeng);
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -51,7 +52,7 @@ public class UmengActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
+                                Toast.makeText(UmengActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -71,6 +72,6 @@ public class UmengActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btn = findViewById(com.example.umeng.R.id.btn);
+        btn = findViewById(R.id.btn);
     }
 }

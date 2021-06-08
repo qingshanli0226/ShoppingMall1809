@@ -36,8 +36,8 @@ public class App extends Application {
 
         PaySendCacheManager.getInstance().init();
         CaCheArote.getInstance().init(this);
-        UMConfigure.init(this, "5a12384aa40fa3551f0001d1"
-                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        UMConfigure.init(this, "60be055c85c1f6195c473e17"
+                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "5f3d7b1dccee13b1fd00fa0a46fdf8dd");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
 // 微信设置
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
 // QQ设置
