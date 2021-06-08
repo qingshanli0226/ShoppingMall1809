@@ -107,7 +107,10 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-                        IView.showLoading();
+                        if (IView!=null){
+                            IView.showLoading();
+
+                        }
                     }
                 })
                 .subscribe(new Observer<CheckInventoryBean>() {
@@ -118,12 +121,16 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
                     @Override
                     public void onNext(CheckInventoryBean bean) {
-                        IView.checkInventory(bean);
-                        LogUtils.json(bean);
+                        if (IView!=null) {
+                            IView.checkInventory(bean);
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        if (IView!=null){
+                            IView.showError(e.getMessage());
+                        }
                     }
 
                     @Override

@@ -1,8 +1,11 @@
 package com.example.electricityproject.person;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,6 +23,11 @@ import com.example.framework.BaseFragment;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.view.ToolBar;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class PersonFragment extends BaseFragment<PersonPresenter> implements IoutloginView{
 
@@ -28,7 +36,10 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
     private LogBean logBean;
     private LinearLayout orderPayment;
     private LinearLayout orderShipment;
-    private TextView zhibo;
+    private LinearLayout liveStreaming;
+    private LinearLayout tell;
+    private LinearLayout feedback;
+
 
     @Override
     protected void initData() {
@@ -47,6 +58,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                 }
             }
         });
+
         //代付款
         orderPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +72,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                 }
             }
         });
+
         //待收货
         orderShipment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +87,13 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         });
 
         //直播
-        zhibo.setOnClickListener(new View.OnClickListener() {
+        liveStreaming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), SinatvActivity.class));
             }
         });
+
         //退出登录
         mView.findViewById(R.id.outLog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +121,48 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
             }
         });
 
+        //打电话
+        tell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+10086));
+                startActivity(intent);
+
+            }
+        });
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+                if (isLog!=null){
+                    EMClient.getInstance().login(isLog.getResult().getName(), isLog.getResult().getPassword(), new EMCallBack(){
+                        @Override
+                        public void onSuccess() {
+                            Intent intent = new Intent(getContext(), ChatActivity.class);
+                            //username为对方的环信id
+                            intent.putExtra(EaseConstant.EXTRA_USER_ID,"zx");
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onError(int code, String error) {
+                            Log.i("zx", "onError: "+error);
+                        }
+
+                        @Override
+                        public void onProgress(int progress, String status) {
+
+                        }
+                    });
+                }else {
+                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
+                }
+
+            }
+        });
     }
 
     @Override
@@ -116,11 +172,20 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
 
     @Override
     protected void initView() {
-        toolbar = (ToolBar) findViewById(R.id.toolbar);
-        pleaseLogin = (TextView) findViewById(R.id.please_login);
-        orderPayment = (LinearLayout) findViewById(R.id.order_payment);
-        orderShipment = (LinearLayout) findViewById(R.id.order_shipment);
-        zhibo = (TextView) findViewById(R.id.zhibo);
+        toolbar = mView.findViewById(R.id.toolbar);
+        pleaseLogin = mView.findViewById(R.id.please_login);
+        orderPayment = mView.findViewById(R.id.order_payment);
+        orderShipment = mView.findViewById(R.id.order_shipment);
+        liveStreaming = mView.findViewById(R.id.liveStreaming);
+        feedback = mView.findViewById(R.id.feedback);
+        tell = mView.findViewById(R.id.tell);
+
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            requestPermissions(new String[]{
+                    Manifest.permission.CALL_PHONE
+            },100);
+        }
+
     }
 
     @Override
@@ -141,6 +206,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         Log.i("zx", "showError: " + error);
     }
 
+
     @Override
     public void onLoginChange(LogBean isLog) {
         if (isLog != null) {
@@ -157,6 +223,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
             pleaseLogin.setText("未登录");
             TokenSPUtility.putString(getContext(),null);
             BusinessUserManager.getInstance().setIsLog(null);
+            EventBus.getDefault().post("outLog");
 
         }
     }

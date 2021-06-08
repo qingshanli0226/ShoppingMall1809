@@ -360,7 +360,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50">
+                android:layout_height="@dimen/dp_50"
+                android:id="@+id/tell">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -402,7 +403,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50">
+                android:layout_height="@dimen/dp_50"
+                android:id="@+id/feedback">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -423,10 +425,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50">
-
+                android:layout_height="@dimen/dp_50"
+                android:id="@+id/liveStreaming">
                 <TextView
-                    android:id="@+id/zhibo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

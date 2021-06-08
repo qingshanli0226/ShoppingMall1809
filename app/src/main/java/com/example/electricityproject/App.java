@@ -18,6 +18,9 @@ import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
 import com.example.user.auto.AutoService;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
@@ -31,6 +34,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        EMOptions options = new EMOptions();
+        //EaseUI初始化
+        if (EaseUI.getInstance().init(getApplicationContext(), options)) {
+            //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
+            EMClient.getInstance().setDebugMode(true);
+            //EaseUI初始化成功之后再去调用注册消息监听的代码
+        }
 
         NetModel.init(this);
         FrameModel.init(this);
@@ -117,11 +127,11 @@ public class App extends Application {
         CrashReport.initCrashReport(getApplicationContext(), "c66d73003a", true);
 
 
-        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        SDKInitializer.initialize(this);
-        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
-        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
-        SDKInitializer.setCoordType(CoordType.BD09LL);
+//        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
+//        SDKInitializer.initialize(getApplicationContext());
+//        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+//        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
+//        SDKInitializer.setCoordType(CoordType.BD09LL);
 
 
     }

@@ -177,19 +177,19 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     protected void onResume() {
         super.onResume();
-        bmapView.onResume();
+        //bmapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        bmapView.onPause();
+        //bmapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bmapView.onDestroy();
+        //bmapView.onDestroy();
     }
 
     public class MyBDA extends BDAbstractLocationListener {
