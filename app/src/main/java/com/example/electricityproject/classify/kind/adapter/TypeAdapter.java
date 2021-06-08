@@ -14,8 +14,7 @@ import com.example.electricityproject.details.DetailsActivity;
 
 import java.util.List;
 
-public
-class TypeAdapter extends BaseAdapter<Object> {
+public class TypeAdapter extends BaseAdapter<Object> {
 
     private Context context;
     public TypeAdapter(Context context) {
@@ -66,7 +65,6 @@ class TypeAdapter extends BaseAdapter<Object> {
                     }
 
                 });
-
 
                 break;
             case 1:

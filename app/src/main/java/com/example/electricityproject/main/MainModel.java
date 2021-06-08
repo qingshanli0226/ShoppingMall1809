@@ -24,14 +24,11 @@ public class MainModel implements BusinessARouter.iAppManager {
             }
         }
         Intent intent = new Intent(context, MainActivity.class);
-
         if (context instanceof Activity) {
             context.startActivity(intent);
         } else {
-
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-
         }
     }
 
@@ -41,7 +38,6 @@ public class MainModel implements BusinessARouter.iAppManager {
         if (context instanceof Activity) {
             context.startActivity(intent);
         } else {
-
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
