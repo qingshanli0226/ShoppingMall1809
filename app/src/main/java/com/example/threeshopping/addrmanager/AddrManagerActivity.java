@@ -69,6 +69,25 @@ public class AddrManagerActivity extends BaseActivity<BindPresenter> implements 
                 bundle.putInt(Constants.DEFAULT_ADDR,position);
                 CommonArouter.getInstance().build(Constants.PATH_BIND).with(bundle).navigation();
             }
+
+
+        });
+
+
+        //删除
+        addrAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
+            @Override
+            public void onItemClick(int position, View view) {
+                Toast.makeText(AddrManagerActivity.this, "单机", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public boolean onLongItemClick(int position, View view) {
+                Toast.makeText(AddrManagerActivity.this, "长点", Toast.LENGTH_SHORT).show();
+                LogUtil.d("zybp"+position);
+                CacheAddrManager.getInstance().removeOne(addrAdapter.getData().get(position),position);
+                return true;
+            }
         });
     }
     //全部
@@ -78,7 +97,14 @@ public class AddrManagerActivity extends BaseActivity<BindPresenter> implements 
     }
     //刷新一个
     @Override
-    public void onrefreshOne(int position) {
+    public void onrefreshOne(int position,boolean isDelect) {
+        LogUtil.d("zyb"+position);
+        LogUtil.d("zyb"+CacheAddrManager.getInstance().getAddrBeans().size());
+        LogUtil.d("zyb=====================================");
+        LogUtil.d("zyb"+addrAdapter.getData().size());
+        if(isDelect){
+            addrAdapter.notifyItemRemoved(position);
+        }
         addrAdapter.notifyItemChanged(position);
     }
 
@@ -92,7 +118,6 @@ public class AddrManagerActivity extends BaseActivity<BindPresenter> implements 
 
     @Override
     public void onClickRight() {
-        super.onClickRight();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.ADD_ADDR,null);
         bundle.putString(Constants.PHONE_ADDR,null);

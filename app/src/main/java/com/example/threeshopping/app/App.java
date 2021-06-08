@@ -68,7 +68,7 @@ public class App extends Application {
         CacheMessageManager.getInstance().init(this);
         CacheConnectManager.getInstance().init(this);//网络
 
-        //ShopCrashHandler.getInstance().init(this);//错误上报
+        ShopCrashHandler.getInstance().init(this);//错误上报
         //激光推送
         //JPushInterface.setDebugMode(true);
         //JPushInterface.init(this);

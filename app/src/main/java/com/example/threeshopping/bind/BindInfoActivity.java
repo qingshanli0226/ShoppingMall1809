@@ -178,7 +178,6 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
         if(oneFlag && twoFlag){
             if(position != -1){
                 update();
-
             } else{
                 addAddr();
 
@@ -194,7 +193,6 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
                 update();
             } else{
                 addAddr();
-
             }
         }
     }

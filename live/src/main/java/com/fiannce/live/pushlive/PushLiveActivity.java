@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.common.LogUtil;
 import com.example.framework.BaseActivity;
 import com.fiannce.live.R;
 import com.tencent.live2.V2TXLiveDef;
@@ -56,7 +57,7 @@ public class PushLiveActivity extends BaseActivity {
                 String rtmpURL = "rtmp://3891.livepush.myqcloud.com/live/3891_user_a3954fab_d1eb?bizid=3891&txSecret=73e289071ee163c678c8b370c763b98d&txTime=60BDB6FA"; //此处填写您的 rtmp 推流地址
                 int ret = mLivePusher.startPush(rtmpURL.trim());
                 if (ret == V2TXLIVE_ERROR_INVALID_LICENSE) {
-                    Toast.makeText(PushLiveActivity.this, "检验失败", Toast.LENGTH_SHORT).show();
+                    LogUtil.d("检验失败");
                 }
             }
         });

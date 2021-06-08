@@ -24,8 +24,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
     }
 
     public void updata(List<T> data){
-        this.data.clear();
-        this.data.addAll(data);
+        this.data = data;
         notifyDataSetChanged();
     }
 

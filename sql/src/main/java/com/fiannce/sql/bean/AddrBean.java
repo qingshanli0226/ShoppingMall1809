@@ -57,14 +57,5 @@ public class AddrBean {
         this.isDefault = isDefault;
     }
 
-    @Override
-    public String toString() {
-        return "AddrBean{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", addr='" + addr + '\'' +
-                ", phone='" + phone + '\'' +
-                ", isDefault=" + isDefault +
-                '}';
-    }
+
 }

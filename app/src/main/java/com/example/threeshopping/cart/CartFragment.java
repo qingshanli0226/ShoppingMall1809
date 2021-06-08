@@ -1,6 +1,7 @@
 package com.example.threeshopping.cart;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -82,7 +83,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
     }
 
-    private List<CartBean.ResultBean> carts;
 
     @Override
     protected void initData() {
@@ -103,7 +103,7 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
 
         //注册
         CacheShopManager.getInstance().registerCart(this);
-        carts = CacheShopManager.getInstance().getCarts();
+        List<CartBean.ResultBean> carts = CacheShopManager.getInstance().getCarts();
         isLayoutShow(carts);
         //获取数据
         cartAdapter = new CartAdapter();
@@ -211,7 +211,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                     }
                 }
                 LoginBean.ResultBean result = CacheUserManager.getInstance().getLoginBean().getResult();
-                LogUtil.d("zyb" + result.getPhone() + "   " + result.getAddress());
                 //判断是否选中
                 if (body.size() >= 1) {
                     //选中一个
@@ -280,7 +279,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     //购物车数据
     @Override
     public void onShowCart(List<CartBean.ResultBean> carts) {
-        this.carts = carts;
         cartAdapter.updata(carts);
         EventBean eventBean = new EventBean(1, 1, "小红点");
         EventBus.getDefault().post(eventBean);
@@ -363,8 +361,8 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     //删除一个
     @Override
     public void onRemoveProduct(int position) {
-        cartAdapter.getData().remove(position);
         cartAdapter.notifyItemRemoved(position);
+        cartAdapter.notifyItemChanged(position);
         //再次更新小远点
         EventBean eventBean = new EventBean(1, 1, "小红点");
         EventBus.getDefault().post(eventBean);
@@ -387,10 +385,10 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     @Override
     public void onAddCart(int position) {
         if (position > cartAdapter.getData().size()) {
-            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position - 1));
+//            cartAdapter.getData().add(CacheShopManager.getInstance().getCarts().get(position - 1));
             cartAdapter.notifyItemChanged(position - 1);
         } else {
-            cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
+//            cartAdapter.getData().get(position).setProductNum(CacheShopManager.getInstance().getCarts().get(position).getProductNum());
             cartAdapter.notifyItemChanged(position);
         }
         isLayoutShow(cartAdapter.getData());

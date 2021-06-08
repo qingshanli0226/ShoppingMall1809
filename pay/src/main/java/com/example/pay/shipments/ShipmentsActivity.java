@@ -91,7 +91,17 @@ public class ShipmentsActivity extends BaseActivity<ShipmentPresenter> implement
                 return false;
             }
         });
+        shipmentAdapter.setRvItemOnClickListener(new BaseRvAdapter.IRvItemOnClickListener() {
+            @Override
+            public void onItemClick(int position, View view) {
+                CommonArouter.getInstance().build(Constants.PATH_MAP).navigation();
+            }
 
+            @Override
+            public boolean onLongItemClick(int position, View view) {
+                return false;
+            }
+        });
     }
 
     @Override

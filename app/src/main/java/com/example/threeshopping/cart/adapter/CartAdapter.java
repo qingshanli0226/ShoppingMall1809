@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.common.LogUtil;
 import com.example.framework.BaseRvAdapter;
 import com.example.framework.view.ShopmallGlide;
 import com.example.net.bean.CartBean;
@@ -29,6 +30,8 @@ public class CartAdapter extends BaseRvAdapter<CartBean.ResultBean> {
 
     @Override
     protected void displayViewHolder(BaseViewHolder holder, int position, CartBean.ResultBean itemView) {
+        LogUtil.d("zyb长度"+getData().size());
+        LogUtil.d("zyb下标"+position);
         ImageView shopCartCheck = holder.getView(R.id.shopCartCheck);
         ImageView shopCartImg = holder.getView(R.id.shopCartImg);
         TextView shopCartTitle = holder.getView(R.id.shopCartTitle);

@@ -6,6 +6,6 @@ import com.example.map.checklog.CheckLogActivity;
 
 public class MapModule {
     public static void init(){
-        CommonArouter.getInstance().registerPath(Constants.PATH_BIND, CheckLogActivity.class);
+        CommonArouter.getInstance().registerPath(Constants.PATH_MAP, CheckLogActivity.class);
     }
 }

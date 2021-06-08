@@ -54,6 +54,7 @@ public class AddrAdapter extends BaseRvAdapter<AddrBean> {
                 }
             }
         });
+
     }
 
     public interface IAddrListener{
