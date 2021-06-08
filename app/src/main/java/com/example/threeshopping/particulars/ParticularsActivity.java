@@ -43,6 +43,8 @@ import com.example.threeshopping.particulars.detail.IDetailView;
 import com.example.user.user.UserActivity;
 import com.fiannce.sql.bean.SqlBean;
 import com.fiannce.sql.manager.SqlManager;
+import com.shuyu.gsyvideoplayer.render.view.GSYVideoGLView;
+import com.shuyu.gsyvideoplayer.video.GSYADVideoPlayer;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -82,6 +84,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
     private ImageView popheadShare;
     private ImageView popheadLive;
     private ImageView popheadVideo;
+    private com.shuyu.gsyvideoplayer.video.GSYADVideoPlayer gsyv;
 
     @Override
     public int getLayoutId() {
@@ -118,6 +121,7 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         particulars = (RelativeLayout) findViewById(R.id.particulars);
 
 
+        gsyv = (GSYADVideoPlayer) findViewById(R.id.gsyv);
     }
 
 
@@ -143,7 +147,15 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
         paricularsPrice.setText("￥" + price);
 
         loginBean = CacheUserManager.getInstance().getLoginBean();
-
+        paricularsImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paricularsImg.setVisibility(View.GONE);
+                gsyv.setVisibility(View.VISIBLE);
+                gsyv.setUp("http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8",false,"");
+                gsyv.startPlayLogic();
+            }
+        });
 
         particularsJoin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,8 +261,6 @@ public class ParticularsActivity extends BaseActivity<DetailPresenter> implement
                 }
             }
         });
-
-
     }
 
 

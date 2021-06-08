@@ -7,6 +7,7 @@ import com.example.net.bean.CartBean;
 import com.example.net.bean.CheckNumAll;
 import com.example.net.bean.LabelBean;
 import com.example.net.bean.LoginBean;
+import com.example.net.bean.LogoutBean;
 import com.example.net.bean.OrderBean;
 import com.example.net.bean.RegisterBean;
 
@@ -55,7 +56,9 @@ public interface IHttpApiService {
     //首页
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomeData();
-
+    //退出登录
+    @GET(Constants.LOGOUT)
+    Observable<LogoutBean> getLogout();
     //分类
     @GET
     Observable<TypeBean> getType(@Url String url);

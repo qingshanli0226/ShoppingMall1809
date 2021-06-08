@@ -30,6 +30,7 @@ public class Constants {
     public static final String LOGIN = "login";//登录
     public static final String USERREGISTER = "register";//注册
     public static final String AUTOLOGIN = "autoLogin";//自动登录
+    public static final String LOGOUT = "logout";//退出登录
     //代付款
     public static final String AWAITPAYMENT = "findForPay";
     //代发货
@@ -88,6 +89,10 @@ public class Constants {
     public static final String PATH_ADDRMANAGER = "/app/AddrManagerActivity";
     //绑定页面
     public static final String PATH_BIND = "/app/BindInfoActivity";
+    //设置
+    public static final String PATH_SETTING = "/app/SettingActivity";
+    //
+    public static final String PATH_INFORMATION = "/app/PersonalinformationActivity";
     //信息
     public static final String PATH_MESSAGE = "/pay/MessageActivity";
     //待付款

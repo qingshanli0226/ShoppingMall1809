@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CacheAddrManager {
+public class  CacheAddrManager {
 
     private static CacheAddrManager cacheAddrManager;
 

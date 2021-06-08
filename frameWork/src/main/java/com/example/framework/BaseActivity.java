@@ -53,8 +53,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
         ActManager.getActManager().register(this);
 
-
-
         CacheConnectManager.getInstance().registerConnectListener(this);
 
         initView();

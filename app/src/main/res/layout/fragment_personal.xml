@@ -28,6 +28,7 @@
             android:layout_centerInParent="true"
             ></ImageView>
         <ImageView
+            android:id="@+id/setting"
             android:layout_width="@dimen/dm_dp_50"
             android:layout_height="@dimen/dm_dp_50"
             android:src="@drawable/new_user_setting"

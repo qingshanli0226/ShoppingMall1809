@@ -26,7 +26,6 @@ public class UserPresenter  extends BasePresenter<IUserView> {
     public void getRegister(String name,String password){
         RetrofitManager.getHttpApiService()
                 .getRegister(name,password)
-                .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -73,7 +72,6 @@ public class UserPresenter  extends BasePresenter<IUserView> {
     public void getLogin(String name,String password){
         RetrofitManager.getHttpApiService()
                 .getLogin(name,password)
-                .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

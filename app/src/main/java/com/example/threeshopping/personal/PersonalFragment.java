@@ -19,6 +19,7 @@ public class PersonalFragment extends BaseFragment {
     private ImageView payment;
     private ImageView shipments;
     private LinearLayout personAddr;
+    private ImageView setting;
 
     @Override
     protected int getLayoutId() {
@@ -32,6 +33,7 @@ public class PersonalFragment extends BaseFragment {
         payment = (ImageView) rootView.findViewById(R.id.payment);//待付款
         shipments = (ImageView) rootView.findViewById(R.id.shipments);//待发货
         personAddr = (LinearLayout) findViewById(R.id.personAddr);
+        setting = (ImageView) findViewById(R.id.setting);
     }
 
     @Override
@@ -59,6 +61,13 @@ public class PersonalFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 CommonArouter.getInstance().build(Constants.PATH_ADDRMANAGER).navigation();
+            }
+        });
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonArouter.getInstance().build(Constants.PATH_SETTING).navigation();
             }
         });
     }

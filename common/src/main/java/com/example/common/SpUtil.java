@@ -29,4 +29,15 @@ public class SpUtil {
         edit.putInt(Constants.SP_READ_NUM, num);
         edit.commit();
     }
+
+    public static void clean(Context context){
+        SharedPreferences readnum = context.getSharedPreferences("readnum", Context.MODE_PRIVATE);
+        SharedPreferences.Editor readnumedit = readnum.edit();
+        readnumedit.clear();
+        readnumedit.commit();
+        SharedPreferences autologin = context.getSharedPreferences("autologin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor autologinedit = autologin.edit();
+        autologinedit.clear();
+        autologinedit.commit();
+    }
 }

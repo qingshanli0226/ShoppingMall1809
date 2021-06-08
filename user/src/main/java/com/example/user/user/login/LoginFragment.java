@@ -170,13 +170,7 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
 
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
 
-
             CacheUserManager.getInstance().setLoginBean(loginBean);
-            getActivity().finish();
-
-            CacheUserManager.getInstance().setLoginBean(loginBean);
-
-
             getActivity().finish();
 
             Bundle bundle = new Bundle();

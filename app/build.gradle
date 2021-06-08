@@ -81,6 +81,7 @@ dependencies {
     implementation 'me.jessyan:autosize:1.2.1'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.shuyu:GSYVideoPlayer:8.1.0'
     implementation project(path: ':live')
     implementation files('libs/umeng-share-core-6.9.6.jar')
     implementation files('libs/umeng-share-QQ-simplify-6.9.6.jar')
