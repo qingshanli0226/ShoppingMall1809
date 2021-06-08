@@ -47,8 +47,6 @@ public abstract class LoadingPage extends FrameLayout {
         loadingView = inflter.inflate(R.layout.view_loading, null);
         addView(loadingView,layoutParams);
         showSuccessView();
-
-
     }
 
 
@@ -57,7 +55,6 @@ public abstract class LoadingPage extends FrameLayout {
     public void showLoadingView(){
         errorView.setVisibility(GONE);
         successView.setVisibility(GONE);
-//        loadingView.setBackgroundColor(Color.RED);
         loadingView.setVisibility(VISIBLE);
     }
 
@@ -83,6 +80,5 @@ public abstract class LoadingPage extends FrameLayout {
         showErrorView();
         errorTV.setText(errorInfo);
     }
-
 
 }

@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.LogUtils;
-
 public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
 
     private static ShopmallCrashHandler shopmallCrashHandler;
@@ -39,13 +37,9 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
             public void run() {
                 Looper.prepare();
                 Toast.makeText(context, "出现了一个意料之外的错，请重新启动", Toast.LENGTH_SHORT).show();
-
                 Looper.loop();
-
             }
         }).start();
-
-        LogUtils.json(e+"aaa");
 
         try {
             Thread.sleep(3 * 1000);
@@ -55,11 +49,7 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
 
         for (Activity activity: ActivityManger.getInstance().getActivity()) {
             activity.finish();
-            LogUtils.json(e+"bbb");
-
         }
-        LogUtils.json(e+"eee");
-
         System.exit(1);
 
     }

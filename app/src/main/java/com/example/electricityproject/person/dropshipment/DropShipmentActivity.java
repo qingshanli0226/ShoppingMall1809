@@ -18,10 +18,8 @@ public class DropShipmentActivity extends BaseActivity implements ShopCacheMange
     private DropShipmentAdapter dropShipmentAdapter;
     private List<FindForSendBean.ResultBean> findShopList;
 
-
     @Override
     protected void initData() {
-
         toolbar.setToolbarListener(new ToolBar.IToolbarListener() {
             @Override
             public void onLeftClick() {
@@ -93,4 +91,5 @@ public class DropShipmentActivity extends BaseActivity implements ShopCacheMange
         dropShipmentAdapter.updateData(findShopList);
         dropShipmentAdapter.notifyDataSetChanged();
     }
+
 }

@@ -8,21 +8,25 @@ import java.util.TimerTask;
 
 public class AdvertActivity extends BaseActivity {
 
-
     @Override
     protected void initData() {
         Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            int time = 0;
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                time++;
-                if (time==3){
-                    timer.cancel();
-                    finish();
-                }
+                timer.schedule(new TimerTask() {
+                    int time = 0;
+                    @Override
+                    public void run() {
+                        time++;
+                        if (time==3){
+                            timer.cancel();
+                            finish();
+                        }
+                    }
+                },1000,1000);
             }
-        },1000,1000);
+        }).start();
     }
 
     @Override

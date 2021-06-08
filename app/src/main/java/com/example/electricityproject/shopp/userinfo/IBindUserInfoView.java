@@ -6,7 +6,6 @@ import com.example.framework.IBaseView;
 
 public
 interface IBindUserInfoView extends IBaseView {
-
     void updatePhone(UpdatePhoneBean updatePhoneBean);
     void updateAddress(UpdateAddress updateAddress);
 }

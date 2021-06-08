@@ -40,7 +40,6 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
     private LinearLayout tell;
     private LinearLayout feedback;
 
-
     @Override
     protected void initData() {
         httpPresenter = new PersonPresenter(this);
@@ -49,21 +48,18 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
             @Override
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-
                 if (BusinessUserManager.getInstance().getIsLog() != null) {
                     pleaseLogin.setText(isLog.getResult().getName() + "");
-                    Toast.makeText(getContext(), "当前" + isLog.getResult().getName() + "用户已经登陆", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.person_now) + isLog.getResult().getName() + getResources().getString(R.string.person_Already_Login), Toast.LENGTH_SHORT).show();
                 } else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
                 }
             }
         });
-
         //代付款
         orderPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (BusinessUserManager.getInstance().getIsLog() != null) {
                     Intent intent = new Intent(getContext(), FindForPayActivity.class);
                     startActivity(intent);
@@ -72,12 +68,10 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                 }
             }
         });
-
         //待收货
         orderShipment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (BusinessUserManager.getInstance().getIsLog() != null) {
                     startActivity(new Intent(getActivity(), DropShipmentActivity.class));
                 } else {
@@ -99,25 +93,24 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
             @Override
             public void onClick(View v) {
                 if (BusinessUserManager.getInstance().getIsLog()==null){
-                    Toast.makeText(getActivity(), "当前还未登录,无需退出", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.person_no_NoLogin), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("退出登录?");
-                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                builder.setTitle(getResources().getString(R.string.person_exit_login));
+                builder.setPositiveButton(getResources().getString(R.string.person_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         httpPresenter.outLogin();
                     }
                 });
-                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getResources().getString(R.string.person_no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 });
                 builder.show();
-
             }
         });
 
@@ -125,12 +118,10 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         tell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
                 intent.setData(Uri.parse("tel:"+10086));
                 startActivity(intent);
-
             }
         });
         feedback.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +151,6 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                 }else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
                 }
-
             }
         });
     }
@@ -179,13 +169,12 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         liveStreaming = mView.findViewById(R.id.liveStreaming);
         feedback = mView.findViewById(R.id.feedback);
         tell = mView.findViewById(R.id.tell);
-
+        //加入动态权限
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             requestPermissions(new String[]{
                     Manifest.permission.CALL_PHONE
             },100);
         }
-
     }
 
     @Override
@@ -203,9 +192,8 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
 
     @Override
     public void showError(String error) {
-        Log.i("zx", "showError: " + error);
-    }
 
+    }
 
     @Override
     public void onLoginChange(LogBean isLog) {
@@ -214,19 +202,13 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         }
     }
 
-
     @Override
     public void outLogin(OutLogBean outLogBean) {
-        Log.i("zx", "outLogin: "+outLogBean.toString());
         if (outLogBean.getCode().equals("200")){
-
-            pleaseLogin.setText("未登录");
+            pleaseLogin.setText(getResources().getString(R.string.person_no_Login));
             TokenSPUtility.putString(getContext(),null);
             BusinessUserManager.getInstance().setIsLog(null);
             EventBus.getDefault().post("outLog");
-
         }
     }
-
-
 }

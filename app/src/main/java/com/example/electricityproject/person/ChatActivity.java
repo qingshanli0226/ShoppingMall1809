@@ -17,12 +17,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(arg0);
         setContentView(R.layout.activity_chat_activity);
         activityInstance = this;
-
-        //use EaseChatFratFragment
         chatFragment = new EaseChatFragment();
-        //pass parameters to chat fragment
         chatFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
-
     }
 }

@@ -1,6 +1,7 @@
 package com.example.electricityproject.shopp.userinfo;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.UpdateAddress;
@@ -23,7 +24,6 @@ public class BindUserInfoPresenter extends BasePresenter<IBindUserInfoView> {
     }
 
     public void postUpdatePhoneData(String phone){
-
         RetrofitCreate.getFiannceApiService()
                 .setUpdatePhone(phone)
                 .subscribeOn(Schedulers.io())
@@ -56,7 +56,7 @@ public class BindUserInfoPresenter extends BasePresenter<IBindUserInfoView> {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i("zrf", "onError: "+e.getMessage());
+
                     }
 
                     @Override

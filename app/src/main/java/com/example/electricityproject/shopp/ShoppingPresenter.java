@@ -66,8 +66,6 @@ class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     public void onNext(@NonNull ShortcartProductBean shortcartProductBean) {
                         if (IView != null) {
                             IView.getShortProductData(shortcartProductBean);
-                            List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-
                         }
                     }
 

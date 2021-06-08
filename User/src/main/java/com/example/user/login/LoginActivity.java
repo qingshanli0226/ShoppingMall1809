@@ -89,13 +89,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         if (logBean.getCode().equals("200")){
             //如果手动登录成功把当前token存入sp
             TokenSPUtility.putString(LoginActivity.this,logBean.getResult().getToken());
-
             ShopCacheManger.getInstance().requestShortProductData();
             BusinessUserManager.getInstance().setLogList(logBean.getResult());
             BusinessUserManager.getInstance().setIsLog(logBean);
             ShopCacheManger.getInstance().isBind(logBean);
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
-
         }
     }
 

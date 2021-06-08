@@ -64,8 +64,6 @@ public class MessageDataBase {
         List<MessageTable> messageTables = getMessageTableDao().loadAll();
         return messageTables;
     }
-
-
     //注册
     public synchronized void register(MessageDataBase.iMessageListener iMessageListener){
         synchronized (MessageDataBase.class) {
@@ -78,8 +76,6 @@ public class MessageDataBase {
             messageListeners.remove(iMessageListener);
         }
     }
-
-
     //支付信息接口刷新
     public void MessageNotify(){
         for (MessageDataBase.iMessageListener messageListener : messageListeners) {
@@ -87,10 +83,8 @@ public class MessageDataBase {
         }
     }
 
-
     public interface iMessageListener {
         void onMessageNumListener();
     }
-
 
 }

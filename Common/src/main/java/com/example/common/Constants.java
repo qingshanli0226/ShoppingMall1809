@@ -2,8 +2,6 @@ package com.example.common;
 
 public class Constants {
 
-
-
     public static final String BASE_URL="http://49.233.0.68:8080";
     public static final String BASE_URL_JSON ="/atguigu/json/";
     public static final String BASE_URl_IMAGE =BASE_URL+"/atguigu/img";
@@ -30,20 +28,13 @@ public class Constants {
     //游戏专区
     public static final String GAME_URL = BASE_URL_JSON + "GAME_URL.json";
 
-
-
-
-
-
     //主页Fragment路径
     public static final String HOME_URL = BASE_URL_JSON + "HOME_URL.json";
     //分类Fragment里面的标签Fragment页面数据
     public static final String TAG_URL = BASE_URL_JSON + "TAG_URL.json";
 
-
     public static final String NEW_POST_URL = BASE_URL_JSON + "NEW_POST_URL.json";
     public static final String HOT_POST_URL = BASE_URL_JSON + "HOT_POST_URL.json";
-
 
     //页面的具体数据的id
     public static final String GOODSINFO_URL = BASE_URL_JSON + "GOODSINFO_URL.json";
@@ -67,11 +58,7 @@ public class Constants {
     //首饰厂
     public static final String SHOUSHI_STORE = BASE_URL_JSON + "SHOUSHI_STORE.json";
 
-
-
     public static Boolean isBackHome = false;
-
-
 
     //客服数据
     public static final String CALL_CENTER = "http://www6.53kf.com/webCompany.php?arg=10007377&style=1&kflist=off&kf=info@atguigu.com,video@atguigu.com,public@atguigu.com,3069368606@qq.com,215648937@qq.com,sudan@atguigu.com,sszhang@atguigu.com&zdkf_type=1&language=zh-cn&charset=gbk&referer=http%3A%2F%2Fwww.atguigu.com%2Fcontant.shtml&keyword=&tfrom=1&tpl=crystal_blue&timeStamp=1479001706368&ucust_id=";

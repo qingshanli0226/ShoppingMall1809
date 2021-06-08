@@ -25,7 +25,6 @@ public class SPMessageNum {
 
     //初始化
     public void init(Context context){
-
         DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
         List<MessageTable> messageTables = MessageDataBase.getInstance().payLoadAll();
         MessageManager.getInstance().setMessageTableList(messageTables);
@@ -33,17 +32,13 @@ public class SPMessageNum {
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putInt(MESSAGE_EDIT_MESSAGENUM,messageTables.size());
         edit.commit();
-
     }
 
     //查询数据库的数量
     public int queryMessageNum(Context context){
-
         SharedPreferences sharedPreferences = context.getSharedPreferences(MESSAGE_SPName, context.MODE_PRIVATE);
         num = sharedPreferences.getInt(MESSAGE_EDIT_MESSAGENUM, 0);
-
         return num;
-
     }
     //数据库数量加一
     public void addShopNum(int i){
@@ -53,14 +48,9 @@ public class SPMessageNum {
     public void subShopNum(int i){
         num=num-i;
     }
-
     //返回数据库的数量
     public int getShopNum(){
         return num;
     }
-
-
-
-
 
 }

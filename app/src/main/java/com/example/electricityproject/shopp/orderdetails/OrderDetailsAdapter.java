@@ -13,7 +13,6 @@ public
 class OrderDetailsAdapter extends BaseAdapter<ShortcartProductBean.ResultBean> {
     @Override
     public int getLayoutId(int viewType) {
-
         return R.layout.item_order;
     }
 
@@ -28,9 +27,6 @@ class OrderDetailsAdapter extends BaseAdapter<ShortcartProductBean.ResultBean> {
         TextView order_num = baseViewHolder.getView(R.id.order_num);
         order_num.setText("数量:"+itemData.getProductNum());
     }
-
-
-
 
     @Override
     public int getRootViewType(int position) {

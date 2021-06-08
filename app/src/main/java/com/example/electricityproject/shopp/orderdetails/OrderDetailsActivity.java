@@ -42,7 +42,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private static final int SDK_AUTH_FLAG = 2;
     private String outTradeNo;
     private String orderInfo;
-    private String moneyValue;
 
 
     private com.example.view.ToolBar toolbar;
@@ -76,8 +75,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     @Override
     public void onLeftClick() {
         super.onLeftClick();
-        Toast.makeText(OrderDetailsActivity.this, "返回", Toast.LENGTH_SHORT).show();
-        list.clear();
         finish();
     }
 
@@ -95,8 +92,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                     LogUtils.i(resultStatus+"");
                     if (TextUtils.equals(resultStatus, "9000")) {
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,true);
-                        payMsg="支付成功";
-                        Toast.makeText(OrderDetailsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        payMsg = getResources().getString(R.string.orderDetails_pay_success);
+                        Toast.makeText(OrderDetailsActivity.this,""+payMsg, Toast.LENGTH_SHORT).show();
 
                         FindForSendBean.ResultBean resultBean = new FindForSendBean.ResultBean();
                         resultBean.setTradeNo(outTradeNo);
@@ -113,9 +110,9 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         EventBus.getDefault().post("del");
 
                     } else {
-                        payMsg="支付失败";
+                        payMsg = getResources().getString(R.string.orderDetails_pay_fail);
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
-                        Toast.makeText(OrderDetailsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDetailsActivity.this, ""+payMsg, Toast.LENGTH_SHORT).show();
 
                         FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
                         resultBean.setOrderInfo(orderInfo);
@@ -243,6 +240,5 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
         super.onDestroy();
         MessageDataBase.getInstance().unregister(this);
         ShopCacheManger.getInstance().setList(null);
-
     }
 }

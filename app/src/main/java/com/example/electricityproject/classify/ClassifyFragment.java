@@ -23,17 +23,13 @@ public class ClassifyFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
         fragmentList.add(new KindFragment());
         fragmentList.add(new TagFragment());
-
-        stringList.add("分类");
-        stringList.add("标签");
-
+        stringList.add(getResources().getString(R.string.kind_type));
+        stringList.add(getResources().getString(R.string.kind_tag));
         adapter = new MyFragmentAdapter(getChildFragmentManager(),fragmentList,stringList);
         vp.setAdapter(adapter);
         tableLayout.setupWithViewPager(vp);
-
     }
 
     @Override

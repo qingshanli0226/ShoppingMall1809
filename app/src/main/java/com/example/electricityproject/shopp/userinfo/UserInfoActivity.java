@@ -1,7 +1,6 @@
 package com.example.electricityproject.shopp.userinfo;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -39,28 +38,22 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
 
     @Override
     protected void initData() {
-
+        //注册EventBus
         EventBus.getDefault().register(this);
-
         //查找数据
         DaoMaster daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
-
         list = daoMaster.newSession().loadAll(UserInfoTable.class);
-        Log.i("zx", "initData: "+list.toString());
+        //如果list不为空存入recyclerview
         if (list !=null){
             userInfoAdapter = new UserInfoAdapter();
             userInfoAdapter.updateData(this.list);
-            LogUtils.i(this.list.toString());
             bindAddress.setAdapter(userInfoAdapter);
             userInfoAdapter.notifyDataSetChanged();
         }
-
         //点击选择地址
         userInfoAdapter.setRecyclerItemClickListener(new BaseAdapter.iRecyclerItemClickListener() {
             @Override
             public void OnItemClick(int position) {
-                Toast.makeText(UserInfoActivity.this, ""+position, Toast.LENGTH_SHORT).show();
-
                 if (list.get(position).getIsShow()){
                     list.get(position).setIsShow(false);
                 }else {
@@ -74,7 +67,7 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
 
             }
         });
-
+        //点击确定添加
         conAddInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,17 +77,13 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
                         phone = userInfoTable.getPhone();
                     }
                 }
-                LogUtils.i(address+"");
-                LogUtils.i(phone+"");
                 if (address==null){
-                    Toast.makeText(UserInfoActivity.this, "发生了未知的问题,请重新尝试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserInfoActivity.this, getResources().getString(R.string.userInfo_error), Toast.LENGTH_SHORT).show();
                 }else {
                     httpPresenter.postUpdateAddressData(address);
                 }
             }
         });
-
-
     }
 
     @Override
@@ -104,8 +93,6 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
 
     @Subscribe
     public void event(String even){
-        LogUtils.i(even+"");
-
         if (even.equals("bindinfo")){
             daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
             list = daoMaster.newSession().loadAll(UserInfoTable.class);
@@ -154,7 +141,7 @@ public class UserInfoActivity extends BaseActivity<BindUserInfoPresenter> implem
     public void updatePhone(UpdatePhoneBean updatePhoneBean) {
         if (updatePhoneBean.getCode().equals("200")){
             BusinessUserManager.getInstance().setBindTel(phone);
-            Toast.makeText(this, "选择地址成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.userInfo_select_success), Toast.LENGTH_SHORT).show();
             BusinessUserManager.getInstance().setBindTel(true);
             BusinessUserManager.getInstance().setBindAddress(true);
             finish();

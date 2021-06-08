@@ -17,6 +17,7 @@ public class HomePresenter extends BasePresenter<CallHomeData> {
     public HomePresenter(CallHomeData callHomeData) {
         attachView(callHomeData);
     }
+
     public void getHomeBannerData(){
         RetrofitCreate.getFiannceApiService()
                 .getHomeData()
@@ -44,7 +45,6 @@ public class HomePresenter extends BasePresenter<CallHomeData> {
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
-
 
                     @Override
                     public void onNext(@NonNull HomeBean homeBean) {

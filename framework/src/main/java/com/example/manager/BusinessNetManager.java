@@ -13,11 +13,8 @@ import java.util.List;
 public class BusinessNetManager {
 
     private static BusinessNetManager manager;
-
     private List<NetConnectListener> list=new ArrayList<>();
-
     private Context context;
-
     public static BusinessNetManager getInstance() {
         if (manager==null){
 
@@ -75,9 +72,7 @@ public class BusinessNetManager {
         }else {
             isNetConnect=false;
         }
-
     }
-
 
     public interface NetConnectListener{
         void OnConnect();

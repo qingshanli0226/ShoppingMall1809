@@ -1,6 +1,5 @@
 package com.example.electricityproject.shopp;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,16 +31,13 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
         ImageView selectImg = baseViewHolder.itemView.findViewById(R.id.is_select);
         ImageView add = baseViewHolder.getView(R.id.image_add);
         ImageView sub = baseViewHolder.getView(R.id.image_sub);
+        ImageView img = baseViewHolder.getView(R.id.is_select);
 
         shop_name.setText(itemData.getProductName() + "");
         shop_money.setText("￥" + itemData.getProductPrice());
         shop_product_num.setText(itemData.getProductNum() + "");
         selectImg.setImageDrawable(baseViewHolder.itemView.getContext().getDrawable(R.drawable.checkbox_unselected));
-//        ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(BASE_URl_IMAGE + itemData.getUrl()).init((ImageView) baseViewHolder.getView(R.id.shop_image));
-        Log.i("zx", "displayViewHolder: "+Constants.BASE_URl_IMAGE + itemData.getUrl());
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE + itemData.getUrl()).init((ImageView) baseViewHolder.getView(R.id.shop_image));
-
-        ImageView img = baseViewHolder.getView(R.id.is_select);
 
         if (itemData.isAll()) {
             img.setImageResource(R.drawable.checkbox_selected);
@@ -72,8 +68,7 @@ public class ShoppingAdapter extends BaseAdapter<ShortcartProductBean.ResultBean
                }
            }
        });
-}
-
+    }
 
     @Override
     public int getRootViewType(int position) {

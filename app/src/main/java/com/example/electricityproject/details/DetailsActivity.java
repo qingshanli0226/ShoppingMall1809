@@ -83,7 +83,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     protected void initData() {
-
         intent = getIntent();
         name = intent.getStringExtra("name");
         img = intent.getStringExtra("img");
@@ -97,8 +96,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         map.put("url",url);
         map.put("productPrice",price);
         map.put("productName",name);
-
-
         detailsWeb.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -135,7 +132,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             @Override
             public void onRightImgClick() {
-
                 PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
                 popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 popupWindow.setHeight(200);
@@ -144,7 +140,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 //点击pop外的地方，把pop隐藏
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.showAsDropDown(toolbar,0,0);
-
             }
             @Override
             public void onRightTvClick() {
@@ -155,7 +150,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (BusinessUserManager.getInstance().getIsLog()!=null){
                     popupWindow = new PopupWindow();
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -179,7 +173,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         public void onClick(View v) {
                             prod_num = prod_num+1;
                             num.setText(""+prod_num);
-
                         }
                     });
                     //数量减一
@@ -188,14 +181,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         public void onClick(View v) {
                             //判断数量不能小于0
                             if (prod_num < 0){
-                                Toast.makeText(DetailsActivity.this, "库存不可为0", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailsActivity.this, getResources().getString(R.string.details_num), Toast.LENGTH_SHORT).show();
                             }else {
                                 prod_num = prod_num-1;
                                 num.setText(""+prod_num);
                             }
                         }
                     });
-
+                    //点击确定后
                     pop_conf.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -204,7 +197,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             map.put("productNum", String.valueOf(prod_num));
                             httpPresenter.checkOneProductInventory(productId, String.valueOf(prod_num));
                             ShopCacheManger.getInstance().addShopMessageNum(productId,name,productNum+"",url,productPrice,AllSelectManager.getInstance().isSelect());
-
                         }
                     });
 
@@ -212,10 +204,8 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                     popupWindow.showAsDropDown(detailsWeb,0,500 );
 
                 }else {
-
-                    Toast.makeText(DetailsActivity.this, "当前用户未登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailsActivity.this, getResources().getString(R.string.details_personNoLogin), Toast.LENGTH_SHORT).show();
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(DetailsActivity.this,null);
-
                 }
 
             }
@@ -231,6 +221,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
             }
         });
+        //监听购物车数量
         if (ShopCacheManger.getInstance().getShortBeanList()!=null){
             if (ShopCacheManger.getInstance().getShortBeanList().size()>0) {
                 detailsBuyCarNum.setVisibility(View.VISIBLE);
@@ -239,15 +230,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 detailsBuyCarNum.setVisibility(View.GONE);
             }
         }
-
-
-
+        //读取内存的动态权限
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList =new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
             ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
-
     }
 
     @Override
@@ -294,7 +282,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     }
     @Override
     public void onRightImgClick() {
-
         PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(200);
@@ -315,8 +302,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             @Override
                             public void onResult(SHARE_MEDIA share_media) {
 
-
-
                             }
 
                             @Override
@@ -326,30 +311,24 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                                     isSend=true;
                                     SPMessageNum.getInstance().addShopNum(1);
                                     MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
-
                                 }
                             }
-
                             @Override
                             public void onCancel(SHARE_MEDIA share_media) {
                                 if (!isSend){
                                     isSend=true;
                                     //数据库数量加一
                                     SPMessageNum.getInstance().addShopNum(1);
-
                                     MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 用户已取消",System.currentTimeMillis(),false));
                                 }
-
                             }
                         }).open();
-
                 popupWindow.dismiss();
             }
         });
         popupWindow.setContentView(inflate);
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(toolbar,0,0);
-
     }
 
     @Override
@@ -364,25 +343,20 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     public void getAddOneProduct(AddOneProductBean addOneProductBean) {
-
         if (addOneProductBean.getCode().equals("200")){
-
             showBezierAnim(Constants.BASE_URl_IMAGE+img);
             String result = addOneProductBean.getResult();
             //ShopCacheManger.getInstance().requestShortProductData();
-
         }
     }
 
     @Override
     public void checkOneProductInventory(RegBean checkInventoryBean) {
         if (checkInventoryBean.getCode().equals("200")){
-
             String result = checkInventoryBean.getResult();
             if (!result.equals("0")){
                 httpPresenter.postAddOneProduct(map);
             }
-
         }
     }
 
@@ -396,9 +370,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
         //起始点坐标
         int[] startLoa = new int[2];
-//        startLoa[0] = 600;
-//        startLoa[1] = -1100;
-
         detailsWeb.getLocationInWindow(startLoa);
 
         //终点坐标
@@ -431,16 +402,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 pathMeasure.getPosTan(value,nextLocation,null);
                 imageView.setTranslationX(nextLocation[0]);
                 imageView.setTranslationY(nextLocation[1]);
-
                 float v = value / pathMeasure.getLength();
                 imageView.setAlpha(1-v);
-
                 imageView.setScaleX(2*v);
                 imageView.setScaleY(2*v);
-
             }
         });
-
         valueAnimator.start();
     }
 
@@ -449,6 +416,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         super.destroy();
         ShopCacheManger.getInstance().unregisterShopBeanChange(this);
     }
+
     //购物车数量发生改成时
     @Override
     public void OnShopBeanChange() {

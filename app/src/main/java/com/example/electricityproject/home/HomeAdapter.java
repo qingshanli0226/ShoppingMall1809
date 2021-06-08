@@ -3,7 +3,6 @@ package com.example.electricityproject.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +32,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeAdapter extends BaseAdapter<Object> {
+
     private final int BANNER_TYPE=0;
     private final int CHANNEL_TYPE=1;
     private final int ACT_TYPE=2;
@@ -44,6 +44,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
     private Long start_time;
     private Long end_time;
     private long l;
+
     @Override
     public int getLayoutId(int viewType) {
         int layoutId=-1;
@@ -100,7 +101,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 channnel_re.setAdapter(channelAdapter);
                 channnel_re.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.VERTICAL));
                 channelAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
-
                     @Override
                     public void OnItemClick(int position) {
                         Toast.makeText(baseViewHolder.itemView.getContext(), ""+channelInfoBeans.get(position).getChannel_name(), Toast.LENGTH_SHORT).show();
@@ -117,12 +117,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 List<HomeBean.ResultBean.ActInfoBean> actInfoBeans= (List<HomeBean.ResultBean.ActInfoBean>) itemData;
                 RecyclerView act_re = baseViewHolder.getView(R.id.act_re);
                 ActAdapter actAdapter = new ActAdapter();
-
-
                 act_re.setLayoutManager(ActLayoutManager);
                 actAdapter.updateData(actInfoBeans);
                 act_re.setAdapter(actAdapter);
-
                 actAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
                     @Override
                     public void OnItemClick(int position) {
@@ -272,6 +269,7 @@ public class HomeAdapter extends BaseAdapter<Object> {
         }
         return type;
     }
+
     public String Current(Long i){
         String str="HH:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);

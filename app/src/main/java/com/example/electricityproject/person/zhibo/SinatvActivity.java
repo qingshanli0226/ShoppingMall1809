@@ -6,7 +6,6 @@ import com.example.view.ToolBar;
 
 public class SinatvActivity extends BaseActivity {
 
-
     private com.example.view.ToolBar toolbar;
 //    private com.tencent.rtmp.ui.TXCloudVideoView videoView;
 //    private android.widget.Button push;
@@ -36,11 +35,9 @@ public class SinatvActivity extends BaseActivity {
 //        mLivePusher.setConfig(mLivePushConfig);
 //        mLivePusher.startCameraPreview(pusherTxCloudView);//将流预览到videoview
 //
-//
 //        TXLivePlayer mLivePlayer = new TXLivePlayer(this);
 ////关键 player 对象与界面 view
 //        mLivePlayer.setPlayerView(videoView);
-//
 //
 //        push.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -74,10 +71,8 @@ public class SinatvActivity extends BaseActivity {
 ////关键 player 对象与界面 view
 //        mLivePlayer.setPlayerView(videoView);
 
-
 //        String flvUrl = "http://ivi.bupt.edu.cn/hls/cctv9hd.m3u8";
 //        mLivePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_VOD_FLV); //推荐 FLV
-
     }
 
     @Override
@@ -114,8 +109,6 @@ public class SinatvActivity extends BaseActivity {
     public void showError(String error) {
 
     }
-
-
 
     @Override
     protected void onDestroy() {

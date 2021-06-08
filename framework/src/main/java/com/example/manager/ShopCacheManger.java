@@ -1,7 +1,6 @@
 package com.example.manager;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.common.LogUtils;
@@ -26,7 +25,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     private static ShopCacheManger cacheManger;
     //商品数量
     private String productNum;
-
     //购物车所有数据缓存
     private List<ShortcartProductBean.ResultBean> shortBeanList = new ArrayList<>();
     //选中商品缓存
@@ -45,12 +43,10 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     private List<iFindShopChangeListener> findShopChangeListeners = new ArrayList<>();
     //待支付数据发生改变时
     private List<iFindPayChangeListener> findPayChangeListeners = new ArrayList<>();
-
     //待发货商品数据缓存
     private List<FindForSendBean.ResultBean> findShopList = new ArrayList<>();
     //带支付商品数据缓存
     private List<FindForPayBean.ResultBean> findPayList = new ArrayList<>();
-
 
     private Context mContext;
 
@@ -62,10 +58,10 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         }
         return cacheManger;
     }
+
     public void init(Context context){
         this.mContext=context;
         BusinessUserManager.getInstance().Register(this);
-
     }
 
     public List<FindForSendBean.ResultBean> getFindShopList() {
@@ -103,6 +99,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
             findShopChangeListener.OnFindShopChange();
         }
     }
+
     //删除待支付的数据 遍历接口刷新
     public void removeFindPay(FindForPayBean.ResultBean resultBean){
         findPayList.remove(resultBean);
@@ -137,9 +134,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         findPayChangeListeners.remove(iFindPayChangeListener);
     }
 
-
-
-
     //判断当期是否登录
     @Override
     public void onLoginChange(LogBean isLog) {
@@ -151,8 +145,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         }
     }
 
-
-
     public List<ShortcartProductBean.ResultBean> getShortBeanList() {
         return shortBeanList;
     }
@@ -161,8 +153,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         this.shortBeanList = shortBeanList;
         ShopBeanNotify();
     }
-
-
 
     public List<SelectOrderBean> getList() {
         return list;
@@ -185,14 +175,12 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                 }
             }
         }
-        Log.i("zx", "setSelect: "+selectList.toString());
     }
 
     //返回选中的集合
     public List<ShortcartProductBean.ResultBean> getSelectList() {
         return selectList;
     }
-
 
     public String getMoneyValue() {
         float sumPrice=0;
@@ -206,7 +194,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         return String.valueOf(sumPrice);
     }
 
-
     //详情页面添加数据
     public void addShopMessageNum(String productId,String productName,String productNum,String url,String productPrice,boolean isAll){
         ShortcartProductBean.ResultBean bean = new ShortcartProductBean.ResultBean(productId, productName, productNum, url, productPrice, false);
@@ -215,7 +202,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                 if (resultBean.getProductName().equals(bean.getProductName())){
                     int i = Integer.parseInt(resultBean.getProductNum());
                     int j = Integer.parseInt(bean.getProductNum());
-                    Log.i("zx", "addShopMessageNum: i="+i+"j="+j);
                     i+=j;
                     resultBean.setProductNum(i+"");
                     ShopBeanNotify();
@@ -225,7 +211,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
             shortBeanList.add(bean);
 
         ShopBeanNotify();
-
     }
 
     //购物车中删除
@@ -242,7 +227,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                 resultBean.setProductNum(num+1+"");
             }
         }
-        Log.i("zx", "addShopNum: "+shortBeanList.toString());
         ShopBeanNotify();
 
     }
@@ -254,11 +238,8 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                 resultBean.setProductNum(num-1+"");
             }
         }
-        Log.i("zx", "subShopNum: "+shortBeanList.toString());
        ShopBeanNotify();
-
     }
-
 
     public void setMessageList(List<FindForPayBean.ResultBean> messageList) {
         this.messageList = messageList;
@@ -268,11 +249,9 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         return payFailList;
     }
 
-
     public List<FindForPayBean.ResultBean> getPaySussList() {
         return paySussList;
     }
-
 
     //购物车页面数据
     public synchronized void requestShortProductData(){
@@ -283,6 +262,7 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                 .subscribe(new Observer<ShortcartProductBean>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+
                     }
 
                     @Override
@@ -378,7 +358,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
         }
     }
 
-
     //购物车数据发生变化时,调用接口
    public  interface iShopBeanChangeListener{
         void OnShopBeanChange();
@@ -399,7 +378,5 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     public interface iFindPayChangeListener{
         void OnFindPayChange();
     }
-
-
 
 }

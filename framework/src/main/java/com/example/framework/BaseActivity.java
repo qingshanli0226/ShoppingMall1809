@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.common.ActivityManger;
-import com.example.common.LogUtils;
 import com.example.common.SpUtils;
 import com.example.common.bean.LogBean;
 import com.example.manager.BusinessARouter;
@@ -52,27 +51,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         ActivityManger.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart();
         BusinessUserManager.getInstance().Register(this);
-//        UmengMessageHandler messageHandler = new UmengMessageHandler() {
-//
-//            @Override
-//            public Notification getNotification(Context context, UMessage msg) {
-//
-//                for (Map.Entry entry : msg.extra.entrySet()) {
-//
-//                    Object key = entry.getKey();
-//                    final Object value = entry.getValue();
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//                return super.getNotification(context, msg);
-//            }
-//        };
-//        UMutlis.getInstance().getPushAgent().setMessageHandler(messageHandler);
-
     }
 
     protected abstract void initData();
@@ -132,16 +110,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onRestart() {
         super.onRestart();
-
         String time = SpUtils.getTime(FrameModel.context);
         long newTime = Long.parseLong(time);
         if (System.currentTimeMillis() - newTime > 5 * 1000){
-            LogUtils.i("当前时间超过5秒，弹出广告业");
             String times = System.currentTimeMillis() + "";
             SpUtils.putTime(FrameModel.context,times);
             BusinessARouter.getInstance().getAppManager().OpenAdvertActivity(FrameModel.context,null);
         }
-
     }
 
     public void onLeftClick() {
@@ -149,11 +124,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         destroy();
     }
 
-
     public void onRightImgClick() {
 
     }
-
 
     public void onRightTvClick() {
 

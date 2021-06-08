@@ -31,44 +31,33 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
     private RecyclerView typeRv;
     private TypeAdapter typeAdapter;
 
-
     @Override
     protected void initData() {
 
-        list.add(new KindBean("小裙子"));
-        list.add(new KindBean("上衣"));
-        list.add(new KindBean("下装"));
-        list.add(new KindBean("外套"));
-        list.add(new KindBean("配件"));
-        list.add(new KindBean("包包"));
-        list.add(new KindBean("装扮"));
-        list.add(new KindBean("居家宅品"));
-        list.add(new KindBean("办公文具"));
-        list.add(new KindBean("数据周边"));
-        list.add(new KindBean("游戏专区"));
-
-
-
+        list.add(new KindBean(getResources().getString(R.string.kind_skirt)));
+        list.add(new KindBean(getResources().getString(R.string.kind_jacket)));
+        list.add(new KindBean(getResources().getString(R.string.kind_pants)));
+        list.add(new KindBean(getResources().getString(R.string.kind_overcoat)));
+        list.add(new KindBean(getResources().getString(R.string.kind_accessory)));
+        list.add(new KindBean(getResources().getString(R.string.kind_bag)));
+        list.add(new KindBean(getResources().getString(R.string.kind_dressUp)));
+        list.add(new KindBean(getResources().getString(R.string.kind_home_products)));
+        list.add(new KindBean(getResources().getString(R.string.kind_stationery)));
+        list.add(new KindBean(getResources().getString(R.string.kind_digit)));
+        list.add(new KindBean(getResources().getString(R.string.kind_gameUrl)));
         KindAdapter kindAdapter = new KindAdapter(getContext(), R.layout.item_kind, list);
         kindListview.setAdapter(kindAdapter);
-
+        //请求第一个页面的数据
         httpPresenter.getTypeData(url[0]);
-
-
-
-
-
         kindListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 kindAdapter.setSelectedPosition(position);
                 kindAdapter.notifyDataSetChanged();
-
+                //点击哪个item请求哪个item数据
                 httpPresenter.getTypeData(url[position]);
-
             }
         });
-
     }
 
     @Override
@@ -85,7 +74,6 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
         typeRv.setLayoutManager(manager);
         typeAdapter=new TypeAdapter(getContext());
         typeRv.setAdapter(typeAdapter);
-
     }
 
     @Override
@@ -113,18 +101,14 @@ public class KindFragment extends BaseFragment<IKindPresenter> implements IKindV
 
     }
 
-
     @Override
     public void onTypeData(GoodsBean goodsBean) {
-
         objectList.clear();
-
         List<GoodsBean.ResultBean> result = goodsBean.getResult();
         List<GoodsBean.ResultBean.HotProductListBean> hot_product_list = result.get(0).getHot_product_list();
         List<GoodsBean.ResultBean.ChildBean> child = result.get(0).getChild();
         objectList.add(hot_product_list);
         objectList.add(child);
         typeAdapter.updateData(objectList);
-
     }
 }

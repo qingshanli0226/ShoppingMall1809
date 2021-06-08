@@ -19,7 +19,6 @@ public class AutoPresenter extends BasePresenter<IAutoView> {
         attachView(iAutoView);
     }
     public void getAutoData(String token){
-
         RetrofitCreate.getFiannceApiService()
                 .postAutoLogin(token)
                 .subscribeOn(Schedulers.io())

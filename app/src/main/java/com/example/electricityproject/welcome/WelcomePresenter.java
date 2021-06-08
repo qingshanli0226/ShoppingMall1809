@@ -1,13 +1,9 @@
 package com.example.electricityproject.welcome;
 
-import android.util.Log;
-
 import com.blankj.utilcode.util.LogUtils;
 import com.example.common.bean.ShortcartProductBean;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreate;
-
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,10 +34,6 @@ class WelcomePresenter extends BasePresenter<IWelcomeView> {
                         if (IView != null) {
                             IView.getShortProductData(shortcartProductBean);
                             LogUtils.json(shortcartProductBean);
-                            List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
-                            for (int i = 0; i < result.size(); i++) {
-                                Log.i("zrf", "onNext: " + result.get(i).getProductPrice());
-                            }
                         }
                     }
 

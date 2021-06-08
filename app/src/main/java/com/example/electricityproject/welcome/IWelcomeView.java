@@ -6,5 +6,4 @@ import com.example.framework.IBaseView;
 public
 interface IWelcomeView extends IBaseView {
     void getShortProductData(ShortcartProductBean shortcartProductBean);
-
 }

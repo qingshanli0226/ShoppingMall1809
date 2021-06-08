@@ -24,9 +24,9 @@ public class channelAdapter extends BaseAdapter<HomeBean.ResultBean.ChannelInfoB
         name.setText(itemData.getChannel_name()+"");
     }
 
-
     @Override
     public int getRootViewType(int position) {
         return 1;
     }
+
 }

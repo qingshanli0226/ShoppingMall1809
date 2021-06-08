@@ -58,5 +58,4 @@ public class BusinessARouter {
         void OpenPayActivity(Context context, Build build);
     }
 
-
 }

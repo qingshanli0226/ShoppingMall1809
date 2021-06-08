@@ -10,7 +10,6 @@ import com.example.glide.ShopGlide;
 
 public class ActAdapter extends BaseAdapter<HomeBean.ResultBean.ActInfoBean> {
 
-
     @Override
     public int getLayoutId(int viewType) {
         return R.layout.item_act_layout;
@@ -18,16 +17,13 @@ public class ActAdapter extends BaseAdapter<HomeBean.ResultBean.ActInfoBean> {
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, HomeBean.ResultBean.ActInfoBean itemData) {
-
         ImageView imageView = baseViewHolder.getView(R.id.act_img);
         ShopGlide.getInstance().with(baseViewHolder.itemView.getContext()).load(Constants.BASE_URl_IMAGE+itemData.getIcon_url()).init(imageView);
-
     }
 
     @Override
     public int getRootViewType(int position) {
         return 1;
     }
-
 
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Welcome页面语言适配-->
+    <string name="welcome_loading">欢迎页面加载完成数据</string>
+
+<!--    HOME页面语言适配-->
+    <string name="home_info">信息</string>
+    <string name="home_network_connections">网络重新连接,重新获取数据</string>
+    <string name="home_disconnect_the_network">已断开网络</string>
+    <string name="home_con_message">已确认消息</string>
+    <string name="home_is_del">是否删除？</string>
+    <string name="home_yes">是</string>
+    <string name="home_no">否</string>
+
+<!--    Details页面语言适配-->
+    <string name="details_videoUrl">http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4</string>
+    <string name="details_num">库存不可为0</string>
+    <string name="details_personNoLogin">当前用户未登录</string>
+
+<!--    Kind页面语言适配-->
+    <string name="kind_type">分类</string>
+    <string name="kind_tag">标签</string>
+    <string name="kind_skirt">小裙子</string>
+    <string name="kind_jacket">上衣</string>
+    <string name="kind_pants">下装</string>
+    <string name="kind_overcoat">外套</string>
+    <string name="kind_accessory">配件</string>
+    <string name="kind_bag">包包</string>
+    <string name="kind_dressUp">装扮</string>
+    <string name="kind_home_products">居家宅品</string>
+    <string name="kind_stationery">办公文具</string>
+    <string name="kind_digit">数据周边</string>
+    <string name="kind_gameUrl">游戏专区</string>
+
+<!--    Shopping页面语言适配-->
+    <string name="shop_num">商品数量不能小于1</string>
+    <string name="shop_success">完成</string>
+    <string name="shop_bianji">编辑</string>
+    <string name="shop_unselected_goods">未选中商品</string>
+    <string name="shop_del_success">删除成功</string>
+    <string name="shop_product_not">库存不足</string>
+    <string name="shop_del">删除</string>
+    <string name="shop_exit">退出</string>
+    <string name="shop_loadingFail">加载失败，正在重新加载</string>
+    <string name="shop_request_success">请求成功</string>
+
+<!--    UserInfo页面语言适配-->
+    <string name="userInfo_error">发生了未知的问题,请重新尝试</string>
+    <string name="userInfo_select_success">选择地址成功</string>
+
+<!--    BindUserInfo页面语言适配-->
+    <string name="bind_UserInfo_phone">电话绑定成功</string>
+    <string name="bind_UserInfo_address">地址绑定成功</string>
+    <string name="bind_UserInfo_phone_error">电话格式不对</string>
+
+<!--    OrderDetails页面语言适配-->
+    <string name="orderDetails_pay_success">支付成功</string>
+    <string name="orderDetails_pay_fail">支付失败</string>
+
+<!--    Person页面语言适配-->
+    <string name="person_Already_Login">用户已经登陆</string>
+    <string name="person_now">当前</string>
+    <string name="person_no_NoLogin">当前还未登录,无需退出</string>
+    <string name="person_exit_login">退出登录?</string>
+    <string name="person_yes">是</string>
+    <string name="person_no">否</string>
+    <string name="person_no_Login">未登录</string>
+
+<!--    FindForPay页面语言适配-->
+    <string name="findForPay_conPay">确认支付该订单</string>
+    <string name="findForPay_yes">是</string>
+    <string name="findForPay_no">否</string>
+
+<!--    Main页面语言适配-->
+    <string name="main_userNoLogin">用户未登录，请先登录</string>
+
+<!--    错误框架页面语言适配-->
+    <string name="cash_error">出现了一个意料之外的错，请重新启动</string>
+
+</resources>

@@ -29,11 +29,7 @@ class UserInfoAdapter extends BaseAdapter<UserInfoTable> {
         }else {
             checkBox.setChecked(false);
         }
-
-
     }
-
-
 
     @Override
     public int getRootViewType(int position) {

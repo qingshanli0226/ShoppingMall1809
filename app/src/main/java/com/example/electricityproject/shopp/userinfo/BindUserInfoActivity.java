@@ -2,7 +2,6 @@ package com.example.electricityproject.shopp.userinfo;
 
 import android.Manifest;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +48,7 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     public void updatePhone(UpdatePhoneBean updatePhoneBean) {
         if (updatePhoneBean.getCode().equals("200")){
-            Toast.makeText(this, "电话绑定成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.bind_UserInfo_phone), Toast.LENGTH_SHORT).show();
             isBindPhone = true;
         }
     }
@@ -57,9 +56,8 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     public void updateAddress(UpdateAddress updateAddress) {
         if (updateAddress.getCode().equals("200")){
-            Toast.makeText(this, "地址绑定成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.bind_UserInfo_address), Toast.LENGTH_SHORT).show();
             isBindAddress = true;
-
             if (isBindAddress && isBindPhone){
                 long insert = daoMaster.newSession().insert(new UserInfoTable(null, name, Newaddress, phone,false));
                 LogUtils.i(insert+"");
@@ -68,16 +66,15 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                     finish();
                 }
             }
-
         }
     }
 
 
     @Override
     protected void initData() {
-
+        //数据库初始化
         daoMaster = UserInfoTableManger.getInstance().getDaoMaster(this);
-
+        //加入获取当前地址的动态权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{
                     Manifest.permission.ACCESS_NETWORK_STATE,
@@ -104,7 +101,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
         option.setAddrType("all"); // 定位的街道类型，只有设定为all才可以全部显示
 //可选，是否需要地址信息，默认为不需要，即参数为false
 //如果开发者需要获得当前点的地址信息，此处必须为true
-
         mLocationClient.setLocOption(option);
         mLocationClient.start();
 
@@ -112,7 +108,7 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
         if (isLog!=null){
             name = isLog.getResult().getName();
         }
-
+        //点击绑定电话
         confirmPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,12 +116,11 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                 if (phone.length() == 11){
                     httpPresenter.postUpdatePhoneData(phone);
                 }else {
-                    Toast.makeText(BindUserInfoActivity.this, "电话格式不对", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BindUserInfoActivity.this, getResources().getString(R.string.bind_UserInfo_phone_error), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
+        //点击绑定地址
         confirmAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,8 +130,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                 }
             }
         });
-
-
     }
 
     @Override
@@ -177,26 +170,21 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     protected void onResume() {
         super.onResume();
-        //bmapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //bmapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //bmapView.onDestroy();
     }
 
     public class MyBDA extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            Log.i("zrf","123");
-
             Newaddress = bdLocation.getAddrStr();    //获取详细地址信息
             String country = bdLocation.getCountry();    //获取国家
             String province = bdLocation.getProvince();    //获取省份
@@ -205,10 +193,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
             String street = bdLocation.getStreet();    //获取街道信息
             int locType = bdLocation.getLocType();    //获取街道信息
             Toast.makeText(BindUserInfoActivity.this, ""+Newaddress, Toast.LENGTH_SHORT).show();
-            Log.i("zrf",""+locType);
-            Log.i("zrf",""+city);
-            Log.i("zrf",""+district);
-            Log.i("zrf",""+street);
 
             //mapView 销毁后不在处理新接收的位置
             if (bdLocation == null || bmapView == null) {
@@ -222,19 +206,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                     .longitude(bdLocation.getLongitude())
                     .build();
 
-
-            Log.i("zrf", "定位的位置为    " + locData.latitude + "         经度 = "
-                    + locData.longitude);
-            Log.i("zrf", bdLocation.getLocType() + "     定位结果码为     " + bdLocation.getLocTypeDescription());
-
-//            mBaiduMap.setMyLocationData(locData);
-//
-//            LatLng ll = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
-//            MapStatus.Builder builder = new MapStatus.Builder();
-//            builder.target(ll).zoom(18.0f);
-//            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
         }
     }
-
 }

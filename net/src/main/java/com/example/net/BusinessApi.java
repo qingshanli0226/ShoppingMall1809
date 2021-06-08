@@ -53,8 +53,6 @@ public interface BusinessApi {
     @GET("getRecommend")
     Observable<RecommendBean> getRecommendData();
 
-
-
     //主页面的数据
     @GET("/atguigu/json/HOME_URL.json")
     Observable<HomeBean> getHomeData();
@@ -110,21 +108,20 @@ public interface BusinessApi {
     @GET("/atguigu/json/GAME_URL.json")
     Observable<KindGameBean> getGameData();
 
-
     @GET
     @Streaming
     Call<ResponseBody> DownFile(@Url String url);
-
-
 
     //注册
     @FormUrlEncoded
     @POST("register")
     Observable<RegBean> postRegister(@Field("name") String name, @Field("password") String password);
+
     //登录
     @FormUrlEncoded
     @POST("login")
     Observable<LogBean> postLogin(@Field("name") String name, @Field("password") String password);
+
     //自动登录
     @FormUrlEncoded
     @POST("autoLogin")
@@ -155,7 +152,6 @@ public interface BusinessApi {
     @POST("updateAddress")
     Observable<UpdateAddress> setUpdateAddress(@Field("address") String address);
 
-
     //请求添加产品的接口
     @POST("addOneProduct")
     Observable<AddOneProductBean> setAddOneProduct(@Body RequestBody requestBody);
@@ -164,8 +160,6 @@ public interface BusinessApi {
     @POST("checkOneProductInventory")
     @FormUrlEncoded
     Observable<RegBean> checkOneProductInventory(@Field("productId") String productId,@Field("productNum") String productNum);
-
-
 
     //获取服务端购物车产品信息的接口
     @GET("getShortcartProducts")
@@ -205,8 +199,5 @@ public interface BusinessApi {
     //向服务端下订单接口
     @POST("getOrderInfo")
     Observable<OrderInfoBean> GetOrderInfo(@Body RequestBody requestBody);
-
-
-
 
 }

@@ -6,7 +6,5 @@ import com.example.framework.IBaseView;
 
 public
 interface IRegisterView extends IBaseView {
-
     void onRegisterData(RegBean regBean);
-
 }

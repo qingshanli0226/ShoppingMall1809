@@ -16,7 +16,6 @@ import com.example.view.ToolBar;
 
 public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegisterView {
 
-
     private com.example.view.ToolBar toolbar;
     private android.widget.EditText registerUsername;
     private android.widget.EditText registerPwd;
@@ -24,13 +23,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     private android.widget.EditText registerCmPwd;
     private android.widget.ImageView registerPasswordImage;
     private android.widget.Button register;
-
     private boolean is_Show = false;
     private boolean is_shows = false;
 
-
     protected void initData() {
-
         passwordImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +75,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     protected void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         registerUsername = (EditText) findViewById(R.id.register_username);
         registerPwd = (EditText) findViewById(R.id.register_pwd);
@@ -93,7 +88,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     protected int getLayoutId() {
         return R.layout.activity_register;
     }
-
 
     @Override
     public void onRegisterData(RegBean regBean) {

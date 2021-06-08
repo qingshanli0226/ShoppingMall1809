@@ -65,8 +65,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
                 return true;
             }
         });
-
-
     }
 
     public abstract int getLayoutId(int viewType);
@@ -75,13 +73,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
 
     public abstract int getRootViewType(int position);
 
-
-
     @Override
     public int getItemViewType(int position) {
         return getRootViewType(position);
     }
-
 
     @Override
     public int getItemCount() {
@@ -89,7 +84,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
     }
 
     public static class BaseViewHolder extends RecyclerView.ViewHolder{
-
         SparseArray<View> sparseArray=new SparseArray<>();
         public BaseViewHolder(View itemView) {
             super(itemView);
@@ -102,15 +96,12 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Ba
                 sparseArray.put(id,childView);
                 return childView;
             }
-
         }
-
     }
 
     //点击事件
     public interface iRecyclerItemClickListener{
         void OnItemClick(int position);
         void OnItemLongClick(int position);
-
     }
 }

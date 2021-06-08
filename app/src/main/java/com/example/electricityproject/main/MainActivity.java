@@ -1,7 +1,6 @@
 package com.example.electricityproject.main;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -48,7 +47,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
     private RadioButton btnPerson;
     private CircleView buyCarNum;
 
-
     @Override
     protected void initData() {
         btnHome.setChecked(true);
@@ -66,11 +64,9 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
         fragmentTransaction.add(R.id.main_lin, findFragment);
         fragmentTransaction.add(R.id.main_lin, shoppingFragment);
         fragmentTransaction.add(R.id.main_lin, personFragment);
-
-
-
+        //第一次进入首页加载HomeFragment
         BeginTransaction(homeFragment, classifyFragment, findFragment, shoppingFragment, personFragment);
-
+        //点击切换各个Fragment
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -92,10 +88,9 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                         BeginTransaction(shoppingFragment, classifyFragment, findFragment, homeFragment, personFragment);
                         LogBean logBean = BusinessUserManager.getInstance().getIsLog();
                         if (logBean == null) {
-                            Toast.makeText(MainActivity.this, "用户未登录，请先登录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.main_userNoLogin), Toast.LENGTH_SHORT).show();
                             BusinessARouter.getInstance().getUserManager().OpenLogActivity(MainActivity.this, null);
                         }
-
                         break;
                     case R.id.btn_person:
                         BeginTransaction(personFragment, classifyFragment, findFragment, homeFragment, shoppingFragment);
@@ -103,7 +98,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                 }
             }
         });
-
 
         if (BusinessUserManager.getInstance().getIsLog()!=null && ShopCacheManger.getInstance().getShortBeanList()!=null){
             List<ShortcartProductBean.ResultBean> shortcartProductBean = ShopCacheManger.getInstance().getShortBeanList();
@@ -114,7 +108,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                 buyCarNum.setVisibility(View.GONE);
             }
         }
-
     }
 
     @Override
@@ -157,7 +150,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
         btnBuycar.setChecked(true);
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         fragmentTransaction = supportFragmentManager.beginTransaction();
@@ -170,16 +162,13 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
     }
 
     private void BeginTransaction(Fragment showFragment, Fragment hideFragmentOne, Fragment hideFragmentTwo, Fragment hideFragmentThree, Fragment hideFragmentFour) {
-
         fragmentTransaction.show(showFragment);
         fragmentTransaction.hide(hideFragmentOne);
         fragmentTransaction.hide(hideFragmentTwo);
         fragmentTransaction.hide(hideFragmentThree);
         fragmentTransaction.hide(hideFragmentFour);
         fragmentTransaction.commit();
-
     }
-
 
     @Override
     public void showLoading() {
@@ -193,7 +182,7 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
 
     @Override
     public void showError(String error) {
-        Log.i("zx", "showError: "+error);
+
     }
 
     @Override
@@ -211,7 +200,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
             }else {
                 buyCarNum.setVisibility(View.GONE);
             }
-
         }
     }
 }

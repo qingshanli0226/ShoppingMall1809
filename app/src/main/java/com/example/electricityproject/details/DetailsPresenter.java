@@ -21,16 +21,15 @@ import okhttp3.RequestBody;
 
 public
 class DetailsPresenter extends BasePresenter<IDetailsView> {
+
     public DetailsPresenter(IDetailsView iDetailsView) {
         attachView(iDetailsView);
     }
 
     public void postAddOneProduct(Map<String,String> map){
-
         String s = new Gson().toJson(map);
         MediaType parse = MediaType.parse("application/json;charset=UTF-8");
         RequestBody requestBody = RequestBody.create(parse, s);
-
         RetrofitCreate.getFiannceApiService()
                 .setAddOneProduct(requestBody)
                 .subscribeOn(Schedulers.io())
@@ -82,7 +81,6 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
     }
 
     public void checkOneProductInventory(String productId,String productNum){
-
         RetrofitCreate.getFiannceApiService()
                 .checkOneProductInventory(productId,productNum)
                 .subscribeOn(Schedulers.io())
@@ -130,10 +128,6 @@ class DetailsPresenter extends BasePresenter<IDetailsView> {
 
                     }
                 });
-
     }
-
-
-
 
 }

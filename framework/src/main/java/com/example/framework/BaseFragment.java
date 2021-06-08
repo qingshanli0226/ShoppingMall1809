@@ -19,7 +19,6 @@ import com.umeng.message.PushAgent;
 
 public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements IBaseView, BusinessUserManager.IUserLoginChanged, BusinessNetManager.NetConnectListener{
 
-
     protected T httpPresenter;
     protected View mView;
     protected LoadingPage loadingPage;
@@ -68,7 +67,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
         if (httpPresenter!=null){
             httpPresenter.detachView();
         }
-
     }
 
     protected abstract void initData();
@@ -78,7 +76,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
     protected abstract void initView();
 
     protected abstract int getLayoutId();
-
 
     @Override
     public void onLoginChange(LogBean isLog) {
@@ -94,6 +91,5 @@ public abstract class BaseFragment <T extends BasePresenter> extends Fragment im
     public void DisConnect() {
 
     }
-
 
 }

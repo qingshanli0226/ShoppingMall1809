@@ -13,7 +13,6 @@ import com.example.electricityproject.R;
 public class HotAdapter extends BaseAdapter<GoodsBean.ResultBean.HotProductListBean> {
 
     private Context context;
-
     public HotAdapter(Context context) {
         this.context = context;
     }
@@ -35,4 +34,5 @@ public class HotAdapter extends BaseAdapter<GoodsBean.ResultBean.HotProductListB
     public int getRootViewType(int position) {
         return 0;
     }
+
 }

@@ -14,7 +14,6 @@ public
 class ChildAdapter extends BaseAdapter<GoodsBean.ResultBean.ChildBean> {
 
     private Context context;
-
     public ChildAdapter(Context context) {
         this.context = context;
     }
@@ -36,4 +35,5 @@ class ChildAdapter extends BaseAdapter<GoodsBean.ResultBean.ChildBean> {
     public int getRootViewType(int position) {
         return 0;
     }
+
 }

@@ -19,7 +19,6 @@ public class LogUtils {
         if (BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
             Log.d("FOUR","  "+ className + "类  " + methodName + "方法  " + linName + "行  " + message);
-
         }
     }
 
@@ -27,7 +26,6 @@ public class LogUtils {
         if (BuildConfig.LOG_DEBUG){
             createLogName(new Throwable().getStackTrace());
             Log.i("FOUR","  "+ className + "类  " + methodName + "方法  " + linName + "行  " + message);
-
         }
     }
 
@@ -43,5 +41,4 @@ public class LogUtils {
         methodName = stackTraceElements[1].getMethodName();  //获取方法名
         linName = stackTraceElements[1].getLineNumber();  //获取行数
     }
-
 }

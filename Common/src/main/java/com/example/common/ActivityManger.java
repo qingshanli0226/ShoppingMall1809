@@ -29,6 +29,4 @@ public class ActivityManger {
         return activityList;
     }
 
-
-
 }

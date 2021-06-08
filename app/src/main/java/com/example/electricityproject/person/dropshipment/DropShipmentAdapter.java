@@ -1,6 +1,5 @@
 package com.example.electricityproject.person.dropshipment;
 
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.adapter.BaseAdapter;
@@ -18,7 +17,6 @@ public class DropShipmentAdapter extends BaseAdapter<FindForSendBean.ResultBean>
 
     @Override
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, FindForSendBean.ResultBean itemData) {
-        Log.i("zx", "displayViewHolder: "+itemData);
         TextView year = baseViewHolder.getView(R.id.drop_year);
         TextView order = baseViewHolder.getView(R.id.drop_order);
         TextView price = baseViewHolder.getView(R.id.drop_price);
@@ -27,18 +25,11 @@ public class DropShipmentAdapter extends BaseAdapter<FindForSendBean.ResultBean>
         year.setText(contDown(time)+"");
         order.setText(itemData.getTradeNo()+"");
         price.setText("￥"+itemData.getTotalPrice());
-
-
     }
-
-
-
 
     @Override
     public int getRootViewType(int position) {
-
         return 0;
-
     }
 
     public String contDown(long time){
@@ -47,4 +38,5 @@ public class DropShipmentAdapter extends BaseAdapter<FindForSendBean.ResultBean>
         String format = simpleDateFormat.format(new Date(time));
         return format;
     }
+
 }

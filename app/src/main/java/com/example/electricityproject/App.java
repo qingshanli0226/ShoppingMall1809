@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 
-import com.baidu.mapapi.CoordType;
-import com.baidu.mapapi.SDKInitializer;
 import com.example.common.NetModel;
 import com.example.common.db.MessageDataBase;
 import com.example.electricityproject.main.MainModel;

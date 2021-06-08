@@ -29,7 +29,6 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
 
     @Override
     protected void initData() {
-
         messageTables= MessageManager.getInstance().getMessageTableList();
         messageRv.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter();
@@ -64,16 +63,16 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
                 MessageManager.getInstance().UpdateMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
                 messageTables.get(position).setIsShow(true);
                 messageAdapter.notifyItemChanged(position);
-                Toast.makeText(MessageActivity.this, "已确认消息", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MessageActivity.this, getResources().getString(R.string.home_con_message), Toast.LENGTH_SHORT).show();
             }
             //长按
             @Override
             public void OnItemLongClick(int position) {
                 //长按 弹出AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
-                builder.setTitle("是否删除?");
+                builder.setTitle(getResources().getString(R.string.home_is_del));
                 //点击是
-                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getResources().getString(R.string.home_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                        //数据库数量减一
@@ -82,13 +81,11 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
                         MessageDataBase.getInstance().payRemove(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
                         //缓存数据删除
                         MessageManager.getInstance().removeMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
-
                         dialog.dismiss();
-
                     }
                 });
 
-                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getResources().getString(R.string.home_no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -97,8 +94,6 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
                 builder.show();
             }
         });
-
-
     }
 
     @Override
@@ -108,7 +103,6 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
 
     @Override
     protected void initView() {
-
         toolbar = (ToolBar) findViewById(R.id.toolbar);
         messageRv = (RecyclerView) findViewById(R.id.message_rv);
         MessageDataBase.getInstance().register(this);
@@ -142,9 +136,7 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
 
     @Override
     public void onMessageNumListener() {
-
         messageAdapter.updateData(MessageManager.getInstance().getMessageTableList());
         messageAdapter.notifyDataSetChanged();
-
     }
 }

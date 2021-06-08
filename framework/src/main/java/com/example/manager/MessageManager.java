@@ -49,10 +49,10 @@ public class MessageManager {
         MessageNotify();
     }
 
-
     public interface iMessageListener{
         void OnMessage();
     }
+
     public void MessageNotify(){
         for (iMessageListener iMessageListener : messageListenerList) {
             iMessageListener.OnMessage();

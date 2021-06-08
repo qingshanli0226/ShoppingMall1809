@@ -17,9 +17,7 @@ public class UserModel implements BusinessARouter.iUserManager{
 
     @Override
     public void OpenLogActivity(Context context, Bundle bundle) {
-
         Intent intent = new Intent(context, LoginActivity.class);
-
         if (context instanceof Activity){
             context.startActivity(intent);
         }else {

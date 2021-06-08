@@ -35,7 +35,6 @@ public class RetrofitCreate {
                 .client(build)
                 .baseUrl(Constants.BASE_URL).build();
 
-
         return retrofit.create(BusinessApi.class);
     }
 }

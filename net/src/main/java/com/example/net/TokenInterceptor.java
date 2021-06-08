@@ -14,5 +14,4 @@ public class TokenInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         return chain.proceed(chain.request().newBuilder().addHeader("token", TokenSPUtility.getString(NetModel.context)).build());
     }
-
 }

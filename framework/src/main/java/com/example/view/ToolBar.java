@@ -33,7 +33,6 @@ public class ToolBar extends RelativeLayout {
         init(context,null,0);
     }
 
-
     public ToolBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context,attrs,0);
@@ -70,7 +69,6 @@ public class ToolBar extends RelativeLayout {
 
         rightText.setText(rightTvs);
         rightText.setTextColor(titleTextColor);
-
 
         if (leftIsShow && leftImgId!=0) {
             leftImg.setImageResource(leftImgId);
@@ -110,6 +108,5 @@ public class ToolBar extends RelativeLayout {
         void onLeftClick();
         void onRightImgClick();
         void onRightTvClick();
-
     }
 }

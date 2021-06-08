@@ -3,7 +3,6 @@ package com.example.electricityproject.welcome;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,9 +30,13 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             if (msg.what==START){
-                countDown();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        countDown();
+                    }
+                }).start();
             }
-
         }
     };
     private android.widget.RelativeLayout aaaaa;
@@ -41,7 +44,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     protected void initData() {
-
 
         //判断是否已经登录(已经登录获取购物车页面数据,没有登录发送一个handler)
         if (BusinessUserManager.getInstance().getIsLog()!=null){
@@ -57,7 +59,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
                 timer.cancel();
             }
         });
-
     }
 
     @Override
@@ -96,14 +97,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
     //登录成功后获取购物车的数据
     @Override
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
-        Log.i("zx", "getShortProductData: "+shortcartProductBean.toString());
         if (shortcartProductBean.getCode().equals("200")) {
-
-            Toast.makeText(this, "欢迎页面加载完成数据", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, getResources().getString(R.string.welcome_loading), Toast.LENGTH_SHORT).show();
             ShopCacheManger.getInstance().setShortBeanList(shortcartProductBean.getResult());
             handler.sendEmptyMessage(START);
-
         }
     }
 
@@ -137,7 +134,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
             }
         }, 0, 1000);
     }
-
 
     @Override
     protected void onDestroy() {

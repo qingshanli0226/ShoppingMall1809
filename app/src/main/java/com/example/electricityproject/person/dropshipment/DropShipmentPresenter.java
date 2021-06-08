@@ -13,9 +13,11 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DropShipmentPresenter extends BasePresenter<IDropShipmentView> {
+
     public DropShipmentPresenter(IDropShipmentView dropShipmentView ) {
         attachView(dropShipmentView);
     }
+
     public void getDropShipment(){
         RetrofitCreate.getFiannceApiService()
                 .getFindSendData()

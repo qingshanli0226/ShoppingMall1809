@@ -56,5 +56,4 @@ public class OrderDetailsActivityPresenter extends BasePresenter<OrderDetailsAct
                     }
                 });
     }
-
 }

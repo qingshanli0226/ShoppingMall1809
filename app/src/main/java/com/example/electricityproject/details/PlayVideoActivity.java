@@ -15,6 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PlayVideoActivity extends BaseActivity {
+
     private VideoView playVideo;
     private RelativeLayout re;
     private TextView tvStart;
@@ -23,16 +24,17 @@ public class PlayVideoActivity extends BaseActivity {
     private SeekBar bar;
     private TextView tvDuration;
 
-
     @Override
     protected void initData() {
-        playVideo.setData("http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4");
+        playVideo.setData(getResources().getString(R.string.details_videoUrl));
         tvStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 playVideo.start();
             }
         });
+
+        //等会修改在子线程中进行
          Timer timer = new Timer();
          timer.schedule(new TimerTask() {
              @Override
@@ -52,6 +54,7 @@ public class PlayVideoActivity extends BaseActivity {
                  });
              }
          },0,100);
+
          bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
              @Override
              public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -70,6 +73,7 @@ public class PlayVideoActivity extends BaseActivity {
 
              }
          });
+
          tvFull.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -90,8 +94,8 @@ public class PlayVideoActivity extends BaseActivity {
                  }
              }
          });
-    }
 
+    }
 
     @Override
     protected void initPresenter() {
@@ -132,6 +136,5 @@ public class PlayVideoActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        
     }
 }
