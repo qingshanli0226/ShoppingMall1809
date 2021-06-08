@@ -5,7 +5,7 @@
     <application>
         <activity android:name=".removelogin.RemoveActivity"></activity>
         <activity android:name=".addresslist.AddressListActivity" />
-        <activity android:name=".address.ShoppingAddressActivity" />
+        <activity android:name=".address.ShoppingAddressActivity" android:launchMode="singleTask" />
         <activity android:name=".LoginActivity" />
     </application>
 

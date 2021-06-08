@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.commom.ShopConstants;
 import com.example.framework.db.DaoMaster;
 import com.example.framework.db.DaoSession;

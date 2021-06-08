@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.example.framework.manager.AddressManager;
 import com.example.framework.manager.MessageManager;
 import com.example.framework.manager.ShoppingCarManager;
@@ -87,6 +89,14 @@ public class App extends Application {
 //        PlatformConfig.setYnote("9c82bf470cba7bd2f1819b0ee26f86c6ce670e9b");
         //bugly
         CrashReport.initCrashReport(getApplicationContext(), "87da9e07da", false);
+
+        //地图
+        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
+        SDKInitializer.initialize(this);
+        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
+        SDKInitializer.setCoordType(CoordType.BD09LL);
+
 
     }
 }

@@ -1,3 +1,4 @@
+include ':map'
 include ':pay'
 include ':shoppingCar'
 include ':framework'

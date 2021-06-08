@@ -17,6 +17,7 @@ public class ShopConstants {
     public final static String PAY_PATH="/pay/PayActivity";
     public final static String MAIN_HOME_MESSAGE="/main/home/MessageActivity";
     public final static String STREAMING_PATH="/main/StreamingActivity";
+    public final static String MAP_PATH="/map/MapActivity";
 
 
     //跳转逻辑

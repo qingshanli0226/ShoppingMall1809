@@ -41,6 +41,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,7 +61,8 @@ dependencies {
     implementation  'com.tencent.tauth:qqopensdk:3.51.2'//QQ官方SDK依赖库
 
     implementation  'com.umeng.umsdk:common:9.3.8'//必选
-    implementation  'com.umeng.umsdk:asms:1.2.2'//必选
+    implementation  'com.umeng.umsdk:asms:1.2.2'
+    implementation project(path: ':map')//必选
 
     compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本
 

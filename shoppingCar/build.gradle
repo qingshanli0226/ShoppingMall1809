@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+    implementation 'com.alibaba:fastjson:1.2.41' //fastjson
+
     implementation ('com.alibaba:arouter-api:1.4.1') //ARouter依赖
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2' //ARouter依赖
 
