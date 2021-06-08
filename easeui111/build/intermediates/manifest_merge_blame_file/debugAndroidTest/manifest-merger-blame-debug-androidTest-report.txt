@@ -1,0 +1,52 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.hyphenate.easeui.test" >
+4
+5    <uses-sdk
+5-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:5:5-74
+6        android:minSdkVersion="19"
+6-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:5:15-41
+7        android:targetSdkVersion="29" />
+7-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:5:42-71
+8
+9    <instrumentation
+9-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:11:5-15:75
+10        android:name="android.support.test.runner.AndroidJUnitRunner"
+10-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:11:22-83
+11        android:functionalTest="false"
+11-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:14:22-52
+12        android:handleProfiling="false"
+12-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:13:22-53
+13        android:label="Tests for com.hyphenate.easeui.test"
+13-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:15:22-73
+14        android:targetPackage="com.hyphenate.easeui.test" />
+14-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:12:22-71
+15
+16    <application
+16-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:7:5-9:19
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.0.0] D:\.gradle\caches\transforms-2\files-2.1\ec609e8cee787e2dff3592c66b08a66a\core-1.0.0\AndroidManifest.xml:22:18-86
+18        android:debuggable="true" >
+18-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:7:18-43
+19        <uses-library android:name="android.test.runner" />
+19-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:8:9-60
+19-->F:\Designed3\easeui111\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger2351673066154699215.xml:8:23-57
+20
+21        <activity
+21-->[com.google.android.gms:play-services-base:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\d36ef377bff3c1071344010f632f5724\jetified-play-services-base-11.4.0\AndroidManifest.xml:19:9-172
+22            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+22-->[com.google.android.gms:play-services-base:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\d36ef377bff3c1071344010f632f5724\jetified-play-services-base-11.4.0\AndroidManifest.xml:19:19-85
+23            android:exported="false"
+23-->[com.google.android.gms:play-services-base:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\d36ef377bff3c1071344010f632f5724\jetified-play-services-base-11.4.0\AndroidManifest.xml:19:146-170
+24            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+24-->[com.google.android.gms:play-services-base:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\d36ef377bff3c1071344010f632f5724\jetified-play-services-base-11.4.0\AndroidManifest.xml:19:86-145
+25
+26        <meta-data
+26-->[com.google.android.gms:play-services-basement:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\59cb1fd7c1536942be80770e2930ac38\jetified-play-services-basement-11.4.0\AndroidManifest.xml:20:9-121
+27            android:name="com.google.android.gms.version"
+27-->[com.google.android.gms:play-services-basement:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\59cb1fd7c1536942be80770e2930ac38\jetified-play-services-basement-11.4.0\AndroidManifest.xml:20:20-65
+28            android:value="@integer/google_play_services_version" />
+28-->[com.google.android.gms:play-services-basement:11.4.0] D:\.gradle\caches\transforms-2\files-2.1\59cb1fd7c1536942be80770e2930ac38\jetified-play-services-basement-11.4.0\AndroidManifest.xml:20:66-119
+29    </application>
+30
+31</manifest>
