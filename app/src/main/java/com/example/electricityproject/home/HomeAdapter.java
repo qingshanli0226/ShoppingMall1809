@@ -127,7 +127,6 @@ public class HomeAdapter extends BaseAdapter<Object> {
                     @Override
                     public void OnItemClick(int position) {
                         Toast.makeText(baseViewHolder.itemView.getContext(), ""+actInfoBeans.get(position).getName(), Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
