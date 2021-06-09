@@ -34,7 +34,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter<BaseRvAdapte
     public abstract int getLayoutId(int viewType);
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
 
         displayViewHolder(holder,position,dataList.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {

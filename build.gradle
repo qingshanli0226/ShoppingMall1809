@@ -1,5 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+apply from: "config.gradle"//在项目中使用我们的配置文件
 buildscript {
     
     repositories {
@@ -19,6 +20,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

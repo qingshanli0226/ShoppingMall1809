@@ -1,0 +1,7 @@
+ext {
+    isOrderLibrary=false//定义一个开关，当它为true时，order模块为Library,否则，order模块编译成可以运行的apk
+
+    compileVersionValue = 30
+    targetVersionValue = 29
+    minVersionValue = 21
+}

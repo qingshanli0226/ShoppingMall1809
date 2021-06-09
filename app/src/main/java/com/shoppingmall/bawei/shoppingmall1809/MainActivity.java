@@ -14,6 +14,7 @@ import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import com.shoppingmall.bawei.order.OrderUtil;
 import com.shoppingmall.bawei.shoppingmall1809.anr.AnrActivity;
 import com.shoppingmall.bawei.shoppingmall1809.beisaier.BeisaierActivity;
 
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initPresenter() {
 
+        OrderUtil.print("");
     }
 
     @Override

@@ -106,7 +106,7 @@ public class ShopmallGlide {
     }
 
     //向磁盘中存储Bitmap
-    public void setBitmapToDisk(String url, Bitmap bitmap) {
+    public void setBitmapToDisk(final String url, final Bitmap bitmap) {
         //凡是IO操作都必须放到子线程中,使用线程池
         executorService.execute(new Runnable() {
             @Override
@@ -128,7 +128,7 @@ public class ShopmallGlide {
     }
 
     //从磁盘中读取Bitmap
-    public void getBitmapFromDisk(String url, IBitmapReceivedListener listener) {
+    public void getBitmapFromDisk(final String url, final IBitmapReceivedListener listener) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -145,7 +145,7 @@ public class ShopmallGlide {
                             });
                         } else {
                             InputStream inputStream = snapshot.getInputStream(0);
-                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//从输入流里读出Bitmap
+                            final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);//从输入流里读出Bitmap
                             setBitmapToMem(url, bitmap);//先存到内存里一份
                             mainHandler.post(new Runnable() {
                                 @Override
@@ -170,7 +170,7 @@ public class ShopmallGlide {
      * @param listener
      * @param imageView 对下载的文件做好二次采样，避免占用太多内存而出现OOM问题
      */
-    public void getBitmapFromServer(String url, IBitmapReceivedListener listener, ImageView imageView) {
+    public void getBitmapFromServer(final String url, final IBitmapReceivedListener listener, final ImageView imageView) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -196,7 +196,7 @@ public class ShopmallGlide {
                         } else {
                             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
                             //因为原生图片的Bitmap比较耗费内存，直接设置到ImageView上，容易OOM问题，所有进行二次采样
-                            Bitmap sBitmap = sampleBitmap(imageView,originalBitmap);
+                            final Bitmap sBitmap = sampleBitmap(imageView,originalBitmap);
                             originalBitmap.recycle();//已经有了新的采样的Bitmap，原生的占用内存的Bitmap就可以释放了
                             originalBitmap=null;
                             setBitmapToDisk(url,sBitmap);//存到sd卡
