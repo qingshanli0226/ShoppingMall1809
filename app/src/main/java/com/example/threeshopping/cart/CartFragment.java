@@ -170,7 +170,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
                 } else {
                     isAll = true;
                 }
-
                 mPresenter.selectAll(isAll);
             }
         });

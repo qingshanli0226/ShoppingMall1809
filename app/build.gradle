@@ -61,7 +61,8 @@ dependencies {
     implementation 'com.umeng.umsdk:push:6.0.1'
     //直播
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
-
+    //fastjson
+    implementation 'com.alibaba:fastjson:1.1.71.android'
 
 
 

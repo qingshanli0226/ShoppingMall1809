@@ -7,10 +7,13 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 
+import com.example.common.SignUtil;
 import com.example.common.SpUtil;
 import com.example.framework.manager.CacheUserManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.LoginBean;
+
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,8 +38,15 @@ public class AutoService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
     if (!SpUtil.getString(this).equals("")){
+        String string = SpUtil.getString(this);
+//        TreeMap<String, String> treeMap = new TreeMap<>();
+//        treeMap.put("token",string);
+//        String sign = SignUtil.generateSign(treeMap);
+//        treeMap.put("sign",sign);
+//        TreeMap<String, String> map = SignUtil.encryptParamsByBase64(treeMap);
+
         RetrofitManager.getHttpApiService()
-                .getAutoLogin(SpUtil.getString(this))
+                .getAutoLogin(string)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<LoginBean>() {

@@ -24,7 +24,10 @@
 
     <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -105,6 +108,9 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="rvbGb1PDgrcOKqMkz98j0iO43jvk0fHt" />
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
     </application>
 
 </manifest>

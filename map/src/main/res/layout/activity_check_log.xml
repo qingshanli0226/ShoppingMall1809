@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,4 +17,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />
-</LinearLayout>
+    <LinearLayout
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/dm_dp_50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/locationText"
+            android:lines="2"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/locationBtn"
+            android:text="定位"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/confirm"
+            android:text="确定"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

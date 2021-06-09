@@ -44,6 +44,7 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
     private String mAddr;
     private String mPhone;
     private Boolean mFlag;
+    private TextView locaYes;
 
     @Override
     public int getLayoutId() {
@@ -59,6 +60,7 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
         toolbar.setToolbarOnClickLisenter(this);
         bindSave = (Button) findViewById(R.id.bindSave);
         setDefault = (CheckBox) findViewById(R.id.setDefault);
+        locaYes = (TextView) findViewById(R.id.locaYes);
     }
 
     @Override
@@ -76,10 +78,11 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
         mFlag = bundle.getBoolean(Constants.FLAG_ADDR);
         setDefault.setChecked(mFlag);
         isPhoneShow();
+
         //内容添加
         if (mAddr != null && mPhone != null) {
-            number.setText(mAddr);
-            location.setText(mPhone);
+            number.setText(mPhone);
+            location.setText(mAddr);
         }
         //绑定
         bindSave.setOnClickListener(new View.OnClickListener() {
@@ -102,8 +105,6 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
                                 addAddr();
                             }
                         }
-
-
                 }
 
             }
@@ -112,6 +113,18 @@ public class BindInfoActivity extends BaseActivity<BindPresenter> implements IBi
             @Override
             public void onClick(View v) {
                 isPhoneShow();
+            }
+        });
+
+        locaYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.PHONE_ADDR,number.getText().toString());
+                bundle.putInt(Constants.DEFAULT_ADDR,position);
+                bundle.putBoolean(Constants.FLAG_ADDR,setDefault.isChecked());
+                CommonArouter.getInstance().build(Constants.PATH_MAP).with(bundle).navigation();
+
             }
         });
 

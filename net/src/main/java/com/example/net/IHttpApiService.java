@@ -16,12 +16,15 @@ import com.example.net.bean.SelectBean;
 import com.example.net.bean.ShipmentBean;
 import com.example.net.bean.TypeBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -34,16 +37,26 @@ public interface IHttpApiService {
     @FormUrlEncoded
     @POST(Constants.USERREGISTER)
     Observable<RegisterBean> getRegister(@Field("name")String name, @Field("password")String password);
-
+    //安全
+    @FormUrlEncoded
+    @POST(Constants.USERREGISTER)
+    Observable<RegisterBean> getRegister(@FieldMap Map<String,String> map);
 
     @FormUrlEncoded
     @POST(Constants.LOGIN)
     Observable<LoginBean> getLogin(@Field("name")String name, @Field("password")String password);
 
+    //安全
+    @FormUrlEncoded
+    @POST(Constants.LOGIN)
+    Observable<LoginBean> getLogin(@FieldMap Map<String,String> map);
+
     @FormUrlEncoded
     @POST(Constants.AUTOLOGIN)
     Observable<LoginBean> getAutoLogin(@Field("token")String token);
-
+    @FormUrlEncoded
+    @POST(Constants.AUTOLOGIN)
+    Observable<LoginBean> getAutoLogin(@FieldMap Map<String,String> map);
     @GET(Constants.TAG_URL)
     Observable<LabelBean> getLabel();
     //代付款
@@ -79,11 +92,13 @@ public interface IHttpApiService {
     @POST(Constants.CHECKONEPRODUCTINVENTORY)
     Observable<SelectBean> inventory(@Field("productId") int productId,@Field("productNum") int productNum);
 
-
+    @FormUrlEncoded
+    @POST(Constants.CHECKONEPRODUCTINVENTORY)
+    Observable<SelectBean> inventory(@FieldMap Map<String,String> map);
     //    检查服务端一个产品库存情况的接口
     @POST(Constants.CHECKINVENTORY)
     Observable<CheckNumAll> inventoryAll(@Body RequestBody requestBody);
-    //选中一个\
+    //选中一个
     @POST(Constants.UPDATEPRODUCTSELECTED)
     Observable<SelectBean> updateProductSelect(@Body RequestBody requestBody);
 

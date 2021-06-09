@@ -1,11 +1,13 @@
 package com.example.user.user;
 
+import com.example.common.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.framework.manager.CacheConnectManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.RegisterBean;
 
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
@@ -24,9 +26,15 @@ public class UserPresenter  extends BasePresenter<IUserView> {
 
 
     public void getRegister(String name,String password){
+//        TreeMap<String, String> treeMap = new TreeMap<>();
+//        treeMap.put("name",name);
+//        treeMap.put("password",password);
+//        String sign = SignUtil.generateSign(treeMap);
+//        treeMap.put("sign",sign);
+//        TreeMap<String, String> map = SignUtil.encryptParamsByBase64(treeMap);
+//         .getRegister(map)
         RetrofitManager.getHttpApiService()
                 .getRegister(name,password)
-                .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -71,9 +79,17 @@ public class UserPresenter  extends BasePresenter<IUserView> {
     }
 
     public void getLogin(String name,String password){
+
+//        TreeMap<String, String> treeMap = new TreeMap<>();
+//        treeMap.put("name",name);
+//        treeMap.put("password",password);
+//        String sign = SignUtil.generateSign(treeMap);
+//        treeMap.put("sign",sign);
+//        TreeMap<String, String> map = SignUtil.encryptParamsByBase64(treeMap);
+
+
         RetrofitManager.getHttpApiService()
                 .getLogin(name,password)
-                .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

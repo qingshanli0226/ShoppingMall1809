@@ -69,6 +69,7 @@
             android:background="@color/white">
 
             <TextView
+                android:id="@+id/locaYes"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dm_dp_50"
                 android:padding="@dimen/dm_dp_10"
