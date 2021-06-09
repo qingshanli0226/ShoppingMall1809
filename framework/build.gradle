@@ -44,6 +44,7 @@ dependencies {
 
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
 
+    implementation 'com.alibaba:fastjson:1.2.41' //fastjson
 
 //    api 'com.umeng.umsdk:common:1.5.4'
     //PushSDK必须依赖utdid库，所以需要加入对应依赖

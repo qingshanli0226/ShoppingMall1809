@@ -15,7 +15,6 @@
 
         <com.example.view.ToolBar
             app:rightText="编辑"
-
             android:gravity="center"
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
@@ -32,8 +31,6 @@
             android:background="@color/gray"></View>
 
     </LinearLayout>
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
