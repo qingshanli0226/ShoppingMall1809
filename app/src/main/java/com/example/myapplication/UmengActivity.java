@@ -27,7 +27,22 @@ public class UmengActivity extends AppCompatActivity {
         setContentView(R.layout.activity_umeng);
         if (Build.VERSION.SDK_INT >= 23) {
             String[] mPermissionList = new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+                    "android.permission.INTERNET",
+                    "android.permission.READ_PHONE_STATE",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.READ_LOGS",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.READ_EXTERNAL_STORAGE",
+                    "android.permission.RECORD_AUDIO",
+                    "android.permission.MODIFY_AUDIO_SETTINGS",
+                    "android.permission.BLUETOOTH",
+                    "android.permission.CAMERA",
+                    "android.permission.READ_PHONE_STATE",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.ACCESS_WIFI_STATE",
+
+            };
             ActivityCompat.requestPermissions(this, mPermissionList, 123);
         }
 
@@ -37,8 +52,8 @@ public class UmengActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new ShareAction(UmengActivity.this)
                         .withText("hello")
-                        .withMedia(new UMImage(UmengActivity.this,"https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg"))
-                        .setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                        .withMedia(new UMImage(UmengActivity.this, "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2858426577,4189650377&fm=26&gp=0.jpg"))
+                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
@@ -52,7 +67,7 @@ public class UmengActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                Toast.makeText(UmengActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UmengActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

@@ -1,7 +1,10 @@
 package com.example.user.register;
 
+import com.example.common.SignUtil;
 import com.example.net.retrofit.RetrofitManager;
 import com.example.net.bean.RegisterBean;
+
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,8 +20,14 @@ public class RegisPresenter extends BasePresenter<IRegisterView> {
     }
 
     public void getRegister(String name, String password) {
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();//TreeMap遍历时是按照key字母的升序遍历出数据的
+        map.put("name",name);
+        map.put("password",password);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign", sign);
+        TreeMap<String,String> encryptParams = SignUtil.encryptParamsByBase64(map);
         RetrofitManager.getApi()
-                .getRegister(name, password)
+                .getRegister(encryptParams)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {

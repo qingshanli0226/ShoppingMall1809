@@ -29,7 +29,7 @@ public class LiveonActivity extends AppCompatActivity {
         mLivePusher.setRenderView(pusherTxCloudView);
         mLivePusher.startCamera(true);
         //启动推流
-        String rtmpURL = "rtmp://124108.livepush.myqcloud.com/live/livezhao?txSecret=010d938f966bac39a80efcc86bec228c&txTime=60C056FE"; //此处填写您的 rtmp 推流地址
+        String rtmpURL = "rtmp://3891.liveplay.myqcloud.com/live/3891_user_66f076f6_096a"; //此处填写您的 rtmp 推流地址
         int ret = mLivePusher.startPush(rtmpURL.trim());
 
         if (ret == V2TXLIVE_ERROR_INVALID_LICENSE) {

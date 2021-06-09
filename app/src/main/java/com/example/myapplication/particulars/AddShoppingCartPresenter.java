@@ -2,6 +2,7 @@ package com.example.myapplication.particulars;
 
 import android.util.Log;
 
+import com.example.common.SignUtil;
 import com.example.framework.manager.CaCheMannager;
 import com.example.common.log.LogUtil;
 import com.example.net.retrofit.RetrofitManager;
@@ -29,6 +30,8 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
 
     //购物车
     public void getAddShoppingCart(String id, String num, String name, String url, String price) {
+
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productId", id);
@@ -36,6 +39,7 @@ public class AddShoppingCartPresenter extends BasePresenter<IAddShoppingCartView
             jsonObject.put("productName", name);
             jsonObject.put("url", url);
             jsonObject.put("productPrice", price);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
