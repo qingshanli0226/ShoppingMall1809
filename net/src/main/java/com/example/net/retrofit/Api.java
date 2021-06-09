@@ -15,12 +15,15 @@ import com.example.net.bean.SkirtBean;
 import com.example.net.bean.UpdateAddress;
 import com.example.net.bean.UpdatePhone;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -33,11 +36,11 @@ public interface Api {
 
     @POST("register")
     @FormUrlEncoded
-    Observable<RegisterBean> getRegister(@Field("name") String name, @Field("password") String password);
+    Observable<RegisterBean> getRegister(@FieldMap Map<String,String> map);
 
     @POST("login")
     @FormUrlEncoded
-    Observable<LoginBean> getLogin(@Field("name") String name, @Field("password") String password);
+    Observable<LoginBean> getLogin(@FieldMap Map<String,String> map);
 
     @GET
     Observable<SkirtBean> getSkirt(@Url String url);
