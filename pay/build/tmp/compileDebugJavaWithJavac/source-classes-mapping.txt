@@ -1,2 +1,0 @@
-com/example/pay/BuildConfig.java
- com.example.pay.BuildConfig

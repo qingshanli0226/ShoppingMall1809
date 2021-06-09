@@ -1,8 +1,0 @@
-com/example/commom/BuildConfig.java
- com.example.commom.BuildConfig
-com/example/commom/Constants.java
- com.example.commom.Constants
-com/example/commom/ShopConstants.java
- com.example.commom.ShopConstants
-com/example/commom/SpUtil.java
- com.example.commom.SpUtil
