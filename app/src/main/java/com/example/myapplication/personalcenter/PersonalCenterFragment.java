@@ -3,6 +3,7 @@ package com.example.myapplication.personalcenter;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,12 +14,13 @@ import com.example.framework.view.MyToorbar;
 import com.example.myapplication.R;
 import com.example.myapplication.personalcenter.findforpay.FindPayMainActivity;
 import com.example.myapplication.personalcenter.findforsend.FindsendMainActivity;
+import com.example.myapplication.personalcenter.map.MapActivity;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.OrderinfoBean;
 
 
-public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements com.example.myapplication.personalcenter.IPersonalView {
+public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> implements IPersonalView {
 
     private MyToorbar toorBar;
     private ImageView userImage;
@@ -29,6 +31,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
     private TextView sendnum;
     private RelativeLayout awaitPay;
     private RelativeLayout awaitDeliverGoods;
+    private LinearLayout gaoDeMap;
 
     @Override
     public int bandLayout() {
@@ -37,19 +40,24 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
 
     @Override
     public void initView() {
-
-
         toorBar = (MyToorbar) findViewById(R.id.toorBar);
         userImage = (ImageView) findViewById(R.id.userImage);
 
         forpay = findViewById(R.id.forpay);
         forsend = findViewById(R.id.forsend);
+
+        paynum = findViewById(R.id.paynum);
+        sendnum = findViewById(R.id.sendnum);
+        awaitPay = findViewById(R.id.awaitPay);
+        awaitDeliverGoods = findViewById(R.id.awaitDeliverGoods);
+
+        gaoDeMap = (LinearLayout) findViewById(R.id.gaoDeMap);
         forpay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FindPayMainActivity.class);
                 OrderinfoBean orderBean = PaySendCacheManager.getInstance().getOrderBean();
-                intent.putExtra("order",orderBean);
+                intent.putExtra("order", orderBean);
                 startActivity(intent);
             }
         });
@@ -60,13 +68,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
                 startActivity(intent1);
             }
         });
-        paynum = findViewById(R.id.paynum);
-        sendnum = findViewById(R.id.sendnum);
-        awaitPay = findViewById(R.id.awaitPay);
-        awaitDeliverGoods = findViewById(R.id.awaitDeliverGoods);
-
     }
-
 
 
     @Override
@@ -102,6 +104,13 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
         //获取待支付订单
         awaitPay.setOnClickListener(v -> mPresenter.getFindForPay());
         awaitDeliverGoods.setOnClickListener(v -> mPresenter.getFindSend());
+        //高德地图
+        gaoDeMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MapActivity.class));
+            }
+        });
     }
 
     @Override
@@ -126,7 +135,6 @@ public class PersonalCenterFragment extends BaseFragment<PersonalPresenter> impl
 
 
     }
-
 
 
 }

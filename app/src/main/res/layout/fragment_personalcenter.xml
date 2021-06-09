@@ -123,6 +123,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/gaoDeMap"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
