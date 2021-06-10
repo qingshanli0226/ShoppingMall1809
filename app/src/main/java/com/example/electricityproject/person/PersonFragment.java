@@ -54,17 +54,6 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
     @Override
     protected void initData() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.CALL_PHONE,
-                    Manifest.permission.READ_CONTACTS,
-                    Manifest.permission.WRITE_CONTACTS
-            }, 100);
-        }
-
         httpPresenter = new PersonPresenter(this);
         //登录则吐司已登录,未登录跳转到登录页面
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
@@ -198,10 +187,15 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         tell = mView.findViewById(R.id.tell);
         outLog = (ImageView) findViewById(R.id.outLog);
         cameraPhoto = (ImageView) findViewById(R.id.camera_photo);
-        //加入动态权限
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{
-                    Manifest.permission.CALL_PHONE
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.CALL_PHONE,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.WRITE_CONTACTS
             }, 100);
         }
     }
