@@ -68,7 +68,6 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
 
     @Subscribe
     public void getEventBus(EventBean eventBean) {
-
         if(eventBean.getType() == 0){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (eventBean.getFlag()) {
@@ -84,9 +83,6 @@ public class UserActivity extends BaseActivity implements ToolBar.OnClickListene
                     break;
             }
         }
-
-
-
     }
 
     @Override

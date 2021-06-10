@@ -272,7 +272,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CacheSh
     public void destroy() {
         super.destroy();
         CacheShopManager.getInstance().unRegisterCart(this);
-        CacheShopManager.getInstance().destory();
     }
 
     //购物车数据

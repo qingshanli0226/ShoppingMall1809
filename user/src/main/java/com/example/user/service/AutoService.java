@@ -62,7 +62,6 @@ public class AutoService extends Service {
                                 Toast.makeText(AutoService.this, "自动登录成功", Toast.LENGTH_SHORT).show();
                                 SpUtil.putString(AutoService.this,loginBean.getResult().getToken());
                                 CacheUserManager.getInstance().setLoginBean(loginBean);
-
                             }
                         }
                     }

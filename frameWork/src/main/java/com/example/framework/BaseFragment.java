@@ -56,7 +56,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     protected abstract void initPrensenter();
 
-
     protected abstract void initData();
 
     @Override

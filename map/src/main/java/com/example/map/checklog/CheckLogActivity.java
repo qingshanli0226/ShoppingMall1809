@@ -162,7 +162,7 @@ public class CheckLogActivity extends BaseActivity {
                 LogUtil.d("zybt1");
 
                 List<PoiInfo> allPoi = poiResult.getAllPoi();
-                if(allPoi.size() > 0){
+                if(allPoi != null && allPoi.size() > 0){
                     LogUtil.d("zybt2");
                     PoiInfo poiInfo = allPoi.get(0);
                     mAddr = poiInfo.address;

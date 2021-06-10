@@ -54,13 +54,15 @@ public class CacheMessageManager {
         return messageBeans;
     }
 
-    public void init(Context context) {
+
+    public void init(Context context){
+
         this.mContext = context;
-        //更改
         searchMessage();
         if (SpUtil.getInt(mContext) == -1) {
             SpUtil.putInt(mContext, 0);
         }
+
         executorServices.execute(new Runnable() {
             @Override
             public void run() {
@@ -85,6 +87,7 @@ public class CacheMessageManager {
             }
         });
     }
+
 
     //注册
     public synchronized void register(IMessageListener messageListener) {
@@ -172,7 +175,6 @@ public class CacheMessageManager {
 
     public interface IMessageListener {
         void onAddRefresh(int position);
-
         void onAllRefresh(List<MessageBean> messageBeans);
     }
 }

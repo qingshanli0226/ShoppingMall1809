@@ -8,6 +8,8 @@ import com.example.threeshopping.MainActivity;
 import com.example.threeshopping.addrmanager.AddrManagerActivity;
 import com.example.threeshopping.bind.BindInfoActivity;
 import com.example.threeshopping.particulars.ParticularsActivity;
+import com.example.threeshopping.personalinformation.PersonalinformationActivity;
+import com.example.threeshopping.setting.SettingActivity;
 import com.example.threeshopping.shopcart.ShopCartActivity;
 
 
@@ -18,5 +20,7 @@ public class AppModule {
         CommonArouter.getInstance().registerPath(Constants.PATH_BIND, BindInfoActivity.class);//绑定地址
         CommonArouter.getInstance().registerPath(Constants.PATH_SHOPACTIVITY, ShopCartActivity.class);//购物车页面
         CommonArouter.getInstance().registerPath(Constants.PATH_ADDRMANAGER, AddrManagerActivity.class);//地址管理
+        CommonArouter.getInstance().registerPath(Constants.PATH_SETTING, SettingActivity.class);//设置
+        CommonArouter.getInstance().registerPath(Constants.PATH_INFORMATION, PersonalinformationActivity.class);//设置
     }
 }

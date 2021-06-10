@@ -1,0 +1,9 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_action_name
+id bmapView
+id confirm
+id locationBtn
+id locationText
+id toolbar
+layout activity_check_log

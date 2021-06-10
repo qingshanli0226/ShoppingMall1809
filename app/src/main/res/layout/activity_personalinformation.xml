@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".personalinformation.PersonalinformationActivity">
+    <com.example.framework.view.ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:app_back_color_toob="@color/white"
+        app:app_text="个人信息"
+        app:app_text_color="@color/black"
+        app:app_left_src="@drawable/top_bar_left_back"
+        app:app_left_isshow="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_80"
+        android:background="@drawable/broder"
+        >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="头像"
+           android:textSize="@dimen/dm_dp_30"
+           android:textColor="@color/black"
+           android:layout_gravity="center"
+           android:layout_marginLeft="@dimen/dm_dp_20"
+           ></TextView>
+        <ImageView
+            android:id="@+id/portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/new_user_icon"
+            android:layout_marginLeft="@dimen/dm_dp_250"
+            ></ImageView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_80"
+        android:background="@drawable/broder"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_dp_20"
+            android:text="用户名"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_dp_30"></TextView>
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dm_dp_20"
+            android:layout_marginLeft="@dimen/dm_dp_250"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_dp_20"></TextView>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_dp_80"
+        android:background="@drawable/broder"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dm_dp_20"
+            android:text="昵称"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_dp_30"></TextView>
+
+        <TextView
+            android:id="@+id/nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dm_dp_20"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dm_dp_20"></TextView>
+    </RelativeLayout>
+
+
+</LinearLayout>

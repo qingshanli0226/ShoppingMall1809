@@ -2,7 +2,6 @@ package com.example.pay.awaitpayment;
 
 import com.example.framework.BasePresenter;
 import com.example.framework.manager.CacheAwaitPaymentManager;
-import com.example.framework.manager.CacheShopManager;
 import com.example.net.RetrofitManager;
 import com.example.net.bean.AwaitPaymentBean;
 
@@ -56,7 +55,7 @@ public class AwaitPaymentPresenter extends BasePresenter<IAwaitPaymentView> {
                         if (paymentBean.getCode().equals("200")){
                             if (mView != null) {
                                 List<AwaitPaymentBean.ResultBean> result = paymentBean.getResult();
-                                CacheAwaitPaymentManager.getInstance().setAwaitPayment(result);
+                                CacheAwaitPaymentManager.getInstance().setAwaitpayment(result);
                                 mView.onAwaitPayment(paymentBean);
                             }
                         }

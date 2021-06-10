@@ -37,11 +37,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
-                <ImageView
-                    android:id="@+id/pariculars_img"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dm_dp_300"
-                    ></ImageView>
+                    >
+                    <ImageView
+                        android:id="@+id/pariculars_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dm_dp_300"
+
+                        ></ImageView>
+                    <com.shuyu.gsyvideoplayer.video.GSYADVideoPlayer
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dm_dp_300"
+                        android:id="@+id/gsyv"
+                        android:visibility="gone"
+                        ></com.shuyu.gsyvideoplayer.video.GSYADVideoPlayer>
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/pariculars_name"
                     android:layout_width="match_parent"

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CacheAddrManager {
+public class  CacheAddrManager {
 
     private static CacheAddrManager cacheAddrManager;
     private Handler handler = new Handler();
@@ -44,7 +44,6 @@ public class CacheAddrManager {
 
     public synchronized void unRegisterListener(IAddrListener addrListener) {
         addrListeners.remove(addrListener);
-
     }
 
     public synchronized List<AddrBean> getAddrBeans() {
@@ -173,13 +172,13 @@ public class CacheAddrManager {
                     newAddrBean.setAddr(addr);
                     newAddrBean.setPhone(phone);
                     addrBeanDao.update(newAddrBean);
+           //修改缓存
                 }
                 //通知页面
                 CacheAddrManager.this.notifyAll(addrBeans);
             }
         });
     }
-
 
     //接口监听
     public interface IAddrListener {

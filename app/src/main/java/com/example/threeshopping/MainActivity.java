@@ -76,7 +76,11 @@ public class MainActivity extends BaseActivity {
     public void initData() {
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList =new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    "android.permission.CAMERA",
+                    "android.permission.CALL_PHONE"
+            };
             ActivityCompat.requestPermissions(this,mPermissionList,123);
         }
         //注册
