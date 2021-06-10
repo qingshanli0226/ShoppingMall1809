@@ -34,8 +34,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initView();
         initPresenter();
         initData();
-        CacheUserManager.getInstance().registerLogin(this);
-        CaCheMannager.getInstance().registerIShoppingCart(this);
+        CacheUserManager.getInstance().registerLogin(this);//登陆状态
+        CaCheMannager.getInstance().registerIShoppingCart(this);//缓存类
+        CacheConnectManager.getInstance().registerConncectListener(this);//网络
     }
 
     protected abstract int bandLayout();
@@ -85,6 +86,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
         CacheUserManager.getInstance().unregisterLogin(this);
         CaCheMannager.getInstance().unregisterIShoppingCart(this);
+        CacheConnectManager.getInstance().unregisterConncectListener(this);//网络
     }
 
     @Override

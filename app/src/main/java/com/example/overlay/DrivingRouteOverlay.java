@@ -1,4 +1,4 @@
-package com.example.day14_gaode.overlay;
+package com.example.overlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.TMC;
-import com.example.day14_gaode.R;
-import com.example.day14_gaode.util.AMapUtil;
+import com.example.myapplication.R;
+import com.example.util.AMapUtil;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.day14_gaode.util;
+package com.example.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -15,7 +15,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.Camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 高德 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!-- 高德 -->
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 

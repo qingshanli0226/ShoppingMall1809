@@ -1,4 +1,4 @@
-package com.example.day14_gaode.overlay;
+package com.example.overlay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
-import com.example.day14_gaode.R;
+import com.example.myapplication.R;
 
 
 public class RouteOverlay {

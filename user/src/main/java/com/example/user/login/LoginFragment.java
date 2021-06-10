@@ -72,6 +72,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements ILogi
             CacheUserManager.getInstance().setLoginBean(true);//修改登录状态
             EventBus.getDefault().post("2");
             CaCheLoginUserMannager.getInstance().setBean(loginBean);//存储登陆用户信息
+//            getActivity().finish();
         }else {
             Toast.makeText(getActivity(), loginBean.getMessage(), Toast.LENGTH_SHORT).show();
         }

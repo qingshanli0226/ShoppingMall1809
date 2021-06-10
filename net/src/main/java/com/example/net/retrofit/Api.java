@@ -6,6 +6,7 @@ import com.example.net.bean.ConfirmServerPayResultBean;
 import com.example.net.bean.FindForPayBean;
 import com.example.net.bean.FindForSendBean;
 import com.example.net.bean.HomeBean;
+import com.example.net.bean.LogOutBean;
 import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.RegisterBean;
@@ -36,11 +37,11 @@ public interface Api {
 
     @POST("register")
     @FormUrlEncoded
-    Observable<RegisterBean> getRegister(@FieldMap Map<String,String> map);
+    Observable<RegisterBean> getRegister(@FieldMap Map<String, String> map);
 
     @POST("login")
     @FormUrlEncoded
-    Observable<LoginBean> getLogin(@FieldMap Map<String,String> map);
+    Observable<LoginBean> getLogin(@FieldMap Map<String, String> map);
 
     @GET
     Observable<SkirtBean> getSkirt(@Url String url);
@@ -96,6 +97,10 @@ public interface Api {
     @FormUrlEncoded
     Observable<LoginBean> getAutoLogin(@Field("token") String token);
 
+    //退出登陆
+    @POST("logout")
+    Observable<LogOutBean> getLogOut();
+
     //待发货
     @GET("findForSend")
     Observable<FindForSendBean> getForSend();
@@ -103,11 +108,11 @@ public interface Api {
     //改手机
     @POST("updatePhone")
     @FormUrlEncoded
-    Observable<UpdatePhone> getUpdatephone(@Field("phone")String phone);
+    Observable<UpdatePhone> getUpdatephone(@Field("phone") String phone);
 
     @POST("updateAddress")
     @FormUrlEncoded
-    Observable<UpdateAddress> getupdataAddress(@Field("address")String address);
+    Observable<UpdateAddress> getupdataAddress(@Field("address") String address);
 
     //向服务端下订单
     @POST("getOrderInfo")

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.day14_gaode.util;
+package com.example.util;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ import com.amap.api.services.route.BusPath;
 import com.amap.api.services.route.BusStep;
 import com.amap.api.services.route.RouteBusLineItem;
 import com.amap.api.services.route.RouteRailwayItem;
-import com.example.day14_gaode.R;
+import com.example.myapplication.R;
 
 
 public class AMapUtil {

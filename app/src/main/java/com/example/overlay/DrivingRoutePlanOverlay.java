@@ -1,4 +1,4 @@
-package com.example.day14_gaode.overlay;
+package com.example.overlay;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,7 @@ import com.amap.api.services.route.DrivePlanStep;
 import com.amap.api.services.route.DriveRoutePlanResult;
 import com.amap.api.services.route.TMC;
 import com.amap.api.services.route.TimeInfo;
-import com.example.day14_gaode.util.AMapUtil;
+import com.example.util.AMapUtil;
 
 
 import java.util.ArrayList;

@@ -37,8 +37,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
-        main.jniLibs.srcDirs = ['libs']
+        main {
+            jniLibs.srcDirs = ['libs']//将so文件目录指向libs目录
+        }
     }
+
 }
 
 dependencies {
