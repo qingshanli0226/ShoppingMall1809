@@ -43,6 +43,11 @@
         android:layout_height="wrap_content"
         android:text="推流"
         android:id="@+id/tui"></Button>
+  <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拉流"
+        android:id="@+id/la"></Button>
 
 
 </LinearLayout>

@@ -30,7 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".live.LiveonActivity"></activity>
+        <activity android:name=".live.LiveunActivity"></activity>
+        <activity android:name=".live.LiveonActivity" />
         <activity
             android:name=".particulars.VideoActivity"
             android:screenOrientation="portrait" />

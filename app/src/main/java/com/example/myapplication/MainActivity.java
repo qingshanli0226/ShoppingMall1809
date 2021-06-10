@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.common.type.ToLoginType;
@@ -52,6 +54,26 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] mPermissionList = new String[]{
+                    "android.permission.INTERNET",
+                    "android.permission.READ_PHONE_STATE",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.READ_LOGS",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.WRITE_EXTERNAL_STORAGE",
+                    "android.permission.READ_EXTERNAL_STORAGE",
+                    "android.permission.RECORD_AUDIO",
+                    "android.permission.MODIFY_AUDIO_SETTINGS",
+                    "android.permission.BLUETOOTH",
+                    "android.permission.CAMERA",
+                    "android.permission.READ_PHONE_STATE",
+                    "android.permission.ACCESS_NETWORK_STATE",
+                    "android.permission.ACCESS_WIFI_STATE",
+
+            };
+            ActivityCompat.requestPermissions(this, mPermissionList, 123);
+        }
         mainComm = (CommonTabLayout) findViewById(R.id.mainComm);
         numView = (MessageNumView) findViewById(R.id.numView);
 

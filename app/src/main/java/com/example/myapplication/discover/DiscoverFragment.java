@@ -7,6 +7,7 @@ import com.example.framework.BaseFragment;
 import com.example.myapplication.R;
 import com.example.myapplication.UmengActivity;
 import com.example.myapplication.live.LiveonActivity;
+import com.example.myapplication.live.LiveunActivity;
 import com.tencent.bugly.crashreport.CrashReport;
 
 
@@ -15,6 +16,7 @@ public class DiscoverFragment extends BaseFragment {
     private Button errorBtn;
     private Button btn;
     private Button tui;
+    private Button la;
 
     @Override
     public int bandLayout() {
@@ -26,6 +28,7 @@ public class DiscoverFragment extends BaseFragment {
         errorBtn = (Button) findViewById(R.id.errorBtn);
         btn = (Button) findViewById(R.id.btn);
         tui = (Button) findViewById(R.id.tui);
+        la = (Button) findViewById(R.id.la);
     }
 
     @Override
@@ -36,8 +39,11 @@ public class DiscoverFragment extends BaseFragment {
             Intent intent = new Intent(getActivity(), UmengActivity.class);
             startActivity(intent);
         });
-        tui.setOnClickListener(v ->{
+        tui.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), LiveonActivity.class));
+        });
+        la.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), LiveunActivity.class));
         });
     }
 
