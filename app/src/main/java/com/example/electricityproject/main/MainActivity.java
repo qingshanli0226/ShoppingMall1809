@@ -198,7 +198,6 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
                 buyCarNum.setVisibility(View.VISIBLE);
                 buyCarNum.setCurrentNum(ShopCacheManger.getInstance().getShortBeanList().size()+"");
         }else {
-            Toast.makeText(this, "隐藏", Toast.LENGTH_SHORT).show();
             buyCarNum.setVisibility(View.GONE);
         }
     }
