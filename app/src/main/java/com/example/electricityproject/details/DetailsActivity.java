@@ -29,8 +29,6 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
-import com.example.common.db.MessageDataBase;
-import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
@@ -38,7 +36,6 @@ import com.example.glide.ShopGlide;
 import com.example.manager.AllSelectManager;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
-import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 import com.umeng.socialize.ShareAction;
@@ -272,12 +269,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        if (!isSend) {
-            isSend=true;
-            //数据库数量加一
-            SPMessageNum.getInstance().addShopNum(1);
-            MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享成功", System.currentTimeMillis(), false));
-        }
+//        if (!isSend) {
+//            isSend=true;
+//            //数据库数量加一
+//            SPMessageNum.getInstance().addShopNum(1);
+//            MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享成功", System.currentTimeMillis(), false));
+//        }
 
     }
     @Override
@@ -296,7 +293,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
-
+                                Toast.makeText(DetailsActivity.this, "开始", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -307,20 +304,20 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
                                 Toast.makeText(DetailsActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                if (!isSend){
-                                    isSend=true;
-                                    SPMessageNum.getInstance().addShopNum(1);
-                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
-                                }
+//                                if (!isSend){
+//                                    isSend=true;
+//                                    SPMessageNum.getInstance().addShopNum(1);
+//                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
+//                                }
                             }
                             @Override
                             public void onCancel(SHARE_MEDIA share_media) {
-                                if (!isSend){
-                                    isSend=true;
-                                    //数据库数量加一
-                                    SPMessageNum.getInstance().addShopNum(1);
-                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 用户已取消",System.currentTimeMillis(),false));
-                                }
+//                                if (!isSend){
+//                                    isSend=true;
+//                                    //数据库数量加一
+//                                    SPMessageNum.getInstance().addShopNum(1);
+//                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 用户已取消",System.currentTimeMillis(),false));
+//                                }
                             }
                         }).open();
                 popupWindow.dismiss();

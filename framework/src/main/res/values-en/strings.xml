@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Welcome页面语言适配-->
+    <string name="welcome_loading">Welcome page load complete data</string>
+
+<!--    HOME页面语言适配-->
+    <string name="home_info">message</string>
+    <string name="home_network_connections">The network is reconnected and data is retrieved</string>
+    <string name="home_disconnect_the_network">Disconnected network</string>
+    <string name="home_con_message">Confirmed message</string>
+    <string name="home_is_del">Whether or not to delete？</string>
+    <string name="home_yes">yes</string>
+    <string name="home_no">no</string>
+
+<!--    Details页面语言适配-->
+    <string name="details_videoUrl">http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4</string>
+    <string name="details_num">Inventory cannot be zero</string>
+    <string name="details_personNoLogin">The current user is not logged in</string>
+
+<!--    Kind页面语言适配-->
+    <string name="kind_type">classify</string>
+    <string name="kind_tag">label</string>
+    <string name="kind_skirt">Small skirt</string>
+    <string name="kind_jacket">jacket</string>
+    <string name="kind_pants"> Lower Clothing</string>
+    <string name="kind_overcoat">coat</string>
+    <string name="kind_accessory">accessories</string>
+    <string name="kind_bag">handbag</string>
+    <string name="kind_dressUp">dress up</string>
+    <string name="kind_home_products">居家宅品</string>
+    <string name="kind_stationery">office stationery</string>
+    <string name="kind_digit">data processing</string>
+    <string name="kind_gameUrl">game zone</string>
+
+<!--    Shopping页面语言适配-->
+    <string name="shop_num">The quantity of goods must not be less than one</string>
+    <string name="shop_success">accomplish</string>
+    <string name="shop_bianji">compile</string>
+    <string name="shop_unselected_goods">Unselected goods</string>
+    <string name="shop_del_success">successfully delete</string>
+    <string name="shop_product_not">understock </string>
+    <string name="shop_del">delete</string>
+    <string name="shop_exit">quit</string>
+    <string name="shop_loadingFail">Loading failed, reloading is underway</string>
+    <string name="shop_request_success">request is successful</string>
+
+<!--    UserInfo页面语言适配-->
+    <string name="userInfo_error">An unknown problem occurred. Please try again</string>
+    <string name="userInfo_select_success">Address selected successfully</string>
+
+<!--    BindUserInfo页面语言适配-->
+    <string name="bind_UserInfo_phone">Phone binding successfully</string>
+    <string name="bind_UserInfo_address">Address binding successful</string>
+    <string name="bind_UserInfo_phone_error">telephone format is wrong.</string>
+
+<!--    OrderDetails页面语言适配-->
+    <string name="orderDetails_pay_success">payment success</string>
+    <string name="orderDetails_pay_fail">payment failure</string>
+
+<!--    Person页面语言适配-->
+    <string name="person_Already_Login">user has logged in</string>
+    <string name="person_now">present</string>
+    <string name="person_no_NoLogin">You are not currently logged in. You do not need to log out</string>
+    <string name="person_exit_login">log out ?</string>
+    <string name="person_yes">yes</string>
+    <string name="person_no">no</string>
+    <string name="person_no_Login">log out</string>
+
+<!--    FindForPay页面语言适配-->
+    <string name="findForPay_conPay">Confirm payment for this order</string>
+    <string name="findForPay_yes">yes</string>
+    <string name="findForPay_no">no</string>
+
+<!--    Main页面语言适配-->
+    <string name="main_userNoLogin">User is not logged in, please log in first</string>
+
+<!--    错误框架页面语言适配-->
+    <string name="cash_error">An unexpected error has occurred. Please reboot</string>
+
+</resources>

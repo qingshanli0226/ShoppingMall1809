@@ -191,6 +191,7 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
         ShopCacheManger.getInstance().unregisterShopBeanChange(this);
     }
 
+
     @Override
     public void OnShopBeanChange() {
         if (BusinessUserManager.getInstance().getIsLog()!=null&&ShopCacheManger.getInstance().getShortBeanList()!=null){

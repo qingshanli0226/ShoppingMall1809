@@ -61,7 +61,11 @@ dependencies {
     implementation project(path: ':framework')
     implementation project(path: ':Common')
     implementation project(path: ':pay')
-    implementation project(path: ':User')
+    if (rootProject.ext.isUserLibrary){
+        implementation project(path: ':User')
+    }else {
+        implementation (name: 'User-debug', ext:  'aar')
+    }
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation project(path: ':easeui111')
     testImplementation 'junit:junit:4.+'

@@ -1,12 +1,17 @@
-plugins {
-    id 'com.android.library'
+if (rootProject.ext.isUserLibrary){
+    apply plugin: 'com.android.library'
+}else{
+    apply plugin: 'com.android.application'
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+        if (!rootProject.ext.isUserLibrary){
+            applicationId "com.example.user"
+        }
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
@@ -26,6 +31,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            if (!rootProject.ext.isUserLibrary) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
     }
 }
 

@@ -1,0 +1,3 @@
+ext{
+    isUserLibrary=true //当为true时，user为library 当为false为application
+}

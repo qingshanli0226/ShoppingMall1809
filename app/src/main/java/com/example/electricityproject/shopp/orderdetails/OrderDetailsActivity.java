@@ -42,8 +42,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private static final int SDK_AUTH_FLAG = 2;
     private String outTradeNo;
     private String orderInfo;
-
-
     private com.example.view.ToolBar toolbar;
     private android.widget.TextView username;
     private android.widget.TextView userPhone;
@@ -54,7 +52,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     private OrderDetailsAdapter orderDetailsAdapter;
     private List<ShortcartProductBean.ResultBean> list;
     private android.widget.Button goBuy;
-    private DaoMaster daoMaster = MessageDataBase.getInstance().getDaoMaster();
+    private DaoMaster daoMaster;
 
     public void payV2(View v) {
         final Runnable payRunnable = new Runnable() {
@@ -108,7 +106,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         //缓存数据添加
                         MessageManager.getInstance().addMessage(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
                         EventBus.getDefault().post("del");
-
+                        list.clear();
                     } else {
                         payMsg = getResources().getString(R.string.orderDetails_pay_fail);
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
@@ -136,6 +134,7 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         MessageManager.getInstance().addMessage(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
 
                         EventBus.getDefault().post("del");
+                        list.clear();
                     }
                     break;
                 }
@@ -239,6 +238,6 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
     protected void onDestroy() {
         super.onDestroy();
         MessageDataBase.getInstance().unregister(this);
-        ShopCacheManger.getInstance().setList(null);
+
     }
 }
