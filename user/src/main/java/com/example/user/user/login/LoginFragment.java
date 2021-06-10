@@ -171,11 +171,13 @@ public class LoginFragment extends BaseFragment<UserPresenter> implements ToolBa
             SpUtil.putString(getActivity(), loginBean.getResult().getToken());
 
             CacheUserManager.getInstance().setLoginBean(loginBean);
+
             getActivity().finish();
 
             Bundle bundle = new Bundle();
             bundle.putInt("page", page);
             CommonArouter.getInstance().build(Constants.PATH_MAIN).navigation();
+
             CacheAwaitPaymentManager.getInstance().getAwaitPay();
         } else {
             Toast.makeText(getActivity(), "" + loginBean.getMessage(), Toast.LENGTH_SHORT).show();

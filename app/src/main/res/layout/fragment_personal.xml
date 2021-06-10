@@ -22,6 +22,7 @@
             android:src="@drawable/new_user_icon_background"
             ></ImageView>
         <ImageView
+            android:id="@+id/head"
             android:layout_width="@dimen/dm_dp_50"
             android:layout_height="@dimen/dm_dp_50"
             android:src="@drawable/new_user_icon"
@@ -292,6 +293,7 @@
                 ></TextView>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/call"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/broder"

@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SettingPresenter extends BasePresenter<ISettingView> {
 
-    public SettingPresenter(ISettingView settingView) {
+    public SettingPresenter(ISettingView settingView)  {
         attchView(settingView);
     }
     public void getLogout(){

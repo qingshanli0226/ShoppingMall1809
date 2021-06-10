@@ -41,7 +41,6 @@ public class  CacheAddrManager {
 
     public synchronized void unRegisterListener(IAddrListener addrListener){
         addrListeners.remove(addrListener);
-
     }
 
     public synchronized List<AddrBean> getAddrBeans() {
@@ -132,11 +131,7 @@ public class  CacheAddrManager {
                     newAddrBean.setAddr(addr);
                     newAddrBean.setPhone(phone);
                     addrBeanDao.update(newAddrBean);
-
                     //修改缓存
-
-
-
                 }
                 //通知页面
                 CacheAddrManager.this.notifyAll(addrBeans);

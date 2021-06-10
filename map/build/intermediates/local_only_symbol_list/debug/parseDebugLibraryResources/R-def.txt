@@ -1,0 +1,5 @@
+R_DEF: Internal format may change without notice
+local
+id bmapView
+id toolbar
+layout activity_check_log

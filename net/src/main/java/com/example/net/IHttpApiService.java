@@ -57,7 +57,7 @@ public interface IHttpApiService {
     @GET(Constants.HOME_URL)
     Observable<HomeBean> getHomeData();
     //退出登录
-    @GET(Constants.LOGOUT)
+    @POST(Constants.LOGOUT)
     Observable<LogoutBean> getLogout();
     //分类
     @GET

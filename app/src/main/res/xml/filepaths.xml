@@ -3,4 +3,8 @@
     <!-- QQ 官方分享SDK 共享路径 -->
     <root-path name="opensdk_root" path=""/>
     <external-files-path name="opensdk_external" path="Images/tmp"/>
+
+    <external-path
+        name="mypaths"
+        path="DCIM"></external-path>
 </PreferenceScreen>
