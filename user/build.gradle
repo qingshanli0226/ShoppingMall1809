@@ -52,7 +52,7 @@ dependencies {
     //工具类
     implementation 'com.blankj:utilcodex:1.26.0'
 
-
+    implementation 'com.alibaba:fastjson:1.2.41' //fastjson
 
     implementation ('com.alibaba:arouter-api:1.4.1')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

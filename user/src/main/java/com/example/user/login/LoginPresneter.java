@@ -1,8 +1,11 @@
 package com.example.user.login;
 
+import com.example.commom.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.LoginBean;
+
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,8 +19,16 @@ public class LoginPresneter extends BasePresenter<ILoginView> {
     }
 
     public void getRegisterData(String user, String pwd) {
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();
+        map.put("name",user);
+        map.put("password",pwd);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign",sign);
+
+        TreeMap<String, String> encryptParamsByBase = SignUtil.encryptParamsByBase64(map);
+
         RetrofitCreator.getShopApiService()
-                .getLoginData(user,pwd)
+                .getLoginData(encryptParamsByBase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {

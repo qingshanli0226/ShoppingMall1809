@@ -10,6 +10,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 import com.example.commom.ShopConstants;
+import com.example.commom.SignUtil;
 import com.example.commom.SpUtil;
 import com.example.framework.db.MessageTable;
 import com.example.framework.manager.MessageManager;
@@ -21,6 +22,7 @@ import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.entity.UMessage;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,8 +55,14 @@ public class ShopService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         String token = SpUtil.getString(this, ShopConstants.TOKEN_KEY);
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();
+        map.put("token",token);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign",sign);
 
-        RetrofitCreator.getShopApiService().getAutoLoginData(token)
+        TreeMap<String, String> encryptParamsByBase = SignUtil.encryptParamsByBase64(map);
+
+        RetrofitCreator.getShopApiService().getAutoLoginData(encryptParamsByBase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<LoginBean>() {

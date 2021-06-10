@@ -391,6 +391,7 @@ public class ShoppingViewTrolleyFragment extends BaseFragment<ShoppingPresenter>
                 shoppingCarAdapter.notifyDataSetChanged();
             }
             totalPrice();
+            selectAll();
         }
     }
 

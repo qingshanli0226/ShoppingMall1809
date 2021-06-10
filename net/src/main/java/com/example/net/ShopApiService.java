@@ -11,6 +11,7 @@ import com.example.net.model.ShoppingTrolleyBean;
 import com.example.net.model.SortBean;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -38,18 +39,18 @@ public interface ShopApiService {
     //注册
     @FormUrlEncoded
     @POST("register")
-    Observable<RegisterBean> getRegisterData(@Field("name") String username, @Field("password") String password);
+    Observable<RegisterBean> getRegisterData(@FieldMap Map<String,String> map);
     //退出登录
     @POST("logout")
     Observable<RegisterBean> getLogout();
     //登录
     @FormUrlEncoded
     @POST("login")
-    Observable<LoginBean> getLoginData(@Field("name") String username, @Field("password") String password);
+    Observable<LoginBean> getLoginData(@FieldMap Map<String,String> map);
     //自动登录
     @FormUrlEncoded
     @POST("autoLogin")
-    Observable<LoginBean> getAutoLoginData(@Field("token") String token);
+    Observable<LoginBean> getAutoLoginData(@FieldMap Map<String,String> map);
     //购物车请求
     @GET("getShortcartProducts")
     Observable<ShoppingTrolleyBean> getShoppingTrolley();
@@ -67,28 +68,28 @@ public interface ShopApiService {
     //库存
     @POST("checkOneProductInventory")
     @FormUrlEncoded
-    Observable<RegisterBean> getCheckOneProductInventory(@Field("productId")String productId,@Field("productNum")String productNum);
+    Observable<RegisterBean> getCheckOneProductInventory(@FieldMap Map<String,String> map);
     //修改选择
     @POST("updateProductSelected")
     Observable<RegisterBean> getUpdateProductSelected(@Body RequestBody requestBody);
     //全选
     @POST("selectAllProduct")
     Observable<RegisterBean> getSelectAllProduct(@Body RequestBody requestBody);
-    //删除
+    //删除 ---
     @POST("removeManyProduct")
     Observable<RegisterBean> getRemoveManyProduct(@Body RequestBody requestBody);
-    //单选
+    //检查服务端多个产品是否库存充足 ---
     @POST("checkInventory")
     Observable<ShoppingTrolleyBean> getCheckInventory(@Body RequestBody requestBody);
     //修改数量
     @POST("updateProductNum")
     Observable<RegisterBean> getUpDateProductNum(@Body RequestBody requestBody);
 
-    //向服务端下订单接口
+    //向服务端下订单接口 --
     @POST("getOrderInfo")
     Observable<OrderinfoBean> getOrderInfo(@Body RequestBody requestBody);
 
-    //向服务端下订单接口
+    //请求服务端，是否支付成功
     @POST("confirmServerPayResult")
     Observable<RegisterBean> getConfirmServerPayResult(@Body RequestBody requestBody);
 
@@ -102,15 +103,15 @@ public interface ShopApiService {
 
     //上传错误
     @GET("crash")
-    Observable<FindForBean> getCrash(@FieldMap HashMap<String,String> params);
+    Observable<FindForBean> getCrash(@FieldMap Map<String,String> params);
 
     //更新用户绑定的电话
     @POST("updatePhone")
     @FormUrlEncoded
-    Observable<RegisterBean> getUpDataPhone(@Field("phone")String phone);
+    Observable<RegisterBean> getUpDataPhone(@FieldMap Map<String,String> map);
 
     //更新地址的接口
     @POST("updateAddress")
     @FormUrlEncoded
-    Observable<RegisterBean> getUpDataAddress(@Field("address")String address);
+    Observable<RegisterBean> getUpDataAddress(@FieldMap Map<String,String> map);
 }

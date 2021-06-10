@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation 'org.greenrobot:eventbus:3.1.1'// EventBus依赖  带值  Subscribe
+    implementation 'com.alibaba:fastjson:1.2.72'//fastjson
 
     implementation fileTree('..\\app\\lib\\alipaySdk-15.6.5-20190718211148.aar')
     implementation fileTree(dir: 'libs', include: ['*.aar','*.jar'])

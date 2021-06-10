@@ -1,8 +1,11 @@
 package com.example.user.address;
 
+import com.example.commom.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.RegisterBean;
+
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -16,8 +19,14 @@ public class AddressPresenter extends BasePresenter<IAddress> {
     }
 
     public void getUpDataPhone(String phone){
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();
+        map.put("phone",phone);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign",sign);
+        TreeMap<String, String> encryptParamsByBase = SignUtil.encryptParamsByBase64(map);
+
         RetrofitCreator.getShopApiService()
-                .getUpDataPhone(phone)
+                .getUpDataPhone(encryptParamsByBase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterBean>() {
@@ -48,8 +57,15 @@ public class AddressPresenter extends BasePresenter<IAddress> {
     }
 
     public void getUpDataAddress(String address){
+
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();
+        map.put("address",address);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign",sign);
+        TreeMap<String, String> encryptParamsByBase = SignUtil.encryptParamsByBase64(map);
+
         RetrofitCreator.getShopApiService()
-                .getUpDataAddress(address)
+                .getUpDataAddress(encryptParamsByBase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterBean>() {

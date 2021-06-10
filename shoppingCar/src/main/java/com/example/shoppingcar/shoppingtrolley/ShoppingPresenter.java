@@ -1,6 +1,10 @@
 package com.example.shoppingcar.shoppingtrolley;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.DeleteBean;
@@ -11,9 +15,9 @@ import com.example.net.model.ShoppingTrolleyBean;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,16 +38,27 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
     public void getUpDateSelected(String productId, boolean productSelected, String productName, String url, String productPrice) {
 
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("productId", productId);
-            jsonObject.put("productSelected", productSelected);
-            jsonObject.put("productName", productName);
-            jsonObject.put("url", url);
-            jsonObject.put("productPrice", productPrice);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("productId", productId);
+//            jsonObject.put("productSelected", productSelected);
+//            jsonObject.put("productName", productName);
+//            jsonObject.put("url", url);
+//            jsonObject.put("productPrice", productPrice);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
+        com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+        jsonObject.put("productId", productId);
+        jsonObject.put("productSelected", productSelected);
+        jsonObject.put("productName", productName);
+        jsonObject.put("url", url);
+        jsonObject.put("productPrice", productPrice);
+        String sign = SignUtil.generateJsonSign(jsonObject);
+        jsonObject.put("sign", sign);
+        SignUtil.encryptJsonParamsByBase64(jsonObject);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
 
@@ -97,12 +112,19 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
     public void getSelectAllProduct(boolean selected) {
 
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("selected", selected);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("selected", selected);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
+        com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+        jsonObject.put("selected", selected);
+        String sign = SignUtil.generateJsonSign(jsonObject);
+        jsonObject.put("sign", sign);
+        SignUtil.encryptJsonParamsByBase64(jsonObject);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
 
@@ -156,8 +178,21 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
 
     public void getRemoveManyProduct(List<DeleteBean> delete) {
-        String json = new Gson().toJson(delete);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
+//        String json = new Gson().toJson(delete);
+
+        JSONArray objects = new JSONArray();
+        for (DeleteBean deleteBean : delete) {
+            com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+            jsonObject.put("productId",deleteBean.getProductId());
+            jsonObject.put("productNum",deleteBean.getProductNum());
+            jsonObject.put("productName",deleteBean.getProductName());
+            String sign = SignUtil.generateJsonSign(jsonObject);
+            jsonObject.put("sign", sign);
+            SignUtil.encryptJsonParamsByBase64(jsonObject);
+
+            objects.add(jsonObject);
+        }
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), objects.toString());
 
         RetrofitCreator.getShopApiService()
                 .getRemoveManyProduct(requestBody)
@@ -208,8 +243,22 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
     }
 
     public void getCheckInventory(List<DeleteBean> enough) {
-        String json = new Gson().toJson(enough);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
+//        String json = new Gson().toJson(enough);
+
+        JSONArray objects = new JSONArray();
+        for (DeleteBean deleteBean : enough) {
+            com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+            jsonObject.put("productId",deleteBean.getProductId());
+            jsonObject.put("productNum",deleteBean.getProductNum());
+            jsonObject.put("productName",deleteBean.getProductName());
+            String sign = SignUtil.generateJsonSign(jsonObject);
+            jsonObject.put("sign", sign);
+            SignUtil.encryptJsonParamsByBase64(jsonObject);
+
+            objects.add(jsonObject);
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), objects.toString());
 
         RetrofitCreator.getShopApiService()
                 .getCheckInventory(requestBody)
@@ -262,16 +311,26 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
     public void getUpDateProductNum(String productId, String productNum, String productName, String url, String productPrice) {
 
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("productId", productId);
-            jsonObject.put("productNum", productNum);
-            jsonObject.put("productName", productName);
-            jsonObject.put("url", url);
-            jsonObject.put("productPrice", productPrice);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("productId", productId);
+//            jsonObject.put("productNum", productNum);
+//            jsonObject.put("productName", productName);
+//            jsonObject.put("url", url);
+//            jsonObject.put("productPrice", productPrice);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+        com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+        jsonObject.put("productId", productId);
+        jsonObject.put("productNum", productNum);
+        jsonObject.put("productName", productName);
+        jsonObject.put("url", url);
+        jsonObject.put("productPrice", productPrice);
+        String sign = SignUtil.generateJsonSign(jsonObject);
+        jsonObject.put("sign", sign);
+        SignUtil.encryptJsonParamsByBase64(jsonObject);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
 
@@ -326,8 +385,16 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
 
     public void getCheckOneProductInventory(String productId, String productNum) {
 
+        TreeMap<String, String> map = SignUtil.getEmptyTreeMap();
+        map.put("productId", productId);
+        map.put("productNum", productNum);
+        String sign = SignUtil.generateSign(map);
+        map.put("sign", sign);
+        TreeMap<String, String> encryptParamsByBase = SignUtil.encryptParamsByBase64(map);
+
+
         RetrofitCreator.getShopApiService()
-                .getCheckOneProductInventory(productId, productNum)
+                .getCheckOneProductInventory(encryptParamsByBase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -373,7 +440,6 @@ public class ShoppingPresenter extends BasePresenter<IShoppingView> {
                     }
                 });
     }
-
 
 
 }

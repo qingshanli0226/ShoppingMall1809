@@ -1,5 +1,8 @@
 package com.example.shoppingcar.orderForm;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.example.commom.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.OrderInfoParamBean;
@@ -23,9 +26,27 @@ public class OrderFormPresenter extends BasePresenter<IOrderFormView> {
 
     public void getOrderInfo(OrderInfoParamBean orderInfoParamBean) {
 
-        String json = new Gson().toJson(orderInfoParamBean);
+//        String json = new Gson().toJson(orderInfoParamBean);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("subject",orderInfoParamBean.getSubject());
+        jsonObject.put("totalPrice",orderInfoParamBean.getTotalPrice());
+        JSONArray objects = new JSONArray();
+        for (OrderInfoParamBean.BodyBean bodyBean : orderInfoParamBean.getBody()) {
+            JSONObject json = new JSONObject();
+            json.put("productName",bodyBean.getProductName());
+            json.put("productId",bodyBean.getProductId());
+            String sign = SignUtil.generateJsonSign(json);
+            json.put("sign",sign);
+            SignUtil.encryptJsonParamsByBase64(json);
+        }
+        jsonObject.put("body",objects);
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), json.toString());
+        String sign = SignUtil.generateJsonSign(jsonObject);
+        jsonObject.put("sign",sign);
+
+        SignUtil.encryptJsonParamsByBase64(jsonObject);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
 
 
         RetrofitCreator.getShopApiService()

@@ -1,6 +1,7 @@
 package com.example.pay;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.commom.SignUtil;
 import com.example.framework.BasePresenter;
 import com.example.net.RetrofitCreator;
 import com.example.net.model.OrderInfoParamBean;
@@ -25,16 +26,25 @@ public class PayPresenter extends BasePresenter<IPayView> {
     }
 
     public void getConfirmServerPayResult(String outTradeNo,String result,boolean clientPayResult) {
-        LogUtils.e("开始请求验证成功");
-        JSONObject jsonObject = new JSONObject();
+//        LogUtils.e("开始请求验证成功");
+//        JSONObject jsonObject = new JSONObject();
+//
+//        try {
+//            jsonObject.put("outTradeNo",outTradeNo);
+//            jsonObject.put("result",result);
+//            jsonObject.put("clientPayResult",clientPayResult);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
-        try {
-            jsonObject.put("outTradeNo",outTradeNo);
-            jsonObject.put("result",result);
-            jsonObject.put("clientPayResult",clientPayResult);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        com.alibaba.fastjson.JSONObject jsonObject = new com.alibaba.fastjson.JSONObject();
+        jsonObject.put("outTradeNo",outTradeNo);
+        jsonObject.put("result",result);
+        jsonObject.put("clientPayResult",clientPayResult);
+        String sign = SignUtil.generateJsonSign(jsonObject);
+        jsonObject.put("sign", sign);
+        SignUtil.encryptJsonParamsByBase64(jsonObject);
+
 
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
