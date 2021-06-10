@@ -24,7 +24,6 @@ class LoginPresenter extends BasePresenter<ILoginView> {
 
     public void postLogin(String name,String pwd){
 
-
         RetrofitCreate.getFiannceApiService()
                 .postLogin(name, pwd)
                 .subscribeOn(Schedulers.io())

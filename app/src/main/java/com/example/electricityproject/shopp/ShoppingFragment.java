@@ -345,7 +345,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             if (AllSelectManager.getInstance().isSelect()){
                 AllSelect();
             }
-            deleteShopmall();
         }else if (del.equals("outLog")){
             Toast.makeText(getContext(), getResources().getString(R.string.shop_exit), Toast.LENGTH_SHORT).show();
             ShopCacheManger.getInstance().setShortBeanList(null);
