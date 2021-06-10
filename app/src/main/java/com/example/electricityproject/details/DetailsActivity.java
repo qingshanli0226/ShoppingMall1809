@@ -29,6 +29,8 @@ import com.example.common.Constants;
 import com.example.common.bean.AddOneProductBean;
 import com.example.common.bean.RegBean;
 import com.example.common.bean.ShortcartProductBean;
+import com.example.common.db.MessageDataBase;
+import com.example.common.db.MessageTable;
 import com.example.electricityproject.R;
 import com.example.electricityproject.view.CircleView;
 import com.example.framework.BaseActivity;
@@ -36,6 +38,8 @@ import com.example.glide.ShopGlide;
 import com.example.manager.AllSelectManager;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
+import com.example.manager.MessageManager;
+import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.view.ToolBar;
 import com.umeng.socialize.ShareAction;
@@ -75,7 +79,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     private RelativeLayout liner;
     private RelativeLayout relitive;
     private com.example.electricityproject.view.CircleView detailsBuyCarNum;
-    private boolean isSend=false;
+    private String isStorage="";
 
 
     @Override
@@ -227,12 +231,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                 detailsBuyCarNum.setVisibility(View.GONE);
             }
         }
-        //读取内存的动态权限
-        if(Build.VERSION.SDK_INT>=23){
-            String[] mPermissionList =new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions(this,mPermissionList,123);
-        }
+
     }
 
     @Override
@@ -253,6 +252,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         relitive = (RelativeLayout) findViewById(R.id.relitive);
         detailsBuyCarNum = (CircleView) findViewById(R.id.details_buyCarNum);
         ShopCacheManger.getInstance().registerShopBeanChange(this);
+        //读取内存的动态权限
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList =new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
     }
 
     @Override
@@ -269,16 +274,19 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-//        if (!isSend) {
-//            isSend=true;
-//            //数据库数量加一
-//            SPMessageNum.getInstance().addShopNum(1);
-//            MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享成功", System.currentTimeMillis(), false));
-//        }
+        Toast.makeText(this, "分享成功", Toast.LENGTH_SHORT).show();
+        if (isStorage.equals("")) {
+            isStorage="succeed";
+            //数据库数量加一
+            SPMessageNum.getInstance().addShopNum(1);
+            MessageDataBase.getInstance().payInsert(new MessageTable(null, "分享信息","分享成功", System.currentTimeMillis(), false));
+            MessageManager.getInstance().addMessage(new MessageTable(null, "分享信息","分享成功", System.currentTimeMillis(), false));
+        }
 
     }
     @Override
     public void onRightImgClick() {
+        isStorage="";
         PopupWindow popupWindow = new PopupWindow(DetailsActivity.this);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(200);
@@ -287,13 +295,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         viewById.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSend=false;
                 UMImage image = new UMImage(DetailsActivity.this, Constants.BASE_URl_IMAGE+img);//网络图片
-                new ShareAction(DetailsActivity.this).withMedia(image).withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
+                new ShareAction(DetailsActivity.this).withMedia(image).withText("hello").setDisplayList(SHARE_MEDIA.QZONE,SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
-                                Toast.makeText(DetailsActivity.this, "开始", Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
@@ -304,20 +311,16 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
                             @Override
                             public void onError(SHARE_MEDIA share_media, Throwable throwable) {
                                 Toast.makeText(DetailsActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-//                                if (!isSend){
-//                                    isSend=true;
-//                                    SPMessageNum.getInstance().addShopNum(1);
-//                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
-//                                }
+                                if (isStorage.equals("")){
+                                    isStorage="error";
+                                    SPMessageNum.getInstance().addShopNum(1);
+                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享信息","分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
+                                    MessageManager.getInstance().addMessage(new MessageTable(null,"分享信息","分享失败 错误信息:"+throwable.getMessage(),System.currentTimeMillis(),false));
+                                }
                             }
                             @Override
                             public void onCancel(SHARE_MEDIA share_media) {
-//                                if (!isSend){
-//                                    isSend=true;
-//                                    //数据库数量加一
-//                                    SPMessageNum.getInstance().addShopNum(1);
-//                                    MessageDataBase.getInstance().payInsert(new MessageTable(null,"分享失败 用户已取消",System.currentTimeMillis(),false));
-//                                }
+
                             }
                         }).open();
                 popupWindow.dismiss();

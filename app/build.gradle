@@ -29,13 +29,11 @@ android {
     }
 
     buildTypes {
-
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -97,5 +95,8 @@ dependencies {
     //bugly错误统计
     implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.
 
+
+    //屏幕适配
+    implementation 'me.jessyan:autosize:1.1.2'
 
 }

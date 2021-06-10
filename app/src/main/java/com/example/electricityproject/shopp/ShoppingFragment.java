@@ -271,7 +271,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     //检查多个库存
     @Override
     public void checkInventory(CheckInventoryBean checkInventoryBean) {
-        Log.i("zx", "checkInventory: "+checkInventoryBean.toString());
         if(checkInventoryBean.getCode().equals("200")){
             loadingPage.showSuccessView();
             List<CheckInventoryBean.ResultBean> checkInventoryBeanResul = checkInventoryBean.getResult();

@@ -58,9 +58,9 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
             @Override
             public void OnItemClick(int position) {
                 //更改数据库
-                MessageDataBase.getInstance().payUpdate(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
+                MessageDataBase.getInstance().payUpdate(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getPayMessage(),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
                 //缓存数据修改
-                MessageManager.getInstance().UpdateMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
+                MessageManager.getInstance().UpdateMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getPayMessage(),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),true));
                 messageTables.get(position).setIsShow(true);
                 messageAdapter.notifyItemChanged(position);
                 Toast.makeText(MessageActivity.this, getResources().getString(R.string.home_con_message), Toast.LENGTH_SHORT).show();
@@ -78,9 +78,9 @@ public class MessageActivity extends BaseActivity implements MessageDataBase.iMe
 //                        //数据库数量减一
 //                        SPMessageNum.getInstance().subShopNum(1);
                         //把当前点击的数据，从数据库中删除
-                        MessageDataBase.getInstance().payRemove(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
+                        MessageDataBase.getInstance().payRemove(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getPayMessage(),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
                         //缓存数据删除
-                        MessageManager.getInstance().removeMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
+                        MessageManager.getInstance().removeMessage(new MessageTable(Long.decode(messageTables.get(position).getId()+""),messageTables.get(position).getPayMessage(),messageTables.get(position).getIsSucceed(),messageTables.get(position).getMessageTime(),messageTables.get(position).getIsShow()));
                         dialog.dismiss();
                     }
                 });

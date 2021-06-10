@@ -56,7 +56,7 @@ public class MessageDataBase {
     }
     //修改支付信息后遍历注册接口发送通知
     public void payUpdate(MessageTable messageTable){
-        getMessageTableDao().update(new MessageTable(Long.decode(messageTable.getId()+""),messageTable.getIsSucceed(),messageTable.getMessageTime(),true));
+        getMessageTableDao().update(new MessageTable(Long.decode(messageTable.getId()+""),messageTable.getPayMessage(),messageTable.getIsSucceed(),messageTable.getMessageTime(),true));
         MessageNotify();
     }
     //查询所有支付的信息

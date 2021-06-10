@@ -1,17 +1,25 @@
 package com.example.electricityproject.person;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.common.bean.OutLogBean;
@@ -29,7 +37,11 @@ import com.hyphenate.easeui.EaseConstant;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class PersonFragment extends BaseFragment<PersonPresenter> implements IoutloginView{
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class PersonFragment extends BaseFragment<PersonPresenter> implements IoutloginView {
 
     private ToolBar toolbar;
     private TextView pleaseLogin;
@@ -39,9 +51,24 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
     private LinearLayout liveStreaming;
     private LinearLayout tell;
     private LinearLayout feedback;
+    private ImageView outLog;
+    private ImageView cameraPhoto;
+    private String path;
 
     @Override
     protected void initData() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.CALL_PHONE,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.WRITE_CONTACTS
+            }, 100);
+        }
+
         httpPresenter = new PersonPresenter(this);
         //登录则吐司已登录,未登录跳转到登录页面
         pleaseLogin.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +119,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         mView.findViewById(R.id.outLog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (BusinessUserManager.getInstance().getIsLog()==null){
+                if (BusinessUserManager.getInstance().getIsLog() == null) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.person_no_NoLogin), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -102,6 +129,7 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         httpPresenter.outLogin();
+
                     }
                 });
                 builder.setNegativeButton(getResources().getString(R.string.person_no), new DialogInterface.OnClickListener() {
@@ -120,27 +148,28 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+10086));
+                intent.setData(Uri.parse("tel:" + 10086));
                 startActivity(intent);
             }
         });
+        //退出登录
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-                if (isLog!=null){
-                    EMClient.getInstance().login(isLog.getResult().getName(), isLog.getResult().getPassword(), new EMCallBack(){
+                if (isLog != null) {
+                    EMClient.getInstance().login(isLog.getResult().getName(), isLog.getResult().getPassword(), new EMCallBack() {
                         @Override
                         public void onSuccess() {
                             Intent intent = new Intent(getContext(), ChatActivity.class);
                             //username为对方的环信id
-                            intent.putExtra(EaseConstant.EXTRA_USER_ID,"zx");
+                            intent.putExtra(EaseConstant.EXTRA_USER_ID, "zx");
                             startActivity(intent);
                         }
 
                         @Override
                         public void onError(int code, String error) {
-                            Log.i("zx", "onError: "+error);
+                            Log.i("zx", "onError: " + error);
                         }
 
                         @Override
@@ -148,11 +177,43 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
 
                         }
                     });
-                }else {
+                } else {
                     BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
                 }
             }
         });
+
+        //拍照换头像
+        cameraPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
+                if (isLog!=null){
+                    Intent intent = new Intent();
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    path = "/sdcard/DCIM/Camera" + capturename();
+                    Uri uri = FileProvider.getUriForFile(getActivity(), "com.example.electricityproject", new File(path));
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
+                    startActivityForResult(intent,101);
+                }else {
+                    Toast.makeText(getActivity(), "当前用户未登录", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==101 && resultCode== Activity.RESULT_OK){
+            Glide.with(getContext()).load(path).transform(new CircleCrop()).into(cameraPhoto);
+        }
+    }
+
+    private String capturename() {
+        String format = new SimpleDateFormat(System.currentTimeMillis()+"").format(new Date());
+        return format;
     }
 
     @Override
@@ -169,11 +230,13 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
         liveStreaming = mView.findViewById(R.id.liveStreaming);
         feedback = mView.findViewById(R.id.feedback);
         tell = mView.findViewById(R.id.tell);
+        outLog = (ImageView) findViewById(R.id.outLog);
+        cameraPhoto = (ImageView) findViewById(R.id.camera_photo);
         //加入动态权限
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{
                     Manifest.permission.CALL_PHONE
-            },100);
+            }, 100);
         }
     }
 
@@ -204,9 +267,9 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
 
     @Override
     public void outLogin(OutLogBean outLogBean) {
-        if (outLogBean.getCode().equals("200")){
+        if (outLogBean.getCode().equals("200")) {
             pleaseLogin.setText(getResources().getString(R.string.person_no_Login));
-            TokenSPUtility.putString(getContext(),null);
+            TokenSPUtility.putString(getContext(), null);
             BusinessUserManager.getInstance().setIsLog(null);
             EventBus.getDefault().post("outLog");
         }

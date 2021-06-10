@@ -170,9 +170,9 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                         //数据库数量加一
                         SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
-                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,"支付信息",payMsg,System.currentTimeMillis(),false));
                         //缓存数据
-                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg,System.currentTimeMillis(),false));
+                        MessageManager.getInstance().addMessage(new MessageTable(null,"支付信息",payMsg,System.currentTimeMillis(),false));
                     } else {
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
                         payMsg = getResources().getString(R.string.orderDetails_pay_fail);
@@ -188,9 +188,9 @@ public class FindForPayActivity extends BaseActivity<FindForPayPresenter> implem
                         //数据库数量加一
                         SPMessageNum.getInstance().addShopNum(1);
                         //添加到数据库
-                        MessageDataBase.getInstance().payInsert(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+                        MessageDataBase.getInstance().payInsert(new MessageTable(null,"支付信息",payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
                         //缓存数据
-                        MessageManager.getInstance().addMessage(new MessageTable(null,payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
+                        MessageManager.getInstance().addMessage(new MessageTable(null,"支付信息",payMsg+payResult.getMemo(),System.currentTimeMillis(),false));
                     }
                     break;
                 }

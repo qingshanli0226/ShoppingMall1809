@@ -49,7 +49,7 @@ public class SignUtil {
         return encryptedParams;
     }
 
-    public static void encryptJsonParamsByBase64(JSONObject object) {
+    public static void encryptJsonParamsByBase64(com.alibaba.fastjson.JSONObject object) {
         Log.d("LQS str = ", object.toString());
 
         Iterator<String> iterator = object.keySet().iterator();

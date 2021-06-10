@@ -42,6 +42,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -66,11 +67,13 @@
         <activity
             android:name=".details.PlayVideoActivity"
             android:configChanges="orientation|screenSize|keyboard" />
+
         <activity android:name=".home.message.MessageActivity" />
         <activity android:name=".person.dropshipment.DropShipmentActivity" />
-        <activity android:name=".shopp.orderdetails.OrderDetailsActivity" />
+        <activity android:name=".shopp.orderdetails.OrderDetailsActivity" android:launchMode="singleTop"/>
         <activity android:name=".shopp.userinfo.BindUserInfoActivity" />
         <activity android:name=".person.findforpay.FindForPayActivity" />
+
         <activity
             android:name=".details.DetailsActivity"
             android:screenOrientation="portrait" />
@@ -88,6 +91,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -101,20 +105,10 @@
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
-<!--        <activityS-->
-<!--            android:name="com.tencent.connect.common.AssistActivity"-->
-<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
-<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.electricityproject.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
-        </provider>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
 
         <meta-data
             android:name="EASEMOB_APPKEY"
@@ -144,6 +138,23 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="XcjQbYMU6LDwqCRLmn08me2NYasXiKEh" />
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="410" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="730" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.electricityproject"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
 
     </application>
 

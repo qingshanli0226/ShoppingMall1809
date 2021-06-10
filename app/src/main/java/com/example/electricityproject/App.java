@@ -55,15 +55,12 @@ public class App extends Application {
         //错误框架
 //        ShopmallCrashHandler.getInstance().init(this);
 
-
         ShopCacheManger.getInstance().init(this);
 
         //自动登录
         startService(new Intent(this, AutoService.class));
         //网络连接初始化
         BusinessNetManager.getInstance().init(this);
-
-
 
         //查询数据库 把信息数据库的数量存储到SP
         SPMessageNum.getInstance().init(this);

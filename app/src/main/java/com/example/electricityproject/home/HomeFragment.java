@@ -61,11 +61,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements CallHom
         mainRe.setLayoutManager(new LinearLayoutManager(getContext()));
         homeAdapter = new HomeAdapter();
         MessageDataBase.getInstance().register(this);
-        if (SPMessageNum.getInstance().getShopNum()==0){
+
+        if (SPMessageNum.getInstance().queryMessageNum(getContext())==0){
             unreadMessageNum.setText(getResources().getString(R.string.home_info));
         }else {
             //把数据库的数量写到 unreadMessageNum
-            unreadMessageNum.setText(SPMessageNum.getInstance().getShopNum() +"");
+            unreadMessageNum.setText(SPMessageNum.getInstance().queryMessageNum(getContext()) +"");
         }
     }
 

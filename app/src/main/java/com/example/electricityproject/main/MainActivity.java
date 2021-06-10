@@ -194,13 +194,12 @@ public class MainActivity extends BaseActivity implements ShopCacheManger.iShopB
 
     @Override
     public void OnShopBeanChange() {
-        if (BusinessUserManager.getInstance().getIsLog()!=null&&ShopCacheManger.getInstance().getShortBeanList()!=null){
-            if (ShopCacheManger.getInstance().getShortBeanList().size()>0){
+        if (BusinessUserManager.getInstance().getIsLog()!=null&&ShopCacheManger.getInstance().getShortBeanList().size()>0){
                 buyCarNum.setVisibility(View.VISIBLE);
                 buyCarNum.setCurrentNum(ShopCacheManger.getInstance().getShortBeanList().size()+"");
-            }else {
-                buyCarNum.setVisibility(View.GONE);
-            }
+        }else {
+            Toast.makeText(this, "隐藏", Toast.LENGTH_SHORT).show();
+            buyCarNum.setVisibility(View.GONE);
         }
     }
 }

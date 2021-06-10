@@ -40,7 +40,6 @@ public class ShopmallCrashHandler implements Thread.UncaughtExceptionHandler{
                 Looper.loop();
             }
         }).start();
-
         try {
             Thread.sleep(3 * 1000);
         } catch (InterruptedException interruptedException) {
