@@ -3,6 +3,8 @@ package com.example.myapplication.personalcenter;
 import com.example.common.log.LogUtil;
 import com.example.framework.manager.CaCheMannager;
 import com.example.framework.manager.PaySendCacheManager;
+import com.example.net.bean.LogOutBean;
+import com.example.net.bean.LoginBean;
 import com.example.net.bean.OrderinfoBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.net.retrofit.RetrofitManager;
@@ -151,6 +153,35 @@ public class PersonalPresenter extends BasePresenter<com.example.myapplication.p
                     @Override
                     public void onNext(@NonNull FindForSendBean findForSendBean) {
                         mView.onShoppingSend(findForSendBean);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void getLogOut(){
+
+        RetrofitManager.getApi().getLogOut()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<LogOutBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull LogOutBean logOutBean) {
+                        if (mView!=null){
+                            mView.onLogOut(logOutBean);
+                        }
                     }
 
                     @Override

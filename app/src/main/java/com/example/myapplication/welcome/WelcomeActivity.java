@@ -2,7 +2,9 @@ package com.example.myapplication.welcome;
 
 import androidx.annotation.NonNull;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
@@ -34,6 +36,17 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements I
 
     @Override
     public void initView() {
+        //权限
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_NETWORK_STATE,
+                    Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.CHANGE_WIFI_STATE,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            },100);
+        }
         coundDownTv = (TextView) findViewById(R.id.coundDownTv);
     }
 

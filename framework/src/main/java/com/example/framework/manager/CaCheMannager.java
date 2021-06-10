@@ -1,9 +1,7 @@
 package com.example.framework.manager;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.net.AppMoudel;
 import com.example.net.bean.HomeBean;
 import com.example.net.bean.ShoppingCartBean;
 import com.example.net.retrofit.RetrofitManager;
@@ -52,6 +50,9 @@ public class CaCheMannager implements CacheUserManager.IloginChange {
         if (loginBean) {
             Log.d("CaCheMannager", "登陆了");
             getShoppingData();
+            showShoppingData();
+        }else {
+            destroy();
         }
     }
 
@@ -67,14 +68,14 @@ public class CaCheMannager implements CacheUserManager.IloginChange {
 
     private List<IShoppingCartInterface> list = new ArrayList<>();
     private List<ShoppingCartBean.ResultBean> shoppingCartBeanList = new ArrayList<>();//购物车数据
-    private List<ShoppingCartBean.ResultBean> CheckList = new ArrayList<>();//选中集合
+    private List<ShoppingCartBean.ResultBean> checkList = new ArrayList<>();//选中集合
 
     public synchronized List<ShoppingCartBean.ResultBean> getCheckList() {
-        return CheckList;
+        return checkList;
     }
 
     public synchronized void setCheckList(List<ShoppingCartBean.ResultBean> checkList) {
-        CheckList = checkList;
+        this.checkList = checkList;
     }
 
     public synchronized List<ShoppingCartBean.ResultBean> getShoppingCartBeanList() {
@@ -166,5 +167,11 @@ public class CaCheMannager implements CacheUserManager.IloginChange {
 
                     }
                 });
+    }
+
+    public void destroy(){
+        price=-1;
+        shoppingCartBeanList.clear();
+        checkList.clear();
     }
 }

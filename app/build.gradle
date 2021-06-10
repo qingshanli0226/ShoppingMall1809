@@ -37,8 +37,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     sourceSets {
-        main.jniLibs.srcDirs = ['libs']
+        main {
+            jniLibs.srcDirs = ['libs']//将so文件目录指向libs目录
+        }
     }
+
 }
 
 dependencies {
@@ -61,6 +64,7 @@ dependencies {
     implementation files('libs\\umeng-share-wechat-simplify-6.9.6.jar')
     implementation files('libs\\umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs\\umeng-sharetool-6.9.6.jar')
+    implementation files('libs\\AMap3DMap_7.6.0_AMapNavi_7.6.0_AMapSearch_7.6.0_AMapTrack_1.3.0_AMapLocation_5.2.0_20200915.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

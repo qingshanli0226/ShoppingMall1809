@@ -18,11 +18,12 @@ public class UserModule implements CaCheArote.IUserInterface {
     @Override
     public void openLoginActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, UserActivity.class);
-        if (context instanceof Activity){
+        if (bundle!=null){
             intent.putExtras(bundle);
+        }
+        if (context instanceof Activity){
             ((Activity) context).startActivityForResult(intent,100);
         }else {
-            intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             ((Activity) context).startActivityForResult(intent,100);
         }
