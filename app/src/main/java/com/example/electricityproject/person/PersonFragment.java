@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,9 +30,6 @@ import com.example.framework.BaseFragment;
 import com.example.manager.BusinessARouter;
 import com.example.manager.BusinessUserManager;
 import com.example.view.ToolBar;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.EaseConstant;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -151,36 +147,6 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                 startActivity(intent);
             }
         });
-        //退出登录
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogBean isLog = BusinessUserManager.getInstance().getIsLog();
-                if (isLog != null) {
-                    EMClient.getInstance().login(isLog.getResult().getName(), isLog.getResult().getPassword(), new EMCallBack() {
-                        @Override
-                        public void onSuccess() {
-                            Intent intent = new Intent(getContext(), ChatActivity.class);
-                            //username为对方的环信id
-                            intent.putExtra(EaseConstant.EXTRA_USER_ID, "zx");
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onError(int code, String error) {
-                            Log.i("zx", "onError: " + error);
-                        }
-
-                        @Override
-                        public void onProgress(int progress, String status) {
-
-                        }
-                    });
-                } else {
-                    BusinessARouter.getInstance().getUserManager().OpenLogActivity(getContext(), null);
-                }
-            }
-        });
 
         //拍照换头像
         cameraPhoto.setOnClickListener(new View.OnClickListener() {
@@ -195,12 +161,11 @@ public class PersonFragment extends BaseFragment<PersonPresenter> implements Iou
                     intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
                     startActivityForResult(intent,101);
                 }else {
-                    Toast.makeText(getActivity(), "当前用户未登录", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "当前用户未登录,请先登录", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

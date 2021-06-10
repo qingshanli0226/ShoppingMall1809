@@ -69,7 +69,6 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
         }
     }
 
-
     @Override
     protected void initData() {
         //数据库初始化
@@ -124,8 +123,8 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
         confirmAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editAddress.setHint(""+Newaddress);
-                if (!Newaddress.equals("")){
+                if (!Newaddress.equals("") && Newaddress!=null){
+                    editAddress.setHint(""+Newaddress);
                     httpPresenter.postUpdateAddressData(Newaddress);
                 }
             }
@@ -170,16 +169,19 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
     @Override
     protected void onResume() {
         super.onResume();
+        bmapView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        bmapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        bmapView.onDestroy();
     }
 
     public class MyBDA extends BDAbstractLocationListener {
@@ -205,7 +207,8 @@ public class BindUserInfoActivity extends BaseActivity<BindUserInfoPresenter> im
                     .latitude(bdLocation.getLatitude())
                     .longitude(bdLocation.getLongitude())
                     .build();
-
         }
     }
+
+
 }

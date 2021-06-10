@@ -1,7 +1,6 @@
 package com.example.manager;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.common.LogUtils;
 import com.example.common.bean.FindForPayBean;
@@ -271,8 +270,6 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
                             List<ShortcartProductBean.ResultBean> result = shortcartProductBean.getResult();
                             ShopCacheManger.getInstance().setShortBeanList(result);
                             LogUtils.i(shortcartProductBean.getResult().toString());
-                        }else {
-                            Toast.makeText(mContext, "没有拿到购物车数据", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -351,6 +348,8 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     //判断登录成功后的收货地址
     public void isBind(LogBean logBean){
         if (logBean!=null){
+            LogUtils.i(""+logBean.getResult().getAddress());
+            LogUtils.i(""+logBean.getResult().getPhone());
             if (logBean.getResult().getAddress()!=null && logBean.getResult().getPhone()!=null){
                 BusinessUserManager.getInstance().setBindTel(true);
                 BusinessUserManager.getInstance().setBindAddress(true);

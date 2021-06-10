@@ -92,7 +92,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             ShopCacheManger.getInstance().requestShortProductData();
             BusinessUserManager.getInstance().setLogList(logBean.getResult());
             BusinessUserManager.getInstance().setIsLog(logBean);
-            ShopCacheManger.getInstance().isBind(logBean);
+            if (logBean.getResult().getPhone() != null || logBean.getResult().getAddress() !=null){
+                ShopCacheManger.getInstance().isBind(logBean);
+            }
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
         }
     }

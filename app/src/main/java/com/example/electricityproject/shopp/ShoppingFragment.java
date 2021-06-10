@@ -232,7 +232,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void removeOneShop(RemoveOneProductBean removeOneProductBean) {
         if (removeOneProductBean.getCode().equals("200")){
-            Toast.makeText(getContext(), getResources().getString(R.string.shop_del_success), Toast.LENGTH_SHORT).show();
             //从缓存数据源中删除然后调用接口刷新
             ShopCacheManger.getInstance().ShopDelOne(result.get(delOne));
         }
@@ -241,7 +240,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     @Override
     public void removeManyShop(RemoveManyProductBean removeManyProductBean) {
         if (removeManyProductBean.getCode().equals("200")){
-            Toast.makeText(getContext(), getResources().getString(R.string.shop_del_success), Toast.LENGTH_SHORT).show();
             for (ShortcartProductBean.ResultBean bean : removeAllShopBean) {
                 ShopCacheManger.getInstance().ShopDelOne(bean);
             }
@@ -338,9 +336,7 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     //支付成功或者支付失败后发送eventBus，来把选中的数据删除
     @Subscribe
     public void eventDel(String del){
-
         if (del.equals("del")) {
-            Toast.makeText(getContext(), getResources().getString(R.string.shop_del), Toast.LENGTH_SHORT).show();
             deleteShopmall();
             if (AllSelectManager.getInstance().isSelect()){
                 AllSelect();
@@ -392,12 +388,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             shoppingAdapter.updateData(shortcartProductBean.getResult());
             buyCarRv.setAdapter(shoppingAdapter);
             ShopCacheManger.getInstance().setShortBeanList(shortcartProductBean.getResult());
-            shoppingAdapter.notifyDataSetChanged();
-        } else {
-            Toast.makeText(getContext(), getResources().getString(R.string.shop_loadingFail), Toast.LENGTH_SHORT).show();
-            httpPresenter.getShortProductsData();
-            shoppingAdapter.updateData(shortcartProductBean.getResult());
-            buyCarRv.setAdapter(shoppingAdapter);
             shoppingAdapter.notifyDataSetChanged();
         }
     }
