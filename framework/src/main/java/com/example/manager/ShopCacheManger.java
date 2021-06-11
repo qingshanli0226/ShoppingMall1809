@@ -348,13 +348,9 @@ public class ShopCacheManger implements BusinessUserManager.IUserLoginChanged{
     //判断登录成功后的收货地址
     public void isBind(LogBean logBean){
         if (logBean!=null){
-            if (!logBean.getResult().getAddress().equals("")&&!logBean.getResult().getPhone().equals("")) {
-                LogUtils.i("" + logBean.getResult().getAddress());
-                LogUtils.i("" + logBean.getResult().getPhone());
-                if (logBean.getResult().getAddress() != null && logBean.getResult().getPhone() != null) {
-                    BusinessUserManager.getInstance().setBindTel(true);
-                    BusinessUserManager.getInstance().setBindAddress(true);
-                }
+            if (logBean.getResult().getAddress() != null && logBean.getResult().getPhone() != null) {
+                BusinessUserManager.getInstance().setBindTel(true);
+                BusinessUserManager.getInstance().setBindAddress(true);
             }
         }
     }

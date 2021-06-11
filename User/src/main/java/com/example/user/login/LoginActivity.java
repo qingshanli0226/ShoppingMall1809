@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.common.LogUtils;
 import com.example.common.TokenSPUtility;
 import com.example.common.bean.LogBean;
 import com.example.framework.BaseActivity;
@@ -93,8 +95,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
             BusinessUserManager.getInstance().setLogList(logBean.getResult());
             BusinessUserManager.getInstance().setIsLog(logBean);
             if (logBean.getResult().getPhone() != null || logBean.getResult().getAddress() !=null){
+                Toast.makeText(this, "执行这里了", Toast.LENGTH_SHORT).show();
                 ShopCacheManger.getInstance().isBind(logBean);
             }
+            LogUtils.i(logBean.getResult().getAddress()+"");
+            LogUtils.i(logBean.getResult().getPhone()+"");
+
             BusinessARouter.getInstance().getAppManager().OpenMainActivity(LoginActivity.this,null);
         }
     }

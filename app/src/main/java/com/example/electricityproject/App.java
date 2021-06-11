@@ -1,7 +1,6 @@
 package com.example.electricityproject;
 
 import android.app.Application;
-import android.content.Intent;
 import android.util.Log;
 
 import com.baidu.mapapi.CoordType;
@@ -17,7 +16,7 @@ import com.example.manager.SPMessageNum;
 import com.example.manager.ShopCacheManger;
 import com.example.pay.order.PayModel;
 import com.example.user.UserModel;
-import com.example.user.auto.AutoService;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
@@ -50,7 +49,7 @@ public class App extends Application {
         ShopCacheManger.getInstance().init(this);
 
         //自动登录
-        startService(new Intent(this, AutoService.class));
+//        startService(new Intent(this, AutoService.class));
         //网络连接初始化
         BusinessNetManager.getInstance().init(this);
 
@@ -113,11 +112,16 @@ public class App extends Application {
         //bugly初始化
         CrashReport.initCrashReport(getApplicationContext(), "c66d73003a", true);
 
+        //百度地图
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         SDKInitializer.initialize(getApplicationContext());
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
+
+
+        //内存泄漏
+        LeakCanary.install(this);
 
     }
 }
