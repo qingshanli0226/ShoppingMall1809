@@ -20,7 +20,7 @@ class TagAdapter extends BaseAdapter<ClassifyBean.ResultBean> {
     public void displayViewHolder(BaseViewHolder baseViewHolder, int position, ClassifyBean.ResultBean itemData) {
         //随机颜色
         Random random = new Random();
-        String []ranColor ={"#FFB6C1","#DB7093","#000000"};
+        String[] ranColor ={"#FFB6C1","#DB7093","#000000"};
         int randomcolor =random.nextInt(ranColor.length);
         TextView view = baseViewHolder.getView(R.id.tag_text);
         view.setText(itemData.getName()+"");

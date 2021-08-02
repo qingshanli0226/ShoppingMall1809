@@ -170,13 +170,10 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
             }
         });
 
-
         //去结算
         goZfb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 LogUtils.i(BusinessUserManager.getInstance().isBindAddress()+"");
                 LogUtils.i(BusinessUserManager.getInstance().isBindTel()+"");
                 LogUtils.i(ShopCacheManger.getInstance().getSelectList().toString());
@@ -331,7 +328,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
         }
         EventBus.getDefault().register(this);
         ShopCacheManger.getInstance().registerShopBeanChange(this);
-
     }
 
     //支付成功或者支付失败后发送eventBus，来把选中的数据删除
@@ -380,7 +376,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
 
     @Override
     public void getShortProductData(ShortcartProductBean shortcartProductBean) {
-
         if (shortcartProductBean.getCode().equals("200")) {
             result = shortcartProductBean.getResult();
             loadingPage.showSuccessView();
@@ -395,7 +390,6 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     //修改产品返回Bean
     @Override
     public void amendProductData(UpdateProductNumBean updateProductNumBean) {
-
         if (updateProductNumBean.getCode().equals("200")) {
             if (!a.equals("")){
                 if (a.equals("add")){
@@ -420,33 +414,33 @@ public class ShoppingFragment extends BaseFragment<ShoppingPresenter> implements
     // 全选点击请求数据返回的数据
     @Override
     public void postSelectAllProductData(SelectAllProductBean selectAllProductBean) {
-            //全选
-                if (selectAllProductBean.getCode().equals("200")) {
-                        if (!AllSelectManager.getInstance().isSelect()) {
-                            AllSelectManager.getInstance().setSelect(true);
-                            all.setImageResource(R.drawable.checkbox_selected);
-                            delAll.setImageResource(R.drawable.checkbox_selected);
-                            for (ShortcartProductBean.ResultBean bean : result) {
-                                bean.setAll(true);
-                            }
-                            count();
-                            shoppingAdapter.notifyDataSetChanged();
-                        } else {
-                            AllSelectManager.getInstance().setSelect(false);
-                            all.setImageResource(R.drawable.checkbox_unselected);
-                            delAll.setImageResource(R.drawable.checkbox_unselected);
-                            for (ShortcartProductBean.ResultBean bean : result) {
-                                bean.setAll(false);
-                            }
-                            count();
-                            shoppingAdapter.notifyDataSetChanged();
-                        }
-
-                        for (ShortcartProductBean.ResultBean bean : result) {
-                            ShopCacheManger.getInstance().setSelect(bean);
-                        }
+        //全选
+        if (selectAllProductBean.getCode().equals("200")) {
+                if (!AllSelectManager.getInstance().isSelect()) {
+                    AllSelectManager.getInstance().setSelect(true);
+                    all.setImageResource(R.drawable.checkbox_selected);
+                    delAll.setImageResource(R.drawable.checkbox_selected);
+                    for (ShortcartProductBean.ResultBean bean : result) {
+                        bean.setAll(true);
                     }
+                    count();
+                    shoppingAdapter.notifyDataSetChanged();
+                } else {
+                    AllSelectManager.getInstance().setSelect(false);
+                    all.setImageResource(R.drawable.checkbox_unselected);
+                    delAll.setImageResource(R.drawable.checkbox_unselected);
+                    for (ShortcartProductBean.ResultBean bean : result) {
+                        bean.setAll(false);
+                    }
+                    count();
+                    shoppingAdapter.notifyDataSetChanged();
                 }
+
+                for (ShortcartProductBean.ResultBean bean : result) {
+                    ShopCacheManger.getInstance().setSelect(bean);
+                }
+            }
+    }
 
     //单选
     @Override

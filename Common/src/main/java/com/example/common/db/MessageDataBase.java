@@ -16,7 +16,7 @@ public class MessageDataBase {
         }
         return messageManger;
     }
-
+    //GreenDao数据库
     private DaoMaster daoMaster;
     private MessageTableDao messageTableDao;
     private Context mContext;

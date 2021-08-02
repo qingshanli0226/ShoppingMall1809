@@ -17,9 +17,7 @@ public class BusinessNetManager {
     private Context context;
     public static BusinessNetManager getInstance() {
         if (manager==null){
-
             manager=new BusinessNetManager();
-
         }
         return manager;
     }

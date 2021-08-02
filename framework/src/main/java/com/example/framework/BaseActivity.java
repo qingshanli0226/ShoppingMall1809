@@ -44,6 +44,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         BusinessNetManager.getInstance().RegisterConnect(this);
         ActivityManger.getInstance().register(this);
         PushAgent.getInstance(this).onAppStart();
+
         BusinessUserManager.getInstance().Register(this);
     }
 

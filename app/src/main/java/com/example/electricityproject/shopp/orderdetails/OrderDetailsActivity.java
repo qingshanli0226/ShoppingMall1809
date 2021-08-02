@@ -108,8 +108,8 @@ public class OrderDetailsActivity extends BaseActivity<OrderDetailsActivityPrese
                         EventBus.getDefault().post("del");
                         list.clear();
                     } else {
-                        payMsg = getResources().getString(R.string.orderDetails_pay_fail);
                         httpPresenter.confirmServerPayResult(outTradeNo,payResult,false);
+                        payMsg = getResources().getString(R.string.orderDetails_pay_fail);
                         Toast.makeText(OrderDetailsActivity.this, ""+payMsg, Toast.LENGTH_SHORT).show();
 
                         FindForPayBean.ResultBean resultBean = new FindForPayBean.ResultBean();
