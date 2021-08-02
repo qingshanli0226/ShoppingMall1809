@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageDataBase {
-
     private static MessageDataBase messageManger;
     private List<iMessageListener> messageListeners =new ArrayList<>();
 
@@ -77,7 +76,7 @@ public class MessageDataBase {
             messageListener.onMessageNumListener();
         }
     }
-
+    //接口
     public interface iMessageListener {
         void onMessageNumListener();
     }

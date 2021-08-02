@@ -13,9 +13,11 @@ public class BasePresenter<V> {
     public synchronized void add(Disposable disposable){
         disposableList.add(disposable);
     }
+    //绑定v层
     public void attachView(V IView) {
         this.IView = IView;
     }
+    //销毁掉 以防内存泄漏
     public void detachView(){
         this.IView = null;
         for (Disposable disposable : disposableList) {

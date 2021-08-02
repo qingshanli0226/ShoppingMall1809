@@ -10,8 +10,8 @@ import android.net.NetworkInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+//网络管理类
 public class BusinessNetManager {
-
     private static BusinessNetManager manager;
     private List<NetConnectListener> list=new ArrayList<>();
     private Context context;

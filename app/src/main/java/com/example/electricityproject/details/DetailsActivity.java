@@ -53,6 +53,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 商品购物车详情页面继承了基类Activity 并且实现了各种view
+ */
 public class DetailsActivity extends BaseActivity<DetailsPresenter> implements IDetailsView,ToolBar.IToolbarListener,ShopCacheManger.iShopBeanChangeListener{
     private ToolBar toolbar;
     private WebView detailsWeb;
@@ -84,6 +87,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
 
     @Override
     protected void initData() {
+        /**
+         * intent用来接收商品页面传递过来的值
+         * 商品名字
+         * 图片
+         * 价格
+         * 商品数量
+         * 商品图片的网址
+         */
         intent = getIntent();
         name = intent.getStringExtra("name");
         img = intent.getStringExtra("img");
@@ -91,8 +102,15 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
         productNum = prod_num;
         url = intent.getStringExtra("url");
 
+        /**
+         * 商品Id
+         * 商品价格
+         */
         productId = intent.getStringExtra("productId");
         productPrice = intent.getStringExtra("productPrice");
+        /**
+         * map存储方便加签加密
+         */
         map.put("productId",productId);
         map.put("url",url);
         map.put("productPrice",price);
@@ -148,9 +166,17 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements I
             }
         });
 
+        /**
+         * 加入购物车按钮
+         */
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 *
+                 * 判断用户的登录状态，如果是登录过的
+                 * 点击之后会弹出popupWindow
+                 */
                 if (BusinessUserManager.getInstance().getIsLog()!=null){
                     popupWindow = new PopupWindow();
                     popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);

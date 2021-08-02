@@ -3,8 +3,6 @@ package com.example.manager;
 import android.util.Base64;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
@@ -14,6 +12,10 @@ import java.util.TreeMap;
 
 public class SignUtil {
 
+    /**
+     * 加签加密的类
+     * @return
+     */
     public static TreeMap<String,String> getEmptyTreeMap() {
         TreeMap<String,String> treeMap = new TreeMap<>(new Comparator<String>() {
             @Override

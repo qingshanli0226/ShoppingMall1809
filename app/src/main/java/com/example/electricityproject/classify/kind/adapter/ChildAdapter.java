@@ -10,8 +10,10 @@ import com.example.common.Constants;
 import com.example.common.bean.GoodsBean;
 import com.example.electricityproject.R;
 
-public
-class ChildAdapter extends BaseAdapter<GoodsBean.ResultBean.ChildBean> {
+/**
+ * 子类集成安卓原生适配器
+ */
+public class ChildAdapter extends BaseAdapter<GoodsBean.ResultBean.ChildBean> {
 
     private Context context;
     public ChildAdapter(Context context) {

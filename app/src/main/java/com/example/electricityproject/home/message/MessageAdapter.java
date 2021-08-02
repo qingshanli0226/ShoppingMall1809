@@ -34,7 +34,6 @@ public class MessageAdapter extends BaseAdapter<MessageTable> {
             message_status.setVisibility(View.VISIBLE);
         }
 
-
     }
 
     public String getTime(long time) {
@@ -42,12 +41,10 @@ public class MessageAdapter extends BaseAdapter<MessageTable> {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);
         String format = simpleDateFormat.format(new Date(time));
         return format;
-
     }
 
     @Override
     public int getRootViewType(int position) {
-
         return 0;
     }
 

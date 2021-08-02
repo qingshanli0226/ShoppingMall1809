@@ -45,6 +45,11 @@ public class HomeAdapter extends BaseAdapter<Object> {
     private Long end_time;
     private long l;
 
+    /**
+     * 多布局 判断它的各种布局
+     * @param viewType
+     * @return
+     */
     @Override
     public int getLayoutId(int viewType) {
         int layoutId=-1;
@@ -195,6 +200,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 recommendAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
                     @Override
                     public void OnItemClick(int position) {
+                        /**
+                         * 传值 各种传值
+                         */
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",recommendInfoBeans.get(position).getFigure());
                         intent.putExtra("name",recommendInfoBeans.get(position).getName()+"");
@@ -222,6 +230,9 @@ public class HomeAdapter extends BaseAdapter<Object> {
                 hotAdapter.setRecyclerItemClickListener(new iRecyclerItemClickListener() {
                     @Override
                     public void OnItemClick(int position) {
+                        /**
+                         * 
+                         */
                         Intent intent = new Intent(baseViewHolder.itemView.getContext(), DetailsActivity.class);
                         intent.putExtra("img",hotInfoBeans.get(position).getFigure());
                         intent.putExtra("name",hotInfoBeans.get(position).getName()+"");

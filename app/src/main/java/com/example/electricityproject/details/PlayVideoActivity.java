@@ -14,6 +14,9 @@ import com.example.framework.BaseActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 播放视频Activity用来继承基类
+ */
 public class PlayVideoActivity extends BaseActivity {
 
     private VideoView playVideo;
@@ -26,6 +29,9 @@ public class PlayVideoActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        /**
+         * 设置播放源
+         */
         playVideo.setData(getResources().getString(R.string.details_videoUrl));
         tvStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +40,9 @@ public class PlayVideoActivity extends BaseActivity {
             }
         });
 
-        //等会修改在子线程中进行
+        /**
+         * 倒计时采用Timer计时器
+         */
          Timer timer = new Timer();
          timer.schedule(new TimerTask() {
              @Override
@@ -79,7 +87,7 @@ public class PlayVideoActivity extends BaseActivity {
              public void onClick(View v) {
                  int width = getWindow().getDecorView().getWidth();
                  int height = getWindow().getDecorView().getHeight();
-                 if (height>width){//竖屏切换成横屏
+                 if (height > width){//竖屏切换成横屏
                      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                      //修改相对布局高度
                      ViewGroup.LayoutParams layoutParams = re.getLayoutParams();
